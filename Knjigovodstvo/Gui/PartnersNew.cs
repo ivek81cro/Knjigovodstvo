@@ -20,20 +20,19 @@ namespace Knjigovodstvo.Gui
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            int oib = Int32.Parse(textBoxOib.Text);
             //TODO Validate form data
             Partner partner = new Partner
             {
-                Oib = oib,
+                Oib = textBoxOib.Text,
                 Naziv = textBoxName.Text,
                 Adresa = textBoxStreet.Text,
-                Posta = Int32.Parse(textBoxPost.Text),
+                Posta = textBoxPost.Text,
                 Grad = textBoxCity.Text,
                 Telefon = textBoxPhone.Text,
                 Fax = textBoxFax.Text,
                 Mail = textBoxEmail.Text,
                 Iban = textBoxIban.Text,
-                Mbo = Int32.Parse(textBoxMbo.Text),
+                Mbo = textBoxMbo.Text,
                 Kupac = checkBoxBuyer.Checked,
                 Dobavljac = checkBoxSeller.Checked
             };
@@ -43,14 +42,6 @@ namespace Knjigovodstvo.Gui
             {
                 PartnerInsert partnerInsert = new PartnerInsert(partner);
                 bool success = partnerInsert.Insert();
-            }
-        }
-
-        private void TextBoxOib_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
             }
         }
 

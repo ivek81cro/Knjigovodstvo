@@ -61,7 +61,6 @@
             this.textBoxOib.Name = "textBoxOib";
             this.textBoxOib.Size = new System.Drawing.Size(251, 23);
             this.textBoxOib.TabIndex = 0;
-            this.textBoxOib.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxOib_KeyPress);
             // 
             // textBoxName
             // 

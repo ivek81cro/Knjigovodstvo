@@ -9,24 +9,27 @@ namespace Knjigovodstvo.Code.Validators
     {
         public bool Validate(string iban)
         {
-            int i = 0;
-            bool status = true;
-
             if (iban.Length < 21)
                 return false;
 
-            foreach(char c in iban)
+            int i = 0;
+            foreach (char c in iban)
             {
                 if (i < 2)
-                    status = Char.IsLetter(iban, i);
+                {
+                    if (!Char.IsLetter(c))
+                        return false;
+                    
+                }
                 else
-                    status = Char.IsDigit(iban, i);
-
-                if (!status)
-                    return status;
+                {
+                    if (!Char.IsDigit(c))
+                        return false;
+                }
+                ++i;
             }
 
-            return status;
+            return true;
         }
     }
 }

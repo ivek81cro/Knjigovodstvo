@@ -13,6 +13,12 @@ namespace Knjigovodstvo.Models
             if (iban.Validate(partner.Iban))
                 return false;
 
+            OibValidator oib = new OibValidator();
+            if (oib.Validate(partner.Oib))
+                return false;
+
+            //TODO Validate Post, MBO and checkboxes
+
             return true;
         }
     }
