@@ -1,4 +1,6 @@
 ﻿using Knjigovodstvo.Code;
+using Knjigovodstvo.Code.Validators;
+using Knjigovodstvo.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +21,7 @@ namespace Knjigovodstvo.Gui
         private void BtnSave_Click(object sender, EventArgs e)
         {
             int oib = Int32.Parse(textBoxOib.Text);
-            string iban = "";//TODO IBAN validator
+            //TODO Validate form data
             Partner partner = new Partner
             {
                 Oib = oib,
@@ -35,8 +37,13 @@ namespace Knjigovodstvo.Gui
                 Kupac = checkBoxBuyer.Checked,
                 Dobavljac = checkBoxSeller.Checked
             };
-            PartnerInsert partnerInsert = new PartnerInsert(partner);
-            bool success = partnerInsert.Insert();
+            PartnerDataValidate valiateData = new PartnerDataValidate();
+
+            if (valiateData.ValidateData(partner))
+            {
+                PartnerInsert partnerInsert = new PartnerInsert(partner);
+                bool success = partnerInsert.Insert();
+            }
         }
 
         private void TextBoxOib_KeyPress(object sender, KeyPressEventArgs e)

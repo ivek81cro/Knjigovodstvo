@@ -1,15 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 
 namespace Knjigovodstvo.Code.Validators
 {
-    class IbanValidator
+    public class IbanValidator
     {
-        //TODO Iban validate
         public bool Validate(string iban)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            bool status = true;
+
+            if (iban.Length < 21)
+                return false;
+
+            foreach(char c in iban)
+            {
+                if (i < 2)
+                    status = Char.IsLetter(iban, i);
+                else
+                    status = Char.IsDigit(iban, i);
+
+                if (!status)
+                    return status;
+            }
+
+            return status;
         }
     }
 }

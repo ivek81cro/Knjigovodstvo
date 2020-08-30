@@ -115,6 +115,7 @@
             // textBoxIban
             // 
             this.textBoxIban.Location = new System.Drawing.Point(69, 289);
+            this.textBoxIban.MaxLength = 21;
             this.textBoxIban.Name = "textBoxIban";
             this.textBoxIban.Size = new System.Drawing.Size(251, 23);
             this.textBoxIban.TabIndex = 0;
