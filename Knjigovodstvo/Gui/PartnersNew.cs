@@ -52,8 +52,11 @@ namespace Knjigovodstvo.Gui
 
         private void btnSelectCity_Click(object sender, EventArgs e)
         {
+            //TODO Check city data if valid before txtbox fill
             CityNew city = new CityNew();
-            city.ShowDialog();
+            City c = city.ShowDialogValue();
+            textBoxCity.Text = c.Name;
+            textBoxPost.Text = c.Post;
         }
     }
 }

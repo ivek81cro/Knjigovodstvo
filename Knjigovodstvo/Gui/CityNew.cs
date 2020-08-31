@@ -1,4 +1,5 @@
 ﻿using Knjigovodstvo.Code.Cities;
+using Knjigovodstvo.Models;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -13,7 +14,7 @@ namespace Knjigovodstvo.Gui
             InitializeComponent();
             FillComboCounty();
         }
-        //TODO Finish City part and connest to county
+        //TODO Finish City part and connect to county
         void FillComboCounty()
         {
             DataTable dt = new CountySelectAll().GetAllCounty();
@@ -36,6 +37,28 @@ namespace Knjigovodstvo.Gui
         private void comboBoxCounty_SelectedValueChanged(object sender, EventArgs e)
         {
             FillComboCity();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        public City ShowDialogValue()
+        {
+            ShowDialog();
+
+            return new City {
+                Country = textBoxCountry.Text,
+                County = comboBoxCounty.Text,
+                Name = comboBoxCity.Text,
+                Post = textBoxPost.Text
+            };
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            //TODO Save new city in db if doesn't exist and send back result
         }
     }
 }

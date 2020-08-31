@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Knjigovodstvo.Models
 {
-    class City
+    public class City
     {
         public string Name { get; set; }
         public string County { get; set; }
