@@ -112,6 +112,7 @@
             // 
             // comboBoxCounty
             // 
+            this.comboBoxCounty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCounty.FormattingEnabled = true;
             this.comboBoxCounty.Location = new System.Drawing.Point(68, 41);
             this.comboBoxCounty.Name = "comboBoxCounty";
