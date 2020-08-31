@@ -49,5 +49,11 @@ namespace Knjigovodstvo.Gui
         {
             Close();
         }
+
+        private void btnSelectCity_Click(object sender, EventArgs e)
+        {
+            CityNew city = new CityNew();
+            city.ShowDialog();
+        }
     }
 }

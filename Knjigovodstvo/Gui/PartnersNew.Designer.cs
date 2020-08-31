@@ -52,6 +52,7 @@
             this.labelStreet = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
+            this.btnSelectCity = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxOib
@@ -79,15 +80,18 @@
             // textBoxPost
             // 
             this.textBoxPost.Location = new System.Drawing.Point(69, 134);
+            this.textBoxPost.MaxLength = 5;
             this.textBoxPost.Name = "textBoxPost";
-            this.textBoxPost.Size = new System.Drawing.Size(251, 23);
+            this.textBoxPost.ReadOnly = true;
+            this.textBoxPost.Size = new System.Drawing.Size(161, 23);
             this.textBoxPost.TabIndex = 0;
             // 
             // textBoxCity
             // 
             this.textBoxCity.Location = new System.Drawing.Point(69, 165);
             this.textBoxCity.Name = "textBoxCity";
-            this.textBoxCity.Size = new System.Drawing.Size(251, 23);
+            this.textBoxCity.ReadOnly = true;
+            this.textBoxCity.Size = new System.Drawing.Size(161, 23);
             this.textBoxCity.TabIndex = 0;
             // 
             // textBoxPhone
@@ -256,11 +260,22 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
+            // btnSelectCity
+            // 
+            this.btnSelectCity.Location = new System.Drawing.Point(245, 149);
+            this.btnSelectCity.Name = "btnSelectCity";
+            this.btnSelectCity.Size = new System.Drawing.Size(75, 23);
+            this.btnSelectCity.TabIndex = 4;
+            this.btnSelectCity.Text = "Odaberi";
+            this.btnSelectCity.UseVisualStyleBackColor = true;
+            this.btnSelectCity.Click += new System.EventHandler(this.btnSelectCity_Click);
+            // 
             // PartnersNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(379, 450);
+            this.Controls.Add(this.btnSelectCity);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.labelStreet);
@@ -318,5 +333,6 @@
         private System.Windows.Forms.Label labelStreet;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnSelectCity;
     }
 }
