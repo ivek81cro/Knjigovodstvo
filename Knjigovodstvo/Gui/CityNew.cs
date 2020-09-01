@@ -2,7 +2,6 @@
 using Knjigovodstvo.Models;
 using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Gui
@@ -14,14 +13,17 @@ namespace Knjigovodstvo.Gui
             InitializeComponent();
             FillComboCounty();
         }
-        //TODO Finish City part and connect to county
+
         void FillComboCounty()
         {
             DataTable dt = new CountySelectAll().GetAllCounty();
             //Assign DataTable as DataSource.
-            comboBoxCounty.DataSource = dt;
-            comboBoxCounty.DisplayMember = "Naziv";
-            comboBoxCounty.ValueMember = "Id";
+            if (dt.Rows.Count > 0)
+            {
+                comboBoxCounty.DataSource = dt;
+                comboBoxCounty.DisplayMember = "Naziv";
+                comboBoxCounty.ValueMember = "Id";
+            }
         }
 
         void FillComboCity()
@@ -29,9 +31,12 @@ namespace Knjigovodstvo.Gui
             DataTable dt = new CitySelectByCounty().GetCityByCounty(comboBoxCounty.Text);
 
             //Assign DataTable as DataSource.
-            comboBoxCity.DataSource = dt;
-            comboBoxCity.DisplayMember = "Naziv";
-            comboBoxCity.ValueMember = "Id";
+            if (dt.Rows.Count > 0)
+            {
+                comboBoxCounty.DataSource = dt;
+                comboBoxCounty.DisplayMember = "Naziv";
+                comboBoxCounty.ValueMember = "Id";
+            }
         }
 
         private void comboBoxCounty_SelectedValueChanged(object sender, EventArgs e)
