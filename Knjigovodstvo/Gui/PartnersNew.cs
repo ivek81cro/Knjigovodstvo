@@ -39,8 +39,7 @@ namespace Knjigovodstvo.Gui
 
             if (partner.ValidateData())
             {
-                PartnerInsert partnerInsert = new PartnerInsert(partner);
-                _ = partnerInsert.Insert();
+                partner.InsertNew();
             }
         }
 

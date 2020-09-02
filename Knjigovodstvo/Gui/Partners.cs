@@ -21,7 +21,7 @@ namespace Knjigovodstvo
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
-            PartnerSearch searchPartner = new PartnerSearch();
+            Partner searchPartner = new Partner();
             List<Partner> partners = searchPartner.GetPartners(namePartnerTextBox.Text);
             //TODO Partner search https://www.youtube.com/watch?v=Et2khGnrIqc&list=PLLWMQd6PeGY3b89Ni7xsNZddi9wD5Esv2
         }
