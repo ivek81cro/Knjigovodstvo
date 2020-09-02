@@ -6,8 +6,16 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Code.Cities
 {
-    class CitySelectByCounty
+    class CitySelect
     {
+        public DataTable GetAllCities()
+        {
+            DbDataGet data = new DbDataGet();
+            string query = String.Format("SELECT Id, Naziv FROM Opcina;");
+            DataTable dt = data.GetTable(query);
+            
+            return dt;
+        }
         public DataTable GetCityByCounty(string county)
         {
             DbDataGet data = new DbDataGet();

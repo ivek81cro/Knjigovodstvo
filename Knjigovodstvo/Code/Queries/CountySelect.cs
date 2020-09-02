@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Code.Cities
 {
-    class CountySelectAll
+    class CountySelect
     {
         public DataTable GetAllCounty()
         {

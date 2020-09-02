@@ -16,7 +16,7 @@ namespace Knjigovodstvo.Gui
 
         void FillComboCounty()
         {
-            DataTable dt = new CountySelectAll().GetAllCounty();
+            DataTable dt = new CountySelect().GetAllCounty();
             //Assign DataTable as DataSource.
             if (dt.Rows.Count > 0)
             {
@@ -28,7 +28,7 @@ namespace Knjigovodstvo.Gui
 
         void FillComboCity()
         {
-            DataTable dt = new CitySelectByCounty().GetCityByCounty(comboBoxCounty.Text);
+            DataTable dt = new CitySelect().GetCityByCounty(comboBoxCounty.Text);
 
             //Assign DataTable as DataSource.
             if (dt.Rows.Count > 0)
