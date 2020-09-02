@@ -20,7 +20,6 @@ namespace Knjigovodstvo.Gui
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            //TODO Validate form data
             Partner partner = new Partner
             {
                 Oib = textBoxOib.Text,
@@ -33,8 +32,8 @@ namespace Knjigovodstvo.Gui
                 Mail = textBoxEmail.Text,
                 Iban = textBoxIban.Text,
                 Mbo = textBoxMbo.Text,
-                Kupac = checkBoxBuyer.Checked,
-                Dobavljac = checkBoxSeller.Checked
+                Kupac = checkBoxBuyer.Checked ? 'k' : 'n',
+                Dobavljac = checkBoxSeller.Checked ? 'd' : 'n'
             };
 
             if (partner.ValidateData())

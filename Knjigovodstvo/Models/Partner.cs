@@ -9,15 +9,20 @@ namespace Knjigovodstvo
     {
         public bool ValidateData()
         {
-            IbanValidator iban = new IbanValidator();
-            if (iban.Validate(Iban))
+            if (!new OibValidator().Validate(Oib))
                 return false;
-
-            OibValidator oib = new OibValidator();
-            if (oib.Validate(Oib))
+            if (Naziv.Length < 2)
                 return false;
-
-            //TODO Validate Post, MBO and checkboxes
+            if (Adresa.Length < 2)
+                return false;
+            if (Posta.Length != 5)
+                return false;
+            if (Grad.Length < 2)
+                return false;
+            if (!new IbanValidator().Validate(Iban))
+                return false;
+            if (Kupac != 'k' || Dobavljac != 'd')
+                return false;
 
             return true;
         }
@@ -44,8 +49,8 @@ namespace Knjigovodstvo
         public string Mail { get; set; }
         public string Iban { get; set; }
         public string Mbo { get; set; }
-        public bool Kupac { get; set; }
-        public bool Dobavljac { get; set; }
+        public char Kupac { get; set; }
+        public char Dobavljac { get; set; }
     }
 
 }

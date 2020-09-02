@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Knjigovodstvo.Code.Validators;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,8 +7,24 @@ namespace Knjigovodstvo
 {
     class Komitent
     {
-        //TODO Make validations for data
-        public int Oib { get; set; }
+        public bool ValidateData()
+        {
+            if (!new OibValidator().Validate(Oib))
+                return false;
+            if (Naziv.Length < 2)
+                return false;
+            if (Adresa.Length < 2)
+                return false;
+            if (Posta.Length != 5)
+                return false;
+            if (Grad.Length < 2)
+                return false;
+            if (!new IbanValidator().Validate(Iban))
+                return false;
+            return true;
+        }
+
+        public string Oib { get; set; }
         public string Naziv { get; set; }
         public string Adresa { get; set; }
         public string Posta { get; set; }
