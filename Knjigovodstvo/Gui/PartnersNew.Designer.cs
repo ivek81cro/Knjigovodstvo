@@ -68,14 +68,14 @@
             this.textBoxName.Location = new System.Drawing.Point(69, 72);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(251, 23);
-            this.textBoxName.TabIndex = 0;
+            this.textBoxName.TabIndex = 1;
             // 
             // textBoxStreet
             // 
             this.textBoxStreet.Location = new System.Drawing.Point(69, 103);
             this.textBoxStreet.Name = "textBoxStreet";
             this.textBoxStreet.Size = new System.Drawing.Size(251, 23);
-            this.textBoxStreet.TabIndex = 0;
+            this.textBoxStreet.TabIndex = 2;
             // 
             // textBoxPost
             // 
@@ -85,6 +85,7 @@
             this.textBoxPost.ReadOnly = true;
             this.textBoxPost.Size = new System.Drawing.Size(161, 23);
             this.textBoxPost.TabIndex = 0;
+            this.textBoxPost.TabStop = false;
             // 
             // textBoxCity
             // 
@@ -93,27 +94,28 @@
             this.textBoxCity.ReadOnly = true;
             this.textBoxCity.Size = new System.Drawing.Size(161, 23);
             this.textBoxCity.TabIndex = 0;
+            this.textBoxCity.TabStop = false;
             // 
             // textBoxPhone
             // 
             this.textBoxPhone.Location = new System.Drawing.Point(69, 196);
             this.textBoxPhone.Name = "textBoxPhone";
             this.textBoxPhone.Size = new System.Drawing.Size(251, 23);
-            this.textBoxPhone.TabIndex = 0;
+            this.textBoxPhone.TabIndex = 4;
             // 
             // textBoxFax
             // 
             this.textBoxFax.Location = new System.Drawing.Point(69, 227);
             this.textBoxFax.Name = "textBoxFax";
             this.textBoxFax.Size = new System.Drawing.Size(251, 23);
-            this.textBoxFax.TabIndex = 0;
+            this.textBoxFax.TabIndex = 5;
             // 
             // textBoxEmail
             // 
             this.textBoxEmail.Location = new System.Drawing.Point(69, 258);
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(251, 23);
-            this.textBoxEmail.TabIndex = 0;
+            this.textBoxEmail.TabIndex = 6;
             // 
             // textBoxIban
             // 
@@ -121,14 +123,14 @@
             this.textBoxIban.MaxLength = 21;
             this.textBoxIban.Name = "textBoxIban";
             this.textBoxIban.Size = new System.Drawing.Size(251, 23);
-            this.textBoxIban.TabIndex = 0;
+            this.textBoxIban.TabIndex = 7;
             // 
             // textBoxMbo
             // 
             this.textBoxMbo.Location = new System.Drawing.Point(69, 320);
             this.textBoxMbo.Name = "textBoxMbo";
             this.textBoxMbo.Size = new System.Drawing.Size(251, 23);
-            this.textBoxMbo.TabIndex = 0;
+            this.textBoxMbo.TabIndex = 8;
             // 
             // checkBoxBuyer
             // 
@@ -136,7 +138,7 @@
             this.checkBoxBuyer.Location = new System.Drawing.Point(69, 349);
             this.checkBoxBuyer.Name = "checkBoxBuyer";
             this.checkBoxBuyer.Size = new System.Drawing.Size(59, 19);
-            this.checkBoxBuyer.TabIndex = 1;
+            this.checkBoxBuyer.TabIndex = 9;
             this.checkBoxBuyer.Text = "Kupac";
             this.checkBoxBuyer.UseVisualStyleBackColor = true;
             // 
@@ -146,7 +148,7 @@
             this.checkBoxSeller.Location = new System.Drawing.Point(69, 374);
             this.checkBoxSeller.Name = "checkBoxSeller";
             this.checkBoxSeller.Size = new System.Drawing.Size(78, 19);
-            this.checkBoxSeller.TabIndex = 1;
+            this.checkBoxSeller.TabIndex = 10;
             this.checkBoxSeller.Text = "Dobavljač";
             this.checkBoxSeller.UseVisualStyleBackColor = true;
             // 
@@ -245,7 +247,7 @@
             this.btnSave.Location = new System.Drawing.Point(12, 415);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 3;
+            this.btnSave.TabIndex = 11;
             this.btnSave.Text = "Spremi";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -255,7 +257,7 @@
             this.btnClose.Location = new System.Drawing.Point(292, 415);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 3;
+            this.btnClose.TabIndex = 12;
             this.btnClose.Text = "Zatvori";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
@@ -265,7 +267,7 @@
             this.btnSelectCity.Location = new System.Drawing.Point(245, 149);
             this.btnSelectCity.Name = "btnSelectCity";
             this.btnSelectCity.Size = new System.Drawing.Size(75, 23);
-            this.btnSelectCity.TabIndex = 4;
+            this.btnSelectCity.TabIndex = 3;
             this.btnSelectCity.Text = "Odaberi";
             this.btnSelectCity.UseVisualStyleBackColor = true;
             this.btnSelectCity.Click += new System.EventHandler(this.BtnSelectCity_Click);

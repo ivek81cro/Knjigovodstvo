@@ -1,5 +1,6 @@
 ﻿using Knjigovodstvo.Code;
 using Knjigovodstvo.Gui;
+using Knjigovodstvo.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace Knjigovodstvo
         public partnersForm()
         {
             InitializeComponent();
+            LoadDatagrid();
         }
 
         private void BtnSearch_Click(object sender, EventArgs e)
@@ -30,6 +32,12 @@ namespace Knjigovodstvo
         {
             PartnersNew form = new PartnersNew();
             form.ShowDialog();
+        }
+
+        private void LoadDatagrid()
+        {
+            DbDataGet data = new DbDataGet();
+            dataGridView1.DataSource = data.GetTable("SELECT * FROM Partneri;");
         }
     }
 }

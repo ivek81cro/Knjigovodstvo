@@ -1,12 +1,5 @@
-﻿using Knjigovodstvo.Code;
-using Knjigovodstvo.Code.Validators;
-using Knjigovodstvo.Models;
+﻿using Knjigovodstvo.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Gui
@@ -38,7 +31,11 @@ namespace Knjigovodstvo.Gui
 
             if (partner.ValidateData())
             {
-                partner.InsertNew();
+                if (partner.InsertNew())
+                {
+                    MessageBox.Show("Unos uspješan.", "Novi Partner Unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Close();
+                }
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using Knjigovodstvo.Code.Validators;
+using Knjigovodstvo.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,7 +22,7 @@ namespace Knjigovodstvo
                 return false;
             if (!new IbanValidator().Validate(Iban))
                 return false;
-            if (Kupac != 'k' || Dobavljac != 'd')
+            if (Kupac != 'k' && Dobavljac != 'd')
                 return false;
 
             return true;
@@ -29,8 +30,10 @@ namespace Knjigovodstvo
 
         public bool InsertNew()
         {
-            //TODO Insert new partner into db
-            return true;
+            if(new DbDataInsert().InsertPartner(this))
+                return true;
+
+            return false;
         }
 
         public List<Partner> GetPartners(string name)

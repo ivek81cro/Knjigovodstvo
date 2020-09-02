@@ -82,7 +82,7 @@
             this.textBoxPost.Location = new System.Drawing.Point(68, 99);
             this.textBoxPost.Name = "textBoxPost";
             this.textBoxPost.Size = new System.Drawing.Size(96, 23);
-            this.textBoxPost.TabIndex = 1;
+            this.textBoxPost.TabIndex = 3;
             // 
             // textBoxCountry
             // 
@@ -90,7 +90,7 @@
             this.textBoxCountry.Name = "textBoxCountry";
             this.textBoxCountry.ReadOnly = true;
             this.textBoxCountry.Size = new System.Drawing.Size(240, 23);
-            this.textBoxCountry.TabIndex = 1;
+            this.textBoxCountry.TabIndex = 0;
             this.textBoxCountry.Text = "Hrvatska";
             // 
             // btnSave
@@ -98,7 +98,7 @@
             this.btnSave.Location = new System.Drawing.Point(13, 239);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 2;
+            this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Spremi";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -120,7 +120,7 @@
             this.comboBoxCounty.Location = new System.Drawing.Point(68, 41);
             this.comboBoxCounty.Name = "comboBoxCounty";
             this.comboBoxCounty.Size = new System.Drawing.Size(240, 23);
-            this.comboBoxCounty.TabIndex = 4;
+            this.comboBoxCounty.TabIndex = 1;
             this.comboBoxCounty.SelectedValueChanged += new System.EventHandler(this.ComboBoxCounty_SelectedValueChanged);
             // 
             // comboBoxCity
@@ -129,7 +129,7 @@
             this.comboBoxCity.Location = new System.Drawing.Point(68, 70);
             this.comboBoxCity.Name = "comboBoxCity";
             this.comboBoxCity.Size = new System.Drawing.Size(240, 23);
-            this.comboBoxCity.TabIndex = 4;
+            this.comboBoxCity.TabIndex = 2;
             // 
             // labelWarning
             // 
