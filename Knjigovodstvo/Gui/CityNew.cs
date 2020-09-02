@@ -33,9 +33,9 @@ namespace Knjigovodstvo.Gui
             //Assign DataTable as DataSource.
             if (dt.Rows.Count > 0)
             {
-                comboBoxCounty.DataSource = dt;
-                comboBoxCounty.DisplayMember = "Naziv";
-                comboBoxCounty.ValueMember = "Id";
+                comboBoxCity.DataSource = dt;
+                comboBoxCity.DisplayMember = "Naziv";
+                comboBoxCity.ValueMember = "Id";
             }
         }
 
