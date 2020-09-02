@@ -36,12 +36,11 @@ namespace Knjigovodstvo.Gui
                 Kupac = checkBoxBuyer.Checked,
                 Dobavljac = checkBoxSeller.Checked
             };
-            PartnerDataValidate valiateData = new PartnerDataValidate();
 
-            if (valiateData.ValidateData(partner))
+            if (partner.ValidateData())
             {
                 PartnerInsert partnerInsert = new PartnerInsert(partner);
-                bool success = partnerInsert.Insert();
+                _ = partnerInsert.Insert();
             }
         }
 
@@ -50,13 +49,16 @@ namespace Knjigovodstvo.Gui
             Close();
         }
 
-        private void btnSelectCity_Click(object sender, EventArgs e)
+        private void BtnSelectCity_Click(object sender, EventArgs e)
         {
-            //TODO Check city data if valid before txtbox fill
             CityNew city = new CityNew();
             City c = city.ShowDialogValue();
-            textBoxCity.Text = c.Name;
-            textBoxPost.Text = c.Post;
+
+            if (c != null && c.ValidateData())
+            {
+                textBoxCity.Text = c.Name;
+                textBoxPost.Text = c.Post;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Knjigovodstvo.Code.Validators;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,21 @@ namespace Knjigovodstvo
 {
     class Partner
     {
+        public bool ValidateData()
+        {
+            IbanValidator iban = new IbanValidator();
+            if (iban.Validate(Iban))
+                return false;
+
+            OibValidator oib = new OibValidator();
+            if (oib.Validate(Oib))
+                return false;
+
+            //TODO Validate Post, MBO and checkboxes
+
+            return true;
+        }
+
         public int Id { get; set; }
         public string Oib { get; set; }
         public string Naziv { get; set; }
@@ -20,4 +36,5 @@ namespace Knjigovodstvo
         public bool Kupac { get; set; }
         public bool Dobavljac { get; set; }
     }
+
 }

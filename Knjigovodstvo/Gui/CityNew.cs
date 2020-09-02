@@ -39,13 +39,26 @@ namespace Knjigovodstvo.Gui
             }
         }
 
-        private void comboBoxCounty_SelectedValueChanged(object sender, EventArgs e)
+        private void ComboBoxCounty_SelectedValueChanged(object sender, EventArgs e)
         {
             FillComboCity();
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private void BtnClose_Click(object sender, EventArgs e)
         {
+            _city = new City()
+            {
+                Country = textBoxCountry.Text,
+                County = comboBoxCounty.Text,
+                Name = comboBoxCity.Text,
+                Post = textBoxPost.Text
+            };
+
+            if (!_city.ValidateData())
+            {
+                labelWarning.Text = "Provjerite valjanost podataka.";
+                return;
+            }
             Close();
         }
 
@@ -53,17 +66,14 @@ namespace Knjigovodstvo.Gui
         {
             ShowDialog();
 
-            return new City {
-                Country = textBoxCountry.Text,
-                County = comboBoxCounty.Text,
-                Name = comboBoxCity.Text,
-                Post = textBoxPost.Text
-            };
+            return _city;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             //TODO Save new city in db if doesn't exist and send back result
         }
+
+        private City _city;
     }
 }

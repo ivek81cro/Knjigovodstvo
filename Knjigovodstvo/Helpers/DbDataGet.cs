@@ -14,14 +14,11 @@ namespace Knjigovodstvo.Helpers
             DataTable dt = new DataTable();
             try
             {
-                using (SqlConnection conn = new SqlConnection(ConnHelper.ConnStr(connection_name)))
-                {
-                    using (SqlDataAdapter sda = new SqlDataAdapter(query, conn))
-                    {
-                        //Fill the DataTable with records from Table.
-                        sda.Fill(dt);
-                    }
-                }
+                using SqlConnection conn = new SqlConnection(ConnHelper.ConnStr(connection_name));
+                using SqlDataAdapter sda = new SqlDataAdapter(query, conn);
+
+                //Fill the DataTable with records from Table.
+                sda.Fill(dt);
             }
             catch (SqlException e)
             {

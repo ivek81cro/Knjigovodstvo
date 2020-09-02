@@ -38,6 +38,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.comboBoxCounty = new System.Windows.Forms.ComboBox();
             this.comboBoxCity = new System.Windows.Forms.ComboBox();
+            this.labelWarning = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelName
@@ -100,7 +101,7 @@
             this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Spremi";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // btnClose
             // 
@@ -110,7 +111,7 @@
             this.btnClose.TabIndex = 3;
             this.btnClose.Text = "Odaberi";
             this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // comboBoxCounty
             // 
@@ -120,7 +121,7 @@
             this.comboBoxCounty.Name = "comboBoxCounty";
             this.comboBoxCounty.Size = new System.Drawing.Size(240, 23);
             this.comboBoxCounty.TabIndex = 4;
-            this.comboBoxCounty.SelectedValueChanged += new System.EventHandler(this.comboBoxCounty_SelectedValueChanged);
+            this.comboBoxCounty.SelectedValueChanged += new System.EventHandler(this.ComboBoxCounty_SelectedValueChanged);
             // 
             // comboBoxCity
             // 
@@ -130,11 +131,22 @@
             this.comboBoxCity.Size = new System.Drawing.Size(240, 23);
             this.comboBoxCity.TabIndex = 4;
             // 
+            // labelWarning
+            // 
+            this.labelWarning.AutoSize = true;
+            this.labelWarning.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelWarning.ForeColor = System.Drawing.Color.Firebrick;
+            this.labelWarning.Location = new System.Drawing.Point(12, 139);
+            this.labelWarning.Name = "labelWarning";
+            this.labelWarning.Size = new System.Drawing.Size(0, 21);
+            this.labelWarning.TabIndex = 5;
+            // 
             // CityNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(355, 274);
+            this.Controls.Add(this.labelWarning);
             this.Controls.Add(this.comboBoxCity);
             this.Controls.Add(this.comboBoxCounty);
             this.Controls.Add(this.btnClose);
@@ -164,5 +176,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.ComboBox comboBoxCounty;
         private System.Windows.Forms.ComboBox comboBoxCity;
+        private System.Windows.Forms.Label labelWarning;
     }
 }

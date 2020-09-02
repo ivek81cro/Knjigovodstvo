@@ -268,7 +268,7 @@
             this.btnSelectCity.TabIndex = 4;
             this.btnSelectCity.Text = "Odaberi";
             this.btnSelectCity.UseVisualStyleBackColor = true;
-            this.btnSelectCity.Click += new System.EventHandler(this.btnSelectCity_Click);
+            this.btnSelectCity.Click += new System.EventHandler(this.BtnSelectCity_Click);
             // 
             // PartnersNew
             // 
