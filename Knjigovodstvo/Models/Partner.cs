@@ -22,6 +22,17 @@ namespace Knjigovodstvo
             return true;
         }
 
+        public bool InsertNew()
+        {
+            //TODO Insert new partner into db
+            return true;
+        }
+
+        public List<Partner> GetPartners(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public int Id { get; set; }
         public string Oib { get; set; }
         public string Naziv { get; set; }
