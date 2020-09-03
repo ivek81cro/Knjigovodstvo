@@ -5,7 +5,7 @@ namespace Knjigovodstvo.Helpers
 {
     class DbDataDelete
     {
-        public bool UpadatePartner(Partner partner)
+        public bool DeletePartner(Partner partner)
         {
             try
             {
