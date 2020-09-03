@@ -1,20 +1,31 @@
 ﻿using Knjigovodstvo.Helpers;
+using Knjigovodstvo.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Windows.Forms;
+using System.Linq;
 
 namespace Knjigovodstvo.Code.Cities
 {
     class CitySelect
     {
-        public DataTable GetAllCities()
+        public List<City> GetAllCities()
         {
             DbDataGet data = new DbDataGet();
-            string query = String.Format("SELECT Id, Naziv FROM Opcina;");
+            string query = String.Format("SELECT * FROM Opcina;");
             DataTable dt = data.GetTable(query);
-            
-            return dt;
+            List<DataRow> rows = dt.AsEnumerable().ToList();
+            List<City> cityList = new List<City>();
+            cityList = (from DataRow dr in rows
+                           select new City()
+                           {
+                               Name = dr["Naziv"].ToString(),
+                               Country = "Hrvatska",//TODO Add country to City
+                               County = dr["Zupanija"].ToString(),
+                               Post = "00000"//TODO link post number to cities
+                           }).ToList();
+
+            return cityList;
         }
         public DataTable GetCityByCounty(string county)
         {
