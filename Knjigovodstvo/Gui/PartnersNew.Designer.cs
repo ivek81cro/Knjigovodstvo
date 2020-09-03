@@ -303,6 +303,7 @@
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.textBoxOib);
             this.Name = "PartnersNew";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Unos Poslovnog Partnera";
             this.ResumeLayout(false);
             this.PerformLayout();

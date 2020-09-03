@@ -158,6 +158,7 @@
             this.Controls.Add(this.labelPost);
             this.Controls.Add(this.labelName);
             this.Name = "CityNew";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Unesi novi grad";
             this.ResumeLayout(false);
             this.PerformLayout();
