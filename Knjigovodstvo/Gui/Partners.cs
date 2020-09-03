@@ -56,7 +56,7 @@ namespace Knjigovodstvo
         {
             int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             Partner partner = new Partner().GetPartnerById(id);
-            if (new DbDataDelete().UpadatePartner(partner))
+            if (new DbDataDelete().DeletePartner(partner))
                 MessageBox.Show("Partner obrisan", "Brisanje partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             LoadDatagrid();

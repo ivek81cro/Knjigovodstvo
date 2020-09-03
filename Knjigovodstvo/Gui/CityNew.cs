@@ -1,7 +1,9 @@
 ﻿using Knjigovodstvo.Code.Cities;
 using Knjigovodstvo.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Gui
@@ -71,7 +73,15 @@ namespace Knjigovodstvo.Gui
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            //TODO Save new city in db if doesn't exist and send back result
+            City city = new City
+            {
+                Name=comboBoxCity.Text,
+                Country=textBoxCountry.Text,
+                Post = textBoxPost.Text,
+                County = comboBoxCounty.Text
+            };
+            List<City> cities = new CitySelect().GetAllCities();
+            bool isInList = cities.Any(x=> x.Post==city.Post && x.Name==city.Name);
         }
 
         private City _city;
