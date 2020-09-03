@@ -2,11 +2,12 @@
 using Knjigovodstvo.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace Knjigovodstvo
 {
-    class Partner
+    public class Partner
     {
         public bool ValidateData()
         {
@@ -36,9 +37,34 @@ namespace Knjigovodstvo
             return false;
         }
 
-        public List<Partner> GetPartners(string name)
+        public bool EditPartner(int id)
         {
-            throw new NotImplementedException();
+            Id = id;
+            if (new DbDataUpdate().UpadatePartner(this))
+                return true;
+
+            return false;
+        }
+
+        public Partner GetPartnerById(int id)
+        {
+            DataTable partner = new DbDataGet().GetTable(String.Format("SELECT * FROM Partneri WHERE Id={0};",id));
+            return new Partner
+            {
+                Id = int.Parse(partner.Rows[0][0].ToString()),
+                Oib = partner.Rows[0][1].ToString(),
+                Naziv = partner.Rows[0][2].ToString(),
+                Adresa = partner.Rows[0][3].ToString(),
+                Posta = partner.Rows[0][4].ToString(),
+                Grad = partner.Rows[0][5].ToString(),
+                Telefon = partner.Rows[0][6].ToString(),
+                Fax = partner.Rows[0][7].ToString(),
+                Mail = partner.Rows[0][8].ToString(),
+                Iban = partner.Rows[0][9].ToString(),
+                Mbo = partner.Rows[0][10].ToString(),
+                Kupac = char.Parse(partner.Rows[0][11].ToString()),
+                Dobavljac = char.Parse(partner.Rows[0][12].ToString())
+            };
         }
 
         public int Id { get; set; }
