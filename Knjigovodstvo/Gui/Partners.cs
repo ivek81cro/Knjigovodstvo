@@ -56,10 +56,17 @@ namespace Knjigovodstvo
         private void BtnDeletePartner_Click(object sender, EventArgs e)
         {
             int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-            if (new DbDataDelete().DeleteItem(id, "Partneri"))
-                MessageBox.Show("Podatak obrisan", "Brisanje podatka", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DialogResult result = MessageBox.Show("Da li ste sigurni da želite obrisati odabrani red?", 
+                "Brisanje partnera", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
 
-            LoadDatagrid();
+            if (result == DialogResult.Yes)
+            {
+
+                if (new DbDataDelete().DeleteItem(id, "Partneri"))
+                    MessageBox.Show("Podatak obrisan", "Brisanje podatka", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
+                LoadDatagrid();
+            }
         }
     }
 }
