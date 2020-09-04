@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Knjigovodstvo
 {
-    public class Partner : IDbObject
+    public class Partneri : IDbObject
     {
         public bool ValidateData()
         {
@@ -32,7 +32,7 @@ namespace Knjigovodstvo
 
         public bool InsertNew()
         {
-            if(new DbDataInsert().InsertPartner(this))
+            if(new DbDataInsert().InsertData(this))
                 return true;
 
             return false;
@@ -41,16 +41,17 @@ namespace Knjigovodstvo
         public bool EditPartner(int id)
         {
             Id = id;
+            //TODO Test property finder
             if (new DbDataUpdate().UpadatePartner(this))
                 return true;
 
             return false;
         }
 
-        public Partner GetPartnerById(int id)
+        public Partneri GetPartnerById(int id)
         {
             DataTable partner = new DbDataGet().GetTable(String.Format("SELECT * FROM Partneri WHERE Id={0};",id));
-            return new Partner
+            return new Partneri
             {
                 Id = int.Parse(partner.Rows[0][0].ToString()),
                 Oib = partner.Rows[0][1].ToString(),
@@ -60,7 +61,7 @@ namespace Knjigovodstvo
                 Grad = partner.Rows[0][5].ToString(),
                 Telefon = partner.Rows[0][6].ToString(),
                 Fax = partner.Rows[0][7].ToString(),
-                Mail = partner.Rows[0][8].ToString(),
+                Email = partner.Rows[0][8].ToString(),
                 Iban = partner.Rows[0][9].ToString(),
                 Mbo = partner.Rows[0][10].ToString(),
                 Kupac = char.Parse(partner.Rows[0][11].ToString()),
@@ -76,7 +77,7 @@ namespace Knjigovodstvo
         public string Grad { get; set; }
         public string Telefon { get; set; }
         public string Fax { get; set; }
-        public string Mail { get; set; }
+        public string Email { get; set; }
         public string Iban { get; set; }
         public string Mbo { get; set; }
         public char Kupac { get; set; }

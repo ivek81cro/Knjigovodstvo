@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Knjigovodstvo.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,7 +10,7 @@ namespace Knjigovodstvo.Helpers
 {
     class DbDataGet
     {
-        public DataTable GetTable(string query)
+        public DataTable GetTable(IDbObject obj)
         {
             DataTable dt = new DataTable();
             try

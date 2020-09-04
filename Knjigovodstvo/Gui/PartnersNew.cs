@@ -13,7 +13,7 @@ namespace Knjigovodstvo.Gui
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            Partner partner = new Partner
+            Partneri partner = new Partneri
             {
                 Oib = textBoxOib.Text,
                 Naziv = textBoxName.Text,
@@ -22,7 +22,7 @@ namespace Knjigovodstvo.Gui
                 Grad = textBoxCity.Text,
                 Telefon = textBoxPhone.Text,
                 Fax = textBoxFax.Text,
-                Mail = textBoxEmail.Text,
+                Email = textBoxEmail.Text,
                 Iban = textBoxIban.Text,
                 Mbo = textBoxMbo.Text,
                 Kupac = checkBoxBuyer.Checked ? 'k' : 'n',
@@ -53,16 +53,16 @@ namespace Knjigovodstvo.Gui
         private void BtnSelectCity_Click(object sender, EventArgs e)
         {
             CityNew city = new CityNew();
-            City c = city.ShowDialogValue();
+            Opcina c = city.ShowDialogValue();
 
             if (c != null && c.ValidateData())
             {
-                textBoxCity.Text = c.Name;
-                textBoxPost.Text = c.Post;
+                textBoxCity.Text = c.Naziv;
+                textBoxPost.Text = c.Posta;
             }
         }
 
-        public void EditPartner(Partner partner)
+        public void EditPartner(Partneri partner)
         {
             _id = partner.Id;
             textBoxOib.Text = partner.Oib;
@@ -72,7 +72,7 @@ namespace Knjigovodstvo.Gui
             textBoxCity.Text = partner.Grad;
             textBoxPhone.Text = partner.Telefon;
             textBoxFax.Text = partner.Fax;
-            textBoxEmail.Text = partner.Mail;
+            textBoxEmail.Text = partner.Email;
             textBoxIban.Text = partner.Iban;
             textBoxMbo.Text = partner.Mbo;
             if (partner.Kupac == 'k')

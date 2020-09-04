@@ -42,7 +42,7 @@ namespace Knjigovodstvo
         private void BtnEditPartner_Click(object sender, EventArgs e)
         {
             int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-            Partner partner = new Partner().GetPartnerById(id);
+            Partneri partner = new Partneri().GetPartnerById(id);
             PartnersNew pn = new PartnersNew();
             pn.FormClosing += new FormClosingEventHandler(this.PartnersNew_FormClosing);
             pn.EditPartner(partner);
@@ -56,7 +56,6 @@ namespace Knjigovodstvo
         private void BtnDeletePartner_Click(object sender, EventArgs e)
         {
             int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-            Partner partner = new Partner().GetPartnerById(id);
             if (new DbDataDelete().DeleteItem(id, "Partneri"))
                 MessageBox.Show("Partner obrisan", "Brisanje partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

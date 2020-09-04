@@ -9,20 +9,20 @@ namespace Knjigovodstvo.Code.Cities
 {
     class CitySelect
     {
-        public List<City> GetAllCities()
+        public List<Opcina> GetAllCities()
         {
             DbDataGet data = new DbDataGet();
             string query = String.Format("SELECT * FROM Opcina;");
             DataTable dt = data.GetTable(query);
             List<DataRow> rows = dt.AsEnumerable().ToList();
-            List<City> cityList = new List<City>();
+            List<Opcina> cityList = new List<Opcina>();
             cityList = (from DataRow dr in rows
-                           select new City()
+                           select new Opcina()
                            {
-                               Name = dr["Naziv"].ToString(),
-                               Country = "Hrvatska",//TODO Add country to City
-                               County = dr["Zupanija"].ToString(),
-                               Post = "00000"//TODO link post number to cities
+                               Naziv = dr["Naziv"].ToString(),
+                               Drzava = "Hrvatska",//TODO Add country to City
+                               Zupanija = dr["Zupanija"].ToString(),
+                               Posta = "00000"//TODO link post number to cities
                            }).ToList();
 
             return cityList;

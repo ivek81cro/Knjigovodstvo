@@ -48,12 +48,12 @@ namespace Knjigovodstvo.Gui
 
         private void BtnClose_Click(object sender, EventArgs e)
         {
-            _city = new City()
+            _city = new Opcina()
             {
-                Country = textBoxCountry.Text,
-                County = comboBoxCounty.Text,
-                Name = comboBoxCity.Text,
-                Post = textBoxPost.Text
+                Drzava = textBoxCountry.Text,
+                Zupanija = comboBoxCounty.Text,
+                Naziv = comboBoxCity.Text,
+                Posta = textBoxPost.Text
             };
 
             if (!_city.ValidateData())
@@ -64,7 +64,7 @@ namespace Knjigovodstvo.Gui
             Close();
         }
 
-        public City ShowDialogValue()
+        public Opcina ShowDialogValue()
         {
             ShowDialog();
 
@@ -73,15 +73,15 @@ namespace Knjigovodstvo.Gui
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            City city = new City
+            Opcina city = new Opcina
             {
-                Name=comboBoxCity.Text,
-                Country=textBoxCountry.Text,
-                Post = textBoxPost.Text,
-                County = comboBoxCounty.Text
+                Naziv=comboBoxCity.Text,
+                Drzava=textBoxCountry.Text,
+                Posta = textBoxPost.Text,
+                Zupanija = comboBoxCounty.Text
             };
-            List<City> cities = new CitySelect().GetAllCities();
-            bool isInList = cities.Any(x=> x.Post==city.Post && x.Name==city.Name);
+            List<Opcina> cities = new CitySelect().GetAllCities();
+            bool isInList = cities.Any(x=> x.Posta==city.Posta && x.Naziv==city.Naziv);
 
             if (!isInList)
             {
@@ -89,6 +89,6 @@ namespace Knjigovodstvo.Gui
             }
         }
 
-        private City _city;
+        private Opcina _city;
     }
 }
