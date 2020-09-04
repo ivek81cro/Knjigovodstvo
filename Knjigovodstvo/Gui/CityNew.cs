@@ -82,6 +82,11 @@ namespace Knjigovodstvo.Gui
             };
             List<City> cities = new CitySelect().GetAllCities();
             bool isInList = cities.Any(x=> x.Post==city.Post && x.Name==city.Name);
+
+            if (!isInList)
+            {
+                //TODO Save new city to database
+            }
         }
 
         private City _city;

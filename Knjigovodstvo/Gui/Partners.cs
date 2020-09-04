@@ -24,6 +24,7 @@ namespace Knjigovodstvo
         private void BtnNewPartner_Click(object sender, EventArgs e)
         {
             PartnersNew form = new PartnersNew();
+            form.FormClosing += new FormClosingEventHandler(this.PartnersNew_FormClosing);
             form.ShowDialog();
         }
 
@@ -56,7 +57,7 @@ namespace Knjigovodstvo
         {
             int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             Partner partner = new Partner().GetPartnerById(id);
-            if (new DbDataDelete().DeletePartner(partner))
+            if (new DbDataDelete().DeleteItem(id, "Partneri"))
                 MessageBox.Show("Partner obrisan", "Brisanje partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             LoadDatagrid();

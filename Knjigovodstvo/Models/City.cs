@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Knjigovodstvo.Models
 {
-    public class City
+    public class City : IDbObject
     {
         public bool ValidateData()
         {

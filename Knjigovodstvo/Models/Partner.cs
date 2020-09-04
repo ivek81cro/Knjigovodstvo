@@ -1,5 +1,6 @@
 ﻿using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Helpers;
+using Knjigovodstvo.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Knjigovodstvo
 {
-    public class Partner
+    public class Partner : IDbObject
     {
         public bool ValidateData()
         {
