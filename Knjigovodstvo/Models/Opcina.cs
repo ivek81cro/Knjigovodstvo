@@ -20,10 +20,10 @@ namespace Knjigovodstvo.Models
             return true;
         }
 
-        public int Id { get; set; }
-        public string Naziv { get; set; }
-        public string Zupanija { get; set; }
-        public string Drzava { get; set; }
-        public string Posta { get; set; }
+        public int Id { get; set; } = 0;
+        public string Naziv { get; set; } = "";
+        public string Zupanija { get; set; } = "";
+        public string Drzava { get; set; } = "";
+        public string Posta { get; set; } = "";
     }
 }

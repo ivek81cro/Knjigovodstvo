@@ -30,7 +30,7 @@ namespace Knjigovodstvo
 
         private void LoadDatagrid()
         {
-            dataGridView1.DataSource = new DbDataGet().GetTable("SELECT * FROM Partneri;");
+            dataGridView1.DataSource = new DbDataGet().GetTable(new Partneri());
         }
 
         private void TextBoxFilterPartner_TextChanged(object sender, EventArgs e)
@@ -57,7 +57,7 @@ namespace Knjigovodstvo
         {
             int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             if (new DbDataDelete().DeleteItem(id, "Partneri"))
-                MessageBox.Show("Partner obrisan", "Brisanje partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Podatak obrisan", "Brisanje podatka", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             LoadDatagrid();
         }

@@ -10,9 +10,22 @@ namespace Knjigovodstvo.Helpers
 {
     class DbDataGet
     {
-        public DataTable GetTable(IDbObject obj)
+        public DataTable GetTable(IDbObject dbObject, string condition=null)
         {
             DataTable dt = new DataTable();
+
+            GenericPropertyFinder<IDbObject> property = new GenericPropertyFinder<IDbObject>();
+
+            IEnumerable<List<string>> obj = property.PrintTModelPropertyAndValue(dbObject);
+            string table = dbObject.GetType().ToString().Substring(dbObject.GetType().ToString().LastIndexOf('.') + 1);
+            string query = new DbQueryBuilder(obj, table).BuildQuery(QueryType.Select);
+
+            if(condition != null)
+            {
+                query = query.Substring(0, query.Length - 1);
+                query += " WHERE " + condition + ";";
+            }
+
             try
             {
                 using SqlConnection conn = new SqlConnection(ConnHelper.ConnStr(connection_name));

@@ -2,9 +2,7 @@
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace Knjigovodstvo
 {
@@ -42,7 +40,7 @@ namespace Knjigovodstvo
         {
             Id = id;
             //TODO Test property finder
-            if (new DbDataUpdate().UpadatePartner(this))
+            if (new DbDataUpdate().UpdateData(this))
                 return true;
 
             return false;
@@ -50,7 +48,8 @@ namespace Knjigovodstvo
 
         public Partneri GetPartnerById(int id)
         {
-            DataTable partner = new DbDataGet().GetTable(String.Format("SELECT * FROM Partneri WHERE Id={0};",id));
+            string condition = String.Format("Id={0};", id);
+            DataTable partner = new DbDataGet().GetTable(new Partneri(), condition);
             return new Partneri
             {
                 Id = int.Parse(partner.Rows[0][0].ToString()),
@@ -69,19 +68,19 @@ namespace Knjigovodstvo
             };
         }
 
-        public int Id { get; set; }
-        public string Oib { get; set; }
-        public string Naziv { get; set; }
-        public string Adresa { get; set; }
-        public string Posta { get; set; }
-        public string Grad { get; set; }
-        public string Telefon { get; set; }
-        public string Fax { get; set; }
-        public string Email { get; set; }
-        public string Iban { get; set; }
-        public string Mbo { get; set; }
-        public char Kupac { get; set; }
-        public char Dobavljac { get; set; }
+        public int Id { get; set; } = 0;
+        public string Oib { get; set; } = "00000000000";
+        public string Naziv { get; set; } = "";
+        public string Adresa { get; set; } = "";
+        public string Posta { get; set; } = "";
+        public string Grad { get; set; } = "";
+        public string Telefon { get; set; } = "";
+        public string Fax { get; set; } = "";
+        public string Email { get; set; } = "";
+        public string Iban { get; set; } = "";
+        public string Mbo { get; set; } = "";
+        public char Kupac { get; set; } = 'n';
+        public char Dobavljac { get; set; } = 'n';
     }
 
 }

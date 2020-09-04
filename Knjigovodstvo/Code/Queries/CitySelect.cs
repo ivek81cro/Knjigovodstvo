@@ -12,8 +12,7 @@ namespace Knjigovodstvo.Code.Cities
         public List<Opcina> GetAllCities()
         {
             DbDataGet data = new DbDataGet();
-            string query = String.Format("SELECT * FROM Opcina;");
-            DataTable dt = data.GetTable(query);
+            DataTable dt = data.GetTable(new Opcina());
             List<DataRow> rows = dt.AsEnumerable().ToList();
             List<Opcina> cityList = new List<Opcina>();
             cityList = (from DataRow dr in rows
@@ -30,8 +29,8 @@ namespace Knjigovodstvo.Code.Cities
         public DataTable GetCityByCounty(string county)
         {
             DbDataGet data = new DbDataGet();
-            string query = String.Format("SELECT Id, Naziv FROM Opcina where Zupanija='{0}';", county);
-            DataTable dt = data.GetTable(query);
+            string condition = String.Format("Zupanija='{0}'", county);
+            DataTable dt = data.GetTable(new Opcina(), condition);
 
             DataRow row = dt.NewRow();
             row[0] = 0;

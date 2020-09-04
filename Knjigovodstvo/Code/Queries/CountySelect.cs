@@ -1,4 +1,5 @@
 ﻿using Knjigovodstvo.Helpers;
+using Knjigovodstvo.Models;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,8 +12,7 @@ namespace Knjigovodstvo.Code.Cities
         public DataTable GetAllCounty()
         {
             DbDataGet data = new DbDataGet();
-            string query = "SELECT Id, Naziv FROM Zupanije;";
-            DataTable dt = data.GetTable(query);
+            DataTable dt = data.GetTable(new Zupanije());
             
             DataRow row = dt.NewRow();
             row[0] = 0;

@@ -7,11 +7,11 @@ namespace Knjigovodstvo.Helpers
 {
     class DbDataDelete
     {
-        public bool DeleteItem(int id, string database)
+        public bool DeleteItem(int id, string table)
         {
             try
             {
-                string query = String.Format("DELETE FROM {0} WHERE Id={1};", database, id);
+                string query = String.Format("DELETE FROM {0} WHERE Id={1};", table, id);
 
                 using SqlConnection conn = new SqlConnection(ConnHelper.ConnStr(connection_name));
                 using SqlCommand command = new SqlCommand(query, conn);

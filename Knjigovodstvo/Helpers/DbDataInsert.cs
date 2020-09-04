@@ -1,7 +1,9 @@
 ﻿using Knjigovodstvo.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace Knjigovodstvo.Helpers
 {
@@ -12,24 +14,9 @@ namespace Knjigovodstvo.Helpers
             GenericPropertyFinder<IDbObject> property = new GenericPropertyFinder<IDbObject>();
 
             IEnumerable<List<string>> obj = property.PrintTModelPropertyAndValue(dbObject);
-            List<string> name = obj.First();
-            List<string> value = obj.ElementAt(1);
-            string query = "INSERT INTO " + dbObject.GetType().ToString().Substring(dbObject.GetType().ToString().LastIndexOf('.') + 1) + " ";
-            query += "(";
+            string table = dbObject.GetType().ToString().Substring(dbObject.GetType().ToString().LastIndexOf('.') + 1);
+            string query = new DbQueryBuilder(obj, table).BuildQuery(QueryType.Insert);
 
-            for(int i = 1; i< name.Count; ++i)
-            {
-                query += name[i] + ", ";
-            }
-            query = query.Substring(0, query.Length - 2);
-            query += ") VALUES (";
-            for (int i = 1; i < value.Count; ++i)
-            {
-                query += "'" + value[i] + "', ";
-            }
-            query = query.Substring(0, query.Length - 2);
-            query += ");";
-            // TODO, return list of property names and list of values, form guerry and params
             try
             {
                 using SqlConnection conn = new SqlConnection(ConnHelper.ConnStr(connection_name));
@@ -40,8 +27,24 @@ namespace Knjigovodstvo.Helpers
 
                 return true;
             }
-            catch
+            catch (SqlException e)
             {
+                MessageBox.Show(
+                    $"Provjerite vezu sa bazom podataka.\n {e.Message}",
+                    "Greška",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
+                return false;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(
+                    $"Nepoznata greška kod brisanja podataka, kontaktirajte podršku.\n {e.Message}",
+                    "Greška",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
                 return false;
             }
         }
