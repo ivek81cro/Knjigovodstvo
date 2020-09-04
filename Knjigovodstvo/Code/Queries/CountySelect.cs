@@ -9,6 +9,9 @@ namespace Knjigovodstvo.Code.Cities
 {
     class CountySelect
     {
+        /// <summary>
+        /// Gets all counties from database
+        /// </summary>
         public DataTable GetAllCounty()
         {
             DbDataGet data = new DbDataGet();

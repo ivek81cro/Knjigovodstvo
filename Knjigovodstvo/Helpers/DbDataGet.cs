@@ -10,6 +10,12 @@ namespace Knjigovodstvo.Helpers
 {
     class DbDataGet
     {
+        /// <summary>
+        /// Gets table from database depending on recieved object.
+        /// </summary>
+        /// <param name="dbObject">Table name based on type name of object.</param>
+        /// <param name="condition">Parameter after WHERE in SQL query. (Ex. Id=0), default null</param>
+        /// <returns>DataTable based on condition</returns>
         public DataTable GetTable(IDbObject dbObject, string condition=null)
         {
             DataTable dt = new DataTable();

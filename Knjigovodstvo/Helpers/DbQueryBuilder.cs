@@ -22,6 +22,11 @@ namespace Knjigovodstvo.Helpers
             _table = table;
         }
 
+        /// <summary>
+        /// Build query based on type.
+        /// </summary>
+        /// <param name="type">Select, Insert, Update, Delete</param>
+        /// <returns>Query as string.</returns>
         public string BuildQuery(QueryType type)
         {
             string query = null;

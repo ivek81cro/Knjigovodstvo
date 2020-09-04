@@ -9,6 +9,11 @@ namespace Knjigovodstvo.Helpers
 {
     class DbDataUpdate
     {
+        /// <summary>
+        /// Updates row in table.
+        /// </summary>
+        /// <param name="dbObject">Table name based on type name of object.</param>
+        /// <returns></returns>
         public bool UpdateData(IDbObject dbObject)
         {
             GenericPropertyFinder<IDbObject> property = new GenericPropertyFinder<IDbObject>();

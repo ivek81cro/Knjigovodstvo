@@ -7,6 +7,10 @@ namespace Knjigovodstvo.Helpers
 {
     public class GenericPropertyFinder<TModel> where TModel : class
     {
+        /// <summary>
+        /// Gets names and values of object as lists of strings
+        /// </summary>
+        /// <returns>Lists of strings</returns>
         public IEnumerable<List<String>> PrintTModelPropertyAndValue(TModel tmodelObj)
         {
             //Getting Type of Generic Class Model

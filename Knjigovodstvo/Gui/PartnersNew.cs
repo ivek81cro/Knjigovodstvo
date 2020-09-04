@@ -62,6 +62,10 @@ namespace Knjigovodstvo.Gui
             }
         }
 
+        /// <summary>
+        /// Custom show dialog implementation, table row to object for sending to dialog.
+        /// </summary>
+        /// <param name="partner">Selected row from datatagrid</param>
         public void EditPartner(Partneri partner)
         {
             _id = partner.Id;

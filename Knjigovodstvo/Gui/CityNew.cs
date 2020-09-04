@@ -64,6 +64,10 @@ namespace Knjigovodstvo.Gui
             Close();
         }
 
+        /// <summary>
+        /// Custom ShowDialog
+        /// </summary>
+        /// <returns>City selected from dialog.</returns>
         public Opcina ShowDialogValue()
         {
             ShowDialog();

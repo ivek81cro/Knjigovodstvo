@@ -9,6 +9,10 @@ namespace Knjigovodstvo.Code.Cities
 {
     class CitySelect
     {
+        /// <summary>
+        /// Gets list of cities from database.
+        /// </summary>
+        /// <returns>List of City</returns>
         public List<Opcina> GetAllCities()
         {
             DbDataGet data = new DbDataGet();
@@ -26,6 +30,12 @@ namespace Knjigovodstvo.Code.Cities
 
             return cityList;
         }
+
+        /// <summary>
+        /// Gets cities from specific county. 
+        /// </summary>
+        /// <param name="county">Name of county (Županija)</param>
+        /// <returns>DataTable</returns>
         public DataTable GetCityByCounty(string county)
         {
             DbDataGet data = new DbDataGet();

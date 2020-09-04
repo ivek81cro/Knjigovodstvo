@@ -9,6 +9,11 @@ namespace Knjigovodstvo.Helpers
 {
     class DbDataInsert
     {
+        /// <summary>
+        /// Insert data in database. Name of table based on argument type.
+        /// </summary>
+        /// <param name="dbObject">Table name based on type name of object.</param>
+        /// <returns>Boolean, True if operation successful</returns>
         public bool InsertData(IDbObject dbObject)
         {
             GenericPropertyFinder<IDbObject> property = new GenericPropertyFinder<IDbObject>();
