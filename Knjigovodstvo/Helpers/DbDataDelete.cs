@@ -1,5 +1,4 @@
-﻿using Knjigovodstvo.Models;
-using System;
+﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 

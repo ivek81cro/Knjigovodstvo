@@ -1,14 +1,7 @@
-﻿using Knjigovodstvo.Code;
-using Knjigovodstvo.Gui;
+﻿using Knjigovodstvo.Gui;
 using Knjigovodstvo.Helpers;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo
@@ -61,7 +54,6 @@ namespace Knjigovodstvo
 
             if (result == DialogResult.Yes)
             {
-
                 if (new DbDataDelete().DeleteItem(id, "Partneri"))
                     MessageBox.Show("Podatak obrisan", "Brisanje podatka", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 
