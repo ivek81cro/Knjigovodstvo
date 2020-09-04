@@ -7,6 +7,10 @@ namespace Knjigovodstvo.Helpers
 {
     class DbDataDelete
     {
+        /// <summary>Deletes row from table</summary>
+        /// <param name="id">Id of row in table.</param>
+        /// <param name="table">Name of table in database.</param>
+        /// <returns>Bool True if operation succseeded.</returns>
         public bool DeleteItem(int id, string table)
         {
             try
