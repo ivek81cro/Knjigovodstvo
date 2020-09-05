@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Models;
+﻿using Knjigovodstvo.Code.Validators;
+using Knjigovodstvo.Models;
 using System;
 using System.Windows.Forms;
 
@@ -13,6 +14,8 @@ namespace Knjigovodstvo.Gui
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
+            labelMessage.Text = "";
+
             Partneri partner = new Partneri
             {
                 Oib = textBoxOib.Text,
@@ -29,7 +32,8 @@ namespace Knjigovodstvo.Gui
                 Dobavljac = checkBoxSeller.Checked ? 'd' : 'n'
             };
 
-            if (partner.ValidateData())
+            FormError validateResult = partner.ValidateData();
+            if ( validateResult == FormError.None)
             {
                 if (!_editMode && partner.InsertNew())
                 {
@@ -43,6 +47,15 @@ namespace Knjigovodstvo.Gui
                     Close();
                 }
             }
+            else
+            {
+                SetMessageLabel(validateResult);
+            }
+        }
+
+        private void SetMessageLabel(FormError errorType)
+        {
+            labelMessage.Text = new ProcessFormErrors().FormErrorMessage(errorType);
         }
 
         private void BtnClose_Click(object sender, EventArgs e)
@@ -55,7 +68,7 @@ namespace Knjigovodstvo.Gui
             CityNew city = new CityNew();
             Opcina c = city.ShowDialogValue();
 
-            if (c != null && c.ValidateData())
+            if (c != null && c.ValidateData() == FormError.None)
             {
                 textBoxCity.Text = c.Naziv;
                 textBoxPost.Text = c.Posta;

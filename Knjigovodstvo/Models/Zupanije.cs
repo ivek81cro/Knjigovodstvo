@@ -2,12 +2,12 @@
 {
     class Zupanije : IDbObject
     {        
-        public bool ValidateData()
+        public FormError ValidateData()
         {
             if (Naziv == null)
-                return false;
+                return FormError.Name;
 
-            return true;
+            return FormError.None;
         }
 
         public int Id { get; set; } = 0;

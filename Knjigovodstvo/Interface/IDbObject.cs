@@ -1,5 +1,18 @@
 ﻿namespace Knjigovodstvo.Models
 {
+    public enum FormError
+    {
+        Oib,
+        Name,
+        Street,
+        Post,
+        City,
+        County,
+        Country,
+        Iban,
+        Kupac_Dobavljac,
+        None
+    }
     /// <summary>
     /// Database object.
     /// </summary>
@@ -9,6 +22,6 @@
         /// Validate data.
         /// </summary>
         /// <returns>Boolean, True if all is valid.</returns>
-        public bool ValidateData();
+        public FormError ValidateData();
     }
 }

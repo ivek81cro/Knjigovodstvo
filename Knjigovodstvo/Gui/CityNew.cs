@@ -1,4 +1,5 @@
 ﻿using Knjigovodstvo.Code.Cities;
+using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Models;
 using System;
 using System.Collections.Generic;
@@ -56,9 +57,10 @@ namespace Knjigovodstvo.Gui
                 Posta = textBoxPost.Text
             };
 
-            if (!_city.ValidateData())
+            FormError validateResult = _city.ValidateData();
+            if (validateResult != FormError.None)
             {
-                labelWarning.Text = "Provjerite valjanost podataka.";
+                labelWarning.Text = new ProcessFormErrors().FormErrorMessage(validateResult);
                 return;
             }
             Close();

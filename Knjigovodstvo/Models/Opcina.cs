@@ -2,18 +2,18 @@
 {
     public class Opcina : IDbObject
     {
-        public bool ValidateData()
+        public FormError ValidateData()
         {
             if (Naziv.Length < 2 || Naziv.StartsWith("Odaberite"))
-                return false;
+                return FormError.Name;
             if (Zupanija.Length < 2 || Zupanija.StartsWith("Odaberite"))
-                return false;
+                return FormError.County;
             if (Drzava.Length < 2)
-                return false;
+                return FormError.Country;
             if (Posta.Length != 5)
-                return false;
+                return FormError.Post;
 
-            return true;
+            return FormError.None;
         }
 
         public int Id { get; set; } = 0;

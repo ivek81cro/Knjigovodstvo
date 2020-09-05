@@ -53,11 +53,12 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSelectCity = new System.Windows.Forms.Button();
+            this.labelMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxOib
             // 
-            this.textBoxOib.Location = new System.Drawing.Point(69, 41);
+            this.textBoxOib.Location = new System.Drawing.Point(69, 52);
             this.textBoxOib.MaxLength = 11;
             this.textBoxOib.Name = "textBoxOib";
             this.textBoxOib.Size = new System.Drawing.Size(251, 23);
@@ -65,21 +66,21 @@
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(69, 72);
+            this.textBoxName.Location = new System.Drawing.Point(69, 83);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(251, 23);
             this.textBoxName.TabIndex = 1;
             // 
             // textBoxStreet
             // 
-            this.textBoxStreet.Location = new System.Drawing.Point(69, 103);
+            this.textBoxStreet.Location = new System.Drawing.Point(69, 114);
             this.textBoxStreet.Name = "textBoxStreet";
             this.textBoxStreet.Size = new System.Drawing.Size(251, 23);
             this.textBoxStreet.TabIndex = 2;
             // 
             // textBoxPost
             // 
-            this.textBoxPost.Location = new System.Drawing.Point(69, 134);
+            this.textBoxPost.Location = new System.Drawing.Point(69, 145);
             this.textBoxPost.MaxLength = 5;
             this.textBoxPost.Name = "textBoxPost";
             this.textBoxPost.ReadOnly = true;
@@ -89,7 +90,7 @@
             // 
             // textBoxCity
             // 
-            this.textBoxCity.Location = new System.Drawing.Point(69, 165);
+            this.textBoxCity.Location = new System.Drawing.Point(69, 176);
             this.textBoxCity.Name = "textBoxCity";
             this.textBoxCity.ReadOnly = true;
             this.textBoxCity.Size = new System.Drawing.Size(161, 23);
@@ -98,28 +99,28 @@
             // 
             // textBoxPhone
             // 
-            this.textBoxPhone.Location = new System.Drawing.Point(69, 196);
+            this.textBoxPhone.Location = new System.Drawing.Point(69, 207);
             this.textBoxPhone.Name = "textBoxPhone";
             this.textBoxPhone.Size = new System.Drawing.Size(251, 23);
             this.textBoxPhone.TabIndex = 4;
             // 
             // textBoxFax
             // 
-            this.textBoxFax.Location = new System.Drawing.Point(69, 227);
+            this.textBoxFax.Location = new System.Drawing.Point(69, 238);
             this.textBoxFax.Name = "textBoxFax";
             this.textBoxFax.Size = new System.Drawing.Size(251, 23);
             this.textBoxFax.TabIndex = 5;
             // 
             // textBoxEmail
             // 
-            this.textBoxEmail.Location = new System.Drawing.Point(69, 258);
+            this.textBoxEmail.Location = new System.Drawing.Point(69, 269);
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(251, 23);
             this.textBoxEmail.TabIndex = 6;
             // 
             // textBoxIban
             // 
-            this.textBoxIban.Location = new System.Drawing.Point(69, 289);
+            this.textBoxIban.Location = new System.Drawing.Point(69, 300);
             this.textBoxIban.MaxLength = 21;
             this.textBoxIban.Name = "textBoxIban";
             this.textBoxIban.Size = new System.Drawing.Size(251, 23);
@@ -127,7 +128,7 @@
             // 
             // textBoxMbo
             // 
-            this.textBoxMbo.Location = new System.Drawing.Point(69, 320);
+            this.textBoxMbo.Location = new System.Drawing.Point(69, 331);
             this.textBoxMbo.Name = "textBoxMbo";
             this.textBoxMbo.Size = new System.Drawing.Size(251, 23);
             this.textBoxMbo.TabIndex = 8;
@@ -135,7 +136,7 @@
             // checkBoxBuyer
             // 
             this.checkBoxBuyer.AutoSize = true;
-            this.checkBoxBuyer.Location = new System.Drawing.Point(69, 349);
+            this.checkBoxBuyer.Location = new System.Drawing.Point(69, 360);
             this.checkBoxBuyer.Name = "checkBoxBuyer";
             this.checkBoxBuyer.Size = new System.Drawing.Size(59, 19);
             this.checkBoxBuyer.TabIndex = 9;
@@ -145,7 +146,7 @@
             // checkBoxSeller
             // 
             this.checkBoxSeller.AutoSize = true;
-            this.checkBoxSeller.Location = new System.Drawing.Point(69, 374);
+            this.checkBoxSeller.Location = new System.Drawing.Point(69, 385);
             this.checkBoxSeller.Name = "checkBoxSeller";
             this.checkBoxSeller.Size = new System.Drawing.Size(78, 19);
             this.checkBoxSeller.TabIndex = 10;
@@ -155,7 +156,7 @@
             // labelOib
             // 
             this.labelOib.AutoSize = true;
-            this.labelOib.Location = new System.Drawing.Point(12, 44);
+            this.labelOib.Location = new System.Drawing.Point(12, 55);
             this.labelOib.Name = "labelOib";
             this.labelOib.Size = new System.Drawing.Size(26, 15);
             this.labelOib.TabIndex = 2;
@@ -164,7 +165,7 @@
             // labelName
             // 
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(12, 75);
+            this.labelName.Location = new System.Drawing.Point(12, 86);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(36, 15);
             this.labelName.TabIndex = 2;
@@ -173,7 +174,7 @@
             // labelPost
             // 
             this.labelPost.AutoSize = true;
-            this.labelPost.Location = new System.Drawing.Point(12, 137);
+            this.labelPost.Location = new System.Drawing.Point(12, 148);
             this.labelPost.Name = "labelPost";
             this.labelPost.Size = new System.Drawing.Size(36, 15);
             this.labelPost.TabIndex = 2;
@@ -182,7 +183,7 @@
             // labelCtiy
             // 
             this.labelCtiy.AutoSize = true;
-            this.labelCtiy.Location = new System.Drawing.Point(12, 168);
+            this.labelCtiy.Location = new System.Drawing.Point(12, 179);
             this.labelCtiy.Name = "labelCtiy";
             this.labelCtiy.Size = new System.Drawing.Size(32, 15);
             this.labelCtiy.TabIndex = 2;
@@ -191,7 +192,7 @@
             // labelPhone
             // 
             this.labelPhone.AutoSize = true;
-            this.labelPhone.Location = new System.Drawing.Point(12, 199);
+            this.labelPhone.Location = new System.Drawing.Point(12, 210);
             this.labelPhone.Name = "labelPhone";
             this.labelPhone.Size = new System.Drawing.Size(45, 15);
             this.labelPhone.TabIndex = 2;
@@ -200,7 +201,7 @@
             // labelFax
             // 
             this.labelFax.AutoSize = true;
-            this.labelFax.Location = new System.Drawing.Point(12, 230);
+            this.labelFax.Location = new System.Drawing.Point(12, 241);
             this.labelFax.Name = "labelFax";
             this.labelFax.Size = new System.Drawing.Size(25, 15);
             this.labelFax.TabIndex = 2;
@@ -209,7 +210,7 @@
             // labelEmail
             // 
             this.labelEmail.AutoSize = true;
-            this.labelEmail.Location = new System.Drawing.Point(12, 261);
+            this.labelEmail.Location = new System.Drawing.Point(12, 272);
             this.labelEmail.Name = "labelEmail";
             this.labelEmail.Size = new System.Drawing.Size(36, 15);
             this.labelEmail.TabIndex = 2;
@@ -218,7 +219,7 @@
             // labelIban
             // 
             this.labelIban.AutoSize = true;
-            this.labelIban.Location = new System.Drawing.Point(12, 292);
+            this.labelIban.Location = new System.Drawing.Point(12, 303);
             this.labelIban.Name = "labelIban";
             this.labelIban.Size = new System.Drawing.Size(34, 15);
             this.labelIban.TabIndex = 2;
@@ -227,7 +228,7 @@
             // labelMbo
             // 
             this.labelMbo.AutoSize = true;
-            this.labelMbo.Location = new System.Drawing.Point(12, 323);
+            this.labelMbo.Location = new System.Drawing.Point(12, 334);
             this.labelMbo.Name = "labelMbo";
             this.labelMbo.Size = new System.Drawing.Size(32, 15);
             this.labelMbo.TabIndex = 2;
@@ -236,7 +237,7 @@
             // labelStreet
             // 
             this.labelStreet.AutoSize = true;
-            this.labelStreet.Location = new System.Drawing.Point(12, 106);
+            this.labelStreet.Location = new System.Drawing.Point(12, 117);
             this.labelStreet.Name = "labelStreet";
             this.labelStreet.Size = new System.Drawing.Size(33, 15);
             this.labelStreet.TabIndex = 2;
@@ -264,7 +265,7 @@
             // 
             // btnSelectCity
             // 
-            this.btnSelectCity.Location = new System.Drawing.Point(245, 149);
+            this.btnSelectCity.Location = new System.Drawing.Point(245, 160);
             this.btnSelectCity.Name = "btnSelectCity";
             this.btnSelectCity.Size = new System.Drawing.Size(75, 23);
             this.btnSelectCity.TabIndex = 3;
@@ -272,11 +273,20 @@
             this.btnSelectCity.UseVisualStyleBackColor = true;
             this.btnSelectCity.Click += new System.EventHandler(this.BtnSelectCity_Click);
             // 
+            // labelMessage
+            // 
+            this.labelMessage.AutoSize = true;
+            this.labelMessage.Location = new System.Drawing.Point(12, 13);
+            this.labelMessage.Name = "labelMessage";
+            this.labelMessage.Size = new System.Drawing.Size(0, 15);
+            this.labelMessage.TabIndex = 13;
+            // 
             // PartnersNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(379, 450);
+            this.Controls.Add(this.labelMessage);
             this.Controls.Add(this.btnSelectCity);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
@@ -337,5 +347,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSelectCity;
+        private System.Windows.Forms.Label labelMessage;
     }
 }
