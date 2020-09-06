@@ -22,7 +22,6 @@ namespace Knjigovodstvo.Helpers
             string table = dbObject.GetType().ToString().Substring(dbObject.GetType().ToString().LastIndexOf('.') + 1);
             string query = new DbQueryBuilder(obj, table).BuildQuery(QueryType.Update);
             
-            // TODO, return list of property names and list of values, form guerry and params
             try
             {
                 using SqlConnection conn = new SqlConnection(ConnHelper.ConnStr(connection_name));

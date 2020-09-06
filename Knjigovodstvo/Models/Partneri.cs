@@ -40,7 +40,6 @@ namespace Knjigovodstvo
         public bool EditPartner(int id)
         {
             Id = id;
-            //TODO Test property finder
             if (new DbDataUpdate().UpdateData(this))
                 return true;
 
