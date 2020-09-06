@@ -1,6 +1,6 @@
 ﻿namespace Knjigovodstvo.Gui
 {
-    partial class Komitent
+    partial class KomitentNew
     {
         /// <summary>
         /// Required designer variable.
@@ -127,7 +127,7 @@
             this.textBoxTypeName.Location = new System.Drawing.Point(115, 418);
             this.textBoxTypeName.Name = "textBoxTypeName";
             this.textBoxTypeName.Size = new System.Drawing.Size(211, 23);
-            this.textBoxTypeName.TabIndex = 8;
+            this.textBoxTypeName.TabIndex = 11;
             // 
             // textBoxName
             // 
@@ -222,18 +222,20 @@
             this.buttonSave.Location = new System.Drawing.Point(23, 467);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 25);
-            this.buttonSave.TabIndex = 11;
+            this.buttonSave.TabIndex = 12;
             this.buttonSave.Text = "Spremi";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // buttonClose
             // 
             this.buttonClose.Location = new System.Drawing.Point(303, 467);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 25);
-            this.buttonClose.TabIndex = 12;
+            this.buttonClose.TabIndex = 13;
             this.buttonClose.Text = "Zatvori";
             this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // labelName
             // 
@@ -252,6 +254,7 @@
             this.buttonSelectCity.TabIndex = 3;
             this.buttonSelectCity.Text = "Odaberi";
             this.buttonSelectCity.UseVisualStyleBackColor = true;
+            this.buttonSelectCity.Click += new System.EventHandler(this.buttonSelectCity_Click);
             // 
             // labelCode
             // 
@@ -286,23 +289,23 @@
             this.textBoxCode.MaxLength = 21;
             this.textBoxCode.Name = "textBoxCode";
             this.textBoxCode.Size = new System.Drawing.Size(211, 23);
-            this.textBoxCode.TabIndex = 7;
+            this.textBoxCode.TabIndex = 10;
             // 
             // textBoxType
             // 
             this.textBoxType.Location = new System.Drawing.Point(115, 358);
             this.textBoxType.Name = "textBoxType";
             this.textBoxType.Size = new System.Drawing.Size(211, 23);
-            this.textBoxType.TabIndex = 6;
+            this.textBoxType.TabIndex = 9;
             // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(75, 327);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(251, 23);
-            this.textBox3.TabIndex = 5;
+            this.textBox3.TabIndex = 8;
             // 
-            // Komitent
+            // KomitentNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -336,7 +339,7 @@
             this.Controls.Add(this.textBoxPost);
             this.Controls.Add(this.textBoxStreet);
             this.Controls.Add(this.textBoxOib);
-            this.Name = "Komitent";
+            this.Name = "KomitentNew";
             this.Text = "Komitent";
             this.ResumeLayout(false);
             this.PerformLayout();
