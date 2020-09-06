@@ -1,18 +1,18 @@
 ﻿using Knjigovodstvo.Helpers;
-using System;
+using Knjigovodstvo.Models;
 using System.Data;
-using System.Data.SqlClient;
-using System.Windows.Forms;
 
 namespace Knjigovodstvo.Code.Cities
 {
     class CountySelect
     {
+        /// <summary>
+        /// Gets all counties from database
+        /// </summary>
         public DataTable GetAllCounty()
         {
             DbDataGet data = new DbDataGet();
-            string query = "SELECT Id, Naziv FROM Zupanije;";
-            DataTable dt = data.GetTable(query);
+            DataTable dt = data.GetTable(new Zupanije());
             
             DataRow row = dt.NewRow();
             row[0] = 0;

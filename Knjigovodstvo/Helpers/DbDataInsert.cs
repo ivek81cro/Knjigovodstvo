@@ -1,43 +1,35 @@
 ﻿using Knjigovodstvo.Models;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Helpers
 {
-    class DbDataGet
+    class DbDataInsert
     {
         /// <summary>
-        /// Gets table from database depending on recieved object.
+        /// Insert data in database. Name of table based on argument type.
         /// </summary>
         /// <param name="dbObject">Table name based on type name of object.</param>
-        /// <param name="condition">Parameter after WHERE in SQL query. (Ex. Id=0), default null</param>
-        /// <returns>DataTable based on condition</returns>
-        public DataTable GetTable(IDbObject dbObject, string condition=null)
+        /// <returns>Boolean, True if operation successful</returns>
+        public bool InsertData(IDbObject dbObject)
         {
-            DataTable dt = new DataTable();
-
             GenericPropertyFinder<IDbObject> property = new GenericPropertyFinder<IDbObject>();
 
             IEnumerable<List<string>> obj = property.PrintTModelPropertyAndValue(dbObject);
             string table = dbObject.GetType().ToString().Substring(dbObject.GetType().ToString().LastIndexOf('.') + 1);
-            string query = new DbQueryBuilder(obj, table).BuildQuery(QueryType.Select);
-
-            if(condition != null)
-            {
-                query = query.Substring(0, query.Length - 1);
-                query += " WHERE " + condition + ";";
-            }
+            string query = new DbQueryBuilder(obj, table).BuildQuery(QueryType.Insert);
 
             try
             {
                 using SqlConnection conn = new SqlConnection(ConnHelper.ConnStr(connection_name));
-                using SqlDataAdapter sda = new SqlDataAdapter(query, conn);
+                using SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                command.ExecuteNonQuery();
+                conn.Close();
 
-                //Fill the DataTable with records from Table.
-                sda.Fill(dt);
+                return true;
             }
             catch (SqlException e)
             {
@@ -46,16 +38,19 @@ namespace Knjigovodstvo.Helpers
                     "Greška",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+
+                return false;
             }
             catch (Exception e)
             {
                 MessageBox.Show(
-                    $"Nepoznata greška kod dohvata županija, kontaktirajte podršku.\n {e.Message}",
+                    $"Nepoznata greška kod brisanja podataka, kontaktirajte podršku.\n {e.Message}",
                     "Greška",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+
+                return false;
             }
-            return dt;
         }
 
         private readonly string connection_name = "KnjigovodstvoDb";

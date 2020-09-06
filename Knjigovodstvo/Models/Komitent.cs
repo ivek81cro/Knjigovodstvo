@@ -1,27 +1,26 @@
 ﻿using Knjigovodstvo.Code.Validators;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Knjigovodstvo.Models;
 
 namespace Knjigovodstvo
 {
-    class Komitent
+    class Komitent : IDbObject
     {
-        public bool ValidateData()
+        public FormError ValidateData()
         {
             if (!new OibValidator().Validate(Oib))
-                return false;
+                return FormError.Oib;
             if (Naziv.Length < 2)
-                return false;
+                return FormError.Name;
             if (Adresa.Length < 2)
-                return false;
+                return FormError.Street;
             if (Posta.Length != 5)
-                return false;
+                return FormError.Post;
             if (Grad.Length < 2)
-                return false;
+                return FormError.City;
             if (!new IbanValidator().Validate(Iban))
-                return false;
-            return true;
+                return FormError.Iban;
+            
+            return FormError.None;
         }
 
         public string Oib { get; set; }

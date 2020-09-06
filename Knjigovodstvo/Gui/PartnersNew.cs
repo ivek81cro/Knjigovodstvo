@@ -1,12 +1,6 @@
-﻿using Knjigovodstvo.Code;
-using Knjigovodstvo.Code.Validators;
+﻿using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Gui
@@ -20,7 +14,9 @@ namespace Knjigovodstvo.Gui
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            Partner partner = new Partner
+            labelMessage.Text = "";
+
+            Partneri partner = new Partneri
             {
                 Oib = textBoxOib.Text,
                 Naziv = textBoxName.Text,
@@ -29,17 +25,37 @@ namespace Knjigovodstvo.Gui
                 Grad = textBoxCity.Text,
                 Telefon = textBoxPhone.Text,
                 Fax = textBoxFax.Text,
-                Mail = textBoxEmail.Text,
+                Email = textBoxEmail.Text,
                 Iban = textBoxIban.Text,
                 Mbo = textBoxMbo.Text,
                 Kupac = checkBoxBuyer.Checked ? 'k' : 'n',
                 Dobavljac = checkBoxSeller.Checked ? 'd' : 'n'
             };
 
-            if (partner.ValidateData())
+            FormError validateResult = partner.ValidateData();
+            if ( validateResult == FormError.None)
             {
-                partner.InsertNew();
+                if (!_editMode && partner.InsertNew())
+                {
+                    MessageBox.Show("Unos uspješan.", "Novi partner unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Close();
+                }
+
+                if (_editMode && partner.EditPartner(_id))
+                {
+                    MessageBox.Show("Izmjena uspješna.", "Izmjena podataka partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Close();
+                }
             }
+            else
+            {
+                SetMessageLabel(validateResult);
+            }
+        }
+
+        private void SetMessageLabel(FormError errorType)
+        {
+            labelMessage.Text = new ProcessFormErrors().FormErrorMessage(errorType);
         }
 
         private void BtnClose_Click(object sender, EventArgs e)
@@ -50,13 +66,43 @@ namespace Knjigovodstvo.Gui
         private void BtnSelectCity_Click(object sender, EventArgs e)
         {
             CityNew city = new CityNew();
-            City c = city.ShowDialogValue();
+            Opcina c = city.ShowDialogValue();
 
-            if (c != null && c.ValidateData())
+            if (c != null && c.ValidateData() == FormError.None)
             {
-                textBoxCity.Text = c.Name;
-                textBoxPost.Text = c.Post;
+                textBoxCity.Text = c.Naziv;
+                textBoxPost.Text = c.Posta;
             }
         }
+
+        /// <summary>
+        /// Custom show dialog implementation, table row to object for sending to dialog.
+        /// </summary>
+        /// <param name="partner">Selected row from datatagrid</param>
+        public void EditPartner(Partneri partner)
+        {
+            _id = partner.Id;
+            textBoxOib.Text = partner.Oib;
+            textBoxName.Text = partner.Naziv;
+            textBoxStreet.Text = partner.Adresa;
+            textBoxPost.Text = partner.Posta;
+            textBoxCity.Text = partner.Grad;
+            textBoxPhone.Text = partner.Telefon;
+            textBoxFax.Text = partner.Fax;
+            textBoxEmail.Text = partner.Email;
+            textBoxIban.Text = partner.Iban;
+            textBoxMbo.Text = partner.Mbo;
+            if (partner.Kupac == 'k')
+                checkBoxBuyer.Checked = true;
+            if (partner.Dobavljac == 'd')
+                checkBoxSeller.Checked = true;
+            
+            _editMode = true;
+
+            ShowDialog();
+        }
+
+        bool _editMode = false;
+        int _id = 0;
     }
 }

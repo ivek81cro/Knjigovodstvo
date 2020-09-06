@@ -1,7 +1,10 @@
 ﻿using Knjigovodstvo.Code.Cities;
+using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Gui
@@ -46,23 +49,28 @@ namespace Knjigovodstvo.Gui
 
         private void BtnClose_Click(object sender, EventArgs e)
         {
-            _city = new City()
+            _city = new Opcina()
             {
-                Country = textBoxCountry.Text,
-                County = comboBoxCounty.Text,
-                Name = comboBoxCity.Text,
-                Post = textBoxPost.Text
+                Drzava = textBoxCountry.Text,
+                Zupanija = comboBoxCounty.Text,
+                Naziv = comboBoxCity.Text,
+                Posta = textBoxPost.Text
             };
 
-            if (!_city.ValidateData())
+            FormError validateResult = _city.ValidateData();
+            if (validateResult != FormError.None)
             {
-                labelWarning.Text = "Provjerite valjanost podataka.";
+                labelWarning.Text = new ProcessFormErrors().FormErrorMessage(validateResult);
                 return;
             }
             Close();
         }
 
-        public City ShowDialogValue()
+        /// <summary>
+        /// Custom ShowDialog
+        /// </summary>
+        /// <returns>City selected from dialog.</returns>
+        public Opcina ShowDialogValue()
         {
             ShowDialog();
 
@@ -71,9 +79,22 @@ namespace Knjigovodstvo.Gui
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            //TODO Save new city in db if doesn't exist and send back result
+            Opcina city = new Opcina
+            {
+                Naziv=comboBoxCity.Text,
+                Drzava=textBoxCountry.Text,
+                Posta = textBoxPost.Text,
+                Zupanija = comboBoxCounty.Text
+            };
+            List<Opcina> cities = new CitySelect().GetAllCities();
+            bool isInList = cities.Any(x=> x.Posta==city.Posta && x.Naziv==city.Naziv);
+
+            if (!isInList)
+            {
+                //TODO Save new city to database
+            }
         }
 
-        private City _city;
+        private Opcina _city;
     }
 }

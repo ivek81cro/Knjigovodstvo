@@ -8,7 +8,7 @@ namespace Knjigovodstvo.Code.Validators
     {
         public bool Validate(string oib)
         {
-            if (oib.Length < 11)
+            if (oib.Length != 11)
                 return false;
 
             foreach(char c in oib)
