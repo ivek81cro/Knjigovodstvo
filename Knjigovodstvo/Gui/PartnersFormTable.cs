@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo
 {
-    public partial class partnersForm : Form
+    public partial class PartnersFormTable : Form
     {
-        public partnersForm()
+        public PartnersFormTable()
         {
             InitializeComponent();
             LoadDatagrid();
@@ -16,7 +16,7 @@ namespace Knjigovodstvo
 
         private void BtnNewPartner_Click(object sender, EventArgs e)
         {
-            PartnersNew form = new PartnersNew();
+            PartnerForm form = new PartnerForm();
             form.FormClosing += new FormClosingEventHandler(this.PartnersNew_FormClosing);
             form.ShowDialog();
         }
@@ -36,7 +36,7 @@ namespace Knjigovodstvo
         {
             int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             Partneri partner = new Partneri().GetPartnerById(id);
-            PartnersNew pn = new PartnersNew();
+            PartnerForm pn = new PartnerForm();
             pn.FormClosing += new FormClosingEventHandler(this.PartnersNew_FormClosing);
             pn.EditPartner(partner);
         }

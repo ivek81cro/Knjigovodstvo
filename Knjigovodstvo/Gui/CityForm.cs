@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Gui
 {
-    public partial class CityNew : Form
+    public partial class CityForm : Form
     {
-        public CityNew()
+        public CityForm()
         {
             InitializeComponent();
             FillComboCounty();
