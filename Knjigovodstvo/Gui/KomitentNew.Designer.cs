@@ -53,10 +53,11 @@
             this.buttonSelectCity = new System.Windows.Forms.Button();
             this.labelCode = new System.Windows.Forms.Label();
             this.labelType = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelMbo = new System.Windows.Forms.Label();
             this.textBoxCode = new System.Windows.Forms.TextBox();
             this.textBoxType = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBoxMbo = new System.Windows.Forms.TextBox();
+            this.labelMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxOib
@@ -274,14 +275,14 @@
             this.labelType.TabIndex = 2;
             this.labelType.Text = "Vrsta djelatnosti";
             // 
-            // label3
+            // labelMbo
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 330);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(25, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Fax";
+            this.labelMbo.AutoSize = true;
+            this.labelMbo.Location = new System.Drawing.Point(18, 330);
+            this.labelMbo.Name = "labelMbo";
+            this.labelMbo.Size = new System.Drawing.Size(32, 15);
+            this.labelMbo.TabIndex = 2;
+            this.labelMbo.Text = "Mbo";
             // 
             // textBoxCode
             // 
@@ -298,22 +299,31 @@
             this.textBoxType.Size = new System.Drawing.Size(211, 23);
             this.textBoxType.TabIndex = 9;
             // 
-            // textBox3
+            // textBoxMbo
             // 
-            this.textBox3.Location = new System.Drawing.Point(75, 327);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(251, 23);
-            this.textBox3.TabIndex = 8;
+            this.textBoxMbo.Location = new System.Drawing.Point(75, 327);
+            this.textBoxMbo.Name = "textBoxMbo";
+            this.textBoxMbo.Size = new System.Drawing.Size(251, 23);
+            this.textBoxMbo.TabIndex = 8;
+            // 
+            // labelMessage
+            // 
+            this.labelMessage.AutoSize = true;
+            this.labelMessage.Location = new System.Drawing.Point(18, 13);
+            this.labelMessage.Name = "labelMessage";
+            this.labelMessage.Size = new System.Drawing.Size(0, 15);
+            this.labelMessage.TabIndex = 14;
             // 
             // KomitentNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(390, 510);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.labelMessage);
+            this.Controls.Add(this.textBoxMbo);
             this.Controls.Add(this.textBoxType);
             this.Controls.Add(this.textBoxCode);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.labelMbo);
             this.Controls.Add(this.labelType);
             this.Controls.Add(this.labelCode);
             this.Controls.Add(this.buttonSelectCity);
@@ -373,9 +383,10 @@
         private System.Windows.Forms.Button buttonSelectCity;
         private System.Windows.Forms.Label labelCode;
         private System.Windows.Forms.Label labelType;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelMbo;
         private System.Windows.Forms.TextBox textBoxCode;
         private System.Windows.Forms.TextBox textBoxType;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBoxMbo;
+        private System.Windows.Forms.Label labelMessage;
     }
 }

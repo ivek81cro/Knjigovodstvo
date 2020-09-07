@@ -37,7 +37,7 @@ namespace Knjigovodstvo
             return false;
         }
 
-        public bool EditPartner(int id)
+        public bool UpdateData(int id)
         {
             Id = id;
             if (new DbDataUpdate().UpdateData(this))

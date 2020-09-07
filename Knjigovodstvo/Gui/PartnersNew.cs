@@ -41,7 +41,7 @@ namespace Knjigovodstvo.Gui
                     Close();
                 }
 
-                if (_editMode && partner.EditPartner(_id))
+                if (_editMode && partner.UpdateData(_id))
                 {
                     MessageBox.Show("Izmjena uspješna.", "Izmjena podataka partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
