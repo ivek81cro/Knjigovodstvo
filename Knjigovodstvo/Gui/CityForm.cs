@@ -1,5 +1,4 @@
-﻿using Knjigovodstvo.Code.Cities;
-using Knjigovodstvo.Code.Validators;
+﻿using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +8,7 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Gui
 {
+    //TODO change textBoxPost to Combo box and load post numbers from database for selected city
     public partial class CityForm : Form
     {
         public CityForm()
@@ -19,7 +19,7 @@ namespace Knjigovodstvo.Gui
 
         void FillComboCounty()
         {
-            DataTable dt = new CountySelect().GetAllCounty();
+            DataTable dt = new Zupanije().GetAllCounty();
             //Assign DataTable as DataSource.
             if (dt.Rows.Count > 0)
             {
@@ -31,7 +31,7 @@ namespace Knjigovodstvo.Gui
 
         void FillComboCity()
         {
-            DataTable dt = new CitySelect().GetCityByCounty(comboBoxCounty.Text);
+            DataTable dt = new Opcina().GetCityByCounty(comboBoxCounty.Text);
 
             //Assign DataTable as DataSource.
             if (dt.Rows.Count > 0)
@@ -86,7 +86,7 @@ namespace Knjigovodstvo.Gui
                 Posta = textBoxPost.Text,
                 Zupanija = comboBoxCounty.Text
             };
-            List<Opcina> cities = new CitySelect().GetAllCities();
+            List<Opcina> cities = new Opcina().GetAllCities();
             bool isInList = cities.Any(x=> x.Posta==city.Posta && x.Naziv==city.Naziv);
 
             if (!isInList)
