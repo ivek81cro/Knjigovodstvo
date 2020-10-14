@@ -39,6 +39,9 @@
             this.comboBoxCounty = new System.Windows.Forms.ComboBox();
             this.comboBoxCity = new System.Windows.Forms.ComboBox();
             this.labelWarning = new System.Windows.Forms.Label();
+            this.textBoxPrirez = new System.Windows.Forms.TextBox();
+            this.labelPrirez = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelName
@@ -136,16 +139,46 @@
             this.labelWarning.AutoSize = true;
             this.labelWarning.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelWarning.ForeColor = System.Drawing.Color.Firebrick;
-            this.labelWarning.Location = new System.Drawing.Point(12, 139);
+            this.labelWarning.Location = new System.Drawing.Point(13, 184);
             this.labelWarning.Name = "labelWarning";
-            this.labelWarning.Size = new System.Drawing.Size(0, 21);
+            this.labelWarning.Size = new System.Drawing.Size(106, 21);
             this.labelWarning.TabIndex = 5;
+            this.labelWarning.Text = "Warning label";
             // 
-            // CityNew
+            // textBoxPrirez
+            // 
+            this.textBoxPrirez.Location = new System.Drawing.Point(68, 128);
+            this.textBoxPrirez.Name = "textBoxPrirez";
+            this.textBoxPrirez.Size = new System.Drawing.Size(96, 23);
+            this.textBoxPrirez.TabIndex = 3;
+            // 
+            // labelPrirez
+            // 
+            this.labelPrirez.AutoSize = true;
+            this.labelPrirez.Location = new System.Drawing.Point(12, 131);
+            this.labelPrirez.Name = "labelPrirez";
+            this.labelPrirez.Size = new System.Drawing.Size(36, 15);
+            this.labelPrirez.TabIndex = 0;
+            this.labelPrirez.Text = "Prirez";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(164, 131);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(17, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "%";
+            // 
+            // CityForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(355, 274);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelPrirez);
+            this.Controls.Add(this.textBoxPrirez);
             this.Controls.Add(this.labelWarning);
             this.Controls.Add(this.comboBoxCity);
             this.Controls.Add(this.comboBoxCounty);
@@ -157,7 +190,8 @@
             this.Controls.Add(this.labelCounty);
             this.Controls.Add(this.labelPost);
             this.Controls.Add(this.labelName);
-            this.Name = "CityNew";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Name = "CityForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Unesi novi grad";
             this.ResumeLayout(false);
@@ -178,5 +212,8 @@
         private System.Windows.Forms.ComboBox comboBoxCounty;
         private System.Windows.Forms.ComboBox comboBoxCity;
         private System.Windows.Forms.Label labelWarning;
+        private System.Windows.Forms.TextBox textBoxPrirez;
+        private System.Windows.Forms.Label labelPrirez;
+        private System.Windows.Forms.Label label2;
     }
 }

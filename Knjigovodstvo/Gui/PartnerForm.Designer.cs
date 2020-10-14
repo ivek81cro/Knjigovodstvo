@@ -281,7 +281,7 @@
             this.labelMessage.Size = new System.Drawing.Size(0, 15);
             this.labelMessage.TabIndex = 13;
             // 
-            // PartnersNew
+            // PartnerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -312,7 +312,8 @@
             this.Controls.Add(this.textBoxStreet);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.textBoxOib);
-            this.Name = "PartnersNew";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Name = "PartnerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Unos Poslovnog Partnera";
             this.ResumeLayout(false);

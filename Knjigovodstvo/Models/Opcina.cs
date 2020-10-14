@@ -67,5 +67,6 @@ namespace Knjigovodstvo.Models
         public string Zupanija { get; set; } = "";
         public string Drzava { get; set; } = "";
         public string Posta { get; set; } = "";
+        public float Prirez { get; set; } = 1;
     }
 }

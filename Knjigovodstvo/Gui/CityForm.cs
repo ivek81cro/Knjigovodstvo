@@ -15,6 +15,7 @@ namespace Knjigovodstvo.Gui
         {
             InitializeComponent();
             FillComboCounty();
+            labelWarning.Text = "";
         }
 
         void FillComboCounty()
@@ -79,12 +80,22 @@ namespace Knjigovodstvo.Gui
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
+            float prirez = 1;
+            if (textBoxPrirez.Text != "")
+            {
+                bool isPrirez = float.TryParse(textBoxPrirez.Text, out prirez);
+
+                if (!isPrirez)
+                    labelWarning.Text = "Unešena vrijednost u polje Prirez nije \ndecimalan broj";
+            }
+
             Opcina city = new Opcina
             {
                 Naziv=comboBoxCity.Text,
                 Drzava=textBoxCountry.Text,
                 Posta = textBoxPost.Text,
-                Zupanija = comboBoxCounty.Text
+                Zupanija = comboBoxCounty.Text,
+                Prirez = prirez
             };
             List<Opcina> cities = new Opcina().GetAllCities();
             bool isInList = cities.Any(x=> x.Posta==city.Posta && x.Naziv==city.Naziv);
