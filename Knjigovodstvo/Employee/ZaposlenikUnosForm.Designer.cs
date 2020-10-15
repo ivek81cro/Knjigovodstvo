@@ -226,8 +226,10 @@
             // 
             this.textBoxDrzava.Location = new System.Drawing.Point(117, 255);
             this.textBoxDrzava.Name = "textBoxDrzava";
+            this.textBoxDrzava.ReadOnly = true;
             this.textBoxDrzava.Size = new System.Drawing.Size(228, 23);
             this.textBoxDrzava.TabIndex = 5;
+            this.textBoxDrzava.Text = "Hrvatska";
             // 
             // textBoxTelefon
             // 
@@ -258,6 +260,7 @@
             this.buttonSave.TabIndex = 6;
             this.buttonSave.Text = "Spremi";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // buttonClose
             // 

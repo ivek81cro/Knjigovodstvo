@@ -1,9 +1,11 @@
-﻿using Knjigovodstvo.Code.Validators;
+﻿using Knjigovodstvo.City;
+using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Models;
+using Knjigovodstvo.Partners;
 using System;
 using System.Windows.Forms;
 
-namespace Knjigovodstvo.Gui
+namespace Knjigovodstvo.Partners
 {
     public partial class PartnerUnosForm : Form
     {

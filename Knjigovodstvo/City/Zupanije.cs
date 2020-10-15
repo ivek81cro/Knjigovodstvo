@@ -1,7 +1,8 @@
 ﻿using Knjigovodstvo.Helpers;
+using Knjigovodstvo.Models;
 using System.Data;
 
-namespace Knjigovodstvo.Models
+namespace Knjigovodstvo.City
 {
     class Zupanije : IDbObject
     {        

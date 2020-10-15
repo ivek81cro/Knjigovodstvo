@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Knjigovodstvo.Models
+namespace Knjigovodstvo.Settings
 {
     class Postavke
     {

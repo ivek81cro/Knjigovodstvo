@@ -4,7 +4,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace Knjigovodstvo
+namespace Knjigovodstvo.Partners
 {
     public partial class PartneriFormTable : Form
     {

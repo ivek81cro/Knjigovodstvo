@@ -1,4 +1,4 @@
-﻿namespace Knjigovodstvo.Gui
+﻿namespace Knjigovodstvo.City
 {
     partial class GradUnosForm
     {

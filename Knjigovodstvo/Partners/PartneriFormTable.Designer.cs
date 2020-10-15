@@ -1,4 +1,4 @@
-﻿namespace Knjigovodstvo
+﻿namespace Knjigovodstvo.Partners
 {
     partial class PartneriFormTable
     {

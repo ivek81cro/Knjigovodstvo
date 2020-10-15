@@ -1,4 +1,4 @@
-﻿namespace Knjigovodstvo.Gui
+﻿namespace Knjigovodstvo.Partners
 {
     partial class PartnerUnosForm
     {

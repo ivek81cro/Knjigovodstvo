@@ -4,7 +4,7 @@ using Knjigovodstvo.Models;
 using System;
 using System.Data;
 
-namespace Knjigovodstvo
+namespace Knjigovodstvo.Partners
 {
     
     public class Partneri : IDbObject

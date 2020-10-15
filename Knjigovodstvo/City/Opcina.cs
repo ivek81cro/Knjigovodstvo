@@ -1,10 +1,11 @@
 ﻿using Knjigovodstvo.Helpers;
+using Knjigovodstvo.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-namespace Knjigovodstvo.Models
+namespace Knjigovodstvo.City
 {
     public class Opcina : IDbObject
     {
