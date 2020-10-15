@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Gui
 {
-    public partial class PartnerForm : Form
+    public partial class PartnerUnosForm : Form
     {
-        public PartnerForm()
+        public PartnerUnosForm()
         {
             InitializeComponent();
         }
@@ -65,7 +65,7 @@ namespace Knjigovodstvo.Gui
 
         private void BtnSelectCity_Click(object sender, EventArgs e)
         {
-            CityForm city = new CityForm();
+            GradUnosForm city = new GradUnosForm();
             Opcina c = city.ShowDialogValue();
 
             if (c != null && c.ValidateData() == FormError.None)

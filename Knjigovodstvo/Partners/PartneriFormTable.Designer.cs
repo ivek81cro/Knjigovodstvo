@@ -1,6 +1,6 @@
 ﻿namespace Knjigovodstvo
 {
-    partial class PartnersFormTable
+    partial class PartneriFormTable
     {
         /// <summary>
         ///  Required designer variable.

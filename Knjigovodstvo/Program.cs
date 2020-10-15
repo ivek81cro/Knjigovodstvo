@@ -15,7 +15,7 @@ namespace Knjigovodstvo
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PartnersFormTable());
+            Application.Run(new PartneriFormTable());
         }
     }
 }

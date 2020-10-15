@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Gui
 {
-    public partial class KomitentForm : Form
+    public partial class KomitentUnosForm : Form
     {
-        public KomitentForm()
+        public KomitentUnosForm()
         {
             InitializeComponent();
             InitialFormLoad();
@@ -111,7 +111,7 @@ namespace Knjigovodstvo.Gui
 
         private void buttonSelectCity_Click(object sender, EventArgs e)
         {
-            CityForm city = new CityForm();
+            GradUnosForm city = new GradUnosForm();
             Opcina c = city.ShowDialogValue();
 
             if (c != null && c.ValidateData() == FormError.None)

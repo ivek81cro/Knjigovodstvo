@@ -1,6 +1,6 @@
 ﻿namespace Knjigovodstvo.Gui
 {
-    partial class PartnerForm
+    partial class PartnerUnosForm
     {
         /// <summary>
         /// Required designer variable.

@@ -9,9 +9,9 @@ using System.Windows.Forms;
 namespace Knjigovodstvo.Gui
 {
     //TODO change textBoxPost to Combo box and load post numbers from database for selected city
-    public partial class CityForm : Form
+    public partial class GradUnosForm : Form
     {
-        public CityForm()
+        public GradUnosForm()
         {
             InitializeComponent();
             FillComboCounty();

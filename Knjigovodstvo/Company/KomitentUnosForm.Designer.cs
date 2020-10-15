@@ -1,6 +1,6 @@
 ﻿namespace Knjigovodstvo.Gui
 {
-    partial class KomitentForm
+    partial class KomitentUnosForm
     {
         /// <summary>
         /// Required designer variable.
