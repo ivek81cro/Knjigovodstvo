@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Knjigovodstvo.Code.Validators;
+using Knjigovodstvo.Models;
+using System;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Employee
@@ -8,6 +10,12 @@ namespace Knjigovodstvo.Employee
         public ZaposlenikUnosForm()
         {
             InitializeComponent();
+            labelMessage.Text = "";
+        }
+
+        private void SetMessageLabel(FormError errorType)
+        {
+            labelMessage.Text = new ProcessFormErrors().FormErrorMessage(errorType);
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -16,16 +24,39 @@ namespace Knjigovodstvo.Employee
                 Oib = textBoxOib.Text,
                 Ime = textBoxIme.Text,
                 Prezime = textBoxPrezime.Text,
-                DatumRodenja = dateTimePickerDatumRodenja.Value.ToString("yyyyy-MM-dd"),
+                DatumRodenja = dateTimePickerDatumRodenja.Value.ToString("yyyy-MM-dd"),
+                Adresa = textBoxAdresa.Text,
                 Grad=textBoxGrad.Text,
                 Drzava=textBoxDrzava.Text,
                 Telefon=textBoxTelefon.Text,
                 StručnaSprema=textBoxStrucnaSprema.Text,
-                DatumDolaska=dateTimePickerDatumDolaska.Value.ToString("yyyyy-MM-dd"),
-                DatumOdlaska=dateTimePickerDatumOdlaska.Value.ToString("yyyyy-MM-dd")
+                Olaksica = float.Parse(textBoxOlaksica.Text),
+                DatumDolaska=dateTimePickerDatumDolaska.Value.ToString("yyyy-MM-dd"),
+                DatumOdlaska=dateTimePickerDatumOdlaska.Value.ToString("yyyy-MM-dd")
             };
 
-            zaposlenik.ValidateData();
+            FormError validateResult = zaposlenik.ValidateData();
+            if (validateResult == FormError.None)
+            {
+                if (!_editMode && zaposlenik.InsertNew())
+                {
+                    MessageBox.Show("Unos uspješan.", "Novi partner unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Close();
+                }
+
+                if (_editMode && zaposlenik.UpdateData(_id))
+                {
+                    MessageBox.Show("Izmjena uspješna.", "Izmjena podataka partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Close();
+                }
+            }
+            else
+            {
+                SetMessageLabel(validateResult);
+            }
         }
+
+        bool _editMode = false;
+        int _id = 0;
     }
 }

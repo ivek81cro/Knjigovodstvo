@@ -1,5 +1,4 @@
-﻿using Knjigovodstvo.Gui;
-using Knjigovodstvo.Helpers;
+﻿using Knjigovodstvo.Helpers;
 using System;
 using System.Data;
 using System.Windows.Forms;

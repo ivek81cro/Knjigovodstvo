@@ -1,8 +1,8 @@
 ﻿using Knjigovodstvo.Code.Validators;
+using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Data;
 
 namespace Knjigovodstvo.Employee
 {
@@ -24,6 +24,45 @@ namespace Knjigovodstvo.Employee
             return FormError.None;
         }
 
+        public bool InsertNew()
+        {
+            if (new DbDataInsert().InsertData(this))
+                return true;
+
+            return false;
+        }
+
+        public bool UpdateData(int id)
+        {
+            Id = id;
+            if (new DbDataUpdate().UpdateData(this))
+                return true;
+
+            return false;
+        }
+
+        public Zaposlenik GetZaposlenikById(int id)
+        {
+            string condition = String.Format("Id={0};", id);
+            DataTable zaposlenik = new DbDataGet().GetTable(new Zaposlenik(), condition);
+            return new Zaposlenik
+            {
+                Id = int.Parse(zaposlenik.Rows[0][0].ToString()),
+                Oib = zaposlenik.Rows[0][1].ToString(),
+                Ime = zaposlenik.Rows[0][2].ToString(),
+                Prezime = zaposlenik.Rows[0][3].ToString(),
+                DatumRodenja = zaposlenik.Rows[0][4].ToString(),
+                Adresa = zaposlenik.Rows[0][5].ToString(),
+                Grad = zaposlenik.Rows[0][6].ToString(),
+                Telefon = zaposlenik.Rows[0][7].ToString(),
+                StručnaSprema = zaposlenik.Rows[0][8].ToString(),
+                Olaksica = float.Parse(zaposlenik.Rows[0][9].ToString()),
+                DatumDolaska = zaposlenik.Rows[0][10].ToString(),
+                DatumOdlaska = zaposlenik.Rows[0][11].ToString()
+            };
+        }
+
+        public int Id { get; set; }
         public string Oib { get; set; }
         public string Ime { get; set; }
         public string Prezime { get; set; }

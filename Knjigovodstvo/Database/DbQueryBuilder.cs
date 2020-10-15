@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Accessibility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,6 +19,7 @@ namespace Knjigovodstvo.Helpers
             _obj = obj;
             _name = _obj.First();
             _value = _obj.ElementAt(1);
+            _type = _obj.ElementAt(2);
             _table = table;
         }
 
@@ -50,7 +52,7 @@ namespace Knjigovodstvo.Helpers
 
         private string Select()
         {
-            return String.Format("SELECT * FROM {0};", _table);
+            return $"SELECT * FROM {_table};";
         }
 
         private string Insert()
@@ -62,12 +64,18 @@ namespace Knjigovodstvo.Helpers
             {
                 query += _name[i] + ", ";
             }
+
             query = query.Substring(0, query.Length - 2);
             query += ") VALUES (";
+
             for (int i = 1; i < _value.Count; ++i)
             {
-                query += "'" + _value[i] + "', ";
+                if (_type[i] == "Single")
+                    query += _value[i].Replace(',', '.') + ", ";
+                else
+                    query += "'" + _value[i] + "', ";
             }
+
             query = query.Substring(0, query.Length - 2);
             query += ");";
 
@@ -81,8 +89,12 @@ namespace Knjigovodstvo.Helpers
 
             for (int i = 1; i < _name.Count; ++i)
             {
-                query += _name[i] + "='" + _value[i] + "', ";
+                if (_type[i] == "Single")
+                    query += _name[i] + "=" + _value[i].Replace(',', '.') + ", ";
+                else
+                    query += _name[i] + "='" + _value[i] + "', ";
             }
+
             query = query.Substring(0, query.Length - 2);
             query += " WHERE Id=" + _value[0] + ";";
 
@@ -91,12 +103,13 @@ namespace Knjigovodstvo.Helpers
 
         private string Delete()
         {
-            return String.Format("DELETE FROM {0} WHERE Id={1};", _table, _value[0]);
+            return $"DELETE FROM {_table} WHERE Id={_value};";
         }
 
         private readonly IEnumerable<List<string>> _obj;
         private readonly string _table;
         private readonly List<string> _name;
         private readonly List<string> _value;
+        private readonly List<string> _type;
     }
 }

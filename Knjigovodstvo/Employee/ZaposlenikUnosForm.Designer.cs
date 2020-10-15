@@ -55,6 +55,7 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonOdaberiGrad = new System.Windows.Forms.Button();
+            this.labelMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -192,6 +193,7 @@
             this.textBoxOib.Name = "textBoxOib";
             this.textBoxOib.Size = new System.Drawing.Size(228, 23);
             this.textBoxOib.TabIndex = 5;
+            this.textBoxOib.Text = "01234567890";
             // 
             // textBoxIme
             // 
@@ -199,6 +201,7 @@
             this.textBoxIme.Name = "textBoxIme";
             this.textBoxIme.Size = new System.Drawing.Size(228, 23);
             this.textBoxIme.TabIndex = 5;
+            this.textBoxIme.Text = "Ivan";
             // 
             // textBoxPrezime
             // 
@@ -206,6 +209,7 @@
             this.textBoxPrezime.Name = "textBoxPrezime";
             this.textBoxPrezime.Size = new System.Drawing.Size(228, 23);
             this.textBoxPrezime.TabIndex = 5;
+            this.textBoxPrezime.Text = "Batinić";
             // 
             // textBoxAdresa
             // 
@@ -213,6 +217,7 @@
             this.textBoxAdresa.Name = "textBoxAdresa";
             this.textBoxAdresa.Size = new System.Drawing.Size(228, 23);
             this.textBoxAdresa.TabIndex = 5;
+            this.textBoxAdresa.Text = "Sv. Mateja 3";
             // 
             // textBoxGrad
             // 
@@ -221,6 +226,7 @@
             this.textBoxGrad.ReadOnly = true;
             this.textBoxGrad.Size = new System.Drawing.Size(228, 23);
             this.textBoxGrad.TabIndex = 5;
+            this.textBoxGrad.Text = "Zagreb";
             // 
             // textBoxDrzava
             // 
@@ -237,6 +243,7 @@
             this.textBoxTelefon.Name = "textBoxTelefon";
             this.textBoxTelefon.Size = new System.Drawing.Size(228, 23);
             this.textBoxTelefon.TabIndex = 5;
+            this.textBoxTelefon.Text = "098/1934-288";
             // 
             // textBoxStrucnaSprema
             // 
@@ -244,6 +251,7 @@
             this.textBoxStrucnaSprema.Name = "textBoxStrucnaSprema";
             this.textBoxStrucnaSprema.Size = new System.Drawing.Size(59, 23);
             this.textBoxStrucnaSprema.TabIndex = 5;
+            this.textBoxStrucnaSprema.Text = "SSS";
             // 
             // textBoxOlaksica
             // 
@@ -251,10 +259,11 @@
             this.textBoxOlaksica.Name = "textBoxOlaksica";
             this.textBoxOlaksica.Size = new System.Drawing.Size(59, 23);
             this.textBoxOlaksica.TabIndex = 5;
+            this.textBoxOlaksica.Text = "0,7";
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(13, 512);
+            this.buttonSave.Location = new System.Drawing.Point(13, 593);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 6;
@@ -264,7 +273,7 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(361, 512);
+            this.buttonClose.Location = new System.Drawing.Point(361, 593);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 7;
@@ -280,11 +289,21 @@
             this.buttonOdaberiGrad.Text = "Odaberi";
             this.buttonOdaberiGrad.UseVisualStyleBackColor = true;
             // 
+            // labelMessage
+            // 
+            this.labelMessage.AutoSize = true;
+            this.labelMessage.Location = new System.Drawing.Point(12, 500);
+            this.labelMessage.Name = "labelMessage";
+            this.labelMessage.Size = new System.Drawing.Size(81, 15);
+            this.labelMessage.TabIndex = 9;
+            this.labelMessage.Text = "LabelMessage";
+            // 
             // ZaposlenikUnosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(448, 566);
+            this.ClientSize = new System.Drawing.Size(448, 628);
+            this.Controls.Add(this.labelMessage);
             this.Controls.Add(this.buttonOdaberiGrad);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSave);
@@ -348,5 +367,6 @@
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonOdaberiGrad;
+        private System.Windows.Forms.Label labelMessage;
     }
 }

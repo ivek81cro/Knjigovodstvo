@@ -20,14 +20,16 @@ namespace Knjigovodstvo.Helpers
 
             List<string> propName = new List<string>();
             List<string> propValue = new List<string>();
+            List<string> propType = new List<string>();
             //Now we will loop in all properties one by one to get value
             foreach (PropertyInfo property in arrayPropertyInfos)
             {
                 propName.Add(property.Name.ToString());
                 propValue.Add(property.GetValue(tmodelObj).ToString());
+                propType.Add(property.PropertyType.Name.ToString());
             }
 
-            return new List<List<String>> { propName, propValue };
+            return new List<List<String>> { propName, propValue, propType };
         }
     }
 }
