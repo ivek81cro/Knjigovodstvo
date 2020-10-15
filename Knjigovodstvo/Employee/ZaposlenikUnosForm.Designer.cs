@@ -54,6 +54,7 @@
             this.textBoxOlaksica = new System.Windows.Forms.TextBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.buttonOdaberiGrad = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -217,6 +218,7 @@
             // 
             this.textBoxGrad.Location = new System.Drawing.Point(117, 216);
             this.textBoxGrad.Name = "textBoxGrad";
+            this.textBoxGrad.ReadOnly = true;
             this.textBoxGrad.Size = new System.Drawing.Size(228, 23);
             this.textBoxGrad.TabIndex = 5;
             // 
@@ -266,11 +268,21 @@
             this.buttonClose.Text = "Zatvori";
             this.buttonClose.UseVisualStyleBackColor = true;
             // 
-            // ZaposlenikForm
+            // buttonOdaberiGrad
+            // 
+            this.buttonOdaberiGrad.Location = new System.Drawing.Point(351, 215);
+            this.buttonOdaberiGrad.Name = "buttonOdaberiGrad";
+            this.buttonOdaberiGrad.Size = new System.Drawing.Size(75, 23);
+            this.buttonOdaberiGrad.TabIndex = 8;
+            this.buttonOdaberiGrad.Text = "Odaberi";
+            this.buttonOdaberiGrad.UseVisualStyleBackColor = true;
+            // 
+            // ZaposlenikUnosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(448, 566);
+            this.Controls.Add(this.buttonOdaberiGrad);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxOlaksica);
@@ -297,7 +309,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "ZaposlenikForm";
+            this.Name = "ZaposlenikUnosForm";
             this.Text = "Zaposlenici";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -332,5 +344,6 @@
         private System.Windows.Forms.TextBox textBoxOlaksica;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.Button buttonOdaberiGrad;
     }
 }
