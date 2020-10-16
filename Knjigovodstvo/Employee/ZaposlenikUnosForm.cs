@@ -56,6 +56,27 @@ namespace Knjigovodstvo.Employee
             }
         }
 
+        public void EditZaposlenik(Zaposlenik zaposlenik)
+        {
+            _id = zaposlenik.Id;
+            textBoxOib.Text = zaposlenik.Oib;
+            textBoxIme.Text = zaposlenik.Ime;
+            textBoxPrezime.Text = zaposlenik.Prezime;
+            dateTimePickerDatumRodenja.Text = zaposlenik.DatumRodenja;
+            textBoxAdresa.Text = zaposlenik.Adresa;
+            textBoxGrad.Text = zaposlenik.Grad;
+            textBoxDrzava.Text = zaposlenik.Drzava;
+            textBoxTelefon.Text = zaposlenik.Telefon;
+            textBoxStrucnaSprema.Text = zaposlenik.StručnaSprema;
+            textBoxOlaksica.Text = zaposlenik.Olaksica.ToString();
+            dateTimePickerDatumDolaska.Text = zaposlenik.DatumDolaska;
+            dateTimePickerDatumOdlaska.Text = zaposlenik.DatumOdlaska;
+
+            _editMode = true;
+
+            ShowDialog();
+        }
+
         bool _editMode = false;
         int _id = 0;
     }

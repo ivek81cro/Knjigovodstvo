@@ -14,7 +14,7 @@ namespace Knjigovodstvo.Helpers
         {
             try
             {
-                string query = String.Format("DELETE FROM {0} WHERE Id={1};", table, id);
+                string query = $"DELETE FROM {table} WHERE Id={id};";
 
                 using SqlConnection conn = new SqlConnection(ConnHelper.ConnStr(connection_name));
                 using SqlCommand command = new SqlCommand(query, conn);

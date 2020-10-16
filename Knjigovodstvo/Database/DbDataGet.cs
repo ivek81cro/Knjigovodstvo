@@ -28,7 +28,7 @@ namespace Knjigovodstvo.Helpers
             if(condition != null)
             {
                 query = query.Substring(0, query.Length - 1);
-                query += " WHERE " + condition + ";";
+                query += $" WHERE {condition};";
             }
 
             try

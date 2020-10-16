@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Partners
 {
-    public partial class PartneriFormTable : Form
+    public partial class PartneriTableForm : Form
     {
-        public PartneriFormTable()
+        public PartneriTableForm()
         {
             InitializeComponent();
             LoadDatagrid();
@@ -28,7 +28,7 @@ namespace Knjigovodstvo.Partners
         private void TextBoxFilterPartner_TextChanged(object sender, EventArgs e)
         {
             (dataGridView1.DataSource as DataTable).DefaultView.RowFilter =
-                String.Format("Naziv LIKE '{0}%' OR Naziv LIKE '% {0}%'", textBoxFilterPartner.Text);
+                $"Naziv LIKE '{textBoxFilterPartner.Text}%' OR Naziv LIKE '% {textBoxFilterPartner.Text}%'";
         }
 
         private void BtnEditPartner_Click(object sender, EventArgs e)
@@ -39,7 +39,6 @@ namespace Knjigovodstvo.Partners
             pn.FormClosing += new FormClosingEventHandler(this.PartnersNew_FormClosing);
             pn.EditPartner(partner);
         }
-
         private void PartnersNew_FormClosing(object sender, FormClosingEventArgs e)
         {
             LoadDatagrid();
@@ -49,7 +48,7 @@ namespace Knjigovodstvo.Partners
         {
             int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             DialogResult result = MessageBox.Show("Da li ste sigurni da želite obrisati odabrani red?", 
-                "Brisanje partnera", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                "Brisanje partnera", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {

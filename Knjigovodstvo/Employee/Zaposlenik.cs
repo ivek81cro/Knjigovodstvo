@@ -6,7 +6,7 @@ using System.Data;
 
 namespace Knjigovodstvo.Employee
 {
-    class Zaposlenik : IDbObject
+    public class Zaposlenik : IDbObject
     {
         public FormError ValidateData()
         {
@@ -45,6 +45,7 @@ namespace Knjigovodstvo.Employee
         {
             string condition = String.Format("Id={0};", id);
             DataTable zaposlenik = new DbDataGet().GetTable(new Zaposlenik(), condition);
+
             return new Zaposlenik
             {
                 Id = int.Parse(zaposlenik.Rows[0][0].ToString()),
@@ -54,26 +55,27 @@ namespace Knjigovodstvo.Employee
                 DatumRodenja = zaposlenik.Rows[0][4].ToString(),
                 Adresa = zaposlenik.Rows[0][5].ToString(),
                 Grad = zaposlenik.Rows[0][6].ToString(),
-                Telefon = zaposlenik.Rows[0][7].ToString(),
-                StručnaSprema = zaposlenik.Rows[0][8].ToString(),
-                Olaksica = float.Parse(zaposlenik.Rows[0][9].ToString()),
-                DatumDolaska = zaposlenik.Rows[0][10].ToString(),
-                DatumOdlaska = zaposlenik.Rows[0][11].ToString()
+                Drzava = zaposlenik.Rows[0][7].ToString(),
+                Telefon = zaposlenik.Rows[0][8].ToString(),
+                StručnaSprema = zaposlenik.Rows[0][9].ToString(),
+                Olaksica = float.Parse(zaposlenik.Rows[0][10].ToString()),
+                DatumDolaska = zaposlenik.Rows[0][11].ToString(),
+                DatumOdlaska = zaposlenik.Rows[0][12].ToString()
             };
         }
 
-        public int Id { get; set; }
-        public string Oib { get; set; }
-        public string Ime { get; set; }
-        public string Prezime { get; set; }
-        public string DatumRodenja { get; set; }
-        public string Adresa { get; set; }
-        public string Grad { get; set; }
-        public string Drzava { get; set; }
-        public string Telefon { get; set; }
-        public string StručnaSprema { get; set; }
-        public float Olaksica { get; set; }
-        public string DatumDolaska { get; set; }
-        public string DatumOdlaska { get; set; }
+        public int Id { get; set; } = 0;
+        public string Oib { get; set; } = "";
+        public string Ime { get; set; } = "";
+        public string Prezime { get; set; } = "";
+        public string DatumRodenja { get; set; } = "";
+        public string Adresa { get; set; } = "";
+        public string Grad { get; set; } = "";
+        public string Drzava { get; set; } = "";
+        public string Telefon { get; set; } = "";
+        public string StručnaSprema { get; set; } = "";
+        public float Olaksica { get; set; } = 0;
+        public string DatumDolaska { get; set; } = "";
+        public string DatumOdlaska { get; set; } = "";
     }
 }
