@@ -116,7 +116,7 @@ namespace Knjigovodstvo.Employee
             this.Controls.Add(this.namePartnerLabel);
             this.Controls.Add(this.textBoxFilterZaposlenik);
             this.Name = "ZaposleniciTableForm";
-            this.Text = "ZaposleniciTableForm";
+            this.Text = "Zaposlenici";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
