@@ -15,7 +15,7 @@ namespace Knjigovodstvo.City
         {
             InitializeComponent();
             FillComboCounty();
-            labelWarning.Text = "";
+            labelUpozorenja.Text = "";
         }
 
         void FillComboCounty()
@@ -24,22 +24,22 @@ namespace Knjigovodstvo.City
             //Assign DataTable as DataSource.
             if (dt.Rows.Count > 0)
             {
-                comboBoxCounty.DataSource = dt;
-                comboBoxCounty.DisplayMember = "Naziv";
-                comboBoxCounty.ValueMember = "Id";
+                comboBoxZupanija.DataSource = dt;
+                comboBoxZupanija.DisplayMember = "Naziv";
+                comboBoxZupanija.ValueMember = "Id";
             }
         }
 
         void FillComboCity()
         {
-            DataTable dt = new Opcina().GetCityByCounty(comboBoxCounty.Text);
+            DataTable dt = new Grad().GetGradByZupanija(comboBoxZupanija.Text);
 
             //Assign DataTable as DataSource.
             if (dt.Rows.Count > 0)
             {
-                comboBoxCity.DataSource = dt;
-                comboBoxCity.DisplayMember = "Naziv";
-                comboBoxCity.ValueMember = "Id";
+                comboBoxNaziv.DataSource = dt;
+                comboBoxNaziv.DisplayMember = "Naziv";
+                comboBoxNaziv.ValueMember = "Id";
             }
         }
 
@@ -50,18 +50,18 @@ namespace Knjigovodstvo.City
 
         private void BtnClose_Click(object sender, EventArgs e)
         {
-            _city = new Opcina()
+            _grad = new Grad()
             {
-                Drzava = textBoxCountry.Text,
-                Zupanija = comboBoxCounty.Text,
-                Naziv = comboBoxCity.Text,
-                Posta = textBoxPost.Text
+                Drzava = textBoxDrzava.Text,
+                Zupanija = comboBoxZupanija.Text,
+                Naziv = comboBoxNaziv.Text,
+                Posta = textBoxPosta.Text
             };
 
-            FormError validateResult = _city.ValidateData();
+            FormError validateResult = _grad.ValidateData();
             if (validateResult != FormError.None)
             {
-                labelWarning.Text = new ProcessFormErrors().FormErrorMessage(validateResult);
+                labelUpozorenja.Text = new ProcessFormErrors().FormErrorMessage(validateResult);
                 return;
             }
             Close();
@@ -71,41 +71,64 @@ namespace Knjigovodstvo.City
         /// Custom ShowDialog
         /// </summary>
         /// <returns>City selected from dialog.</returns>
-        public Opcina ShowDialogValue()
+        public Grad ShowDialogValue()
         {
             ShowDialog();
 
-            return _city;
+            return _grad;
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            float prirez = 1;
-            if (textBoxPrirez.Text != "")
+            Grad grad = new Grad
             {
-                bool isPrirez = float.TryParse(textBoxPrirez.Text, out prirez);
-
-                if (!isPrirez)
-                    labelWarning.Text = "Unešena vrijednost u polje Prirez nije \ndecimalan broj";
-            }
-
-            Opcina city = new Opcina
-            {
-                Naziv=comboBoxCity.Text,
-                Drzava=textBoxCountry.Text,
-                Posta = textBoxPost.Text,
-                Zupanija = comboBoxCounty.Text,
-                Prirez = prirez
+                Naziv = comboBoxNaziv.Text,
+                Zupanija = comboBoxZupanija.Text,
+                Posta = textBoxPosta.Text,
+                Prirez = float.Parse(textBoxPrirez.Text),
+                Drzava =textBoxDrzava.Text
             };
-            List<Opcina> cities = new Opcina().GetAllCities();
-            bool isInList = cities.Any(x=> x.Posta==city.Posta && x.Naziv==city.Naziv);
 
-            if (!isInList)
+            FormError validateResult = grad.ValidateData();
+            if (validateResult == FormError.None)
             {
-                //TODO Save new city to database
+                if (!_editMode && grad.InsertNew())
+                {
+                    MessageBox.Show("Unos uspješan.", "Novi partner unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Close();
+                }
+
+                if (_editMode && grad.UpdateData(_id))
+                {
+                    MessageBox.Show("Izmjena uspješna.", "Izmjena podataka partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Close();
+                }
+            }
+            else
+            {
+                SetMessageLabel(validateResult);
             }
         }
 
-        private Opcina _city;
+        internal void EditGrad(Grad grad)
+        {
+            _id = grad.Id;
+            comboBoxNaziv.Text = grad.Naziv;//TODO: NE sprema naziv odabranog grada
+            comboBoxZupanija.Text = grad.Zupanija;
+            textBoxPosta.Text = grad.Posta;
+            textBoxPrirez.Text = grad.Prirez.ToString();
+
+            _editMode = true;
+
+            ShowDialog();
+        }
+        private void SetMessageLabel(FormError errorType)
+        {
+            labelUpozorenja.Text = new ProcessFormErrors().FormErrorMessage(errorType);
+        }
+
+        private Grad _grad;
+        private int _id;
+        private bool _editMode;
     }
 }

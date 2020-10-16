@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Knjigovodstvo.City
 {
-    public class Opcina : IDbObject
+    public class Grad : IDbObject
     {
         public FormError ValidateData()
         {
@@ -27,22 +27,39 @@ namespace Knjigovodstvo.City
         /// Gets list of cities from database.
         /// </summary>
         /// <returns>List of City</returns>
-        public List<Opcina> GetAllCities()
+        public List<Grad> GetAllGrad()
         {
             DbDataGet data = new DbDataGet();
-            DataTable dt = data.GetTable(new Opcina());
+            DataTable dt = data.GetTable(new Grad());
             List<DataRow> rows = dt.AsEnumerable().ToList();
-            List<Opcina> cityList = new List<Opcina>();
+            List<Grad> cityList = new List<Grad>();
             cityList = (from DataRow dr in rows
-                        select new Opcina()
+                        select new Grad()
                         {
+                            Id = int.Parse(dr["Id"].ToString()),
                             Naziv = dr["Naziv"].ToString(),
-                            Drzava = "Hrvatska",//TODO Add country to City
+                            Drzava = dr["Drzava"].ToString(),
                             Zupanija = dr["Zupanija"].ToString(),
-                            Posta = "00000"
+                            Posta = dr["Posta"].ToString()
                         }).ToList();
 
             return cityList;
+        }
+
+        internal Grad GetGradById(int id)
+        {
+            string condition = $"Id={id};";
+            DataTable grad = new DbDataGet().GetTable(new Grad(), condition);
+
+            return new Grad
+            {
+                Id = int.Parse(grad.Rows[0][0].ToString()),
+                Naziv = grad.Rows[0][1].ToString(),
+                Zupanija = grad.Rows[0][2].ToString(),
+                Drzava = grad.Rows[0][3].ToString(),
+                Posta = grad.Rows[0][4].ToString(),
+                Prirez = float.Parse(grad.Rows[0][5].ToString())
+            };
         }
 
         /// <summary>
@@ -50,17 +67,34 @@ namespace Knjigovodstvo.City
         /// </summary>
         /// <param name="county">Name of county (Županija)</param>
         /// <returns>DataTable</returns>
-        public DataTable GetCityByCounty(string county)
+        public DataTable GetGradByZupanija(string county)
         {
             DbDataGet data = new DbDataGet();
-            string condition = String.Format("Zupanija='{0}'", county);
-            DataTable dt = data.GetTable(new Opcina(), condition);
+            string condition = $"Zupanija='{county}'";
+            DataTable dt = data.GetTable(new Grad(), condition);
 
             DataRow row = dt.NewRow();
             row[0] = 0;
             row[1] = "Odaberite Grad";
             dt.Rows.InsertAt(row, 0);
             return dt;
+        }
+
+        internal bool InsertNew()
+        {
+            if(new DbDataInsert().InsertData(this))
+                return true;
+
+            return false;
+        }
+
+        internal bool UpdateData(int id)
+        {
+            Id = id;
+            if (new DbDataUpdate().UpdateData(this))
+                return true;
+
+            return false;
         }
 
         public int Id { get; set; } = 0;

@@ -28,80 +28,80 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelName = new System.Windows.Forms.Label();
-            this.labelPost = new System.Windows.Forms.Label();
-            this.labelCounty = new System.Windows.Forms.Label();
-            this.labelCountry = new System.Windows.Forms.Label();
-            this.textBoxPost = new System.Windows.Forms.TextBox();
-            this.textBoxCountry = new System.Windows.Forms.TextBox();
+            this.labelNaziv = new System.Windows.Forms.Label();
+            this.labelPosta = new System.Windows.Forms.Label();
+            this.labelZupanija = new System.Windows.Forms.Label();
+            this.labelDrzava = new System.Windows.Forms.Label();
+            this.textBoxPosta = new System.Windows.Forms.TextBox();
+            this.textBoxDrzava = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            this.comboBoxCounty = new System.Windows.Forms.ComboBox();
-            this.comboBoxCity = new System.Windows.Forms.ComboBox();
-            this.labelWarning = new System.Windows.Forms.Label();
+            this.comboBoxZupanija = new System.Windows.Forms.ComboBox();
+            this.comboBoxNaziv = new System.Windows.Forms.ComboBox();
+            this.labelUpozorenja = new System.Windows.Forms.Label();
             this.textBoxPrirez = new System.Windows.Forms.TextBox();
             this.labelPrirez = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // labelName
+            // labelNaziv
             // 
-            this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(12, 73);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(32, 15);
-            this.labelName.TabIndex = 0;
-            this.labelName.Text = "Grad";
+            this.labelNaziv.AutoSize = true;
+            this.labelNaziv.Location = new System.Drawing.Point(12, 73);
+            this.labelNaziv.Name = "labelNaziv";
+            this.labelNaziv.Size = new System.Drawing.Size(32, 15);
+            this.labelNaziv.TabIndex = 0;
+            this.labelNaziv.Text = "Grad";
             // 
-            // labelPost
+            // labelPosta
             // 
-            this.labelPost.AutoSize = true;
-            this.labelPost.Location = new System.Drawing.Point(12, 102);
-            this.labelPost.Name = "labelPost";
-            this.labelPost.Size = new System.Drawing.Size(36, 15);
-            this.labelPost.TabIndex = 0;
-            this.labelPost.Text = "Pošta";
+            this.labelPosta.AutoSize = true;
+            this.labelPosta.Location = new System.Drawing.Point(12, 102);
+            this.labelPosta.Name = "labelPosta";
+            this.labelPosta.Size = new System.Drawing.Size(36, 15);
+            this.labelPosta.TabIndex = 0;
+            this.labelPosta.Text = "Pošta";
             // 
-            // labelCounty
+            // labelZupanija
             // 
-            this.labelCounty.AutoSize = true;
-            this.labelCounty.Location = new System.Drawing.Point(12, 44);
-            this.labelCounty.Name = "labelCounty";
-            this.labelCounty.Size = new System.Drawing.Size(53, 15);
-            this.labelCounty.TabIndex = 0;
-            this.labelCounty.Text = "Županija";
+            this.labelZupanija.AutoSize = true;
+            this.labelZupanija.Location = new System.Drawing.Point(12, 44);
+            this.labelZupanija.Name = "labelZupanija";
+            this.labelZupanija.Size = new System.Drawing.Size(53, 15);
+            this.labelZupanija.TabIndex = 0;
+            this.labelZupanija.Text = "Županija";
             // 
-            // labelCountry
+            // labelDrzava
             // 
-            this.labelCountry.AutoSize = true;
-            this.labelCountry.Location = new System.Drawing.Point(12, 15);
-            this.labelCountry.Name = "labelCountry";
-            this.labelCountry.Size = new System.Drawing.Size(42, 15);
-            this.labelCountry.TabIndex = 0;
-            this.labelCountry.Text = "Država";
+            this.labelDrzava.AutoSize = true;
+            this.labelDrzava.Location = new System.Drawing.Point(12, 15);
+            this.labelDrzava.Name = "labelDrzava";
+            this.labelDrzava.Size = new System.Drawing.Size(42, 15);
+            this.labelDrzava.TabIndex = 0;
+            this.labelDrzava.Text = "Država";
             // 
-            // textBoxPost
+            // textBoxPosta
             // 
-            this.textBoxPost.Location = new System.Drawing.Point(68, 99);
-            this.textBoxPost.Name = "textBoxPost";
-            this.textBoxPost.Size = new System.Drawing.Size(96, 23);
-            this.textBoxPost.TabIndex = 3;
+            this.textBoxPosta.Location = new System.Drawing.Point(68, 99);
+            this.textBoxPosta.Name = "textBoxPosta";
+            this.textBoxPosta.Size = new System.Drawing.Size(96, 23);
+            this.textBoxPosta.TabIndex = 3;
             // 
-            // textBoxCountry
+            // textBoxDrzava
             // 
-            this.textBoxCountry.Location = new System.Drawing.Point(68, 12);
-            this.textBoxCountry.Name = "textBoxCountry";
-            this.textBoxCountry.ReadOnly = true;
-            this.textBoxCountry.Size = new System.Drawing.Size(240, 23);
-            this.textBoxCountry.TabIndex = 0;
-            this.textBoxCountry.Text = "Hrvatska";
+            this.textBoxDrzava.Location = new System.Drawing.Point(68, 12);
+            this.textBoxDrzava.Name = "textBoxDrzava";
+            this.textBoxDrzava.ReadOnly = true;
+            this.textBoxDrzava.Size = new System.Drawing.Size(240, 23);
+            this.textBoxDrzava.TabIndex = 0;
+            this.textBoxDrzava.Text = "Hrvatska";
             // 
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(13, 239);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 4;
+            this.btnSave.TabIndex = 5;
             this.btnSave.Text = "Spremi";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -111,46 +111,46 @@
             this.btnClose.Location = new System.Drawing.Point(268, 239);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 3;
+            this.btnClose.TabIndex = 6;
             this.btnClose.Text = "Odaberi";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
-            // comboBoxCounty
+            // comboBoxZupanija
             // 
-            this.comboBoxCounty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCounty.FormattingEnabled = true;
-            this.comboBoxCounty.Location = new System.Drawing.Point(68, 41);
-            this.comboBoxCounty.Name = "comboBoxCounty";
-            this.comboBoxCounty.Size = new System.Drawing.Size(240, 23);
-            this.comboBoxCounty.TabIndex = 1;
-            this.comboBoxCounty.SelectedValueChanged += new System.EventHandler(this.ComboBoxCounty_SelectedValueChanged);
+            this.comboBoxZupanija.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxZupanija.FormattingEnabled = true;
+            this.comboBoxZupanija.Location = new System.Drawing.Point(68, 41);
+            this.comboBoxZupanija.Name = "comboBoxZupanija";
+            this.comboBoxZupanija.Size = new System.Drawing.Size(240, 23);
+            this.comboBoxZupanija.TabIndex = 1;
+            this.comboBoxZupanija.SelectedValueChanged += new System.EventHandler(this.ComboBoxCounty_SelectedValueChanged);
             // 
-            // comboBoxCity
+            // comboBoxNaziv
             // 
-            this.comboBoxCity.FormattingEnabled = true;
-            this.comboBoxCity.Location = new System.Drawing.Point(68, 70);
-            this.comboBoxCity.Name = "comboBoxCity";
-            this.comboBoxCity.Size = new System.Drawing.Size(240, 23);
-            this.comboBoxCity.TabIndex = 2;
+            this.comboBoxNaziv.FormattingEnabled = true;
+            this.comboBoxNaziv.Location = new System.Drawing.Point(68, 70);
+            this.comboBoxNaziv.Name = "comboBoxNaziv";
+            this.comboBoxNaziv.Size = new System.Drawing.Size(240, 23);
+            this.comboBoxNaziv.TabIndex = 2;
             // 
-            // labelWarning
+            // labelUpozorenja
             // 
-            this.labelWarning.AutoSize = true;
-            this.labelWarning.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelWarning.ForeColor = System.Drawing.Color.Firebrick;
-            this.labelWarning.Location = new System.Drawing.Point(13, 184);
-            this.labelWarning.Name = "labelWarning";
-            this.labelWarning.Size = new System.Drawing.Size(106, 21);
-            this.labelWarning.TabIndex = 5;
-            this.labelWarning.Text = "Warning label";
+            this.labelUpozorenja.AutoSize = true;
+            this.labelUpozorenja.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelUpozorenja.ForeColor = System.Drawing.Color.Firebrick;
+            this.labelUpozorenja.Location = new System.Drawing.Point(13, 184);
+            this.labelUpozorenja.Name = "labelUpozorenja";
+            this.labelUpozorenja.Size = new System.Drawing.Size(106, 21);
+            this.labelUpozorenja.TabIndex = 5;
+            this.labelUpozorenja.Text = "Warning label";
             // 
             // textBoxPrirez
             // 
             this.textBoxPrirez.Location = new System.Drawing.Point(68, 128);
             this.textBoxPrirez.Name = "textBoxPrirez";
             this.textBoxPrirez.Size = new System.Drawing.Size(96, 23);
-            this.textBoxPrirez.TabIndex = 3;
+            this.textBoxPrirez.TabIndex = 4;
             // 
             // labelPrirez
             // 
@@ -171,7 +171,7 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "%";
             // 
-            // CityForm
+            // GradUnosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -179,19 +179,19 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.labelPrirez);
             this.Controls.Add(this.textBoxPrirez);
-            this.Controls.Add(this.labelWarning);
-            this.Controls.Add(this.comboBoxCity);
-            this.Controls.Add(this.comboBoxCounty);
+            this.Controls.Add(this.labelUpozorenja);
+            this.Controls.Add(this.comboBoxNaziv);
+            this.Controls.Add(this.comboBoxZupanija);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.textBoxCountry);
-            this.Controls.Add(this.textBoxPost);
-            this.Controls.Add(this.labelCountry);
-            this.Controls.Add(this.labelCounty);
-            this.Controls.Add(this.labelPost);
-            this.Controls.Add(this.labelName);
+            this.Controls.Add(this.textBoxDrzava);
+            this.Controls.Add(this.textBoxPosta);
+            this.Controls.Add(this.labelDrzava);
+            this.Controls.Add(this.labelZupanija);
+            this.Controls.Add(this.labelPosta);
+            this.Controls.Add(this.labelNaziv);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "CityForm";
+            this.Name = "GradUnosForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Unesi novi grad";
             this.ResumeLayout(false);
@@ -201,17 +201,17 @@
 
         #endregion
 
-        private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.Label labelPost;
-        private System.Windows.Forms.Label labelCounty;
-        private System.Windows.Forms.Label labelCountry;
-        private System.Windows.Forms.TextBox textBoxPost;
-        private System.Windows.Forms.TextBox textBoxCountry;
+        private System.Windows.Forms.Label labelNaziv;
+        private System.Windows.Forms.Label labelPosta;
+        private System.Windows.Forms.Label labelZupanija;
+        private System.Windows.Forms.Label labelDrzava;
+        private System.Windows.Forms.TextBox textBoxPosta;
+        private System.Windows.Forms.TextBox textBoxDrzava;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.ComboBox comboBoxCounty;
-        private System.Windows.Forms.ComboBox comboBoxCity;
-        private System.Windows.Forms.Label labelWarning;
+        private System.Windows.Forms.ComboBox comboBoxZupanija;
+        private System.Windows.Forms.ComboBox comboBoxNaziv;
+        private System.Windows.Forms.Label labelUpozorenja;
         private System.Windows.Forms.TextBox textBoxPrirez;
         private System.Windows.Forms.Label labelPrirez;
         private System.Windows.Forms.Label label2;

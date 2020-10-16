@@ -67,7 +67,7 @@ namespace Knjigovodstvo.Partners
         private void BtnSelectCity_Click(object sender, EventArgs e)
         {
             GradUnosForm city = new GradUnosForm();
-            Opcina c = city.ShowDialogValue();
+            Grad c = city.ShowDialogValue();
 
             if (c != null && c.ValidateData() == FormError.None)
             {

@@ -113,7 +113,7 @@ namespace Knjigovodstvo.Gui
         private void buttonSelectCity_Click(object sender, EventArgs e)
         {
             GradUnosForm city = new GradUnosForm();
-            Opcina c = city.ShowDialogValue();
+            Grad c = city.ShowDialogValue();
 
             if (c != null && c.ValidateData() == FormError.None)
             {

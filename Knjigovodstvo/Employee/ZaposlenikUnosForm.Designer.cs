@@ -171,28 +171,28 @@
             this.dateTimePickerDatumRodenja.Location = new System.Drawing.Point(117, 141);
             this.dateTimePickerDatumRodenja.Name = "dateTimePickerDatumRodenja";
             this.dateTimePickerDatumRodenja.Size = new System.Drawing.Size(228, 23);
-            this.dateTimePickerDatumRodenja.TabIndex = 2;
+            this.dateTimePickerDatumRodenja.TabIndex = 3;
             // 
             // dateTimePickerDatumDolaska
             // 
             this.dateTimePickerDatumDolaska.Location = new System.Drawing.Point(117, 408);
             this.dateTimePickerDatumDolaska.Name = "dateTimePickerDatumDolaska";
             this.dateTimePickerDatumDolaska.Size = new System.Drawing.Size(228, 23);
-            this.dateTimePickerDatumDolaska.TabIndex = 3;
+            this.dateTimePickerDatumDolaska.TabIndex = 9;
             // 
             // dateTimePickerDatumOdlaska
             // 
             this.dateTimePickerDatumOdlaska.Location = new System.Drawing.Point(117, 447);
             this.dateTimePickerDatumOdlaska.Name = "dateTimePickerDatumOdlaska";
             this.dateTimePickerDatumOdlaska.Size = new System.Drawing.Size(228, 23);
-            this.dateTimePickerDatumOdlaska.TabIndex = 4;
+            this.dateTimePickerDatumOdlaska.TabIndex = 10;
             // 
             // textBoxOib
             // 
             this.textBoxOib.Location = new System.Drawing.Point(117, 21);
             this.textBoxOib.Name = "textBoxOib";
             this.textBoxOib.Size = new System.Drawing.Size(228, 23);
-            this.textBoxOib.TabIndex = 5;
+            this.textBoxOib.TabIndex = 0;
             this.textBoxOib.Text = "01234567890";
             // 
             // textBoxIme
@@ -200,7 +200,7 @@
             this.textBoxIme.Location = new System.Drawing.Point(117, 60);
             this.textBoxIme.Name = "textBoxIme";
             this.textBoxIme.Size = new System.Drawing.Size(228, 23);
-            this.textBoxIme.TabIndex = 5;
+            this.textBoxIme.TabIndex = 1;
             this.textBoxIme.Text = "Ivan";
             // 
             // textBoxPrezime
@@ -208,7 +208,7 @@
             this.textBoxPrezime.Location = new System.Drawing.Point(117, 99);
             this.textBoxPrezime.Name = "textBoxPrezime";
             this.textBoxPrezime.Size = new System.Drawing.Size(228, 23);
-            this.textBoxPrezime.TabIndex = 5;
+            this.textBoxPrezime.TabIndex = 2;
             this.textBoxPrezime.Text = "Batinić";
             // 
             // textBoxAdresa
@@ -216,7 +216,7 @@
             this.textBoxAdresa.Location = new System.Drawing.Point(117, 177);
             this.textBoxAdresa.Name = "textBoxAdresa";
             this.textBoxAdresa.Size = new System.Drawing.Size(228, 23);
-            this.textBoxAdresa.TabIndex = 5;
+            this.textBoxAdresa.TabIndex = 4;
             this.textBoxAdresa.Text = "Sv. Mateja 3";
             // 
             // textBoxGrad
@@ -242,7 +242,7 @@
             this.textBoxTelefon.Location = new System.Drawing.Point(117, 294);
             this.textBoxTelefon.Name = "textBoxTelefon";
             this.textBoxTelefon.Size = new System.Drawing.Size(228, 23);
-            this.textBoxTelefon.TabIndex = 5;
+            this.textBoxTelefon.TabIndex = 6;
             this.textBoxTelefon.Text = "098/1934-288";
             // 
             // textBoxStrucnaSprema
@@ -250,7 +250,7 @@
             this.textBoxStrucnaSprema.Location = new System.Drawing.Point(117, 333);
             this.textBoxStrucnaSprema.Name = "textBoxStrucnaSprema";
             this.textBoxStrucnaSprema.Size = new System.Drawing.Size(59, 23);
-            this.textBoxStrucnaSprema.TabIndex = 5;
+            this.textBoxStrucnaSprema.TabIndex = 7;
             this.textBoxStrucnaSprema.Text = "SSS";
             // 
             // textBoxOlaksica
@@ -258,7 +258,7 @@
             this.textBoxOlaksica.Location = new System.Drawing.Point(117, 372);
             this.textBoxOlaksica.Name = "textBoxOlaksica";
             this.textBoxOlaksica.Size = new System.Drawing.Size(59, 23);
-            this.textBoxOlaksica.TabIndex = 5;
+            this.textBoxOlaksica.TabIndex = 8;
             this.textBoxOlaksica.Text = "0,7";
             // 
             // buttonSave
@@ -266,7 +266,7 @@
             this.buttonSave.Location = new System.Drawing.Point(13, 593);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 6;
+            this.buttonSave.TabIndex = 11;
             this.buttonSave.Text = "Spremi";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
@@ -276,18 +276,20 @@
             this.buttonClose.Location = new System.Drawing.Point(361, 593);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
-            this.buttonClose.TabIndex = 7;
+            this.buttonClose.TabIndex = 12;
             this.buttonClose.Text = "Zatvori";
             this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // buttonOdaberiGrad
             // 
             this.buttonOdaberiGrad.Location = new System.Drawing.Point(351, 215);
             this.buttonOdaberiGrad.Name = "buttonOdaberiGrad";
             this.buttonOdaberiGrad.Size = new System.Drawing.Size(75, 23);
-            this.buttonOdaberiGrad.TabIndex = 8;
+            this.buttonOdaberiGrad.TabIndex = 5;
             this.buttonOdaberiGrad.Text = "Odaberi";
             this.buttonOdaberiGrad.UseVisualStyleBackColor = true;
+            this.buttonOdaberiGrad.Click += new System.EventHandler(this.buttonOdaberiGrad_Click);
             // 
             // labelMessage
             // 

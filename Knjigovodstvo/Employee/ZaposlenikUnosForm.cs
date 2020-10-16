@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Code.Validators;
+﻿using Knjigovodstvo.City;
+using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Models;
 using System;
 using System.Windows.Forms;
@@ -79,5 +80,19 @@ namespace Knjigovodstvo.Employee
 
         bool _editMode = false;
         int _id = 0;
+
+        private void buttonOdaberiGrad_Click(object sender, EventArgs e)
+        {
+            GradoviTableForm form = new GradoviTableForm();
+            Grad grad = form.ShowDialogValue(1);
+
+            if (grad != null && grad.ValidateData() == FormError.None)
+                textBoxGrad.Text = grad.Naziv;
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
