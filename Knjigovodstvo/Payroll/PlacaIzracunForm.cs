@@ -19,9 +19,14 @@ namespace Knjigovodstvo.Payroll
             dt.Columns.Add(
                 "Ime i prezime", 
                 typeof(string),
-                "Ime + ' ' + Prezime");
+                "oib + '   ' + Ime + ' ' + Prezime");
             comboBoxZaposlenik.DataSource = dt;
             comboBoxZaposlenik.DisplayMember = "Ime i prezime";
+        }
+
+        private void buttonClose_Click(object sender, System.EventArgs e)
+        {
+            Close();
         }
     }
 }
