@@ -10,7 +10,8 @@ namespace Knjigovodstvo.MainForm
         Komitent,
         Postavke,
         Zaposlenici,
-        Partneri
+        Partneri,
+        Gradovi
     }
     public class IsChildOpen
     {

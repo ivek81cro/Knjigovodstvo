@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Employee;
+﻿using Knjigovodstvo.City;
+using Knjigovodstvo.Employee;
 using Knjigovodstvo.Gui;
 using Knjigovodstvo.Partners;
 using Knjigovodstvo.Settings;
@@ -9,8 +10,6 @@ namespace Knjigovodstvo.MainForm
 {
     public partial class MainWindowForm : Form
     {
-        private int childFormNumber = 0;
-
         public MainWindowForm()
         {
             InitializeComponent();
@@ -73,21 +72,18 @@ namespace Knjigovodstvo.MainForm
             }
         }
 
-        private void CutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ShowNewFormGradovi(object sender, EventArgs e)
         {
-        }
-
-        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void StatusBarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            statusStrip.Visible = statusBarToolStripMenuItem.Checked;
+            string formName = ChildWindowName.Gradovi.ToString();
+            if (_isOpen.Check(MdiChildren, formName))
+            {
+                Form f = _isOpen.getChild(MdiChildren, formName);
+                f.Focus();
+            }
+            else
+            {
+                _openForm.Open(new GradoviTableForm(), this);
+            }
         }
 
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -103,11 +99,6 @@ namespace Knjigovodstvo.MainForm
         private void TileHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.TileHorizontal);
-        }
-
-        private void ArrangeIconsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LayoutMdi(MdiLayout.ArrangeIcons);
         }
 
         private void CloseAllToolStripMenuItem_Click(object sender, EventArgs e)
