@@ -1,6 +1,4 @@
-using Knjigovodstvo.Employee;
-using Knjigovodstvo.Payroll;
-using Knjigovodstvo.Settings;
+using Knjigovodstvo.MainForm;
 using System;
 using System.Windows.Forms;
 
@@ -17,7 +15,7 @@ namespace Knjigovodstvo
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PostavkeTablicaForm());
+            Application.Run(new MainWindowForm());
         }
     }
 }

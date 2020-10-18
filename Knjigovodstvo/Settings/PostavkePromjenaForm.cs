@@ -33,7 +33,7 @@ namespace Knjigovodstvo.Settings
             {
                 if (postavka.UpdateData(_id))
                 {
-                    MessageBox.Show("Izmjena uspješna.", "Izmjena podataka partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Izmjena uspješna.", "Izmjena vrijednosti postavke", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
                 }
                 else
