@@ -28,5 +28,11 @@ namespace Knjigovodstvo.Payroll
         {
             Close();
         }
+
+        private void buttonIzracunaj_Click(object sender, System.EventArgs e)
+        {
+            Placa placa = new Placa();
+            float iznosBruto = float.Parse(textBoxBruto.Text);
+        }
     }
 }

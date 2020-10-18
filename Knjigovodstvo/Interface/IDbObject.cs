@@ -11,6 +11,7 @@
         Country,
         Iban,
         Kupac_Dobavljac,
+        Prazno,
         None
     }
     /// <summary>

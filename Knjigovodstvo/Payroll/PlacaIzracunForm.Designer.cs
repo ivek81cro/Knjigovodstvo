@@ -113,6 +113,7 @@
             this.buttonIzracunaj.TabIndex = 5;
             this.buttonIzracunaj.Text = "Izračunaj";
             this.buttonIzracunaj.UseVisualStyleBackColor = true;
+            this.buttonIzracunaj.Click += new System.EventHandler(this.buttonIzracunaj_Click);
             // 
             // labelMio1
             // 

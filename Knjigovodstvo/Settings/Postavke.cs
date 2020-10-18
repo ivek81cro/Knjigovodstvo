@@ -1,14 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Knjigovodstvo.Models;
 
 namespace Knjigovodstvo.Settings
 {
-    class Postavke
+    class Postavke : IDbObject
     {
-        public float Porez1 { get; set; }
-        public float Porez2 { get; set; }
-        public float Porez3 { get; set; }
-        public float Porez4 { get; set; }
-    }
+        public FormError ValidateData()
+        {
+            if (Vrijednost.ToString() == "")
+            {
+                return FormError.Prazno;
+            }
+
+            return FormError.None;
+        }
+        public int Id { get; set; } = 0;
+        public string Naziv { get; set; } = "";
+        public string Vrsta { get; set; } = "";
+        public float Vrijednost { get; set; } = 0;
+    }    
 }

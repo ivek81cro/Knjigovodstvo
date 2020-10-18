@@ -1,5 +1,6 @@
 using Knjigovodstvo.Employee;
 using Knjigovodstvo.Payroll;
+using Knjigovodstvo.Settings;
 using System;
 using System.Windows.Forms;
 
@@ -16,7 +17,7 @@ namespace Knjigovodstvo
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PlacaIzracunForm());
+            Application.Run(new PostavkeTablicaForm());
         }
     }
 }
