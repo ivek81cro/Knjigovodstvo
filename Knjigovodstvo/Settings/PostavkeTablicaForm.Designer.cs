@@ -55,7 +55,7 @@ namespace Knjigovodstvo.Settings
             // 
             // buttonEditPostavke
             // 
-            this.buttonEditPostavke.Location = new System.Drawing.Point(394, 55);
+            this.buttonEditPostavke.Location = new System.Drawing.Point(12, 12);
             this.buttonEditPostavke.Name = "buttonEditPostavke";
             this.buttonEditPostavke.Size = new System.Drawing.Size(75, 23);
             this.buttonEditPostavke.TabIndex = 6;

@@ -76,7 +76,7 @@ namespace Knjigovodstvo.City
             // 
             // btnNewGrad
             // 
-            this.btnNewGrad.Location = new System.Drawing.Point(885, 55);
+            this.btnNewGrad.Location = new System.Drawing.Point(12, 12);
             this.btnNewGrad.Name = "btnNewGrad";
             this.btnNewGrad.Size = new System.Drawing.Size(75, 23);
             this.btnNewGrad.TabIndex = 5;
@@ -86,7 +86,7 @@ namespace Knjigovodstvo.City
             // 
             // btnEditGrad
             // 
-            this.btnEditGrad.Location = new System.Drawing.Point(966, 54);
+            this.btnEditGrad.Location = new System.Drawing.Point(93, 12);
             this.btnEditGrad.Name = "btnEditGrad";
             this.btnEditGrad.Size = new System.Drawing.Size(139, 23);
             this.btnEditGrad.TabIndex = 6;
@@ -96,7 +96,7 @@ namespace Knjigovodstvo.City
             // 
             // btnDeleteGrad
             // 
-            this.btnDeleteGrad.Location = new System.Drawing.Point(1111, 54);
+            this.btnDeleteGrad.Location = new System.Drawing.Point(238, 12);
             this.btnDeleteGrad.Name = "btnDeleteGrad";
             this.btnDeleteGrad.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteGrad.TabIndex = 6;

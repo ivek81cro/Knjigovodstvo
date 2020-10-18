@@ -74,7 +74,7 @@
             // 
             // btnNewPartner
             // 
-            this.btnNewPartner.Location = new System.Drawing.Point(948, 54);
+            this.btnNewPartner.Location = new System.Drawing.Point(12, 12);
             this.btnNewPartner.Name = "btnNewPartner";
             this.btnNewPartner.Size = new System.Drawing.Size(75, 23);
             this.btnNewPartner.TabIndex = 5;
@@ -84,7 +84,7 @@
             // 
             // btnEditPartner
             // 
-            this.btnEditPartner.Location = new System.Drawing.Point(1030, 54);
+            this.btnEditPartner.Location = new System.Drawing.Point(93, 12);
             this.btnEditPartner.Name = "btnEditPartner";
             this.btnEditPartner.Size = new System.Drawing.Size(75, 23);
             this.btnEditPartner.TabIndex = 6;
@@ -94,7 +94,7 @@
             // 
             // btnDeletePartner
             // 
-            this.btnDeletePartner.Location = new System.Drawing.Point(1111, 54);
+            this.btnDeletePartner.Location = new System.Drawing.Point(174, 12);
             this.btnDeletePartner.Name = "btnDeletePartner";
             this.btnDeletePartner.Size = new System.Drawing.Size(75, 23);
             this.btnDeletePartner.TabIndex = 6;
@@ -102,7 +102,7 @@
             this.btnDeletePartner.UseVisualStyleBackColor = true;
             this.btnDeletePartner.Click += new System.EventHandler(this.BtnDeletePartner_Click);
             // 
-            // partnersForm
+            // PartneriTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -113,7 +113,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.namePartnerLabel);
             this.Controls.Add(this.textBoxFilterPartner);
-            this.Name = "partnersForm";
+            this.Name = "PartneriTableForm";
             this.Text = "Poslovni Partneri";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

@@ -38,10 +38,11 @@ namespace Knjigovodstvo.MainForm
             this.menuStopePoreza = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPartneri = new System.Windows.Forms.ToolStripMenuItem();
             this.menuZaposlenici = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuGradovi = new System.Windows.Forms.ToolStripMenuItem();
             this.menuKnjige = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUra = new System.Windows.Forms.ToolStripMenuItem();
             this.menuIra = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPlaca = new System.Windows.Forms.ToolStripMenuItem();
             this.menuObracunPlace = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,7 +60,6 @@ namespace Knjigovodstvo.MainForm
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.menuGradovi = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -69,7 +69,7 @@ namespace Knjigovodstvo.MainForm
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.postavkeMenu,
             this.menuKnjige,
-            this.viewMenu,
+            this.menuPlaca,
             this.toolsMenu,
             this.prozoriMenu,
             this.helpMenu});
@@ -77,7 +77,7 @@ namespace Knjigovodstvo.MainForm
             this.menuStrip.MdiWindowListItem = this.prozoriMenu;
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(737, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1265, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -122,6 +122,13 @@ namespace Knjigovodstvo.MainForm
             this.menuZaposlenici.Text = "&Zaposlenici";
             this.menuZaposlenici.Click += new System.EventHandler(this.ShowNewFormZaposlenici);
             // 
+            // menuGradovi
+            // 
+            this.menuGradovi.Name = "menuGradovi";
+            this.menuGradovi.Size = new System.Drawing.Size(142, 22);
+            this.menuGradovi.Text = "&Gradovi";
+            this.menuGradovi.Click += new System.EventHandler(this.ShowNewFormGradovi);
+            // 
             // menuKnjige
             // 
             this.menuKnjige.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -143,13 +150,14 @@ namespace Knjigovodstvo.MainForm
             this.menuIra.Size = new System.Drawing.Size(97, 22);
             this.menuIra.Text = "IRA";
             // 
-            // viewMenu
+            // menuPlaca
             // 
-            this.viewMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuPlaca.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuObracunPlace});
-            this.viewMenu.Name = "viewMenu";
-            this.viewMenu.Size = new System.Drawing.Size(47, 20);
-            this.viewMenu.Text = "&Plaća";
+            this.menuPlaca.Name = "menuPlaca";
+            this.menuPlaca.Size = new System.Drawing.Size(47, 20);
+            this.menuPlaca.Text = "&Plaća";
+            this.menuPlaca.Click += new System.EventHandler(this.ShowNewFormPlaca);
             // 
             // menuObracunPlace
             // 
@@ -260,10 +268,10 @@ namespace Knjigovodstvo.MainForm
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 501);
+            this.statusStrip.Location = new System.Drawing.Point(0, 569);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip.Size = new System.Drawing.Size(737, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1265, 22);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "StatusStrip";
             // 
@@ -273,25 +281,18 @@ namespace Knjigovodstvo.MainForm
             this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
-            // menuGradovi
-            // 
-            this.menuGradovi.Name = "menuGradovi";
-            this.menuGradovi.Size = new System.Drawing.Size(142, 22);
-            this.menuGradovi.Text = "&Gradovi";
-            this.menuGradovi.Click += new System.EventHandler(this.ShowNewFormGradovi);
-            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 523);
+            this.ClientSize = new System.Drawing.Size(1265, 591);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "MainWindowForm";
-            this.Text = "MainWindowForm";
+            this.Text = "Knjigovodstvo";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
@@ -330,7 +331,6 @@ namespace Knjigovodstvo.MainForm
         private System.Windows.Forms.ToolStripMenuItem menuZaposlenici;
         private System.Windows.Forms.ToolStripMenuItem menuUra;
         private System.Windows.Forms.ToolStripMenuItem menuIra;
-        private System.Windows.Forms.ToolStripMenuItem viewMenu;
         private System.Windows.Forms.ToolStripMenuItem menuGradovi;
     }
 }

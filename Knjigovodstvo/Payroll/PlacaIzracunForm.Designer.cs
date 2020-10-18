@@ -69,6 +69,7 @@
             this.comboBoxZaposlenik.Name = "comboBoxZaposlenik";
             this.comboBoxZaposlenik.Size = new System.Drawing.Size(315, 23);
             this.comboBoxZaposlenik.TabIndex = 0;
+            this.comboBoxZaposlenik.SelectionChangeCommitted += new System.EventHandler(this.comboBoxZaposlenik_SelectionChangeCommitted);
             // 
             // labelOdabirZaposlenika
             // 

@@ -76,7 +76,7 @@ namespace Knjigovodstvo.Employee
             // 
             // btnNewZaposlenik
             // 
-            this.btnNewZaposlenik.Location = new System.Drawing.Point(948, 54);
+            this.btnNewZaposlenik.Location = new System.Drawing.Point(12, 12);
             this.btnNewZaposlenik.Name = "btnNewZaposlenik";
             this.btnNewZaposlenik.Size = new System.Drawing.Size(75, 23);
             this.btnNewZaposlenik.TabIndex = 5;
@@ -86,7 +86,7 @@ namespace Knjigovodstvo.Employee
             // 
             // btnEditZaposlenik
             // 
-            this.btnEditZaposlenik.Location = new System.Drawing.Point(1030, 54);
+            this.btnEditZaposlenik.Location = new System.Drawing.Point(93, 12);
             this.btnEditZaposlenik.Name = "btnEditZaposlenik";
             this.btnEditZaposlenik.Size = new System.Drawing.Size(75, 23);
             this.btnEditZaposlenik.TabIndex = 6;
@@ -96,7 +96,7 @@ namespace Knjigovodstvo.Employee
             // 
             // btnDeleteZaposlenik
             // 
-            this.btnDeleteZaposlenik.Location = new System.Drawing.Point(1111, 54);
+            this.btnDeleteZaposlenik.Location = new System.Drawing.Point(174, 12);
             this.btnDeleteZaposlenik.Name = "btnDeleteZaposlenik";
             this.btnDeleteZaposlenik.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteZaposlenik.TabIndex = 6;

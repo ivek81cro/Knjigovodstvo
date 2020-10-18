@@ -2,6 +2,7 @@
 using Knjigovodstvo.Employee;
 using Knjigovodstvo.Gui;
 using Knjigovodstvo.Partners;
+using Knjigovodstvo.Payroll;
 using Knjigovodstvo.Settings;
 using System;
 using System.Windows.Forms;
@@ -83,6 +84,20 @@ namespace Knjigovodstvo.MainForm
             else
             {
                 _openForm.Open(new GradoviTableForm(), this);
+            }
+        }
+
+        private void ShowNewFormPlaca(object sender, EventArgs e)
+        {
+            string formName = ChildWindowName.Placa.ToString();
+            if (_isOpen.Check(MdiChildren, formName))
+            {
+                Form f = _isOpen.getChild(MdiChildren, formName);
+                f.Focus();
+            }
+            else
+            {
+                _openForm.Open(new PlacaIzracunForm(), this);
             }
         }
 

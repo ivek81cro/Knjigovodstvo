@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Code.Validators;
+﻿using Knjigovodstvo.City;
+using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Models;
 using System;
@@ -41,9 +42,32 @@ namespace Knjigovodstvo.Employee
             return false;
         }
 
+        internal Zaposlenik GetZaposlenikByOib(string oib)
+        {
+            string condition = $"Oib='{oib}';";
+            DataTable zaposlenik = new DbDataGet().GetTable(new Zaposlenik(), condition);
+
+            return new Zaposlenik
+            {
+                Id = int.Parse(zaposlenik.Rows[0][0].ToString()),
+                Oib = zaposlenik.Rows[0][1].ToString(),
+                Ime = zaposlenik.Rows[0][2].ToString(),
+                Prezime = zaposlenik.Rows[0][3].ToString(),
+                DatumRodenja = zaposlenik.Rows[0][4].ToString(),
+                Adresa = zaposlenik.Rows[0][5].ToString(),
+                Grad = zaposlenik.Rows[0][6].ToString(),
+                Drzava = zaposlenik.Rows[0][7].ToString(),
+                Telefon = zaposlenik.Rows[0][8].ToString(),
+                StručnaSprema = zaposlenik.Rows[0][9].ToString(),
+                Olaksica = float.Parse(zaposlenik.Rows[0][10].ToString()),
+                DatumDolaska = zaposlenik.Rows[0][11].ToString(),
+                DatumOdlaska = zaposlenik.Rows[0][12].ToString()
+            };
+        }
+
         public Zaposlenik GetZaposlenikById(int id)
         {
-            string condition = String.Format("Id={0};", id);
+            string condition = $"Id={id};";
             DataTable zaposlenik = new DbDataGet().GetTable(new Zaposlenik(), condition);
 
             return new Zaposlenik
