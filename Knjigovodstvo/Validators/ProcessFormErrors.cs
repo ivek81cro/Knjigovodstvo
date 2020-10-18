@@ -22,6 +22,8 @@ namespace Knjigovodstvo.Code.Validators
                     return "Provjerite unešeni IBAN.";
                 case FormError.Kupac_Dobavljac:
                     return "Mora biti označeno Kupac/Dobavljač ili oboje.";
+                case FormError.Prazno:
+                    return "Polje ne može ostati prazno";
                 default:
                     return "";
             }

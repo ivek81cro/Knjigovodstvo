@@ -48,7 +48,7 @@ namespace Knjigovodstvo.Partners
 
         public Partneri GetPartnerById(int id)
         {
-            string condition = String.Format("Id={0};", id);
+            string condition = $"Id={id};";
             DataTable partner = new DbDataGet().GetTable(new Partneri(), condition);
             return new Partneri
             {
