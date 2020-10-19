@@ -12,7 +12,8 @@ namespace Knjigovodstvo.MainForm
         Zaposlenici,
         Partneri,
         Gradovi,
-        Placa
+        Placa,
+        PregledPlaca
     }
     public class IsChildOpen
     {

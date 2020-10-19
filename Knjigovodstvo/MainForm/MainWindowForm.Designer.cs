@@ -43,6 +43,8 @@ namespace Knjigovodstvo.MainForm
             this.menuUra = new System.Windows.Forms.ToolStripMenuItem();
             this.menuIra = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPlaca = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPregledPlace = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuIzracunPlace = new System.Windows.Forms.ToolStripMenuItem();
             this.menuObracunPlace = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +79,7 @@ namespace Knjigovodstvo.MainForm
             this.menuStrip.MdiWindowListItem = this.prozoriMenu;
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1265, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1309, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -153,11 +155,26 @@ namespace Knjigovodstvo.MainForm
             // menuPlaca
             // 
             this.menuPlaca.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuPregledPlace,
+            this.menuIzracunPlace,
             this.menuObracunPlace});
             this.menuPlaca.Name = "menuPlaca";
             this.menuPlaca.Size = new System.Drawing.Size(47, 20);
             this.menuPlaca.Text = "&Plaća";
-            this.menuPlaca.Click += new System.EventHandler(this.ShowNewFormPlaca);
+            // 
+            // menuPregledPlace
+            // 
+            this.menuPregledPlace.Name = "menuPregledPlace";
+            this.menuPregledPlace.Size = new System.Drawing.Size(151, 22);
+            this.menuPregledPlace.Text = "Pregled";
+            this.menuPregledPlace.Click += new System.EventHandler(this.ShowNewFormPregledPlaca);
+            // 
+            // menuIzracunPlace
+            // 
+            this.menuIzracunPlace.Name = "menuIzracunPlace";
+            this.menuIzracunPlace.Size = new System.Drawing.Size(151, 22);
+            this.menuIzracunPlace.Text = "Izračun plaće";
+            this.menuIzracunPlace.Click += new System.EventHandler(this.ShowNewFormPlaca);
             // 
             // menuObracunPlace
             // 
@@ -268,10 +285,10 @@ namespace Knjigovodstvo.MainForm
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 569);
+            this.statusStrip.Location = new System.Drawing.Point(0, 684);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1265, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1309, 22);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "StatusStrip";
             // 
@@ -285,7 +302,7 @@ namespace Knjigovodstvo.MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1265, 591);
+            this.ClientSize = new System.Drawing.Size(1309, 706);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.IsMdiContainer = true;
@@ -332,6 +349,8 @@ namespace Knjigovodstvo.MainForm
         private System.Windows.Forms.ToolStripMenuItem menuUra;
         private System.Windows.Forms.ToolStripMenuItem menuIra;
         private System.Windows.Forms.ToolStripMenuItem menuGradovi;
+        private System.Windows.Forms.ToolStripMenuItem menuIzracunPlace;
+        private System.Windows.Forms.ToolStripMenuItem menuPregledPlace;
     }
 }
 
