@@ -28,12 +28,21 @@ namespace Knjigovodstvo.Payroll
             comboBoxZaposlenik.Text = "--Odaberi zaposlenika--";
         }
 
-        private void buttonClose_Click(object sender, System.EventArgs e)
+        internal void EditPlaca(Placa placa)
+        {
+            PopuniKontrole(placa);
+            int index = comboBoxZaposlenik.FindString(placa.Oib);
+            comboBoxZaposlenik.SelectedIndex = index;
+
+            ShowDialog();
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void buttonIzracunaj_Click(object sender, System.EventArgs e)
+        private void buttonIzracunaj_Click(object sender, EventArgs e)
         {
             if (comboBoxZaposlenik.SelectedItem != null)
             {
@@ -47,7 +56,7 @@ namespace Knjigovodstvo.Payroll
             }
         }
 
-        private void comboBoxZaposlenik_SelectionChangeCommitted(object sender, System.EventArgs e)
+        private void comboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)
         {
             string selected = this.comboBoxZaposlenik.GetItemText(this.comboBoxZaposlenik.SelectedItem);
             _oib = selected.Split(' ')[0];
@@ -58,7 +67,7 @@ namespace Knjigovodstvo.Payroll
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if (comboBoxZaposlenik.SelectedItem != null)
+            if (comboBoxZaposlenik.SelectedItem != null && placa.Oib != "" && placa.Oib != "0")
             {
                 if (new Placa().GetPlacaByOib(_oib).Oib == "0")
                 {

@@ -1,5 +1,6 @@
 ﻿using Knjigovodstvo.Helpers;
 using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Payroll
@@ -19,18 +20,29 @@ namespace Knjigovodstvo.Payroll
 
         private void BtnEditPlaca_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            string oib = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            Placa placa = new Placa().GetPlacaByOib(oib);
+            PlacaIzracunForm pn = new PlacaIzracunForm();
+            pn.FormClosing += new FormClosingEventHandler(this.PlacaNew_FormClosing);
+            pn.EditPlaca(placa);
+        }
+
+        private void PlacaNew_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            LoadDatagrid();
         }
 
         private void BtnNewPlaca_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            PlacaIzracunForm pn = new PlacaIzracunForm();
+            pn.FormClosing += new FormClosingEventHandler(this.PlacaNew_FormClosing);
+            pn.ShowDialog();
         }
 
         private void TextBoxFilterPlaca_TextChanged(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter =
+                $"Oib LIKE '{textBoxFilterPlaca.Text}%' OR Oib LIKE '% {textBoxFilterPlaca.Text}%'";
         }
-
-    }
+    }    
 }
