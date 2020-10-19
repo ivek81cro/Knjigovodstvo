@@ -193,7 +193,6 @@
             this.textBoxOib.Name = "textBoxOib";
             this.textBoxOib.Size = new System.Drawing.Size(228, 23);
             this.textBoxOib.TabIndex = 0;
-            this.textBoxOib.Text = "01234567890";
             // 
             // textBoxIme
             // 
@@ -201,7 +200,6 @@
             this.textBoxIme.Name = "textBoxIme";
             this.textBoxIme.Size = new System.Drawing.Size(228, 23);
             this.textBoxIme.TabIndex = 1;
-            this.textBoxIme.Text = "Ivan";
             // 
             // textBoxPrezime
             // 
@@ -209,7 +207,6 @@
             this.textBoxPrezime.Name = "textBoxPrezime";
             this.textBoxPrezime.Size = new System.Drawing.Size(228, 23);
             this.textBoxPrezime.TabIndex = 2;
-            this.textBoxPrezime.Text = "Batinić";
             // 
             // textBoxAdresa
             // 
@@ -217,7 +214,6 @@
             this.textBoxAdresa.Name = "textBoxAdresa";
             this.textBoxAdresa.Size = new System.Drawing.Size(228, 23);
             this.textBoxAdresa.TabIndex = 4;
-            this.textBoxAdresa.Text = "Sv. Mateja 3";
             // 
             // textBoxGrad
             // 
@@ -226,7 +222,6 @@
             this.textBoxGrad.ReadOnly = true;
             this.textBoxGrad.Size = new System.Drawing.Size(228, 23);
             this.textBoxGrad.TabIndex = 5;
-            this.textBoxGrad.Text = "Zagreb";
             // 
             // textBoxDrzava
             // 
@@ -235,7 +230,6 @@
             this.textBoxDrzava.ReadOnly = true;
             this.textBoxDrzava.Size = new System.Drawing.Size(228, 23);
             this.textBoxDrzava.TabIndex = 5;
-            this.textBoxDrzava.Text = "Hrvatska";
             // 
             // textBoxTelefon
             // 
@@ -243,7 +237,6 @@
             this.textBoxTelefon.Name = "textBoxTelefon";
             this.textBoxTelefon.Size = new System.Drawing.Size(228, 23);
             this.textBoxTelefon.TabIndex = 6;
-            this.textBoxTelefon.Text = "098/1934-288";
             // 
             // textBoxStrucnaSprema
             // 
@@ -251,7 +244,6 @@
             this.textBoxStrucnaSprema.Name = "textBoxStrucnaSprema";
             this.textBoxStrucnaSprema.Size = new System.Drawing.Size(59, 23);
             this.textBoxStrucnaSprema.TabIndex = 7;
-            this.textBoxStrucnaSprema.Text = "SSS";
             // 
             // textBoxOlaksica
             // 
@@ -259,7 +251,6 @@
             this.textBoxOlaksica.Name = "textBoxOlaksica";
             this.textBoxOlaksica.Size = new System.Drawing.Size(59, 23);
             this.textBoxOlaksica.TabIndex = 8;
-            this.textBoxOlaksica.Text = "0,7";
             // 
             // buttonSave
             // 
@@ -334,7 +325,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "ZaposlenikUnosForm";
-            this.Text = "Zaposlenici";
+            this.Text = "Unos zaposlenika";
             this.ResumeLayout(false);
             this.PerformLayout();
 
