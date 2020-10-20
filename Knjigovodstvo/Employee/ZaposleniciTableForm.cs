@@ -20,7 +20,6 @@ namespace Knjigovodstvo.Employee
             {
                 dataGridView1.Columns[i].HeaderText =
                     new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
-
             }
         }
 
