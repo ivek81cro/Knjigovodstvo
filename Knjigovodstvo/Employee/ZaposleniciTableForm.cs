@@ -16,6 +16,12 @@ namespace Knjigovodstvo.Employee
         private void LoadDatagrid()
         {
             dataGridView1.DataSource = new DbDataGet().GetTable(new Zaposlenik());
+            for (int i = 2; i < dataGridView1.Columns.Count; i++)
+            {
+                dataGridView1.Columns[i].HeaderText =
+                    new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
+
+            }
         }
 
         private void BtnNewZaposlenik_Click(object sender, EventArgs e)

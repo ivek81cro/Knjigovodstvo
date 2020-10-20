@@ -1,11 +1,8 @@
-﻿using Knjigovodstvo.Employee;
-using Knjigovodstvo.Helpers;
+﻿using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Models;
 using Knjigovodstvo.Settings;
-using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
-using System.Text;
 
 namespace Knjigovodstvo.Payroll
 {

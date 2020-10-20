@@ -1,6 +1,7 @@
 ﻿using Knjigovodstvo.Helpers;
 using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Payroll
@@ -16,6 +17,13 @@ namespace Knjigovodstvo.Payroll
         private void LoadDatagrid()
         {
             dataGridView1.DataSource = new DbDataGet().GetTable(new Placa());
+            for(int i = 2; i< dataGridView1.Columns.Count; i++)
+            {
+                dataGridView1.Columns[i].DefaultCellStyle.Format = "0.00";
+                dataGridView1.Columns[i].HeaderText =
+                    new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
+                
+            }
         }
 
         private void BtnEditPlaca_Click(object sender, EventArgs e)
