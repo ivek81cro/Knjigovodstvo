@@ -12,8 +12,8 @@ namespace Knjigovodstvo.MainForm
         Zaposlenici,
         Partneri,
         Gradovi,
-        Placa,
-        PregledPlaca
+        PlacaTableForm,
+        PlacaIzracunForm
     }
     public class IsChildOpen
     {
@@ -21,7 +21,7 @@ namespace Knjigovodstvo.MainForm
         {
             foreach(Form f in mdiChildren)
             {
-                if(f.Text == titleForm)
+                if(f.Name.ToString() == titleForm)
                 {
                     f.Focus();
                     return true;
@@ -34,7 +34,7 @@ namespace Knjigovodstvo.MainForm
         {
             foreach (Form f in mdiChildren)
             {
-                if (f.Text == titleForm)
+                if (f.Name.ToString() == titleForm)
                 {
                     return f;
                 }

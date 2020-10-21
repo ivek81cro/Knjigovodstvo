@@ -210,28 +210,28 @@ namespace Knjigovodstvo.MainForm
             // cascadeToolStripMenuItem
             // 
             this.cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
-            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.cascadeToolStripMenuItem.Text = "&Cascade";
+            this.cascadeToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.cascadeToolStripMenuItem.Text = "&Kaskadno";
             this.cascadeToolStripMenuItem.Click += new System.EventHandler(this.CascadeToolStripMenuItem_Click);
             // 
             // tileVerticalToolStripMenuItem
             // 
             this.tileVerticalToolStripMenuItem.Name = "tileVerticalToolStripMenuItem";
-            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.tileVerticalToolStripMenuItem.Text = "Tile &Vertical";
+            this.tileVerticalToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.tileVerticalToolStripMenuItem.Text = "Poredaj &Vertikalno";
             this.tileVerticalToolStripMenuItem.Click += new System.EventHandler(this.TileVerticalToolStripMenuItem_Click);
             // 
             // tileHorizontalToolStripMenuItem
             // 
             this.tileHorizontalToolStripMenuItem.Name = "tileHorizontalToolStripMenuItem";
-            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.tileHorizontalToolStripMenuItem.Text = "Tile &Horizontal";
+            this.tileHorizontalToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.tileHorizontalToolStripMenuItem.Text = "Poredaj &Horizontalno";
             this.tileHorizontalToolStripMenuItem.Click += new System.EventHandler(this.TileHorizontalToolStripMenuItem_Click);
             // 
             // zatvoriSveToolStripMenuItem
             // 
             this.zatvoriSveToolStripMenuItem.Name = "zatvoriSveToolStripMenuItem";
-            this.zatvoriSveToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.zatvoriSveToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.zatvoriSveToolStripMenuItem.Text = "&Zatvori sve";
             this.zatvoriSveToolStripMenuItem.Click += new System.EventHandler(this.CloseAllToolStripMenuItem_Click);
             // 

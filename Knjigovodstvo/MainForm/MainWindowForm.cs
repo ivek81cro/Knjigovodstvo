@@ -89,7 +89,7 @@ namespace Knjigovodstvo.MainForm
 
         private void ShowNewFormPlaca(object sender, EventArgs e)
         {
-            string formName = ChildWindowName.Placa.ToString();
+            string formName = ChildWindowName.PlacaIzracunForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
                 Form f = _isOpen.getChild(MdiChildren, formName);
@@ -103,7 +103,7 @@ namespace Knjigovodstvo.MainForm
 
         private void ShowNewFormPregledPlaca(object sender, EventArgs e)
         {
-            string formName = ChildWindowName.PregledPlaca.ToString();
+            string formName = ChildWindowName.PlacaTableForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
                 Form f = _isOpen.getChild(MdiChildren, formName);
