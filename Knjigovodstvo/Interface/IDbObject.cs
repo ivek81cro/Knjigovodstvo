@@ -12,6 +12,7 @@
         Iban,
         Kupac_Dobavljac,
         Prazno,
+        NumberFormat,
         None
     }
     /// <summary>

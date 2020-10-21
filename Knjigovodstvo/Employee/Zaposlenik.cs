@@ -47,19 +47,19 @@ namespace Knjigovodstvo.Employee
 
             return new Zaposlenik
             {
-                Id = int.Parse(zaposlenik.Rows[0][0].ToString()),
-                Oib = zaposlenik.Rows[0][1].ToString(),
-                Ime = zaposlenik.Rows[0][2].ToString(),
-                Prezime = zaposlenik.Rows[0][3].ToString(),
-                DatumRodenja = zaposlenik.Rows[0][4].ToString(),
-                Adresa = zaposlenik.Rows[0][5].ToString(),
-                Grad = zaposlenik.Rows[0][6].ToString(),
-                Drzava = zaposlenik.Rows[0][7].ToString(),
-                Telefon = zaposlenik.Rows[0][8].ToString(),
-                StručnaSprema = zaposlenik.Rows[0][9].ToString(),
-                Olaksica = float.Parse(zaposlenik.Rows[0][10].ToString()),
-                DatumDolaska = zaposlenik.Rows[0][11].ToString(),
-                DatumOdlaska = zaposlenik.Rows[0][12].ToString()
+                Id = int.Parse(zaposlenik.Rows[0]["Id"].ToString()),
+                Oib = zaposlenik.Rows[0]["Oib"].ToString(),
+                Ime = zaposlenik.Rows[0]["Ime"].ToString(),
+                Prezime = zaposlenik.Rows[0]["Prezime"].ToString(),
+                DatumRodenja = zaposlenik.Rows[0]["DatumRodenja"].ToString(),
+                Adresa = zaposlenik.Rows[0]["Adresa"].ToString(),
+                Grad = zaposlenik.Rows[0]["Grad"].ToString(),
+                Drzava = zaposlenik.Rows[0]["Drzava"].ToString(),
+                Telefon = zaposlenik.Rows[0]["Telefon"].ToString(),
+                StručnaSprema = zaposlenik.Rows[0]["StručnaSprema"].ToString(),
+                Olaksica = float.Parse(zaposlenik.Rows[0]["Olaksica"].ToString()),
+                DatumDolaska = zaposlenik.Rows[0]["DatumDolaska"].ToString(),
+                DatumOdlaska = zaposlenik.Rows[0]["DatumOdlaska"].ToString()
             };
         }
 
