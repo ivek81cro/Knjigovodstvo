@@ -16,8 +16,9 @@ namespace Knjigovodstvo.Payroll
 
         private void LoadDatagrid()
         {
-            dataGridView1.DataSource = new DbDataGet().GetTable(new Placa());
-            for(int i = 2; i< dataGridView1.Columns.Count; i++)
+            DbDataGetCustom db = new DbDataGetCustom();
+            dataGridView1.DataSource = db.GetTable($"EXEC PlacaPregled;");
+            for(int i = 3; i< dataGridView1.Columns.Count; i++)
             {
                 dataGridView1.Columns[i].DefaultCellStyle.Format = "0.00";
                 dataGridView1.Columns[i].HeaderText =
@@ -27,9 +28,9 @@ namespace Knjigovodstvo.Payroll
 
         private void BtnEditPlaca_Click(object sender, EventArgs e)
         {
-            string oib = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            string oib = dataGridView1.SelectedRows[0].Cells["Oib"].Value.ToString();
             Placa placa = new Placa().GetPlacaByOib(oib);
-            PlacaIzracunForm pn = new PlacaIzracunForm();
+            PlacaIzracunForm pn = new PlacaIzracunForm(oib);
             pn.FormClosing += new FormClosingEventHandler(this.PlacaNew_FormClosing);
             pn.EditPlaca(placa);
         }

@@ -15,6 +15,14 @@ namespace Knjigovodstvo.Payroll
             FillComboBox();
         }
 
+        public PlacaIzracunForm(string oib)
+        {
+            InitializeComponent();
+            FillComboBox();
+            int index = comboBoxZaposlenik.FindString(oib);
+            comboBoxZaposlenik.SelectedIndex = index;
+        }
+
         private void FillComboBox()
         {
             DataTable dt = new DbDataGet().GetTable(new Zaposlenik());
@@ -62,7 +70,6 @@ namespace Knjigovodstvo.Payroll
             _oib = selected.Split(' ')[0];
             if (placa.GetPlacaByOib(_oib).Oib != "0")
                 PopuniKontrole(placa);
-
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
