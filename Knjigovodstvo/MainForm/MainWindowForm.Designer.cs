@@ -44,7 +44,6 @@ namespace Knjigovodstvo.MainForm
             this.menuIra = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPlaca = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPregledPlace = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuIzracunPlace = new System.Windows.Forms.ToolStripMenuItem();
             this.menuObracunPlace = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -156,7 +155,6 @@ namespace Knjigovodstvo.MainForm
             // 
             this.menuPlaca.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuPregledPlace,
-            this.menuIzracunPlace,
             this.menuObracunPlace});
             this.menuPlaca.Name = "menuPlaca";
             this.menuPlaca.Size = new System.Drawing.Size(47, 20);
@@ -168,13 +166,6 @@ namespace Knjigovodstvo.MainForm
             this.menuPregledPlace.Size = new System.Drawing.Size(151, 22);
             this.menuPregledPlace.Text = "Pregled";
             this.menuPregledPlace.Click += new System.EventHandler(this.ShowNewFormPregledPlaca);
-            // 
-            // menuIzracunPlace
-            // 
-            this.menuIzracunPlace.Name = "menuIzracunPlace";
-            this.menuIzracunPlace.Size = new System.Drawing.Size(151, 22);
-            this.menuIzracunPlace.Text = "Izračun plaće";
-            this.menuIzracunPlace.Click += new System.EventHandler(this.ShowNewFormPlaca);
             // 
             // menuObracunPlace
             // 
@@ -349,7 +340,6 @@ namespace Knjigovodstvo.MainForm
         private System.Windows.Forms.ToolStripMenuItem menuUra;
         private System.Windows.Forms.ToolStripMenuItem menuIra;
         private System.Windows.Forms.ToolStripMenuItem menuGradovi;
-        private System.Windows.Forms.ToolStripMenuItem menuIzracunPlace;
         private System.Windows.Forms.ToolStripMenuItem menuPregledPlace;
     }
 }

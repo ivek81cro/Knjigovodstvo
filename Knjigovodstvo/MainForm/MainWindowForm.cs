@@ -87,20 +87,6 @@ namespace Knjigovodstvo.MainForm
             }
         }
 
-        private void ShowNewFormPlaca(object sender, EventArgs e)
-        {
-            string formName = ChildWindowName.PlacaIzracunForm.ToString();
-            if (_isOpen.Check(MdiChildren, formName))
-            {
-                Form f = _isOpen.getChild(MdiChildren, formName);
-                f.Focus();
-            }
-            else
-            {
-                _openForm.Open(new PlacaIzracunForm(), this);
-            }
-        }
-
         private void ShowNewFormPregledPlaca(object sender, EventArgs e)
         {
             string formName = ChildWindowName.PlacaTableForm.ToString();
