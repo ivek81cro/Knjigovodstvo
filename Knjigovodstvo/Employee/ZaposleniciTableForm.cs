@@ -38,7 +38,7 @@ namespace Knjigovodstvo.Employee
 
         private void BtnEditZaposlenik_Click(object sender, EventArgs e)
         {
-            int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+            int id = int.Parse(dataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
             Zaposlenik zaposlenik = new Zaposlenik().GetZaposlenikById(id);
             ZaposlenikUnosForm pn = new ZaposlenikUnosForm();
             pn.FormClosing += new FormClosingEventHandler(this.ZaposlenikNew_FormClosing);

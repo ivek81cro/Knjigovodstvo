@@ -22,7 +22,7 @@ namespace Knjigovodstvo.Payroll
             {
                 dataGridView1.Columns[i].DefaultCellStyle.Format = "0.00";
                 dataGridView1.Columns[i].HeaderText =
-                    new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);                
+                    new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
             }
         }
 

@@ -25,15 +25,15 @@ namespace Knjigovodstvo.Employee
                 Oib = textBoxOib.Text,
                 Ime = textBoxIme.Text,
                 Prezime = textBoxPrezime.Text,
-                DatumRodenja = dateTimePickerDatumRodenja.Value.ToString("yyyy-MM-dd"),
+                Datum_Rodenja = dateTimePickerDatumRodenja.Value.ToString("yyyy-MM-dd"),
                 Adresa = textBoxAdresa.Text,
                 Grad=textBoxGrad.Text,
                 Drzava=textBoxDrzava.Text,
                 Telefon=textBoxTelefon.Text,
-                StručnaSprema=textBoxStrucnaSprema.Text,
+                Stručna_Sprema=textBoxStrucnaSprema.Text,
                 Olaksica = float.Parse(textBoxOlaksica.Text),
-                DatumDolaska=dateTimePickerDatumDolaska.Value.ToString("yyyy-MM-dd"),
-                DatumOdlaska=dateTimePickerDatumOdlaska.Value.ToString("yyyy-MM-dd")
+                Datum_Dolaska=dateTimePickerDatumDolaska.Value.ToString("yyyy-MM-dd"),
+                Datum_Odlaska=dateTimePickerDatumOdlaska.Value.ToString("yyyy-MM-dd")
             };
 
             FormError validateResult = zaposlenik.ValidateData();
@@ -63,15 +63,15 @@ namespace Knjigovodstvo.Employee
             textBoxOib.Text = zaposlenik.Oib;
             textBoxIme.Text = zaposlenik.Ime;
             textBoxPrezime.Text = zaposlenik.Prezime;
-            dateTimePickerDatumRodenja.Text = zaposlenik.DatumRodenja;
+            dateTimePickerDatumRodenja.Text = zaposlenik.Datum_Rodenja;
             textBoxAdresa.Text = zaposlenik.Adresa;
             textBoxGrad.Text = zaposlenik.Grad;
             textBoxDrzava.Text = zaposlenik.Drzava;
             textBoxTelefon.Text = zaposlenik.Telefon;
-            textBoxStrucnaSprema.Text = zaposlenik.StručnaSprema;
+            textBoxStrucnaSprema.Text = zaposlenik.Stručna_Sprema;
             textBoxOlaksica.Text = zaposlenik.Olaksica.ToString();
-            dateTimePickerDatumDolaska.Text = zaposlenik.DatumDolaska;
-            dateTimePickerDatumOdlaska.Text = zaposlenik.DatumOdlaska;
+            dateTimePickerDatumDolaska.Text = zaposlenik.Datum_Dolaska;
+            dateTimePickerDatumOdlaska.Text = zaposlenik.Datum_Odlaska;
 
             _editMode = true;
 
