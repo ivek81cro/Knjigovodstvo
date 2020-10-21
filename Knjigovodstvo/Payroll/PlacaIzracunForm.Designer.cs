@@ -60,6 +60,8 @@
             this.textBoxDoprinosZdravstvo = new System.Windows.Forms.TextBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.labelBrutoRaed = new System.Windows.Forms.Label();
+            this.textBoxBrutoRead = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // comboBoxZaposlenik
@@ -119,7 +121,7 @@
             // labelMio1
             // 
             this.labelMio1.AutoSize = true;
-            this.labelMio1.Location = new System.Drawing.Point(12, 150);
+            this.labelMio1.Location = new System.Drawing.Point(10, 181);
             this.labelMio1.Name = "labelMio1";
             this.labelMio1.Size = new System.Drawing.Size(66, 15);
             this.labelMio1.TabIndex = 6;
@@ -128,7 +130,7 @@
             // labelMio2
             // 
             this.labelMio2.AutoSize = true;
-            this.labelMio2.Location = new System.Drawing.Point(12, 183);
+            this.labelMio2.Location = new System.Drawing.Point(10, 214);
             this.labelMio2.Name = "labelMio2";
             this.labelMio2.Size = new System.Drawing.Size(66, 15);
             this.labelMio2.TabIndex = 6;
@@ -136,7 +138,7 @@
             // 
             // textBoxMio1
             // 
-            this.textBoxMio1.Location = new System.Drawing.Point(121, 147);
+            this.textBoxMio1.Location = new System.Drawing.Point(119, 180);
             this.textBoxMio1.Name = "textBoxMio1";
             this.textBoxMio1.ReadOnly = true;
             this.textBoxMio1.Size = new System.Drawing.Size(123, 23);
@@ -144,7 +146,7 @@
             // 
             // textBoxMio2
             // 
-            this.textBoxMio2.Location = new System.Drawing.Point(121, 180);
+            this.textBoxMio2.Location = new System.Drawing.Point(119, 211);
             this.textBoxMio2.Name = "textBoxMio2";
             this.textBoxMio2.ReadOnly = true;
             this.textBoxMio2.Size = new System.Drawing.Size(123, 23);
@@ -153,7 +155,7 @@
             // labelDohodak
             // 
             this.labelDohodak.AutoSize = true;
-            this.labelDohodak.Location = new System.Drawing.Point(12, 216);
+            this.labelDohodak.Location = new System.Drawing.Point(10, 247);
             this.labelDohodak.Name = "labelDohodak";
             this.labelDohodak.Size = new System.Drawing.Size(55, 15);
             this.labelDohodak.TabIndex = 8;
@@ -161,7 +163,7 @@
             // 
             // textBoxDohodak
             // 
-            this.textBoxDohodak.Location = new System.Drawing.Point(121, 213);
+            this.textBoxDohodak.Location = new System.Drawing.Point(119, 244);
             this.textBoxDohodak.Name = "textBoxDohodak";
             this.textBoxDohodak.ReadOnly = true;
             this.textBoxDohodak.Size = new System.Drawing.Size(123, 23);
@@ -170,7 +172,7 @@
             // labelOsobniOdbitak
             // 
             this.labelOsobniOdbitak.AutoSize = true;
-            this.labelOsobniOdbitak.Location = new System.Drawing.Point(12, 249);
+            this.labelOsobniOdbitak.Location = new System.Drawing.Point(10, 280);
             this.labelOsobniOdbitak.Name = "labelOsobniOdbitak";
             this.labelOsobniOdbitak.Size = new System.Drawing.Size(90, 15);
             this.labelOsobniOdbitak.TabIndex = 9;
@@ -179,7 +181,7 @@
             // labelPoreznaOsnovica
             // 
             this.labelPoreznaOsnovica.AutoSize = true;
-            this.labelPoreznaOsnovica.Location = new System.Drawing.Point(12, 282);
+            this.labelPoreznaOsnovica.Location = new System.Drawing.Point(10, 313);
             this.labelPoreznaOsnovica.Name = "labelPoreznaOsnovica";
             this.labelPoreznaOsnovica.Size = new System.Drawing.Size(99, 15);
             this.labelPoreznaOsnovica.TabIndex = 10;
@@ -188,7 +190,7 @@
             // labelPorez24
             // 
             this.labelPorez24.AutoSize = true;
-            this.labelPorez24.Location = new System.Drawing.Point(12, 315);
+            this.labelPorez24.Location = new System.Drawing.Point(10, 346);
             this.labelPorez24.Name = "labelPorez24";
             this.labelPorez24.Size = new System.Drawing.Size(61, 15);
             this.labelPorez24.TabIndex = 11;
@@ -197,7 +199,7 @@
             // labelPorez36
             // 
             this.labelPorez36.AutoSize = true;
-            this.labelPorez36.Location = new System.Drawing.Point(12, 348);
+            this.labelPorez36.Location = new System.Drawing.Point(10, 379);
             this.labelPorez36.Name = "labelPorez36";
             this.labelPorez36.Size = new System.Drawing.Size(61, 15);
             this.labelPorez36.TabIndex = 12;
@@ -206,7 +208,7 @@
             // labelPorezUkupno
             // 
             this.labelPorezUkupno.AutoSize = true;
-            this.labelPorezUkupno.Location = new System.Drawing.Point(12, 381);
+            this.labelPorezUkupno.Location = new System.Drawing.Point(10, 412);
             this.labelPorezUkupno.Name = "labelPorezUkupno";
             this.labelPorezUkupno.Size = new System.Drawing.Size(80, 15);
             this.labelPorezUkupno.TabIndex = 13;
@@ -215,7 +217,7 @@
             // labelPrirez
             // 
             this.labelPrirez.AutoSize = true;
-            this.labelPrirez.Location = new System.Drawing.Point(12, 414);
+            this.labelPrirez.Location = new System.Drawing.Point(10, 445);
             this.labelPrirez.Name = "labelPrirez";
             this.labelPrirez.Size = new System.Drawing.Size(36, 15);
             this.labelPrirez.TabIndex = 14;
@@ -224,7 +226,7 @@
             // labelUkupnoPorezPrirez
             // 
             this.labelUkupnoPorezPrirez.AutoSize = true;
-            this.labelUkupnoPorezPrirez.Location = new System.Drawing.Point(12, 447);
+            this.labelUkupnoPorezPrirez.Location = new System.Drawing.Point(10, 478);
             this.labelUkupnoPorezPrirez.Name = "labelUkupnoPorezPrirez";
             this.labelUkupnoPorezPrirez.Size = new System.Drawing.Size(94, 15);
             this.labelUkupnoPorezPrirez.TabIndex = 15;
@@ -233,7 +235,7 @@
             // labelNetto
             // 
             this.labelNetto.AutoSize = true;
-            this.labelNetto.Location = new System.Drawing.Point(12, 480);
+            this.labelNetto.Location = new System.Drawing.Point(10, 511);
             this.labelNetto.Name = "labelNetto";
             this.labelNetto.Size = new System.Drawing.Size(37, 15);
             this.labelNetto.TabIndex = 16;
@@ -242,7 +244,7 @@
             // labelDoprinosZdravstvo
             // 
             this.labelDoprinosZdravstvo.AutoSize = true;
-            this.labelDoprinosZdravstvo.Location = new System.Drawing.Point(13, 513);
+            this.labelDoprinosZdravstvo.Location = new System.Drawing.Point(11, 544);
             this.labelDoprinosZdravstvo.Name = "labelDoprinosZdravstvo";
             this.labelDoprinosZdravstvo.Size = new System.Drawing.Size(108, 15);
             this.labelDoprinosZdravstvo.TabIndex = 17;
@@ -250,7 +252,7 @@
             // 
             // textBoxOdbitak
             // 
-            this.textBoxOdbitak.Location = new System.Drawing.Point(121, 246);
+            this.textBoxOdbitak.Location = new System.Drawing.Point(119, 277);
             this.textBoxOdbitak.Name = "textBoxOdbitak";
             this.textBoxOdbitak.ReadOnly = true;
             this.textBoxOdbitak.Size = new System.Drawing.Size(123, 23);
@@ -258,7 +260,7 @@
             // 
             // textBoxPoreznaOsnovica
             // 
-            this.textBoxPoreznaOsnovica.Location = new System.Drawing.Point(121, 279);
+            this.textBoxPoreznaOsnovica.Location = new System.Drawing.Point(119, 310);
             this.textBoxPoreznaOsnovica.Name = "textBoxPoreznaOsnovica";
             this.textBoxPoreznaOsnovica.ReadOnly = true;
             this.textBoxPoreznaOsnovica.Size = new System.Drawing.Size(123, 23);
@@ -266,7 +268,7 @@
             // 
             // textBoxPorez24
             // 
-            this.textBoxPorez24.Location = new System.Drawing.Point(121, 312);
+            this.textBoxPorez24.Location = new System.Drawing.Point(119, 343);
             this.textBoxPorez24.Name = "textBoxPorez24";
             this.textBoxPorez24.ReadOnly = true;
             this.textBoxPorez24.Size = new System.Drawing.Size(123, 23);
@@ -274,7 +276,7 @@
             // 
             // textBoxPorez36
             // 
-            this.textBoxPorez36.Location = new System.Drawing.Point(121, 345);
+            this.textBoxPorez36.Location = new System.Drawing.Point(119, 376);
             this.textBoxPorez36.Name = "textBoxPorez36";
             this.textBoxPorez36.ReadOnly = true;
             this.textBoxPorez36.Size = new System.Drawing.Size(123, 23);
@@ -282,7 +284,7 @@
             // 
             // textBoxPorezUkupno
             // 
-            this.textBoxPorezUkupno.Location = new System.Drawing.Point(121, 378);
+            this.textBoxPorezUkupno.Location = new System.Drawing.Point(119, 409);
             this.textBoxPorezUkupno.Name = "textBoxPorezUkupno";
             this.textBoxPorezUkupno.ReadOnly = true;
             this.textBoxPorezUkupno.Size = new System.Drawing.Size(123, 23);
@@ -290,7 +292,7 @@
             // 
             // textBoxPrirez
             // 
-            this.textBoxPrirez.Location = new System.Drawing.Point(121, 411);
+            this.textBoxPrirez.Location = new System.Drawing.Point(119, 442);
             this.textBoxPrirez.Name = "textBoxPrirez";
             this.textBoxPrirez.ReadOnly = true;
             this.textBoxPrirez.Size = new System.Drawing.Size(123, 23);
@@ -298,7 +300,7 @@
             // 
             // textBoxUkupnoPorezPrirez
             // 
-            this.textBoxUkupnoPorezPrirez.Location = new System.Drawing.Point(121, 444);
+            this.textBoxUkupnoPorezPrirez.Location = new System.Drawing.Point(119, 475);
             this.textBoxUkupnoPorezPrirez.Name = "textBoxUkupnoPorezPrirez";
             this.textBoxUkupnoPorezPrirez.ReadOnly = true;
             this.textBoxUkupnoPorezPrirez.Size = new System.Drawing.Size(123, 23);
@@ -306,7 +308,7 @@
             // 
             // textBoxNetto
             // 
-            this.textBoxNetto.Location = new System.Drawing.Point(121, 477);
+            this.textBoxNetto.Location = new System.Drawing.Point(119, 508);
             this.textBoxNetto.Name = "textBoxNetto";
             this.textBoxNetto.ReadOnly = true;
             this.textBoxNetto.Size = new System.Drawing.Size(123, 23);
@@ -314,7 +316,7 @@
             // 
             // textBoxDoprinosZdravstvo
             // 
-            this.textBoxDoprinosZdravstvo.Location = new System.Drawing.Point(121, 510);
+            this.textBoxDoprinosZdravstvo.Location = new System.Drawing.Point(119, 541);
             this.textBoxDoprinosZdravstvo.Name = "textBoxDoprinosZdravstvo";
             this.textBoxDoprinosZdravstvo.ReadOnly = true;
             this.textBoxDoprinosZdravstvo.Size = new System.Drawing.Size(123, 23);
@@ -322,7 +324,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(283, 521);
+            this.buttonSave.Location = new System.Drawing.Point(281, 552);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 18;
@@ -332,7 +334,7 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(367, 521);
+            this.buttonClose.Location = new System.Drawing.Point(365, 552);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 19;
@@ -340,11 +342,30 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
+            // labelBrutoRaed
+            // 
+            this.labelBrutoRaed.AutoSize = true;
+            this.labelBrutoRaed.Location = new System.Drawing.Point(10, 152);
+            this.labelBrutoRaed.Name = "labelBrutoRaed";
+            this.labelBrutoRaed.Size = new System.Drawing.Size(36, 15);
+            this.labelBrutoRaed.TabIndex = 6;
+            this.labelBrutoRaed.Text = "Bruto";
+            // 
+            // textBoxBrutoRead
+            // 
+            this.textBoxBrutoRead.Location = new System.Drawing.Point(119, 149);
+            this.textBoxBrutoRead.Name = "textBoxBrutoRead";
+            this.textBoxBrutoRead.ReadOnly = true;
+            this.textBoxBrutoRead.Size = new System.Drawing.Size(123, 23);
+            this.textBoxBrutoRead.TabIndex = 7;
+            // 
             // PlacaIzracunForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 556);
+            this.ClientSize = new System.Drawing.Size(452, 587);
+            this.Controls.Add(this.textBoxBrutoRead);
+            this.Controls.Add(this.labelBrutoRaed);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxDoprinosZdravstvo);
@@ -378,6 +399,7 @@
             this.Controls.Add(this.labelOdabirZaposlenika);
             this.Controls.Add(this.comboBoxZaposlenik);
             this.Name = "PlacaIzracunForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Izračun plaće";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -418,5 +440,7 @@
         private System.Windows.Forms.TextBox textBoxDoprinosZdravstvo;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.Label labelBrutoRaed;
+        private System.Windows.Forms.TextBox textBoxBrutoRead;
     }
 }

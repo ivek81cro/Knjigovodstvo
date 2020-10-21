@@ -24,6 +24,8 @@ namespace Knjigovodstvo.Code.Validators
                     return "Mora biti označeno Kupac/Dobavljač ili oboje.";
                 case FormError.Prazno:
                     return "Polje ne može ostati prazno";
+                case FormError.NumberFormat:
+                    return "Neispravan format unešenog broja";
                 default:
                     return "";
             }

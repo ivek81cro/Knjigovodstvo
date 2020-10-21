@@ -1,6 +1,7 @@
 ﻿using Knjigovodstvo.City;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
+using Knjigovodstvo.Validators;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -21,6 +22,15 @@ namespace Knjigovodstvo.Payroll
             FillComboBox();
             int index = comboBoxZaposlenik.FindString(oib);
             comboBoxZaposlenik.SelectedIndex = index;
+            InitPrivateMembers();
+        }
+
+        private void InitPrivateMembers()
+        {
+            string selected = this.comboBoxZaposlenik.GetItemText(this.comboBoxZaposlenik.SelectedItem);
+            _oib = selected.Split(' ')[0];
+            if (placa.GetPlacaByOib(_oib).Oib != "0")
+                PopuniKontrole(placa);
         }
 
         private void FillComboBox()
@@ -52,24 +62,32 @@ namespace Knjigovodstvo.Payroll
 
         private void buttonIzracunaj_Click(object sender, EventArgs e)
         {
-            if (comboBoxZaposlenik.SelectedItem != null)
+            if (new FloatValidator().Check(textBoxBruto.Text))
             {
-                Zaposlenik zaposlenik = new Zaposlenik().GetZaposlenikByOib(_oib);
-                float prirez = float.Parse(new DbDataGet().GetTable(new Grad(), $"Naziv='{zaposlenik.Grad}';").Rows[0][5].ToString()) / 100.0f;
-                float iznosBruto = float.Parse(textBoxBruto.Text);
-                placa.Izracun(iznosBruto, prirez, zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
-                placa.Oib = _oib;
+                if (comboBoxZaposlenik.SelectedItem != null)
+                {
+                    Zaposlenik zaposlenik = new Zaposlenik().GetZaposlenikByOib(_oib);
+                    float prirez = float.Parse(new DbDataGet().GetTable(new Grad(), $"Naziv='{zaposlenik.Grad}';").Rows[0]["Prirez"].ToString()) / 100.0f;
+                    float iznosBruto = float.Parse(textBoxBruto.Text);
+                    placa.Izracun(iznosBruto, prirez, zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
+                    placa.Oib = _oib;
 
-                PopuniKontrole(placa);
+                    PopuniKontrole(placa);
+                }
+                else
+                {
+                    MessageBox.Show("Niste odabrali zaposlenika.", "Izračun", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Neispravan format unešenog broja.", "Izračun", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private void comboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            string selected = this.comboBoxZaposlenik.GetItemText(this.comboBoxZaposlenik.SelectedItem);
-            _oib = selected.Split(' ')[0];
-            if (placa.GetPlacaByOib(_oib).Oib != "0")
-                PopuniKontrole(placa);
+            InitPrivateMembers();
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -97,6 +115,7 @@ namespace Knjigovodstvo.Payroll
 
         private void PopuniKontrole(Placa placa)
         {
+            textBoxBrutoRead.Text = Math.Round(placa.Bruto, 2).ToString("0.00");
             textBoxMio1.Text = Math.Round(placa.Mio_1, 2).ToString("0.00");
             textBoxMio2.Text = Math.Round(placa.Mio_2, 2).ToString("0.00");
             textBoxDohodak.Text = Math.Round(placa.Dohodak, 2).ToString("0.00");
