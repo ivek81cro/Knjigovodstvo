@@ -1,7 +1,7 @@
-﻿using Knjigovodstvo.Helpers;
+﻿using Knjigovodstvo.Database;
+using Knjigovodstvo.Helpers;
 using System;
 using System.Data;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Payroll

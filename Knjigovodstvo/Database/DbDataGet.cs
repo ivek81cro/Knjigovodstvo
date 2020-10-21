@@ -1,12 +1,14 @@
-﻿using Knjigovodstvo.Models;
+﻿using Knjigovodstvo.Helpers;
+using Knjigovodstvo.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
-namespace Knjigovodstvo.Helpers
+namespace Knjigovodstvo.Database
 {
+    //TODO Get with join on query
     class DbDataGet
     {
         /// <summary>

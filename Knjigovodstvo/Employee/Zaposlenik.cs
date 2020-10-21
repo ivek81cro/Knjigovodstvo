@@ -1,8 +1,6 @@
-﻿using Knjigovodstvo.City;
-using Knjigovodstvo.Code.Validators;
-using Knjigovodstvo.Helpers;
+﻿using Knjigovodstvo.Code.Validators;
+using Knjigovodstvo.Database;
 using Knjigovodstvo.Models;
-using System;
 using System.Data;
 
 namespace Knjigovodstvo.Employee

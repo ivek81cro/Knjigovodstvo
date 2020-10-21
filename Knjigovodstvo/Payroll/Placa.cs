@@ -1,7 +1,6 @@
-﻿using Knjigovodstvo.Helpers;
+﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Models;
 using Knjigovodstvo.Settings;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
 
 namespace Knjigovodstvo.Payroll
@@ -21,34 +20,34 @@ namespace Knjigovodstvo.Payroll
             Bruto = iznos;
             if (drugi)
             {
-                iznos -= Mio1 = iznos * (p.GetStopaByName(PlacaStope.Mio_1) + p.GetStopaByName(PlacaStope.Mio_2));
-                Mio2 = 0;
+                iznos -= Mio_1 = iznos * (p.GetStopaByName(PlacaStope.Mio_1) + p.GetStopaByName(PlacaStope.Mio_2));
+                Mio_2 = 0;
             }
             else
             {
-                Mio1 = iznos * p.GetStopaByName(PlacaStope.Mio_1);
-                Mio2 = iznos * p.GetStopaByName(PlacaStope.Mio_2);
-                iznos -= Mio1 + Mio2;
+                Mio_1 = iznos * p.GetStopaByName(PlacaStope.Mio_1);
+                Mio_2 = iznos * p.GetStopaByName(PlacaStope.Mio_2);
+                iznos -= Mio_1 + Mio_2;
             }
             Dohodak = iznos;
-            iznos -= OsobniOdbitak = 2500.0f * (1.6f + odbitak);
-            PoreznaOsnovica = iznos;
+            iznos -= Osobni_Odbitak = 2500.0f * (1.6f + odbitak);
+            Porezna_Osnovica = iznos;
 
-            if (PoreznaOsnovica > 30000)
+            if (Porezna_Osnovica > 30000)
             {
-                iznos -= Porez24 = 30000.0f * p.GetStopaByName(PlacaStope.Porez_Dohodak_24);
-                iznos -= Porez36 = (PoreznaOsnovica - 30000) * p.GetStopaByName(PlacaStope.Porez_Dohodak_36);
+                iznos -= Porez_24_per = 30000.0f * p.GetStopaByName(PlacaStope.Porez_Dohodak_24);
+                iznos -= Porez_36_per = (Porezna_Osnovica - 30000) * p.GetStopaByName(PlacaStope.Porez_Dohodak_36);
             }
             else
             {
-                iznos -= Porez24 = PoreznaOsnovica * p.GetStopaByName(PlacaStope.Porez_Dohodak_24);
-                Porez36 = 0;
+                iznos -= Porez_24_per = Porezna_Osnovica * p.GetStopaByName(PlacaStope.Porez_Dohodak_24);
+                Porez_36_per = 0;
             }
-            iznos -= Prirez = ( PorezUkupno = Porez24 + Porez36) * prirez;
-            UkupnoPorezPrirez = PorezUkupno + Prirez;
-            Neto = iznos + OsobniOdbitak;
+            iznos -= Prirez = ( Porez_Ukupno = Porez_24_per + Porez_36_per) * prirez;
+            Ukupno_Porez_i_Prirez = Porez_Ukupno + Prirez;
+            Neto = iznos + Osobni_Odbitak;
 
-            DoprinosZdravstvo = Bruto * p.GetStopaByName(PlacaStope.Doprinos_Zdravstveno);
+            Doprinos_Zdravstvo = Bruto * p.GetStopaByName(PlacaStope.Doprinos_Zdravstveno);
 
 
             return this;
@@ -62,18 +61,18 @@ namespace Knjigovodstvo.Payroll
                 Id = int.Parse(data.Rows[0][0].ToString());
                 Oib = data.Rows[0][1].ToString();
                 Bruto = float.Parse(data.Rows[0][2].ToString());
-                Mio1 = float.Parse(data.Rows[0][3].ToString());
-                Mio2 = float.Parse(data.Rows[0][4].ToString());
+                Mio_1 = float.Parse(data.Rows[0][3].ToString());
+                Mio_2 = float.Parse(data.Rows[0][4].ToString());
                 Dohodak = float.Parse(data.Rows[0][5].ToString());
-                OsobniOdbitak = float.Parse(data.Rows[0][6].ToString());
-                PoreznaOsnovica = float.Parse(data.Rows[0][7].ToString());
-                Porez24 = float.Parse(data.Rows[0][8].ToString());
-                Porez36 = float.Parse(data.Rows[0][9].ToString());
-                PorezUkupno = float.Parse(data.Rows[0][10].ToString());
+                Osobni_Odbitak = float.Parse(data.Rows[0][6].ToString());
+                Porezna_Osnovica = float.Parse(data.Rows[0][7].ToString());
+                Porez_24_per = float.Parse(data.Rows[0][8].ToString());
+                Porez_36_per = float.Parse(data.Rows[0][9].ToString());
+                Porez_Ukupno = float.Parse(data.Rows[0][10].ToString());
                 Prirez = float.Parse(data.Rows[0][11].ToString());
-                UkupnoPorezPrirez = float.Parse(data.Rows[0][12].ToString());
+                Ukupno_Porez_i_Prirez = float.Parse(data.Rows[0][12].ToString());
                 Neto = float.Parse(data.Rows[0][13].ToString());
-                DoprinosZdravstvo = float.Parse(data.Rows[0][14].ToString());
+                Doprinos_Zdravstvo = float.Parse(data.Rows[0][14].ToString());
             }
             catch
             {
@@ -86,17 +85,17 @@ namespace Knjigovodstvo.Payroll
         public int Id { get; set; } = 0;
         public string Oib { get; set; } = "";
         public float Bruto { get; set; } = 0;
-        public float Mio1 { get; set; } = 0;
-        public float Mio2 { get; set; } = 0;
+        public float Mio_1 { get; set; } = 0;
+        public float Mio_2 { get; set; } = 0;
         public float Dohodak { get; set; } = 0;
-        public float OsobniOdbitak { get; set; } = 0;
-        public float PoreznaOsnovica { get; set; } = 0;
-        public float Porez24 { get; set; } = 0;
-        public float Porez36 { get; set; } = 0;
-        public float PorezUkupno { get; set; } = 0;
+        public float Osobni_Odbitak { get; set; } = 0;
+        public float Porezna_Osnovica { get; set; } = 0;
+        public float Porez_24_per { get; set; } = 0;
+        public float Porez_36_per { get; set; } = 0;
+        public float Porez_Ukupno { get; set; } = 0;
         public float Prirez { get; set; } = 0;
-        public float UkupnoPorezPrirez { get; set; } = 0;
+        public float Ukupno_Porez_i_Prirez { get; set; } = 0;
         public float Neto { get; set; } = 0;
-        public float DoprinosZdravstvo { get; set; } = 0;
+        public float Doprinos_Zdravstvo { get; set; } = 0;
     }
 }

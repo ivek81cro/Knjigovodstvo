@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Knjigovodstvo.Helpers
+namespace Knjigovodstvo.Database
 {
     public enum QueryType
     {

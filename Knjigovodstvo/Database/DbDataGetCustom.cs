@@ -1,28 +1,28 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Database
 {
-    class DbDataDelete
+    class DbDataGetCustom
     {
-        /// <summary>Deletes row from table</summary>
-        /// <param name="id">Id of row in table.</param>
-        /// <param name="table">Name of table in database.</param>
-        /// <returns>Bool True if operation successful.</returns>
-        public bool DeleteItem(int id, string table)
+        /// <summary>
+        /// Gets table from database depending on recieved object.
+        /// </summary>
+        /// <param name="query">Custom string query.</param>
+        /// <returns>DataTable based on condition</returns>
+        public DataTable GetTable(string query)
         {
+            DataTable dt = new DataTable();
+            
             try
             {
-                string query = $"DELETE FROM {table} WHERE Id={id};";
-
                 using SqlConnection conn = new SqlConnection(ConnHelper.ConnStr(connection_name));
-                using SqlCommand command = new SqlCommand(query, conn);
-                conn.Open();
-                command.ExecuteNonQuery();
-                conn.Close();
+                using SqlDataAdapter sda = new SqlDataAdapter(query, conn);
 
-                return true;
+                //Fill the DataTable with records from Table.
+                sda.Fill(dt);
             }
             catch (SqlException e)
             {
@@ -31,19 +31,16 @@ namespace Knjigovodstvo.Database
                     "Greška",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-
-                return false;
             }
             catch (Exception e)
             {
                 MessageBox.Show(
-                    $"Nepoznata greška kod brisanja podataka, kontaktirajte podršku.\n {e.Message}",
+                    $"Nepoznata greška kod dohvata županija, kontaktirajte podršku.\n {e.Message}",
                     "Greška",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-
-                return false;
             }
+            return dt;
         }
 
         private readonly string connection_name = "KnjigovodstvoDb";
