@@ -11,7 +11,7 @@ namespace Knjigovodstvo.City
     //TODO change textBoxPost to Combo box and load post numbers from database for selected city
     public partial class GradUnosForm : Form
     {
-        public GradUnosForm(Grad grad=null)
+        public GradUnosForm(Grad grad = null)
         {
             InitializeComponent();
             FillComboCounty();
@@ -19,11 +19,17 @@ namespace Knjigovodstvo.City
             _grad = grad;
             if (_grad != null)
             {
-                int index = comboBoxZupanija.FindStringExact(_grad.Zupanija);
-                comboBoxZupanija.SelectedIndex = index;
-                index = comboBoxGrad.FindStringExact(_grad.Naziv);
-                comboBoxGrad.SelectedIndex = index;
+                SetControls();
             }
+        }
+
+        private void SetControls()
+        {
+            int index = comboBoxZupanija.FindStringExact(_grad.Zupanija);
+            comboBoxZupanija.SelectedIndex = index;
+            index = comboBoxGrad.FindStringExact(_grad.Naziv);
+            comboBoxGrad.SelectedIndex = index;
+            textBoxPrirez.Text = _grad.Prirez.ToString();
         }
 
         void FillComboCounty()
@@ -40,7 +46,7 @@ namespace Knjigovodstvo.City
 
         void FillComboCity()
         {
-            DataTable dt = new Grad().GetGradByZupanija(comboBoxZupanija.Text);
+            DataTable dt = new Grad().GetGradoviByZupanija(comboBoxZupanija.Text);
 
             //Assign DataTable as DataSource.
             if (dt.Rows.Count > 0)
@@ -112,7 +118,7 @@ namespace Knjigovodstvo.City
                 Zupanija = comboBoxZupanija.Text,
                 Posta = comboBoxPosta.Text,
                 Prirez = float.Parse(textBoxPrirez.Text),
-                Drzava =textBoxDrzava.Text
+                Drzava = textBoxDrzava.Text
             };
 
             FormError validateResult = grad.ValidateData();

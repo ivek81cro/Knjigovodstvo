@@ -53,12 +53,12 @@ namespace Knjigovodstvo.City
 
             return new Grad
             {
-                Id = int.Parse(grad.Rows[0][0].ToString()),
-                Naziv = grad.Rows[0][1].ToString(),
-                Zupanija = grad.Rows[0][2].ToString(),
-                Drzava = grad.Rows[0][3].ToString(),
-                Posta = grad.Rows[0][4].ToString(),
-                Prirez = float.Parse(grad.Rows[0][5].ToString())
+                Id = int.Parse(grad.Rows[0]["Id"].ToString()),
+                Naziv = grad.Rows[0]["Naziv"].ToString(),
+                Zupanija = grad.Rows[0]["Zupanija"].ToString(),
+                Drzava = grad.Rows[0]["Drzava"].ToString(),
+                Posta = grad.Rows[0]["Posta"].ToString(),
+                Prirez = float.Parse(grad.Rows[0]["Prirez"].ToString())
             };
         }
 
@@ -67,7 +67,7 @@ namespace Knjigovodstvo.City
         /// </summary>
         /// <param name="county">Name of county (Županija)</param>
         /// <returns>DataTable</returns>
-        public DataTable GetGradByZupanija(string county)
+        public DataTable GetGradoviByZupanija(string county)
         {
             DbDataGet data = new DbDataGet();
             string condition = $"Zupanija='{county}'";
