@@ -148,11 +148,13 @@ namespace Knjigovodstvo.City
 
             ShowDialog();
         }
+
         private void SetMessageLabel(FormError errorType)
         {
             labelUpozorenja.Text = new ProcessFormErrors().FormErrorMessage(errorType);
 
         }
+
         private Grad _grad;
         private int _id;
         private bool _editMode;

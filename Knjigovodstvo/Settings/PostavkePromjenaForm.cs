@@ -1,5 +1,6 @@
 ﻿using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Models;
+using Knjigovodstvo.Validators;
 using System;
 using System.Windows.Forms;
 
@@ -20,25 +21,32 @@ namespace Knjigovodstvo.Settings
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            Postavke postavka = new Postavke
+            if (!new FloatValidator().Check(textBoxVrijednost.Text))
             {
-                Id = _id,
-                Naziv = textBoxNaziv.Text,
-                Vrsta = textBoxVrsta.Text,
-                Vrijednost = float.Parse(textBoxVrijednost.Text)
-            };
+                MessageBox.Show("Vrijednost nije ispravno unešena.", "Izmjena vrijednosti postavke", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                Postavke postavka = new Postavke
+                {
+                    Id = _id,
+                    Naziv = textBoxNaziv.Text,
+                    Vrsta = textBoxVrsta.Text,
+                    Vrijednost = float.Parse(textBoxVrijednost.Text)
+                };
 
-            FormError validateResult = postavka.ValidateData();
-            if (postavka.ValidateData() == FormError.None)
-            {
-                if (postavka.UpdateData(_id))
+                FormError validateResult = postavka.ValidateData();
+                if (postavka.ValidateData() == FormError.None)
                 {
-                    MessageBox.Show("Izmjena uspješna.", "Izmjena vrijednosti postavke", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Close();
-                }
-                else
-                {
-                    SetMessageLabel(validateResult);
+                    if (postavka.UpdateData(_id))
+                    {
+                        MessageBox.Show("Izmjena uspješna.", "Izmjena vrijednosti postavke", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Close();
+                    }
+                    else
+                    {
+                        SetMessageLabel(validateResult);
+                    }
                 }
             }
         }

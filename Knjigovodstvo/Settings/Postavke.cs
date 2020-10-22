@@ -1,5 +1,6 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Models;
+using Knjigovodstvo.Validators;
 using System.Data;
 
 namespace Knjigovodstvo.Settings
@@ -30,10 +31,10 @@ namespace Knjigovodstvo.Settings
             DataTable postavka = new DbDataGet().GetTable(new Postavke(), condition);
             return new Postavke
             {
-                Id = int.Parse(postavka.Rows[0][0].ToString()),
-                Naziv = postavka.Rows[0][1].ToString(),
-                Vrsta = postavka.Rows[0][2].ToString(),
-                Vrijednost = float.Parse(postavka.Rows[0][3].ToString())
+                Id = int.Parse(postavka.Rows[0]["Id"].ToString()),
+                Naziv = postavka.Rows[0]["Naziv"].ToString(),
+                Vrsta = postavka.Rows[0]["Vrsta"].ToString(),
+                Vrijednost = float.Parse(postavka.Rows[0]["Vrijednost"].ToString())
             };
         }
 
@@ -48,7 +49,7 @@ namespace Knjigovodstvo.Settings
 
         internal float GetStopaByName(PlacaStope naziv)
         {
-            string condition = $"Naziv='{naziv.ToString()}';";
+            string condition = $"Naziv='{naziv}';";
             DataTable postavka = new DbDataGet().GetTable(new Postavke(), condition);
 
             return float.Parse(postavka.Rows[0][3].ToString());

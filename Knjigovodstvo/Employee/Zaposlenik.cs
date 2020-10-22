@@ -51,15 +51,15 @@ namespace Knjigovodstvo.Employee
                 Oib = zaposlenik.Rows[0]["Oib"].ToString(),
                 Ime = zaposlenik.Rows[0]["Ime"].ToString(),
                 Prezime = zaposlenik.Rows[0]["Prezime"].ToString(),
-                Datum_Rodenja = zaposlenik.Rows[0]["Datum Rodenja"].ToString(),
+                Datum_Rodenja = zaposlenik.Rows[0]["Datum_Rodenja"].ToString(),
                 Adresa = zaposlenik.Rows[0]["Adresa"].ToString(),
                 Grad = zaposlenik.Rows[0]["Grad"].ToString(),
                 Drzava = zaposlenik.Rows[0]["Drzava"].ToString(),
                 Telefon = zaposlenik.Rows[0]["Telefon"].ToString(),
-                Stručna_Sprema = zaposlenik.Rows[0]["Stručna Sprema"].ToString(),
+                Stručna_Sprema = zaposlenik.Rows[0]["Stručna_Sprema"].ToString(),
                 Olaksica = float.Parse(zaposlenik.Rows[0]["Olaksica"].ToString()),
-                Datum_Dolaska = zaposlenik.Rows[0]["Datum Dolaska"].ToString(),
-                Datum_Odlaska = zaposlenik.Rows[0]["Datum Odlaska"].ToString()
+                Datum_Dolaska = zaposlenik.Rows[0]["Datum_Dolaska"].ToString(),
+                Datum_Odlaska = zaposlenik.Rows[0]["Datum_Odlaska"].ToString()
             };
         }
 

@@ -155,6 +155,7 @@
             this.Controls.Add(this.labelNaziv);
             this.Controls.Add(this.labelId);
             this.Name = "PostavkePromjenaForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Promjena postavke";
             this.ResumeLayout(false);
             this.PerformLayout();
