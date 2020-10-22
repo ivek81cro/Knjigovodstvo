@@ -7,11 +7,11 @@ namespace Knjigovodstvo.MainForm
 {
     public enum ChildWindowName
     {
-        Komitent,
-        Postavke,
-        Zaposlenici,
-        Partneri,
-        Gradovi,
+        KomitentNew,
+        PostavkeTablicaForm,
+        ZaposleniciTableForm,
+        PartneriTableForm,
+        GradoviTableForm,
         PlacaTableForm,
     }
     public class IsChildOpen

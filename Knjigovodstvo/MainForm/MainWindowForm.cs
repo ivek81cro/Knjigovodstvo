@@ -18,7 +18,7 @@ namespace Knjigovodstvo.MainForm
 
         private void ShowNewFormKomitent(object sender, EventArgs e)
         {
-            string formName = ChildWindowName.Komitent.ToString();
+            string formName = ChildWindowName.KomitentNew.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
                 Form f = _isOpen.getChild(MdiChildren, formName);
@@ -32,7 +32,7 @@ namespace Knjigovodstvo.MainForm
 
         private void ShowNewFormPostavke(object sender, EventArgs e)
         {
-            string formName = ChildWindowName.Postavke.ToString();
+            string formName = ChildWindowName.PostavkeTablicaForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
                 Form f = _isOpen.getChild(MdiChildren, formName);
@@ -47,7 +47,7 @@ namespace Knjigovodstvo.MainForm
 
         private void ShowNewFormPartneri(object sender, EventArgs e)
         {
-            string formName = ChildWindowName.Partneri.ToString();
+            string formName = ChildWindowName.PartneriTableForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
                 Form f = _isOpen.getChild(MdiChildren, formName);
@@ -61,7 +61,7 @@ namespace Knjigovodstvo.MainForm
 
         private void ShowNewFormZaposlenici(object sender, EventArgs e)
         {
-            string formName = ChildWindowName.Zaposlenici.ToString();
+            string formName = ChildWindowName.ZaposleniciTableForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
                 Form f = _isOpen.getChild(MdiChildren, formName);
@@ -75,7 +75,7 @@ namespace Knjigovodstvo.MainForm
 
         private void ShowNewFormGradovi(object sender, EventArgs e)
         {
-            string formName = ChildWindowName.Gradovi.ToString();
+            string formName = ChildWindowName.GradoviTableForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
                 Form f = _isOpen.getChild(MdiChildren, formName);
