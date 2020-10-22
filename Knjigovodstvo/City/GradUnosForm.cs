@@ -37,9 +37,9 @@ namespace Knjigovodstvo.City
             //Assign DataTable as DataSource.
             if (dt.Rows.Count > 0)
             {
-                comboBoxNaziv.DataSource = dt;
-                comboBoxNaziv.DisplayMember = "Naziv";
-                comboBoxNaziv.ValueMember = "Id";
+                comboBoxGrad.DataSource = dt;
+                comboBoxGrad.DisplayMember = "Naziv";
+                comboBoxGrad.ValueMember = "Id";
             }
         }
 
@@ -48,14 +48,32 @@ namespace Knjigovodstvo.City
             FillComboCity();
         }
 
+        private void comboBoxGrad_SelectedValueChanged(object sender, EventArgs e)
+        {
+            FillComboPosta();
+        }
+
+        private void FillComboPosta()
+        {
+            DataTable dt = new Posta().GetPostaByGrad(comboBoxGrad.Text);
+
+            //Assign DataTable as DataSource.
+            if (dt.Rows.Count > 0)
+            {
+                comboBoxPosta.DataSource = dt;
+                comboBoxPosta.DisplayMember = "BrojPu";
+                comboBoxPosta.ValueMember = "BrojPu";
+            }
+        }
+
         private void BtnClose_Click(object sender, EventArgs e)
         {
             _grad = new Grad()
             {
                 Drzava = textBoxDrzava.Text,
                 Zupanija = comboBoxZupanija.Text,
-                Naziv = comboBoxNaziv.Text,
-                Posta = textBoxPosta.Text
+                Naziv = comboBoxGrad.Text,
+                Posta = comboBoxPosta.Text
             };
 
             FormError validateResult = _grad.ValidateData();
@@ -82,9 +100,9 @@ namespace Knjigovodstvo.City
         {
             Grad grad = new Grad
             {
-                Naziv = comboBoxNaziv.Text,
+                Naziv = comboBoxGrad.Text,
                 Zupanija = comboBoxZupanija.Text,
-                Posta = textBoxPosta.Text,
+                Posta = comboBoxPosta.Text,
                 Prirez = float.Parse(textBoxPrirez.Text),
                 Drzava =textBoxDrzava.Text
             };
@@ -113,9 +131,9 @@ namespace Knjigovodstvo.City
         internal void EditGrad(Grad grad)
         {
             _id = grad.Id;
-            comboBoxNaziv.Text = grad.Naziv;//TODO: NE sprema naziv odabranog grada
+            comboBoxGrad.Text = grad.Naziv;//TODO: NE sprema naziv odabranog grada
             comboBoxZupanija.Text = grad.Zupanija;
-            textBoxPosta.Text = grad.Posta;
+            comboBoxPosta.Text = grad.Posta;
             textBoxPrirez.Text = grad.Prirez.ToString();
 
             _editMode = true;
@@ -125,8 +143,8 @@ namespace Knjigovodstvo.City
         private void SetMessageLabel(FormError errorType)
         {
             labelUpozorenja.Text = new ProcessFormErrors().FormErrorMessage(errorType);
-        }
 
+        }
         private Grad _grad;
         private int _id;
         private bool _editMode;

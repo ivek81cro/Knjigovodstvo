@@ -29,7 +29,7 @@ namespace Knjigovodstvo.MainForm
             return false;
         }
 
-        public Form getChild(Form[] mdiChildren, string titleForm)
+        public Form GetChild(Form[] mdiChildren, string titleForm)
         {
             foreach (Form f in mdiChildren)
             {

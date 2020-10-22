@@ -32,12 +32,12 @@
             this.labelPosta = new System.Windows.Forms.Label();
             this.labelZupanija = new System.Windows.Forms.Label();
             this.labelDrzava = new System.Windows.Forms.Label();
-            this.textBoxPosta = new System.Windows.Forms.TextBox();
+            this.comboBoxPosta = new System.Windows.Forms.ComboBox();
             this.textBoxDrzava = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.comboBoxZupanija = new System.Windows.Forms.ComboBox();
-            this.comboBoxNaziv = new System.Windows.Forms.ComboBox();
+            this.comboBoxGrad = new System.Windows.Forms.ComboBox();
             this.labelUpozorenja = new System.Windows.Forms.Label();
             this.textBoxPrirez = new System.Windows.Forms.TextBox();
             this.labelPrirez = new System.Windows.Forms.Label();
@@ -80,12 +80,12 @@
             this.labelDrzava.TabIndex = 0;
             this.labelDrzava.Text = "Država";
             // 
-            // textBoxPosta
+            // comboBoxPosta
             // 
-            this.textBoxPosta.Location = new System.Drawing.Point(68, 99);
-            this.textBoxPosta.Name = "textBoxPosta";
-            this.textBoxPosta.Size = new System.Drawing.Size(96, 23);
-            this.textBoxPosta.TabIndex = 3;
+            this.comboBoxPosta.Location = new System.Drawing.Point(68, 99);
+            this.comboBoxPosta.Name = "comboBoxPosta";
+            this.comboBoxPosta.Size = new System.Drawing.Size(96, 23);
+            this.comboBoxPosta.TabIndex = 3;
             // 
             // textBoxDrzava
             // 
@@ -126,13 +126,14 @@
             this.comboBoxZupanija.TabIndex = 1;
             this.comboBoxZupanija.SelectedValueChanged += new System.EventHandler(this.ComboBoxCounty_SelectedValueChanged);
             // 
-            // comboBoxNaziv
+            // comboBoxGrad
             // 
-            this.comboBoxNaziv.FormattingEnabled = true;
-            this.comboBoxNaziv.Location = new System.Drawing.Point(68, 70);
-            this.comboBoxNaziv.Name = "comboBoxNaziv";
-            this.comboBoxNaziv.Size = new System.Drawing.Size(240, 23);
-            this.comboBoxNaziv.TabIndex = 2;
+            this.comboBoxGrad.FormattingEnabled = true;
+            this.comboBoxGrad.Location = new System.Drawing.Point(68, 70);
+            this.comboBoxGrad.Name = "comboBoxGrad";
+            this.comboBoxGrad.Size = new System.Drawing.Size(240, 23);
+            this.comboBoxGrad.TabIndex = 2;
+            this.comboBoxGrad.SelectedValueChanged += new System.EventHandler(this.comboBoxGrad_SelectedValueChanged);
             // 
             // labelUpozorenja
             // 
@@ -180,12 +181,12 @@
             this.Controls.Add(this.labelPrirez);
             this.Controls.Add(this.textBoxPrirez);
             this.Controls.Add(this.labelUpozorenja);
-            this.Controls.Add(this.comboBoxNaziv);
+            this.Controls.Add(this.comboBoxGrad);
             this.Controls.Add(this.comboBoxZupanija);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.textBoxDrzava);
-            this.Controls.Add(this.textBoxPosta);
+            this.Controls.Add(this.comboBoxPosta);
             this.Controls.Add(this.labelDrzava);
             this.Controls.Add(this.labelZupanija);
             this.Controls.Add(this.labelPosta);
@@ -205,12 +206,12 @@
         private System.Windows.Forms.Label labelPosta;
         private System.Windows.Forms.Label labelZupanija;
         private System.Windows.Forms.Label labelDrzava;
-        private System.Windows.Forms.TextBox textBoxPosta;
+        private System.Windows.Forms.ComboBox comboBoxPosta;
         private System.Windows.Forms.TextBox textBoxDrzava;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.ComboBox comboBoxZupanija;
-        private System.Windows.Forms.ComboBox comboBoxNaziv;
+        private System.Windows.Forms.ComboBox comboBoxGrad;
         private System.Windows.Forms.Label labelUpozorenja;
         private System.Windows.Forms.TextBox textBoxPrirez;
         private System.Windows.Forms.Label labelPrirez;

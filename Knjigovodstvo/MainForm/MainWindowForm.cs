@@ -21,7 +21,7 @@ namespace Knjigovodstvo.MainForm
             string formName = ChildWindowName.KomitentNew.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
-                Form f = _isOpen.getChild(MdiChildren, formName);
+                Form f = _isOpen.GetChild(MdiChildren, formName);
                 f.Focus();
             }
             else
@@ -35,7 +35,7 @@ namespace Knjigovodstvo.MainForm
             string formName = ChildWindowName.PostavkeTablicaForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
-                Form f = _isOpen.getChild(MdiChildren, formName);
+                Form f = _isOpen.GetChild(MdiChildren, formName);
                 f.Focus();
             }
             else
@@ -50,7 +50,7 @@ namespace Knjigovodstvo.MainForm
             string formName = ChildWindowName.PartneriTableForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
-                Form f = _isOpen.getChild(MdiChildren, formName);
+                Form f = _isOpen.GetChild(MdiChildren, formName);
                 f.Focus();
             }
             else
@@ -64,7 +64,7 @@ namespace Knjigovodstvo.MainForm
             string formName = ChildWindowName.ZaposleniciTableForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
-                Form f = _isOpen.getChild(MdiChildren, formName);
+                Form f = _isOpen.GetChild(MdiChildren, formName);
                 f.Focus();
             }
             else
@@ -78,7 +78,7 @@ namespace Knjigovodstvo.MainForm
             string formName = ChildWindowName.GradoviTableForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
-                Form f = _isOpen.getChild(MdiChildren, formName);
+                Form f = _isOpen.GetChild(MdiChildren, formName);
                 f.Focus();
             }
             else
@@ -92,7 +92,7 @@ namespace Knjigovodstvo.MainForm
             string formName = ChildWindowName.PlacaTableForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
-                Form f = _isOpen.getChild(MdiChildren, formName);
+                Form f = _isOpen.GetChild(MdiChildren, formName);
                 f.Focus();
             }
             else
@@ -124,7 +124,7 @@ namespace Knjigovodstvo.MainForm
             }
         }
 
-        IsChildOpen _isOpen = new IsChildOpen();
-        OpenChildForm _openForm = new OpenChildForm();
+        private IsChildOpen _isOpen = new IsChildOpen();
+        private OpenChildForm _openForm = new OpenChildForm();
     }
 }
