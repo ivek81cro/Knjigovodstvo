@@ -11,11 +11,19 @@ namespace Knjigovodstvo.City
     //TODO change textBoxPost to Combo box and load post numbers from database for selected city
     public partial class GradUnosForm : Form
     {
-        public GradUnosForm()
+        public GradUnosForm(Grad grad=null)
         {
             InitializeComponent();
             FillComboCounty();
             labelUpozorenja.Text = "";
+            _grad = grad;
+            if (_grad != null)
+            {
+                int index = comboBoxZupanija.FindStringExact(_grad.Zupanija);
+                comboBoxZupanija.SelectedIndex = index;
+                index = comboBoxGrad.FindStringExact(_grad.Naziv);
+                comboBoxGrad.SelectedIndex = index;
+            }
         }
 
         void FillComboCounty()

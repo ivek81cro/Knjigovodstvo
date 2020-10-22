@@ -41,7 +41,7 @@ namespace Knjigovodstvo.City
             }
             else
             {
-                GradUnosForm pn = new GradUnosForm();
+                GradUnosForm pn = new GradUnosForm(_grad);
                 pn.FormClosing += new FormClosingEventHandler(this.GradNew_FormClosing);
                 pn.EditGrad(_grad);
             }

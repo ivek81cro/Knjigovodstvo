@@ -78,9 +78,6 @@ namespace Knjigovodstvo.Employee
             ShowDialog();
         }
 
-        bool _editMode = false;
-        int _id = 0;
-
         private void buttonOdaberiGrad_Click(object sender, EventArgs e)
         {
             GradoviTableForm form = new GradoviTableForm();
@@ -94,5 +91,8 @@ namespace Knjigovodstvo.Employee
         {
             Close();
         }
+
+        bool _editMode = false;
+        int _id = 0;
     }
 }
