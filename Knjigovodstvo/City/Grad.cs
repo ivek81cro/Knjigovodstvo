@@ -1,6 +1,5 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Models;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -40,7 +39,8 @@ namespace Knjigovodstvo.City
                             Naziv = dr["Naziv"].ToString(),
                             Drzava = dr["Drzava"].ToString(),
                             Zupanija = dr["Zupanija"].ToString(),
-                            Posta = dr["Posta"].ToString()
+                            Posta = dr["Posta"].ToString(),
+                            Sifra = dr["Sifra"].ToString()
                         }).ToList();
 
             return cityList;
@@ -58,7 +58,8 @@ namespace Knjigovodstvo.City
                 Zupanija = grad.Rows[0]["Zupanija"].ToString(),
                 Drzava = grad.Rows[0]["Drzava"].ToString(),
                 Posta = grad.Rows[0]["Posta"].ToString(),
-                Prirez = float.Parse(grad.Rows[0]["Prirez"].ToString())
+                Prirez = float.Parse(grad.Rows[0]["Prirez"].ToString()),
+                Sifra = grad.Rows[0]["Sifra"].ToString()
             };
         }
 
@@ -103,5 +104,6 @@ namespace Knjigovodstvo.City
         public string Drzava { get; set; } = "";
         public string Posta { get; set; } = "";
         public float Prirez { get; set; } = 1;
+        public string Sifra { get; set; } = "";
     }
 }

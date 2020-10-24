@@ -1,9 +1,7 @@
 ﻿using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.City
@@ -30,6 +28,7 @@ namespace Knjigovodstvo.City
             index = comboBoxGrad.FindStringExact(_grad.Naziv);
             comboBoxGrad.SelectedIndex = index;
             textBoxPrirez.Text = _grad.Prirez.ToString();
+            textBoxSifra.Text = _grad.Sifra;
         }
 
         void FillComboCounty()
@@ -87,7 +86,8 @@ namespace Knjigovodstvo.City
                 Drzava = textBoxDrzava.Text,
                 Zupanija = comboBoxZupanija.Text,
                 Naziv = comboBoxGrad.Text,
-                Posta = comboBoxPosta.Text
+                Posta = comboBoxPosta.Text,
+                Sifra = textBoxSifra.Text
             };
 
             FormError validateResult = _grad.ValidateData();
@@ -118,7 +118,8 @@ namespace Knjigovodstvo.City
                 Zupanija = comboBoxZupanija.Text,
                 Posta = comboBoxPosta.Text,
                 Prirez = float.Parse(textBoxPrirez.Text),
-                Drzava = textBoxDrzava.Text
+                Drzava = textBoxDrzava.Text,
+                Sifra = textBoxSifra.Text
             };
 
             FormError validateResult = grad.ValidateData();
@@ -149,6 +150,7 @@ namespace Knjigovodstvo.City
             comboBoxZupanija.Text = grad.Zupanija;
             comboBoxPosta.Text = grad.Posta;
             textBoxPrirez.Text = grad.Prirez.ToString();
+            textBoxSifra.Text = grad.Sifra;
 
             _editMode = true;
 

@@ -42,6 +42,8 @@
             this.textBoxPrirez = new System.Windows.Forms.TextBox();
             this.labelPrirez = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.textBoxSifra = new System.Windows.Forms.TextBox();
+            this.labelSifra = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelNaziv
@@ -172,11 +174,29 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "%";
             // 
+            // textBoxSifra
+            // 
+            this.textBoxSifra.Location = new System.Drawing.Point(68, 157);
+            this.textBoxSifra.Name = "textBoxSifra";
+            this.textBoxSifra.Size = new System.Drawing.Size(96, 23);
+            this.textBoxSifra.TabIndex = 4;
+            // 
+            // labelSifra
+            // 
+            this.labelSifra.AutoSize = true;
+            this.labelSifra.Location = new System.Drawing.Point(12, 160);
+            this.labelSifra.Name = "labelSifra";
+            this.labelSifra.Size = new System.Drawing.Size(30, 15);
+            this.labelSifra.TabIndex = 0;
+            this.labelSifra.Text = "Šifra";
+            // 
             // GradUnosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(355, 274);
+            this.Controls.Add(this.labelSifra);
+            this.Controls.Add(this.textBoxSifra);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.labelPrirez);
             this.Controls.Add(this.textBoxPrirez);
@@ -216,5 +236,7 @@
         private System.Windows.Forms.TextBox textBoxPrirez;
         private System.Windows.Forms.Label labelPrirez;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxSifra;
+        private System.Windows.Forms.Label labelSifra;
     }
 }
