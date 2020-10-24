@@ -80,6 +80,8 @@ namespace Knjigovodstvo.Payroll
                     }
                     else if(new DbDataInsert().InsertData(_dodaci))
                     {
+                        _placa = _dodaci.ZbrojiDodatke(_placa, _zaposlenik);
+                        new DbDataUpdate().UpdateData(_placa);
                         MessageBox.Show("Unos uspješan.", "Dodaci", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadDatagrid();
                     }
