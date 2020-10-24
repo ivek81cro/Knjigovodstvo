@@ -29,8 +29,8 @@ namespace Knjigovodstvo.Payroll
         {
             string selected = this.comboBoxZaposlenik.GetItemText(this.comboBoxZaposlenik.SelectedItem);
             _oib = selected.Split(' ')[0];
-            if (placa.GetPlacaByOib(_oib).Oib != "0")
-                PopuniKontrole(placa);
+            if (_placa.GetPlacaByOib(_oib).Oib != "0")
+                PopuniKontrole(_placa);
         }
 
         private void FillComboBox()
@@ -55,12 +55,12 @@ namespace Knjigovodstvo.Payroll
             ShowDialog();
         }
 
-        private void buttonClose_Click(object sender, EventArgs e)
+        private void ButtonClose_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void buttonIzracunaj_Click(object sender, EventArgs e)
+        private void ButtonIzracunaj_Click(object sender, EventArgs e)
         {
             if (new FloatValidator().Check(textBoxBruto.Text))
             {
@@ -69,10 +69,10 @@ namespace Knjigovodstvo.Payroll
                     Zaposlenik zaposlenik = new Zaposlenik().GetZaposlenikByOib(_oib);
                     float prirez = float.Parse(new DbDataGet().GetTable(new Grad(), $"Naziv='{zaposlenik.Grad}';").Rows[0]["Prirez"].ToString()) / 100.0f;
                     float iznosBruto = float.Parse(textBoxBruto.Text);
-                    placa.Izracun(iznosBruto, prirez, zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
-                    placa.Oib = _oib;
+                    _placa.Izracun(iznosBruto, prirez, zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
+                    _placa.Oib = _oib;
 
-                    PopuniKontrole(placa);
+                    PopuniKontrole(_placa);
                 }
                 else
                 {
@@ -85,18 +85,18 @@ namespace Knjigovodstvo.Payroll
             }
         }
 
-        private void comboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)
+        private void ComboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)
         {
             InitPrivateMembers();
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
-            if (comboBoxZaposlenik.SelectedItem != null && placa.Oib != "" && placa.Oib != "0")
+            if (comboBoxZaposlenik.SelectedItem != null && _placa.Oib != "" && _placa.Oib != "0")
             {
                 if (new Placa().GetPlacaByOib(_oib).Oib == "0")
                 {
-                    if (new DbDataInsert().InsertData(placa))
+                    if (new DbDataInsert().InsertData(_placa))
                     {
                         FillComboBox();
                         MessageBox.Show("Unos uspješan.", "Novi izračun unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -104,7 +104,7 @@ namespace Knjigovodstvo.Payroll
                 }
                 else
                 {
-                    if (new DbDataUpdate().UpdateData(placa))
+                    if (new DbDataUpdate().UpdateData(_placa))
                     {
                         FillComboBox();
                         MessageBox.Show("Unos uspješan.", "Izmjena unešena", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -128,9 +128,30 @@ namespace Knjigovodstvo.Payroll
             textBoxUkupnoPorezPrirez.Text = Math.Round(placa.Ukupno_Porez_i_Prirez, 2).ToString("0.00");
             textBoxNetto.Text = Math.Round(placa.Neto, 2).ToString("0.00");
             textBoxDoprinosZdravstvo.Text = Math.Round(placa.Doprinos_Zdravstvo, 2).ToString("0.00");
+            textBoxDodaci.Text = Math.Round(placa.Dodaci_Ukupno, 2).ToString("0.00");
         }
 
-        string _oib = "";
-        private Placa placa = new Placa();
+        private void ButtonDodaci_Click(object sender, EventArgs e)
+        {
+            if (comboBoxZaposlenik.SelectedItem != null)
+            {
+                Zaposlenik zaposlenik = new Zaposlenik().GetZaposlenikByOib(_oib);
+                DodaciUnosForm dodaci = new DodaciUnosForm(zaposlenik, _placa);
+                _placa= dodaci.ShowDialogValue();
+                dodaci.FormClosing += new FormClosingEventHandler(this.DodaciNew_FormClosing);
+            }
+            else
+            {
+                MessageBox.Show("Niste odabrali zaposlenika.", "Izračun", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void DodaciNew_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            PopuniKontrole(_placa);
+        }
+
+        private string _oib = "";
+        private Placa _placa = new Placa();
     }
 }

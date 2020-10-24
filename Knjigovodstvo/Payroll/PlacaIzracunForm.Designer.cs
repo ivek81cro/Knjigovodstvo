@@ -62,6 +62,11 @@
             this.buttonClose = new System.Windows.Forms.Button();
             this.labelBrutoRaed = new System.Windows.Forms.Label();
             this.textBoxBrutoRead = new System.Windows.Forms.TextBox();
+            this.buttonDodaci = new System.Windows.Forms.Button();
+            this.textBoxDodaci = new System.Windows.Forms.TextBox();
+            this.labelDodaci = new System.Windows.Forms.Label();
+            this.groupBoxDodaci = new System.Windows.Forms.GroupBox();
+            this.groupBoxDodaci.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxZaposlenik
@@ -71,7 +76,7 @@
             this.comboBoxZaposlenik.Name = "comboBoxZaposlenik";
             this.comboBoxZaposlenik.Size = new System.Drawing.Size(315, 23);
             this.comboBoxZaposlenik.TabIndex = 0;
-            this.comboBoxZaposlenik.SelectionChangeCommitted += new System.EventHandler(this.comboBoxZaposlenik_SelectionChangeCommitted);
+            this.comboBoxZaposlenik.SelectionChangeCommitted += new System.EventHandler(this.ComboBoxZaposlenik_SelectionChangeCommitted);
             // 
             // labelOdabirZaposlenika
             // 
@@ -116,7 +121,7 @@
             this.buttonIzracunaj.TabIndex = 5;
             this.buttonIzracunaj.Text = "Izračunaj";
             this.buttonIzracunaj.UseVisualStyleBackColor = true;
-            this.buttonIzracunaj.Click += new System.EventHandler(this.buttonIzracunaj_Click);
+            this.buttonIzracunaj.Click += new System.EventHandler(this.ButtonIzracunaj_Click);
             // 
             // labelMio1
             // 
@@ -330,7 +335,7 @@
             this.buttonSave.TabIndex = 18;
             this.buttonSave.Text = "Spremi";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // buttonClose
             // 
@@ -340,7 +345,7 @@
             this.buttonClose.TabIndex = 19;
             this.buttonClose.Text = "Zatvori";
             this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // labelBrutoRaed
             // 
@@ -359,11 +364,51 @@
             this.textBoxBrutoRead.Size = new System.Drawing.Size(123, 23);
             this.textBoxBrutoRead.TabIndex = 7;
             // 
+            // buttonDodaci
+            // 
+            this.buttonDodaci.Location = new System.Drawing.Point(6, 29);
+            this.buttonDodaci.Name = "buttonDodaci";
+            this.buttonDodaci.Size = new System.Drawing.Size(75, 23);
+            this.buttonDodaci.TabIndex = 20;
+            this.buttonDodaci.Text = "Dodaci";
+            this.buttonDodaci.UseVisualStyleBackColor = true;
+            this.buttonDodaci.Click += new System.EventHandler(this.ButtonDodaci_Click);
+            // 
+            // textBoxDodaci
+            // 
+            this.textBoxDodaci.Location = new System.Drawing.Point(6, 91);
+            this.textBoxDodaci.Name = "textBoxDodaci";
+            this.textBoxDodaci.ReadOnly = true;
+            this.textBoxDodaci.Size = new System.Drawing.Size(123, 23);
+            this.textBoxDodaci.TabIndex = 7;
+            // 
+            // labelDodaci
+            // 
+            this.labelDodaci.AutoSize = true;
+            this.labelDodaci.Location = new System.Drawing.Point(6, 63);
+            this.labelDodaci.Name = "labelDodaci";
+            this.labelDodaci.Size = new System.Drawing.Size(88, 15);
+            this.labelDodaci.TabIndex = 21;
+            this.labelDodaci.Text = "Dodaci ukupno";
+            // 
+            // groupBoxDodaci
+            // 
+            this.groupBoxDodaci.Controls.Add(this.textBoxDodaci);
+            this.groupBoxDodaci.Controls.Add(this.labelDodaci);
+            this.groupBoxDodaci.Controls.Add(this.buttonDodaci);
+            this.groupBoxDodaci.Location = new System.Drawing.Point(279, 149);
+            this.groupBoxDodaci.Name = "groupBoxDodaci";
+            this.groupBoxDodaci.Size = new System.Drawing.Size(161, 163);
+            this.groupBoxDodaci.TabIndex = 22;
+            this.groupBoxDodaci.TabStop = false;
+            this.groupBoxDodaci.Text = "Dodaci na plaću";
+            // 
             // PlacaIzracunForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(452, 587);
+            this.Controls.Add(this.groupBoxDodaci);
             this.Controls.Add(this.textBoxBrutoRead);
             this.Controls.Add(this.labelBrutoRaed);
             this.Controls.Add(this.buttonClose);
@@ -401,6 +446,8 @@
             this.Name = "PlacaIzracunForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Izračun plaće";
+            this.groupBoxDodaci.ResumeLayout(false);
+            this.groupBoxDodaci.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -442,5 +489,9 @@
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Label labelBrutoRaed;
         private System.Windows.Forms.TextBox textBoxBrutoRead;
+        private System.Windows.Forms.Button buttonDodaci;
+        private System.Windows.Forms.TextBox textBoxDodaci;
+        private System.Windows.Forms.Label labelDodaci;
+        private System.Windows.Forms.GroupBox groupBoxDodaci;
     }
 }

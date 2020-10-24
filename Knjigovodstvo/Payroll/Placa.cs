@@ -5,7 +5,7 @@ using System.Data;
 
 namespace Knjigovodstvo.Payroll
 {
-    class Placa : IDbObject
+    public class Placa : IDbObject
     {
         public FormError ValidateData() 
         {
@@ -58,21 +58,22 @@ namespace Knjigovodstvo.Payroll
             DataTable data = new DbDataGet().GetTable(this, $"Oib='{oib}'");
             try
             {
-                Id = int.Parse(data.Rows[0][0].ToString());
-                Oib = data.Rows[0][1].ToString();
-                Bruto = float.Parse(data.Rows[0][2].ToString());
-                Mio_1 = float.Parse(data.Rows[0][3].ToString());
-                Mio_2 = float.Parse(data.Rows[0][4].ToString());
-                Dohodak = float.Parse(data.Rows[0][5].ToString());
-                Osobni_Odbitak = float.Parse(data.Rows[0][6].ToString());
-                Porezna_Osnovica = float.Parse(data.Rows[0][7].ToString());
-                Porez_24_per = float.Parse(data.Rows[0][8].ToString());
-                Porez_36_per = float.Parse(data.Rows[0][9].ToString());
-                Porez_Ukupno = float.Parse(data.Rows[0][10].ToString());
-                Prirez = float.Parse(data.Rows[0][11].ToString());
-                Ukupno_Porez_i_Prirez = float.Parse(data.Rows[0][12].ToString());
-                Neto = float.Parse(data.Rows[0][13].ToString());
-                Doprinos_Zdravstvo = float.Parse(data.Rows[0][14].ToString());
+                Id = int.Parse(data.Rows[0]["Id"].ToString());
+                Oib = data.Rows[0]["Oib"].ToString();
+                Bruto = float.Parse(data.Rows[0]["Bruto"].ToString());
+                Mio_1 = float.Parse(data.Rows[0]["Mio_1"].ToString());
+                Mio_2 = float.Parse(data.Rows[0]["Mio_2"].ToString());
+                Dohodak = float.Parse(data.Rows[0]["Dohodak"].ToString());
+                Osobni_Odbitak = float.Parse(data.Rows[0]["Osobni_Odbitak"].ToString());
+                Porezna_Osnovica = float.Parse(data.Rows[0]["Porezna_Osnovica"].ToString());
+                Porez_24_per = float.Parse(data.Rows[0]["Porez_24_per"].ToString());
+                Porez_36_per = float.Parse(data.Rows[0]["Porez_36_per"].ToString());
+                Porez_Ukupno = float.Parse(data.Rows[0]["Porez_Ukupno"].ToString());
+                Prirez = float.Parse(data.Rows[0]["Prirez"].ToString());
+                Ukupno_Porez_i_Prirez = float.Parse(data.Rows[0]["Ukupno_Porez_i_Prirez"].ToString());
+                Neto = float.Parse(data.Rows[0]["Neto"].ToString());
+                Doprinos_Zdravstvo = float.Parse(data.Rows[0]["Doprinos_Zdravstvo"].ToString());
+                Dodaci_Ukupno = float.Parse(data.Rows[0]["Dodaci_Ukupno"].ToString());
             }
             catch
             {
@@ -97,5 +98,6 @@ namespace Knjigovodstvo.Payroll
         public float Ukupno_Porez_i_Prirez { get; set; } = 0;
         public float Neto { get; set; } = 0;
         public float Doprinos_Zdravstvo { get; set; } = 0;
+        public float Dodaci_Ukupno { get; set; } = 0;
     }
 }

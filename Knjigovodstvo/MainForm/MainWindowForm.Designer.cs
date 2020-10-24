@@ -61,6 +61,7 @@ namespace Knjigovodstvo.MainForm
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.toolStripMenuItemDodaci = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -155,6 +156,7 @@ namespace Knjigovodstvo.MainForm
             // 
             this.menuPlaca.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuPregledPlace,
+            this.toolStripMenuItemDodaci,
             this.menuObracunPlace});
             this.menuPlaca.Name = "menuPlaca";
             this.menuPlaca.Size = new System.Drawing.Size(47, 20);
@@ -289,6 +291,13 @@ namespace Knjigovodstvo.MainForm
             this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
+            // toolStripMenuItemDodaci
+            // 
+            this.toolStripMenuItemDodaci.Name = "toolStripMenuItemDodaci";
+            this.toolStripMenuItemDodaci.Size = new System.Drawing.Size(159, 22);
+            this.toolStripMenuItemDodaci.Text = "Dodaci na plaću";
+            this.toolStripMenuItemDodaci.Click += new System.EventHandler(this.ShowDialogDodaci);
+            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -341,6 +350,7 @@ namespace Knjigovodstvo.MainForm
         private System.Windows.Forms.ToolStripMenuItem menuIra;
         private System.Windows.Forms.ToolStripMenuItem menuGradovi;
         private System.Windows.Forms.ToolStripMenuItem menuPregledPlace;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDodaci;
     }
 }
 

@@ -101,6 +101,12 @@ namespace Knjigovodstvo.MainForm
             }
         }
 
+        private void ShowDialogDodaci(object sender, EventArgs e)
+        {
+            DodaciUnosForm dialog = new DodaciUnosForm();
+            dialog.ShowDialog();
+        }
+
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.Cascade);
