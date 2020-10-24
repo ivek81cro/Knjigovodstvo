@@ -66,6 +66,7 @@
             this.textBoxDodaci = new System.Windows.Forms.TextBox();
             this.labelDodaci = new System.Windows.Forms.Label();
             this.groupBoxDodaci = new System.Windows.Forms.GroupBox();
+            this.labelPrirezStopa = new System.Windows.Forms.Label();
             this.groupBoxDodaci.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -403,11 +404,21 @@
             this.groupBoxDodaci.TabStop = false;
             this.groupBoxDodaci.Text = "Dodaci na plaću";
             // 
+            // labelPrirezStopa
+            // 
+            this.labelPrirezStopa.AutoSize = true;
+            this.labelPrirezStopa.Location = new System.Drawing.Point(248, 445);
+            this.labelPrirezStopa.Name = "labelPrirezStopa";
+            this.labelPrirezStopa.Size = new System.Drawing.Size(23, 15);
+            this.labelPrirezStopa.TabIndex = 23;
+            this.labelPrirezStopa.Text = "0%";
+            // 
             // PlacaIzracunForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(452, 587);
+            this.Controls.Add(this.labelPrirezStopa);
             this.Controls.Add(this.groupBoxDodaci);
             this.Controls.Add(this.textBoxBrutoRead);
             this.Controls.Add(this.labelBrutoRaed);
@@ -493,5 +504,6 @@
         private System.Windows.Forms.TextBox textBoxDodaci;
         private System.Windows.Forms.Label labelDodaci;
         private System.Windows.Forms.GroupBox groupBoxDodaci;
+        private System.Windows.Forms.Label labelPrirezStopa;
     }
 }

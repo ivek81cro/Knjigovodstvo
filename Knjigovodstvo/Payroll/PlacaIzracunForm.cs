@@ -69,6 +69,7 @@ namespace Knjigovodstvo.Payroll
                     Zaposlenik zaposlenik = new Zaposlenik().GetZaposlenikByOib(_oib);
                     float prirez = float.Parse(new DbDataGet().GetTable(new Grad(), $"Naziv='{zaposlenik.Grad}';").Rows[0]["Prirez"].ToString()) / 100.0f;
                     float iznosBruto = float.Parse(textBoxBruto.Text);
+                    labelPrirezStopa.Text = (prirez*100).ToString() + '%';
                     _placa.Izracun(iznosBruto, prirez, zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
                     _placa.Oib = _oib;
 
