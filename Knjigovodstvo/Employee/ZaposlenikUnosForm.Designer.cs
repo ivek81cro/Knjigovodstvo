@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.labelOib = new System.Windows.Forms.Label();
+            this.labelIme = new System.Windows.Forms.Label();
+            this.labelPrezime = new System.Windows.Forms.Label();
+            this.labelDatumRodenja = new System.Windows.Forms.Label();
+            this.labelAdresa = new System.Windows.Forms.Label();
+            this.labelGrad = new System.Windows.Forms.Label();
+            this.labelDrzava = new System.Windows.Forms.Label();
+            this.labelTelefon = new System.Windows.Forms.Label();
+            this.labelStrucnaSprema = new System.Windows.Forms.Label();
+            this.labelOlaksica = new System.Windows.Forms.Label();
+            this.labelDolazak = new System.Windows.Forms.Label();
+            this.labelOdlazak = new System.Windows.Forms.Label();
             this.dateTimePickerDatumRodenja = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerDatumDolaska = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerDatumOdlaska = new System.Windows.Forms.DateTimePicker();
@@ -56,118 +56,121 @@
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonOdaberiGrad = new System.Windows.Forms.Button();
             this.labelMessage = new System.Windows.Forms.Label();
+            this.checkBoxOdlazak = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
-            // label1
+            // labelOib
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Oib";
+            this.labelOib.AutoSize = true;
+            this.labelOib.Location = new System.Drawing.Point(12, 24);
+            this.labelOib.Name = "labelOib";
+            this.labelOib.Size = new System.Drawing.Size(26, 15);
+            this.labelOib.TabIndex = 0;
+            this.labelOib.Text = "Oib";
             // 
-            // label2
+            // labelIme
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(27, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Ime";
+            this.labelIme.AutoSize = true;
+            this.labelIme.Location = new System.Drawing.Point(12, 63);
+            this.labelIme.Name = "labelIme";
+            this.labelIme.Size = new System.Drawing.Size(27, 15);
+            this.labelIme.TabIndex = 1;
+            this.labelIme.Text = "Ime";
             // 
-            // label3
+            // labelPrezime
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 102);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 15);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Prezime";
+            this.labelPrezime.AutoSize = true;
+            this.labelPrezime.Location = new System.Drawing.Point(12, 102);
+            this.labelPrezime.Name = "labelPrezime";
+            this.labelPrezime.Size = new System.Drawing.Size(49, 15);
+            this.labelPrezime.TabIndex = 1;
+            this.labelPrezime.Text = "Prezime";
             // 
-            // label4
+            // labelDatumRodenja
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 141);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 15);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Datum rođenja";
+            this.labelDatumRodenja.AutoSize = true;
+            this.labelDatumRodenja.Location = new System.Drawing.Point(12, 141);
+            this.labelDatumRodenja.Name = "labelDatumRodenja";
+            this.labelDatumRodenja.Size = new System.Drawing.Size(86, 15);
+            this.labelDatumRodenja.TabIndex = 1;
+            this.labelDatumRodenja.Text = "Datum rođenja";
             // 
-            // label5
+            // labelAdresa
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 180);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 15);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Adresa";
+            this.labelAdresa.AutoSize = true;
+            this.labelAdresa.Location = new System.Drawing.Point(12, 180);
+            this.labelAdresa.Name = "labelAdresa";
+            this.labelAdresa.Size = new System.Drawing.Size(43, 15);
+            this.labelAdresa.TabIndex = 1;
+            this.labelAdresa.Text = "Adresa";
             // 
-            // label6
+            // labelGrad
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 219);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 15);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Grad";
+            this.labelGrad.AutoSize = true;
+            this.labelGrad.Location = new System.Drawing.Point(12, 219);
+            this.labelGrad.Name = "labelGrad";
+            this.labelGrad.Size = new System.Drawing.Size(32, 15);
+            this.labelGrad.TabIndex = 1;
+            this.labelGrad.Text = "Grad";
             // 
-            // label7
+            // labelDrzava
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 258);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 15);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Država";
+            this.labelDrzava.AutoSize = true;
+            this.labelDrzava.Location = new System.Drawing.Point(12, 258);
+            this.labelDrzava.Name = "labelDrzava";
+            this.labelDrzava.Size = new System.Drawing.Size(42, 15);
+            this.labelDrzava.TabIndex = 1;
+            this.labelDrzava.Text = "Država";
             // 
-            // label8
+            // labelTelefon
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 297);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(45, 15);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Telefon";
+            this.labelTelefon.AutoSize = true;
+            this.labelTelefon.Location = new System.Drawing.Point(12, 297);
+            this.labelTelefon.Name = "labelTelefon";
+            this.labelTelefon.Size = new System.Drawing.Size(45, 15);
+            this.labelTelefon.TabIndex = 1;
+            this.labelTelefon.Text = "Telefon";
             // 
-            // label9
+            // labelStrucnaSprema
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 336);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 15);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "Stručna sprema";
+            this.labelStrucnaSprema.AutoSize = true;
+            this.labelStrucnaSprema.Location = new System.Drawing.Point(12, 336);
+            this.labelStrucnaSprema.Name = "labelStrucnaSprema";
+            this.labelStrucnaSprema.Size = new System.Drawing.Size(89, 15);
+            this.labelStrucnaSprema.TabIndex = 1;
+            this.labelStrucnaSprema.Text = "Stručna sprema";
             // 
-            // label10
+            // labelOlaksica
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 375);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(51, 15);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Olakšica";
+            this.labelOlaksica.AutoSize = true;
+            this.labelOlaksica.Location = new System.Drawing.Point(12, 375);
+            this.labelOlaksica.Name = "labelOlaksica";
+            this.labelOlaksica.Size = new System.Drawing.Size(51, 15);
+            this.labelOlaksica.TabIndex = 1;
+            this.labelOlaksica.Text = "Olakšica";
             // 
-            // label11
+            // labelDolazak
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(12, 414);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(86, 15);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "Datum dolaska";
+            this.labelDolazak.AutoSize = true;
+            this.labelDolazak.Location = new System.Drawing.Point(12, 414);
+            this.labelDolazak.Name = "labelDolazak";
+            this.labelDolazak.Size = new System.Drawing.Size(86, 15);
+            this.labelDolazak.TabIndex = 1;
+            this.labelDolazak.Text = "Datum dolaska";
             // 
-            // label12
+            // labelOdlazak
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 453);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(86, 15);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "Datum odlaska";
+            this.labelOdlazak.AutoSize = true;
+            this.labelOdlazak.Location = new System.Drawing.Point(12, 453);
+            this.labelOdlazak.Name = "labelOdlazak";
+            this.labelOdlazak.Size = new System.Drawing.Size(86, 15);
+            this.labelOdlazak.TabIndex = 1;
+            this.labelOdlazak.Text = "Datum odlaska";
+            this.labelOdlazak.Visible = false;
             // 
             // dateTimePickerDatumRodenja
             // 
+            this.dateTimePickerDatumRodenja.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePickerDatumRodenja.Location = new System.Drawing.Point(117, 141);
             this.dateTimePickerDatumRodenja.Name = "dateTimePickerDatumRodenja";
             this.dateTimePickerDatumRodenja.Size = new System.Drawing.Size(228, 23);
@@ -175,6 +178,7 @@
             // 
             // dateTimePickerDatumDolaska
             // 
+            this.dateTimePickerDatumDolaska.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePickerDatumDolaska.Location = new System.Drawing.Point(117, 408);
             this.dateTimePickerDatumDolaska.Name = "dateTimePickerDatumDolaska";
             this.dateTimePickerDatumDolaska.Size = new System.Drawing.Size(228, 23);
@@ -182,10 +186,12 @@
             // 
             // dateTimePickerDatumOdlaska
             // 
+            this.dateTimePickerDatumOdlaska.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePickerDatumOdlaska.Location = new System.Drawing.Point(117, 447);
             this.dateTimePickerDatumOdlaska.Name = "dateTimePickerDatumOdlaska";
             this.dateTimePickerDatumOdlaska.Size = new System.Drawing.Size(228, 23);
             this.dateTimePickerDatumOdlaska.TabIndex = 10;
+            this.dateTimePickerDatumOdlaska.Visible = false;
             // 
             // textBoxOib
             // 
@@ -230,6 +236,7 @@
             this.textBoxDrzava.ReadOnly = true;
             this.textBoxDrzava.Size = new System.Drawing.Size(228, 23);
             this.textBoxDrzava.TabIndex = 5;
+            this.textBoxDrzava.Text = "Hrvatska";
             // 
             // textBoxTelefon
             // 
@@ -291,11 +298,23 @@
             this.labelMessage.TabIndex = 9;
             this.labelMessage.Text = "LabelMessage";
             // 
+            // checkBoxOdlazak
+            // 
+            this.checkBoxOdlazak.AutoSize = true;
+            this.checkBoxOdlazak.Location = new System.Drawing.Point(351, 413);
+            this.checkBoxOdlazak.Name = "checkBoxOdlazak";
+            this.checkBoxOdlazak.Size = new System.Drawing.Size(68, 19);
+            this.checkBoxOdlazak.TabIndex = 13;
+            this.checkBoxOdlazak.Text = "Odlazak";
+            this.checkBoxOdlazak.UseVisualStyleBackColor = true;
+            this.checkBoxOdlazak.CheckedChanged += new System.EventHandler(this.CheckBoxOdlazak_CheckedChanged);
+            // 
             // ZaposlenikUnosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(448, 628);
+            this.Controls.Add(this.checkBoxOdlazak);
             this.Controls.Add(this.labelMessage);
             this.Controls.Add(this.buttonOdaberiGrad);
             this.Controls.Add(this.buttonClose);
@@ -312,18 +331,18 @@
             this.Controls.Add(this.dateTimePickerDatumOdlaska);
             this.Controls.Add(this.dateTimePickerDatumDolaska);
             this.Controls.Add(this.dateTimePickerDatumRodenja);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelOdlazak);
+            this.Controls.Add(this.labelDolazak);
+            this.Controls.Add(this.labelOlaksica);
+            this.Controls.Add(this.labelStrucnaSprema);
+            this.Controls.Add(this.labelTelefon);
+            this.Controls.Add(this.labelDrzava);
+            this.Controls.Add(this.labelGrad);
+            this.Controls.Add(this.labelAdresa);
+            this.Controls.Add(this.labelDatumRodenja);
+            this.Controls.Add(this.labelPrezime);
+            this.Controls.Add(this.labelIme);
+            this.Controls.Add(this.labelOib);
             this.Name = "ZaposlenikUnosForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Unos zaposlenika";
@@ -334,18 +353,18 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label labelOib;
+        private System.Windows.Forms.Label labelIme;
+        private System.Windows.Forms.Label labelPrezime;
+        private System.Windows.Forms.Label labelDatumRodenja;
+        private System.Windows.Forms.Label labelAdresa;
+        private System.Windows.Forms.Label labelGrad;
+        private System.Windows.Forms.Label labelDrzava;
+        private System.Windows.Forms.Label labelTelefon;
+        private System.Windows.Forms.Label labelStrucnaSprema;
+        private System.Windows.Forms.Label labelOlaksica;
+        private System.Windows.Forms.Label labelDolazak;
+        private System.Windows.Forms.Label labelOdlazak;
         private System.Windows.Forms.DateTimePicker dateTimePickerDatumRodenja;
         private System.Windows.Forms.DateTimePicker dateTimePickerDatumDolaska;
         private System.Windows.Forms.DateTimePicker dateTimePickerDatumOdlaska;
@@ -362,5 +381,6 @@
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonOdaberiGrad;
         private System.Windows.Forms.Label labelMessage;
+        private System.Windows.Forms.CheckBox checkBoxOdlazak;
     }
 }

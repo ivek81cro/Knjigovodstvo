@@ -21,19 +21,23 @@ namespace Knjigovodstvo.Employee
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            string odlazak = "";
+            if (dateTimePickerDatumOdlaska.Visible == true)
+                odlazak = dateTimePickerDatumOdlaska.Value.ToString("yyyy-MM-dd");
+
             Zaposlenik zaposlenik = new Zaposlenik {
                 Oib = textBoxOib.Text,
                 Ime = textBoxIme.Text,
                 Prezime = textBoxPrezime.Text,
                 Datum_Rodenja = dateTimePickerDatumRodenja.Value.ToString("yyyy-MM-dd"),
                 Adresa = textBoxAdresa.Text,
-                Grad=textBoxGrad.Text,
-                Drzava=textBoxDrzava.Text,
-                Telefon=textBoxTelefon.Text,
-                Stručna_Sprema=textBoxStrucnaSprema.Text,
+                Grad = textBoxGrad.Text,
+                Drzava = textBoxDrzava.Text,
+                Telefon = textBoxTelefon.Text,
+                Stručna_Sprema = textBoxStrucnaSprema.Text,
                 Olaksica = float.Parse(textBoxOlaksica.Text),
-                Datum_Dolaska=dateTimePickerDatumDolaska.Value.ToString("yyyy-MM-dd"),
-                Datum_Odlaska=dateTimePickerDatumOdlaska.Value.ToString("yyyy-MM-dd")
+                Datum_Dolaska = dateTimePickerDatumDolaska.Value.ToString("yyyy-MM-dd"),
+                Datum_Odlaska = odlazak
             };
 
             FormError validateResult = zaposlenik.ValidateData();
@@ -71,7 +75,17 @@ namespace Knjigovodstvo.Employee
             textBoxStrucnaSprema.Text = zaposlenik.Stručna_Sprema;
             textBoxOlaksica.Text = zaposlenik.Olaksica.ToString();
             dateTimePickerDatumDolaska.Text = zaposlenik.Datum_Dolaska;
-            dateTimePickerDatumOdlaska.Text = zaposlenik.Datum_Odlaska;
+            if (zaposlenik.Datum_Odlaska == "")
+            {
+                dateTimePickerDatumOdlaska.Visible = false;
+                labelOdlazak.Visible = false;
+            }
+            else
+            {
+                dateTimePickerDatumOdlaska.Visible = true;
+                labelOdlazak.Visible = true;
+                dateTimePickerDatumOdlaska.Text = zaposlenik.Datum_Odlaska;
+            }
 
             _editMode = true;
 
@@ -94,5 +108,19 @@ namespace Knjigovodstvo.Employee
 
         bool _editMode = false;
         int _id = 0;
+
+        private void CheckBoxOdlazak_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxOdlazak.Checked)
+            {
+                dateTimePickerDatumOdlaska.Visible = true;
+                labelOdlazak.Visible = true;
+            }
+            else
+            {
+                dateTimePickerDatumOdlaska.Visible = false;
+                labelOdlazak.Visible = false;
+            }
+        }
     }
 }
