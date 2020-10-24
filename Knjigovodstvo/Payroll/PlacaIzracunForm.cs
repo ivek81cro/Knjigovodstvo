@@ -28,14 +28,15 @@ namespace Knjigovodstvo.Payroll
         private void InitPrivateMembers()
         {
             string selected = this.comboBoxZaposlenik.GetItemText(this.comboBoxZaposlenik.SelectedItem);
-            _oib = selected.Split(' ')[0];
-            if (_placa.GetPlacaByOib(_oib).Oib != "0")
+            string oib = selected.Split(' ')[0];
+            _zaposlenik = _zaposlenik.GetZaposlenikByOib(oib);
+            if (_placa.GetPlacaByOib(_zaposlenik.Oib).Oib != "0")
                 PopuniKontrole(_placa);
         }
 
         private void FillComboBox()
         {
-            DataTable dt = new DbDataGet().GetTable(new Zaposlenik());
+            DataTable dt = new DbDataGet().GetTable(_zaposlenik);
             dt.Columns.Add(
                 "Ime i prezime", 
                 typeof(string),
@@ -66,12 +67,11 @@ namespace Knjigovodstvo.Payroll
             {
                 if (comboBoxZaposlenik.SelectedItem != null)
                 {
-                    Zaposlenik zaposlenik = new Zaposlenik().GetZaposlenikByOib(_oib);
-                    float prirez = float.Parse(new DbDataGet().GetTable(new Grad(), $"Naziv='{zaposlenik.Grad}';").Rows[0]["Prirez"].ToString()) / 100.0f;
+                    float prirez = float.Parse(new DbDataGet().GetTable(new Grad(), $"Naziv='{_zaposlenik.Grad}';").Rows[0]["Prirez"].ToString()) / 100.0f;
                     float iznosBruto = float.Parse(textBoxBruto.Text);
                     labelPrirezStopa.Text = (prirez*100).ToString() + '%';
-                    _placa.Izracun(iznosBruto, prirez, zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
-                    _placa.Oib = _oib;
+                    _placa.Izracun(iznosBruto, prirez, _zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
+                    _placa.Oib = _zaposlenik.Oib;
 
                     PopuniKontrole(_placa);
                 }
@@ -95,7 +95,7 @@ namespace Knjigovodstvo.Payroll
         {
             if (comboBoxZaposlenik.SelectedItem != null && _placa.Oib != "" && _placa.Oib != "0")
             {
-                if (new Placa().GetPlacaByOib(_oib).Oib == "0")
+                if (new Placa().GetPlacaByOib(_zaposlenik.Oib).Oib == "0")
                 {
                     if (new DbDataInsert().InsertData(_placa))
                     {
@@ -136,8 +136,7 @@ namespace Knjigovodstvo.Payroll
         {
             if (comboBoxZaposlenik.SelectedItem != null)
             {
-                Zaposlenik zaposlenik = new Zaposlenik().GetZaposlenikByOib(_oib);
-                DodaciUnosForm dodaci = new DodaciUnosForm(zaposlenik, _placa);
+                DodaciUnosForm dodaci = new DodaciUnosForm(_zaposlenik, _placa);
                 _placa= dodaci.ShowDialogValue();
                 dodaci.FormClosing += new FormClosingEventHandler(this.DodaciNew_FormClosing);
             }
@@ -152,7 +151,7 @@ namespace Knjigovodstvo.Payroll
             PopuniKontrole(_placa);
         }
 
-        private string _oib = "";
         private Placa _placa = new Placa();
+        private Zaposlenik _zaposlenik = new Zaposlenik();
     }
 }
