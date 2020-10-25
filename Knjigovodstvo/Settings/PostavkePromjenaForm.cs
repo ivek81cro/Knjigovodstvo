@@ -27,12 +27,16 @@ namespace Knjigovodstvo.Settings
             }
             else
             {
+                float vrijednost = float.Parse(textBoxVrijednost.Text);
+                if (vrijednost > 1)
+                    vrijednost = vrijednost / 100.0f;
+
                 Postavke postavka = new Postavke
-                {
+                {                    
                     Id = _id,
                     Naziv = textBoxNaziv.Text,
                     Vrsta = textBoxVrsta.Text,
-                    Vrijednost = float.Parse(textBoxVrijednost.Text)
+                    Vrijednost = vrijednost
                 };
 
                 FormError validateResult = postavka.ValidateData();
@@ -64,6 +68,20 @@ namespace Knjigovodstvo.Settings
             textBoxVrijednost.Text = postavka.Vrijednost.ToString();
 
             ShowDialog();
+        }
+
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
+            {
+                e.Handled = true;
+            }
         }
 
         int _id = 0;

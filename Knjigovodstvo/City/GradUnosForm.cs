@@ -1,5 +1,4 @@
 ﻿using Knjigovodstvo.Code.Validators;
-using Knjigovodstvo.Database;
 using Knjigovodstvo.Models;
 using System;
 using System.Data;
@@ -50,6 +49,7 @@ namespace Knjigovodstvo.City
             int index = comboBoxGrad.FindStringExact(_grad.Naziv);
             comboBoxGrad.SelectedIndex = index;
             FillPrirezSifra();
+            FillComboPosta();
         }
 
         private void ComboBoxCounty_SelectionChangeCommitted(object sender, EventArgs e)
@@ -125,7 +125,7 @@ namespace Knjigovodstvo.City
         internal void EditGrad(Grad grad)
         {
             _id = grad.Id;
-            comboBoxGrad.Text = grad.Naziv;//TODO: NE sprema naziv odabranog grada
+            comboBoxGrad.Text = grad.Naziv;
             comboBoxZupanija.Text = grad.Zupanija;
             comboBoxPosta.Text = grad.Posta;
             textBoxPrirez.Text = grad.Prirez.ToString();

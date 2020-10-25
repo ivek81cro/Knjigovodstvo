@@ -107,6 +107,7 @@
             this.textBoxVrijednost.Name = "textBoxVrijednost";
             this.textBoxVrijednost.Size = new System.Drawing.Size(111, 23);
             this.textBoxVrijednost.TabIndex = 4;
+            this.textBoxVrijednost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // buttonSave
             // 
