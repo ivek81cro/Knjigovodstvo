@@ -18,6 +18,8 @@ namespace Knjigovodstvo.City
                 return FormError.Country;
             if (Posta.Length != 5)
                 return FormError.Post;
+            if (Sifra.Length != 5)
+                return FormError.Sifra;
 
             return FormError.None;
         }

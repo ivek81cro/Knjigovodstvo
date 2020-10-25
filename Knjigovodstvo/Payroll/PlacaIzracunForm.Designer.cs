@@ -72,6 +72,7 @@
             // 
             // comboBoxZaposlenik
             // 
+            this.comboBoxZaposlenik.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxZaposlenik.FormattingEnabled = true;
             this.comboBoxZaposlenik.Location = new System.Drawing.Point(12, 12);
             this.comboBoxZaposlenik.Name = "comboBoxZaposlenik";

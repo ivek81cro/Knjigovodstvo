@@ -26,6 +26,8 @@ namespace Knjigovodstvo.Code.Validators
                     return "Polje ne može ostati prazno";
                 case FormError.NumberFormat:
                     return "Neispravan format unešenog broja";
+                case FormError.Sifra:
+                    return "Neispravan format šifre općine/grada";
                 default:
                     return "";
             }

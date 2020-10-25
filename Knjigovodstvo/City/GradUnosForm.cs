@@ -163,6 +163,15 @@ namespace Knjigovodstvo.City
 
         }
 
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
         private Grad _grad;
         private int _id;
         private bool _editMode;

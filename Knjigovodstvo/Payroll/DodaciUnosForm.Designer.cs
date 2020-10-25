@@ -67,6 +67,7 @@
             // 
             // comboBoxOdabirZaposlenika
             // 
+            this.comboBoxOdabirZaposlenika.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxOdabirZaposlenika.FormattingEnabled = true;
             this.comboBoxOdabirZaposlenika.Location = new System.Drawing.Point(132, 10);
             this.comboBoxOdabirZaposlenika.Name = "comboBoxOdabirZaposlenika";
@@ -85,6 +86,7 @@
             // 
             // comboBoxOdabirDodatka
             // 
+            this.comboBoxOdabirDodatka.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxOdabirDodatka.FormattingEnabled = true;
             this.comboBoxOdabirDodatka.Location = new System.Drawing.Point(132, 45);
             this.comboBoxOdabirDodatka.Name = "comboBoxOdabirDodatka";

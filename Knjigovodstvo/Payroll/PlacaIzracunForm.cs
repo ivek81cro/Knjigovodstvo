@@ -46,7 +46,7 @@ namespace Knjigovodstvo.Payroll
             comboBoxZaposlenik.SelectedItem = null;
             comboBoxZaposlenik.Text = "--Odaberi zaposlenika--";
         }
-
+        //TODO: not needed, refactor
         internal void EditPlaca(Placa placa)
         {
             PopuniKontrole(placa);

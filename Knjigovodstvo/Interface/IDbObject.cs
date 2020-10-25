@@ -13,6 +13,7 @@
         Kupac_Dobavljac,
         Prazno,
         NumberFormat,
+        Sifra,
         None
     }
     /// <summary>

@@ -84,6 +84,7 @@
             // 
             // comboBoxPosta
             // 
+            this.comboBoxPosta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPosta.Location = new System.Drawing.Point(68, 99);
             this.comboBoxPosta.Name = "comboBoxPosta";
             this.comboBoxPosta.Size = new System.Drawing.Size(96, 23);
@@ -130,6 +131,7 @@
             // 
             // comboBoxGrad
             // 
+            this.comboBoxGrad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxGrad.FormattingEnabled = true;
             this.comboBoxGrad.Location = new System.Drawing.Point(68, 70);
             this.comboBoxGrad.Name = "comboBoxGrad";
@@ -154,6 +156,7 @@
             this.textBoxPrirez.Name = "textBoxPrirez";
             this.textBoxPrirez.Size = new System.Drawing.Size(96, 23);
             this.textBoxPrirez.TabIndex = 4;
+            this.textBoxPrirez.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // labelPrirez
             // 
@@ -180,6 +183,7 @@
             this.textBoxSifra.Name = "textBoxSifra";
             this.textBoxSifra.Size = new System.Drawing.Size(96, 23);
             this.textBoxSifra.TabIndex = 4;
+            this.textBoxSifra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // labelSifra
             // 
