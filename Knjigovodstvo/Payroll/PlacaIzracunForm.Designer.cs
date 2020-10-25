@@ -104,6 +104,7 @@
             this.textBoxBruto.Name = "textBoxBruto";
             this.textBoxBruto.Size = new System.Drawing.Size(150, 23);
             this.textBoxBruto.TabIndex = 3;
+            this.textBoxBruto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // checkBoxSamoMio1
             // 

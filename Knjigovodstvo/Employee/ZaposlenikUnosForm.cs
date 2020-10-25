@@ -106,9 +106,6 @@ namespace Knjigovodstvo.Employee
             Close();
         }
 
-        bool _editMode = false;
-        int _id = 0;
-
         private void CheckBoxOdlazak_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxOdlazak.Checked)
@@ -122,5 +119,22 @@ namespace Knjigovodstvo.Employee
                 labelOdlazak.Visible = false;
             }
         }
+
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        bool _editMode = false;
+        int _id = 0;
     }
 }

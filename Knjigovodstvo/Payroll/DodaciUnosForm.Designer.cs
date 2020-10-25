@@ -109,6 +109,7 @@
             this.textBoxIznos.Name = "textBoxIznos";
             this.textBoxIznos.Size = new System.Drawing.Size(192, 23);
             this.textBoxIznos.TabIndex = 6;
+            this.textBoxIznos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // buttonSave
             // 
