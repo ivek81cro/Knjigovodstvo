@@ -41,7 +41,7 @@
             // labelRazdoblje
             // 
             this.labelRazdoblje.AutoSize = true;
-            this.labelRazdoblje.Location = new System.Drawing.Point(12, 9);
+            this.labelRazdoblje.Location = new System.Drawing.Point(12, 23);
             this.labelRazdoblje.Name = "labelRazdoblje";
             this.labelRazdoblje.Size = new System.Drawing.Size(152, 15);
             this.labelRazdoblje.TabIndex = 0;
@@ -58,7 +58,7 @@
             // labelDatumOd
             // 
             this.labelDatumOd.AutoSize = true;
-            this.labelDatumOd.Location = new System.Drawing.Point(12, 47);
+            this.labelDatumOd.Location = new System.Drawing.Point(12, 45);
             this.labelDatumOd.Name = "labelDatumOd";
             this.labelDatumOd.Size = new System.Drawing.Size(23, 15);
             this.labelDatumOd.TabIndex = 2;
@@ -67,7 +67,7 @@
             // dateTimePickerDatumDo
             // 
             this.dateTimePickerDatumDo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerDatumDo.Location = new System.Drawing.Point(166, 41);
+            this.dateTimePickerDatumDo.Location = new System.Drawing.Point(161, 41);
             this.dateTimePickerDatumDo.Name = "dateTimePickerDatumDo";
             this.dateTimePickerDatumDo.Size = new System.Drawing.Size(91, 23);
             this.dateTimePickerDatumDo.TabIndex = 1;
@@ -75,7 +75,7 @@
             // labelDatumDo
             // 
             this.labelDatumDo.AutoSize = true;
-            this.labelDatumDo.Location = new System.Drawing.Point(142, 47);
+            this.labelDatumDo.Location = new System.Drawing.Point(137, 45);
             this.labelDatumDo.Name = "labelDatumDo";
             this.labelDatumDo.Size = new System.Drawing.Size(22, 15);
             this.labelDatumDo.TabIndex = 2;
@@ -89,6 +89,7 @@
             this.buttonObracunajSve.TabIndex = 3;
             this.buttonObracunajSve.Text = "Obračunaj Sve";
             this.buttonObracunajSve.UseVisualStyleBackColor = true;
+            this.buttonObracunajSve.Click += new System.EventHandler(this.buttonObracunajSve_Click);
             // 
             // dataGridView1
             // 

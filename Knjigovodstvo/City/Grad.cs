@@ -29,9 +29,8 @@ namespace Knjigovodstvo.City
         /// </summary>
         /// <returns>List of City</returns>
         public List<Grad> GetAllGrad()
-        {
-            DbDataGet data = new DbDataGet();
-            DataTable dt = data.GetTable(new Grad());
+        {            
+            DataTable dt = new DbDataGet().GetTable(new Grad());
             List<DataRow> rows = dt.AsEnumerable().ToList();
             List<Grad> cityList = new List<Grad>();
             cityList = (from DataRow dr in rows
