@@ -1,4 +1,5 @@
 ﻿using Knjigovodstvo.Code.Validators;
+using Knjigovodstvo.Database;
 using Knjigovodstvo.Models;
 using System;
 using System.Data;
@@ -12,23 +13,13 @@ namespace Knjigovodstvo.City
         public GradUnosForm(Grad grad = null)
         {
             InitializeComponent();
+            _grad = grad;
             FillComboCounty();
             labelUpozorenja.Text = "";
-            _grad = grad;
             if (_grad != null)
             {
-                SetControls();
+                FillComboCity();
             }
-        }
-
-        private void SetControls()
-        {
-            int index = comboBoxZupanija.FindStringExact(_grad.Zupanija);
-            comboBoxZupanija.SelectedIndex = index;
-            index = comboBoxGrad.FindStringExact(_grad.Naziv);
-            comboBoxGrad.SelectedIndex = index;
-            textBoxPrirez.Text = _grad.Prirez.ToString();
-            textBoxSifra.Text = _grad.Sifra;
         }
 
         void FillComboCounty()
@@ -41,6 +32,8 @@ namespace Knjigovodstvo.City
                 comboBoxZupanija.DisplayMember = "Naziv";
                 comboBoxZupanija.ValueMember = "Id";
             }
+            int index = comboBoxZupanija.FindStringExact(_grad.Zupanija);
+            comboBoxZupanija.SelectedIndex = index;
         }
 
         void FillComboCity()
@@ -54,16 +47,27 @@ namespace Knjigovodstvo.City
                 comboBoxGrad.DisplayMember = "Naziv";
                 comboBoxGrad.ValueMember = "Id";
             }
+            int index = comboBoxGrad.FindStringExact(_grad.Naziv);
+            comboBoxGrad.SelectedIndex = index;
+            FillPrirezSifra();
         }
 
-        private void ComboBoxCounty_SelectedValueChanged(object sender, EventArgs e)
+        private void ComboBoxCounty_SelectionChangeCommitted(object sender, EventArgs e)
         {
             FillComboCity();
         }
 
-        private void comboBoxGrad_SelectedValueChanged(object sender, EventArgs e)
+        private void comboBoxGrad_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            _grad = _grad.GetGradById(int.Parse(comboBoxGrad.SelectedValue.ToString()));
+            FillPrirezSifra();
             FillComboPosta();
+        }
+
+        private void FillPrirezSifra()
+        {
+            textBoxPrirez.Text = _grad.Prirez.ToString();
+            textBoxSifra.Text = _grad.Sifra;
         }
 
         private void FillComboPosta()
@@ -79,23 +83,8 @@ namespace Knjigovodstvo.City
             }
         }
 
-        private void BtnClose_Click(object sender, EventArgs e)
+        private void BtnOdaberi_Click(object sender, EventArgs e)
         {
-            _grad = new Grad()
-            {
-                Drzava = textBoxDrzava.Text,
-                Zupanija = comboBoxZupanija.Text,
-                Naziv = comboBoxGrad.Text,
-                Posta = comboBoxPosta.Text,
-                Sifra = textBoxSifra.Text
-            };
-
-            FormError validateResult = _grad.ValidateData();
-            if (validateResult != FormError.None)
-            {
-                labelUpozorenja.Text = new ProcessFormErrors().FormErrorMessage(validateResult);
-                return;
-            }
             Close();
         }
 
@@ -112,26 +101,16 @@ namespace Knjigovodstvo.City
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            Grad grad = new Grad
-            {
-                Naziv = comboBoxGrad.Text,
-                Zupanija = comboBoxZupanija.Text,
-                Posta = comboBoxPosta.Text,
-                Prirez = float.Parse(textBoxPrirez.Text),
-                Drzava = textBoxDrzava.Text,
-                Sifra = textBoxSifra.Text
-            };
-
-            FormError validateResult = grad.ValidateData();
+            FormError validateResult = _grad.ValidateData();
             if (validateResult == FormError.None)
             {
-                if (!_editMode && grad.InsertNew())
+                if (!_editMode && _grad.InsertNew())
                 {
                     MessageBox.Show("Unos uspješan.", "Novi partner unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
                 }
 
-                if (_editMode && grad.UpdateData(_id))
+                if (_editMode && _grad.UpdateData(_id))
                 {
                     MessageBox.Show("Izmjena uspješna.", "Izmjena podataka partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();

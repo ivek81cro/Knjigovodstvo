@@ -35,7 +35,7 @@
             this.comboBoxPosta = new System.Windows.Forms.ComboBox();
             this.textBoxDrzava = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
+            this.btnOdaberi = new System.Windows.Forms.Button();
             this.comboBoxZupanija = new System.Windows.Forms.ComboBox();
             this.comboBoxGrad = new System.Windows.Forms.ComboBox();
             this.labelUpozorenja = new System.Windows.Forms.Label();
@@ -109,15 +109,15 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
-            // btnClose
+            // btnOdaberi
             // 
-            this.btnClose.Location = new System.Drawing.Point(268, 239);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 6;
-            this.btnClose.Text = "Odaberi";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
+            this.btnOdaberi.Location = new System.Drawing.Point(268, 239);
+            this.btnOdaberi.Name = "btnOdaberi";
+            this.btnOdaberi.Size = new System.Drawing.Size(75, 23);
+            this.btnOdaberi.TabIndex = 6;
+            this.btnOdaberi.Text = "Odaberi";
+            this.btnOdaberi.UseVisualStyleBackColor = true;
+            this.btnOdaberi.Click += new System.EventHandler(this.BtnOdaberi_Click);
             // 
             // comboBoxZupanija
             // 
@@ -127,7 +127,7 @@
             this.comboBoxZupanija.Name = "comboBoxZupanija";
             this.comboBoxZupanija.Size = new System.Drawing.Size(240, 23);
             this.comboBoxZupanija.TabIndex = 1;
-            this.comboBoxZupanija.SelectedValueChanged += new System.EventHandler(this.ComboBoxCounty_SelectedValueChanged);
+            this.comboBoxZupanija.SelectionChangeCommitted += new System.EventHandler(this.ComboBoxCounty_SelectionChangeCommitted);
             // 
             // comboBoxGrad
             // 
@@ -137,7 +137,7 @@
             this.comboBoxGrad.Name = "comboBoxGrad";
             this.comboBoxGrad.Size = new System.Drawing.Size(240, 23);
             this.comboBoxGrad.TabIndex = 2;
-            this.comboBoxGrad.SelectedValueChanged += new System.EventHandler(this.comboBoxGrad_SelectedValueChanged);
+            this.comboBoxGrad.SelectionChangeCommitted += new System.EventHandler(this.comboBoxGrad_SelectionChangeCommitted);
             // 
             // labelUpozorenja
             // 
@@ -207,7 +207,7 @@
             this.Controls.Add(this.labelUpozorenja);
             this.Controls.Add(this.comboBoxGrad);
             this.Controls.Add(this.comboBoxZupanija);
-            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnOdaberi);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.textBoxDrzava);
             this.Controls.Add(this.comboBoxPosta);
@@ -233,7 +233,7 @@
         private System.Windows.Forms.ComboBox comboBoxPosta;
         private System.Windows.Forms.TextBox textBoxDrzava;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnOdaberi;
         private System.Windows.Forms.ComboBox comboBoxZupanija;
         private System.Windows.Forms.ComboBox comboBoxGrad;
         private System.Windows.Forms.Label labelUpozorenja;
