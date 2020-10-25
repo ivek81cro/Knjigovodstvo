@@ -101,6 +101,20 @@ namespace Knjigovodstvo.MainForm
             }
         }
 
+        private void ShowNewFormObracunPlaca(object sender, EventArgs e)
+        {
+            string formName = ChildWindowName.PlacaObracunForm.ToString();
+            if (_isOpen.Check(MdiChildren, formName))
+            {
+                Form f = _isOpen.GetChild(MdiChildren, formName);
+                f.Focus();
+            }
+            else
+            {
+                _openForm.Open(new PlacaObracunForm(), this);
+            }
+        }
+
         private void ShowDialogDodaci(object sender, EventArgs e)
         {
             DodaciUnosForm dialog = new DodaciUnosForm();

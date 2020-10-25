@@ -174,6 +174,7 @@ namespace Knjigovodstvo.MainForm
             this.menuObracunPlace.Name = "menuObracunPlace";
             this.menuObracunPlace.Size = new System.Drawing.Size(151, 22);
             this.menuObracunPlace.Text = "Obračun Plaće";
+            this.menuObracunPlace.Click += new System.EventHandler(this.ShowNewFormObracunPlaca);
             // 
             // toolsMenu
             // 

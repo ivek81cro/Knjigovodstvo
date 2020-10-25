@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Knjigovodstvo.MainForm
 {
@@ -13,6 +10,7 @@ namespace Knjigovodstvo.MainForm
         PartneriTableForm,
         GradoviTableForm,
         PlacaTableForm,
+        PlacaObracunForm
     }
     public class IsChildOpen
     {

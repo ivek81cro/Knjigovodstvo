@@ -10,6 +10,6 @@
         public string Razdoblje_Od { get; set; }
         public string Razdoblje_Do { get; set; }
 
-        private Placa _placa = new Placa();
+        private readonly Placa _placa = new Placa();
     }
 }
