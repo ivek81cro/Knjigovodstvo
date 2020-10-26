@@ -55,20 +55,15 @@ namespace Knjigovodstvo.Database
 
         private string CreateQuery(ProcedureNames name)
         {
-            switch (name) {
-                case ProcedureNames.Dohvati_Distinct_Datum:
-                    return "Dohvati_Distinct_Datum";
-                case ProcedureNames.DropPlacaPregled:
-                    return "DropPlacaPregled";
-                case ProcedureNames.PlacaPregled:
-                    return "PlacaPregled";
-                case ProcedureNames.Prebaci_postBroj:
-                    return "Prebaci_postBroj";
-                case ProcedureNames.Prebaci_prirez:
-                    return "Prebaci_prirez";
-                default:
-                    return "";
-        }
+            return name switch
+            {
+                ProcedureNames.Dohvati_Distinct_Datum => "Dohvati_Distinct_Datum",
+                ProcedureNames.DropPlacaPregled => "DropPlacaPregled",
+                ProcedureNames.PlacaPregled => "PlacaPregled",
+                ProcedureNames.Prebaci_postBroj => "Prebaci_postBroj",
+                ProcedureNames.Prebaci_prirez => "Prebaci_prirez",
+                _ => "",
+            };
         }
 
         private readonly string connection_name = "KnjigovodstvoDb";

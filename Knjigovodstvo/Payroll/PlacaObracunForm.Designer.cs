@@ -94,7 +94,7 @@
             this.buttonObracunajSve.TabIndex = 3;
             this.buttonObracunajSve.Text = "Obračunaj Sve";
             this.buttonObracunajSve.UseVisualStyleBackColor = true;
-            this.buttonObracunajSve.Click += new System.EventHandler(this.buttonObracunajSve_Click);
+            this.buttonObracunajSve.Click += new System.EventHandler(this.ButtonObracunajSve_Click);
             // 
             // dataGridView1
             // 
@@ -120,7 +120,7 @@
             this.comboBoxFilterDjelatnik.Name = "comboBoxFilterDjelatnik";
             this.comboBoxFilterDjelatnik.Size = new System.Drawing.Size(239, 23);
             this.comboBoxFilterDjelatnik.TabIndex = 5;
-            this.comboBoxFilterDjelatnik.SelectionChangeCommitted += new System.EventHandler(this.comboBoxFilter_SelectionChangeCommitted);
+            this.comboBoxFilterDjelatnik.SelectionChangeCommitted += new System.EventHandler(this.ComboBoxFilter_SelectionChangeCommitted);
             // 
             // labelFilterDjelatnik
             // 
@@ -139,7 +139,7 @@
             this.buttonPonisti.TabIndex = 7;
             this.buttonPonisti.Text = "Poništi Filtere";
             this.buttonPonisti.UseVisualStyleBackColor = true;
-            this.buttonPonisti.Click += new System.EventHandler(this.buttonPonisti_Click);
+            this.buttonPonisti.Click += new System.EventHandler(this.ButtonPonisti_Click);
             // 
             // comboBoxFilterPoMjesecu
             // 
@@ -148,7 +148,7 @@
             this.comboBoxFilterPoMjesecu.Name = "comboBoxFilterPoMjesecu";
             this.comboBoxFilterPoMjesecu.Size = new System.Drawing.Size(125, 23);
             this.comboBoxFilterPoMjesecu.TabIndex = 8;
-            this.comboBoxFilterPoMjesecu.SelectionChangeCommitted += new System.EventHandler(this.comboBoxFilter_SelectionChangeCommitted);
+            this.comboBoxFilterPoMjesecu.SelectionChangeCommitted += new System.EventHandler(this.ComboBoxFilter_SelectionChangeCommitted);
             // 
             // labelFilterMjesec
             // 

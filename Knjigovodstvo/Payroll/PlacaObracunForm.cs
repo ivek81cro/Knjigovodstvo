@@ -120,12 +120,12 @@ namespace Knjigovodstvo.Payroll
             comboBoxFilterPoMjesecu.Text = "--Odaberi mjesec--";
         }
 
-        private void comboBoxFilter_SelectionChangeCommitted(object sender, EventArgs e)
+        private void ComboBoxFilter_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadDatagrid();
         }
 
-        private void buttonPonisti_Click(object sender, EventArgs e)
+        private void ButtonPonisti_Click(object sender, EventArgs e)
         {
             comboBoxFilterDjelatnik.SelectedItem = null;
             comboBoxFilterDjelatnik.Text = "--Odaberi zaposlenika--";
@@ -134,7 +134,7 @@ namespace Knjigovodstvo.Payroll
             LoadDatagrid();
         }
 
-        private void buttonObracunajSve_Click(object sender, EventArgs e)
+        private void ButtonObracunajSve_Click(object sender, EventArgs e)
         {
             _placeObracun = (from Placa placa in _place
                              select new PlacaObracun()

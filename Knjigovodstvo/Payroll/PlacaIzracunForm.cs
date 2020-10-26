@@ -4,6 +4,7 @@ using Knjigovodstvo.Employee;
 using Knjigovodstvo.Validators;
 using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Payroll
@@ -13,13 +14,14 @@ namespace Knjigovodstvo.Payroll
         public PlacaIzracunForm()
         {
             InitializeComponent();
-            FillComboBox();
+            FillComboBoxZaposlenik();
+            FillJoppdCombo();
         }
 
         public PlacaIzracunForm(string oib)
         {
             InitializeComponent();
-            FillComboBox();
+            FillComboBoxZaposlenik();
             int index = comboBoxZaposlenik.FindString(oib);
             comboBoxZaposlenik.SelectedIndex = index;
             InitPrivateMembers();
@@ -34,7 +36,7 @@ namespace Knjigovodstvo.Payroll
                 PopuniKontrole(_placa);
         }
 
-        private void FillComboBox()
+        private void FillComboBoxZaposlenik()
         {
             DataTable dt = new DbDataGet().GetTable(_zaposlenik);
             dt.Columns.Add(
@@ -46,6 +48,60 @@ namespace Knjigovodstvo.Payroll
             comboBoxZaposlenik.SelectedItem = null;
             comboBoxZaposlenik.Text = "--Odaberi zaposlenika--";
         }
+
+        private void FillJoppdCombo()
+        {
+            DbDataGet data = new DbDataGet();
+            //TODO: shorten this and simplify
+            DataTable dt = data.GetTable(new Joppd(), $"Skupina='Stjecatelj';");
+            dt.Columns.Add(
+                "Sifra i opis",
+                typeof(string),
+                "Sifra + '   ' + Opis");
+            comboBoxStjecatelj.DataSource = dt;
+            comboBoxStjecatelj.DisplayMember = "Sifra i Opis";
+
+            dt = data.GetTable(new Joppd(), $"Skupina='Primici';");
+            dt.Columns.Add(
+                "Sifra i opis",
+                typeof(string),
+                "Sifra + '   ' + Opis");
+            comboBoxPrimitak.DataSource = dt;
+            comboBoxPrimitak.DisplayMember = "Sifra i opis";
+
+            dt = data.GetTable(new Joppd(), $"Skupina='Beneficirani';");
+            dt.Columns.Add(
+                "Sifra i opis",
+                typeof(string),
+                "Sifra + '   ' + Opis");
+            comboBoxDodatniMio.DataSource = dt;
+            comboBoxDodatniMio.DisplayMember = "Sifra i opis";
+
+            dt = data.GetTable(new Joppd(), $"Skupina='Invaliditet';");
+            dt.Columns.Add(
+                "Sifra i opis",
+                typeof(string),
+                "Sifra + '   ' + Opis");
+            comboBoxInvaliditet.DataSource = dt;
+            comboBoxInvaliditet.DisplayMember = "Sifra i opis";
+
+            dt = data.GetTable(new Joppd(), $"Skupina='Mjesec';");
+            dt.Columns.Add(
+                "Sifra i opis",
+                typeof(string),
+                "Sifra + '   ' + Opis");
+            comboBoxMjesecPrviZadnji.DataSource = dt;
+            comboBoxMjesecPrviZadnji.DisplayMember = "Sifra i opis";
+
+            dt = data.GetTable(new Joppd(), $"Skupina='Vrijeme';");
+            dt.Columns.Add(
+                "Sifra i opis",
+                typeof(string),
+                "Sifra + '   ' + Opis");
+            comboBoxRadnoVrijeme.DataSource = dt;
+            comboBoxRadnoVrijeme.DisplayMember = "Sifra i opis";
+        }        
+
         //TODO: not needed, refactor
         internal void EditPlaca(Placa placa)
         {
@@ -99,7 +155,7 @@ namespace Knjigovodstvo.Payroll
                 {
                     if (new DbDataInsert().InsertData(_placa))
                     {
-                        FillComboBox();
+                        FillComboBoxZaposlenik();
                         MessageBox.Show("Unos uspješan.", "Novi izračun unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
@@ -107,7 +163,7 @@ namespace Knjigovodstvo.Payroll
                 {
                     if (new DbDataUpdate().UpdateData(_placa))
                     {
-                        FillComboBox();
+                        FillComboBoxZaposlenik();
                         MessageBox.Show("Unos uspješan.", "Izmjena unešena", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
@@ -151,7 +207,7 @@ namespace Knjigovodstvo.Payroll
             PopuniKontrole(_placa);
         }
 
-        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
             {
