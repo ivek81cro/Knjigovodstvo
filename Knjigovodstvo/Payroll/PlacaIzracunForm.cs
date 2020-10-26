@@ -187,7 +187,7 @@ namespace Knjigovodstvo.Payroll
             comboBoxRadnoVrijeme.SelectedValue = zaposlenikJoppd.Vrijeme;
         }
 
-        private void PromjenaZaposlenikJoppd(object sender, EventArgs e)
+        private void PromjenaZaposlenikJoppd_SelectionChangeCommitted(object sender, EventArgs e)
         {
             SetZaposlenikJoppd();
         }

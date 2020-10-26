@@ -70,6 +70,7 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxDodaci = new System.Windows.Forms.GroupBox();
             this.labelPrirezStopa = new System.Windows.Forms.Label();
             this.groupBoxJoppd = new System.Windows.Forms.GroupBox();
+            this.buttonSpremiJoppdPostavke = new System.Windows.Forms.Button();
             this.labelNacinIsplate = new System.Windows.Forms.Label();
             this.comboBoxNacinIsplate = new System.Windows.Forms.ComboBox();
             this.labelPrimitak = new System.Windows.Forms.Label();
@@ -84,7 +85,6 @@ namespace Knjigovodstvo.Payroll
             this.comboBoxDodatniMio = new System.Windows.Forms.ComboBox();
             this.comboBoxPrimitak = new System.Windows.Forms.ComboBox();
             this.comboBoxStjecatelj = new System.Windows.Forms.ComboBox();
-            this.buttonSpremiJoppdPostavke = new System.Windows.Forms.Button();
             this.groupBoxDodaci.SuspendLayout();
             this.groupBoxJoppd.SuspendLayout();
             this.SuspendLayout();
@@ -458,6 +458,16 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxJoppd.TabStop = false;
             this.groupBoxJoppd.Text = "Podaci za JOPPD obrazac";
             // 
+            // buttonSpremiJoppdPostavke
+            // 
+            this.buttonSpremiJoppdPostavke.Location = new System.Drawing.Point(213, 22);
+            this.buttonSpremiJoppdPostavke.Name = "buttonSpremiJoppdPostavke";
+            this.buttonSpremiJoppdPostavke.Size = new System.Drawing.Size(150, 23);
+            this.buttonSpremiJoppdPostavke.TabIndex = 6;
+            this.buttonSpremiJoppdPostavke.Text = "Spremi JOPPD postavke";
+            this.buttonSpremiJoppdPostavke.UseVisualStyleBackColor = true;
+            this.buttonSpremiJoppdPostavke.Click += new System.EventHandler(this.ButtonSpremiJoppdPostavke_Click);
+            // 
             // labelNacinIsplate
             // 
             this.labelNacinIsplate.AutoSize = true;
@@ -466,15 +476,6 @@ namespace Knjigovodstvo.Payroll
             this.labelNacinIsplate.Size = new System.Drawing.Size(75, 15);
             this.labelNacinIsplate.TabIndex = 5;
             this.labelNacinIsplate.Text = "Način isplate";
-            // 
-            // comboBoxNacinIsplate
-            // 
-            this.comboBoxNacinIsplate.DropDownWidth = 800;
-            this.comboBoxNacinIsplate.FormattingEnabled = true;
-            this.comboBoxNacinIsplate.Location = new System.Drawing.Point(6, 45);
-            this.comboBoxNacinIsplate.Name = "comboBoxNacinIsplate";
-            this.comboBoxNacinIsplate.Size = new System.Drawing.Size(121, 23);
-            this.comboBoxNacinIsplate.TabIndex = 0;
             // 
             // labelPrimitak
             // 
@@ -530,75 +531,82 @@ namespace Knjigovodstvo.Payroll
             this.labelOznakaDodatniMio.TabIndex = 1;
             this.labelOznakaDodatniMio.Text = "Oznaka dodatnog doprinosa za Mio";
             // 
+            // comboBoxNacinIsplate
+            // 
+            this.comboBoxNacinIsplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxNacinIsplate.DropDownWidth = 800;
+            this.comboBoxNacinIsplate.FormattingEnabled = true;
+            this.comboBoxNacinIsplate.Location = new System.Drawing.Point(6, 45);
+            this.comboBoxNacinIsplate.Name = "comboBoxNacinIsplate";
+            this.comboBoxNacinIsplate.Size = new System.Drawing.Size(121, 23);
+            this.comboBoxNacinIsplate.TabIndex = 0;
+            this.comboBoxNacinIsplate.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
+            // 
             // comboBoxRadnoVrijeme
             // 
+            this.comboBoxRadnoVrijeme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRadnoVrijeme.DropDownWidth = 800;
             this.comboBoxRadnoVrijeme.FormattingEnabled = true;
             this.comboBoxRadnoVrijeme.Location = new System.Drawing.Point(6, 248);
             this.comboBoxRadnoVrijeme.Name = "comboBoxRadnoVrijeme";
             this.comboBoxRadnoVrijeme.Size = new System.Drawing.Size(121, 23);
             this.comboBoxRadnoVrijeme.TabIndex = 0;
-            this.comboBoxRadnoVrijeme.SelectedValueChanged += new System.EventHandler(PromjenaZaposlenikJoppd);
+            this.comboBoxRadnoVrijeme.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
             // 
             // comboBoxMjesecPrviZadnji
             // 
+            this.comboBoxMjesecPrviZadnji.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMjesecPrviZadnji.DropDownWidth = 800;
             this.comboBoxMjesecPrviZadnji.FormattingEnabled = true;
             this.comboBoxMjesecPrviZadnji.Location = new System.Drawing.Point(6, 214);
             this.comboBoxMjesecPrviZadnji.Name = "comboBoxMjesecPrviZadnji";
             this.comboBoxMjesecPrviZadnji.Size = new System.Drawing.Size(121, 23);
             this.comboBoxMjesecPrviZadnji.TabIndex = 0;
-            this.comboBoxMjesecPrviZadnji.SelectedValueChanged += new System.EventHandler(PromjenaZaposlenikJoppd);
+            this.comboBoxMjesecPrviZadnji.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
             // 
             // comboBoxInvaliditet
             // 
+            this.comboBoxInvaliditet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxInvaliditet.DropDownWidth = 800;
             this.comboBoxInvaliditet.FormattingEnabled = true;
             this.comboBoxInvaliditet.Location = new System.Drawing.Point(6, 180);
             this.comboBoxInvaliditet.Name = "comboBoxInvaliditet";
             this.comboBoxInvaliditet.Size = new System.Drawing.Size(121, 23);
             this.comboBoxInvaliditet.TabIndex = 0;
-            this.comboBoxInvaliditet.SelectedValueChanged += new System.EventHandler(PromjenaZaposlenikJoppd);
+            this.comboBoxInvaliditet.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
             // 
             // comboBoxDodatniMio
             // 
+            this.comboBoxDodatniMio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDodatniMio.DropDownWidth = 800;
             this.comboBoxDodatniMio.FormattingEnabled = true;
             this.comboBoxDodatniMio.Location = new System.Drawing.Point(6, 146);
             this.comboBoxDodatniMio.Name = "comboBoxDodatniMio";
             this.comboBoxDodatniMio.Size = new System.Drawing.Size(121, 23);
             this.comboBoxDodatniMio.TabIndex = 0;
-            this.comboBoxDodatniMio.SelectedValueChanged += new System.EventHandler(PromjenaZaposlenikJoppd);
+            this.comboBoxDodatniMio.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
             // 
             // comboBoxPrimitak
             // 
+            this.comboBoxPrimitak.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPrimitak.DropDownWidth = 800;
             this.comboBoxPrimitak.FormattingEnabled = true;
             this.comboBoxPrimitak.Location = new System.Drawing.Point(6, 112);
             this.comboBoxPrimitak.Name = "comboBoxPrimitak";
             this.comboBoxPrimitak.Size = new System.Drawing.Size(121, 23);
             this.comboBoxPrimitak.TabIndex = 0;
-            this.comboBoxPrimitak.SelectedValueChanged += new System.EventHandler(PromjenaZaposlenikJoppd);
+            this.comboBoxPrimitak.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
             // 
             // comboBoxStjecatelj
             // 
+            this.comboBoxStjecatelj.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxStjecatelj.DropDownWidth = 800;
             this.comboBoxStjecatelj.FormattingEnabled = true;
             this.comboBoxStjecatelj.Location = new System.Drawing.Point(6, 78);
             this.comboBoxStjecatelj.Name = "comboBoxStjecatelj";
             this.comboBoxStjecatelj.Size = new System.Drawing.Size(121, 23);
             this.comboBoxStjecatelj.TabIndex = 0;
-            this.comboBoxStjecatelj.SelectedValueChanged += new System.EventHandler(PromjenaZaposlenikJoppd);
-            // 
-            // buttonSpremiJoppdPostavke
-            // 
-            this.buttonSpremiJoppdPostavke.Location = new System.Drawing.Point(213, 22);
-            this.buttonSpremiJoppdPostavke.Name = "buttonSpremiJoppdPostavke";
-            this.buttonSpremiJoppdPostavke.Size = new System.Drawing.Size(150, 23);
-            this.buttonSpremiJoppdPostavke.TabIndex = 6;
-            this.buttonSpremiJoppdPostavke.Text = "Spremi JOPPD postavke";
-            this.buttonSpremiJoppdPostavke.UseVisualStyleBackColor = true;
-            this.buttonSpremiJoppdPostavke.Click += new System.EventHandler(this.ButtonSpremiJoppdPostavke_Click);
+            this.comboBoxStjecatelj.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
             // 
             // PlacaIzracunForm
             // 
