@@ -67,7 +67,21 @@
             this.labelDodaci = new System.Windows.Forms.Label();
             this.groupBoxDodaci = new System.Windows.Forms.GroupBox();
             this.labelPrirezStopa = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.labelOznakaDodatniMio = new System.Windows.Forms.Label();
+            this.labelInvaliditet = new System.Windows.Forms.Label();
+            this.labelPrviZadnjiMjesec = new System.Windows.Forms.Label();
+            this.labelRadnoVrijeme = new System.Windows.Forms.Label();
+            this.labelStjecatelj = new System.Windows.Forms.Label();
+            this.labelPrimitak = new System.Windows.Forms.Label();
             this.groupBoxDodaci.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxZaposlenik
@@ -332,7 +346,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(281, 552);
+            this.buttonSave.Location = new System.Drawing.Point(418, 609);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 18;
@@ -342,7 +356,7 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(365, 552);
+            this.buttonClose.Location = new System.Drawing.Point(499, 609);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 19;
@@ -399,9 +413,9 @@
             this.groupBoxDodaci.Controls.Add(this.textBoxDodaci);
             this.groupBoxDodaci.Controls.Add(this.labelDodaci);
             this.groupBoxDodaci.Controls.Add(this.buttonDodaci);
-            this.groupBoxDodaci.Location = new System.Drawing.Point(279, 149);
+            this.groupBoxDodaci.Location = new System.Drawing.Point(297, 149);
             this.groupBoxDodaci.Name = "groupBoxDodaci";
-            this.groupBoxDodaci.Size = new System.Drawing.Size(161, 163);
+            this.groupBoxDodaci.Size = new System.Drawing.Size(369, 146);
             this.groupBoxDodaci.TabIndex = 22;
             this.groupBoxDodaci.TabStop = false;
             this.groupBoxDodaci.Text = "Dodaci na plaću";
@@ -415,11 +429,135 @@
             this.labelPrirezStopa.TabIndex = 23;
             this.labelPrirezStopa.Text = "0%";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.labelPrimitak);
+            this.groupBox1.Controls.Add(this.labelStjecatelj);
+            this.groupBox1.Controls.Add(this.labelRadnoVrijeme);
+            this.groupBox1.Controls.Add(this.labelPrviZadnjiMjesec);
+            this.groupBox1.Controls.Add(this.labelInvaliditet);
+            this.groupBox1.Controls.Add(this.labelOznakaDodatniMio);
+            this.groupBox1.Controls.Add(this.comboBox6);
+            this.groupBox1.Controls.Add(this.comboBox5);
+            this.groupBox1.Controls.Add(this.comboBox4);
+            this.groupBox1.Controls.Add(this.comboBox3);
+            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Location = new System.Drawing.Point(297, 301);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(369, 263);
+            this.groupBox1.TabIndex = 22;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Podaci za JOPPD obrazac";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(6, 45);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 23);
+            this.comboBox1.TabIndex = 0;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(6, 79);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 23);
+            this.comboBox2.TabIndex = 0;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(6, 113);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(121, 23);
+            this.comboBox3.TabIndex = 0;
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(6, 147);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(121, 23);
+            this.comboBox4.TabIndex = 0;
+            // 
+            // comboBox5
+            // 
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(6, 181);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(121, 23);
+            this.comboBox5.TabIndex = 0;
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(6, 215);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(121, 23);
+            this.comboBox6.TabIndex = 0;
+            // 
+            // labelOznakaDodatniMio
+            // 
+            this.labelOznakaDodatniMio.AutoSize = true;
+            this.labelOznakaDodatniMio.Location = new System.Drawing.Point(133, 116);
+            this.labelOznakaDodatniMio.Name = "labelOznakaDodatniMio";
+            this.labelOznakaDodatniMio.Size = new System.Drawing.Size(195, 15);
+            this.labelOznakaDodatniMio.TabIndex = 1;
+            this.labelOznakaDodatniMio.Text = "Oznaka dodatnog doprinosa za Mio";
+            // 
+            // labelInvaliditet
+            // 
+            this.labelInvaliditet.AutoSize = true;
+            this.labelInvaliditet.Location = new System.Drawing.Point(133, 143);
+            this.labelInvaliditet.Name = "labelInvaliditet";
+            this.labelInvaliditet.Size = new System.Drawing.Size(227, 30);
+            this.labelInvaliditet.TabIndex = 2;
+            this.labelInvaliditet.Text = "Oznaka posebnog doprinosa za poticanje \r\nzapošljavanja osoba sa invaliditetom";
+            // 
+            // labelPrviZadnjiMjesec
+            // 
+            this.labelPrviZadnjiMjesec.AutoSize = true;
+            this.labelPrviZadnjiMjesec.Location = new System.Drawing.Point(133, 179);
+            this.labelPrviZadnjiMjesec.Name = "labelPrviZadnjiMjesec";
+            this.labelPrviZadnjiMjesec.Size = new System.Drawing.Size(216, 30);
+            this.labelPrviZadnjiMjesec.TabIndex = 3;
+            this.labelPrviZadnjiMjesec.Text = "Oznaka prvog/zadnjeg mjeseca u obv. \r\nmirovinskom osiguranju po istoj osnovi";
+            // 
+            // labelRadnoVrijeme
+            // 
+            this.labelRadnoVrijeme.AutoSize = true;
+            this.labelRadnoVrijeme.Location = new System.Drawing.Point(133, 212);
+            this.labelRadnoVrijeme.Name = "labelRadnoVrijeme";
+            this.labelRadnoVrijeme.Size = new System.Drawing.Size(192, 30);
+            this.labelRadnoVrijeme.TabIndex = 4;
+            this.labelRadnoVrijeme.Text = "Oznaka punog, nepunog, polovice \r\nradnog vremena";
+            // 
+            // labelStjecatelj
+            // 
+            this.labelStjecatelj.AutoSize = true;
+            this.labelStjecatelj.Location = new System.Drawing.Point(133, 50);
+            this.labelStjecatelj.Name = "labelStjecatelj";
+            this.labelStjecatelj.Size = new System.Drawing.Size(101, 15);
+            this.labelStjecatelj.TabIndex = 5;
+            this.labelStjecatelj.Text = "Oznaka stjecatelja";
+            // 
+            // labelPrimitak
+            // 
+            this.labelPrimitak.AutoSize = true;
+            this.labelPrimitak.Location = new System.Drawing.Point(133, 82);
+            this.labelPrimitak.Name = "labelPrimitak";
+            this.labelPrimitak.Size = new System.Drawing.Size(93, 15);
+            this.labelPrimitak.TabIndex = 5;
+            this.labelPrimitak.Text = "Oznaka Primitka";
+            // 
             // PlacaIzracunForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 587);
+            this.ClientSize = new System.Drawing.Size(678, 644);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.labelPrirezStopa);
             this.Controls.Add(this.groupBoxDodaci);
             this.Controls.Add(this.textBoxBrutoRead);
@@ -461,6 +599,8 @@
             this.Text = "Izračun plaće";
             this.groupBoxDodaci.ResumeLayout(false);
             this.groupBoxDodaci.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -507,5 +647,18 @@
         private System.Windows.Forms.Label labelDodaci;
         private System.Windows.Forms.GroupBox groupBoxDodaci;
         private System.Windows.Forms.Label labelPrirezStopa;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label labelPrimitak;
+        private System.Windows.Forms.Label labelStjecatelj;
+        private System.Windows.Forms.Label labelRadnoVrijeme;
+        private System.Windows.Forms.Label labelPrviZadnjiMjesec;
+        private System.Windows.Forms.Label labelInvaliditet;
+        private System.Windows.Forms.Label labelOznakaDodatniMio;
+        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
