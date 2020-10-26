@@ -137,7 +137,7 @@
             this.comboBoxGrad.Name = "comboBoxGrad";
             this.comboBoxGrad.Size = new System.Drawing.Size(240, 23);
             this.comboBoxGrad.TabIndex = 2;
-            this.comboBoxGrad.SelectionChangeCommitted += new System.EventHandler(this.comboBoxGrad_SelectionChangeCommitted);
+            this.comboBoxGrad.SelectionChangeCommitted += new System.EventHandler(this.ComboBoxGrad_SelectionChangeCommitted);
             // 
             // labelUpozorenja
             // 
@@ -156,7 +156,7 @@
             this.textBoxPrirez.Name = "textBoxPrirez";
             this.textBoxPrirez.Size = new System.Drawing.Size(96, 23);
             this.textBoxPrirez.TabIndex = 4;
-            this.textBoxPrirez.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            this.textBoxPrirez.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // labelPrirez
             // 
@@ -183,7 +183,7 @@
             this.textBoxSifra.Name = "textBoxSifra";
             this.textBoxSifra.Size = new System.Drawing.Size(96, 23);
             this.textBoxSifra.TabIndex = 4;
-            this.textBoxSifra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            this.textBoxSifra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // labelSifra
             // 

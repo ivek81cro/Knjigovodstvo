@@ -69,7 +69,9 @@ namespace Knjigovodstvo.Payroll
             this.labelDodaci = new System.Windows.Forms.Label();
             this.groupBoxDodaci = new System.Windows.Forms.GroupBox();
             this.labelPrirezStopa = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxJoppd = new System.Windows.Forms.GroupBox();
+            this.labelNacinIsplate = new System.Windows.Forms.Label();
+            this.comboBoxNacinIsplate = new System.Windows.Forms.ComboBox();
             this.labelPrimitak = new System.Windows.Forms.Label();
             this.labelStjecatelj = new System.Windows.Forms.Label();
             this.labelRadnoVrijeme = new System.Windows.Forms.Label();
@@ -82,8 +84,9 @@ namespace Knjigovodstvo.Payroll
             this.comboBoxDodatniMio = new System.Windows.Forms.ComboBox();
             this.comboBoxPrimitak = new System.Windows.Forms.ComboBox();
             this.comboBoxStjecatelj = new System.Windows.Forms.ComboBox();
+            this.buttonSpremiJoppdPostavke = new System.Windows.Forms.Button();
             this.groupBoxDodaci.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxJoppd.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxZaposlenik
@@ -348,7 +351,7 @@ namespace Knjigovodstvo.Payroll
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(418, 609);
+            this.buttonSave.Location = new System.Drawing.Point(510, 609);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 18;
@@ -358,7 +361,7 @@ namespace Knjigovodstvo.Payroll
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(499, 609);
+            this.buttonClose.Location = new System.Drawing.Point(591, 609);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 19;
@@ -431,31 +434,52 @@ namespace Knjigovodstvo.Payroll
             this.labelPrirezStopa.TabIndex = 23;
             this.labelPrirezStopa.Text = "0%";
             // 
-            // groupBox1
+            // groupBoxJoppd
             // 
-            this.groupBox1.Controls.Add(this.labelPrimitak);
-            this.groupBox1.Controls.Add(this.labelStjecatelj);
-            this.groupBox1.Controls.Add(this.labelRadnoVrijeme);
-            this.groupBox1.Controls.Add(this.labelPrviZadnjiMjesec);
-            this.groupBox1.Controls.Add(this.labelInvaliditet);
-            this.groupBox1.Controls.Add(this.labelOznakaDodatniMio);
-            this.groupBox1.Controls.Add(this.comboBoxRadnoVrijeme);
-            this.groupBox1.Controls.Add(this.comboBoxMjesecPrviZadnji);
-            this.groupBox1.Controls.Add(this.comboBoxInvaliditet);
-            this.groupBox1.Controls.Add(this.comboBoxDodatniMio);
-            this.groupBox1.Controls.Add(this.comboBoxPrimitak);
-            this.groupBox1.Controls.Add(this.comboBoxStjecatelj);
-            this.groupBox1.Location = new System.Drawing.Point(297, 301);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(369, 263);
-            this.groupBox1.TabIndex = 22;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Podaci za JOPPD obrazac";
+            this.groupBoxJoppd.Controls.Add(this.buttonSpremiJoppdPostavke);
+            this.groupBoxJoppd.Controls.Add(this.labelNacinIsplate);
+            this.groupBoxJoppd.Controls.Add(this.comboBoxNacinIsplate);
+            this.groupBoxJoppd.Controls.Add(this.labelPrimitak);
+            this.groupBoxJoppd.Controls.Add(this.labelStjecatelj);
+            this.groupBoxJoppd.Controls.Add(this.labelRadnoVrijeme);
+            this.groupBoxJoppd.Controls.Add(this.labelPrviZadnjiMjesec);
+            this.groupBoxJoppd.Controls.Add(this.labelInvaliditet);
+            this.groupBoxJoppd.Controls.Add(this.labelOznakaDodatniMio);
+            this.groupBoxJoppd.Controls.Add(this.comboBoxRadnoVrijeme);
+            this.groupBoxJoppd.Controls.Add(this.comboBoxMjesecPrviZadnji);
+            this.groupBoxJoppd.Controls.Add(this.comboBoxInvaliditet);
+            this.groupBoxJoppd.Controls.Add(this.comboBoxDodatniMio);
+            this.groupBoxJoppd.Controls.Add(this.comboBoxPrimitak);
+            this.groupBoxJoppd.Controls.Add(this.comboBoxStjecatelj);
+            this.groupBoxJoppd.Location = new System.Drawing.Point(297, 301);
+            this.groupBoxJoppd.Name = "groupBoxJoppd";
+            this.groupBoxJoppd.Size = new System.Drawing.Size(369, 287);
+            this.groupBoxJoppd.TabIndex = 22;
+            this.groupBoxJoppd.TabStop = false;
+            this.groupBoxJoppd.Text = "Podaci za JOPPD obrazac";
+            // 
+            // labelNacinIsplate
+            // 
+            this.labelNacinIsplate.AutoSize = true;
+            this.labelNacinIsplate.Location = new System.Drawing.Point(133, 48);
+            this.labelNacinIsplate.Name = "labelNacinIsplate";
+            this.labelNacinIsplate.Size = new System.Drawing.Size(75, 15);
+            this.labelNacinIsplate.TabIndex = 5;
+            this.labelNacinIsplate.Text = "Način isplate";
+            // 
+            // comboBoxNacinIsplate
+            // 
+            this.comboBoxNacinIsplate.DropDownWidth = 800;
+            this.comboBoxNacinIsplate.FormattingEnabled = true;
+            this.comboBoxNacinIsplate.Location = new System.Drawing.Point(6, 45);
+            this.comboBoxNacinIsplate.Name = "comboBoxNacinIsplate";
+            this.comboBoxNacinIsplate.Size = new System.Drawing.Size(121, 23);
+            this.comboBoxNacinIsplate.TabIndex = 0;
             // 
             // labelPrimitak
             // 
             this.labelPrimitak.AutoSize = true;
-            this.labelPrimitak.Location = new System.Drawing.Point(133, 82);
+            this.labelPrimitak.Location = new System.Drawing.Point(133, 115);
             this.labelPrimitak.Name = "labelPrimitak";
             this.labelPrimitak.Size = new System.Drawing.Size(93, 15);
             this.labelPrimitak.TabIndex = 5;
@@ -464,7 +488,7 @@ namespace Knjigovodstvo.Payroll
             // labelStjecatelj
             // 
             this.labelStjecatelj.AutoSize = true;
-            this.labelStjecatelj.Location = new System.Drawing.Point(133, 50);
+            this.labelStjecatelj.Location = new System.Drawing.Point(133, 83);
             this.labelStjecatelj.Name = "labelStjecatelj";
             this.labelStjecatelj.Size = new System.Drawing.Size(101, 15);
             this.labelStjecatelj.TabIndex = 5;
@@ -473,7 +497,7 @@ namespace Knjigovodstvo.Payroll
             // labelRadnoVrijeme
             // 
             this.labelRadnoVrijeme.AutoSize = true;
-            this.labelRadnoVrijeme.Location = new System.Drawing.Point(133, 212);
+            this.labelRadnoVrijeme.Location = new System.Drawing.Point(133, 245);
             this.labelRadnoVrijeme.Name = "labelRadnoVrijeme";
             this.labelRadnoVrijeme.Size = new System.Drawing.Size(192, 30);
             this.labelRadnoVrijeme.TabIndex = 4;
@@ -482,7 +506,7 @@ namespace Knjigovodstvo.Payroll
             // labelPrviZadnjiMjesec
             // 
             this.labelPrviZadnjiMjesec.AutoSize = true;
-            this.labelPrviZadnjiMjesec.Location = new System.Drawing.Point(133, 179);
+            this.labelPrviZadnjiMjesec.Location = new System.Drawing.Point(133, 212);
             this.labelPrviZadnjiMjesec.Name = "labelPrviZadnjiMjesec";
             this.labelPrviZadnjiMjesec.Size = new System.Drawing.Size(216, 30);
             this.labelPrviZadnjiMjesec.TabIndex = 3;
@@ -491,7 +515,7 @@ namespace Knjigovodstvo.Payroll
             // labelInvaliditet
             // 
             this.labelInvaliditet.AutoSize = true;
-            this.labelInvaliditet.Location = new System.Drawing.Point(133, 143);
+            this.labelInvaliditet.Location = new System.Drawing.Point(133, 176);
             this.labelInvaliditet.Name = "labelInvaliditet";
             this.labelInvaliditet.Size = new System.Drawing.Size(227, 30);
             this.labelInvaliditet.TabIndex = 2;
@@ -500,7 +524,7 @@ namespace Knjigovodstvo.Payroll
             // labelOznakaDodatniMio
             // 
             this.labelOznakaDodatniMio.AutoSize = true;
-            this.labelOznakaDodatniMio.Location = new System.Drawing.Point(133, 116);
+            this.labelOznakaDodatniMio.Location = new System.Drawing.Point(133, 149);
             this.labelOznakaDodatniMio.Name = "labelOznakaDodatniMio";
             this.labelOznakaDodatniMio.Size = new System.Drawing.Size(195, 15);
             this.labelOznakaDodatniMio.TabIndex = 1;
@@ -508,66 +532,80 @@ namespace Knjigovodstvo.Payroll
             // 
             // comboBoxRadnoVrijeme
             // 
+            this.comboBoxRadnoVrijeme.DropDownWidth = 800;
             this.comboBoxRadnoVrijeme.FormattingEnabled = true;
-            this.comboBoxRadnoVrijeme.Location = new System.Drawing.Point(6, 215);
+            this.comboBoxRadnoVrijeme.Location = new System.Drawing.Point(6, 248);
             this.comboBoxRadnoVrijeme.Name = "comboBoxRadnoVrijeme";
             this.comboBoxRadnoVrijeme.Size = new System.Drawing.Size(121, 23);
             this.comboBoxRadnoVrijeme.TabIndex = 0;
-            this.comboBoxRadnoVrijeme.DropDownWidth = 800;
+            this.comboBoxRadnoVrijeme.SelectedValueChanged += new System.EventHandler(PromjenaZaposlenikJoppd);
             // 
             // comboBoxMjesecPrviZadnji
             // 
+            this.comboBoxMjesecPrviZadnji.DropDownWidth = 800;
             this.comboBoxMjesecPrviZadnji.FormattingEnabled = true;
-            this.comboBoxMjesecPrviZadnji.Location = new System.Drawing.Point(6, 181);
+            this.comboBoxMjesecPrviZadnji.Location = new System.Drawing.Point(6, 214);
             this.comboBoxMjesecPrviZadnji.Name = "comboBoxMjesecPrviZadnji";
             this.comboBoxMjesecPrviZadnji.Size = new System.Drawing.Size(121, 23);
             this.comboBoxMjesecPrviZadnji.TabIndex = 0;
-            this.comboBoxMjesecPrviZadnji.DropDownWidth = 800;
+            this.comboBoxMjesecPrviZadnji.SelectedValueChanged += new System.EventHandler(PromjenaZaposlenikJoppd);
             // 
             // comboBoxInvaliditet
             // 
+            this.comboBoxInvaliditet.DropDownWidth = 800;
             this.comboBoxInvaliditet.FormattingEnabled = true;
-            this.comboBoxInvaliditet.Location = new System.Drawing.Point(6, 147);
+            this.comboBoxInvaliditet.Location = new System.Drawing.Point(6, 180);
             this.comboBoxInvaliditet.Name = "comboBoxInvaliditet";
             this.comboBoxInvaliditet.Size = new System.Drawing.Size(121, 23);
             this.comboBoxInvaliditet.TabIndex = 0;
-            this.comboBoxInvaliditet.DropDownWidth = 800;
+            this.comboBoxInvaliditet.SelectedValueChanged += new System.EventHandler(PromjenaZaposlenikJoppd);
             // 
             // comboBoxDodatniMio
             // 
+            this.comboBoxDodatniMio.DropDownWidth = 800;
             this.comboBoxDodatniMio.FormattingEnabled = true;
-            this.comboBoxDodatniMio.Location = new System.Drawing.Point(6, 113);
+            this.comboBoxDodatniMio.Location = new System.Drawing.Point(6, 146);
             this.comboBoxDodatniMio.Name = "comboBoxDodatniMio";
             this.comboBoxDodatniMio.Size = new System.Drawing.Size(121, 23);
             this.comboBoxDodatniMio.TabIndex = 0;
-            this.comboBoxDodatniMio.DropDownWidth = 800;
-
+            this.comboBoxDodatniMio.SelectedValueChanged += new System.EventHandler(PromjenaZaposlenikJoppd);
             // 
             // comboBoxPrimitak
             // 
+            this.comboBoxPrimitak.DropDownWidth = 800;
             this.comboBoxPrimitak.FormattingEnabled = true;
-            this.comboBoxPrimitak.Location = new System.Drawing.Point(6, 79);
+            this.comboBoxPrimitak.Location = new System.Drawing.Point(6, 112);
             this.comboBoxPrimitak.Name = "comboBoxPrimitak";
             this.comboBoxPrimitak.Size = new System.Drawing.Size(121, 23);
             this.comboBoxPrimitak.TabIndex = 0;
-            this.comboBoxPrimitak.DropDownWidth = 800;
+            this.comboBoxPrimitak.SelectedValueChanged += new System.EventHandler(PromjenaZaposlenikJoppd);
             // 
             // comboBoxStjecatelj
             // 
-            this.comboBoxStjecatelj.DropDownWidth = 400;
+            this.comboBoxStjecatelj.DropDownWidth = 800;
             this.comboBoxStjecatelj.FormattingEnabled = true;
-            this.comboBoxStjecatelj.Location = new System.Drawing.Point(6, 45);
+            this.comboBoxStjecatelj.Location = new System.Drawing.Point(6, 78);
             this.comboBoxStjecatelj.Name = "comboBoxStjecatelj";
             this.comboBoxStjecatelj.Size = new System.Drawing.Size(121, 23);
             this.comboBoxStjecatelj.TabIndex = 0;
-            this.comboBoxStjecatelj.DropDownWidth = 800;
+            this.comboBoxStjecatelj.SelectedValueChanged += new System.EventHandler(PromjenaZaposlenikJoppd);
+            // 
+            // buttonSpremiJoppdPostavke
+            // 
+            this.buttonSpremiJoppdPostavke.Location = new System.Drawing.Point(213, 22);
+            this.buttonSpremiJoppdPostavke.Name = "buttonSpremiJoppdPostavke";
+            this.buttonSpremiJoppdPostavke.Size = new System.Drawing.Size(150, 23);
+            this.buttonSpremiJoppdPostavke.TabIndex = 6;
+            this.buttonSpremiJoppdPostavke.Text = "Spremi JOPPD postavke";
+            this.buttonSpremiJoppdPostavke.UseVisualStyleBackColor = true;
+            this.buttonSpremiJoppdPostavke.Click += new System.EventHandler(this.ButtonSpremiJoppdPostavke_Click);
             // 
             // PlacaIzracunForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(678, 644);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBoxJoppd);
             this.Controls.Add(this.labelPrirezStopa);
             this.Controls.Add(this.groupBoxDodaci);
             this.Controls.Add(this.textBoxBrutoRead);
@@ -609,8 +647,8 @@ namespace Knjigovodstvo.Payroll
             this.Text = "Izračun plaće";
             this.groupBoxDodaci.ResumeLayout(false);
             this.groupBoxDodaci.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxJoppd.ResumeLayout(false);
+            this.groupBoxJoppd.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -662,7 +700,7 @@ namespace Knjigovodstvo.Payroll
         private System.Windows.Forms.Label labelDodaci;
         private System.Windows.Forms.GroupBox groupBoxDodaci;
         private System.Windows.Forms.Label labelPrirezStopa;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxJoppd;
         private System.Windows.Forms.Label labelPrimitak;
         private System.Windows.Forms.Label labelStjecatelj;
         private System.Windows.Forms.Label labelRadnoVrijeme;
@@ -675,5 +713,8 @@ namespace Knjigovodstvo.Payroll
         private System.Windows.Forms.ComboBox comboBoxDodatniMio;
         private System.Windows.Forms.ComboBox comboBoxPrimitak;
         private System.Windows.Forms.ComboBox comboBoxStjecatelj;
+        private System.Windows.Forms.Label labelNacinIsplate;
+        private System.Windows.Forms.ComboBox comboBoxNacinIsplate;
+        private System.Windows.Forms.Button buttonSpremiJoppdPostavke;
     }
 }

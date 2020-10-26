@@ -57,7 +57,7 @@ namespace Knjigovodstvo.City
             FillComboCity();
         }
 
-        private void comboBoxGrad_SelectionChangeCommitted(object sender, EventArgs e)
+        private void ComboBoxGrad_SelectionChangeCommitted(object sender, EventArgs e)
         {
             _grad = _grad.GetGradById(int.Parse(comboBoxGrad.SelectedValue.ToString()));
             FillPrirezSifra();
@@ -142,7 +142,7 @@ namespace Knjigovodstvo.City
 
         }
 
-        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
                 (e.KeyChar != '.'))
