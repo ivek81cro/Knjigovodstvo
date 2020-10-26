@@ -35,6 +35,11 @@
             this.labelDatumDo = new System.Windows.Forms.Label();
             this.buttonObracunajSve = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.comboBoxFilterDjelatnik = new System.Windows.Forms.ComboBox();
+            this.labelFilterDjelatnik = new System.Windows.Forms.Label();
+            this.buttonPonisti = new System.Windows.Forms.Button();
+            this.comboBoxFilterPoMjesecu = new System.Windows.Forms.ComboBox();
+            this.labelFilterMjesec = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,11 +113,62 @@
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.Text = "dataGridView1";
             // 
+            // comboBoxFilterDjelatnik
+            // 
+            this.comboBoxFilterDjelatnik.FormattingEnabled = true;
+            this.comboBoxFilterDjelatnik.Location = new System.Drawing.Point(123, 154);
+            this.comboBoxFilterDjelatnik.Name = "comboBoxFilterDjelatnik";
+            this.comboBoxFilterDjelatnik.Size = new System.Drawing.Size(239, 23);
+            this.comboBoxFilterDjelatnik.TabIndex = 5;
+            this.comboBoxFilterDjelatnik.SelectionChangeCommitted += new System.EventHandler(this.comboBoxFilter_SelectionChangeCommitted);
+            // 
+            // labelFilterDjelatnik
+            // 
+            this.labelFilterDjelatnik.AutoSize = true;
+            this.labelFilterDjelatnik.Location = new System.Drawing.Point(12, 157);
+            this.labelFilterDjelatnik.Name = "labelFilterDjelatnik";
+            this.labelFilterDjelatnik.Size = new System.Drawing.Size(105, 15);
+            this.labelFilterDjelatnik.TabIndex = 6;
+            this.labelFilterDjelatnik.Text = "Filter po djelatniku";
+            // 
+            // buttonPonisti
+            // 
+            this.buttonPonisti.Location = new System.Drawing.Point(603, 154);
+            this.buttonPonisti.Name = "buttonPonisti";
+            this.buttonPonisti.Size = new System.Drawing.Size(97, 23);
+            this.buttonPonisti.TabIndex = 7;
+            this.buttonPonisti.Text = "Poništi Filtere";
+            this.buttonPonisti.UseVisualStyleBackColor = true;
+            this.buttonPonisti.Click += new System.EventHandler(this.buttonPonisti_Click);
+            // 
+            // comboBoxFilterPoMjesecu
+            // 
+            this.comboBoxFilterPoMjesecu.FormattingEnabled = true;
+            this.comboBoxFilterPoMjesecu.Location = new System.Drawing.Point(472, 154);
+            this.comboBoxFilterPoMjesecu.Name = "comboBoxFilterPoMjesecu";
+            this.comboBoxFilterPoMjesecu.Size = new System.Drawing.Size(125, 23);
+            this.comboBoxFilterPoMjesecu.TabIndex = 8;
+            this.comboBoxFilterPoMjesecu.SelectionChangeCommitted += new System.EventHandler(this.comboBoxFilter_SelectionChangeCommitted);
+            // 
+            // labelFilterMjesec
+            // 
+            this.labelFilterMjesec.AutoSize = true;
+            this.labelFilterMjesec.Location = new System.Drawing.Point(369, 157);
+            this.labelFilterMjesec.Name = "labelFilterMjesec";
+            this.labelFilterMjesec.Size = new System.Drawing.Size(97, 15);
+            this.labelFilterMjesec.TabIndex = 9;
+            this.labelFilterMjesec.Text = "Filter po mjesecu";
+            // 
             // PlacaObracunForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 560);
+            this.Controls.Add(this.labelFilterMjesec);
+            this.Controls.Add(this.comboBoxFilterPoMjesecu);
+            this.Controls.Add(this.buttonPonisti);
+            this.Controls.Add(this.labelFilterDjelatnik);
+            this.Controls.Add(this.comboBoxFilterDjelatnik);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.buttonObracunajSve);
             this.Controls.Add(this.labelDatumDo);
@@ -137,5 +193,10 @@
         private System.Windows.Forms.Label labelDatumDo;
         private System.Windows.Forms.Button buttonObracunajSve;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ComboBox comboBoxFilterDjelatnik;
+        private System.Windows.Forms.Label labelFilterDjelatnik;
+        private System.Windows.Forms.Button buttonPonisti;
+        private System.Windows.Forms.ComboBox comboBoxFilterPoMjesecu;
+        private System.Windows.Forms.Label labelFilterMjesec;
     }
 }

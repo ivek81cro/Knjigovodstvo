@@ -1,4 +1,6 @@
-﻿using Knjigovodstvo.Models;
+﻿using Knjigovodstvo.Database;
+using Knjigovodstvo.Models;
+using System.Data;
 
 namespace Knjigovodstvo.Payroll
 {
@@ -7,6 +9,19 @@ namespace Knjigovodstvo.Payroll
         public FormError ValidateData()
         {
             throw new System.NotImplementedException();
+        }
+
+        public int Exists()
+        {
+            DataTable postojece = new DbDataGet().GetTable(new PlacaObracun(), 
+                $"Oib='{Oib}' AND Datum_Od='{Datum_Od}' AND Datum_Do='{Datum_Do}';");
+            int kontrola = postojece.Rows.Count;
+            if ( kontrola >= 1)
+            {
+                return int.Parse(postojece.Rows[0]["Id"].ToString());
+            }
+
+            return 0;
         }
 
         public int Id { get; set; } = 0;
