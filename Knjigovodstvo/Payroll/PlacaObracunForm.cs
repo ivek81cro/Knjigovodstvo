@@ -1,14 +1,10 @@
-﻿using Knjigovodstvo.Code.Validators;
-using Knjigovodstvo.Database;
+﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
 using Knjigovodstvo.Helpers;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Payroll
@@ -57,6 +53,87 @@ namespace Knjigovodstvo.Payroll
                       }).ToList();
         }
 
+        private void LoadDatagrid()
+        {
+            string selected = this.comboBoxFilterDjelatnik.GetItemText(this.comboBoxFilterDjelatnik.SelectedItem);
+            string oib = selected.Split(' ')[0];
+            string condition = "";
+            if (oib.Length == 11)
+                condition = $"Oib='{oib}'";
+
+            selected = this.comboBoxFilterPoMjesecu.GetItemText(this.comboBoxFilterPoMjesecu.SelectedItem);
+            string mjesec = "";
+            string godina = "";
+            if (selected != "")
+            {
+                mjesec = selected.Split('/')[0];
+                godina = selected.Split('/')[1];
+            }
+            if(mjesec.Length >=1 && godina.Length == 4)
+            {
+                if (condition.Length == 17)
+                    condition += " AND ";
+                condition += $"DATEPART(month, Datum_Od)={mjesec} AND DATEPART(year, Datum_Od) = {godina};";
+            }
+
+            if (condition == "")
+                condition = null;
+
+            dataGridView1.DataSource = _dbDataGet.GetTable(new PlacaObracun(), condition);
+            for (int i = 2; i < dataGridView1.Columns.Count-2; i++)
+            {
+                dataGridView1.Columns[i].DefaultCellStyle.Format = "0.00";
+            }
+
+            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+            {
+                dataGridView1.Columns[i].HeaderText =
+                     new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
+            }
+        }
+
+        private void FillComboBoxZaposlenik()
+        {
+            DataTable dt = new DbDataGet().GetTable(new Zaposlenik());
+            dt.Columns.Add(
+                "Ime i prezime",
+                typeof(string),
+                "oib + '   ' + Ime + ' ' + Prezime");
+            comboBoxFilterDjelatnik.DataSource = dt;
+            comboBoxFilterDjelatnik.DisplayMember = "Ime i prezime";
+            comboBoxFilterDjelatnik.SelectedItem = null;
+            comboBoxFilterDjelatnik.Text = "--Odaberi zaposlenika--";
+        }
+
+        private void FillComboBoxMjesec()
+        {
+            DataTable dt = new DbDataExecProcedure
+                ().GetTable(
+                ProcedureNames.Dohvati_Distinct_Datum);
+            dt.Columns.Add(
+                "Mjesec",
+                typeof(string),
+                "monthdate + '/' + yeardate");
+            comboBoxFilterPoMjesecu.DataSource = dt;
+            comboBoxFilterPoMjesecu.DisplayMember = "Mjesec";
+            comboBoxFilterPoMjesecu.SelectedItem = null;
+            comboBoxFilterPoMjesecu.Text = "--Odaberi mjesec--";
+        }
+
+        private void comboBoxFilter_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            LoadDatagrid();
+        }
+
+        private void buttonPonisti_Click(object sender, EventArgs e)
+        {
+            comboBoxFilterDjelatnik.SelectedItem = null;
+            comboBoxFilterDjelatnik.Text = "--Odaberi zaposlenika--";
+            comboBoxFilterPoMjesecu.SelectedItem = null;
+            comboBoxFilterPoMjesecu.Text = "--Odaberi mjesec--";
+            LoadDatagrid();
+        }
+
         private void buttonObracunajSve_Click(object sender, EventArgs e)
         {
             _placeObracun = (from Placa placa in _place
@@ -102,82 +179,6 @@ namespace Knjigovodstvo.Payroll
 
             MessageBox.Show("Obračun izvršen", "Obračun", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadDatagrid();
-        }
-
-        private void LoadDatagrid()
-        {
-            string selected = this.comboBoxFilterDjelatnik.GetItemText(this.comboBoxFilterDjelatnik.SelectedItem);
-            string oib = selected.Split(' ')[0];
-            string condition = "";
-            if (oib.Length == 11)
-                condition = $"Oib='{oib}'";
-
-            selected = this.comboBoxFilterPoMjesecu.GetItemText(this.comboBoxFilterPoMjesecu.SelectedItem);
-            string mjesec = "";
-            string godina = "";
-            if (selected != "")
-            {
-                mjesec = selected.Split('/')[0];
-                godina = selected.Split('/')[1];
-            }
-            if(mjesec.Length >=1 && godina.Length == 4)
-            {
-                if (condition.Length == 17)
-                    condition += " AND ";
-                condition += $"DATEPART(month, Datum_Od)={mjesec} AND DATEPART(year, Datum_Od) = {godina};";
-            }
-
-            if (condition == "")
-                condition = null;
-
-            dataGridView1.DataSource = _dbDataGet.GetTable(new PlacaObracun(), condition);
-            for (int i = 2; i < dataGridView1.Columns.Count-2; i++)
-            {
-                dataGridView1.Columns[i].DefaultCellStyle.Format = "0.00";
-                dataGridView1.Columns[i].HeaderText =
-                    new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
-            }
-        }
-
-        private void FillComboBoxZaposlenik()
-        {
-            DataTable dt = new DbDataGet().GetTable(new Zaposlenik());
-            dt.Columns.Add(
-                "Ime i prezime",
-                typeof(string),
-                "oib + '   ' + Ime + ' ' + Prezime");
-            comboBoxFilterDjelatnik.DataSource = dt;
-            comboBoxFilterDjelatnik.DisplayMember = "Ime i prezime";
-            comboBoxFilterDjelatnik.SelectedItem = null;
-            comboBoxFilterDjelatnik.Text = "--Odaberi zaposlenika--";
-        }
-
-        private void comboBoxFilter_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadDatagrid();
-        }
-
-        private void buttonPonisti_Click(object sender, EventArgs e)
-        {
-            comboBoxFilterDjelatnik.SelectedItem = null;
-            comboBoxFilterDjelatnik.Text = "--Odaberi zaposlenika--";
-            comboBoxFilterPoMjesecu.SelectedItem = null;
-            comboBoxFilterPoMjesecu.Text = "--Odaberi mjesec--";
-            LoadDatagrid();
-        }
-
-        private void FillComboBoxMjesec()
-        {
-            DataTable dt = new DbDataGetCustom().GetTable(
-                $"SELECT DISTINCT DATEPART(month, Datum_Od) as monthdate, DATEPART(year, Datum_Od) as yeardate FROM PlacaObracun ORDER BY monthdate;");
-            dt.Columns.Add(
-                "Mjesec",
-                typeof(string),
-                "monthdate + '/' + yeardate");
-            comboBoxFilterPoMjesecu.DataSource = dt;
-            comboBoxFilterPoMjesecu.DisplayMember = "Mjesec";
-            comboBoxFilterPoMjesecu.SelectedItem = null;
-            comboBoxFilterPoMjesecu.Text = "--Odaberi mjesec--";
         }
 
         private List<PlacaObracun> _placeObracun = new List<PlacaObracun>();

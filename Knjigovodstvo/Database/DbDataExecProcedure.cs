@@ -5,16 +5,26 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Database
 {
-    class DbDataGetCustom
+    enum ProcedureNames
+    {
+        Dohvati_Distinct_Datum,
+        DropPlacaPregled,
+        PlacaPregled,
+        Prebaci_postBroj,
+        Prebaci_prirez
+    }
+
+    class DbDataExecProcedure
     {
         /// <summary>
         /// Gets table from database depending on recieved object.
         /// </summary>
         /// <param name="query">Custom string query.</param>
         /// <returns>DataTable based on condition</returns>
-        public DataTable GetTable(string query)
+        public DataTable GetTable(ProcedureNames procName)
         {
             DataTable dt = new DataTable();
+            string query = $"EXEC {CreateQuery(procName)};";
             
             try
             {
@@ -41,6 +51,24 @@ namespace Knjigovodstvo.Database
                     MessageBoxIcon.Error);
             }
             return dt;
+        }
+
+        private string CreateQuery(ProcedureNames name)
+        {
+            switch (name) {
+                case ProcedureNames.Dohvati_Distinct_Datum:
+                    return "Dohvati_Distinct_Datum";
+                case ProcedureNames.DropPlacaPregled:
+                    return "DropPlacaPregled";
+                case ProcedureNames.PlacaPregled:
+                    return "PlacaPregled";
+                case ProcedureNames.Prebaci_postBroj:
+                    return "Prebaci_postBroj";
+                case ProcedureNames.Prebaci_prirez:
+                    return "Prebaci_prirez";
+                default:
+                    return "";
+        }
         }
 
         private readonly string connection_name = "KnjigovodstvoDb";

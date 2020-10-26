@@ -16,7 +16,7 @@ namespace Knjigovodstvo.Payroll
 
         private void LoadDatagrid()
         {
-            dataGridView1.DataSource = new DbDataGetCustom().GetTable($"EXEC PlacaPregled;");
+            dataGridView1.DataSource = new DbDataExecProcedure().GetTable(ProcedureNames.PlacaPregled);
             for(int i = 3; i< dataGridView1.Columns.Count; i++)
             {
                 dataGridView1.Columns[i].DefaultCellStyle.Format = "0.00";
