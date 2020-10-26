@@ -19,7 +19,7 @@ namespace Knjigovodstvo.Database
         /// <summary>
         /// Gets table from database depending on recieved object.
         /// </summary>
-        /// <param name="query">Custom string query.</param>
+        /// <param name="procName">Selected procedure from ProcedureNames enum.</param>
         /// <returns>DataTable based on condition</returns>
         public DataTable GetTable(ProcedureNames procName)
         {

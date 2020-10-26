@@ -49,7 +49,7 @@ namespace Knjigovodstvo.Payroll
         private void TextBoxFilterPlaca_TextChanged(object sender, EventArgs e)
         {
             (dataGridView1.DataSource as DataTable).DefaultView.RowFilter =
-                $"Oib LIKE '{textBoxFilterPlaca.Text}%' OR Oib LIKE '% {textBoxFilterPlaca.Text}%'";
+                $"Prezime LIKE '{textBoxFilterPlaca.Text}%' OR Prezime LIKE '% {textBoxFilterPlaca.Text}%'";
         }
     }    
 }

@@ -51,9 +51,9 @@ namespace Knjigovodstvo.Payroll
             this.namePartnerLabel.AutoSize = true;
             this.namePartnerLabel.Location = new System.Drawing.Point(9, 54);
             this.namePartnerLabel.Name = "namePartnerLabel";
-            this.namePartnerLabel.Size = new System.Drawing.Size(92, 15);
+            this.namePartnerLabel.Size = new System.Drawing.Size(109, 15);
             this.namePartnerLabel.TabIndex = 2;
-            this.namePartnerLabel.Text = "Oib Zaposlenika";
+            this.namePartnerLabel.Text = "Filter po prezimenu";
             // 
             // dataGridView1
             // 
