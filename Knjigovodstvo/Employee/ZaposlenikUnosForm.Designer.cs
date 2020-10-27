@@ -344,7 +344,9 @@
             this.Controls.Add(this.labelPrezime);
             this.Controls.Add(this.labelIme);
             this.Controls.Add(this.labelOib);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ZaposlenikUnosForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Unos zaposlenika";
             this.ResumeLayout(false);

@@ -115,6 +115,12 @@ namespace Knjigovodstvo.MainForm
             }
         }
 
+        private void ShowDialogIzracunPlace(object sender, EventArgs e)
+        {
+            PlacaIzracunForm dialog = new PlacaIzracunForm();
+            dialog.ShowDialog();
+        }
+
         private void ShowDialogDodaci(object sender, EventArgs e)
         {
             DodaciUnosForm dialog = new DodaciUnosForm();

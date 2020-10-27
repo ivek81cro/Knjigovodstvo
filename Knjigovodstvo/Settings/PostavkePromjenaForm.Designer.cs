@@ -155,6 +155,7 @@
             this.Controls.Add(this.labelVrsta);
             this.Controls.Add(this.labelNaziv);
             this.Controls.Add(this.labelId);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "PostavkePromjenaForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Promjena postavke";

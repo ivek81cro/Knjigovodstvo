@@ -477,6 +477,17 @@ namespace Knjigovodstvo.Payroll
             this.labelNacinIsplate.TabIndex = 5;
             this.labelNacinIsplate.Text = "Način isplate";
             // 
+            // comboBoxNacinIsplate
+            // 
+            this.comboBoxNacinIsplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxNacinIsplate.DropDownWidth = 800;
+            this.comboBoxNacinIsplate.FormattingEnabled = true;
+            this.comboBoxNacinIsplate.Location = new System.Drawing.Point(6, 45);
+            this.comboBoxNacinIsplate.Name = "comboBoxNacinIsplate";
+            this.comboBoxNacinIsplate.Size = new System.Drawing.Size(121, 23);
+            this.comboBoxNacinIsplate.TabIndex = 0;
+            this.comboBoxNacinIsplate.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
+            // 
             // labelPrimitak
             // 
             this.labelPrimitak.AutoSize = true;
@@ -530,17 +541,6 @@ namespace Knjigovodstvo.Payroll
             this.labelOznakaDodatniMio.Size = new System.Drawing.Size(195, 15);
             this.labelOznakaDodatniMio.TabIndex = 1;
             this.labelOznakaDodatniMio.Text = "Oznaka dodatnog doprinosa za Mio";
-            // 
-            // comboBoxNacinIsplate
-            // 
-            this.comboBoxNacinIsplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxNacinIsplate.DropDownWidth = 800;
-            this.comboBoxNacinIsplate.FormattingEnabled = true;
-            this.comboBoxNacinIsplate.Location = new System.Drawing.Point(6, 45);
-            this.comboBoxNacinIsplate.Name = "comboBoxNacinIsplate";
-            this.comboBoxNacinIsplate.Size = new System.Drawing.Size(121, 23);
-            this.comboBoxNacinIsplate.TabIndex = 0;
-            this.comboBoxNacinIsplate.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
             // 
             // comboBoxRadnoVrijeme
             // 
@@ -650,7 +650,9 @@ namespace Knjigovodstvo.Payroll
             this.Controls.Add(this.labelBruto);
             this.Controls.Add(this.labelOdabirZaposlenika);
             this.Controls.Add(this.comboBoxZaposlenik);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "PlacaIzracunForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Izračun plaće";
             this.groupBoxDodaci.ResumeLayout(false);

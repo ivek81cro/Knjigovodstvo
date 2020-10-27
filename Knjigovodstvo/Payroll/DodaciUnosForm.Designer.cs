@@ -134,6 +134,7 @@
             this.Controls.Add(this.comboBoxOdabirZaposlenika);
             this.Controls.Add(this.labelOdabirZaposlenika);
             this.Controls.Add(this.dataGridView1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "DodaciUnosForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "DodaciUnosForm";
