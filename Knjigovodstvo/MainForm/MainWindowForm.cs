@@ -1,6 +1,7 @@
 ﻿using Knjigovodstvo.City;
 using Knjigovodstvo.Employee;
 using Knjigovodstvo.Gui;
+using Knjigovodstvo.JoppdDocument;
 using Knjigovodstvo.Partners;
 using Knjigovodstvo.Payroll;
 using Knjigovodstvo.Settings;
@@ -112,6 +113,20 @@ namespace Knjigovodstvo.MainForm
             else
             {
                 _openForm.Open(new PlacaObracunForm(), this);
+            }
+        }
+
+        private void ShowNewFormPlacaJoppdForm(object sender, EventArgs e)
+        {
+            string formName = ChildWindowName.JoppdPlacaForm.ToString();
+            if (_isOpen.Check(MdiChildren, formName))
+            {
+                Form f = _isOpen.GetChild(MdiChildren, formName);
+                f.Focus();
+            }
+            else
+            {
+                _openForm.Open(new JoppdPlacaForm(), this);
             }
         }
 

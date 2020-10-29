@@ -2,9 +2,7 @@
 using Knjigovodstvo.Employee;
 using Knjigovodstvo.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace Knjigovodstvo.Payroll
 {
@@ -19,8 +17,8 @@ namespace Knjigovodstvo.Payroll
         {
             placa.Dodaci_Ukupno = 0;
 
-            DataTable table = new DbDataGet().GetTable(new PlacaDodatak(), $"Oib='{zaposlenik.Oib}';");
-            foreach (DataRow row in table.Rows)
+            _dt = new DbDataGet().GetTable(new PlacaDodatak(), $"Oib='{zaposlenik.Oib}';");
+            foreach (DataRow row in _dt.Rows)
             {
                 placa.Dodaci_Ukupno += float.Parse(row["Iznos"].ToString());
             }
@@ -28,9 +26,16 @@ namespace Knjigovodstvo.Payroll
             return placa;
         }
 
+        public DataTable GetDodaciByOib(string oib)
+        {
+            return _dt = new DbDataGet().GetTable(this, $"Oib={oib};");
+        }
+
+        private DataTable _dt = new DataTable();
+
         public int Id { get; set; } = 0;
         public string Oib { get; set; } = "";
-        public int Sifra { get; set; } = 0;
+        public string Sifra { get; set; } = "";
         public float Iznos { get; set; } = 0;
     }
 }

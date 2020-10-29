@@ -8,7 +8,6 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Database
 {
-    //TODO Get with join on query
     class DbDataGet
     {
         /// <summary>

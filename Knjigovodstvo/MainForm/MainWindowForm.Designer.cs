@@ -43,9 +43,12 @@ namespace Knjigovodstvo.MainForm
             this.menuUra = new System.Windows.Forms.ToolStripMenuItem();
             this.menuIra = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPlaca = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemIzracun = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPregledPlace = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemDodaci = new System.Windows.Forms.ToolStripMenuItem();
             this.menuObracunPlace = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemJoppd = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.prozoriMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,7 +65,6 @@ namespace Knjigovodstvo.MainForm
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.toolStripMenuItemIzracun = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -159,10 +161,19 @@ namespace Knjigovodstvo.MainForm
             this.toolStripMenuItemIzracun,
             this.menuPregledPlace,
             this.toolStripMenuItemDodaci,
-            this.menuObracunPlace});
+            this.menuObracunPlace,
+            this.toolStripSeparator1,
+            this.toolStripMenuItemJoppd});
             this.menuPlaca.Name = "menuPlaca";
             this.menuPlaca.Size = new System.Drawing.Size(47, 20);
             this.menuPlaca.Text = "&Plaća";
+            // 
+            // toolStripMenuItemIzracun
+            // 
+            this.toolStripMenuItemIzracun.Name = "toolStripMenuItemIzracun";
+            this.toolStripMenuItemIzracun.Size = new System.Drawing.Size(159, 22);
+            this.toolStripMenuItemIzracun.Text = "Izračun";
+            this.toolStripMenuItemIzracun.Click += new System.EventHandler(this.ShowDialogIzracunPlace);
             // 
             // menuPregledPlace
             // 
@@ -184,6 +195,18 @@ namespace Knjigovodstvo.MainForm
             this.menuObracunPlace.Size = new System.Drawing.Size(159, 22);
             this.menuObracunPlace.Text = "Obračun Plaće";
             this.menuObracunPlace.Click += new System.EventHandler(this.ShowNewFormObracunPlaca);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(156, 6);
+            // 
+            // toolStripMenuItemJoppd
+            // 
+            this.toolStripMenuItemJoppd.Name = "toolStripMenuItemJoppd";
+            this.toolStripMenuItemJoppd.Size = new System.Drawing.Size(159, 22);
+            this.toolStripMenuItemJoppd.Text = "Joppd obrazac";
+            this.toolStripMenuItemJoppd.Click += new System.EventHandler(this.ShowNewFormPlacaJoppdForm);
             // 
             // toolsMenu
             // 
@@ -301,13 +324,6 @@ namespace Knjigovodstvo.MainForm
             this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
-            // toolStripMenuItemIzracun
-            // 
-            this.toolStripMenuItemIzracun.Name = "toolStripMenuItemIzracun";
-            this.toolStripMenuItemIzracun.Size = new System.Drawing.Size(159, 22);
-            this.toolStripMenuItemIzracun.Text = "Izračun";
-            this.toolStripMenuItemIzracun.Click += new System.EventHandler(this.ShowDialogIzracunPlace);
-            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -362,6 +378,8 @@ namespace Knjigovodstvo.MainForm
         private System.Windows.Forms.ToolStripMenuItem menuPregledPlace;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDodaci;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemIzracun;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemJoppd;
     }
 }
 

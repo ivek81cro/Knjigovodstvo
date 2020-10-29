@@ -10,7 +10,8 @@ namespace Knjigovodstvo.MainForm
         PartneriTableForm,
         GradoviTableForm,
         PlacaTableForm,
-        PlacaObracunForm
+        PlacaObracunForm,
+        JoppdPlacaForm
     }
     public class IsChildOpen
     {

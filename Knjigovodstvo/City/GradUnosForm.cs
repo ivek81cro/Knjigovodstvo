@@ -6,7 +6,6 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.City
 {
-    //TODO change textBoxPost to Combo box and load post numbers from database for selected city
     public partial class GradUnosForm : Form
     {
         public GradUnosForm(Grad grad = null)

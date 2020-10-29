@@ -1,5 +1,6 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
+using Knjigovodstvo.JoppdDocument;
 using Knjigovodstvo.Validators;
 using System;
 using System.Data;
@@ -45,7 +46,7 @@ namespace Knjigovodstvo.Payroll
 
         private void FillComboBoxDodaci()
         {
-            DataTable dt = new DbDataGet().GetTable(new Joppd(), $"Skupina='Neoporezivo';");
+            DataTable dt = new DbDataGet().GetTable(new JoppdSifre(), $"Skupina='Neoporezivo';");
             dt.Columns.Add(
                 "Naziv i Opis",
                 typeof(string),
@@ -98,7 +99,7 @@ namespace Knjigovodstvo.Payroll
             DataTable table = new DbDataGet().GetTable(dodatak, $"Oib='{_zaposlenik.Oib}' AND Sifra={_sifra};");
             foreach(DataRow row in table.Rows)
             {
-                if (row["Oib"].ToString() == dodatak.Oib && int.Parse(row["Sifra"].ToString()) == dodatak.Sifra)
+                if (row["Oib"].ToString() == dodatak.Oib && row["Sifra"].ToString() == dodatak.Sifra)
                     return int.Parse(row["Id"].ToString());
             }
             return 0;
@@ -107,7 +108,7 @@ namespace Knjigovodstvo.Payroll
         private void comboBoxOdabirDodatka_SelectionChangeCommitted(object sender, EventArgs e)
         {
             string sifra = comboBoxOdabirDodatka.GetItemText(comboBoxOdabirDodatka.SelectedItem);
-            _sifra = int.Parse(sifra.Split(' ')[0]);
+            _sifra = sifra.Split(' ')[0];
         }
 
         private void comboBoxOdabirZaposlenika_SelectionChangeCommitted(object sender, EventArgs e)
@@ -143,6 +144,6 @@ namespace Knjigovodstvo.Payroll
         private PlacaDodatak _dodaci = new PlacaDodatak();
         private Zaposlenik _zaposlenik;
         private Placa _placa;
-        private int _sifra = 0;
+        private string _sifra = "";
     }
 }

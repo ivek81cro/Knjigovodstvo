@@ -1,10 +1,10 @@
 ﻿using Knjigovodstvo.City;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
+using Knjigovodstvo.JoppdDocument;
 using Knjigovodstvo.Validators;
 using System;
 using System.Data;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Payroll
@@ -62,67 +62,67 @@ namespace Knjigovodstvo.Payroll
         {
             DbDataGet data = new DbDataGet();
             //TODO: shorten this and simplify
-            DataTable dt = data.GetTable(new Joppd(), $"Skupina='Nacin_Isplate';");
+            DataTable dt = data.GetTable(new JoppdSifre(), $"Skupina='Nacin_Isplate';");
             dt.Columns.Add(
                 "Sifra i opis",
                 typeof(string),
                 "Sifra + '   ' + Opis");
             comboBoxNacinIsplate.DataSource = dt;
-            comboBoxNacinIsplate.ValueMember = "Id";
+            comboBoxNacinIsplate.ValueMember = "Sifra";
             comboBoxNacinIsplate.DisplayMember = "Sifra i Opis";
 
-            dt = data.GetTable(new Joppd(), $"Skupina='Stjecatelj';");
+            dt = data.GetTable(new JoppdSifre(), $"Skupina='Stjecatelj';");
             dt.Columns.Add(
                 "Sifra i opis",
                 typeof(string),
                 "Sifra + '   ' + Opis");
             comboBoxStjecatelj.DataSource = dt;
-            comboBoxStjecatelj.ValueMember = "Id";
+            comboBoxStjecatelj.ValueMember = "Sifra";
             comboBoxStjecatelj.DisplayMember = "Sifra i Opis";
 
-            dt = data.GetTable(new Joppd(), $"Skupina='Primici';");
+            dt = data.GetTable(new JoppdSifre(), $"Skupina='Primici';");
             dt.Columns.Add(
                 "Sifra i opis",
                 typeof(string),
                 "Sifra + '   ' + Opis");
             comboBoxPrimitak.DataSource = dt;
-            comboBoxPrimitak.ValueMember = "Id";
+            comboBoxPrimitak.ValueMember = "Sifra";
             comboBoxPrimitak.DisplayMember = "Sifra i opis";
 
-            dt = data.GetTable(new Joppd(), $"Skupina='Beneficirani';");
+            dt = data.GetTable(new JoppdSifre(), $"Skupina='Beneficirani';");
             dt.Columns.Add(
                 "Sifra i opis",
                 typeof(string),
                 "Sifra + '   ' + Opis");
             comboBoxDodatniMio.DataSource = dt;
-            comboBoxDodatniMio.ValueMember = "Id";
+            comboBoxDodatniMio.ValueMember = "Sifra";
             comboBoxDodatniMio.DisplayMember = "Sifra i opis";
 
-            dt = data.GetTable(new Joppd(), $"Skupina='Invaliditet';");
+            dt = data.GetTable(new JoppdSifre(), $"Skupina='Invaliditet';");
             dt.Columns.Add(
                 "Sifra i opis",
                 typeof(string),
                 "Sifra + '   ' + Opis");
             comboBoxInvaliditet.DataSource = dt;
-            comboBoxInvaliditet.ValueMember = "Id";
+            comboBoxInvaliditet.ValueMember = "Sifra";
             comboBoxInvaliditet.DisplayMember = "Sifra i opis";
 
-            dt = data.GetTable(new Joppd(), $"Skupina='Mjesec';");
+            dt = data.GetTable(new JoppdSifre(), $"Skupina='Mjesec';");
             dt.Columns.Add(
                 "Sifra i opis",
                 typeof(string),
                 "Sifra + '   ' + Opis");
             comboBoxMjesecPrviZadnji.DataSource = dt;
-            comboBoxMjesecPrviZadnji.ValueMember = "Id";
+            comboBoxMjesecPrviZadnji.ValueMember = "Sifra";
             comboBoxMjesecPrviZadnji.DisplayMember = "Sifra i opis";
 
-            dt = data.GetTable(new Joppd(), $"Skupina='Vrijeme';");
+            dt = data.GetTable(new JoppdSifre(), $"Skupina='Vrijeme';");
             dt.Columns.Add(
                 "Sifra i opis",
                 typeof(string),
                 "Sifra + '   ' + Opis");
             comboBoxRadnoVrijeme.DataSource = dt;
-            comboBoxRadnoVrijeme.ValueMember = "Id";
+            comboBoxRadnoVrijeme.ValueMember = "Sifra";
             comboBoxRadnoVrijeme.DisplayMember = "Sifra i opis";
         }        
 
@@ -215,7 +215,7 @@ namespace Knjigovodstvo.Payroll
         private void ButtonSpremiJoppdPostavke_Click(object sender, EventArgs e)
         {
             ZaposlenikJoppd provjera = new ZaposlenikJoppd().GetZaposlenikByOib(_zaposlenik.Oib);
-
+            SetZaposlenikJoppd();
             if (provjera.Id == 0)
             {
                 if (new DbDataInsert().InsertData(_zaposlenikJoppd))

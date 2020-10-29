@@ -8,10 +8,13 @@ namespace Knjigovodstvo.Database
     enum ProcedureNames
     {
         Dohvati_Distinct_Datum,
-        DropPlacaPregled,
+        /// <summary> params: @TABLENAME</summary>
+        Drop_Table,
         PlacaPregled,
         Prebaci_postBroj,
-        Prebaci_prirez
+        Prebaci_prirez,
+        /// <summary> params: @datumOd, @day = null</summary>
+        Joppd_podaci
     }
 
     class DbDataExecProcedure
@@ -21,10 +24,10 @@ namespace Knjigovodstvo.Database
         /// </summary>
         /// <param name="procName">Selected procedure from ProcedureNames enum.</param>
         /// <returns>DataTable based on condition</returns>
-        public DataTable GetTable(ProcedureNames procName)
+        public DataTable GetTable(ProcedureNames procName, string param = null)
         {
             DataTable dt = new DataTable();
-            string query = $"EXEC {CreateQuery(procName)};";
+            string query = $"EXEC {CreateQuery(procName, param)};";
             
             try
             {
@@ -53,15 +56,16 @@ namespace Knjigovodstvo.Database
             return dt;
         }
 
-        private string CreateQuery(ProcedureNames name)
+        private string CreateQuery(ProcedureNames name, string param=null)
         {
             return name switch
             {
                 ProcedureNames.Dohvati_Distinct_Datum => "Dohvati_Distinct_Datum",
-                ProcedureNames.DropPlacaPregled => "DropPlacaPregled",
+                ProcedureNames.Drop_Table => "Drop_Table " + param,
                 ProcedureNames.PlacaPregled => "PlacaPregled",
                 ProcedureNames.Prebaci_postBroj => "Prebaci_postBroj",
                 ProcedureNames.Prebaci_prirez => "Prebaci_prirez",
+                ProcedureNames.Joppd_podaci => "Joppd_podaci " + param,
                 _ => "",
             };
         }

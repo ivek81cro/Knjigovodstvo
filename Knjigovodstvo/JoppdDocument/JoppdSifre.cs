@@ -1,11 +1,9 @@
 ﻿using Knjigovodstvo.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Knjigovodstvo.Payroll
+namespace Knjigovodstvo.JoppdDocument
 {
-    class Joppd : IDbObject
+    class JoppdSifre : IDbObject
     {
         public FormError ValidateData()
         {
