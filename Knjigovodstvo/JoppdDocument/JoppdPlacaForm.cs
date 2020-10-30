@@ -82,6 +82,55 @@ namespace Knjigovodstvo.JoppdDocument
 
         }
 
+        private void PopuniJoppdEntitete()
+        {
+            _dt = new DbDataExecProcedure().GetTable(ProcedureNames.Joppd_podaci, $"@datumOd='2020-09', @dan='01'");
+            List<DataRow> rows = _dt.AsEnumerable().ToList();
+            _joppdEntiteti.JoppdEntitet = (from DataRow dr in rows
+                              select new JoppdEntitet()
+                              {
+                                  Opcina_Prebivalista = dr["Opcina_Prebivalista"].ToString(),
+                                  Opcina_Rada = dr["Opcina_Rada"].ToString(),
+                                  Oib = dr["Oib"].ToString(),
+                                  Ime_Prezime = dr["Ime_Prezime"].ToString(),
+                                  Stjecatelj = dr["Stjecatelj"].ToString(),
+                                  Primitak = dr["Primitak"].ToString(),
+                                  Beneficirani = dr["Beneficirani"].ToString(),
+                                  Invaliditet = dr["Invaliditet"].ToString(),
+                                  Mjesec = dr["Mjesec"].ToString(),
+                                  Sati = int.Parse(textBoxSatiRada.Text),
+                                  Datum_Od = dr["Datum_Od"].ToString(),
+                                  Datum_Do = dr["Datum_Do"].ToString(),
+                                  Bruto = float.Parse(dr["Bruto"].ToString()),
+                                  Mio_1 = float.Parse(dr["Mio_1"].ToString()),
+                                  Mio_2 = float.Parse(dr["Mio_2"].ToString()),
+                                  Dohodak = float.Parse(dr["Dohodak"].ToString()),
+                                  Osobni_Odbitak = float.Parse(dr["Osobni_Odbitak"].ToString()),
+                                  Porezna_Osnovica = float.Parse(dr["Porezna_Osnovica"].ToString()),
+                                  Porez_Ukupno = float.Parse(dr["Porez_Ukupno"].ToString()),
+                                  Prirez = float.Parse(dr["Prirez"].ToString()),
+                                  Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
+                                  Iznos_Isplate = float.Parse(dr["Neto"].ToString()),
+                                  Primitak_Nesamostalni = float.Parse(dr["Bruto"].ToString())
+                              }).ToList();
+
+            foreach (JoppdEntitet ent in _joppdEntiteti.JoppdEntitet)
+            {
+                ent.PopuniDodatke();
+                ent.Iznos_Isplate += ent.Iznos_Neoporezivog;
+            }
+
+            System.IO.TextWriter txtWriter = new System.IO.StreamWriter(@"Serialization.xml");
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(_joppdEntiteti.GetType());
+            x.Serialize(txtWriter, _joppdEntiteti);
+            txtWriter.Close();
+
+            System.IO.StreamReader reader = new System.IO.StreamReader(@"Serialization.xml");
+            JoppdEntitetCollection enti = (JoppdEntitetCollection)x.Deserialize(reader);
+            enti.JoppdEntitet.ForEach(x => x.PopuniDodatke());
+            enti.GetType();
+        }
+
         private void textBoxSatiRada_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -90,48 +139,9 @@ namespace Knjigovodstvo.JoppdDocument
             }
         }
 
-        private void PopuniJoppdEntitete()
-        {
-            _dt = new DbDataExecProcedure().GetTable(ProcedureNames.Joppd_podaci, $"@datumOd='2020-09', @dan='01'");
-            List<DataRow> rows = _dt.AsEnumerable().ToList();
-            _joppdEntiteti = (from DataRow dr in rows
-                        select new JoppdEntitet()
-                        {
-                            Opcina_Prebivalista = dr["Opcina_Prebivalista"].ToString(),
-                            Opcina_Rada = dr["Opcina_Rada"].ToString(),
-                            Oib = dr["Oib"].ToString(),
-                            Ime_Prezime = dr["Ime_Prezime"].ToString(),
-                            Stjecatelj = dr["Stjecatelj"].ToString(),
-                            Primitak = dr["Primitak"].ToString(),
-                            Beneficirani = dr["Beneficirani"].ToString(),
-                            Invaliditet = dr["Invaliditet"].ToString(),
-                            Mjesec = dr["Mjesec"].ToString(),
-                            Sati = int.Parse(textBoxSatiRada.Text),
-                            Datum_Od = dr["Datum_Od"].ToString(),
-                            Datum_Do = dr["Datum_Do"].ToString(),
-                            Bruto = float.Parse(dr["Bruto"].ToString()),
-                            Mio_1 = float.Parse(dr["Mio_1"].ToString()),
-                            Mio_2 = float.Parse(dr["Mio_2"].ToString()),
-                            Dohodak = float.Parse(dr["Dohodak"].ToString()),
-                            Osobni_Odbitak = float.Parse(dr["Osobni_Odbitak"].ToString()),
-                            Porezna_Osnovica = float.Parse(dr["Porezna_Osnovica"].ToString()),
-                            Porez_Ukupno = float.Parse(dr["Porez_Ukupno"].ToString()),
-                            Prirez = float.Parse(dr["Prirez"].ToString()),
-                            Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
-                            Iznos_Isplate = float.Parse(dr["Neto"].ToString()),
-                            Primitak_Nesamostalni = float.Parse(dr["Bruto"].ToString())
-                        }).ToList();
-
-            foreach(JoppdEntitet ent in _joppdEntiteti)
-            {
-                ent.PopuniDodatke();
-                ent.Iznos_Isplate += ent.Iznos_Neoporezivog;
-            }
-        }
-
         private Zaposlenik _zaposlenik = new Zaposlenik();
         private DataTable _dt = new DataTable();
         private JoppdSifre _joppdSifre = new JoppdSifre();
-        private List<JoppdEntitet> _joppdEntiteti = new List<JoppdEntitet>();
+        private JoppdEntitetCollection _joppdEntiteti = new JoppdEntitetCollection();
     }
 }
