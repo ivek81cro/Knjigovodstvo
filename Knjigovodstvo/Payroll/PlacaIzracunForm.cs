@@ -4,7 +4,9 @@ using Knjigovodstvo.Employee;
 using Knjigovodstvo.JoppdDocument;
 using Knjigovodstvo.Validators;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Payroll
@@ -42,6 +44,7 @@ namespace Knjigovodstvo.Payroll
             if (_zaposlenikJoppd.GetZaposlenikByOib(_zaposlenik.Oib).Oib != "")
             {
                 PopuniJoppd(_zaposlenikJoppd);
+                PopuniDodaci();
             }
         }
 
@@ -160,6 +163,7 @@ namespace Knjigovodstvo.Payroll
 
         private void PopuniKontrole(Placa placa)
         {
+            textBoxBruto.Text =
             textBoxBrutoRead.Text = Math.Round(placa.Bruto, 2).ToString("0.00");
             textBoxMio1.Text = Math.Round(placa.Mio_1, 2).ToString("0.00");
             textBoxMio2.Text = Math.Round(placa.Mio_2, 2).ToString("0.00");
@@ -174,6 +178,7 @@ namespace Knjigovodstvo.Payroll
             textBoxNetto.Text = Math.Round(placa.Neto, 2).ToString("0.00");
             textBoxDoprinosZdravstvo.Text = Math.Round(placa.Doprinos_Zdravstvo, 2).ToString("0.00");
             textBoxDodaci.Text = Math.Round(placa.Dodaci_Ukupno, 2).ToString("0.00");
+            labelPrirez.Text ="Prirez " + Math.Round(placa.Prirez / placa.Porez_Ukupno * 100.0f, 0).ToString("0") + '%';
         }
 
         private void PopuniJoppd(ZaposlenikJoppd zaposlenikJoppd)
@@ -185,6 +190,37 @@ namespace Knjigovodstvo.Payroll
             comboBoxInvaliditet.SelectedValue = zaposlenikJoppd.Invaliditet;
             comboBoxMjesecPrviZadnji.SelectedValue = zaposlenikJoppd.Mjesec;
             comboBoxRadnoVrijeme.SelectedValue = zaposlenikJoppd.Vrijeme;
+        }
+
+        private void PopuniDodaci()
+        {
+            DataTable dt = new PlacaDodatak().GetDodaciByOib(_zaposlenik.Oib);
+            List<DataRow> rows = dt.AsEnumerable().ToList();
+            _dodaci = (from DataRow row in rows
+                       select new PlacaDodatak()
+                       {
+                           Id = int.Parse(row["Id"].ToString()),
+                           Oib = row["Oib"].ToString(),
+                           Sifra = row["Sifra"].ToString(),
+                           Iznos = float.Parse(row["Iznos"].ToString())
+                       }).ToList();
+            float dodaciUkupno = 0;
+            if (_dodaci.Count > 0)
+            {
+                dodaciUkupno = ZbrojiDodatke();
+            }
+            textBoxDodaci.Text = dodaciUkupno.ToString();
+        }
+
+        private float ZbrojiDodatke()
+        {
+            float dodaciUkupno = 0;
+            foreach (PlacaDodatak d in _dodaci)
+            {
+                dodaciUkupno += d.Iznos;
+            }
+
+            return dodaciUkupno;
         }
 
         private void PromjenaZaposlenikJoppd_SelectionChangeCommitted(object sender, EventArgs e)
@@ -274,10 +310,11 @@ namespace Knjigovodstvo.Payroll
             {
                 if (comboBoxZaposlenik.SelectedItem != null)
                 {
+                    PopuniDodaci();
                     float prirez = float.Parse(new DbDataGet().GetTable(new Grad(), $"Naziv='{_zaposlenik.Grad}';").Rows[0]["Prirez"].ToString()) / 100.0f;
                     float iznosBruto = float.Parse(textBoxBruto.Text);
-                    labelPrirezStopa.Text = (prirez * 100).ToString() + '%';
-                    _placa.Izracun(iznosBruto, prirez, _zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
+                    labelPrirez.Text = "Prirez " + (prirez * 100).ToString() + '%';
+                    _placa.Izracun(iznosBruto, prirez, ZbrojiDodatke(), _zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
                     _placa.Oib = _zaposlenik.Oib;
 
                     PopuniKontrole(_placa);
@@ -296,5 +333,6 @@ namespace Knjigovodstvo.Payroll
         private ZaposlenikJoppd _zaposlenikJoppd = new ZaposlenikJoppd();
         private Placa _placa = new Placa();
         private Zaposlenik _zaposlenik = new Zaposlenik();
+        private List<PlacaDodatak> _dodaci = new List<PlacaDodatak>();
     }
 }

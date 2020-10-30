@@ -28,7 +28,7 @@ namespace Knjigovodstvo.Payroll
 
         public DataTable GetDodaciByOib(string oib)
         {
-            return _dt = new DbDataGet().GetTable(this, $"Oib={oib};");
+            return _dt = new DbDataGet().GetTable(this, $"Oib='{oib}';");
         }
 
         private DataTable _dt = new DataTable();

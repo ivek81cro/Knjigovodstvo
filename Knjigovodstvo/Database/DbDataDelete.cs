@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Knjigovodstvo.Helpers;
+using Knjigovodstvo.Models;
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -10,12 +13,16 @@ namespace Knjigovodstvo.Database
         /// <param name="id">Id of row in table.</param>
         /// <param name="table">Name of table in database.</param>
         /// <returns>Bool True if operation successful.</returns>
-        public bool DeleteItem(int id, string table)
+        public bool DeleteItem(IDbObject dbObject)
         {
+            GenericPropertyFinder<IDbObject> property = new GenericPropertyFinder<IDbObject>();
+
+            IEnumerable<List<string>> obj = property.PrintTModelPropertyAndValue(dbObject);
+            string table = dbObject.GetType().ToString().Substring(dbObject.GetType().ToString().LastIndexOf('.') + 1);
+            string query = new DbQueryBuilder(obj, table).BuildQuery(QueryType.Delete);
+
             try
             {
-                string query = $"DELETE FROM {table} WHERE Id={id};";
-
                 using SqlConnection conn = new SqlConnection(ConnHelper.ConnStr(connection_name));
                 using SqlCommand command = new SqlCommand(query, conn);
                 conn.Open();

@@ -141,6 +141,25 @@ namespace Knjigovodstvo.Payroll
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Int32 selectedRowCount = dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0)
+            {
+                _dodaci.Id = int.Parse(dataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
+
+                if(new DbDataDelete().DeleteItem(_dodaci))
+                {
+                    MessageBox.Show("Dodatak obrisan.", "Dodaci", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadDatagrid();
+                }
+                else
+                {
+                    MessageBox.Show("Dodatak nije obrisan.", "Dodaci", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
         private PlacaDodatak _dodaci = new PlacaDodatak();
         private Zaposlenik _zaposlenik;
         private Placa _placa;

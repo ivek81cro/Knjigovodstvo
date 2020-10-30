@@ -39,21 +39,21 @@ namespace Knjigovodstvo.Employee
         private void BtnEditZaposlenik_Click(object sender, EventArgs e)
         {
             int id = int.Parse(dataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
-            Zaposlenik zaposlenik = new Zaposlenik().GetZaposlenikById(id);
+            _zaposlenik = _zaposlenik.GetZaposlenikById(id);
             ZaposlenikUnosForm pn = new ZaposlenikUnosForm();
             pn.FormClosing += new FormClosingEventHandler(this.ZaposlenikNew_FormClosing);
-            pn.EditZaposlenik(zaposlenik);
+            pn.EditZaposlenik(_zaposlenik);
         }
 
         private void BtnDeleteZaposlenik_Click(object sender, EventArgs e)
         {
-            int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-            DialogResult result = MessageBox.Show("Da li ste sigurni da želite obrisati odabrani red?",
+            _zaposlenik.Id = int.Parse(dataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
+            DialogResult result = MessageBox.Show("Da li ste sigurni da želite obrisati odabranog zaposlenika?",
                 "Brisanje reda", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
-                if (new DbDataDelete().DeleteItem(id, "Zaposlenik"))
+                if (new DbDataDelete().DeleteItem(_zaposlenik))
                     MessageBox.Show("Podatak obrisan", "Brisanje podatka", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 LoadDatagrid();
@@ -65,5 +65,7 @@ namespace Knjigovodstvo.Employee
             (dataGridView1.DataSource as DataTable).DefaultView.RowFilter =
                 $"Prezime LIKE '{textBoxFilterZaposlenik.Text}%' OR Prezime LIKE '% {textBoxFilterZaposlenik.Text}%'";
         }
+
+        Zaposlenik _zaposlenik = new Zaposlenik();
     }
 }

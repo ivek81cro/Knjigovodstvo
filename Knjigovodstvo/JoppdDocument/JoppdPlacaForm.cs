@@ -102,6 +102,7 @@ namespace Knjigovodstvo.JoppdDocument
                             Oib = dr["Oib"].ToString(),
                             Ime_Prezime = dr["Ime_Prezime"].ToString(),
                             Stjecatelj = dr["Stjecatelj"].ToString(),
+                            Primitak = dr["Primitak"].ToString(),
                             Beneficirani = dr["Beneficirani"].ToString(),
                             Invaliditet = dr["Invaliditet"].ToString(),
                             Mjesec = dr["Mjesec"].ToString(),
@@ -116,12 +117,15 @@ namespace Knjigovodstvo.JoppdDocument
                             Porezna_Osnovica = float.Parse(dr["Porezna_Osnovica"].ToString()),
                             Porez_Ukupno = float.Parse(dr["Porez_Ukupno"].ToString()),
                             Prirez = float.Parse(dr["Prirez"].ToString()),
-                            Nacin_Isplate = dr["Nacin_Isplate"].ToString()
+                            Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
+                            Iznos_Isplate = float.Parse(dr["Neto"].ToString()),
+                            Primitak_Nesamostalni = float.Parse(dr["Bruto"].ToString())
                         }).ToList();
 
             foreach(JoppdEntitet ent in _joppdEntiteti)
             {
                 ent.PopuniDodatke();
+                ent.Iznos_Isplate += ent.Iznos_Neoporezivog;
             }
         }
 

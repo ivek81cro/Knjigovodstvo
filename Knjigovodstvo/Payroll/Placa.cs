@@ -13,7 +13,7 @@ namespace Knjigovodstvo.Payroll
             return FormError.None;
         }
 
-        public Placa Izracun(float bruto, float prirez, float odbitak, bool drugi = false)
+        public Placa Izracun(float bruto, float prirez, float dodaci, float odbitak, bool drugi = false)
         {
             Postavke p = new Postavke();
             float iznos = bruto;
@@ -48,6 +48,7 @@ namespace Knjigovodstvo.Payroll
             Neto = iznos + Osobni_Odbitak;
 
             Doprinos_Zdravstvo = Bruto * p.GetStopaByName(PlacaStope.Doprinos_Zdravstveno);
+            Dodaci_Ukupno = dodaci;
 
 
             return this;

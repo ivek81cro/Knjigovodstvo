@@ -34,10 +34,10 @@ namespace Knjigovodstvo.Partners
         private void BtnEditPartner_Click(object sender, EventArgs e)
         {
             int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-            Partneri partner = new Partneri().GetPartnerById(id);
+            _partner = new Partneri().GetPartnerById(id);
             PartnerUnosForm pn = new PartnerUnosForm();
             pn.FormClosing += new FormClosingEventHandler(this.PartnersNew_FormClosing);
-            pn.EditPartner(partner);
+            pn.EditPartner(_partner);
         }
         private void PartnersNew_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -46,17 +46,19 @@ namespace Knjigovodstvo.Partners
 
         private void BtnDeletePartner_Click(object sender, EventArgs e)
         {
-            int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-            DialogResult result = MessageBox.Show("Da li ste sigurni da želite obrisati odabrani red?", 
+            _partner.Id = int.Parse(dataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
+            DialogResult result = MessageBox.Show("Da li ste sigurni da želite obrisati odabranog partnera?", 
                 "Brisanje partnera", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
-                if (new DbDataDelete().DeleteItem(id, "Partneri"))
+                if (new DbDataDelete().DeleteItem(_partner))
                     MessageBox.Show("Podatak obrisan", "Brisanje podatka", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 
                 LoadDatagrid();
             }
         }
+
+        Partneri _partner = new Partneri();
     }
 }
