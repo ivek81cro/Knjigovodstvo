@@ -18,9 +18,6 @@ namespace Knjigovodstvo.JoppdDocument
             SetJoppdFormNumber();
             FillComboBoxZaposlenik();
             FillComboBoxDodaci();
-
-            //TODO test
-            PopuniJoppdEntitete();
         }
 
         private void DateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -98,9 +95,10 @@ namespace Knjigovodstvo.JoppdDocument
                                   Beneficirani = dr["Beneficirani"].ToString(),
                                   Invaliditet = dr["Invaliditet"].ToString(),
                                   Mjesec = dr["Mjesec"].ToString(),
+                                  Vrijeme = dr["Vrijeme"].ToString(),
                                   Sati = int.Parse(textBoxSatiRada.Text),
-                                  Datum_Od = dr["Datum_Od"].ToString(),
-                                  Datum_Do = dr["Datum_Do"].ToString(),
+                                  Datum_Od = Convert.ToDateTime(dr["Datum_Od"].ToString()).ToString("yyyy-MM-dd"),
+                                  Datum_Do = Convert.ToDateTime(dr["Datum_Do"].ToString()).ToString("yyyy-MM-dd"),
                                   Bruto = float.Parse(dr["Bruto"].ToString()),
                                   Mio_1 = float.Parse(dr["Mio_1"].ToString()),
                                   Mio_2 = float.Parse(dr["Mio_2"].ToString()),
@@ -114,10 +112,9 @@ namespace Knjigovodstvo.JoppdDocument
                                   Primitak_Nesamostalni = float.Parse(dr["Bruto"].ToString())
                               }).ToList();
 
-            foreach (JoppdEntitet ent in _joppdEntiteti.JoppdEntitet)
+            for(int i = 0; i<_joppdEntiteti.JoppdEntitet.Count; i++)
             {
-                ent.PopuniDodatke();
-                ent.Iznos_Isplate += ent.Iznos_Neoporezivog;
+                _joppdEntiteti.JoppdEntitet[i].PopuniDodatke(i + 1);
             }
 
             System.IO.TextWriter txtWriter = new System.IO.StreamWriter(@"Serialization.xml");
@@ -127,7 +124,12 @@ namespace Knjigovodstvo.JoppdDocument
 
             System.IO.StreamReader reader = new System.IO.StreamReader(@"Serialization.xml");
             JoppdEntitetCollection enti = (JoppdEntitetCollection)x.Deserialize(reader);
-            enti.JoppdEntitet.ForEach(x => x.PopuniDodatke());
+            reader.Close();
+
+            DataSet dataSet = new DataSet();
+            dataSet.ReadXml(@"Serialization.xml");
+            dataGridView1.DataSource = dataSet.Tables[1];
+
             enti.GetType();
         }
 
@@ -137,6 +139,11 @@ namespace Knjigovodstvo.JoppdDocument
             {
                 e.Handled = true;
             }
+        }
+
+        private void buttonPopuniObrazac_Click(object sender, EventArgs e)
+        {
+            PopuniJoppdEntitete();
         }
 
         private Zaposlenik _zaposlenik = new Zaposlenik();

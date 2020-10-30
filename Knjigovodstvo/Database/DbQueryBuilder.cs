@@ -52,7 +52,22 @@ namespace Knjigovodstvo.Database
 
         private string Select()
         {
-            return $"SELECT * FROM {_table};";
+            string query = "SELECT ";
+
+            for (int i = 0; i < _name.Count; ++i)
+            {
+                if (_type[i] == "Single")
+                {
+                    query += "ROUND(" + _name[i] + ", 2) as " + _name[i] + ", ";
+                }
+                else
+                    query += _name[i] + ", ";
+            }
+            query = query.Substring(0, query.Length - 2);
+
+            query += " FROM " + _table + ";";
+
+            return query;
         }
 
         private string Insert()

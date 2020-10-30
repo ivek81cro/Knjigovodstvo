@@ -28,7 +28,8 @@ namespace Knjigovodstvo.Database
 
             if(condition != null)
             {
-                query = query.Substring(0, query.Length - 1);
+                if(query.EndsWith(';'))
+                    query = query.Substring(0, query.Length - 1);
                 query += $" WHERE {condition};";
             }
 

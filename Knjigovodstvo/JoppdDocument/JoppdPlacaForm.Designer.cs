@@ -39,6 +39,8 @@
             this.comboBoxZaposlenik = new System.Windows.Forms.ComboBox();
             this.labelSatiRada = new System.Windows.Forms.Label();
             this.textBoxSatiRada = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dateTimePicker1
@@ -70,12 +72,13 @@
             // 
             // buttonPopuniObrazac
             // 
-            this.buttonPopuniObrazac.Location = new System.Drawing.Point(12, 512);
+            this.buttonPopuniObrazac.Location = new System.Drawing.Point(11, 146);
             this.buttonPopuniObrazac.Name = "buttonPopuniObrazac";
             this.buttonPopuniObrazac.Size = new System.Drawing.Size(75, 23);
             this.buttonPopuniObrazac.TabIndex = 3;
             this.buttonPopuniObrazac.Text = "Popuni";
             this.buttonPopuniObrazac.UseVisualStyleBackColor = true;
+            this.buttonPopuniObrazac.Click += new System.EventHandler(this.buttonPopuniObrazac_Click);
             // 
             // checkBoxSamoDodaci
             // 
@@ -142,11 +145,29 @@
             this.textBoxSatiRada.Text = "168";
             this.textBoxSatiRada.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSatiRada_KeyPress);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(9, 201);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(961, 330);
+            this.dataGridView1.TabIndex = 10;
+            this.dataGridView1.Text = "dataGridView1";
+            // 
             // JoppdPlacaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 547);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBoxSatiRada);
             this.Controls.Add(this.labelSatiRada);
             this.Controls.Add(this.comboBoxZaposlenik);
@@ -160,6 +181,7 @@
             this.Controls.Add(this.dateTimePicker1);
             this.Name = "JoppdPlacaForm";
             this.Text = "PlacaJoppdForm";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,5 +200,6 @@
         private System.Windows.Forms.ComboBox comboBoxZaposlenik;
         private System.Windows.Forms.Label labelSatiRada;
         private System.Windows.Forms.TextBox textBoxSatiRada;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
