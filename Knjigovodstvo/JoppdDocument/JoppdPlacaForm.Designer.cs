@@ -40,6 +40,8 @@
             this.labelSatiRada = new System.Windows.Forms.Label();
             this.textBoxSatiRada = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxIzvjesceSastavioIme = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -158,15 +160,34 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(961, 330);
+            this.dataGridView1.Size = new System.Drawing.Size(935, 330);
             this.dataGridView1.TabIndex = 10;
             this.dataGridView1.Text = "dataGridView1";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(571, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 15);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Izvješće sastavio";
+            // 
+            // textBoxIzvjesceSastavioIme
+            // 
+            this.textBoxIzvjesceSastavioIme.Location = new System.Drawing.Point(669, 15);
+            this.textBoxIzvjesceSastavioIme.Name = "textBoxIzvjesceSastavioIme";
+            this.textBoxIzvjesceSastavioIme.Size = new System.Drawing.Size(136, 23);
+            this.textBoxIzvjesceSastavioIme.TabIndex = 12;
+            this.textBoxIzvjesceSastavioIme.Text = "Ivan Batinić";
             // 
             // JoppdPlacaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(982, 547);
+            this.ClientSize = new System.Drawing.Size(956, 547);
+            this.Controls.Add(this.textBoxIzvjesceSastavioIme);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBoxSatiRada);
             this.Controls.Add(this.labelSatiRada);
@@ -201,5 +222,7 @@
         private System.Windows.Forms.Label labelSatiRada;
         private System.Windows.Forms.TextBox textBoxSatiRada;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxIzvjesceSastavioIme;
     }
 }

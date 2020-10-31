@@ -85,33 +85,33 @@ namespace Knjigovodstvo.JoppdDocument
             _dt = new DbDataExecProcedure().GetTable(ProcedureNames.Joppd_podaci, $"@datumOd='2020-09', @dan='01'");
             List<DataRow> rows = _dt.AsEnumerable().ToList();
             _joppdEntiteti.JoppdEntitet = (from DataRow dr in rows
-                              select new JoppdEntitet()
-                              {
-                                  Opcina_Prebivalista = dr["Opcina_Prebivalista"].ToString(),
-                                  Opcina_Rada = dr["Opcina_Rada"].ToString(),
-                                  Oib = dr["Oib"].ToString(),
-                                  Ime_Prezime = dr["Ime_Prezime"].ToString(),
-                                  Stjecatelj = dr["Stjecatelj"].ToString(),
-                                  Primitak = dr["Primitak"].ToString(),
-                                  Beneficirani = dr["Beneficirani"].ToString(),
-                                  Invaliditet = dr["Invaliditet"].ToString(),
-                                  Mjesec = dr["Mjesec"].ToString(),
-                                  Vrijeme = dr["Vrijeme"].ToString(),
-                                  Sati = int.Parse(textBoxSatiRada.Text),
-                                  Datum_Od = Convert.ToDateTime(dr["Datum_Od"].ToString()).ToString("yyyy-MM-dd"),
-                                  Datum_Do = Convert.ToDateTime(dr["Datum_Do"].ToString()).ToString("yyyy-MM-dd"),
-                                  Bruto = decimal.Parse(dr["Bruto"].ToString()),
-                                  Mio_1 = decimal.Parse(dr["Mio_1"].ToString()),
-                                  Mio_2 = decimal.Parse(dr["Mio_2"].ToString()),
-                                  Dohodak = decimal.Parse(dr["Dohodak"].ToString()),
-                                  Osobni_Odbitak = decimal.Parse(dr["Osobni_Odbitak"].ToString()),
-                                  Porezna_Osnovica = decimal.Parse(dr["Porezna_Osnovica"].ToString()),
-                                  Porez_Ukupno = decimal.Parse(dr["Porez_Ukupno"].ToString()),
-                                  Prirez = decimal.Parse(dr["Prirez"].ToString()),
-                                  Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
-                                  Iznos_Isplate = decimal.Parse(dr["Neto"].ToString()),
-                                  Primitak_Nesamostalni = decimal.Parse(dr["Bruto"].ToString())
-                              }).ToList();
+                                           select new JoppdEntitet()
+                                           {
+                                               Opcina_Prebivalista = dr["Opcina_Prebivalista"].ToString(),
+                                               Opcina_Rada = dr["Opcina_Rada"].ToString(),
+                                               Oib = dr["Oib"].ToString(),
+                                               Ime_Prezime = dr["Ime_Prezime"].ToString(),
+                                               Stjecatelj = dr["Stjecatelj"].ToString(),
+                                               Primitak = dr["Primitak"].ToString(),
+                                               Beneficirani = dr["Beneficirani"].ToString(),
+                                               Invaliditet = dr["Invaliditet"].ToString(),
+                                               Mjesec = dr["Mjesec"].ToString(),
+                                               Vrijeme = dr["Vrijeme"].ToString(),
+                                               Sati = int.Parse(textBoxSatiRada.Text),
+                                               Datum_Od = Convert.ToDateTime(dr["Datum_Od"].ToString()).ToString("yyyy-MM-dd"),
+                                               Datum_Do = Convert.ToDateTime(dr["Datum_Do"].ToString()).ToString("yyyy-MM-dd"),
+                                               Bruto = decimal.Parse(dr["Bruto"].ToString()),
+                                               Mio_1 = decimal.Parse(dr["Mio_1"].ToString()),
+                                               Mio_2 = decimal.Parse(dr["Mio_2"].ToString()),
+                                               Dohodak = decimal.Parse(dr["Dohodak"].ToString()),
+                                               Osobni_Odbitak = decimal.Parse(dr["Osobni_Odbitak"].ToString()),
+                                               Porezna_Osnovica = decimal.Parse(dr["Porezna_Osnovica"].ToString()),
+                                               Porez_Ukupno = decimal.Parse(dr["Porez_Ukupno"].ToString()),
+                                               Prirez = decimal.Parse(dr["Prirez"].ToString()),
+                                               Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
+                                               Iznos_Isplate = decimal.Parse(dr["Neto"].ToString()),
+                                               Primitak_Nesamostalni = decimal.Parse(dr["Bruto"].ToString())
+                                           }).ToList();
 
             List<sPrimateljiP> pArr = new List<sPrimateljiP>();
             for (int i = 0; i < _joppdEntiteti.JoppdEntitet.Count; i++)
@@ -158,12 +158,47 @@ namespace Knjigovodstvo.JoppdDocument
                     P17 = e.Primitak_Nesamostalni
                 });
             }
-            sStranaA strA = new sStranaA();
-            strA.BrojOsoba = pArr.Count().ToString();
+            sStranaA strA = new sStranaA()
+            {
+                DatumIzvjesca = dateTimePicker1.Value,
+                OznakaIzvjesca = SetJoppdFormNumber(),
+                VrstaIzvjesca = tVrstaIzvjesca.Item2,
+                BrojOsoba = pArr.Count.ToString(),
+                BrojRedaka = pArr.Count.ToString(),
+                IzvjesceSastavio = new sIzvjesceSastavio()
+                {
+                    Ime = textBoxIzvjesceSastavioIme.Text.Split(' ')[0],
+                    Prezime = textBoxIzvjesceSastavioIme.Text.Split(' ')[1]
+                },
+                PodnositeljIzvjesca = new sPodnositeljIzvjesca()
+                {
+                    OIB = "12345678901",
+                    Oznaka = tOznakaPodnositelja.Item2,
+                    Adresa = new sAdresa() { Ulica = "Ulica", Broj = "15", Mjesto = "Zagreb" },
+                    Email = "mail@domena.hr",
+                    ItemsElementName = new[] { ItemsChoiceType.Naziv },
+                    Items = new[] { "Firma d.o.o" }
+                },
+                //TODO continue with member value assigning
+            };
+            
+            sJOPPDmetapodaci meta = new sJOPPDmetapodaci()
+            {
+                Datum = new sDatumTemeljni() { Value = dateTimePicker1.Value },
+                Naslov = new sNaslovTemeljni() { Value = "Izvješće o primicima, porezu na dohodak i prirezu te doprinosima za obvezna osiguranja" },
+                Autor = new sAutorTemeljni() { Value = "Ivan Batinić" },
+                Format = new sFormatTemeljni() { Value = tFormat.textxml },
+                Jezik = new sJezikTemeljni() { Value = tJezik.hrHR },
+                Identifikator = new sIdentifikatorTemeljni() { Value = Guid.NewGuid().ToString() },
+                Uskladjenost = new sUskladjenost() { Value = "ObrazacJOPPD-v1-1" },
+                Tip = new sTipTemeljni() { Value = tTip.Elektroničkiobrazac },
+                Adresant = new sAdresantTemeljni() { Value = "Ministarstvo Financija, Porezna uprava, Zagreb" }
+            };
             sPrimateljiP[][] prim = { pArr.ToArray() };
 
             _sObrazacJoppd.StranaA = strA;
             _sObrazacJoppd.StranaB = prim;
+            _sObrazacJoppd.Metapodaci = meta;
 
             System.IO.TextWriter txtWriter = new System.IO.StreamWriter(@"Serialization.xml");
             System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(_sObrazacJoppd.GetType());
@@ -176,7 +211,7 @@ namespace Knjigovodstvo.JoppdDocument
 
             DataSet dataSet = new DataSet();
             dataSet.ReadXml(@"Serialization.xml");
-            dataGridView1.DataSource = dataSet.Tables[4];
+            dataGridView1.DataSource = dataSet.Tables[14];
 
             enti.GetType();
         }
