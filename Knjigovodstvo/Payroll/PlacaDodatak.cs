@@ -20,7 +20,7 @@ namespace Knjigovodstvo.Payroll
             _dt = new DbDataGet().GetTable(new PlacaDodatak(), $"Oib='{zaposlenik.Oib}';");
             foreach (DataRow row in _dt.Rows)
             {
-                placa.Dodaci_Ukupno += float.Parse(row["Iznos"].ToString());
+                placa.Dodaci_Ukupno += decimal.Parse(row["Iznos"].ToString());
             }
 
             return placa;
@@ -36,6 +36,6 @@ namespace Knjigovodstvo.Payroll
         public int Id { get; set; } = 0;
         public string Oib { get; set; } = "";
         public string Sifra { get; set; } = "";
-        public float Iznos { get; set; } = 0;
+        public decimal Iznos { get; set; } = 0;
     }
 }

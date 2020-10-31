@@ -178,7 +178,7 @@ namespace Knjigovodstvo.Payroll
             textBoxNetto.Text = Math.Round(placa.Neto, 2).ToString("0.00");
             textBoxDoprinosZdravstvo.Text = Math.Round(placa.Doprinos_Zdravstvo, 2).ToString("0.00");
             textBoxDodaci.Text = Math.Round(placa.Dodaci_Ukupno, 2).ToString("0.00");
-            labelPrirez.Text ="Prirez " + Math.Round(placa.Prirez / placa.Porez_Ukupno * 100.0f, 0).ToString("0") + '%';
+            labelPrirez.Text ="Prirez " + Math.Round(placa.Prirez / placa.Porez_Ukupno * 100.0m, 0).ToString("0") + '%';
         }
 
         private void PopuniJoppd(ZaposlenikJoppd zaposlenikJoppd)
@@ -202,9 +202,9 @@ namespace Knjigovodstvo.Payroll
                            Id = int.Parse(row["Id"].ToString()),
                            Oib = row["Oib"].ToString(),
                            Sifra = row["Sifra"].ToString(),
-                           Iznos = float.Parse(row["Iznos"].ToString())
+                           Iznos = decimal.Parse(row["Iznos"].ToString())
                        }).ToList();
-            float dodaciUkupno = 0;
+            decimal dodaciUkupno = 0;
             if (_dodaci.Count > 0)
             {
                 dodaciUkupno = ZbrojiDodatke();
@@ -212,9 +212,9 @@ namespace Knjigovodstvo.Payroll
             textBoxDodaci.Text = dodaciUkupno.ToString();
         }
 
-        private float ZbrojiDodatke()
+        private decimal ZbrojiDodatke()
         {
-            float dodaciUkupno = 0;
+            decimal dodaciUkupno = 0;
             foreach (PlacaDodatak d in _dodaci)
             {
                 dodaciUkupno += d.Iznos;
@@ -311,8 +311,8 @@ namespace Knjigovodstvo.Payroll
                 if (comboBoxZaposlenik.SelectedItem != null)
                 {
                     PopuniDodaci();
-                    float prirez = float.Parse(new DbDataGet().GetTable(new Grad(), $"Naziv='{_zaposlenik.Grad}';").Rows[0]["Prirez"].ToString()) / 100.0f;
-                    float iznosBruto = float.Parse(textBoxBruto.Text);
+                    decimal prirez = decimal.Parse(new DbDataGet().GetTable(new Grad(), $"Naziv='{_zaposlenik.Grad}';").Rows[0]["Prirez"].ToString()) / 100.0m;
+                    decimal iznosBruto = decimal.Parse(textBoxBruto.Text);
                     labelPrirez.Text = "Prirez " + (prirez * 100).ToString() + '%';
                     _placa.Izracun(iznosBruto, prirez, ZbrojiDodatke(), _zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
                     _placa.Oib = _zaposlenik.Oib;

@@ -34,7 +34,7 @@ namespace Knjigovodstvo.Settings
                 Id = int.Parse(postavka.Rows[0]["Id"].ToString()),
                 Naziv = postavka.Rows[0]["Naziv"].ToString(),
                 Vrsta = postavka.Rows[0]["Vrsta"].ToString(),
-                Vrijednost = float.Parse(postavka.Rows[0]["Vrijednost"].ToString())
+                Vrijednost = decimal.Parse(postavka.Rows[0]["Vrijednost"].ToString())
             };
         }
 
@@ -47,17 +47,17 @@ namespace Knjigovodstvo.Settings
             return false;
         }
 
-        internal float GetStopaByName(PlacaStope naziv)
+        internal decimal GetStopaByName(PlacaStope naziv)
         {
             string condition = $"Naziv='{naziv}';";
             DataTable postavka = new DbDataGet().GetTable(new Postavke(), condition);
 
-            return float.Parse(postavka.Rows[0][3].ToString());
+            return decimal.Parse(postavka.Rows[0][3].ToString());
         }
 
         public int Id { get; set; } = 0;
         public string Naziv { get; set; } = "";
         public string Vrsta { get; set; } = "";
-        public float Vrijednost { get; set; } = 0;
+        public decimal Vrijednost { get; set; } = 0;
     }
 }

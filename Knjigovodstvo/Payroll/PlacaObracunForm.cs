@@ -35,20 +35,20 @@ namespace Knjigovodstvo.Payroll
                       {
                           Id = int.Parse(data["Id"].ToString()),
                           Oib = data["Oib"].ToString(),
-                          Bruto = float.Parse(data["Bruto"].ToString()),
-                          Mio_1 = float.Parse(data["Mio_1"].ToString()),
-                          Mio_2 = float.Parse(data["Mio_2"].ToString()),
-                          Dohodak = float.Parse(data["Dohodak"].ToString()),
-                          Osobni_Odbitak = float.Parse(data["Osobni_Odbitak"].ToString()),
-                          Porezna_Osnovica = float.Parse(data["Porezna_Osnovica"].ToString()),
-                          Porez_24_per = float.Parse(data["Porez_24_per"].ToString()),
-                          Porez_36_per = float.Parse(data["Porez_36_per"].ToString()),
-                          Porez_Ukupno = float.Parse(data["Porez_Ukupno"].ToString()),
-                          Prirez = float.Parse(data["Prirez"].ToString()),
-                          Ukupno_Porez_i_Prirez = float.Parse(data["Ukupno_Porez_i_Prirez"].ToString()),
-                          Neto = float.Parse(data["Neto"].ToString()),
-                          Doprinos_Zdravstvo = float.Parse(data["Doprinos_Zdravstvo"].ToString()),
-                          Dodaci_Ukupno = float.Parse(data["Dodaci_Ukupno"].ToString())
+                          Bruto = decimal.Parse(data["Bruto"].ToString()),
+                          Mio_1 = decimal.Parse(data["Mio_1"].ToString()),
+                          Mio_2 = decimal.Parse(data["Mio_2"].ToString()),
+                          Dohodak = decimal.Parse(data["Dohodak"].ToString()),
+                          Osobni_Odbitak = decimal.Parse(data["Osobni_Odbitak"].ToString()),
+                          Porezna_Osnovica = decimal.Parse(data["Porezna_Osnovica"].ToString()),
+                          Porez_24_per = decimal.Parse(data["Porez_24_per"].ToString()),
+                          Porez_36_per = decimal.Parse(data["Porez_36_per"].ToString()),
+                          Porez_Ukupno = decimal.Parse(data["Porez_Ukupno"].ToString()),
+                          Prirez = decimal.Parse(data["Prirez"].ToString()),
+                          Ukupno_Porez_i_Prirez = decimal.Parse(data["Ukupno_Porez_i_Prirez"].ToString()),
+                          Neto = decimal.Parse(data["Neto"].ToString()),
+                          Doprinos_Zdravstvo = decimal.Parse(data["Doprinos_Zdravstvo"].ToString()),
+                          Dodaci_Ukupno = decimal.Parse(data["Dodaci_Ukupno"].ToString())
 
                       }).ToList();
         }

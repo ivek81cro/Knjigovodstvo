@@ -57,7 +57,7 @@ namespace Knjigovodstvo.Employee
                 Drzava = zaposlenik.Rows[0]["Drzava"].ToString(),
                 Telefon = zaposlenik.Rows[0]["Telefon"].ToString(),
                 Stručna_Sprema = zaposlenik.Rows[0]["Stručna_Sprema"].ToString(),
-                Olaksica = float.Parse(zaposlenik.Rows[0]["Olaksica"].ToString()),
+                Olaksica = decimal.Parse(zaposlenik.Rows[0]["Olaksica"].ToString()),
                 Datum_Dolaska = zaposlenik.Rows[0]["Datum_Dolaska"].ToString(),
                 Datum_Odlaska = zaposlenik.Rows[0]["Datum_Odlaska"].ToString()
             };
@@ -80,7 +80,7 @@ namespace Knjigovodstvo.Employee
                 Drzava = zaposlenik.Rows[0][7].ToString(),
                 Telefon = zaposlenik.Rows[0][8].ToString(),
                 Stručna_Sprema = zaposlenik.Rows[0][9].ToString(),
-                Olaksica = float.Parse(zaposlenik.Rows[0][10].ToString()),
+                Olaksica = decimal.Parse(zaposlenik.Rows[0][10].ToString()),
                 Datum_Dolaska = zaposlenik.Rows[0][11].ToString(),
                 Datum_Odlaska = zaposlenik.Rows[0][12].ToString()
             };
@@ -96,7 +96,7 @@ namespace Knjigovodstvo.Employee
         public string Drzava { get; set; } = "";
         public string Telefon { get; set; } = "";
         public string Stručna_Sprema { get; set; } = "";
-        public float Olaksica { get; set; } = 0;
+        public decimal Olaksica { get; set; } = 0;
         public string Datum_Dolaska { get; set; } = "";
         public string Datum_Odlaska { get; set; } = "";
     }

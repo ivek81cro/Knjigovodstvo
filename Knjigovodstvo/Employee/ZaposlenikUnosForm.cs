@@ -35,7 +35,7 @@ namespace Knjigovodstvo.Employee
                 Drzava = textBoxDrzava.Text,
                 Telefon = textBoxTelefon.Text,
                 Stručna_Sprema = textBoxStrucnaSprema.Text,
-                Olaksica = float.Parse(textBoxOlaksica.Text),
+                Olaksica = decimal.Parse(textBoxOlaksica.Text),
                 Datum_Dolaska = dateTimePickerDatumDolaska.Value.ToString("yyyy-MM-dd"),
                 Datum_Odlaska = odlazak
             };

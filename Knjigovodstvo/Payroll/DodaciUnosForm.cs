@@ -65,7 +65,7 @@ namespace Knjigovodstvo.Payroll
                 {
                     _dodaci.Oib = _zaposlenik.Oib;
                     _dodaci.Sifra = _sifra;
-                    _dodaci.Iznos = float.Parse(textBoxIznos.Text);
+                    _dodaci.Iznos = decimal.Parse(textBoxIznos.Text);
                     
 
                     int existsId = CheckDuplicate(_dodaci);

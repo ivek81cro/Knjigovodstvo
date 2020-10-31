@@ -27,9 +27,9 @@ namespace Knjigovodstvo.Settings
             }
             else
             {
-                float vrijednost = float.Parse(textBoxVrijednost.Text);
+                decimal vrijednost = decimal.Parse(textBoxVrijednost.Text);
                 if (vrijednost > 1)
-                    vrijednost = vrijednost / 100.0f;
+                    vrijednost = vrijednost / 100.0m;
 
                 Postavke postavka = new Postavke
                 {                    
