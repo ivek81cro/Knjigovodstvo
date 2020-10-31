@@ -1,12 +1,10 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
-using Knjigovodstvo.Payroll;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace Knjigovodstvo.JoppdDocument
 {
@@ -19,6 +17,24 @@ namespace Knjigovodstvo.JoppdDocument
             SetJoppdFormNumber();
             FillComboBoxZaposlenik();
             FillComboBoxDodaci();
+            GetKomitentData();
+        }
+
+        private void GetKomitentData()
+        {
+            _dt = new DbDataGet().GetTable(_komitent);
+            List<DataRow> row = _dt.AsEnumerable().ToList();
+            _komitent = (from DataRow dr in row
+                  select new Komitent()
+                  {
+                      Id = int.Parse(dr["Id"].ToString()),
+                      Oib = dr["Oib"].ToString(),
+                      Mail = dr["Mail"].ToString(),
+                      Naziv = dr["Naziv"].ToString(),
+                      Adresa = dr["Adresa"].ToString(),
+                      Grad = dr["Grad"].ToString(),
+                      Posta = dr["Posta"].ToString()
+                  }).ToList().ElementAt(0);
         }
 
         private void DateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -172,12 +188,17 @@ namespace Knjigovodstvo.JoppdDocument
                 },
                 PodnositeljIzvjesca = new sPodnositeljIzvjesca()
                 {
-                    OIB = "12345678901",
+                    OIB = _komitent.Oib,
                     Oznaka = tOznakaPodnositelja.Item2,
-                    Adresa = new sAdresa() { Ulica = "Ulica", Broj = "15", Mjesto = "Zagreb" },
-                    Email = "mail@domena.hr",
+                    Adresa = new sAdresa() 
+                    { 
+                        Ulica = _komitent.Adresa.Split(' ')[0], 
+                        Broj = _komitent.Adresa.Split(' ')[1], 
+                        Mjesto = _komitent.Grad 
+                    },
+                    Email = _komitent.Mail,
                     ItemsElementName = new[] { ItemsChoiceType.Naziv },
-                    Items = new[] { "Firma d.o.o" }
+                    Items = new[] { _komitent.Naziv }
                 },
                 //TODO continue with member value assigning
             };
@@ -211,7 +232,7 @@ namespace Knjigovodstvo.JoppdDocument
 
             DataSet dataSet = new DataSet();
             dataSet.ReadXml(@"Serialization.xml");
-            dataGridView1.DataSource = dataSet.Tables[14];
+            dataGridView1.DataSource = dataSet.Tables[dataSet.Tables.Count-1];
 
             enti.GetType();
         }
@@ -234,5 +255,6 @@ namespace Knjigovodstvo.JoppdDocument
         private JoppdSifre _joppdSifre = new JoppdSifre();
         private JoppdEntitetCollection _joppdEntiteti = new JoppdEntitetCollection();
         private sObrazacJOPPD _sObrazacJoppd = new sObrazacJOPPD();
+        private Komitent _komitent = new Komitent();
     }
 }
