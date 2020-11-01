@@ -174,13 +174,12 @@ namespace Knjigovodstvo.JoppdDocument
                     P17 = e.Primitak_Nesamostalni
                 });
             }
+            JoppdA jA = new JoppdA(pArr);
             sStranaA strA = new sStranaA()
             {
                 DatumIzvjesca = dateTimePicker1.Value,
                 OznakaIzvjesca = SetJoppdFormNumber(),
                 VrstaIzvjesca = tVrstaIzvjesca.Item2,
-                BrojOsoba = pArr.Count.ToString(),
-                BrojRedaka = pArr.Count.ToString(),
                 IzvjesceSastavio = new sIzvjesceSastavio()
                 {
                     Ime = textBoxIzvjesceSastavioIme.Text.Split(' ')[0],
@@ -188,18 +187,90 @@ namespace Knjigovodstvo.JoppdDocument
                 },
                 PodnositeljIzvjesca = new sPodnositeljIzvjesca()
                 {
-                    OIB = _komitent.Oib,
-                    Oznaka = tOznakaPodnositelja.Item2,
-                    Adresa = new sAdresa() 
-                    { 
-                        Ulica = _komitent.Adresa.Split(' ')[0], 
-                        Broj = _komitent.Adresa.Split(' ')[1], 
-                        Mjesto = _komitent.Grad 
+                    ItemsElementName = new[] { ItemsChoiceType.Naziv },
+                    Items = new[] { _komitent.Naziv },
+                    Adresa = new sAdresa()
+                    {
+                        Ulica = _komitent.Adresa.Split(' ')[0],
+                        Broj = _komitent.Adresa.Split(' ')[1],
+                        Mjesto = _komitent.Grad
                     },
                     Email = _komitent.Mail,
-                    ItemsElementName = new[] { ItemsChoiceType.Naziv },
-                    Items = new[] { _komitent.Naziv }
+                    OIB = _komitent.Oib,
+                    Oznaka = tOznakaPodnositelja.Item2
                 },
+                BrojOsoba = pArr.Count.ToString(),
+                BrojRedaka = pArr.Count.ToString(),
+                PredujamPoreza = new sPredujamPoreza()
+                {
+                    P1 = jA.UkupnoPorezIPrirez(),
+                    P11 = jA.UkupnoPorezIPrirez(),
+                    P12 = 0,
+                    P2 = 0,
+                    P3 = 0,
+                    P4 = 0,
+                    P5 = 0,
+                    P6 = 0
+                },
+                Doprinosi = new sDoprinosi()
+                {
+                    GeneracijskaSolidarnost = new sGeneracijskaSolidarnost()
+                    {
+                        P1 = jA.SviDoprinosiGeneracijskaDjelatnici(),
+                        P1Specified = true,
+                        P2 = 0,
+                        P3 = jA.SviDoprinosiGeneracijskaPoduzetnik(),
+                        P3Specified = true,
+                        P4 = 0,
+                        P5 = 0,
+                        P6 = 0,
+                        P7 = 0
+                    },
+                    KapitaliziranaStednja = new sKapitaliziranaStednja()
+                    {
+                        P1 = jA.SviDoprinosiKapitaliziranaDjelatnici(),
+                        P1Specified = true,
+                        P2 = 0,
+                        P3 = jA.SviDoprinosiKapitaliziranaPoduzetnik(),
+                        P3Specified = true,
+                        P4 = 0,
+                        P5 = 0,
+                        P6 = 0
+                    },
+                    ZdravstvenoOsiguranje = new sZdravstvenoOsiguranje()
+                    {
+                        P1 = jA.ZdravstveoDjelatnici(),
+                        P1Specified = true,
+                        P2 = 0,
+                        P3 = jA.ZdravstvenoPoduzetnici(),
+                        P3Specified = true,
+                        P4 = 0,
+                        P5 = 0,
+                        P6 = 0,
+                        P7 = 0,
+                        P8 = 0,
+                        P9 = 0,
+                        P10 = 0,
+                        P11 = 0,
+                        P12 = 0
+                    },
+                    Zaposljavanje = new sZaposljavanje()
+                    {
+                        P1 = 0,
+                        P2 = 0,
+                        P3 = 0,
+                        P4 = 0
+                    }
+                },
+                IsplaceniNeoporeziviPrimici = jA.ZbrojNeoporezivo(),
+                IsplaceniNeoporeziviPrimiciSpecified = true,
+                KamataMO2 = 0,
+                UkupniNeoporeziviPrimici = 0,
+                NaknadaZaposljavanjeInvalida = new sNaknadaZaposljavanjeInvalida() 
+                {
+                    P1 = "0",
+                    P2 = 0
+                }
                 //TODO continue with member value assigning
             };
             
