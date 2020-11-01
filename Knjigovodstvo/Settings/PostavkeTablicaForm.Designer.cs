@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Knjigovodstvo.Settings
 {
@@ -30,7 +31,7 @@ namespace Knjigovodstvo.Settings
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new DBDataGridView();
             this.buttonEditPostavke = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -42,13 +43,13 @@ namespace Knjigovodstvo.Settings
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
+            this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(9, 84);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(460, 447);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.Text = "dataGridView1";
@@ -78,7 +79,7 @@ namespace Knjigovodstvo.Settings
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private DBDataGridView dataGridView1;
         private System.Windows.Forms.Button buttonEditPostavke;
 
     }

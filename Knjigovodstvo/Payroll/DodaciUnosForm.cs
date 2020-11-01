@@ -105,13 +105,13 @@ namespace Knjigovodstvo.Payroll
             return 0;
         }
 
-        private void comboBoxOdabirDodatka_SelectionChangeCommitted(object sender, EventArgs e)
+        private void ComboBoxOdabirDodatka_SelectionChangeCommitted(object sender, EventArgs e)
         {
             string sifra = comboBoxOdabirDodatka.GetItemText(comboBoxOdabirDodatka.SelectedItem);
             _sifra = sifra.Split(' ')[0];
         }
 
-        private void comboBoxOdabirZaposlenika_SelectionChangeCommitted(object sender, EventArgs e)
+        private void ComboBoxOdabirZaposlenika_SelectionChangeCommitted(object sender, EventArgs e)
         {
             string zaposlenik = comboBoxOdabirZaposlenika.GetItemText(comboBoxOdabirZaposlenika.SelectedItem);
             string oib = zaposlenik.Split(' ')[0];
@@ -127,7 +127,7 @@ namespace Knjigovodstvo.Payroll
             return _placa;
         }
 
-        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
             {
@@ -141,7 +141,7 @@ namespace Knjigovodstvo.Payroll
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             Int32 selectedRowCount = dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0)

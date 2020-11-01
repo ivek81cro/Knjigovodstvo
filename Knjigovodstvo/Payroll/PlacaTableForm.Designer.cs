@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Knjigovodstvo.Payroll
 {
@@ -32,7 +33,7 @@ namespace Knjigovodstvo.Payroll
         {
             this.textBoxFilterPlaca = new System.Windows.Forms.TextBox();
             this.namePartnerLabel = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new DBDataGridView();
             this.btnNewPlaca = new System.Windows.Forms.Button();
             this.btnEditPlaca = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -63,11 +64,11 @@ namespace Knjigovodstvo.Payroll
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(9, 84);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1177, 447);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.Text = "dataGridView1";
@@ -113,7 +114,7 @@ namespace Knjigovodstvo.Payroll
         #endregion
         private System.Windows.Forms.TextBox textBoxFilterPlaca;
         private System.Windows.Forms.Label namePartnerLabel;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private DBDataGridView dataGridView1;
         private System.Windows.Forms.Button btnNewPlaca;
         private System.Windows.Forms.Button btnEditPlaca;
     }

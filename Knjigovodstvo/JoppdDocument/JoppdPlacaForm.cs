@@ -98,7 +98,8 @@ namespace Knjigovodstvo.JoppdDocument
 
         private void PopuniJoppdEntitete()
         {
-            _dt = new DbDataExecProcedure().GetTable(ProcedureNames.Joppd_podaci, $"@datumOd='2020-09', @dan='01'");
+            string datumOd = dateTimePicker1.Value.Year.ToString() + '-' + (dateTimePicker1.Value.Month - 1).ToString();
+            _dt = new DbDataExecProcedure().GetTable(ProcedureNames.Joppd_podaci, $"@datumOd='{datumOd}', @dan='01'");
             List<DataRow> rows = _dt.AsEnumerable().ToList();
             _joppdEntiteti.JoppdEntitet = (from DataRow dr in rows
                                            select new JoppdEntitet()
@@ -126,7 +127,9 @@ namespace Knjigovodstvo.JoppdDocument
                                                Prirez = decimal.Parse(dr["Prirez"].ToString()),
                                                Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
                                                Iznos_Isplate = decimal.Parse(dr["Neto"].ToString()),
-                                               Primitak_Nesamostalni = decimal.Parse(dr["Bruto"].ToString())
+                                               Primitak_Nesamostalni = decimal.Parse(dr["Bruto"].ToString()),
+                                               Zdravstvo = decimal.Parse(dr["Doprinos_Zdravstvo"].ToString())
+
                                            }).ToList();
 
             List<sPrimateljiP> pArr = new List<sPrimateljiP>();
@@ -292,23 +295,25 @@ namespace Knjigovodstvo.JoppdDocument
             _sObrazacJoppd.StranaB = prim;
             _sObrazacJoppd.Metapodaci = meta;
 
-            System.IO.TextWriter txtWriter = new System.IO.StreamWriter(@"Serialization.xml");
+            string path = @"JoppdBroj" + SetJoppdFormNumber() + ".xml";
+
+            System.IO.TextWriter txtWriter = new System.IO.StreamWriter(path);
             System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(_sObrazacJoppd.GetType());
             x.Serialize(txtWriter, _sObrazacJoppd);
             txtWriter.Close();
 
-            System.IO.StreamReader reader = new System.IO.StreamReader(@"Serialization.xml");
+            System.IO.StreamReader reader = new System.IO.StreamReader(path);
             sObrazacJOPPD enti = (sObrazacJOPPD)x.Deserialize(reader);
             reader.Close();
 
             DataSet dataSet = new DataSet();
-            dataSet.ReadXml(@"Serialization.xml");
+            dataSet.ReadXml(path);
             dataGridView1.DataSource = dataSet.Tables[dataSet.Tables.Count-1];
 
             enti.GetType();
         }
 
-        private void textBoxSatiRada_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBoxSatiRada_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
@@ -316,7 +321,7 @@ namespace Knjigovodstvo.JoppdDocument
             }
         }
 
-        private void buttonPopuniObrazac_Click(object sender, EventArgs e)
+        private void ButtonPopuniObrazac_Click(object sender, EventArgs e)
         {
             PopuniJoppdEntitete();
         }

@@ -56,7 +56,7 @@ namespace Knjigovodstvo.Database
 
             for (int i = 0; i < _name.Count; ++i)
             {
-                if (_type[i] == "Single")
+                if (_type[i] == "Decimal")
                 {
                     query += "ROUND(" + _name[i] + ", 2) as " + _name[i] + ", ";
                 }
@@ -85,7 +85,7 @@ namespace Knjigovodstvo.Database
 
             for (int i = 1; i < _value.Count; ++i)
             {
-                if (_type[i] == "Single")
+                if (_type[i] == "Decimal")
                     query += _value[i].Replace(',', '.') + ", ";
                 else
                     query += "'" + _value[i] + "', ";
@@ -104,7 +104,7 @@ namespace Knjigovodstvo.Database
 
             for (int i = 1; i < _name.Count; ++i)
             {
-                if (_type[i] == "Single")
+                if (_type[i] == "Decimal")
                     query += _name[i] + "=" + _value[i].Replace(',', '.') + ", ";
                 else
                     query += _name[i] + "='" + _value[i] + "', ";

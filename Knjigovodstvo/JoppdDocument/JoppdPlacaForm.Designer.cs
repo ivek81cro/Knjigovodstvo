@@ -1,4 +1,6 @@
-﻿namespace Knjigovodstvo.JoppdDocument
+﻿using System.Windows.Forms;
+
+namespace Knjigovodstvo.JoppdDocument
 {
     partial class JoppdPlacaForm
     {
@@ -39,7 +41,7 @@
             this.comboBoxZaposlenik = new System.Windows.Forms.ComboBox();
             this.labelSatiRada = new System.Windows.Forms.Label();
             this.textBoxSatiRada = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new DBDataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxIzvjesceSastavioIme = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -80,7 +82,7 @@
             this.buttonPopuniObrazac.TabIndex = 3;
             this.buttonPopuniObrazac.Text = "Popuni";
             this.buttonPopuniObrazac.UseVisualStyleBackColor = true;
-            this.buttonPopuniObrazac.Click += new System.EventHandler(this.buttonPopuniObrazac_Click);
+            this.buttonPopuniObrazac.Click += new System.EventHandler(this.ButtonPopuniObrazac_Click);
             // 
             // checkBoxSamoDodaci
             // 
@@ -145,7 +147,7 @@
             this.textBoxSatiRada.Size = new System.Drawing.Size(56, 23);
             this.textBoxSatiRada.TabIndex = 9;
             this.textBoxSatiRada.Text = "168";
-            this.textBoxSatiRada.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxSatiRada_KeyPress);
+            this.textBoxSatiRada.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxSatiRada_KeyPress);
             // 
             // dataGridView1
             // 
@@ -155,11 +157,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(9, 201);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(935, 330);
             this.dataGridView1.TabIndex = 10;
             this.dataGridView1.Text = "dataGridView1";
@@ -221,7 +223,7 @@
         private System.Windows.Forms.ComboBox comboBoxZaposlenik;
         private System.Windows.Forms.Label labelSatiRada;
         private System.Windows.Forms.TextBox textBoxSatiRada;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private DBDataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxIzvjesceSastavioIme;
     }

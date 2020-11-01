@@ -1,4 +1,6 @@
-﻿namespace Knjigovodstvo.Payroll
+﻿using System.Windows.Forms;
+
+namespace Knjigovodstvo.Payroll
 {
     partial class PlacaObracunForm
     {
@@ -34,7 +36,7 @@
             this.dateTimePickerDatumDo = new System.Windows.Forms.DateTimePicker();
             this.labelDatumDo = new System.Windows.Forms.Label();
             this.buttonObracunajSve = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new DBDataGridView();
             this.comboBoxFilterDjelatnik = new System.Windows.Forms.ComboBox();
             this.labelFilterDjelatnik = new System.Windows.Forms.Label();
             this.buttonPonisti = new System.Windows.Forms.Button();
@@ -104,11 +106,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(9, 187);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1017, 361);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.Text = "dataGridView1";
@@ -192,7 +194,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerDatumDo;
         private System.Windows.Forms.Label labelDatumDo;
         private System.Windows.Forms.Button buttonObracunajSve;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private DBDataGridView dataGridView1;
         private System.Windows.Forms.ComboBox comboBoxFilterDjelatnik;
         private System.Windows.Forms.Label labelFilterDjelatnik;
         private System.Windows.Forms.Button buttonPonisti;

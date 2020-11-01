@@ -1,4 +1,6 @@
-﻿namespace Knjigovodstvo.Payroll
+﻿using System.Windows.Forms;
+
+namespace Knjigovodstvo.Payroll
 {
     partial class DodaciUnosForm
     {
@@ -28,7 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new DBDataGridView();
             this.labelOdabirZaposlenika = new System.Windows.Forms.Label();
             this.comboBoxOdabirZaposlenika = new System.Windows.Forms.ComboBox();
             this.labelOdabirDodatka = new System.Windows.Forms.Label();
@@ -48,11 +50,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(9, 150);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(779, 288);
             this.dataGridView1.TabIndex = 8;
             this.dataGridView1.Text = "dataGridView1";
@@ -74,7 +76,7 @@
             this.comboBoxOdabirZaposlenika.Name = "comboBoxOdabirZaposlenika";
             this.comboBoxOdabirZaposlenika.Size = new System.Drawing.Size(192, 23);
             this.comboBoxOdabirZaposlenika.TabIndex = 2;
-            this.comboBoxOdabirZaposlenika.SelectionChangeCommitted += new System.EventHandler(this.comboBoxOdabirZaposlenika_SelectionChangeCommitted);
+            this.comboBoxOdabirZaposlenika.SelectionChangeCommitted += new System.EventHandler(this.ComboBoxOdabirZaposlenika_SelectionChangeCommitted);
             // 
             // labelOdabirDodatka
             // 
@@ -93,7 +95,7 @@
             this.comboBoxOdabirDodatka.Name = "comboBoxOdabirDodatka";
             this.comboBoxOdabirDodatka.Size = new System.Drawing.Size(656, 23);
             this.comboBoxOdabirDodatka.TabIndex = 4;
-            this.comboBoxOdabirDodatka.SelectionChangeCommitted += new System.EventHandler(this.comboBoxOdabirDodatka_SelectionChangeCommitted);
+            this.comboBoxOdabirDodatka.SelectionChangeCommitted += new System.EventHandler(this.ComboBoxOdabirDodatka_SelectionChangeCommitted);
             // 
             // labelIznos
             // 
@@ -110,7 +112,7 @@
             this.textBoxIznos.Name = "textBoxIznos";
             this.textBoxIznos.Size = new System.Drawing.Size(192, 23);
             this.textBoxIznos.TabIndex = 6;
-            this.textBoxIznos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            this.textBoxIznos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // buttonSave
             // 
@@ -130,7 +132,7 @@
             this.buttonDelete.TabIndex = 9;
             this.buttonDelete.Text = "Briši";
             this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.button1_Click);
+            this.buttonDelete.Click += new System.EventHandler(this.Button1_Click);
             // 
             // DodaciUnosForm
             // 
@@ -158,7 +160,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private DBDataGridView dataGridView1;
         private System.Windows.Forms.Label labelOdabirZaposlenika;
         private System.Windows.Forms.ComboBox comboBoxOdabirZaposlenika;
         private System.Windows.Forms.Label labelOdabirDodatka;

@@ -1,4 +1,6 @@
-﻿namespace Knjigovodstvo.Partners
+﻿using System.Windows.Forms;
+
+namespace Knjigovodstvo.Partners
 {
     partial class PartneriTableForm
     {
@@ -30,7 +32,7 @@
         {
             this.textBoxFilterPartner = new System.Windows.Forms.TextBox();
             this.namePartnerLabel = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new DBDataGridView();
             this.btnNewPartner = new System.Windows.Forms.Button();
             this.btnEditPartner = new System.Windows.Forms.Button();
             this.btnDeletePartner = new System.Windows.Forms.Button();
@@ -61,13 +63,13 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
+            this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(9, 84);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1177, 447);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.Text = "dataGridView1";
@@ -124,7 +126,7 @@
         #endregion
         private System.Windows.Forms.TextBox textBoxFilterPartner;
         private System.Windows.Forms.Label namePartnerLabel;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private DBDataGridView dataGridView1;
         private System.Windows.Forms.Button btnNewPartner;
         private System.Windows.Forms.Button btnEditPartner;
         private System.Windows.Forms.Button btnDeletePartner;
