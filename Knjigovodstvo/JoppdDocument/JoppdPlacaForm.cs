@@ -3,8 +3,10 @@ using Knjigovodstvo.Employee;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace Knjigovodstvo.JoppdDocument
 {
@@ -96,7 +98,7 @@ namespace Knjigovodstvo.JoppdDocument
 
         }
 
-        private void PopuniJoppdEntitete()
+        private void FillDataForJoppdFile()
         {
             string datumOd = dateTimePicker1.Value.Year.ToString() + '-' + (dateTimePicker1.Value.Month - 1).ToString();
             _dt = new DbDataExecProcedure().GetTable(ProcedureNames.Joppd_podaci, $"@datumOd='{datumOd}', @dan='01'");
@@ -131,24 +133,6 @@ namespace Knjigovodstvo.JoppdDocument
                                                Zdravstvo = decimal.Parse(dr["Doprinos_Zdravstvo"].ToString())
 
                                            }).ToList();
-
-            _sObrazacJoppd = new JoppdObrazac(_joppdEntiteti, _komitent)
-                .CreateJoppdXml(dateTimePicker1.Value, SetJoppdFormNumber(), textBoxIzvjesceSastavioIme.Text);
-
-            string path = @"JoppdBroj" + SetJoppdFormNumber() + ".xml"; //Replace with user input (Open file dialog)
-            //Save joppd.xml file
-            System.IO.TextWriter txtWriter = new System.IO.StreamWriter(path);
-            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(_sObrazacJoppd.GetType());
-            x.Serialize(txtWriter, _sObrazacJoppd);
-            txtWriter.Close();
-
-            System.IO.StreamReader reader = new System.IO.StreamReader(path);
-            sObrazacJOPPD enti = (sObrazacJOPPD)x.Deserialize(reader);
-            reader.Close();
-            //Read xml file into datagridview
-            DataSet dataSet = new DataSet();
-            dataSet.ReadXml(path);
-            dataGridView1.DataSource = dataSet.Tables[dataSet.Tables.Count-1];
         }
 
         private void TextBoxSatiRada_KeyPress(object sender, KeyPressEventArgs e)
@@ -159,9 +143,36 @@ namespace Knjigovodstvo.JoppdDocument
             }
         }
 
+        private void CreateJoppdXmlFile()
+        {
+            _sObrazacJoppd = new JoppdObrazac(_joppdEntiteti, _komitent)
+                .CreateJoppdXmlFile(dateTimePicker1.Value, SetJoppdFormNumber(), textBoxIzvjesceSastavioIme.Text);
+
+            _path = @"JoppdBroj" + SetJoppdFormNumber() + ".xml"; //Replace with user input (Open file dialog)
+            //Save joppd.xml file
+            TextWriter txtWriter = new StreamWriter(_path);
+            XmlSerializer x = new XmlSerializer(_sObrazacJoppd.GetType());
+            x.Serialize(txtWriter, _sObrazacJoppd);
+            txtWriter.Close();
+        }
+
+        private void ReadJoppdXmlToDataGrid()
+        {
+            StreamReader reader = new StreamReader(_path);
+            XmlSerializer x = new XmlSerializer(_sObrazacJoppd.GetType());
+            sObrazacJOPPD enti = (sObrazacJOPPD)x.Deserialize(reader);
+            reader.Close();
+            //Read xml file into datagridview
+            DataSet dataSet = new DataSet();
+            dataSet.ReadXml(_path);
+            dataGridView1.DataSource = dataSet.Tables[dataSet.Tables.Count - 1];
+        }
+
         private void ButtonPopuniObrazac_Click(object sender, EventArgs e)
         {
-            PopuniJoppdEntitete();
+            FillDataForJoppdFile();
+            CreateJoppdXmlFile();
+            ReadJoppdXmlToDataGrid();
         }
 
         private Zaposlenik _zaposlenik = new Zaposlenik();
@@ -170,5 +181,6 @@ namespace Knjigovodstvo.JoppdDocument
         private JoppdEntitetCollection _joppdEntiteti = new JoppdEntitetCollection();
         private Komitent _komitent = new Komitent();
         private sObrazacJOPPD _sObrazacJoppd = new sObrazacJOPPD();
+        private string _path = "";
     }
 }

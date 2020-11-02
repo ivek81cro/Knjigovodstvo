@@ -19,7 +19,7 @@ namespace Knjigovodstvo.JoppdDocument
             _komitent = komitent;
         }
 
-        public sObrazacJOPPD CreateJoppdXml(DateTime datum, string joppdBroj, string izvjesceSastavio) 
+        public sObrazacJOPPD CreateJoppdXmlFile(DateTime datum, string joppdBroj, string izvjesceSastavio) 
         {
             List<sPrimateljiP> pArr = new List<sPrimateljiP>();
             for (int i = 0; i < _joppdEntiteti.JoppdEntitet.Count; i++)
