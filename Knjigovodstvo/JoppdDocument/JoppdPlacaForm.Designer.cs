@@ -41,7 +41,7 @@ namespace Knjigovodstvo.JoppdDocument
             this.comboBoxZaposlenik = new System.Windows.Forms.ComboBox();
             this.labelSatiRada = new System.Windows.Forms.Label();
             this.textBoxSatiRada = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new DBDataGridView();
+            this.dataGridView1 = new Knjigovodstvo.DBDataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxIzvjesceSastavioIme = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -130,6 +130,7 @@ namespace Knjigovodstvo.JoppdDocument
             this.comboBoxZaposlenik.Name = "comboBoxZaposlenik";
             this.comboBoxZaposlenik.Size = new System.Drawing.Size(199, 23);
             this.comboBoxZaposlenik.TabIndex = 5;
+            this.comboBoxZaposlenik.SelectionChangeCommitted += new System.EventHandler(this.comboBoxZaposlenik_SelectionChangeCommitted);
             // 
             // labelSatiRada
             // 
@@ -157,11 +158,11 @@ namespace Knjigovodstvo.JoppdDocument
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(9, 201);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(935, 330);
             this.dataGridView1.TabIndex = 10;
             this.dataGridView1.Text = "dataGridView1";

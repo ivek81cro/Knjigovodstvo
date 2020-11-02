@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Database;
+﻿using Knjigovodstvo.Code.Validators;
+using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
 using System;
 using System.Collections.Generic;
@@ -102,7 +103,16 @@ namespace Knjigovodstvo.JoppdDocument
         {
             string datumOd = dateTimePicker1.Value.Year.ToString() + '-' + (dateTimePicker1.Value.Month - 1).ToString();
             _dt = new DbDataExecProcedure().GetTable(ProcedureNames.Joppd_podaci, $"@datumOd='{datumOd}', @dan='01'");
+         
             List<DataRow> rows = _dt.AsEnumerable().ToList();
+            
+            //If only one specific employee is selected
+            if(checkBoxPojedinacno.Checked && !comboBoxZaposlenik.Text.StartsWith('-'))
+            {
+                var newList = rows.Where(s => s.ItemArray[2].ToString() == _zaposlenik.Oib);
+                rows = newList.ToList();
+            }
+
             _joppdEntiteti.JoppdEntitet = (from DataRow dr in rows
                                            select new JoppdEntitet()
                                            {
@@ -174,6 +184,12 @@ namespace Knjigovodstvo.JoppdDocument
             CreateJoppdXmlFile();
             ReadJoppdXmlToDataGrid();
         }
+        private void comboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string selected = this.comboBoxZaposlenik.GetItemText(this.comboBoxZaposlenik.SelectedItem);
+            string oib = selected.Split(' ')[0];
+            _zaposlenik = _zaposlenik.GetZaposlenikByOib(oib);
+        }
 
         private Zaposlenik _zaposlenik = new Zaposlenik();
         private DataTable _dt = new DataTable();
@@ -182,5 +198,6 @@ namespace Knjigovodstvo.JoppdDocument
         private Komitent _komitent = new Komitent();
         private sObrazacJOPPD _sObrazacJoppd = new sObrazacJOPPD();
         private string _path = "";
+
     }
 }
