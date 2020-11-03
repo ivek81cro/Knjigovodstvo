@@ -113,7 +113,7 @@ namespace Knjigovodstvo.JoppdDocument
                 rows = newList.ToList();
             }
 
-            _joppdEntiteti.JoppdEntitet = (from DataRow dr in rows
+            _joppdB.Entitet = (from DataRow dr in rows
                                            select new JoppdEntitet()
                                            {
                                                Opcina_Prebivalista = dr["Opcina_Prebivalista"].ToString(),
@@ -140,8 +140,8 @@ namespace Knjigovodstvo.JoppdDocument
                                                Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
                                                Iznos_Isplate = decimal.Parse(dr["Neto"].ToString()),
                                                Primitak_Nesamostalni = decimal.Parse(dr["Bruto"].ToString()),
-                                               Zdravstvo = decimal.Parse(dr["Doprinos_Zdravstvo"].ToString())
-
+                                               Zdravstvo = decimal.Parse(dr["Doprinos_Zdravstvo"].ToString()),
+                                               IzdatakUplaceni_Mio = decimal.Parse(dr["Mio_1"].ToString()) + decimal.Parse(dr["Mio_2"].ToString())
                                            }).ToList();
         }
 
@@ -155,12 +155,21 @@ namespace Knjigovodstvo.JoppdDocument
 
         private void CreateJoppdXmlFile()
         {
-            _sObrazacJoppd = new JoppdObrazac(_joppdEntiteti, _komitent)
+            _sObrazacJoppd = new JoppdObrazac(_joppdB, _komitent)
                 .CreateJoppdXmlFile(dateTimePicker1.Value, SetJoppdFormNumber(), textBoxIzvjesceSastavioIme.Text);
 
-            _path = @"JoppdBroj" + SetJoppdFormNumber() + ".xml"; //Replace with user input (Open file dialog)
-            //Save joppd.xml file
-            TextWriter txtWriter = new StreamWriter(_path);
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "XML file|*.xml";
+            saveFileDialog1.Title = "Save an xml File";
+            saveFileDialog1.ShowDialog();
+
+            // If the file name is not an empty string open it for saving.
+            if (saveFileDialog1.FileName != "")
+            {
+                _path = saveFileDialog1.FileName;
+            }
+                //Save joppd.xml file
+                TextWriter txtWriter = new StreamWriter(_path);
             XmlSerializer x = new XmlSerializer(_sObrazacJoppd.GetType());
             x.Serialize(txtWriter, _sObrazacJoppd);
             txtWriter.Close();
@@ -170,7 +179,7 @@ namespace Knjigovodstvo.JoppdDocument
         {
             StreamReader reader = new StreamReader(_path);
             XmlSerializer x = new XmlSerializer(_sObrazacJoppd.GetType());
-            sObrazacJOPPD enti = (sObrazacJOPPD)x.Deserialize(reader);
+            _ = (sObrazacJOPPD)x.Deserialize(reader);
             reader.Close();
             //Read xml file into datagridview
             DataSet dataSet = new DataSet();
@@ -184,7 +193,7 @@ namespace Knjigovodstvo.JoppdDocument
             CreateJoppdXmlFile();
             ReadJoppdXmlToDataGrid();
         }
-        private void comboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)
+        private void ComboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)
         {
             string selected = this.comboBoxZaposlenik.GetItemText(this.comboBoxZaposlenik.SelectedItem);
             string oib = selected.Split(' ')[0];
@@ -194,7 +203,7 @@ namespace Knjigovodstvo.JoppdDocument
         private Zaposlenik _zaposlenik = new Zaposlenik();
         private DataTable _dt = new DataTable();
         private JoppdSifre _joppdSifre = new JoppdSifre();
-        private JoppdEntitetCollection _joppdEntiteti = new JoppdEntitetCollection();
+        private JoppdB _joppdB = new JoppdB();
         private Komitent _komitent = new Komitent();
         private sObrazacJOPPD _sObrazacJoppd = new sObrazacJOPPD();
         private string _path = "";

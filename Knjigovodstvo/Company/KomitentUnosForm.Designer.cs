@@ -226,7 +226,7 @@
             this.buttonSave.TabIndex = 12;
             this.buttonSave.Text = "Spremi";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // buttonClose
             // 
@@ -236,7 +236,7 @@
             this.buttonClose.TabIndex = 13;
             this.buttonClose.Text = "Zatvori";
             this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // labelName
             // 
@@ -255,7 +255,7 @@
             this.buttonSelectCity.TabIndex = 3;
             this.buttonSelectCity.Text = "Odaberi";
             this.buttonSelectCity.UseVisualStyleBackColor = true;
-            this.buttonSelectCity.Click += new System.EventHandler(this.buttonSelectCity_Click);
+            this.buttonSelectCity.Click += new System.EventHandler(this.ButtonSelectCity_Click);
             // 
             // labelCode
             // 

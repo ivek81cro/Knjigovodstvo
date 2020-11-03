@@ -1,4 +1,4 @@
-﻿using Knjigovodstvo.Models;
+﻿using Knjigovodstvo.Interface;
 
 namespace Knjigovodstvo.Code.Validators
 {
@@ -6,31 +6,20 @@ namespace Knjigovodstvo.Code.Validators
     {
         public string FormErrorMessage(FormError errorType)
         {
-            switch (errorType)
+            return errorType switch
             {
-                case FormError.Oib:
-                    return "Provjerite unešeni oib.";
-                case FormError.Name:
-                    return "Provjerite unešeni naziv.";
-                case FormError.Street:
-                    return "Provjerite unešenu ulicu.";
-                case FormError.City:
-                    return "Provjerite unešeni grad.";
-                case FormError.Post:
-                    return "Provjerite unešeni broj pošte.";
-                case FormError.Iban:
-                    return "Provjerite unešeni IBAN.";
-                case FormError.Kupac_Dobavljac:
-                    return "Mora biti označeno Kupac/Dobavljač ili oboje.";
-                case FormError.Prazno:
-                    return "Polje ne može ostati prazno";
-                case FormError.NumberFormat:
-                    return "Neispravan format unešenog broja";
-                case FormError.Sifra:
-                    return "Neispravan format šifre općine/grada";
-                default:
-                    return "";
-            }
+                FormError.Oib => "Provjerite unešeni oib.",
+                FormError.Name => "Provjerite unešeni naziv.",
+                FormError.Street => "Provjerite unešenu ulicu.",
+                FormError.City => "Provjerite unešeni grad.",
+                FormError.Post => "Provjerite unešeni broj pošte.",
+                FormError.Iban => "Provjerite unešeni IBAN.",
+                FormError.Kupac_Dobavljac => "Mora biti označeno Kupac/Dobavljač ili oboje.",
+                FormError.Prazno => "Polje ne može ostati prazno",
+                FormError.NumberFormat => "Neispravan format unešenog broja",
+                FormError.Sifra => "Neispravan format šifre općine/grada",
+                _ => "",
+            };
         }
     }
 }

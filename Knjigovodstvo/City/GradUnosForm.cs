@@ -1,5 +1,5 @@
 ﻿using Knjigovodstvo.Code.Validators;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -11,7 +11,10 @@ namespace Knjigovodstvo.City
         public GradUnosForm(Grad grad = null)
         {
             InitializeComponent();
-            _grad = grad;
+            if (grad != null) 
+            { 
+                _grad = grad; 
+            }
             FillComboCounty();
             labelUpozorenja.Text = "";
             if (_grad != null)
@@ -100,7 +103,13 @@ namespace Knjigovodstvo.City
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
+            _grad.Sifra = textBoxSifra.Text;
+            _grad.Prirez = decimal.Parse(textBoxPrirez.Text);
+            _grad.Posta = comboBoxPosta.Text;
+            _grad.Naziv = comboBoxGrad.Text;
             FormError validateResult = _grad.ValidateData();
+            if (checkBoxNoviGrad.Checked)
+                _editMode = false;
             if (validateResult == FormError.None)
             {
                 if (!_editMode && _grad.InsertNew())
@@ -109,7 +118,7 @@ namespace Knjigovodstvo.City
                     Close();
                 }
 
-                if (_editMode && _grad.UpdateData(_id))
+                if (_editMode && _grad.UpdateData())
                 {
                     MessageBox.Show("Izmjena uspješna.", "Izmjena podataka partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
@@ -150,8 +159,8 @@ namespace Knjigovodstvo.City
             }
         }
 
-        private Grad _grad;
-        private int _id;
-        private bool _editMode;
+        private Grad _grad = new Grad();
+        private int _id = 0;
+        private bool _editMode = false;
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Knjigovodstvo.City;
 using Knjigovodstvo.Code.Validators;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using System;
 using System.Windows.Forms;
 
@@ -66,13 +66,13 @@ namespace Knjigovodstvo.Partners
 
         private void BtnSelectCity_Click(object sender, EventArgs e)
         {
-            GradUnosForm city = new GradUnosForm();
-            Grad c = city.ShowDialogValue();
+            CityTableForm form = new CityTableForm();
+            Grad grad = form.ShowDialogValue(1);
 
-            if (c != null && c.ValidateData() == FormError.None)
+            if (grad != null && grad.ValidateData() == FormError.None)
             {
-                textBoxCity.Text = c.Naziv;
-                textBoxPost.Text = c.Posta;
+                textBoxCity.Text = grad.Naziv;
+                textBoxPost.Text = grad.Posta;
             }
         }
 

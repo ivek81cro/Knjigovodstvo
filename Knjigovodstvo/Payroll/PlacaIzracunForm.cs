@@ -178,7 +178,7 @@ namespace Knjigovodstvo.Payroll
             textBoxNetto.Text = Math.Round(placa.Neto, 2).ToString("0.00");
             textBoxDoprinosZdravstvo.Text = Math.Round(placa.Doprinos_Zdravstvo, 2).ToString("0.00");
             textBoxDodaci.Text = Math.Round(placa.Dodaci_Ukupno, 2).ToString("0.00");
-            labelPrirez.Text ="Prirez " + Math.Round(placa.Prirez / placa.Porez_Ukupno * 100.0m, 0).ToString("0") + '%';
+            labelPrirez.Text = "Prirez " + (_prirez < 100? _prirez * 100m: _prirez);
         }
 
         private void PopuniJoppd(ZaposlenikJoppd zaposlenikJoppd)
@@ -311,10 +311,10 @@ namespace Knjigovodstvo.Payroll
                 if (comboBoxZaposlenik.SelectedItem != null)
                 {
                     PopuniDodaci();
-                    decimal prirez = decimal.Parse(new DbDataGet().GetTable(new Grad(), $"Naziv='{_zaposlenik.Grad}';").Rows[0]["Prirez"].ToString()) / 100.0m;
+                    _prirez = decimal.Parse(new DbDataGet().GetTable(new Grad(), $"Naziv='{_zaposlenik.Grad}';").Rows[0]["Prirez"].ToString()) / 100.0m;
                     decimal iznosBruto = decimal.Parse(textBoxBruto.Text);
-                    labelPrirez.Text = "Prirez " + (prirez * 100).ToString() + '%';
-                    _placa.Izracun(iznosBruto, prirez, ZbrojiDodatke(), _zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
+                    labelPrirez.Text = "Prirez " + (_prirez * 100).ToString() + '%';
+                    _placa.Izracun(iznosBruto, _prirez, ZbrojiDodatke(), _zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
                     _placa.Oib = _zaposlenik.Oib;
 
                     PopuniKontrole(_placa);
@@ -334,5 +334,6 @@ namespace Knjigovodstvo.Payroll
         private Placa _placa = new Placa();
         private Zaposlenik _zaposlenik = new Zaposlenik();
         private List<PlacaDodatak> _dodaci = new List<PlacaDodatak>();
+        private decimal _prirez = 0;
     }
 }

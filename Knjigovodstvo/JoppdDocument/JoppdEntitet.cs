@@ -1,5 +1,5 @@
 ﻿using Knjigovodstvo.Database;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using Knjigovodstvo.Payroll;
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ namespace Knjigovodstvo.JoppdDocument
                                   Id = int.Parse(dr["Id"].ToString()),
                                   Oib = dr["Oib"].ToString(),
                                   Sifra = dr["Sifra"].ToString(),
-                                  Iznos = decimal.Parse(dr["Iznos"].ToString())
+                                  Iznos = Math.Round(decimal.Parse(dr["Iznos"].ToString()), 2)
                               }).ToList();
 
             if (_dodaci.Count > 0)
@@ -114,14 +114,5 @@ namespace Knjigovodstvo.JoppdDocument
         public decimal Iznos_Isplate { get; set; } = 0;
         [XmlElement("P17")]
         public decimal Primitak_Nesamostalni { get; set; } = 0;        
-    }
-
-    [Serializable()]
-    [XmlRoot("StranaB")]
-    public class JoppdEntitetCollection
-    {
-        [XmlArray("Primatelji")]
-        [XmlArrayItem("P", typeof(JoppdEntitet))]
-        public List<JoppdEntitet> JoppdEntitet { get; set; }
     }
 }

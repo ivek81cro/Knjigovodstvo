@@ -1,7 +1,7 @@
 ﻿using Knjigovodstvo.City;
 using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Database;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -22,24 +22,24 @@ namespace Knjigovodstvo.Gui
             if (dt.Rows.Count != 0)
                 EditKomitent(new Komitent
                 {
-                    Id = int.Parse(dt.Rows[0][0].ToString()),
-                    Oib = dt.Rows[0][1].ToString(),
-                    Naziv = dt.Rows[0][2].ToString(),
-                    Adresa = dt.Rows[0][3].ToString(),
-                    Posta = dt.Rows[0][4].ToString(),
-                    Grad = dt.Rows[0][5].ToString(),
-                    Telefon = dt.Rows[0][6].ToString(),
-                    Fax = dt.Rows[0][7].ToString(),
-                    Mail = dt.Rows[0][8].ToString(),
-                    Iban = dt.Rows[0][9].ToString(),
-                    Vrsta_djelatnosti = dt.Rows[0][10].ToString(),
-                    Sifra_djelatnosti = dt.Rows[0][11].ToString(),
-                    Naziv_djelatnosti = dt.Rows[0][12].ToString(),
-                    Mbo = dt.Rows[0][13].ToString()
+                    Id = int.Parse(dt.Rows[0]["Id"].ToString()),
+                    Oib = dt.Rows[0]["Oib"].ToString(),
+                    Naziv = dt.Rows[0]["Naziv"].ToString(),
+                    Adresa = dt.Rows[0]["Adresa"].ToString(),
+                    Posta = dt.Rows[0]["Posta"].ToString(),
+                    Grad = dt.Rows[0]["Grad"].ToString(),
+                    Telefon = dt.Rows[0]["Telefon"].ToString(),
+                    Fax = dt.Rows[0]["Fax"].ToString(),
+                    Mail = dt.Rows[0]["Mail"].ToString(),
+                    Iban = dt.Rows[0]["Iban"].ToString(),
+                    Vrsta_djelatnosti = dt.Rows[0]["Vrsta_djelatnosti"].ToString(),
+                    Sifra_djelatnosti = dt.Rows[0]["Sifra_djelatnosti"].ToString(),
+                    Naziv_djelatnosti = dt.Rows[0]["Naziv_djelatnosti"].ToString(),
+                    Mbo = dt.Rows[0]["Mbo"].ToString()
                 });
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             labelMessage.Text = "";
 
@@ -105,20 +105,20 @@ namespace Knjigovodstvo.Gui
             _editMode = true;
         }
 
-        private void buttonClose_Click(object sender, EventArgs e)
+        private void ButtonClose_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void buttonSelectCity_Click(object sender, EventArgs e)
+        private void ButtonSelectCity_Click(object sender, EventArgs e)
         {
-            GradUnosForm city = new GradUnosForm();
-            Grad c = city.ShowDialogValue();
+            CityTableForm form = new CityTableForm();
+            Grad grad = form.ShowDialogValue(1);
 
-            if (c != null && c.ValidateData() == FormError.None)
+            if (grad != null && grad.ValidateData() == FormError.None)
             {
-                textBoxCity.Text = c.Naziv;
-                textBoxPost.Text = c.Posta;
+                textBoxCity.Text = grad.Naziv;
+                textBoxPost.Text = grad.Posta;
             }
         }
 

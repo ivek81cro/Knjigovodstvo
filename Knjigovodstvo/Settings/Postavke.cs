@@ -1,5 +1,5 @@
 ﻿using Knjigovodstvo.Database;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using Knjigovodstvo.Validators;
 using System.Data;
 

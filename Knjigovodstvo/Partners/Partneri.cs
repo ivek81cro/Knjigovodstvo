@@ -1,6 +1,6 @@
 ﻿using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Database;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using System;
 using System.Data;
 

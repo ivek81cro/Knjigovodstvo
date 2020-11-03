@@ -1,4 +1,4 @@
-﻿using Knjigovodstvo.Models;
+﻿using Knjigovodstvo.Interface;
 using System;
 
 namespace Knjigovodstvo.JoppdDocument

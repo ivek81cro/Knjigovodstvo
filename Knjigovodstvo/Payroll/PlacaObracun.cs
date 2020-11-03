@@ -1,5 +1,5 @@
 ﻿using Knjigovodstvo.Database;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using System.Data;
 
 namespace Knjigovodstvo.Payroll

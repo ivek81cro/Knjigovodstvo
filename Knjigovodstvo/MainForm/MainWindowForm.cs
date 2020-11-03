@@ -84,7 +84,7 @@ namespace Knjigovodstvo.MainForm
             }
             else
             {
-                _openForm.Open(new GradoviTableForm(), this);
+                _openForm.Open(new CityTableForm(), this);
             }
         }
 

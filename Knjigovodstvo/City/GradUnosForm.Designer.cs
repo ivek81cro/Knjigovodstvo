@@ -44,6 +44,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxSifra = new System.Windows.Forms.TextBox();
             this.labelSifra = new System.Windows.Forms.Label();
+            this.checkBoxNoviGrad = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // labelNaziv
@@ -84,7 +85,6 @@
             // 
             // comboBoxPosta
             // 
-            this.comboBoxPosta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPosta.Location = new System.Drawing.Point(68, 99);
             this.comboBoxPosta.Name = "comboBoxPosta";
             this.comboBoxPosta.Size = new System.Drawing.Size(96, 23);
@@ -111,11 +111,11 @@
             // 
             // btnOdaberi
             // 
-            this.btnOdaberi.Location = new System.Drawing.Point(268, 239);
+            this.btnOdaberi.Location = new System.Drawing.Point(337, 239);
             this.btnOdaberi.Name = "btnOdaberi";
             this.btnOdaberi.Size = new System.Drawing.Size(75, 23);
             this.btnOdaberi.TabIndex = 6;
-            this.btnOdaberi.Text = "Odaberi";
+            this.btnOdaberi.Text = "Zatvori";
             this.btnOdaberi.UseVisualStyleBackColor = true;
             this.btnOdaberi.Click += new System.EventHandler(this.BtnOdaberi_Click);
             // 
@@ -131,7 +131,6 @@
             // 
             // comboBoxGrad
             // 
-            this.comboBoxGrad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxGrad.FormattingEnabled = true;
             this.comboBoxGrad.Location = new System.Drawing.Point(68, 70);
             this.comboBoxGrad.Name = "comboBoxGrad";
@@ -194,11 +193,22 @@
             this.labelSifra.TabIndex = 0;
             this.labelSifra.Text = "Šifra";
             // 
+            // checkBoxNoviGrad
+            // 
+            this.checkBoxNoviGrad.AutoSize = true;
+            this.checkBoxNoviGrad.Location = new System.Drawing.Point(314, 72);
+            this.checkBoxNoviGrad.Name = "checkBoxNoviGrad";
+            this.checkBoxNoviGrad.Size = new System.Drawing.Size(56, 19);
+            this.checkBoxNoviGrad.TabIndex = 7;
+            this.checkBoxNoviGrad.Text = "Novi?";
+            this.checkBoxNoviGrad.UseVisualStyleBackColor = true;
+            // 
             // GradUnosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 274);
+            this.ClientSize = new System.Drawing.Size(424, 274);
+            this.Controls.Add(this.checkBoxNoviGrad);
             this.Controls.Add(this.labelSifra);
             this.Controls.Add(this.textBoxSifra);
             this.Controls.Add(this.label2);
@@ -242,5 +252,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxSifra;
         private System.Windows.Forms.Label labelSifra;
+        private System.Windows.Forms.CheckBox checkBoxNoviGrad;
     }
 }

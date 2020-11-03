@@ -1,5 +1,5 @@
 ﻿using Knjigovodstvo.Database;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using Knjigovodstvo.Settings;
 using System.Data;
 
@@ -31,6 +31,11 @@ namespace Knjigovodstvo.Payroll
             }
             Dohodak = iznos;
             iznos -= Osobni_Odbitak = 2500.0m * (1.6m + odbitak);
+            if (iznos < 0)
+            {
+                iznos = 0;
+                Osobni_Odbitak = Dohodak;
+            }
             Porezna_Osnovica = iznos;
 
             if (Porezna_Osnovica > 30000)

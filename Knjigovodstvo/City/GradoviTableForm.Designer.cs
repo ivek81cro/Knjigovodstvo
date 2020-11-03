@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.City
 {
-    partial class GradoviTableForm
+    partial class CityTableForm
     {
         /// <summary>
         /// Required designer variable.
@@ -33,7 +33,7 @@ namespace Knjigovodstvo.City
         {
             this.textBoxFilterGrad = new System.Windows.Forms.TextBox();
             this.namePartnerLabel = new System.Windows.Forms.Label();
-            this.dataGridView1 = new DBDataGridView();
+            this.dataGridView1 = new Knjigovodstvo.DBDataGridView();
             this.btnNewGrad = new System.Windows.Forms.Button();
             this.btnEditGrad = new System.Windows.Forms.Button();
             this.btnDeleteGrad = new System.Windows.Forms.Button();
@@ -64,16 +64,16 @@ namespace Knjigovodstvo.City
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(9, 84);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1177, 447);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.Text = "dataGridView1";
+            this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.BtnEditGrad_Click);
             // 
             // btnNewGrad
             // 
@@ -105,7 +105,7 @@ namespace Knjigovodstvo.City
             this.btnDeleteGrad.UseVisualStyleBackColor = true;
             this.btnDeleteGrad.Click += new System.EventHandler(this.BtnDeleteGrad_Click);
             // 
-            // GradoviTableForm
+            // CityTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -116,7 +116,7 @@ namespace Knjigovodstvo.City
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.namePartnerLabel);
             this.Controls.Add(this.textBoxFilterGrad);
-            this.Name = "GradoviTableForm";
+            this.Name = "CityTableForm";
             this.Text = "Gradovi";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

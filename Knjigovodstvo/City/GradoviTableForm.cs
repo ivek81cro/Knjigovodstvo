@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.City
 {
-    public partial class GradoviTableForm : Form
+    public partial class CityTableForm : Form
     {
-        public GradoviTableForm()
+        public CityTableForm()
         {
             InitializeComponent();
             LoadDatagrid();
@@ -32,10 +32,11 @@ namespace Knjigovodstvo.City
 
         private void BtnEditGrad_Click(object sender, EventArgs e)
         {
+
             int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             _grad = new Grad().GetGradById(id);
 
-            if (_odabir == 1)
+            if (_odabir)
             {
                 Close();
             }
@@ -45,11 +46,12 @@ namespace Knjigovodstvo.City
                 pn.FormClosing += new FormClosingEventHandler(this.GradNew_FormClosing);
                 pn.EditGrad(_grad);
             }
-        }
 
+        }
+        
         private void BtnDeleteGrad_Click(object sender, EventArgs e)
         {
-            _grad.Id = int.Parse(dataGridView1.SelectedRows[0].ToString());
+            _grad.Id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             DialogResult result = MessageBox.Show("Da li ste sigurni da želite obrisati odabrani red?",
                 "Brisanje reda", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -70,13 +72,13 @@ namespace Knjigovodstvo.City
 
         internal Grad ShowDialogValue(int odabir)
         {
-            _odabir = odabir;
+            _odabir = true;
             ShowDialog();
 
             return _grad;
         }
 
-        private Grad _grad;
-        private int _odabir = 0;
+        private Grad _grad = new Grad();
+        private bool _odabir = false;
     }
 }

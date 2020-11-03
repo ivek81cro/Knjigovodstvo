@@ -1,6 +1,6 @@
 ﻿using Knjigovodstvo.City;
 using Knjigovodstvo.Code.Validators;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using System;
 using System.Windows.Forms;
 
@@ -19,7 +19,7 @@ namespace Knjigovodstvo.Employee
             labelMessage.Text = new ProcessFormErrors().FormErrorMessage(errorType);
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             string odlazak = "";
             if (dateTimePickerDatumOdlaska.Visible == true)
@@ -92,16 +92,16 @@ namespace Knjigovodstvo.Employee
             ShowDialog();
         }
 
-        private void buttonOdaberiGrad_Click(object sender, EventArgs e)
+        private void ButtonSelectCity_Click(object sender, EventArgs e)
         {
-            GradoviTableForm form = new GradoviTableForm();
+            CityTableForm form = new CityTableForm();
             Grad grad = form.ShowDialogValue(1);
 
             if (grad != null && grad.ValidateData() == FormError.None)
                 textBoxGrad.Text = grad.Naziv;
         }
 
-        private void buttonClose_Click(object sender, EventArgs e)
+        private void ButtonClose_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -120,7 +120,7 @@ namespace Knjigovodstvo.Employee
             }
         }
 
-        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
             {

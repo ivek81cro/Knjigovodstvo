@@ -13,18 +13,18 @@ namespace Knjigovodstvo.JoppdDocument
 
         }
 
-        public JoppdObrazac(JoppdEntitetCollection joppdEntiteti, Komitent komitent)
+        public JoppdObrazac(JoppdB joppdB, Komitent komitent)
         {
-            _joppdEntiteti = joppdEntiteti;
+            _joppdB = joppdB;
             _komitent = komitent;
         }
 
         public sObrazacJOPPD CreateJoppdXmlFile(DateTime datum, string joppdBroj, string izvjesceSastavio) 
         {
             List<sPrimateljiP> pArr = new List<sPrimateljiP>();
-            for (int i = 0; i < _joppdEntiteti.JoppdEntitet.Count; i++)
+            for (int i = 0; i < _joppdB.Entitet.Count; i++)
             {
-                JoppdEntitet e = _joppdEntiteti.JoppdEntitet[i];
+                JoppdEntitet e = _joppdB.Entitet[i];
                 e.PopuniDodatke(i + 1);
                 pArr.Add(new sPrimateljiP()
                 {
@@ -62,7 +62,7 @@ namespace Knjigovodstvo.JoppdDocument
                     P151 = (tOznakaNeoporezivogPrimitka)Enum.Parse(typeof(tOznakaNeoporezivogPrimitka), e.Oznaka_Neoporezivog),
                     P152 = e.Iznos_Neoporezivog,
                     P161 = (tOznakaNacinaIsplate)Enum.Parse(typeof(tOznakaNacinaIsplate), e.Nacin_Isplate),
-                    P162 = e.Iznos_Isplate,
+                    P162 = e.Iznos_Isplate + e.Iznos_Neoporezivog,
                     P17 = e.Primitak_Nesamostalni
                 });
             }
@@ -188,7 +188,7 @@ namespace Knjigovodstvo.JoppdDocument
             return _sObrazacJoppd;
         }
 
-        private JoppdEntitetCollection _joppdEntiteti = new JoppdEntitetCollection();
+        private JoppdB _joppdB = new JoppdB();
         private Komitent _komitent = new Komitent();
         private sObrazacJOPPD _sObrazacJoppd = new sObrazacJOPPD();
     }

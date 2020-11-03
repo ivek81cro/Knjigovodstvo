@@ -130,7 +130,7 @@ namespace Knjigovodstvo.JoppdDocument
             this.comboBoxZaposlenik.Name = "comboBoxZaposlenik";
             this.comboBoxZaposlenik.Size = new System.Drawing.Size(199, 23);
             this.comboBoxZaposlenik.TabIndex = 5;
-            this.comboBoxZaposlenik.SelectionChangeCommitted += new System.EventHandler(this.comboBoxZaposlenik_SelectionChangeCommitted);
+            this.comboBoxZaposlenik.SelectionChangeCommitted += new System.EventHandler(this.ComboBoxZaposlenik_SelectionChangeCommitted);
             // 
             // labelSatiRada
             // 

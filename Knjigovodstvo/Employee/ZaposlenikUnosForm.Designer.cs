@@ -258,7 +258,7 @@
             this.textBoxOlaksica.Name = "textBoxOlaksica";
             this.textBoxOlaksica.Size = new System.Drawing.Size(59, 23);
             this.textBoxOlaksica.TabIndex = 8;
-            this.textBoxOlaksica.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            this.textBoxOlaksica.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // buttonSave
             // 
@@ -268,7 +268,7 @@
             this.buttonSave.TabIndex = 11;
             this.buttonSave.Text = "Spremi";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // buttonClose
             // 
@@ -278,7 +278,7 @@
             this.buttonClose.TabIndex = 12;
             this.buttonClose.Text = "Zatvori";
             this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // buttonOdaberiGrad
             // 
@@ -288,7 +288,7 @@
             this.buttonOdaberiGrad.TabIndex = 5;
             this.buttonOdaberiGrad.Text = "Odaberi";
             this.buttonOdaberiGrad.UseVisualStyleBackColor = true;
-            this.buttonOdaberiGrad.Click += new System.EventHandler(this.buttonOdaberiGrad_Click);
+            this.buttonOdaberiGrad.Click += new System.EventHandler(this.ButtonSelectCity_Click);
             // 
             // labelMessage
             // 
