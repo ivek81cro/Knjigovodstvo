@@ -14,13 +14,14 @@ namespace Knjigovodstvo.Database
     }
     public class DbQueryBuilder
     {
-        public DbQueryBuilder(IEnumerable<List<String>> obj, string table)
+        public DbQueryBuilder(IEnumerable<List<String>> obj, string table, string whereColumn=null)
         {
             _obj = obj;
             _name = _obj.First();
             _value = _obj.ElementAt(1);
             _type = _obj.ElementAt(2);
             _table = table;
+            _whereColumn = whereColumn;
         }
 
         /// <summary>
@@ -56,9 +57,15 @@ namespace Knjigovodstvo.Database
 
             for (int i = 0; i < _name.Count; ++i)
             {
+                int n;
+                if (_table.Contains("Postavke"))
+                    n = 5;
+                else 
+                    n = 2;
+
                 if (_type[i] == "Decimal")
                 {
-                    query += "ROUND(" + _name[i] + ", 2) as " + _name[i] + ", ";
+                    query += $"ROUND({_name[i]}, {n}) as {_name[i]}, ";
                 }
                 else
                     query += _name[i] + ", ";
@@ -99,7 +106,7 @@ namespace Knjigovodstvo.Database
 
         private string Update()
         {
-            string query = "UPDATE " + _table + " ";
+            string query = $"UPDATE {_table} ";
             query += "SET ";
 
             for (int i = 1; i < _name.Count; ++i)
@@ -111,7 +118,18 @@ namespace Knjigovodstvo.Database
             }
 
             query = query.Substring(0, query.Length - 2);
-            query += " WHERE Id=" + _value[0] + ";";
+            if (_whereColumn == null)
+                query += $" WHERE Id={_value[0]};";
+            else
+            {
+                int i;
+                for (i = 0; i<_name.Count; ++i)
+                {
+                    if (_name[i].Contains(_whereColumn))
+                        break;
+                }
+                query += $" WHERE {_whereColumn}='{_value[i]}';";
+            }
 
             return query;
         }
@@ -123,6 +141,7 @@ namespace Knjigovodstvo.Database
 
         private readonly IEnumerable<List<string>> _obj;
         private readonly string _table;
+        private readonly string _whereColumn;
         private readonly List<string> _name;
         private readonly List<string> _value;
         private readonly List<string> _type;

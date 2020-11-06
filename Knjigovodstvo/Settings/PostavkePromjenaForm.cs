@@ -1,5 +1,5 @@
 ﻿using Knjigovodstvo.Code.Validators;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using Knjigovodstvo.Validators;
 using System;
 using System.Windows.Forms;
@@ -14,12 +14,12 @@ namespace Knjigovodstvo.Settings
             labelMessage.Text = "";
         }
 
-        private void buttonClose_Click(object sender, EventArgs e)
+        private void ButtonClose_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             if (!new FloatValidator().Check(textBoxVrijednost.Text))
             {
@@ -29,7 +29,7 @@ namespace Knjigovodstvo.Settings
             {
                 decimal vrijednost = decimal.Parse(textBoxVrijednost.Text);
                 if (vrijednost > 1)
-                    vrijednost = vrijednost / 100.0m;
+                    vrijednost /= 100.0m;
 
                 Postavke postavka = new Postavke
                 {                    
@@ -70,7 +70,7 @@ namespace Knjigovodstvo.Settings
             ShowDialog();
         }
 
-        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
             {

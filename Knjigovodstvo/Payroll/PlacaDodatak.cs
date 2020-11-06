@@ -1,6 +1,6 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using System;
 using System.Data;
 

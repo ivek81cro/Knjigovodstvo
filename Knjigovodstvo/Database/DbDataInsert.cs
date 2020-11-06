@@ -1,5 +1,5 @@
 ﻿using Knjigovodstvo.Helpers;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;

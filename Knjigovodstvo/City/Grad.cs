@@ -1,5 +1,5 @@
 ﻿using Knjigovodstvo.Database;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -16,10 +16,12 @@ namespace Knjigovodstvo.City
                 return FormError.County;
             if (Drzava.Length < 2)
                 return FormError.Country;
-            if (Posta.Length != 5)
+            if (Posta.Length != 5 && Posta != "0")
                 return FormError.Post;
             if (Sifra.Length != 5)
                 return FormError.Sifra;
+            if (Prirez > 100 || Prirez < 0)
+                return FormError.NumberFormat;
 
             return FormError.None;
         }
@@ -90,10 +92,9 @@ namespace Knjigovodstvo.City
             return false;
         }
 
-        internal bool UpdateData(int id)
+        internal bool UpdateData()
         {
-            Id = id;
-            if (new DbDataUpdate().UpdateData(this))
+            if (new DbDataUpdate().UpdateData(this, "Naziv"))
                 return true;
 
             return false;

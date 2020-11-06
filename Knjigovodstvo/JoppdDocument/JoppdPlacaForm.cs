@@ -5,8 +5,10 @@ using Knjigovodstvo.Global;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace Knjigovodstvo.JoppdDocument
 {
@@ -111,12 +113,21 @@ namespace Knjigovodstvo.JoppdDocument
 
         }
 
-        private void PopuniJoppdEntitete()
+        private void FillDataForJoppdFile()
         {
             string datumOd = dateTimePicker1.Value.Year.ToString() + '-' + (dateTimePicker1.Value.Month - 1).ToString();
             _dt = new DbDataExecProcedure().GetTable(ProcedureNames.Joppd_podaci, $"@datumOd='{datumOd}', @dan='01'");
+         
             List<DataRow> rows = _dt.AsEnumerable().ToList();
-            _joppdEntiteti.JoppdEntitet = (from DataRow dr in rows
+            
+            //If only one specific employee is selected
+            if(checkBoxPojedinacno.Checked && !comboBoxZaposlenik.Text.StartsWith('-'))
+            {
+                var newList = rows.Where(s => s.ItemArray[2].ToString() == _zaposlenik.Oib);
+                rows = newList.ToList();
+            }
+
+            _joppdB.Entitet = (from DataRow dr in rows
                                            select new JoppdEntitet()
                                            {
                                                Opcina_Prebivalista = dr["Opcina_Prebivalista"].ToString(),
@@ -143,9 +154,10 @@ namespace Knjigovodstvo.JoppdDocument
                                                Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
                                                Iznos_Isplate = decimal.Parse(dr["Neto"].ToString()),
                                                Primitak_Nesamostalni = decimal.Parse(dr["Bruto"].ToString()),
-                                               Zdravstvo = decimal.Parse(dr["Doprinos_Zdravstvo"].ToString())
-
+                                               Zdravstvo = decimal.Parse(dr["Doprinos_Zdravstvo"].ToString()),
+                                               IzdatakUplaceni_Mio = decimal.Parse(dr["Mio_1"].ToString()) + decimal.Parse(dr["Mio_2"].ToString())
                                            }).ToList();
+        }
 
             List<sPrimateljiP> pArr = new List<sPrimateljiP>();
             for (int i = 0; i < _joppdEntiteti.JoppdEntitet.Count; i++)
@@ -310,42 +322,55 @@ namespace Knjigovodstvo.JoppdDocument
             _sObrazacJoppd.StranaB = prim;
             _sObrazacJoppd.Metapodaci = meta;
 
-            string path = @"JoppdBroj" + SetJoppdFormNumber() + ".xml";
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "XML file|*.xml";
+            saveFileDialog1.Title = "Save an xml File";
+            saveFileDialog1.ShowDialog();
 
-            System.IO.TextWriter txtWriter = new System.IO.StreamWriter(path);
-            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(_sObrazacJoppd.GetType());
+            // If the file name is not an empty string open it for saving.
+            if (saveFileDialog1.FileName != "")
+            {
+                _path = saveFileDialog1.FileName;
+            }
+                //Save joppd.xml file
+                TextWriter txtWriter = new StreamWriter(_path);
+            XmlSerializer x = new XmlSerializer(_sObrazacJoppd.GetType());
             x.Serialize(txtWriter, _sObrazacJoppd);
             txtWriter.Close();
-
-            System.IO.StreamReader reader = new System.IO.StreamReader(path);
-            sObrazacJOPPD enti = (sObrazacJOPPD)x.Deserialize(reader);
-            reader.Close();
-
-            DataSet dataSet = new DataSet();
-            dataSet.ReadXml(path);
-            dataGridView1.DataSource = dataSet.Tables[dataSet.Tables.Count-1];
-
-            enti.GetType();
         }
 
-        private void TextBoxSatiRada_KeyPress(object sender, KeyPressEventArgs e)
+        private void ReadJoppdXmlToDataGrid()
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            StreamReader reader = new StreamReader(_path);
+            XmlSerializer x = new XmlSerializer(_sObrazacJoppd.GetType());
+            _ = (sObrazacJOPPD)x.Deserialize(reader);
+            reader.Close();
+            //Read xml file into datagridview
+            DataSet dataSet = new DataSet();
+            dataSet.ReadXml(_path);
+            dataGridView1.DataSource = dataSet.Tables[dataSet.Tables.Count - 1];
         }
 
         private void ButtonPopuniObrazac_Click(object sender, EventArgs e)
         {
-            PopuniJoppdEntitete();
+            FillDataForJoppdFile();
+            CreateJoppdXmlFile();
+            ReadJoppdXmlToDataGrid();
+        }
+        private void ComboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string selected = this.comboBoxZaposlenik.GetItemText(this.comboBoxZaposlenik.SelectedItem);
+            string oib = selected.Split(' ')[0];
+            _zaposlenik = _zaposlenik.GetZaposlenikByOib(oib);
         }
 
         private Zaposlenik _zaposlenik = new Zaposlenik();
         private DataTable _dt = new DataTable();
         private JoppdSifre _joppdSifre = new JoppdSifre();
-        private JoppdEntitetCollection _joppdEntiteti = new JoppdEntitetCollection();
-        private sObrazacJOPPD _sObrazacJoppd = new sObrazacJOPPD();
+        private JoppdB _joppdB = new JoppdB();
         private Komitent _komitent = new Komitent();
+        private sObrazacJOPPD _sObrazacJoppd = new sObrazacJOPPD();
+        private string _path = "";
+
     }
 }

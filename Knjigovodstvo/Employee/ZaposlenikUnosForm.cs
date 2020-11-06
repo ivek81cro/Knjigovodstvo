@@ -106,7 +106,7 @@ namespace Knjigovodstvo.Employee
 
         private void ButtonOdaberiGrad_Click(object sender, EventArgs e)
         {
-            GradoviTableForm form = new GradoviTableForm();
+            CityTableForm form = new CityTableForm();
             Grad grad = form.ShowDialogValue(1);
 
             if (grad != null && grad.ValidateData() == FormError.None)

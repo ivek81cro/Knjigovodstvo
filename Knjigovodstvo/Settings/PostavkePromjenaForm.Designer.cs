@@ -107,7 +107,7 @@
             this.textBoxVrijednost.Name = "textBoxVrijednost";
             this.textBoxVrijednost.Size = new System.Drawing.Size(111, 23);
             this.textBoxVrijednost.TabIndex = 4;
-            this.textBoxVrijednost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            this.textBoxVrijednost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // buttonSave
             // 
@@ -117,7 +117,7 @@
             this.buttonSave.TabIndex = 5;
             this.buttonSave.Text = "Spremi";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // buttonClose
             // 
@@ -127,7 +127,7 @@
             this.buttonClose.TabIndex = 5;
             this.buttonClose.Text = "Zatvori";
             this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // labelMessage
             // 

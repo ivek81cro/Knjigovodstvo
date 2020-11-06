@@ -1,5 +1,5 @@
 ﻿using Knjigovodstvo.Helpers;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -14,14 +14,14 @@ namespace Knjigovodstvo.Database
         /// </summary>
         /// <param name="dbObject">Table name based on type name of object.</param>
         /// <returns></returns>
-        public bool UpdateData(IDbObject dbObject)
+        public bool UpdateData(IDbObject dbObject, string whereColumn=null)
         {
             GenericPropertyFinder<IDbObject> property = new GenericPropertyFinder<IDbObject>();
 
             IEnumerable<List<string>> obj = property.PrintTModelPropertyAndValue(dbObject);
 
             string table = dbObject.GetType().ToString().Substring(dbObject.GetType().ToString().LastIndexOf('.') + 1);
-            string query = new DbQueryBuilder(obj, table).BuildQuery(QueryType.Update);
+            string query = new DbQueryBuilder(obj, table, whereColumn).BuildQuery(QueryType.Update);
             
             try
             {
