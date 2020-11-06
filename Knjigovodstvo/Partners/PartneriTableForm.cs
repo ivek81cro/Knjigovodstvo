@@ -1,4 +1,5 @@
 ﻿using Knjigovodstvo.Database;
+using Knjigovodstvo.Global;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -27,16 +28,16 @@ namespace Knjigovodstvo.Partners
         private void BtnNewPartner_Click(object sender, EventArgs e)
         {
             PartnerUnosForm form = new PartnerUnosForm();
-            form.FormClosing += new FormClosingEventHandler(this.PartnersNew_FormClosing);
+            form.FormClosing += new FormClosingEventHandler(PartnersNew_FormClosing);
             form.ShowDialog();
         }
 
         private void BtnEditPartner_Click(object sender, EventArgs e)
         {
-            _partner.Id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+            _partner.OpciPodaci.Id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             _partner = _partner.GetPartnerById();
             PartnerUnosForm pn = new PartnerUnosForm(_partner);
-            pn.FormClosing += new FormClosingEventHandler(this.PartnersNew_FormClosing);
+            pn.FormClosing += new FormClosingEventHandler(PartnersNew_FormClosing);
             pn.ShowDialog();
         }
         private void PartnersNew_FormClosing(object sender, FormClosingEventArgs e)
@@ -46,7 +47,7 @@ namespace Knjigovodstvo.Partners
 
         private void BtnDeletePartner_Click(object sender, EventArgs e)
         {
-            _partner.Id = int.Parse(dataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
+            _partner.OpciPodaci.Id = int.Parse(dataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
             DialogResult result = MessageBox.Show("Da li ste sigurni da želite obrisati odabranog partnera?", 
                 "Brisanje partnera", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 

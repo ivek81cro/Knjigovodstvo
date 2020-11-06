@@ -11,9 +11,9 @@ namespace Knjigovodstvo.Partners
     {
         public FormError ValidateData()
         {
-            if (!new OibValidator().Validate(Oib))
+            if (!new OibValidator().Validate(OpciPodaci.Oib))
                 return FormError.Oib;
-            if (Naziv.Length < 2)
+            if (OpciPodaci.Naziv.Length < 2)
                 return FormError.Name;
             if (Adresa.Ulica.Length < 2)
                 return FormError.Street;
@@ -47,12 +47,12 @@ namespace Knjigovodstvo.Partners
 
         public Partneri GetPartnerById()
         {
-            string condition = $"Id={Id};";
+            string condition = $"Id={OpciPodaci.Id};";
             DataTable dt = new DbDataGet().GetTable(this, condition);
-            
-            Id= int.Parse(dt.Rows[0]["Id"].ToString());
-            Oib = dt.Rows[0]["Oib"].ToString();
-            Naziv = dt.Rows[0]["Naziv"].ToString();
+
+            OpciPodaci.Id = int.Parse(dt.Rows[0]["Id"].ToString());
+            OpciPodaci.Oib = dt.Rows[0]["Oib"].ToString();
+            OpciPodaci.Naziv = dt.Rows[0]["Naziv"].ToString();
             Adresa.Ulica = dt.Rows[0]["Ulica"].ToString();
             Adresa.Broj = dt.Rows[0]["Broj"].ToString();
             Adresa.Grad.Posta = dt.Rows[0]["Posta"].ToString();
@@ -68,9 +68,7 @@ namespace Knjigovodstvo.Partners
             return this;
         }
 
-        public int Id { get; set; } = 0;
-        public string Oib { get; set; } = "00000000000";
-        public string Naziv { get; set; } = "";
+        public OpciPodaci OpciPodaci { get; set; } = new OpciPodaci();
         public Adresa Adresa { get; set; } = new Adresa();
         public Kontakt Kontakt { get; set; } = new Kontakt();
         public string Iban { get; set; } = "";

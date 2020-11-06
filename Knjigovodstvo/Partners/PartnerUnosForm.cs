@@ -18,8 +18,8 @@ namespace Knjigovodstvo.Partners
             InitializeComponent();
             _partner = partner;
 
-            textBoxOib.Text = _partner.Oib;
-            textBoxName.Text = _partner.Naziv;
+            textBoxOib.Text = _partner.OpciPodaci.Oib;
+            textBoxName.Text = _partner.OpciPodaci.Naziv;
             textBoxStreet.Text = _partner.Adresa.Ulica;
             textBoxUlicaBroj.Text = _partner.Adresa.Broj;
             textBoxPost.Text = _partner.Adresa.Grad.Posta;
@@ -27,8 +27,8 @@ namespace Knjigovodstvo.Partners
             textBoxPhone.Text = _partner.Kontakt.Telefon;
             textBoxFax.Text = _partner.Kontakt.Fax;
             textBoxEmail.Text = _partner.Kontakt.Email;
-            textBoxIban.Text = _partner.Iban;
-            textBoxMbo.Text = _partner.Mbo;
+            textBoxIban.Text = _partner.OpciPodaci.Iban;
+            textBoxMbo.Text = _partner.OpciPodaci.Mbo;
             checkBoxBuyer.Checked = _partner.Kupac != 'n' ? true : false;
             checkBoxSeller.Checked = _partner.Dobavljac != 'n' ? true : false;
         }
@@ -37,8 +37,8 @@ namespace Knjigovodstvo.Partners
         {
             labelMessage.Text = "";
 
-            _partner.Oib = textBoxOib.Text;
-            _partner.Naziv = textBoxName.Text;
+            _partner.OpciPodaci.Oib = textBoxOib.Text;
+            _partner.OpciPodaci.Naziv = textBoxName.Text;
             _partner.Adresa.Ulica = textBoxStreet.Text;
             _partner.Adresa.Broj = textBoxUlicaBroj.Text;
             _partner.Adresa.Grad.Posta = textBoxPost.Text;
@@ -46,15 +46,15 @@ namespace Knjigovodstvo.Partners
             _partner.Kontakt.Telefon = textBoxPhone.Text;
             _partner.Kontakt.Fax = textBoxFax.Text;
             _partner.Kontakt.Email = textBoxEmail.Text;
-            _partner.Iban = textBoxIban.Text;
-            _partner.Mbo = textBoxMbo.Text;
+            _partner.OpciPodaci.Iban = textBoxIban.Text;
+            _partner.OpciPodaci.Mbo = textBoxMbo.Text;
             _partner.Kupac = checkBoxBuyer.Checked ? 'k' : 'n';
             _partner.Dobavljac = checkBoxSeller.Checked ? 'd' : 'n';
 
             FormError validateResult = _partner.ValidateData();
             if ( validateResult == FormError.None)
             {
-                if (_partner.Id == 0 && _partner.InsertNew())
+                if (_partner.OpciPodaci.Id == 0 && _partner.InsertNew())
                 {
                     MessageBox.Show("Unos uspješan.", "Novi partner unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();

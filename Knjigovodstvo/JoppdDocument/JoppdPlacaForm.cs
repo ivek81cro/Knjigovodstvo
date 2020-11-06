@@ -29,13 +29,16 @@ namespace Knjigovodstvo.JoppdDocument
             _komitent = (from DataRow dr in row
                   select new Komitent()
                   {
-                      Id = int.Parse(dr["Id"].ToString()),
-                      Oib = dr["Oib"].ToString(),
+                      OpciPodaci = new OpciPodaci() 
+                      {
+                          Id = int.Parse(dr["Id"].ToString()),
+                          Oib = dr["Oib"].ToString(),
+                          Naziv = dr["Naziv"].ToString(),
+                      },
                       Kontakt = new Kontakt() 
                       {
                           Email = dr["Mail"].ToString()
                       },
-                      Naziv = dr["Naziv"].ToString(),
                       Adresa = new Adresa() 
                       {
                           Ulica = dr["Adresa"].ToString(),
@@ -203,7 +206,7 @@ namespace Knjigovodstvo.JoppdDocument
                 PodnositeljIzvjesca = new sPodnositeljIzvjesca()
                 {
                     ItemsElementName = new[] { ItemsChoiceType.Naziv },
-                    Items = new[] { _komitent.Naziv },
+                    Items = new[] { _komitent.OpciPodaci.Naziv },
                     Adresa = new sAdresa()
                     {
                         Ulica = _komitent.Adresa.Ulica,
@@ -211,7 +214,7 @@ namespace Knjigovodstvo.JoppdDocument
                         Mjesto = _komitent.Adresa.Grad.Mjesto
                     },
                     Email = _komitent.Kontakt.Email,
-                    OIB = _komitent.Oib,
+                    OIB = _komitent.OpciPodaci.Oib,
                     Oznaka = tOznakaPodnositelja.Item2
                 },
                 BrojOsoba = pArr.Count.ToString(),

@@ -9,9 +9,9 @@ namespace Knjigovodstvo
     {
         public FormError ValidateData()
         {
-            if (!new OibValidator().Validate(Oib))
+            if (!new OibValidator().Validate(OpciPodaci.Oib))
                 return FormError.Oib;
-            if (Naziv.Length < 2)
+            if (OpciPodaci.Naziv.Length < 2)
                 return FormError.Name;
             if (Adresa.Ulica.Length < 2)
                 return FormError.Street;
@@ -19,7 +19,7 @@ namespace Knjigovodstvo
                 return FormError.Post;
             if (Adresa.Grad.Mjesto.Length < 2)
                 return FormError.City;
-            if (!new IbanValidator().Validate(Iban))
+            if (!new IbanValidator().Validate(OpciPodaci.Iban))
                 return FormError.Iban;
             
             return FormError.None;
@@ -33,22 +33,17 @@ namespace Knjigovodstvo
             return false;
         }
 
-        public bool UpdateData(int id)
+        public bool UpdateData()
         {
-            Id = id;
             if (new DbDataUpdate().UpdateData(this))
                 return true;
 
             return false;
         }
 
-        public int Id { get; set; } = 0;
-        public string Oib { get; set; } = "00000000000";
-        public string Naziv { get; set; } = "";
+        public OpciPodaci OpciPodaci { get; set; } = new OpciPodaci();
         public Adresa Adresa { get; set; } = new Adresa();
         public Kontakt Kontakt { get; set; } = new Kontakt();
-        public string Iban { get; set; } = "";
-        public string Mbo { get; set; } = "";
         public string Vrsta_djelatnosti { get; set; } = "";
         public string Sifra_djelatnosti { get; set; } = "";
         public string Naziv_djelatnosti { get; set; } = "";
