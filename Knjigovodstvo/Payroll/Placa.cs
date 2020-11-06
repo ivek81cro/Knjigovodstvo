@@ -9,7 +9,6 @@ namespace Knjigovodstvo.Payroll
     {
         public FormError ValidateData() 
         {
-            //TODO validate Placa data
             return FormError.None;
         }
 
