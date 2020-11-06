@@ -11,6 +11,17 @@ namespace Knjigovodstvo.Partners
         {
             InitializeComponent();
             LoadDatagrid();
+
+        }
+        private void LoadDatagrid()
+        {
+            dataGridView1.DataSource = new DbDataGet().GetTable(_partner);
+        }
+
+        private void TextBoxFilterPartner_TextChanged(object sender, EventArgs e)
+        {
+            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter =
+                $"Naziv LIKE '{textBoxFilterPartner.Text}%' OR Naziv LIKE '% {textBoxFilterPartner.Text}%'";
         }
 
         private void BtnNewPartner_Click(object sender, EventArgs e)
@@ -20,24 +31,13 @@ namespace Knjigovodstvo.Partners
             form.ShowDialog();
         }
 
-        private void LoadDatagrid()
-        {
-            dataGridView1.DataSource = new DbDataGet().GetTable(new Partneri());
-        }
-
-        private void TextBoxFilterPartner_TextChanged(object sender, EventArgs e)
-        {
-            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter =
-                $"Naziv LIKE '{textBoxFilterPartner.Text}%' OR Naziv LIKE '% {textBoxFilterPartner.Text}%'";
-        }
-
         private void BtnEditPartner_Click(object sender, EventArgs e)
         {
-            int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-            _partner = new Partneri().GetPartnerById(id);
-            PartnerUnosForm pn = new PartnerUnosForm();
+            _partner.Id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+            _partner = _partner.GetPartnerById();
+            PartnerUnosForm pn = new PartnerUnosForm(_partner);
             pn.FormClosing += new FormClosingEventHandler(this.PartnersNew_FormClosing);
-            pn.EditPartner(_partner);
+            pn.ShowDialog();
         }
         private void PartnersNew_FormClosing(object sender, FormClosingEventArgs e)
         {

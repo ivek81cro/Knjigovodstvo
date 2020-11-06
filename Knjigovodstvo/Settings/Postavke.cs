@@ -52,7 +52,7 @@ namespace Knjigovodstvo.Settings
             string condition = $"Naziv='{naziv}';";
             DataTable postavka = new DbDataGet().GetTable(new Postavke(), condition);
 
-            return decimal.Parse(postavka.Rows[0][3].ToString());
+            return decimal.Parse(postavka.Rows[0]["Vrijednost"].ToString());
         }
 
         public int Id { get; set; } = 0;

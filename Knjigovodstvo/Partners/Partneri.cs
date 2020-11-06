@@ -1,12 +1,12 @@
 ﻿using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Database;
+using Knjigovodstvo.Global;
 using Knjigovodstvo.Models;
-using System;
 using System.Data;
 
 namespace Knjigovodstvo.Partners
 {
-    
+
     public class Partneri : IDbObject
     {
         public FormError ValidateData()
@@ -15,11 +15,11 @@ namespace Knjigovodstvo.Partners
                 return FormError.Oib;
             if (Naziv.Length < 2)
                 return FormError.Name;
-            if (Adresa.Length < 2)
+            if (Adresa.Ulica.Length < 2)
                 return FormError.Street;
-            if (Posta.Length != 5)
+            if (Adresa.Grad.Posta.Length != 5)
                 return FormError.Post;
-            if (Grad.Length < 2)
+            if (Adresa.Grad.Mjesto.Length < 2)
                 return FormError.City;
             if (!new IbanValidator().Validate(Iban))
                 return FormError.Iban;
@@ -37,46 +37,42 @@ namespace Knjigovodstvo.Partners
             return false;
         }
 
-        public bool UpdateData(int id)
+        public bool UpdateData()
         {
-            Id = id;
             if (new DbDataUpdate().UpdateData(this))
                 return true;
 
             return false;
         }
 
-        public Partneri GetPartnerById(int id)
+        public Partneri GetPartnerById()
         {
-            string condition = $"Id={id};";
-            DataTable partner = new DbDataGet().GetTable(new Partneri(), condition);
-            return new Partneri
-            {
-                Id = int.Parse(partner.Rows[0][0].ToString()),
-                Oib = partner.Rows[0][1].ToString(),
-                Naziv = partner.Rows[0][2].ToString(),
-                Adresa = partner.Rows[0][3].ToString(),
-                Posta = partner.Rows[0][4].ToString(),
-                Grad = partner.Rows[0][5].ToString(),
-                Telefon = partner.Rows[0][6].ToString(),
-                Fax = partner.Rows[0][7].ToString(),
-                Email = partner.Rows[0][8].ToString(),
-                Iban = partner.Rows[0][9].ToString(),
-                Mbo = partner.Rows[0][10].ToString(),
-                Kupac = char.Parse(partner.Rows[0][11].ToString()),
-                Dobavljac = char.Parse(partner.Rows[0][12].ToString())
-            };
+            string condition = $"Id={Id};";
+            DataTable dt = new DbDataGet().GetTable(this, condition);
+            
+            Id= int.Parse(dt.Rows[0]["Id"].ToString());
+            Oib = dt.Rows[0]["Oib"].ToString();
+            Naziv = dt.Rows[0]["Naziv"].ToString();
+            Adresa.Ulica = dt.Rows[0]["Ulica"].ToString();
+            Adresa.Broj = dt.Rows[0]["Broj"].ToString();
+            Adresa.Grad.Posta = dt.Rows[0]["Posta"].ToString();
+            Adresa.Grad.Mjesto = dt.Rows[0]["Mjesto"].ToString();
+            Kontakt.Telefon = dt.Rows[0]["Telefon"].ToString();
+            Kontakt.Fax = dt.Rows[0]["Fax"].ToString();
+            Kontakt.Email = dt.Rows[0]["Email"].ToString();
+            Iban = dt.Rows[0]["Iban"].ToString();
+            Mbo = dt.Rows[0]["Mbo"].ToString();
+            Kupac = char.Parse(dt.Rows[0]["Kupac"].ToString());
+            Dobavljac = char.Parse(dt.Rows[0]["Dobavljac"].ToString());
+
+            return this;
         }
 
         public int Id { get; set; } = 0;
         public string Oib { get; set; } = "00000000000";
         public string Naziv { get; set; } = "";
-        public string Adresa { get; set; } = "";
-        public string Posta { get; set; } = "";
-        public string Grad { get; set; } = "";
-        public string Telefon { get; set; } = "";
-        public string Fax { get; set; } = "";
-        public string Email { get; set; } = "";
+        public Adresa Adresa { get; set; } = new Adresa();
+        public Kontakt Kontakt { get; set; } = new Kontakt();
         public string Iban { get; set; } = "";
         public string Mbo { get; set; } = "";
         public char Kupac { get; set; } = 'n';

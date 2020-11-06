@@ -13,36 +13,54 @@ namespace Knjigovodstvo.Partners
             InitializeComponent();
         }
 
+        public PartnerUnosForm(Partneri partner)
+        {
+            InitializeComponent();
+            _partner = partner;
+
+            textBoxOib.Text = _partner.Oib;
+            textBoxName.Text = _partner.Naziv;
+            textBoxStreet.Text = _partner.Adresa.Ulica;
+            textBoxUlicaBroj.Text = _partner.Adresa.Broj;
+            textBoxPost.Text = _partner.Adresa.Grad.Posta;
+            textBoxCity.Text = _partner.Adresa.Grad.Mjesto;
+            textBoxPhone.Text = _partner.Kontakt.Telefon;
+            textBoxFax.Text = _partner.Kontakt.Fax;
+            textBoxEmail.Text = _partner.Kontakt.Email;
+            textBoxIban.Text = _partner.Iban;
+            textBoxMbo.Text = _partner.Mbo;
+            checkBoxBuyer.Checked = _partner.Kupac != 'n' ? true : false;
+            checkBoxSeller.Checked = _partner.Dobavljac != 'n' ? true : false;
+        }
+
         private void BtnSave_Click(object sender, EventArgs e)
         {
             labelMessage.Text = "";
 
-            Partneri partner = new Partneri
-            {
-                Oib = textBoxOib.Text,
-                Naziv = textBoxName.Text,
-                Adresa = textBoxStreet.Text,
-                Posta = textBoxPost.Text,
-                Grad = textBoxCity.Text,
-                Telefon = textBoxPhone.Text,
-                Fax = textBoxFax.Text,
-                Email = textBoxEmail.Text,
-                Iban = textBoxIban.Text,
-                Mbo = textBoxMbo.Text,
-                Kupac = checkBoxBuyer.Checked ? 'k' : 'n',
-                Dobavljac = checkBoxSeller.Checked ? 'd' : 'n'
-            };
+            _partner.Oib = textBoxOib.Text;
+            _partner.Naziv = textBoxName.Text;
+            _partner.Adresa.Ulica = textBoxStreet.Text;
+            _partner.Adresa.Broj = textBoxUlicaBroj.Text;
+            _partner.Adresa.Grad.Posta = textBoxPost.Text;
+            _partner.Adresa.Grad.Mjesto = textBoxCity.Text;
+            _partner.Kontakt.Telefon = textBoxPhone.Text;
+            _partner.Kontakt.Fax = textBoxFax.Text;
+            _partner.Kontakt.Email = textBoxEmail.Text;
+            _partner.Iban = textBoxIban.Text;
+            _partner.Mbo = textBoxMbo.Text;
+            _partner.Kupac = checkBoxBuyer.Checked ? 'k' : 'n';
+            _partner.Dobavljac = checkBoxSeller.Checked ? 'd' : 'n';
 
-            FormError validateResult = partner.ValidateData();
+            FormError validateResult = _partner.ValidateData();
             if ( validateResult == FormError.None)
             {
-                if (!_editMode && partner.InsertNew())
+                if (_partner.Id == 0 && _partner.InsertNew())
                 {
                     MessageBox.Show("Unos uspješan.", "Novi partner unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
                 }
 
-                if (_editMode && partner.UpdateData(_id))
+                else if (_partner.UpdateData())
                 {
                     MessageBox.Show("Izmjena uspješna.", "Izmjena podataka partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
@@ -66,44 +84,15 @@ namespace Knjigovodstvo.Partners
 
         private void BtnSelectCity_Click(object sender, EventArgs e)
         {
-            GradUnosForm city = new GradUnosForm();
-            Grad c = city.ShowDialogValue();
+            GradoviTableForm form = new GradoviTableForm();
+            Grad grad = form.ShowDialogValue(1);
 
-            if (c != null && c.ValidateData() == FormError.None)
+            if (grad != null && grad.ValidateData() == FormError.None)
             {
-                textBoxCity.Text = c.Mjesto;
-                textBoxPost.Text = c.Posta;
+                textBoxCity.Text = grad.Mjesto;
+                textBoxPost.Text = grad.Posta;
             }
         }
-
-        /// <summary>
-        /// Custom show dialog implementation, table row to object for sending to dialog.
-        /// </summary>
-        /// <param name="partner">Selected row from datatagrid</param>
-        public void EditPartner(Partneri partner)
-        {
-            _id = partner.Id;
-            textBoxOib.Text = partner.Oib;
-            textBoxName.Text = partner.Naziv;
-            textBoxStreet.Text = partner.Adresa;
-            textBoxPost.Text = partner.Posta;
-            textBoxCity.Text = partner.Grad;
-            textBoxPhone.Text = partner.Telefon;
-            textBoxFax.Text = partner.Fax;
-            textBoxEmail.Text = partner.Email;
-            textBoxIban.Text = partner.Iban;
-            textBoxMbo.Text = partner.Mbo;
-            if (partner.Kupac == 'k')
-                checkBoxBuyer.Checked = true;
-            if (partner.Dobavljac == 'd')
-                checkBoxSeller.Checked = true;
-            
-            _editMode = true;
-
-            ShowDialog();
-        }
-
-        bool _editMode = false;
-        int _id = 0;
+        private Partneri _partner = new Partneri();
     }
 }
