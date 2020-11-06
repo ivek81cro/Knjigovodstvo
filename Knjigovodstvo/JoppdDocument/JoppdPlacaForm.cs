@@ -1,5 +1,7 @@
-﻿using Knjigovodstvo.Database;
+﻿using Knjigovodstvo.City;
+using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
+using Knjigovodstvo.Global;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -29,11 +31,21 @@ namespace Knjigovodstvo.JoppdDocument
                   {
                       Id = int.Parse(dr["Id"].ToString()),
                       Oib = dr["Oib"].ToString(),
-                      Mail = dr["Mail"].ToString(),
+                      Kontakt = new Kontakt() 
+                      {
+                          Email = dr["Mail"].ToString()
+                      },
                       Naziv = dr["Naziv"].ToString(),
-                      Adresa = dr["Adresa"].ToString(),
-                      Grad = dr["Grad"].ToString(),
-                      Posta = dr["Posta"].ToString()
+                      Adresa = new Adresa() 
+                      {
+                          Ulica = dr["Adresa"].ToString(),
+                          Broj = dr["Broj"].ToString(),
+                          Grad = new Grad()
+                          {
+                              Mjesto = dr["Mjesto"].ToString(),
+                              Posta = dr["Posta"].ToString()
+                          }
+                      }
                   }).ToList().ElementAt(0);
         }
 
@@ -194,11 +206,11 @@ namespace Knjigovodstvo.JoppdDocument
                     Items = new[] { _komitent.Naziv },
                     Adresa = new sAdresa()
                     {
-                        Ulica = _komitent.Adresa.Split(' ')[0],
-                        Broj = _komitent.Adresa.Split(' ')[1],
-                        Mjesto = _komitent.Grad
+                        Ulica = _komitent.Adresa.Ulica,
+                        Broj = _komitent.Adresa.Broj,
+                        Mjesto = _komitent.Adresa.Grad.Mjesto
                     },
-                    Email = _komitent.Mail,
+                    Email = _komitent.Kontakt.Email,
                     OIB = _komitent.Oib,
                     Oznaka = tOznakaPodnositelja.Item2
                 },

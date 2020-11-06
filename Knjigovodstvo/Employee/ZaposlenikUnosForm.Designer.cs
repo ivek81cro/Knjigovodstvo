@@ -32,7 +32,7 @@
             this.labelIme = new System.Windows.Forms.Label();
             this.labelPrezime = new System.Windows.Forms.Label();
             this.labelDatumRodenja = new System.Windows.Forms.Label();
-            this.labelAdresa = new System.Windows.Forms.Label();
+            this.labelUlica = new System.Windows.Forms.Label();
             this.labelGrad = new System.Windows.Forms.Label();
             this.labelDrzava = new System.Windows.Forms.Label();
             this.labelTelefon = new System.Windows.Forms.Label();
@@ -46,7 +46,7 @@
             this.textBoxOib = new System.Windows.Forms.TextBox();
             this.textBoxIme = new System.Windows.Forms.TextBox();
             this.textBoxPrezime = new System.Windows.Forms.TextBox();
-            this.textBoxAdresa = new System.Windows.Forms.TextBox();
+            this.textBoxUlica = new System.Windows.Forms.TextBox();
             this.textBoxGrad = new System.Windows.Forms.TextBox();
             this.textBoxDrzava = new System.Windows.Forms.TextBox();
             this.textBoxTelefon = new System.Windows.Forms.TextBox();
@@ -57,6 +57,8 @@
             this.buttonOdaberiGrad = new System.Windows.Forms.Button();
             this.labelMessage = new System.Windows.Forms.Label();
             this.checkBoxOdlazak = new System.Windows.Forms.CheckBox();
+            this.labelUlicaBroj = new System.Windows.Forms.Label();
+            this.textBoxUlicaBroj = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // labelOib
@@ -95,19 +97,19 @@
             this.labelDatumRodenja.TabIndex = 1;
             this.labelDatumRodenja.Text = "Datum rođenja";
             // 
-            // labelAdresa
+            // labelUlica
             // 
-            this.labelAdresa.AutoSize = true;
-            this.labelAdresa.Location = new System.Drawing.Point(12, 180);
-            this.labelAdresa.Name = "labelAdresa";
-            this.labelAdresa.Size = new System.Drawing.Size(43, 15);
-            this.labelAdresa.TabIndex = 1;
-            this.labelAdresa.Text = "Adresa";
+            this.labelUlica.AutoSize = true;
+            this.labelUlica.Location = new System.Drawing.Point(12, 180);
+            this.labelUlica.Name = "labelUlica";
+            this.labelUlica.Size = new System.Drawing.Size(33, 15);
+            this.labelUlica.TabIndex = 1;
+            this.labelUlica.Text = "Ulica";
             // 
             // labelGrad
             // 
             this.labelGrad.AutoSize = true;
-            this.labelGrad.Location = new System.Drawing.Point(12, 219);
+            this.labelGrad.Location = new System.Drawing.Point(13, 255);
             this.labelGrad.Name = "labelGrad";
             this.labelGrad.Size = new System.Drawing.Size(32, 15);
             this.labelGrad.TabIndex = 1;
@@ -116,7 +118,7 @@
             // labelDrzava
             // 
             this.labelDrzava.AutoSize = true;
-            this.labelDrzava.Location = new System.Drawing.Point(12, 258);
+            this.labelDrzava.Location = new System.Drawing.Point(13, 294);
             this.labelDrzava.Name = "labelDrzava";
             this.labelDrzava.Size = new System.Drawing.Size(42, 15);
             this.labelDrzava.TabIndex = 1;
@@ -125,7 +127,7 @@
             // labelTelefon
             // 
             this.labelTelefon.AutoSize = true;
-            this.labelTelefon.Location = new System.Drawing.Point(12, 297);
+            this.labelTelefon.Location = new System.Drawing.Point(13, 333);
             this.labelTelefon.Name = "labelTelefon";
             this.labelTelefon.Size = new System.Drawing.Size(45, 15);
             this.labelTelefon.TabIndex = 1;
@@ -134,7 +136,7 @@
             // labelStrucnaSprema
             // 
             this.labelStrucnaSprema.AutoSize = true;
-            this.labelStrucnaSprema.Location = new System.Drawing.Point(12, 336);
+            this.labelStrucnaSprema.Location = new System.Drawing.Point(13, 372);
             this.labelStrucnaSprema.Name = "labelStrucnaSprema";
             this.labelStrucnaSprema.Size = new System.Drawing.Size(89, 15);
             this.labelStrucnaSprema.TabIndex = 1;
@@ -143,7 +145,7 @@
             // labelOlaksica
             // 
             this.labelOlaksica.AutoSize = true;
-            this.labelOlaksica.Location = new System.Drawing.Point(12, 375);
+            this.labelOlaksica.Location = new System.Drawing.Point(13, 411);
             this.labelOlaksica.Name = "labelOlaksica";
             this.labelOlaksica.Size = new System.Drawing.Size(51, 15);
             this.labelOlaksica.TabIndex = 1;
@@ -152,7 +154,7 @@
             // labelDolazak
             // 
             this.labelDolazak.AutoSize = true;
-            this.labelDolazak.Location = new System.Drawing.Point(12, 414);
+            this.labelDolazak.Location = new System.Drawing.Point(13, 450);
             this.labelDolazak.Name = "labelDolazak";
             this.labelDolazak.Size = new System.Drawing.Size(86, 15);
             this.labelDolazak.TabIndex = 1;
@@ -161,7 +163,7 @@
             // labelOdlazak
             // 
             this.labelOdlazak.AutoSize = true;
-            this.labelOdlazak.Location = new System.Drawing.Point(12, 453);
+            this.labelOdlazak.Location = new System.Drawing.Point(13, 489);
             this.labelOdlazak.Name = "labelOdlazak";
             this.labelOdlazak.Size = new System.Drawing.Size(86, 15);
             this.labelOdlazak.TabIndex = 1;
@@ -179,7 +181,7 @@
             // dateTimePickerDatumDolaska
             // 
             this.dateTimePickerDatumDolaska.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerDatumDolaska.Location = new System.Drawing.Point(117, 408);
+            this.dateTimePickerDatumDolaska.Location = new System.Drawing.Point(118, 444);
             this.dateTimePickerDatumDolaska.Name = "dateTimePickerDatumDolaska";
             this.dateTimePickerDatumDolaska.Size = new System.Drawing.Size(228, 23);
             this.dateTimePickerDatumDolaska.TabIndex = 9;
@@ -187,7 +189,7 @@
             // dateTimePickerDatumOdlaska
             // 
             this.dateTimePickerDatumOdlaska.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerDatumOdlaska.Location = new System.Drawing.Point(117, 447);
+            this.dateTimePickerDatumOdlaska.Location = new System.Drawing.Point(118, 483);
             this.dateTimePickerDatumOdlaska.Name = "dateTimePickerDatumOdlaska";
             this.dateTimePickerDatumOdlaska.Size = new System.Drawing.Size(228, 23);
             this.dateTimePickerDatumOdlaska.TabIndex = 10;
@@ -214,16 +216,16 @@
             this.textBoxPrezime.Size = new System.Drawing.Size(228, 23);
             this.textBoxPrezime.TabIndex = 2;
             // 
-            // textBoxAdresa
+            // textBoxUlica
             // 
-            this.textBoxAdresa.Location = new System.Drawing.Point(117, 177);
-            this.textBoxAdresa.Name = "textBoxAdresa";
-            this.textBoxAdresa.Size = new System.Drawing.Size(228, 23);
-            this.textBoxAdresa.TabIndex = 4;
+            this.textBoxUlica.Location = new System.Drawing.Point(117, 177);
+            this.textBoxUlica.Name = "textBoxUlica";
+            this.textBoxUlica.Size = new System.Drawing.Size(228, 23);
+            this.textBoxUlica.TabIndex = 4;
             // 
             // textBoxGrad
             // 
-            this.textBoxGrad.Location = new System.Drawing.Point(117, 216);
+            this.textBoxGrad.Location = new System.Drawing.Point(118, 252);
             this.textBoxGrad.Name = "textBoxGrad";
             this.textBoxGrad.ReadOnly = true;
             this.textBoxGrad.Size = new System.Drawing.Size(228, 23);
@@ -231,7 +233,7 @@
             // 
             // textBoxDrzava
             // 
-            this.textBoxDrzava.Location = new System.Drawing.Point(117, 255);
+            this.textBoxDrzava.Location = new System.Drawing.Point(118, 291);
             this.textBoxDrzava.Name = "textBoxDrzava";
             this.textBoxDrzava.ReadOnly = true;
             this.textBoxDrzava.Size = new System.Drawing.Size(228, 23);
@@ -240,25 +242,25 @@
             // 
             // textBoxTelefon
             // 
-            this.textBoxTelefon.Location = new System.Drawing.Point(117, 294);
+            this.textBoxTelefon.Location = new System.Drawing.Point(118, 330);
             this.textBoxTelefon.Name = "textBoxTelefon";
             this.textBoxTelefon.Size = new System.Drawing.Size(228, 23);
             this.textBoxTelefon.TabIndex = 6;
             // 
             // textBoxStrucnaSprema
             // 
-            this.textBoxStrucnaSprema.Location = new System.Drawing.Point(117, 333);
+            this.textBoxStrucnaSprema.Location = new System.Drawing.Point(118, 369);
             this.textBoxStrucnaSprema.Name = "textBoxStrucnaSprema";
             this.textBoxStrucnaSprema.Size = new System.Drawing.Size(59, 23);
             this.textBoxStrucnaSprema.TabIndex = 7;
             // 
             // textBoxOlaksica
             // 
-            this.textBoxOlaksica.Location = new System.Drawing.Point(117, 372);
+            this.textBoxOlaksica.Location = new System.Drawing.Point(118, 408);
             this.textBoxOlaksica.Name = "textBoxOlaksica";
             this.textBoxOlaksica.Size = new System.Drawing.Size(59, 23);
             this.textBoxOlaksica.TabIndex = 8;
-            this.textBoxOlaksica.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            this.textBoxOlaksica.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // buttonSave
             // 
@@ -268,7 +270,7 @@
             this.buttonSave.TabIndex = 11;
             this.buttonSave.Text = "Spremi";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonSave.Click += new System.EventHandler(this.RuttonSave_Click);
             // 
             // buttonClose
             // 
@@ -278,22 +280,22 @@
             this.buttonClose.TabIndex = 12;
             this.buttonClose.Text = "Zatvori";
             this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // buttonOdaberiGrad
             // 
-            this.buttonOdaberiGrad.Location = new System.Drawing.Point(351, 215);
+            this.buttonOdaberiGrad.Location = new System.Drawing.Point(352, 251);
             this.buttonOdaberiGrad.Name = "buttonOdaberiGrad";
             this.buttonOdaberiGrad.Size = new System.Drawing.Size(75, 23);
             this.buttonOdaberiGrad.TabIndex = 5;
             this.buttonOdaberiGrad.Text = "Odaberi";
             this.buttonOdaberiGrad.UseVisualStyleBackColor = true;
-            this.buttonOdaberiGrad.Click += new System.EventHandler(this.buttonOdaberiGrad_Click);
+            this.buttonOdaberiGrad.Click += new System.EventHandler(this.ButtonOdaberiGrad_Click);
             // 
             // labelMessage
             // 
             this.labelMessage.AutoSize = true;
-            this.labelMessage.Location = new System.Drawing.Point(12, 500);
+            this.labelMessage.Location = new System.Drawing.Point(13, 536);
             this.labelMessage.Name = "labelMessage";
             this.labelMessage.Size = new System.Drawing.Size(81, 15);
             this.labelMessage.TabIndex = 9;
@@ -302,7 +304,7 @@
             // checkBoxOdlazak
             // 
             this.checkBoxOdlazak.AutoSize = true;
-            this.checkBoxOdlazak.Location = new System.Drawing.Point(351, 413);
+            this.checkBoxOdlazak.Location = new System.Drawing.Point(352, 449);
             this.checkBoxOdlazak.Name = "checkBoxOdlazak";
             this.checkBoxOdlazak.Size = new System.Drawing.Size(68, 19);
             this.checkBoxOdlazak.TabIndex = 13;
@@ -310,11 +312,29 @@
             this.checkBoxOdlazak.UseVisualStyleBackColor = true;
             this.checkBoxOdlazak.CheckedChanged += new System.EventHandler(this.CheckBoxOdlazak_CheckedChanged);
             // 
+            // labelUlicaBroj
+            // 
+            this.labelUlicaBroj.AutoSize = true;
+            this.labelUlicaBroj.Location = new System.Drawing.Point(13, 215);
+            this.labelUlicaBroj.Name = "labelUlicaBroj";
+            this.labelUlicaBroj.Size = new System.Drawing.Size(28, 15);
+            this.labelUlicaBroj.TabIndex = 1;
+            this.labelUlicaBroj.Text = "Broj";
+            // 
+            // textBoxUlicaBroj
+            // 
+            this.textBoxUlicaBroj.Location = new System.Drawing.Point(117, 212);
+            this.textBoxUlicaBroj.Name = "textBoxUlicaBroj";
+            this.textBoxUlicaBroj.Size = new System.Drawing.Size(228, 23);
+            this.textBoxUlicaBroj.TabIndex = 4;
+            // 
             // ZaposlenikUnosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(448, 628);
+            this.Controls.Add(this.textBoxUlicaBroj);
+            this.Controls.Add(this.labelUlicaBroj);
             this.Controls.Add(this.checkBoxOdlazak);
             this.Controls.Add(this.labelMessage);
             this.Controls.Add(this.buttonOdaberiGrad);
@@ -325,7 +345,7 @@
             this.Controls.Add(this.textBoxTelefon);
             this.Controls.Add(this.textBoxDrzava);
             this.Controls.Add(this.textBoxGrad);
-            this.Controls.Add(this.textBoxAdresa);
+            this.Controls.Add(this.textBoxUlica);
             this.Controls.Add(this.textBoxPrezime);
             this.Controls.Add(this.textBoxIme);
             this.Controls.Add(this.textBoxOib);
@@ -339,7 +359,7 @@
             this.Controls.Add(this.labelTelefon);
             this.Controls.Add(this.labelDrzava);
             this.Controls.Add(this.labelGrad);
-            this.Controls.Add(this.labelAdresa);
+            this.Controls.Add(this.labelUlica);
             this.Controls.Add(this.labelDatumRodenja);
             this.Controls.Add(this.labelPrezime);
             this.Controls.Add(this.labelIme);
@@ -360,7 +380,7 @@
         private System.Windows.Forms.Label labelIme;
         private System.Windows.Forms.Label labelPrezime;
         private System.Windows.Forms.Label labelDatumRodenja;
-        private System.Windows.Forms.Label labelAdresa;
+        private System.Windows.Forms.Label labelUlica;
         private System.Windows.Forms.Label labelGrad;
         private System.Windows.Forms.Label labelDrzava;
         private System.Windows.Forms.Label labelTelefon;
@@ -374,7 +394,7 @@
         private System.Windows.Forms.TextBox textBoxOib;
         private System.Windows.Forms.TextBox textBoxIme;
         private System.Windows.Forms.TextBox textBoxPrezime;
-        private System.Windows.Forms.TextBox textBoxAdresa;
+        private System.Windows.Forms.TextBox textBoxUlica;
         private System.Windows.Forms.TextBox textBoxGrad;
         private System.Windows.Forms.TextBox textBoxDrzava;
         private System.Windows.Forms.TextBox textBoxTelefon;
@@ -385,5 +405,7 @@
         private System.Windows.Forms.Button buttonOdaberiGrad;
         private System.Windows.Forms.Label labelMessage;
         private System.Windows.Forms.CheckBox checkBoxOdlazak;
+        private System.Windows.Forms.Label labelUlicaBroj;
+        private System.Windows.Forms.TextBox textBoxUlicaBroj;
     }
 }

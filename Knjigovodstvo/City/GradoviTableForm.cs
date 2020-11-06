@@ -65,7 +65,7 @@ namespace Knjigovodstvo.City
         private void TextBoxFilterGrad_TextChanged(object sender, EventArgs e)
         {
             (dataGridView1.DataSource as DataTable).DefaultView.RowFilter =
-                $"Naziv LIKE '{textBoxFilterGrad.Text}%' OR Naziv LIKE '% {textBoxFilterGrad.Text}%'";
+                $"Mjesto LIKE '{textBoxFilterGrad.Text}%' OR Mjesto LIKE '% {textBoxFilterGrad.Text}%'";
         }
 
         internal Grad ShowDialogValue(int odabir)

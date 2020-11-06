@@ -10,7 +10,7 @@ namespace Knjigovodstvo.City
     {
         public FormError ValidateData()
         {
-            if (Naziv.Length < 2 || Naziv.StartsWith("Odaberite"))
+            if (Mjesto.Length < 2 || Mjesto.StartsWith("Odaberite"))
                 return FormError.Name;
             if (Zupanija.Length < 2 || Zupanija.StartsWith("Odaberite"))
                 return FormError.County;
@@ -37,7 +37,7 @@ namespace Knjigovodstvo.City
                         select new Grad()
                         {
                             Id = int.Parse(dr["Id"].ToString()),
-                            Naziv = dr["Naziv"].ToString(),
+                            Mjesto = dr["Naziv"].ToString(),
                             Drzava = dr["Drzava"].ToString(),
                             Zupanija = dr["Zupanija"].ToString(),
                             Posta = dr["Posta"].ToString(),
@@ -55,11 +55,11 @@ namespace Knjigovodstvo.City
             return new Grad
             {
                 Id = int.Parse(grad.Rows[0]["Id"].ToString()),
-                Naziv = grad.Rows[0]["Naziv"].ToString(),
+                Mjesto = grad.Rows[0]["Mjesto"].ToString(),
                 Zupanija = grad.Rows[0]["Zupanija"].ToString(),
                 Drzava = grad.Rows[0]["Drzava"].ToString(),
                 Posta = grad.Rows[0]["Posta"].ToString(),
-                Prirez = float.Parse(grad.Rows[0]["Prirez"].ToString()),
+                Prirez = decimal.Parse(grad.Rows[0]["Prirez"].ToString()),
                 Sifra = grad.Rows[0]["Sifra"].ToString()
             };
         }
@@ -100,11 +100,11 @@ namespace Knjigovodstvo.City
         }
 
         public int Id { get; set; } = 0;
-        public string Naziv { get; set; } = "";
+        public string Mjesto { get; set; } = "";
         public string Zupanija { get; set; } = "";
         public string Drzava { get; set; } = "";
         public string Posta { get; set; } = "";
-        public float Prirez { get; set; } = 1;
+        public decimal Prirez { get; set; } = 1;
         public string Sifra { get; set; } = "";
     }
 }

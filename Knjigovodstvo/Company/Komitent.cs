@@ -1,5 +1,6 @@
 ﻿using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Database;
+using Knjigovodstvo.Global;
 using Knjigovodstvo.Models;
 
 namespace Knjigovodstvo
@@ -12,11 +13,11 @@ namespace Knjigovodstvo
                 return FormError.Oib;
             if (Naziv.Length < 2)
                 return FormError.Name;
-            if (Adresa.Length < 2)
+            if (Adresa.Ulica.Length < 2)
                 return FormError.Street;
-            if (Posta.Length != 5)
+            if (Adresa.Grad.Posta.Length != 5)
                 return FormError.Post;
-            if (Grad.Length < 2)
+            if (Adresa.Grad.Mjesto.Length < 2)
                 return FormError.City;
             if (!new IbanValidator().Validate(Iban))
                 return FormError.Iban;
@@ -44,12 +45,8 @@ namespace Knjigovodstvo
         public int Id { get; set; } = 0;
         public string Oib { get; set; } = "00000000000";
         public string Naziv { get; set; } = "";
-        public string Adresa { get; set; } = "";
-        public string Posta { get; set; } = "";
-        public string Grad { get; set; } = "";
-        public string Telefon { get; set; } = "";
-        public string Fax { get; set; } = "";
-        public string Mail { get; set; } = "";
+        public Adresa Adresa { get; set; } = new Adresa();
+        public Kontakt Kontakt { get; set; } = new Kontakt();
         public string Iban { get; set; } = "";
         public string Mbo { get; set; } = "";
         public string Vrsta_djelatnosti { get; set; } = "";

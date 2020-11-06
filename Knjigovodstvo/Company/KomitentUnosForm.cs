@@ -20,56 +20,53 @@ namespace Knjigovodstvo.Gui
         {
             DataTable dt = new DbDataGet().GetTable(new Komitent());
             if (dt.Rows.Count != 0)
-                EditKomitent(new Komitent
-                {
-                    Id = int.Parse(dt.Rows[0][0].ToString()),
-                    Oib = dt.Rows[0][1].ToString(),
-                    Naziv = dt.Rows[0][2].ToString(),
-                    Adresa = dt.Rows[0][3].ToString(),
-                    Posta = dt.Rows[0][4].ToString(),
-                    Grad = dt.Rows[0][5].ToString(),
-                    Telefon = dt.Rows[0][6].ToString(),
-                    Fax = dt.Rows[0][7].ToString(),
-                    Mail = dt.Rows[0][8].ToString(),
-                    Iban = dt.Rows[0][9].ToString(),
-                    Vrsta_djelatnosti = dt.Rows[0][10].ToString(),
-                    Sifra_djelatnosti = dt.Rows[0][11].ToString(),
-                    Naziv_djelatnosti = dt.Rows[0][12].ToString(),
-                    Mbo = dt.Rows[0][13].ToString()
-                });
+            {
+                _komitent.Id = int.Parse(dt.Rows[0]["Id"].ToString());
+                textBoxOib.Text = _komitent.Oib = dt.Rows[0]["Oib"].ToString();
+                textBoxName.Text =  _komitent.Naziv = dt.Rows[0]["Naziv"].ToString();
+                textBoxStreet.Text = _komitent.Adresa.Ulica = dt.Rows[0]["Ulica"].ToString();
+                textBoxUlicaBroj.Text = _komitent.Adresa.Broj = dt.Rows[0]["Broj"].ToString();
+                textBoxPost.Text = _komitent.Adresa.Grad.Posta = dt.Rows[0]["Posta"].ToString();
+                textBoxCity.Text = _komitent.Adresa.Grad.Mjesto = dt.Rows[0]["Mjesto"].ToString();
+                textBoxPhone.Text =  _komitent.Kontakt.Telefon = dt.Rows[0]["Telefon"].ToString();
+                textBoxFax.Text = _komitent.Kontakt.Fax = dt.Rows[0]["Fax"].ToString();
+                textBoxEmail.Text =  _komitent.Kontakt.Email = dt.Rows[0]["Email"].ToString();
+                textBoxIban.Text =  _komitent.Iban = dt.Rows[0]["Iban"].ToString();
+                textBoxType.Text =  _komitent.Vrsta_djelatnosti = dt.Rows[0]["Vrsta_djelatnosti"].ToString();
+                textBoxCode.Text =  _komitent.Sifra_djelatnosti = dt.Rows[0]["Sifra_djelatnosti"].ToString();
+                textBoxTypeName.Text = _komitent.Naziv_djelatnosti = dt.Rows[0]["Naziv_djelatnosti"].ToString();
+                textBoxMbo.Text =  _komitent.Mbo = dt.Rows[0]["Mbo"].ToString();
+            }
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             labelMessage.Text = "";
 
-            Komitent komitent = new Komitent
-            {
-                Oib = textBoxOib.Text,
-                Naziv = textBoxName.Text,
-                Adresa = textBoxStreet.Text,
-                Posta = textBoxPost.Text,
-                Grad = textBoxCity.Text,
-                Telefon = textBoxPhone.Text,
-                Fax = textBoxFax.Text,
-                Mail = textBoxEmail.Text,
-                Iban = textBoxIban.Text,
-                Mbo = textBoxMbo.Text,
-                Naziv_djelatnosti = textBoxTypeName.Text,
-                Sifra_djelatnosti = textBoxCode.Text,
-                Vrsta_djelatnosti = textBoxType.Text
+            _komitent.Oib = textBoxOib.Text;
+            _komitent.Naziv = textBoxName.Text;
+            _komitent.Adresa.Ulica = textBoxStreet.Text;
+            _komitent.Adresa.Broj = textBoxUlicaBroj.Text;
+            _komitent.Adresa.Grad.Posta = textBoxPost.Text;
+            _komitent.Adresa.Grad.Mjesto = textBoxCity.Text;
+            _komitent.Kontakt.Telefon = textBoxPhone.Text;
+            _komitent.Kontakt.Fax = textBoxFax.Text;
+            _komitent.Kontakt.Email = textBoxEmail.Text;
+            _komitent.Iban = textBoxIban.Text;
+            _komitent.Vrsta_djelatnosti = textBoxType.Text;
+            _komitent.Sifra_djelatnosti = textBoxCode.Text;
+            _komitent.Naziv_djelatnosti = textBoxTypeName.Text;
+            _komitent.Mbo = textBoxMbo.Text;
 
-            };
-
-            FormError validateResult = komitent.ValidateData();
+            FormError validateResult = _komitent.ValidateData();
             if (validateResult == FormError.None)
             {
-                if (!_editMode && komitent.InsertNew())
+                if (_komitent.Id == 0 && _komitent.InsertNew())
                 {
                     MessageBox.Show("Unos uspješan.", "Novi partner unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                if (_editMode && komitent.UpdateData(_id))
+                else if (_komitent.UpdateData(_id))
                 {
                     MessageBox.Show("Izmjena uspješna.", "Izmjena podataka partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -85,44 +82,24 @@ namespace Knjigovodstvo.Gui
             labelMessage.Text = new ProcessFormErrors().FormErrorMessage(errorType);
         }
 
-        public void EditKomitent(Komitent komitent)
-        {
-            _id = komitent.Id;
-            textBoxOib.Text = komitent.Oib;
-            textBoxName.Text = komitent.Naziv;
-            textBoxStreet.Text = komitent.Adresa;
-            textBoxPost.Text = komitent.Posta;
-            textBoxCity.Text = komitent.Grad;
-            textBoxPhone.Text = komitent.Telefon;
-            textBoxFax.Text = komitent.Fax;
-            textBoxEmail.Text = komitent.Mail;
-            textBoxIban.Text = komitent.Iban;
-            textBoxMbo.Text = komitent.Mbo;
-            textBoxTypeName.Text = komitent.Naziv_djelatnosti;
-            textBoxType.Text = komitent.Vrsta_djelatnosti;
-            textBoxCode.Text = komitent.Sifra_djelatnosti;
-
-            _editMode = true;
-        }
-
-        private void buttonClose_Click(object sender, EventArgs e)
+        private void ButtonClose_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void buttonSelectCity_Click(object sender, EventArgs e)
+        private void ButtonSelectCity_Click(object sender, EventArgs e)
         {
-            GradUnosForm city = new GradUnosForm();
-            Grad c = city.ShowDialogValue();
+            GradoviTableForm form = new GradoviTableForm();
+            Grad grad = form.ShowDialogValue(1);
 
-            if (c != null && c.ValidateData() == FormError.None)
-            {
-                textBoxCity.Text = c.Naziv;
-                textBoxPost.Text = c.Posta;
+            if (grad != null && grad.ValidateData() == FormError.None)
+            { 
+                textBoxCity.Text = grad.Mjesto;
+                textBoxPost.Text = grad.Posta;
             }
         }
 
-        bool _editMode = false;
+        private Komitent _komitent = new Komitent();
         int _id = 0;
     }
 }

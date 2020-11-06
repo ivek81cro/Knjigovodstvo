@@ -1,5 +1,7 @@
-﻿using Knjigovodstvo.Code.Validators;
+﻿using Knjigovodstvo.City;
+using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Database;
+using Knjigovodstvo.Global;
 using Knjigovodstvo.Models;
 using System.Data;
 
@@ -15,9 +17,9 @@ namespace Knjigovodstvo.Employee
                 return FormError.Name;
             if (Prezime.Length < 2)
                 return FormError.Street;
-            if (Adresa.Length < 2)
+            if (Adresa.Ulica.Length < 2)
                 return FormError.Street;
-            if (Grad.Length < 2)
+            if (Adresa.Grad.Mjesto.Length < 2)
                 return FormError.City;
 
             return FormError.None;
@@ -52,10 +54,20 @@ namespace Knjigovodstvo.Employee
                 Ime = zaposlenik.Rows[0]["Ime"].ToString(),
                 Prezime = zaposlenik.Rows[0]["Prezime"].ToString(),
                 Datum_Rodenja = zaposlenik.Rows[0]["Datum_Rodenja"].ToString(),
-                Adresa = zaposlenik.Rows[0]["Adresa"].ToString(),
-                Grad = zaposlenik.Rows[0]["Grad"].ToString(),
-                Drzava = zaposlenik.Rows[0]["Drzava"].ToString(),
-                Telefon = zaposlenik.Rows[0]["Telefon"].ToString(),
+                Adresa = new Adresa()
+                {
+                    Ulica = zaposlenik.Rows[0]["Adresa"].ToString().Split(' ')[0],
+                    Broj = zaposlenik.Rows[0]["Adresa"].ToString().Split(' ')[1],
+                    Grad = new Grad()
+                    {
+                        Mjesto = zaposlenik.Rows[0]["Grad"].ToString(),
+                        Drzava = zaposlenik.Rows[0]["Drzava"].ToString(),
+                    }
+                },
+                Kontakt = new Kontakt()
+                {
+                    Telefon = zaposlenik.Rows[0]["Telefon"].ToString()
+                },
                 Stručna_Sprema = zaposlenik.Rows[0]["Stručna_Sprema"].ToString(),
                 Olaksica = decimal.Parse(zaposlenik.Rows[0]["Olaksica"].ToString()),
                 Datum_Dolaska = zaposlenik.Rows[0]["Datum_Dolaska"].ToString(),
@@ -70,19 +82,29 @@ namespace Knjigovodstvo.Employee
 
             return new Zaposlenik
             {
-                Id = int.Parse(zaposlenik.Rows[0][0].ToString()),
-                Oib = zaposlenik.Rows[0][1].ToString(),
-                Ime = zaposlenik.Rows[0][2].ToString(),
-                Prezime = zaposlenik.Rows[0][3].ToString(),
-                Datum_Rodenja = zaposlenik.Rows[0][4].ToString(),
-                Adresa = zaposlenik.Rows[0][5].ToString(),
-                Grad = zaposlenik.Rows[0][6].ToString(),
-                Drzava = zaposlenik.Rows[0][7].ToString(),
-                Telefon = zaposlenik.Rows[0][8].ToString(),
-                Stručna_Sprema = zaposlenik.Rows[0][9].ToString(),
-                Olaksica = decimal.Parse(zaposlenik.Rows[0][10].ToString()),
-                Datum_Dolaska = zaposlenik.Rows[0][11].ToString(),
-                Datum_Odlaska = zaposlenik.Rows[0][12].ToString()
+                Id = int.Parse(zaposlenik.Rows[0]["Id"].ToString()),
+                Oib = zaposlenik.Rows[0]["Oib"].ToString(),
+                Ime = zaposlenik.Rows[0]["Ime"].ToString(),
+                Prezime = zaposlenik.Rows[0]["Prezime"].ToString(),
+                Datum_Rodenja = zaposlenik.Rows[0]["Datum_Rodenja"].ToString(),
+                Adresa = new Adresa()
+                {
+                    Ulica = zaposlenik.Rows[0]["Ulica"].ToString(),
+                    Broj = zaposlenik.Rows[0]["Broj"].ToString(),
+                    Grad = new Grad()
+                    {
+                        Mjesto = zaposlenik.Rows[0]["Mjesto"].ToString(),
+                        Drzava = zaposlenik.Rows[0]["Drzava"].ToString(),
+                    }
+                },
+                Kontakt = new Kontakt()
+                {
+                    Telefon = zaposlenik.Rows[0]["Telefon"].ToString()
+                },
+                Stručna_Sprema = zaposlenik.Rows[0]["Stručna_Sprema"].ToString(),
+                Olaksica = decimal.Parse(zaposlenik.Rows[0]["Olaksica"].ToString()),
+                Datum_Dolaska = zaposlenik.Rows[0]["Datum_Dolaska"].ToString(),
+                Datum_Odlaska = zaposlenik.Rows[0]["Datum_Odlaska"].ToString()
             };
         }
 
@@ -91,10 +113,8 @@ namespace Knjigovodstvo.Employee
         public string Ime { get; set; } = "";
         public string Prezime { get; set; } = "";
         public string Datum_Rodenja { get; set; } = "";
-        public string Adresa { get; set; } = "";
-        public string Grad { get; set; } = "";
-        public string Drzava { get; set; } = "";
-        public string Telefon { get; set; } = "";
+        public Adresa Adresa { get; set; } = new Adresa();
+        public Kontakt Kontakt { get; set; } = new Kontakt();
         public string Stručna_Sprema { get; set; } = "";
         public decimal Olaksica { get; set; } = 0;
         public string Datum_Dolaska { get; set; } = "";

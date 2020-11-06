@@ -71,7 +71,7 @@ namespace Knjigovodstvo.Partners
 
             if (c != null && c.ValidateData() == FormError.None)
             {
-                textBoxCity.Text = c.Naziv;
+                textBoxCity.Text = c.Mjesto;
                 textBoxPost.Text = c.Posta;
             }
         }

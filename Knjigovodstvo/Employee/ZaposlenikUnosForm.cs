@@ -1,5 +1,6 @@
 ﻿using Knjigovodstvo.City;
 using Knjigovodstvo.Code.Validators;
+using Knjigovodstvo.Global;
 using Knjigovodstvo.Models;
 using System;
 using System.Windows.Forms;
@@ -19,7 +20,7 @@ namespace Knjigovodstvo.Employee
             labelMessage.Text = new ProcessFormErrors().FormErrorMessage(errorType);
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void RuttonSave_Click(object sender, EventArgs e)
         {
             string odlazak = "";
             if (dateTimePickerDatumOdlaska.Visible == true)
@@ -30,10 +31,20 @@ namespace Knjigovodstvo.Employee
                 Ime = textBoxIme.Text,
                 Prezime = textBoxPrezime.Text,
                 Datum_Rodenja = dateTimePickerDatumRodenja.Value.ToString("yyyy-MM-dd"),
-                Adresa = textBoxAdresa.Text,
-                Grad = textBoxGrad.Text,
-                Drzava = textBoxDrzava.Text,
-                Telefon = textBoxTelefon.Text,
+                Adresa = new Adresa()
+                {
+                    Ulica = textBoxUlica.Text,
+                    Broj = textBoxUlicaBroj.Text,
+                    Grad = new Grad()
+                    {
+                        Mjesto = textBoxGrad.Text,
+                        Drzava = textBoxDrzava.Text,
+                    }
+                },
+                Kontakt = new Kontakt()
+                {
+                    Telefon = textBoxTelefon.Text,
+                },
                 Stručna_Sprema = textBoxStrucnaSprema.Text,
                 Olaksica = decimal.Parse(textBoxOlaksica.Text),
                 Datum_Dolaska = dateTimePickerDatumDolaska.Value.ToString("yyyy-MM-dd"),
@@ -68,10 +79,11 @@ namespace Knjigovodstvo.Employee
             textBoxIme.Text = zaposlenik.Ime;
             textBoxPrezime.Text = zaposlenik.Prezime;
             dateTimePickerDatumRodenja.Text = zaposlenik.Datum_Rodenja;
-            textBoxAdresa.Text = zaposlenik.Adresa;
-            textBoxGrad.Text = zaposlenik.Grad;
-            textBoxDrzava.Text = zaposlenik.Drzava;
-            textBoxTelefon.Text = zaposlenik.Telefon;
+            textBoxUlica.Text = zaposlenik.Adresa.Ulica;
+            textBoxUlicaBroj.Text = zaposlenik.Adresa.Ulica;
+            textBoxGrad.Text = zaposlenik.Adresa.Grad.Mjesto;
+            textBoxDrzava.Text = zaposlenik.Adresa.Grad.Drzava;
+            textBoxTelefon.Text = zaposlenik.Kontakt.Telefon;
             textBoxStrucnaSprema.Text = zaposlenik.Stručna_Sprema;
             textBoxOlaksica.Text = zaposlenik.Olaksica.ToString();
             dateTimePickerDatumDolaska.Text = zaposlenik.Datum_Dolaska;
@@ -92,16 +104,16 @@ namespace Knjigovodstvo.Employee
             ShowDialog();
         }
 
-        private void buttonOdaberiGrad_Click(object sender, EventArgs e)
+        private void ButtonOdaberiGrad_Click(object sender, EventArgs e)
         {
             GradoviTableForm form = new GradoviTableForm();
             Grad grad = form.ShowDialogValue(1);
 
             if (grad != null && grad.ValidateData() == FormError.None)
-                textBoxGrad.Text = grad.Naziv;
+                textBoxGrad.Text = grad.Mjesto;
         }
 
-        private void buttonClose_Click(object sender, EventArgs e)
+        private void ButtonClose_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -120,7 +132,7 @@ namespace Knjigovodstvo.Employee
             }
         }
 
-        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
             {

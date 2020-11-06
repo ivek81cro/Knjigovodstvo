@@ -42,10 +42,10 @@ namespace Knjigovodstvo.City
             if (dt.Rows.Count > 0)
             {
                 comboBoxGrad.DataSource = dt;
-                comboBoxGrad.DisplayMember = "Naziv";
+                comboBoxGrad.DisplayMember = "Mjesto";
                 comboBoxGrad.ValueMember = "Id";
             }
-            int index = comboBoxGrad.FindStringExact(_grad.Naziv);
+            int index = comboBoxGrad.FindStringExact(_grad.Mjesto);
             comboBoxGrad.SelectedIndex = index;
             FillPrirezSifra();
             FillComboPosta();
@@ -101,6 +101,9 @@ namespace Knjigovodstvo.City
         private void BtnSave_Click(object sender, EventArgs e)
         {
             FormError validateResult = _grad.ValidateData();
+            _grad.Sifra = textBoxSifra.Text;
+            _grad.Posta = comboBoxPosta.Text;
+            _grad.Prirez = decimal.Parse(textBoxPrirez.Text);
             if (validateResult == FormError.None)
             {
                 if (!_editMode && _grad.InsertNew())
@@ -124,7 +127,7 @@ namespace Knjigovodstvo.City
         internal void EditGrad(Grad grad)
         {
             _id = grad.Id;
-            comboBoxGrad.Text = grad.Naziv;
+            comboBoxGrad.Text = grad.Mjesto;
             comboBoxZupanija.Text = grad.Zupanija;
             comboBoxPosta.Text = grad.Posta;
             textBoxPrirez.Text = grad.Prirez.ToString();
