@@ -1,7 +1,7 @@
 ﻿using Knjigovodstvo.City;
 using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Global;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using System;
 using System.Windows.Forms;
 
@@ -106,8 +106,8 @@ namespace Knjigovodstvo.Employee
 
         private void ButtonOdaberiGrad_Click(object sender, EventArgs e)
         {
-            CityTableForm form = new CityTableForm();
-            Grad grad = form.ShowDialogValue(1);
+            GradoviTableForm form = new GradoviTableForm();
+            Grad grad = form.ShowDialogValue();
 
             if (grad != null && grad.ValidateData() == FormError.None)
                 textBoxGrad.Text = grad.Mjesto;

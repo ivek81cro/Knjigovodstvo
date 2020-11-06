@@ -2,7 +2,7 @@
 using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Global;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using System.Data;
 
 namespace Knjigovodstvo.Employee
@@ -56,11 +56,11 @@ namespace Knjigovodstvo.Employee
                 Datum_Rodenja = zaposlenik.Rows[0]["Datum_Rodenja"].ToString(),
                 Adresa = new Adresa()
                 {
-                    Ulica = zaposlenik.Rows[0]["Adresa"].ToString().Split(' ')[0],
-                    Broj = zaposlenik.Rows[0]["Adresa"].ToString().Split(' ')[1],
+                    Ulica = zaposlenik.Rows[0]["Ulica"].ToString(),
+                    Broj = zaposlenik.Rows[0]["Broj"].ToString(),
                     Grad = new Grad()
                     {
-                        Mjesto = zaposlenik.Rows[0]["Grad"].ToString(),
+                        Mjesto = zaposlenik.Rows[0]["Mjesto"].ToString(),
                         Drzava = zaposlenik.Rows[0]["Drzava"].ToString(),
                     }
                 },

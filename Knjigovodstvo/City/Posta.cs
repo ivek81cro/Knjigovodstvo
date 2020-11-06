@@ -1,7 +1,5 @@
 ﻿using Knjigovodstvo.Database;
-using Knjigovodstvo.Models;
-using System;
-using System.Collections.Generic;
+using Knjigovodstvo.Interface;
 using System.Data;
 
 namespace Knjigovodstvo.City

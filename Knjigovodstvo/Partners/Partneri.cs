@@ -1,7 +1,7 @@
 ﻿using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Global;
-using Knjigovodstvo.Models;
+using Knjigovodstvo.Interface;
 using System.Data;
 
 namespace Knjigovodstvo.Partners
@@ -21,7 +21,7 @@ namespace Knjigovodstvo.Partners
                 return FormError.Post;
             if (Adresa.Grad.Mjesto.Length < 2)
                 return FormError.City;
-            if (!new IbanValidator().Validate(Iban))
+            if (!new IbanValidator().Validate(OpciPodaci.Iban))
                 return FormError.Iban;
             if (Kupac != 'k' && Dobavljac != 'd')
                 return FormError.Kupac_Dobavljac;
@@ -60,8 +60,8 @@ namespace Knjigovodstvo.Partners
             Kontakt.Telefon = dt.Rows[0]["Telefon"].ToString();
             Kontakt.Fax = dt.Rows[0]["Fax"].ToString();
             Kontakt.Email = dt.Rows[0]["Email"].ToString();
-            Iban = dt.Rows[0]["Iban"].ToString();
-            Mbo = dt.Rows[0]["Mbo"].ToString();
+            OpciPodaci.Iban = dt.Rows[0]["Iban"].ToString();
+            OpciPodaci.Mbo = dt.Rows[0]["Mbo"].ToString();
             Kupac = char.Parse(dt.Rows[0]["Kupac"].ToString());
             Dobavljac = char.Parse(dt.Rows[0]["Dobavljac"].ToString());
 
@@ -71,8 +71,6 @@ namespace Knjigovodstvo.Partners
         public OpciPodaci OpciPodaci { get; set; } = new OpciPodaci();
         public Adresa Adresa { get; set; } = new Adresa();
         public Kontakt Kontakt { get; set; } = new Kontakt();
-        public string Iban { get; set; } = "";
-        public string Mbo { get; set; } = "";
         public char Kupac { get; set; } = 'n';
         public char Dobavljac { get; set; } = 'n';
     }

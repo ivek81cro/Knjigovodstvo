@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.City
 {
-    partial class CityTableForm
+    partial class GradoviTableForm
     {
         /// <summary>
         /// Required designer variable.
@@ -105,7 +105,7 @@ namespace Knjigovodstvo.City
             this.btnDeleteGrad.UseVisualStyleBackColor = true;
             this.btnDeleteGrad.Click += new System.EventHandler(this.BtnDeleteGrad_Click);
             // 
-            // CityTableForm
+            // GradoviTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -116,7 +116,7 @@ namespace Knjigovodstvo.City
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.namePartnerLabel);
             this.Controls.Add(this.textBoxFilterGrad);
-            this.Name = "CityTableForm";
+            this.Name = "GradoviTableForm";
             this.Text = "Gradovi";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

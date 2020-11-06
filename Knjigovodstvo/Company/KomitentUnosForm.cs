@@ -90,7 +90,7 @@ namespace Knjigovodstvo.Gui
         private void ButtonSelectCity_Click(object sender, EventArgs e)
         {
             GradoviTableForm form = new GradoviTableForm();
-            Grad grad = form.ShowDialogValue(1);
+            Grad grad = form.ShowDialogValue();
 
             if (grad != null && grad.ValidateData() == FormError.None)
             { 

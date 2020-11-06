@@ -311,7 +311,7 @@ namespace Knjigovodstvo.Payroll
                 if (comboBoxZaposlenik.SelectedItem != null)
                 {
                     PopuniDodaci();
-                    decimal prirez = decimal.Parse(new DbDataGet().GetTable(new Grad(), $"Naziv='{_zaposlenik.Adresa.Grad.Mjesto}';").Rows[0]["Prirez"].ToString()) / 100.0m;
+                    decimal prirez = decimal.Parse(new DbDataGet().GetTable(new Grad(), $"Mjesto='{_zaposlenik.Adresa.Grad.Mjesto}';").Rows[0]["Prirez"].ToString()) / 100.0m;
                     decimal iznosBruto = decimal.Parse(textBoxBruto.Text);
                     labelPrirez.Text = "Prirez " + (_prirez * 100).ToString() + '%';
                     _placa.Izracun(iznosBruto, _prirez, ZbrojiDodatke(), _zaposlenik.Olaksica, checkBoxSamoMio1.Checked);

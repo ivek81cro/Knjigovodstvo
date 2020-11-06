@@ -1,7 +1,6 @@
 ﻿using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Global;
-using Knjigovodstvo.Models;
 using Knjigovodstvo.Interface;
 
 namespace Knjigovodstvo

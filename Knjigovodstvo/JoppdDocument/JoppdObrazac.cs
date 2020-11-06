@@ -81,15 +81,15 @@ namespace Knjigovodstvo.JoppdDocument
                 PodnositeljIzvjesca = new sPodnositeljIzvjesca()
                 {
                     ItemsElementName = new[] { ItemsChoiceType.Naziv },
-                    Items = new[] { _komitent.Naziv },
+                    Items = new[] { _komitent.OpciPodaci.Naziv },
                     Adresa = new sAdresa()
                     {
-                        Ulica = _komitent.Adresa.Split(' ')[0],
-                        Broj = _komitent.Adresa.Split(' ')[1],
-                        Mjesto = _komitent.Grad
+                        Ulica = _komitent.Adresa.Ulica,
+                        Broj = _komitent.Adresa.Broj,
+                        Mjesto = _komitent.Adresa.Grad.Mjesto
                     },
-                    Email = _komitent.Mail,
-                    OIB = _komitent.Oib,
+                    Email = _komitent.Kontakt.Email,
+                    OIB = _komitent.OpciPodaci.Oib,
                     Oznaka = tOznakaPodnositelja.Item2
                 },
                 BrojOsoba = pArr.Count.ToString(),

@@ -103,7 +103,7 @@ namespace Knjigovodstvo.City
             _grad.Sifra = textBoxSifra.Text;
             _grad.Prirez = decimal.Parse(textBoxPrirez.Text);
             _grad.Posta = comboBoxPosta.Text;
-            _grad.Naziv = comboBoxGrad.Text;
+            _grad.Mjesto = comboBoxGrad.Text;
             FormError validateResult = _grad.ValidateData();
             if (checkBoxNoviGrad.Checked)
                 _editMode = false;

@@ -1,4 +1,4 @@
-﻿using Knjigovodstvo.Models;
+﻿using Knjigovodstvo.Interface;
 
 namespace Knjigovodstvo.Global
 {

@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.City
 {
-    public partial class CityTableForm : Form
+    public partial class GradoviTableForm : Form
     {
-        public CityTableForm()
+        public GradoviTableForm()
         {
             InitializeComponent();
             LoadDatagrid();
@@ -70,7 +70,7 @@ namespace Knjigovodstvo.City
                 $"Mjesto LIKE '{textBoxFilterGrad.Text}%' OR Mjesto LIKE '% {textBoxFilterGrad.Text}%'";
         }
 
-        internal Grad ShowDialogValue(int odabir)
+        internal Grad ShowDialogValue()
         {
             _odabir = true;
             ShowDialog();
