@@ -17,7 +17,7 @@ namespace Knjigovodstvo.Payroll
         {
             placa.Dodaci_Ukupno = 0;
 
-            _dt = new DbDataGet().GetTable(new PlacaDodatak(), $"Oib='{zaposlenik.Oib}';");
+            _dt = new DbDataGet().GetTable(this, $"Oib='{zaposlenik.Oib}';");
             foreach (DataRow row in _dt.Rows)
             {
                 placa.Dodaci_Ukupno += decimal.Parse(row["Iznos"].ToString());

@@ -28,10 +28,9 @@ namespace Knjigovodstvo.Payroll
         private void BtnEditPlaca_Click(object sender, EventArgs e)
         {
             string oib = dataGridView1.SelectedRows[0].Cells["Oib"].Value.ToString();
-            Placa placa = new Placa().GetPlacaByOib(oib);
-            PlacaIzracunForm pn = new PlacaIzracunForm(oib);
+            _placa.GetPlacaByOib(oib);
+            PlacaIzracunForm pn = new PlacaIzracunForm(_placa);
             pn.FormClosing += new FormClosingEventHandler(this.PlacaNew_FormClosing);
-            pn.EditPlaca(placa);
         }
 
         private void PlacaNew_FormClosing(object sender, FormClosingEventArgs e)
@@ -51,5 +50,7 @@ namespace Knjigovodstvo.Payroll
             (dataGridView1.DataSource as DataTable).DefaultView.RowFilter =
                 $"Prezime LIKE '{textBoxFilterPlaca.Text}%' OR Prezime LIKE '% {textBoxFilterPlaca.Text}%'";
         }
+
+        private Placa _placa = new Placa();
     }    
 }

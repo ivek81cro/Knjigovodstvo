@@ -1,6 +1,5 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
-using Knjigovodstvo.Validators;
 using System.Data;
 
 namespace Knjigovodstvo.Settings
@@ -11,9 +10,11 @@ namespace Knjigovodstvo.Settings
         Mio_2,
         Porez_Dohodak_24,
         Porez_Dohodak_36,
-        Doprinos_Zdravstveno
+        Doprinos_Zdravstveno,
+        Osnovica_odbitka,
+        Osnovni_odbitak_koeficjent
     }
-    class Postavke : IDbObject
+    public class Postavke : IDbObject
     {
         public FormError ValidateData()
         {
@@ -25,22 +26,20 @@ namespace Knjigovodstvo.Settings
             return FormError.None;
         }
 
-        internal Postavke GetPostavkaById(int id)
+        internal void GetPostavkaById(int id)
         {
             string condition = $"Id={id};";
             DataTable postavka = new DbDataGet().GetTable(new Postavke(), condition);
-            return new Postavke
-            {
-                Id = int.Parse(postavka.Rows[0]["Id"].ToString()),
-                Naziv = postavka.Rows[0]["Naziv"].ToString(),
-                Vrsta = postavka.Rows[0]["Vrsta"].ToString(),
-                Vrijednost = decimal.Parse(postavka.Rows[0]["Vrijednost"].ToString())
-            };
+
+            Id = int.Parse(postavka.Rows[0]["Id"].ToString());
+            Naziv = postavka.Rows[0]["Naziv"].ToString();
+            Vrsta = postavka.Rows[0]["Vrsta"].ToString();
+            Vrijednost = decimal.Parse(postavka.Rows[0]["Vrijednost"].ToString());
+
         }
 
-        internal bool UpdateData(int id)
+        internal bool UpdateData()
         {
-            Id = id;
             if (new DbDataUpdate().UpdateData(this))
                 return true;
 

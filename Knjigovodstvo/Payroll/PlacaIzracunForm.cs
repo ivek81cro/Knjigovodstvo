@@ -1,5 +1,4 @@
-﻿using Knjigovodstvo.City;
-using Knjigovodstvo.Database;
+﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
 using Knjigovodstvo.JoppdDocument;
 using Knjigovodstvo.Validators;
@@ -20,24 +19,28 @@ namespace Knjigovodstvo.Payroll
             FillComboBoxJoppd();
         }
 
-        public PlacaIzracunForm(string oib)
+        public PlacaIzracunForm(Placa placa)
         {
+            _placa = placa;
             InitializeComponent();
             FillComboBoxZaposlenik();
-            int index = comboBoxZaposlenik.FindString(oib);
+            int index = comboBoxZaposlenik.FindString(_placa.Oib);
             comboBoxZaposlenik.SelectedIndex = index;
             InitPrivateMembers();
             FillComboBoxJoppd();
+            ShowDialog();
         }
 
         private void InitPrivateMembers()
         {
-            string selected = this.comboBoxZaposlenik.GetItemText(this.comboBoxZaposlenik.SelectedItem);
+            string selected = comboBoxZaposlenik.GetItemText(this.comboBoxZaposlenik.SelectedItem);
             string oib = selected.Split(' ')[0];
-            _zaposlenik = _zaposlenik.GetZaposlenikByOib(oib);
+            _zaposlenik.GetZaposlenikByOib(oib);
+            _placa.GetPlacaByOib(_zaposlenik.Oib);
             _zaposlenikJoppd = _zaposlenikJoppd.GetZaposlenikByOib(oib);
-            if (_placa.GetPlacaByOib(_zaposlenik.Oib).Oib != "0")
+            if (_placa.Oib != "0")
             {
+                _prirez = _zaposlenik.Adresa.Grad.Prirez;
                 PopuniKontrole(_placa);
             }
 
@@ -130,10 +133,10 @@ namespace Knjigovodstvo.Payroll
         }        
 
         //TODO: not needed, refactor
-        internal void EditPlaca(Placa placa)
+        internal void EditPlaca()
         {
-            PopuniKontrole(placa);
-            int index = comboBoxZaposlenik.FindString(placa.Oib);
+            PopuniKontrole(_placa);
+            int index = comboBoxZaposlenik.FindString(_placa.Oib);
             comboBoxZaposlenik.SelectedIndex = index;
 
             ShowDialog();
@@ -178,7 +181,7 @@ namespace Knjigovodstvo.Payroll
             textBoxNetto.Text = Math.Round(placa.Neto, 2).ToString("0.00");
             textBoxDoprinosZdravstvo.Text = Math.Round(placa.Doprinos_Zdravstvo, 2).ToString("0.00");
             textBoxDodaci.Text = Math.Round(placa.Dodaci_Ukupno, 2).ToString("0.00");
-            labelPrirez.Text = "Prirez " + (_prirez < 100? _prirez * 100m: _prirez);
+            labelPrirez.Text = "Prirez " + _prirez.ToString() + "%";
         }
 
         private void PopuniJoppd(ZaposlenikJoppd zaposlenikJoppd)
@@ -283,11 +286,10 @@ namespace Knjigovodstvo.Payroll
         {
             if (comboBoxZaposlenik.SelectedItem != null && _placa.Oib != "" && _placa.Oib != "0")
             {
-                if (new Placa().GetPlacaByOib(_zaposlenik.Oib).Oib == "0")
+                if (_placa.Oib == "0")
                 {
                     if (new DbDataInsert().InsertData(_placa))
                     {
-                        FillComboBoxZaposlenik();
                         MessageBox.Show("Unos uspješan.", "Novi izračun unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
@@ -295,7 +297,6 @@ namespace Knjigovodstvo.Payroll
                 {
                     if (new DbDataUpdate().UpdateData(_placa))
                     {
-                        FillComboBoxZaposlenik();
                         MessageBox.Show("Unos uspješan.", "Izmjena unešena", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
@@ -311,9 +312,8 @@ namespace Knjigovodstvo.Payroll
                 if (comboBoxZaposlenik.SelectedItem != null)
                 {
                     PopuniDodaci();
-                    decimal prirez = decimal.Parse(new DbDataGet().GetTable(new Grad(), $"Mjesto='{_zaposlenik.Adresa.Grad.Mjesto}';").Rows[0]["Prirez"].ToString()) / 100.0m;
                     decimal iznosBruto = decimal.Parse(textBoxBruto.Text);
-                    labelPrirez.Text = "Prirez " + (_prirez * 100).ToString() + '%';
+                    labelPrirez.Text = "Prirez " + _prirez.ToString() + '%';
                     _placa.Izracun(iznosBruto, _prirez, ZbrojiDodatke(), _zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
                     _placa.Oib = _zaposlenik.Oib;
 

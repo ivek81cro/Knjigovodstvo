@@ -8,10 +8,12 @@ namespace Knjigovodstvo.Settings
 {
     public partial class PostavkePromjenaForm : Form
     {
-        public PostavkePromjenaForm()
+        public PostavkePromjenaForm(Postavke postavke)
         {
+            _postavke = postavke;
             InitializeComponent();
             labelMessage.Text = "";
+            EditPostavka();
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)
@@ -31,18 +33,12 @@ namespace Knjigovodstvo.Settings
                 if (vrijednost > 1)
                     vrijednost /= 100.0m;
 
-                Postavke postavka = new Postavke
-                {                    
-                    Id = _id,
-                    Naziv = textBoxNaziv.Text,
-                    Vrsta = textBoxVrsta.Text,
-                    Vrijednost = vrijednost
-                };
+                _postavke.Vrijednost = vrijednost;
 
-                FormError validateResult = postavka.ValidateData();
-                if (postavka.ValidateData() == FormError.None)
+                FormError validateResult = _postavke.ValidateData();
+                if (_postavke.ValidateData() == FormError.None)
                 {
-                    if (postavka.UpdateData(_id))
+                    if (_postavke.UpdateData())
                     {
                         MessageBox.Show("Izmjena uspješna.", "Izmjena vrijednosti postavke", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Close();
@@ -59,13 +55,12 @@ namespace Knjigovodstvo.Settings
             labelMessage.Text = new ProcessFormErrors().FormErrorMessage(errorType);
         }
 
-        internal void EditPostavka(Postavke postavka)
+        internal void EditPostavka()
         {
-            _id = postavka.Id;
-            textBoxId.Text = _id.ToString();
-            textBoxNaziv.Text = postavka.Naziv;
-            textBoxVrsta.Text = postavka.Vrsta;
-            textBoxVrijednost.Text = postavka.Vrijednost.ToString();
+            textBoxId.Text = _postavke.Id.ToString();
+            textBoxNaziv.Text = _postavke.Naziv;
+            textBoxVrsta.Text = _postavke.Vrsta;
+            textBoxVrijednost.Text = _postavke.Vrijednost.ToString();
 
             ShowDialog();
         }
@@ -84,6 +79,6 @@ namespace Knjigovodstvo.Settings
             }
         }
 
-        int _id = 0;
+        private Postavke _postavke = new Postavke();
     }
 }

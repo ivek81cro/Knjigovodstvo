@@ -213,7 +213,7 @@ namespace Knjigovodstvo.JoppdDocument
         {
             string selected = this.comboBoxZaposlenik.GetItemText(this.comboBoxZaposlenik.SelectedItem);
             string oib = selected.Split(' ')[0];
-            _zaposlenik = _zaposlenik.GetZaposlenikByOib(oib);
+            _zaposlenik.GetZaposlenikByOib(oib);
         }
 
         private Zaposlenik _zaposlenik = new Zaposlenik();

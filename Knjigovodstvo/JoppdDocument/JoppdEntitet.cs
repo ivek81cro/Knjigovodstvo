@@ -14,7 +14,7 @@ namespace Knjigovodstvo.JoppdDocument
     {
         public void PopuniDodatke(int redniBroj = 0)
         {
-            DataTable _dt = new DbDataGet().GetTable(new PlacaDodatak(), $"Oib='{this.Oib}'");
+            DataTable _dt = new DbDataGet().GetTable(_dodaci.ElementAt(0), $"Oib='{this.Oib}'");
             List<DataRow> rows = _dt.AsEnumerable().ToList();
             _dodaci = (from DataRow dr in rows
                               select new PlacaDodatak()
@@ -39,7 +39,7 @@ namespace Knjigovodstvo.JoppdDocument
             throw new NotImplementedException();
         }
 
-        private List<PlacaDodatak> _dodaci;
+        private List<PlacaDodatak> _dodaci = new List<PlacaDodatak>();
         [XmlElement("P1")]
         public int Redni_Broj = 0;
         [XmlElement("P2")]

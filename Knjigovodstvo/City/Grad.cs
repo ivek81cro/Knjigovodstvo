@@ -1,7 +1,9 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Knjigovodstvo.City
@@ -75,7 +77,7 @@ namespace Knjigovodstvo.City
         {
             DbDataGet data = new DbDataGet();
             string condition = $"Zupanija='{county}'";
-            DataTable dt = data.GetTable(new Grad(), condition);
+            DataTable dt = data.GetTable(this, condition);
 
             DataRow row = dt.NewRow();
             row[0] = 0;

@@ -29,7 +29,8 @@ namespace Knjigovodstvo.Payroll
                 iznos -= Mio_1 + Mio_2;
             }
             Dohodak = iznos;
-            iznos -= Osobni_Odbitak = 2500.0m * (1.6m + odbitak);
+            iznos -= Osobni_Odbitak = p.GetStopaByName(PlacaStope.Osnovica_odbitka) * 
+                (p.GetStopaByName(PlacaStope.Osnovni_odbitak_koeficjent) + odbitak);
             if (iznos < 0)
             {
                 iznos = 0;
@@ -47,7 +48,7 @@ namespace Knjigovodstvo.Payroll
                 iznos -= Porez_24_per = Porezna_Osnovica * p.GetStopaByName(PlacaStope.Porez_Dohodak_24);
                 Porez_36_per = 0;
             }
-            iznos -= Prirez = ( Porez_Ukupno = Porez_24_per + Porez_36_per) * prirez;
+            iznos -= Prirez = ( Porez_Ukupno = Porez_24_per + Porez_36_per) * prirez/100;
             Ukupno_Porez_i_Prirez = Porez_Ukupno + Prirez;
             Neto = iznos + Osobni_Odbitak;
 
@@ -58,7 +59,7 @@ namespace Knjigovodstvo.Payroll
             return this;
         }
 
-        public Placa GetPlacaByOib(string oib) 
+        public void GetPlacaByOib(string oib) 
         {
             DataTable data = new DbDataGet().GetTable(this, $"Oib='{oib}'");
             try
@@ -84,8 +85,6 @@ namespace Knjigovodstvo.Payroll
             {
                 Oib = "0";
             }
-
-            return this;
         }
 
         public int Id { get; set; } = 0;

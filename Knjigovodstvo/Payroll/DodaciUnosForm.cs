@@ -115,8 +115,8 @@ namespace Knjigovodstvo.Payroll
         {
             string zaposlenik = comboBoxOdabirZaposlenika.GetItemText(comboBoxOdabirZaposlenika.SelectedItem);
             string oib = zaposlenik.Split(' ')[0];
-            _zaposlenik = new Zaposlenik().GetZaposlenikByOib(oib);
-            _placa = new Placa().GetPlacaByOib(oib);
+            _zaposlenik.GetZaposlenikByOib(oib);
+            _placa.GetPlacaByOib(oib);
             LoadDatagrid();
         }
 
