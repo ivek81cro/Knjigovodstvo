@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Knjigovodstvo.Database
 {
@@ -16,12 +17,47 @@ namespace Knjigovodstvo.Database
     {
         public DbQueryBuilder(IEnumerable<List<String>> obj, string table, string whereColumn=null)
         {
-            _obj = obj;
+            _obj = SortPropertiesCustom(obj);
             _name = _obj.First();
             _value = _obj.ElementAt(1);
             _type = _obj.ElementAt(2);
             _table = table;
             _whereColumn = whereColumn;
+        }
+
+        private IEnumerable<List<string>> SortPropertiesCustom(IEnumerable<List<string>> obj)
+        {
+            List<string> col_names = new List<string>()
+            {
+                "Id", "Oib", "Naziv", "Mbo", "Ime", "Prezime", "Mjesto", "Posta", "Ulica", "Broj", "Email", "Telefon","Fax"
+            };
+            List<string> new_name = new List<string>();
+            List<string> new_value = new List<string>();
+            List<string> new_type = new List<string>();
+            for (int i = 0; i < col_names.Count; i++)
+            {
+                for (int j = 0; j < obj.ElementAt(0).Count; j++)
+                {
+                    if (String.Compare(col_names[i], obj.ElementAt(0)[j]) == 0 && !new_name.Contains(obj.ElementAt(0)[j]))
+                    {
+                        new_name.Add(obj.ElementAt(0)[j]);
+                        new_value.Add(obj.ElementAt(1)[j]);
+                        new_type.Add(obj.ElementAt(2)[j]);
+                        break;
+                    }
+                }
+            }
+            for (int i = 0; i < obj.ElementAt(0).Count; i++)
+            {
+                if (!new_name.Contains(obj.ElementAt(0)[i]) )
+                {
+                    new_name.Add(obj.ElementAt(0)[i]);
+                    new_value.Add(obj.ElementAt(1)[i]);
+                    new_type.Add(obj.ElementAt(2)[i]);
+                }
+            }
+
+            return new List<List<string>> { new_name, new_value, new_type};
         }
 
         /// <summary>
@@ -132,18 +168,18 @@ namespace Knjigovodstvo.Database
             }
 
             return query;
-        }
+        }        
 
         private string Delete()
         {
             return $"DELETE FROM {_table} WHERE Id={_value[0]};";
         }
 
-        private readonly IEnumerable<List<string>> _obj;
-        private readonly string _table;
-        private readonly string _whereColumn;
-        private readonly List<string> _name;
-        private readonly List<string> _value;
-        private readonly List<string> _type;
+        private IEnumerable<List<string>> _obj;
+        private string _table;
+        private string _whereColumn;
+        private List<string> _name;
+        private List<string> _value;
+        private List<string> _type;
     }
 }
