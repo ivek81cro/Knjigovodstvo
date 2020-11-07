@@ -164,7 +164,6 @@ namespace Knjigovodstvo.JoppdDocument
                     P1 = "0",
                     P2 = 0
                 }
-                //TODO continue with member value assigning
             };
 
             sJOPPDmetapodaci meta = new sJOPPDmetapodaci()

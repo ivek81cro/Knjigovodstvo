@@ -8,7 +8,6 @@ namespace Knjigovodstvo.City
     {
         public FormError ValidateData()
         {
-            //TODO: Validation
             return FormError.None;
         }
 
