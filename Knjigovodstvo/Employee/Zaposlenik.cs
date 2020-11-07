@@ -43,9 +43,9 @@ namespace Knjigovodstvo.Employee
         internal void GetZaposlenikByOib(string oib)
         {
             string condition = $"Oib='{oib}';";
-            DataTable zaposlenik = new DbDataGet().GetTable(this, condition);
+            DataTable dt = new DbDataGet().GetTable(this, condition);
 
-            SetPrivateMembers(zaposlenik);
+            SetPrivateMembers(dt);
         }
 
         private void SetPrirez()

@@ -109,7 +109,7 @@ namespace Knjigovodstvo.Employee
                     Close();
                 }
 
-                else if (_zaposlenik.Id != 0 && _zaposlenik.UpdateData())
+                else if (_zaposlenik.UpdateData())
                 {
                     MessageBox.Show("Izmjena uspješna.", "Izmjena podataka partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
@@ -124,7 +124,7 @@ namespace Knjigovodstvo.Employee
         private void ButtonOdaberiGrad_Click(object sender, EventArgs e)
         {
             GradoviTableForm form = new GradoviTableForm();
-            Grad grad = form.ShowDialogValue();
+            Grad grad = form.OdabirGrada();
 
             if (grad != null && grad.ValidateData() == FormError.None)
                 textBoxGrad.Text = grad.Mjesto;

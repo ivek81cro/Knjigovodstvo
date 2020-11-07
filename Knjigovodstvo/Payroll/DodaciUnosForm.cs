@@ -13,8 +13,10 @@ namespace Knjigovodstvo.Payroll
         public DodaciUnosForm(Zaposlenik zaposlenik = null, Placa placa = null)
         {
             InitializeComponent();
-            _zaposlenik = zaposlenik;
-            _placa = placa;
+            if (zaposlenik != null)
+                _zaposlenik = zaposlenik;
+            if (placa != null)
+                _placa = placa;
             FillComboBoxZaposlenici();            
             FillComboBoxDodaci();
             if (_zaposlenik != null)
@@ -33,7 +35,7 @@ namespace Knjigovodstvo.Payroll
 
         private void FillComboBoxZaposlenici()
         {
-            DataTable dt = new DbDataGet().GetTable(new Zaposlenik());
+            DataTable dt = new DbDataGet().GetTable(_zaposlenik);
             dt.Columns.Add(
                 "Ime i prezime",
                 typeof(string),
@@ -46,7 +48,7 @@ namespace Knjigovodstvo.Payroll
 
         private void FillComboBoxDodaci()
         {
-            DataTable dt = new DbDataGet().GetTable(new JoppdSifre(), $"Skupina='Neoporezivo';");
+            DataTable dt = new DbDataGet().GetTable(new JoppdSifre(), $"Skupina='{Joppd_skupine.Neoporezivo}';");
             dt.Columns.Add(
                 "Naziv i Opis",
                 typeof(string),
@@ -161,8 +163,8 @@ namespace Knjigovodstvo.Payroll
         }
 
         private PlacaDodatak _dodaci = new PlacaDodatak();
-        private Zaposlenik _zaposlenik;
-        private Placa _placa;
+        private Zaposlenik _zaposlenik = new Zaposlenik();
+        private Placa _placa = new Placa();
         private string _sifra = "";
     }
 }

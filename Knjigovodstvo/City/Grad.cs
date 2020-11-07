@@ -51,21 +51,18 @@ namespace Knjigovodstvo.City
             return cityList;
         }
 
-        internal Grad GetGradById(int id)
+        internal void GetGradById(int id)
         {
             string condition = $"Id={id};";
-            DataTable grad = new DbDataGet().GetTable(new Grad(), condition);
+            DataTable grad = new DbDataGet().GetTable(this, condition);
 
-            return new Grad
-            {
-                Id = int.Parse(grad.Rows[0]["Id"].ToString()),
-                Mjesto = grad.Rows[0]["Mjesto"].ToString(),
-                Zupanija = grad.Rows[0]["Zupanija"].ToString(),
-                Drzava = grad.Rows[0]["Drzava"].ToString(),
-                Posta = grad.Rows[0]["Posta"].ToString(),
-                Prirez = decimal.Parse(grad.Rows[0]["Prirez"].ToString()),
-                Sifra = grad.Rows[0]["Sifra"].ToString()
-            };
+            Id = int.Parse(grad.Rows[0]["Id"].ToString());
+            Mjesto = grad.Rows[0]["Mjesto"].ToString();
+            Zupanija = grad.Rows[0]["Zupanija"].ToString();
+            Drzava = grad.Rows[0]["Drzava"].ToString();
+            Posta = grad.Rows[0]["Posta"].ToString();
+            Prirez = decimal.Parse(grad.Rows[0]["Prirez"].ToString());
+            Sifra = grad.Rows[0]["Sifra"].ToString();
         }
 
         /// <summary>
@@ -75,9 +72,8 @@ namespace Knjigovodstvo.City
         /// <returns>DataTable</returns>
         public DataTable GetGradoviByZupanija(string county)
         {
-            DbDataGet data = new DbDataGet();
             string condition = $"Zupanija='{county}'";
-            DataTable dt = data.GetTable(this, condition);
+            DataTable dt = new DbDataGet().GetTable(this, condition);
 
             DataRow row = dt.NewRow();
             row[0] = 0;

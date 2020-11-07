@@ -83,7 +83,7 @@ namespace Knjigovodstvo.City
             this.btnNewGrad.TabIndex = 0;
             this.btnNewGrad.Text = "Novi";
             this.btnNewGrad.UseVisualStyleBackColor = true;
-            this.btnNewGrad.Click += new System.EventHandler(this.BtnNewGrad_Click);
+            this.btnNewGrad.Click += new System.EventHandler(this.ButtonNewGrad_Click);
             // 
             // btnEditGrad
             // 

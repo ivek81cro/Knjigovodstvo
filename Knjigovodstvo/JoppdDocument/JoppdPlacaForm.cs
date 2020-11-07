@@ -51,7 +51,7 @@ namespace Knjigovodstvo.JoppdDocument
                               Posta = dr["Posta"].ToString()
                           }
                       }
-                  }).ToList().ElementAt(0);
+                  }).ToList().FirstOrDefault();
         }
 
         private void DateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -64,14 +64,7 @@ namespace Knjigovodstvo.JoppdDocument
             DateTime date = dateTimePicker1.Value;
             string year = date.Year.ToString();
             string dayOfYear = date.DayOfYear.ToString();
-            if (dayOfYear.Length < 3)
-            {
-                while (dayOfYear.Length != 3)
-                {
-                    dayOfYear = "0" + dayOfYear;
-                }
-            }
-
+            
             if (dayOfYear.Length < 3)
             {
                 while (dayOfYear.Length != 3)

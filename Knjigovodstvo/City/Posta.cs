@@ -15,12 +15,7 @@ namespace Knjigovodstvo.City
         {
             string condition = $"Mjesto='{grad}'";
             DbDataGet data = new DbDataGet();
-            DataTable dt = data.GetTable(new Posta(), condition);
-
-            DataRow row = dt.NewRow();
-            row[0] = 0;
-            row[1] = "Odaberite br. pošte";
-            dt.Rows.InsertAt(row, 0);
+            DataTable dt = data.GetTable(this, condition);
 
             return dt;
         }

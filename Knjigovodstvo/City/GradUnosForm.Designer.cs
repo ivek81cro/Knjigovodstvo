@@ -1,6 +1,6 @@
 ﻿namespace Knjigovodstvo.City
 {
-    partial class GradUnosForm
+    partial class GradEditForm
     {
         /// <summary>
         /// Required designer variable.

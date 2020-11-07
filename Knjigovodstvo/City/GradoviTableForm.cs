@@ -18,10 +18,24 @@ namespace Knjigovodstvo.City
             dataGridView1.DataSource = new DbDataGet().GetTable(new Grad());
         }
 
-        private void BtnNewGrad_Click(object sender, EventArgs e)
+        private void TextBoxFilterGrad_TextChanged(object sender, EventArgs e)
         {
-            GradUnosForm form = new GradUnosForm();
-            form.FormClosing += new FormClosingEventHandler(this.GradNew_FormClosing);
+            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter =
+                $"Mjesto LIKE '{textBoxFilterGrad.Text}%' OR Mjesto LIKE '% {textBoxFilterGrad.Text}%'";
+        }
+
+        internal Grad OdabirGrada()
+        {
+            _odabir = true;
+            ShowDialog();
+
+            return _grad;
+        }
+
+        private void ButtonNewGrad_Click(object sender, EventArgs e)
+        {
+            GradEditForm form = new GradEditForm();
+            form.FormClosing += new FormClosingEventHandler(GradNew_FormClosing);
             form.ShowDialog();
         }
 
@@ -34,7 +48,7 @@ namespace Knjigovodstvo.City
         {
 
             int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-            _grad = new Grad().GetGradById(id);
+            _grad.GetGradById(id);
 
             if (_odabir)
             {
@@ -42,9 +56,8 @@ namespace Knjigovodstvo.City
             }
             else
             {
-                GradUnosForm pn = new GradUnosForm(_grad);
+                GradEditForm pn = new GradEditForm(_grad);
                 pn.FormClosing += new FormClosingEventHandler(this.GradNew_FormClosing);
-                pn.EditGrad(_grad);
             }
 
         }
@@ -62,20 +75,6 @@ namespace Knjigovodstvo.City
 
                 LoadDatagrid();
             }
-        }
-
-        private void TextBoxFilterGrad_TextChanged(object sender, EventArgs e)
-        {
-            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter =
-                $"Mjesto LIKE '{textBoxFilterGrad.Text}%' OR Mjesto LIKE '% {textBoxFilterGrad.Text}%'";
-        }
-
-        internal Grad ShowDialogValue()
-        {
-            _odabir = true;
-            ShowDialog();
-
-            return _grad;
         }
 
         private Grad _grad = new Grad();

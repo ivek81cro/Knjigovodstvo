@@ -85,7 +85,7 @@ namespace Knjigovodstvo.Partners
         private void BtnSelectCity_Click(object sender, EventArgs e)
         {
             GradoviTableForm form = new GradoviTableForm();
-            Grad grad = form.ShowDialogValue();
+            Grad grad = form.OdabirGrada();
 
             if (grad != null && grad.ValidateData() == FormError.None)
             {

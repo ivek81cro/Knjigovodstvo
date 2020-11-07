@@ -45,7 +45,7 @@ namespace Knjigovodstvo.Partners
             return false;
         }
 
-        public Partneri GetPartnerById()
+        public void GetPartnerById()
         {
             string condition = $"Id={OpciPodaci.Id};";
             DataTable dt = new DbDataGet().GetTable(this, condition);
@@ -64,8 +64,6 @@ namespace Knjigovodstvo.Partners
             OpciPodaci.Mbo = dt.Rows[0]["Mbo"].ToString();
             Kupac = char.Parse(dt.Rows[0]["Kupac"].ToString());
             Dobavljac = char.Parse(dt.Rows[0]["Dobavljac"].ToString());
-
-            return this;
         }
 
         public OpciPodaci OpciPodaci { get; set; } = new OpciPodaci();

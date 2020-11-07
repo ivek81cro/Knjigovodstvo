@@ -18,7 +18,7 @@ namespace Knjigovodstvo.Gui
 
         private void InitialFormLoad()
         {
-            DataTable dt = new DbDataGet().GetTable(new Komitent());
+            DataTable dt = new DbDataGet().GetTable(_komitent);
             if (dt.Rows.Count != 0)
             {
                 _komitent.OpciPodaci.Id = int.Parse(dt.Rows[0]["Id"].ToString());
@@ -90,7 +90,7 @@ namespace Knjigovodstvo.Gui
         private void ButtonSelectCity_Click(object sender, EventArgs e)
         {
             GradoviTableForm form = new GradoviTableForm();
-            Grad grad = form.ShowDialogValue();
+            Grad grad = form.OdabirGrada();
 
             if (grad != null && grad.ValidateData() == FormError.None)
             { 

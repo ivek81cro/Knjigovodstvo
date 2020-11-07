@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.City
 {
-    public partial class GradUnosForm : Form
+    public partial class GradEditForm : Form
     {
-        public GradUnosForm(Grad grad = null)
+        public GradEditForm(Grad grad = null)
         {
             InitializeComponent();
             FillComboCounty();
@@ -17,6 +17,7 @@ namespace Knjigovodstvo.City
             {
                 _grad = grad;
                 FillComboCity();
+                EditGrad();
             }
         }
 
@@ -58,7 +59,7 @@ namespace Knjigovodstvo.City
 
         private void ComboBoxGrad_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            _grad = _grad.GetGradById(int.Parse(comboBoxGrad.SelectedValue.ToString()));
+            _grad.GetGradById(int.Parse(comboBoxGrad.SelectedValue.ToString()));
             FillPrirezSifra();
             FillComboPosta();
         }
@@ -106,16 +107,16 @@ namespace Knjigovodstvo.City
             _grad.Mjesto = comboBoxGrad.Text;
             FormError validateResult = _grad.ValidateData();
             if (checkBoxNoviGrad.Checked)
-                _editMode = false;
+                _grad.Id = 0;
             if (validateResult == FormError.None)
             {
-                if (!_editMode && _grad.InsertNew())
+                if (_grad.Id == 0 && _grad.InsertNew())
                 {
                     MessageBox.Show("Unos uspješan.", "Novi partner unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
                 }
 
-                if (_editMode && _grad.UpdateData())
+                else if (_grad.UpdateData())
                 {
                     MessageBox.Show("Izmjena uspješna.", "Izmjena podataka partnera", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
@@ -127,16 +128,13 @@ namespace Knjigovodstvo.City
             }
         }
 
-        internal void EditGrad(Grad grad)
+        internal void EditGrad()
         {
-            _id = grad.Id;
-            comboBoxGrad.Text = grad.Mjesto;
-            comboBoxZupanija.Text = grad.Zupanija;
-            comboBoxPosta.Text = grad.Posta;
-            textBoxPrirez.Text = grad.Prirez.ToString();
-            textBoxSifra.Text = grad.Sifra;
-
-            _editMode = true;
+            comboBoxGrad.Text = _grad.Mjesto;
+            comboBoxZupanija.Text = _grad.Zupanija;
+            comboBoxPosta.Text = _grad.Posta;
+            textBoxPrirez.Text = _grad.Prirez.ToString();
+            textBoxSifra.Text = _grad.Sifra;
 
             ShowDialog();
         }
@@ -157,7 +155,5 @@ namespace Knjigovodstvo.City
         }
 
         private Grad _grad = new Grad();
-        private int _id = 0;
-        private bool _editMode = false;
     }
 }

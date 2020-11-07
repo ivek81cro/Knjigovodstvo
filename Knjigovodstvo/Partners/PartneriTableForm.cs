@@ -35,7 +35,7 @@ namespace Knjigovodstvo.Partners
         private void BtnEditPartner_Click(object sender, EventArgs e)
         {
             _partner.OpciPodaci.Id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-            _partner = _partner.GetPartnerById();
+            _partner.GetPartnerById();
             PartnerUnosForm pn = new PartnerUnosForm(_partner);
             pn.FormClosing += new FormClosingEventHandler(PartnersNew_FormClosing);
             pn.ShowDialog();

@@ -3,6 +3,18 @@ using System;
 
 namespace Knjigovodstvo.JoppdDocument
 {
+    public enum Joppd_skupine
+    {
+        Beneficirani,
+        Invaliditet,
+        Mjesec,
+        Nacin_Isplate,
+        Neoporezivo,
+        Podnositelj,
+        Primici,
+        Stjecatelj,
+        Vrijeme
+    }
     class JoppdSifre : IDbObject
     {
         public FormError ValidateData()
