@@ -119,37 +119,78 @@ namespace Knjigovodstvo.JoppdDocument
                 var newList = rows.Where(s => s.ItemArray[2].ToString() == _zaposlenik.Oib);
                 rows = newList.ToList();
             }
-
-            _joppdB.Entitet = (from DataRow dr in rows
-                                           select new JoppdEntitet()
-                                           {
-                                               Opcina_Prebivalista = dr["Opcina_Prebivalista"].ToString(),
-                                               Opcina_Rada = dr["Opcina_Rada"].ToString(),
-                                               Oib = dr["Oib"].ToString(),
-                                               Ime_Prezime = dr["Ime_Prezime"].ToString(),
-                                               Stjecatelj = dr["Stjecatelj"].ToString(),
-                                               Primitak = dr["Primitak"].ToString(),
-                                               Beneficirani = dr["Beneficirani"].ToString(),
-                                               Invaliditet = dr["Invaliditet"].ToString(),
-                                               Mjesec = dr["Mjesec"].ToString(),
-                                               Vrijeme = dr["Vrijeme"].ToString(),
-                                               Sati = int.Parse(textBoxSatiRada.Text),
-                                               Datum_Od = Convert.ToDateTime(dr["Datum_Od"].ToString()).ToString("yyyy-MM-dd"),
-                                               Datum_Do = Convert.ToDateTime(dr["Datum_Do"].ToString()).ToString("yyyy-MM-dd"),
-                                               Bruto = decimal.Parse(dr["Bruto"].ToString()),
-                                               Mio_1 = decimal.Parse(dr["Mio_1"].ToString()),
-                                               Mio_2 = decimal.Parse(dr["Mio_2"].ToString()),
-                                               Dohodak = decimal.Parse(dr["Dohodak"].ToString()),
-                                               Osobni_Odbitak = decimal.Parse(dr["Osobni_Odbitak"].ToString()),
-                                               Porezna_Osnovica = decimal.Parse(dr["Porezna_Osnovica"].ToString()),
-                                               Porez_Ukupno = decimal.Parse(dr["Porez_Ukupno"].ToString()),
-                                               Prirez = decimal.Parse(dr["Prirez"].ToString()),
-                                               Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
-                                               Iznos_Isplate = decimal.Parse(dr["Neto"].ToString()),
-                                               Primitak_Nesamostalni = decimal.Parse(dr["Bruto"].ToString()),
-                                               Zdravstvo = decimal.Parse(dr["Doprinos_Zdravstvo"].ToString()),
-                                               IzdatakUplaceni_Mio = decimal.Parse(dr["Mio_1"].ToString()) + decimal.Parse(dr["Mio_2"].ToString())
-                                           }).ToList();
+            _joppdB.Entitet.Clear();
+            int redni_broj = 1;
+            _broj_osoba = 0;
+            foreach (DataRow dr in rows)
+            {
+                //Add row for payroll
+                _joppdEntitet = new JoppdEntitet()
+                {
+                    Redni_Broj = redni_broj,
+                    Opcina_Prebivalista = dr["Opcina_Prebivalista"].ToString(),
+                    Opcina_Rada = dr["Opcina_Rada"].ToString(),
+                    Oib = dr["Oib"].ToString(),
+                    Ime_Prezime = dr["Ime_Prezime"].ToString(),
+                    Stjecatelj = dr["Stjecatelj"].ToString(),
+                    Primitak = dr["Primitak"].ToString(),
+                    Beneficirani = dr["Beneficirani"].ToString(),
+                    Invaliditet = dr["Invaliditet"].ToString(),
+                    Mjesec = dr["Mjesec"].ToString(),
+                    Vrijeme = dr["Vrijeme"].ToString(),
+                    Sati = int.Parse(textBoxSatiRada.Text),
+                    Datum_Od = Convert.ToDateTime(dr["Datum_Od"].ToString()).ToString("yyyy-MM-dd"),
+                    Datum_Do = Convert.ToDateTime(dr["Datum_Do"].ToString()).ToString("yyyy-MM-dd"),
+                    Bruto = decimal.Parse(dr["Bruto"].ToString()),
+                    Mio_1 = decimal.Parse(dr["Mio_1"].ToString()),
+                    Mio_2 = decimal.Parse(dr["Mio_2"].ToString()),
+                    Dohodak = decimal.Parse(dr["Dohodak"].ToString()),
+                    Osobni_Odbitak = decimal.Parse(dr["Osobni_Odbitak"].ToString()),
+                    Porezna_Osnovica = decimal.Parse(dr["Porezna_Osnovica"].ToString()),
+                    Porez_Ukupno = decimal.Parse(dr["Porez_Ukupno"].ToString()),
+                    Prirez = decimal.Parse(dr["Prirez"].ToString()),
+                    Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
+                    Iznos_Isplate = decimal.Parse(dr["Neto"].ToString()),
+                    Primitak_Nesamostalni = decimal.Parse(dr["Bruto"].ToString()),
+                    Zdravstvo = decimal.Parse(dr["Doprinos_Zdravstvo"].ToString()),
+                    IzdatakUplaceni_Mio = decimal.Parse(dr["Mio_1"].ToString()) + decimal.Parse(dr["Mio_2"].ToString())
+                };
+                //If only bonuses checked, skip adding payroll to list
+                if(checkBoxSamoDodaci.Checked == false)
+                {
+                    _joppdB.Entitet.Add(_joppdEntitet);
+                    redni_broj++;
+                }
+                //If bonuses are checked insert new row for each separate bonus entity has
+                if (checkBoxBezDodataka.Checked == false)
+                {
+                    var current_element = _joppdB.Entitet.ElementAt(_joppdB.Entitet.Count - 1);
+                    current_element.PopuniDodatke();
+                    current_element.PoduzetnikPrilagodi();
+                    //Check if there is more tham one untaxable item and save them in separate row or reciever is enterpreneur
+                    if (current_element.GetDodaciCount() > 1 || (current_element.Stjecatelj == "0032" && current_element.GetDodaciCount() > 0))
+                    {
+                        foreach (var item in current_element.GetDodatakList())
+                        {
+                            _joppdB.Entitet.Add(new JoppdEntitet()
+                            {
+                                Redni_Broj = redni_broj,
+                                Opcina_Prebivalista = dr["Opcina_Prebivalista"].ToString(),
+                                Opcina_Rada = dr["Opcina_Rada"].ToString(),
+                                Oib = dr["Oib"].ToString(),
+                                Ime_Prezime = dr["Ime_Prezime"].ToString(),
+                                Datum_Od = Convert.ToDateTime(dr["Datum_Od"].ToString()).ToString("yyyy-MM-dd"),
+                                Datum_Do = Convert.ToDateTime(dr["Datum_Do"].ToString()).ToString("yyyy-MM-dd"),
+                                Oznaka_Neoporezivog = item.Sifra,
+                                Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
+                                Iznos_Neoporezivog = item.Iznos
+                            });
+                            redni_broj++;
+                        }
+                    }
+                }
+                _broj_osoba++;
+            }
         }
 
         private void TextBoxSatiRada_KeyPress(object sender, KeyPressEventArgs e)
@@ -160,10 +201,10 @@ namespace Knjigovodstvo.JoppdDocument
             }
         }
 
-        private void CreateJoppdXmlFile()
+        private bool CreateJoppdXmlFile()
         {
             _sObrazacJoppd = new JoppdObrazac(_joppdB, _komitent)
-                .CreateJoppdXmlFile(dateTimePicker1.Value, SetJoppdFormNumber(), textBoxIzvjesceSastavioIme.Text);
+                .CreateJoppdXmlFile(dateTimePicker1.Value, SetJoppdFormNumber(), textBoxIzvjesceSastavioIme.Text, _broj_osoba);
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog
             {
@@ -178,10 +219,21 @@ namespace Knjigovodstvo.JoppdDocument
                 _path = saveFileDialog1.FileName;
             }
             //Save joppd.xml file
-            TextWriter txtWriter = new StreamWriter(_path);
-            XmlSerializer x = new XmlSerializer(_sObrazacJoppd.GetType());
-            x.Serialize(txtWriter, _sObrazacJoppd);
-            txtWriter.Close();
+            if (_path != "")
+            {
+                TextWriter txtWriter = new StreamWriter(_path);
+                XmlSerializer x = new XmlSerializer(_sObrazacJoppd.GetType());
+                x.Serialize(txtWriter, _sObrazacJoppd);
+                txtWriter.Close();
+
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Nije odabrana datoteka za spremanje", "Spremanje XML datoteke", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                
+                return false;
+            }
         }
 
         private void ReadJoppdXmlToDataGrid()
@@ -196,17 +248,30 @@ namespace Knjigovodstvo.JoppdDocument
             dataGridView1.DataSource = dataSet.Tables[dataSet.Tables.Count - 1];
         }
 
+        private void ComboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string selected = this.comboBoxZaposlenik.GetItemText(comboBoxZaposlenik.SelectedItem);
+            string oib = selected.Split(' ')[0];
+            _zaposlenik.GetZaposlenikByOib(oib);
+        }
+        //mutually exclude two checkboxes
+        private void CheckBoxSamoDodaci_CheckStateChanged(object sender, EventArgs e)
+        {
+            if(checkBoxSamoDodaci.Checked == true)
+                checkBoxBezDodataka.Checked = false;
+        }
+
+        private void CheckBoxBezDodataka_CheckStateChanged(object sender, EventArgs e)
+        {
+            if(checkBoxBezDodataka.Checked == true)
+                checkBoxSamoDodaci.Checked = false;
+        }
+
         private void ButtonPopuniObrazac_Click(object sender, EventArgs e)
         {
             FillDataForJoppdFile();
-            CreateJoppdXmlFile();
-            ReadJoppdXmlToDataGrid();
-        }
-        private void ComboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            string selected = this.comboBoxZaposlenik.GetItemText(this.comboBoxZaposlenik.SelectedItem);
-            string oib = selected.Split(' ')[0];
-            _zaposlenik.GetZaposlenikByOib(oib);
+            if(CreateJoppdXmlFile())
+                ReadJoppdXmlToDataGrid();
         }
 
         private Zaposlenik _zaposlenik = new Zaposlenik();
@@ -216,6 +281,7 @@ namespace Knjigovodstvo.JoppdDocument
         private Komitent _komitent = new Komitent();
         private sObrazacJOPPD _sObrazacJoppd = new sObrazacJOPPD();
         private string _path = "";
-
+        private int _broj_osoba = 0;
+        private JoppdEntitet _joppdEntitet = new JoppdEntitet();
     }
 }

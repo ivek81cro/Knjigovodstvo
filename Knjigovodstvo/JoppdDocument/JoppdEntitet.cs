@@ -12,9 +12,12 @@ namespace Knjigovodstvo.JoppdDocument
     [Serializable()]
     public class JoppdEntitet : IDbObject
     {
-        public void PopuniDodatke(int redniBroj = 0)
+        public JoppdEntitet()
         {
-            DataTable _dt = new DbDataGet().GetTable(_dodaci.ElementAt(0), $"Oib='{this.Oib}'");
+        }
+        public void PopuniDodatke()
+        {
+            DataTable _dt = new DbDataGet().GetTable(new PlacaDodatak(), $"Oib='{Oib}'");
             List<DataRow> rows = _dt.AsEnumerable().ToList();
             _dodaci = (from DataRow dr in rows
                               select new PlacaDodatak()
@@ -30,8 +33,36 @@ namespace Knjigovodstvo.JoppdDocument
                 Iznos_Neoporezivog = _dodaci.ElementAt(0).Iznos;
                 Oznaka_Neoporezivog = _dodaci.ElementAt(0).Sifra;
             }
+        }
 
-            Redni_Broj = redniBroj;
+        //Remove benefits that produce error at document control check
+        public void PoduzetnikPrilagodi() 
+        {
+            if(Stjecatelj == "0032")
+            {
+                Iznos_Neoporezivog = 0;
+                Oznaka_Neoporezivog = "0";
+                Primitak_Nesamostalni = 0;
+            }
+        }
+
+        public int GetDodaciCount()
+        {
+            return _dodaci.Count;
+        }
+
+        public List<PlacaDodatak> GetDodatakList()
+        {
+            int i = 1;
+            if (Stjecatelj == "0032")
+                i = 0;
+            List<PlacaDodatak> dodaci = new List<PlacaDodatak>();
+            for(; i<_dodaci.Count; ++i)
+            {
+                dodaci.Add(_dodaci[i]);
+            }
+
+            return dodaci;
         }
 
         public FormError ValidateData()
@@ -51,9 +82,9 @@ namespace Knjigovodstvo.JoppdDocument
         [XmlElement("P5")]
         public string Ime_Prezime { get; set; } = "";
         [XmlElement("P61")]
-        public string Stjecatelj { get; set; } = "0";
+        public string Stjecatelj { get; set; } = "0000";
         [XmlElement("P62")]
-        public string Primitak { get; set; } = "0";
+        public string Primitak { get; set; } = "0000";
         [XmlElement("P71")]
         public string Beneficirani { get; set; } = "0";
         [XmlElement("P72")]

@@ -6,7 +6,7 @@ using System.Data;
 
 namespace Knjigovodstvo.Payroll
 {
-    class PlacaDodatak : IDbObject
+    public class PlacaDodatak : IDbObject
     {
         public FormError ValidateData()
         {

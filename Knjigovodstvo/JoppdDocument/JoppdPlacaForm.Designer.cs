@@ -93,6 +93,7 @@ namespace Knjigovodstvo.JoppdDocument
             this.checkBoxSamoDodaci.TabIndex = 4;
             this.checkBoxSamoDodaci.Text = "Samo dodaci";
             this.checkBoxSamoDodaci.UseVisualStyleBackColor = true;
+            this.checkBoxSamoDodaci.CheckStateChanged += new System.EventHandler(this.CheckBoxSamoDodaci_CheckStateChanged);
             // 
             // comboBoxDodaci
             // 
@@ -112,6 +113,7 @@ namespace Knjigovodstvo.JoppdDocument
             this.checkBoxBezDodataka.TabIndex = 6;
             this.checkBoxBezDodataka.Text = "Bez dodataka";
             this.checkBoxBezDodataka.UseVisualStyleBackColor = true;
+            this.checkBoxBezDodataka.CheckStateChanged += new System.EventHandler(this.CheckBoxBezDodataka_CheckStateChanged);
             // 
             // checkBoxPojedinacno
             // 

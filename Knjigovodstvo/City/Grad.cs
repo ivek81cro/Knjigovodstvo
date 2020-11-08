@@ -92,7 +92,7 @@ namespace Knjigovodstvo.City
 
         internal bool UpdateData()
         {
-            if (new DbDataUpdate().UpdateData(this, "Naziv"))
+            if (new DbDataUpdate().UpdateData(this, "Mjesto"))
                 return true;
 
             return false;

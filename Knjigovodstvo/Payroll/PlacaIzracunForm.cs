@@ -38,7 +38,7 @@ namespace Knjigovodstvo.Payroll
             _zaposlenik.GetZaposlenikByOib(oib);
             _placa.GetPlacaByOib(_zaposlenik.Oib);
             _zaposlenikJoppd = _zaposlenikJoppd.GetZaposlenikByOib(oib);
-            if (_placa.Oib != "0")
+            if (_zaposlenik.Oib != "0")
             {
                 _prirez = _zaposlenik.Adresa.Grad.Prirez;
                 PopuniKontrole(_placa);
@@ -284,21 +284,17 @@ namespace Knjigovodstvo.Payroll
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
+            DataTable dt = new DbDataGet().GetTable(_placa, $"Oib='{_zaposlenik.Oib}'");
+
             if (comboBoxZaposlenik.SelectedItem != null && _placa.Oib != "" && _placa.Oib != "0")
             {
-                if (_placa.Oib == "0")
-                {
-                    if (new DbDataInsert().InsertData(_placa))
-                    {
-                        MessageBox.Show("Unos uspješan.", "Novi izračun unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                if (dt.Rows.Count == 0 && new DbDataInsert().InsertData(_placa))
+                {     
+                    MessageBox.Show("Unos uspješan.", "Novi izračun unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else
+                else if(dt.Rows.Count != 0 && new DbDataUpdate().UpdateData(_placa))
                 {
-                    if (new DbDataUpdate().UpdateData(_placa))
-                    {
-                        MessageBox.Show("Unos uspješan.", "Izmjena unešena", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    MessageBox.Show("Izmjena Podataka uspješna.", "Izmjena izračuna", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }

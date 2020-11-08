@@ -4871,6 +4871,34 @@ namespace Knjigovodstvo.JoppdDocument
         /// <remarks/>
         [System.Xml.Serialization.XmlEnumAttribute("64")]
         Item64,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("65")]
+        Item65,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("66")]
+        Item66,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("67")]
+        Item67,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("68")]
+        Item68,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("69")]
+        Item69,
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("70")]
+        Item70,
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("71")]
+        Item71,
     }
 
     /// <remarks/>

@@ -19,13 +19,12 @@ namespace Knjigovodstvo.JoppdDocument
             _komitent = komitent;
         }
 
-        public sObrazacJOPPD CreateJoppdXmlFile(DateTime datum, string joppdBroj, string izvjesceSastavio) 
+        public sObrazacJOPPD CreateJoppdXmlFile(DateTime datum, string joppdBroj, string izvjesceSastavio, int broj_osoba) 
         {
             List<sPrimateljiP> pArr = new List<sPrimateljiP>();
             for (int i = 0; i < _joppdB.Entitet.Count; i++)
             {
                 JoppdEntitet e = _joppdB.Entitet[i];
-                e.PopuniDodatke(i + 1);
                 pArr.Add(new sPrimateljiP()
                 {
                     P1 = e.Redni_Broj,
@@ -62,7 +61,7 @@ namespace Knjigovodstvo.JoppdDocument
                     P151 = (tOznakaNeoporezivogPrimitka)Enum.Parse(typeof(tOznakaNeoporezivogPrimitka), e.Oznaka_Neoporezivog),
                     P152 = e.Iznos_Neoporezivog,
                     P161 = (tOznakaNacinaIsplate)Enum.Parse(typeof(tOznakaNacinaIsplate), e.Nacin_Isplate),
-                    P162 = e.Iznos_Isplate + e.Iznos_Neoporezivog,
+                    P162 = e.Iznos_Isplate==0? e.Iznos_Neoporezivog: e.Iznos_Isplate+e.Iznos_Neoporezivog,
                     P17 = e.Primitak_Nesamostalni
                 });
             }
@@ -92,7 +91,7 @@ namespace Knjigovodstvo.JoppdDocument
                     OIB = _komitent.OpciPodaci.Oib,
                     Oznaka = tOznakaPodnositelja.Item2
                 },
-                BrojOsoba = pArr.Count.ToString(),
+                BrojOsoba = broj_osoba.ToString(),
                 BrojRedaka = pArr.Count.ToString(),
                 PredujamPoreza = new sPredujamPoreza()
                 {
