@@ -208,8 +208,8 @@ namespace Knjigovodstvo.JoppdDocument
                         }
                     }
                 }
-                _broj_osoba++;
             }
+            _broj_osoba = _joppdB.Entitet.Select(o => o.Oib).Distinct().ToList().Count();
         }
 
         private void TextBoxSatiRada_KeyPress(object sender, KeyPressEventArgs e)
