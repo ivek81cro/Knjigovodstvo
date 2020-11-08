@@ -51,11 +51,9 @@ namespace Knjigovodstvo.JoppdDocument
             return _dodaci.Count;
         }
 
-        public List<PlacaDodatak> GetDodatakList()
+        public List<PlacaDodatak> GetDodatakList(int dodatak_start_number)
         {
-            int i = 1;
-            if (Stjecatelj == "0032")
-                i = 0;
+            int i = dodatak_start_number;
             List<PlacaDodatak> dodaci = new List<PlacaDodatak>();
             for(; i<_dodaci.Count; ++i)
             {

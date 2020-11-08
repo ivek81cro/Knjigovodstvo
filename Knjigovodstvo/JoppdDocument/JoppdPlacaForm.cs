@@ -2,6 +2,7 @@
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
 using Knjigovodstvo.Global;
+using Knjigovodstvo.Payroll;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -29,29 +30,29 @@ namespace Knjigovodstvo.JoppdDocument
             _dt = new DbDataGet().GetTable(_komitent);
             List<DataRow> row = _dt.AsEnumerable().ToList();
             _komitent = (from DataRow dr in row
-                  select new Komitent()
-                  {
-                      OpciPodaci = new OpciPodaci() 
-                      {
-                          Id = int.Parse(dr["Id"].ToString()),
-                          Oib = dr["Oib"].ToString(),
-                          Naziv = dr["Naziv"].ToString(),
-                      },
-                      Kontakt = new Kontakt() 
-                      {
-                          Email = dr["Email"].ToString()
-                      },
-                      Adresa = new Adresa() 
-                      {
-                          Ulica = dr["Ulica"].ToString(),
-                          Broj = dr["Broj"].ToString(),
-                          Grad = new Grad()
-                          {
-                              Mjesto = dr["Mjesto"].ToString(),
-                              Posta = dr["Posta"].ToString()
-                          }
-                      }
-                  }).ToList().FirstOrDefault();
+                         select new Komitent()
+                         {
+                             OpciPodaci = new OpciPodaci()
+                             {
+                                 Id = int.Parse(dr["Id"].ToString()),
+                                 Oib = dr["Oib"].ToString(),
+                                 Naziv = dr["Naziv"].ToString(),
+                             },
+                             Kontakt = new Kontakt()
+                             {
+                                 Email = dr["Email"].ToString()
+                             },
+                             Adresa = new Adresa()
+                             {
+                                 Ulica = dr["Ulica"].ToString(),
+                                 Broj = dr["Broj"].ToString(),
+                                 Grad = new Grad()
+                                 {
+                                     Mjesto = dr["Mjesto"].ToString(),
+                                     Posta = dr["Posta"].ToString()
+                                 }
+                             }
+                         }).ToList().FirstOrDefault();
         }
 
         private void DateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -64,7 +65,7 @@ namespace Knjigovodstvo.JoppdDocument
             DateTime date = dateTimePicker1.Value;
             string year = date.Year.ToString();
             string dayOfYear = date.DayOfYear.ToString();
-            
+
             if (dayOfYear.Length < 3)
             {
                 while (dayOfYear.Length != 3)
@@ -75,7 +76,7 @@ namespace Knjigovodstvo.JoppdDocument
             string formNumber = year.Substring(year.Length - 2) + dayOfYear;
 
             labelBrojObrasca.Text = "Oznaka obrasca: " + formNumber;
-            
+
             return formNumber;
         }
 
@@ -110,11 +111,11 @@ namespace Knjigovodstvo.JoppdDocument
         {
             string datumOd = dateTimePicker1.Value.Year.ToString() + '-' + (dateTimePicker1.Value.Month - 1).ToString();
             _dt = new DbDataExecProcedure().GetTable(ProcedureNames.Joppd_podaci, $"@datumOd='{datumOd}', @dan='01'");
-         
+
             List<DataRow> rows = _dt.AsEnumerable().ToList();
-            
+
             //If only one specific employee is selected
-            if(checkBoxPojedinacno.Checked && !comboBoxZaposlenik.Text.StartsWith('-'))
+            if (checkBoxPojedinacno.Checked && !comboBoxZaposlenik.Text.StartsWith('-'))
             {
                 var newList = rows.Where(s => s.ItemArray[2].ToString() == _zaposlenik.Oib);
                 rows = newList.ToList();
@@ -156,7 +157,8 @@ namespace Knjigovodstvo.JoppdDocument
                     IzdatakUplaceni_Mio = decimal.Parse(dr["Mio_1"].ToString()) + decimal.Parse(dr["Mio_2"].ToString())
                 };
                 //If only bonuses checked, skip adding payroll to list
-                if(checkBoxSamoDodaci.Checked == false)
+                int dodatak_start_number = 1;
+                if (checkBoxSamoDodaci.Checked == false)
                 {
                     _joppdB.Entitet.Add(_joppdEntitet);
                     redni_broj++;
@@ -164,15 +166,19 @@ namespace Knjigovodstvo.JoppdDocument
                 //If bonuses are checked insert new row for each separate bonus entity has
                 if (checkBoxBezDodataka.Checked == false)
                 {
-                    var current_element = _joppdB.Entitet.ElementAt(_joppdB.Entitet.Count - 1);
+                    var current_element = _joppdEntitet;
                     current_element.PopuniDodatke();
                     current_element.PoduzetnikPrilagodi();
                     //Check if there is more tham one untaxable item and save them in separate row or reciever is enterpreneur
-                    if (current_element.GetDodaciCount() > 1 || (current_element.Stjecatelj == "0032" && current_element.GetDodaciCount() > 0))
+                    if (current_element.GetDodaciCount() > 0)
                     {
-                        foreach (var item in current_element.GetDodatakList())
+                        //If only bonuses are selected start with 0 because of employee + one bonus auto merge
+                        if (current_element.Stjecatelj == "0032" || checkBoxSamoDodaci.Checked == true)
+                            dodatak_start_number = 0;
+
+                        foreach (var item in current_element.GetDodatakList(dodatak_start_number))
                         {
-                            _joppdB.Entitet.Add(new JoppdEntitet()
+                            _joppdEntitet = new JoppdEntitet()
                             {
                                 Redni_Broj = redni_broj,
                                 Opcina_Prebivalista = dr["Opcina_Prebivalista"].ToString(),
@@ -184,8 +190,21 @@ namespace Knjigovodstvo.JoppdDocument
                                 Oznaka_Neoporezivog = item.Sifra,
                                 Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
                                 Iznos_Neoporezivog = item.Iznos
-                            });
-                            redni_broj++;
+                            };
+                            //If specific bonus is selected
+                            if (!comboBoxDodaci.Text.StartsWith('-'))
+                            {
+                                if (_joppdEntitet.Oznaka_Neoporezivog == _placaDodatak.Sifra)
+                                {
+                                    _joppdB.Entitet.Add(_joppdEntitet);
+                                    redni_broj++;
+                                }
+                            }
+                            else
+                            {
+                                _joppdB.Entitet.Add(_joppdEntitet);
+                                redni_broj++;
+                            }
                         }
                     }
                 }
@@ -231,7 +250,7 @@ namespace Knjigovodstvo.JoppdDocument
             else
             {
                 MessageBox.Show("Nije odabrana datoteka za spremanje", "Spremanje XML datoteke", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                
+
                 return false;
             }
         }
@@ -250,27 +269,35 @@ namespace Knjigovodstvo.JoppdDocument
 
         private void ComboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            string selected = this.comboBoxZaposlenik.GetItemText(comboBoxZaposlenik.SelectedItem);
+            string selected = comboBoxZaposlenik.GetItemText(comboBoxZaposlenik.SelectedItem);
             string oib = selected.Split(' ')[0];
             _zaposlenik.GetZaposlenikByOib(oib);
         }
+
+        private void comboBoxDodaci_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string selected = comboBoxDodaci.GetItemText(comboBoxDodaci.SelectedItem);
+            string code = selected.Split(' ')[0];
+            _placaDodatak.Sifra = code;
+        }
+
         //mutually exclude two checkboxes
         private void CheckBoxSamoDodaci_CheckStateChanged(object sender, EventArgs e)
         {
-            if(checkBoxSamoDodaci.Checked == true)
+            if (checkBoxSamoDodaci.Checked == true)
                 checkBoxBezDodataka.Checked = false;
         }
 
         private void CheckBoxBezDodataka_CheckStateChanged(object sender, EventArgs e)
         {
-            if(checkBoxBezDodataka.Checked == true)
+            if (checkBoxBezDodataka.Checked == true)
                 checkBoxSamoDodaci.Checked = false;
         }
 
         private void ButtonPopuniObrazac_Click(object sender, EventArgs e)
         {
             FillDataForJoppdFile();
-            if(CreateJoppdXmlFile())
+            if (CreateJoppdXmlFile())
                 ReadJoppdXmlToDataGrid();
         }
 
@@ -283,5 +310,6 @@ namespace Knjigovodstvo.JoppdDocument
         private string _path = "";
         private int _broj_osoba = 0;
         private JoppdEntitet _joppdEntitet = new JoppdEntitet();
+        private PlacaDodatak _placaDodatak = new PlacaDodatak();
     }
 }

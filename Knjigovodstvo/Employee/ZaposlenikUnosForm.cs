@@ -1,6 +1,5 @@
 ﻿using Knjigovodstvo.City;
 using Knjigovodstvo.Code.Validators;
-using Knjigovodstvo.Global;
 using Knjigovodstvo.Interface;
 using System;
 using System.Windows.Forms;
