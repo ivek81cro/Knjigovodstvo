@@ -38,7 +38,7 @@ namespace Knjigovodstvo.JoppdDocument
                     P72 = (tOznakaInvaliditet)Enum.Parse(typeof(tOznakaInvaliditet), "Item" + e.Invaliditet),
                     P8 = (tOznakaMjesec)Enum.Parse(typeof(tOznakaMjesec), "Item" + e.Mjesec),
                     P9 = (tOznakaRadnoVrijeme)Enum.Parse(typeof(tOznakaRadnoVrijeme), "Item" + e.Vrijeme),
-                    P10 = e.Sati,
+                    P10 = e.IsPoslodavac()? int.Parse((Convert.ToDateTime(e.Datum_Do) - Convert.ToDateTime(e.Datum_Od)).Days.ToString()) : e.Sati,
                     P101 = Convert.ToDateTime(e.Datum_Od),
                     P102 = Convert.ToDateTime(e.Datum_Do),
                     P11 = e.Bruto,

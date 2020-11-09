@@ -58,7 +58,7 @@ namespace Knjigovodstvo.JoppdDocument
                 if (primatelj.P61 == tOznakaStjecatelja.Item0001 ||
                     primatelj.P61 == tOznakaStjecatelja.Item0002 ||
                     primatelj.P61 == tOznakaStjecatelja.Item0003)
-                    ukupno += primatelj.P121;
+                    ukupno += primatelj.P122;
             }
 
             return Math.Round(ukupno, 2);

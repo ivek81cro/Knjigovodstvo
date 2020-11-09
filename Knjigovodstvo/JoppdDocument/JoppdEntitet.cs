@@ -63,12 +63,22 @@ namespace Knjigovodstvo.JoppdDocument
             return dodaci;
         }
 
+        public bool IsPoslodavac()
+        {
+            if(Stjecatelj == "0032")
+            {
+                return true;
+            }
+            return false;
+        }
+
         public FormError ValidateData()
         {
             throw new NotImplementedException();
         }
 
         private List<PlacaDodatak> _dodaci = new List<PlacaDodatak>();
+
         [XmlElement("P1")]
         public int Redni_Broj = 0;
         [XmlElement("P2")]

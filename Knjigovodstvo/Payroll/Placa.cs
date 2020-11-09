@@ -40,12 +40,12 @@ namespace Knjigovodstvo.Payroll
 
             if (Porezna_Osnovica > 30000)
             {
-                iznos -= Porez_24_per = 30000.0m * p.GetStopaByName(PlacaStope.Porez_Dohodak_24);
-                iznos -= Porez_36_per = (Porezna_Osnovica - 30000) * p.GetStopaByName(PlacaStope.Porez_Dohodak_36);
+                iznos -= Porez_24_per = 30000.0m * p.GetStopaByName(PlacaStope.Porez_Dohodak_1);
+                iznos -= Porez_36_per = (Porezna_Osnovica - 30000) * p.GetStopaByName(PlacaStope.Porez_Dohodak_2);
             }
             else
             {
-                iznos -= Porez_24_per = Porezna_Osnovica * p.GetStopaByName(PlacaStope.Porez_Dohodak_24);
+                iznos -= Porez_24_per = Porezna_Osnovica * p.GetStopaByName(PlacaStope.Porez_Dohodak_1);
                 Porez_36_per = 0;
             }
             iznos -= Prirez = ( Porez_Ukupno = Porez_24_per + Porez_36_per) * prirez/100;

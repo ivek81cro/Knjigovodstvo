@@ -8,8 +8,8 @@ namespace Knjigovodstvo.Settings
     {
         Mio_1,
         Mio_2,
-        Porez_Dohodak_24,
-        Porez_Dohodak_36,
+        Porez_Dohodak_1,
+        Porez_Dohodak_2,
         Doprinos_Zdravstveno,
         Osnovica_odbitka,
         Osnovni_odbitak_koeficjent
