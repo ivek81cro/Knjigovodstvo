@@ -5,6 +5,7 @@ using Knjigovodstvo.Global;
 using Knjigovodstvo.Payroll;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -59,7 +60,10 @@ namespace Knjigovodstvo.JoppdDocument
         {
             SetJoppdFormNumber();
         }
-
+        /// <summary>
+        /// Set correct form number
+        /// </summary>
+        /// <returns></returns>
         private string SetJoppdFormNumber()
         {
             DateTime date = dateTimePicker1.Value;
@@ -106,7 +110,9 @@ namespace Knjigovodstvo.JoppdDocument
             comboBoxDodaci.Text = "--Odaberi Dodatak--";
 
         }
-
+        /// <summary>
+        /// Fetch data for JoppdB from database
+        /// </summary>
         private void FillDataForJoppdFile()
         {
             string datumOd = dateTimePicker1.Value.Year.ToString() + '-' + (dateTimePicker1.Value.Month - 1).ToString();
@@ -115,6 +121,18 @@ namespace Knjigovodstvo.JoppdDocument
 
             List<DataRow> rows = _dt.AsEnumerable().ToList();
 
+            PopuniPodatkeStranaB(rows);
+
+            PrikazPodataka();
+
+            _broj_osoba = _joppdB.Entitet.Select(o => o.Oib).Distinct().ToList().Count();
+        }
+        /// <summary>
+        /// Process data from database about employees needed for JoppdB data
+        /// </summary>
+        /// <param name="rows"></param>
+        private void PopuniPodatkeStranaB(List<DataRow> rows)
+        {
             //If only one specific employee is selected
             if (checkBoxPojedinacno.Checked && !comboBoxZaposlenik.Text.StartsWith('-'))
             {
@@ -210,7 +228,6 @@ namespace Knjigovodstvo.JoppdDocument
                     }
                 }
             }
-            _broj_osoba = _joppdB.Entitet.Select(o => o.Oib).Distinct().ToList().Count();
         }
 
         private void TextBoxSatiRada_KeyPress(object sender, KeyPressEventArgs e)
@@ -220,7 +237,10 @@ namespace Knjigovodstvo.JoppdDocument
                 e.Handled = true;
             }
         }
-
+        /// <summary>
+        /// Creates XML file for sending to Porezna Uprava
+        /// </summary>
+        /// <returns></returns>
         private bool CreateJoppdXmlFile()
         {
             _sObrazacJoppd = new JoppdObrazac(_joppdB, _komitent)
@@ -255,7 +275,9 @@ namespace Knjigovodstvo.JoppdDocument
                 return false;
             }
         }
-
+        /// <summary>
+        /// Shows XML file data, JoppdB part in datagridview
+        /// </summary>
         private void ReadJoppdXmlToDataGrid()
         {
             StreamReader reader = new StreamReader(_path);
@@ -294,10 +316,35 @@ namespace Knjigovodstvo.JoppdDocument
             if (checkBoxBezDodataka.Checked == true)
                 checkBoxSamoDodaci.Checked = false;
         }
-
+        /// <summary>
+        /// Prepare data for Joppd B part of document
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonPopuniObrazac_Click(object sender, EventArgs e)
         {
             FillDataForJoppdFile();
+        }
+        /// <summary>
+        /// Allow user to edit cells or delete rows before saving to XML file, unlocks edit mode of form's datagridvew
+        /// </summary>
+        private void PrikazPodataka()
+        {
+            _list = new BindingList<JoppdEntitet>(_joppdB.Entitet);
+            dataGridView1.DataSource = _list;
+            dataGridView1.ReadOnly = false;
+            dataGridView1.AllowUserToDeleteRows = true;
+        }
+        /// <summary>
+        /// Locks edit mode for form's datagridview and saves data to XML file, result is shown in datagridview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonSnimiPodatke_Click(object sender, EventArgs e)
+        {
+            dataGridView1.ReadOnly = true;
+            dataGridView1.AllowUserToDeleteRows = false;
+            _joppdB.Entitet = _list.ToList();
             if (CreateJoppdXmlFile())
                 ReadJoppdXmlToDataGrid();
         }
@@ -312,5 +359,6 @@ namespace Knjigovodstvo.JoppdDocument
         private int _broj_osoba = 0;
         private JoppdEntitet _joppdEntitet = new JoppdEntitet();
         private readonly PlacaDodatak _placaDodatak = new PlacaDodatak();
+        BindingList<JoppdEntitet> _list = new BindingList<JoppdEntitet>();
     }
 }

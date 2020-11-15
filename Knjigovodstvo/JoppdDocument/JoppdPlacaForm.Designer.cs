@@ -33,7 +33,7 @@ namespace Knjigovodstvo.JoppdDocument
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.labelDatumObrasca = new System.Windows.Forms.Label();
             this.labelBrojObrasca = new System.Windows.Forms.Label();
-            this.buttonPopuniObrazac = new System.Windows.Forms.Button();
+            this.buttonPripremiPodatke = new System.Windows.Forms.Button();
             this.checkBoxSamoDodaci = new System.Windows.Forms.CheckBox();
             this.comboBoxDodaci = new System.Windows.Forms.ComboBox();
             this.checkBoxBezDodataka = new System.Windows.Forms.CheckBox();
@@ -44,6 +44,7 @@ namespace Knjigovodstvo.JoppdDocument
             this.dataGridView1 = new Knjigovodstvo.DBDataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxIzvjesceSastavioIme = new System.Windows.Forms.TextBox();
+            this.buttonSnimiPodatke = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,15 +75,15 @@ namespace Knjigovodstvo.JoppdDocument
             this.labelBrojObrasca.TabIndex = 2;
             this.labelBrojObrasca.Text = "yyddd";
             // 
-            // buttonPopuniObrazac
+            // buttonPripremiPodatke
             // 
-            this.buttonPopuniObrazac.Location = new System.Drawing.Point(11, 146);
-            this.buttonPopuniObrazac.Name = "buttonPopuniObrazac";
-            this.buttonPopuniObrazac.Size = new System.Drawing.Size(75, 23);
-            this.buttonPopuniObrazac.TabIndex = 3;
-            this.buttonPopuniObrazac.Text = "Popuni";
-            this.buttonPopuniObrazac.UseVisualStyleBackColor = true;
-            this.buttonPopuniObrazac.Click += new System.EventHandler(this.ButtonPopuniObrazac_Click);
+            this.buttonPripremiPodatke.Location = new System.Drawing.Point(11, 146);
+            this.buttonPripremiPodatke.Name = "buttonPripremiPodatke";
+            this.buttonPripremiPodatke.Size = new System.Drawing.Size(75, 23);
+            this.buttonPripremiPodatke.TabIndex = 3;
+            this.buttonPripremiPodatke.Text = "Pripremi";
+            this.buttonPripremiPodatke.UseVisualStyleBackColor = true;
+            this.buttonPripremiPodatke.Click += new System.EventHandler(this.ButtonPopuniObrazac_Click);
             // 
             // checkBoxSamoDodaci
             // 
@@ -187,11 +188,22 @@ namespace Knjigovodstvo.JoppdDocument
             this.textBoxIzvjesceSastavioIme.TabIndex = 12;
             this.textBoxIzvjesceSastavioIme.Text = "Ivan Batinić";
             // 
+            // buttonSnimiPodatke
+            // 
+            this.buttonSnimiPodatke.Location = new System.Drawing.Point(92, 146);
+            this.buttonSnimiPodatke.Name = "buttonSnimiPodatke";
+            this.buttonSnimiPodatke.Size = new System.Drawing.Size(75, 23);
+            this.buttonSnimiPodatke.TabIndex = 13;
+            this.buttonSnimiPodatke.Text = "Spremi";
+            this.buttonSnimiPodatke.UseVisualStyleBackColor = true;
+            this.buttonSnimiPodatke.Click += new System.EventHandler(this.ButtonSnimiPodatke_Click);
+            // 
             // JoppdPlacaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 547);
+            this.Controls.Add(this.buttonSnimiPodatke);
             this.Controls.Add(this.textBoxIzvjesceSastavioIme);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
@@ -202,7 +214,7 @@ namespace Knjigovodstvo.JoppdDocument
             this.Controls.Add(this.checkBoxBezDodataka);
             this.Controls.Add(this.comboBoxDodaci);
             this.Controls.Add(this.checkBoxSamoDodaci);
-            this.Controls.Add(this.buttonPopuniObrazac);
+            this.Controls.Add(this.buttonPripremiPodatke);
             this.Controls.Add(this.labelBrojObrasca);
             this.Controls.Add(this.labelDatumObrasca);
             this.Controls.Add(this.dateTimePicker1);
@@ -219,7 +231,7 @@ namespace Knjigovodstvo.JoppdDocument
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label labelDatumObrasca;
         private System.Windows.Forms.Label labelBrojObrasca;
-        private System.Windows.Forms.Button buttonPopuniObrazac;
+        private System.Windows.Forms.Button buttonPripremiPodatke;
         private System.Windows.Forms.CheckBox checkBoxSamoDodaci;
         private System.Windows.Forms.ComboBox comboBoxDodaci;
         private System.Windows.Forms.CheckBox checkBoxBezDodataka;
@@ -230,5 +242,6 @@ namespace Knjigovodstvo.JoppdDocument
         private DBDataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxIzvjesceSastavioIme;
+        private Button buttonSnimiPodatke;
     }
 }
