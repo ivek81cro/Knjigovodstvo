@@ -110,6 +110,7 @@ namespace Knjigovodstvo.JoppdDocument
         private void FillDataForJoppdFile()
         {
             string datumOd = dateTimePicker1.Value.Year.ToString() + '-' + (dateTimePicker1.Value.Month - 1).ToString();
+            datumOd = datumOd.Split('-')[1].Length < 2 ?datumOd.Split('-')[0] + "-0" + datumOd.Split('-')[1] : datumOd;
             _dt = new DbDataExecProcedure().GetTable(ProcedureNames.Joppd_podaci, $"@datumOd='{datumOd}', @dan='01'");
 
             List<DataRow> rows = _dt.AsEnumerable().ToList();
@@ -274,7 +275,7 @@ namespace Knjigovodstvo.JoppdDocument
             _zaposlenik.GetZaposlenikByOib(oib);
         }
 
-        private void comboBoxDodaci_SelectionChangeCommitted(object sender, EventArgs e)
+        private void ComboBoxDodaci_SelectionChangeCommitted(object sender, EventArgs e)
         {
             string selected = comboBoxDodaci.GetItemText(comboBoxDodaci.SelectedItem);
             string code = selected.Split(' ')[0];
@@ -301,15 +302,15 @@ namespace Knjigovodstvo.JoppdDocument
                 ReadJoppdXmlToDataGrid();
         }
 
-        private Zaposlenik _zaposlenik = new Zaposlenik();
+        private readonly Zaposlenik _zaposlenik = new Zaposlenik();
         private DataTable _dt = new DataTable();
-        private JoppdSifre _joppdSifre = new JoppdSifre();
-        private JoppdB _joppdB = new JoppdB();
+        private readonly JoppdSifre _joppdSifre = new JoppdSifre();
+        private readonly JoppdB _joppdB = new JoppdB();
         private Komitent _komitent = new Komitent();
         private sObrazacJOPPD _sObrazacJoppd = new sObrazacJOPPD();
         private string _path = "";
         private int _broj_osoba = 0;
         private JoppdEntitet _joppdEntitet = new JoppdEntitet();
-        private PlacaDodatak _placaDodatak = new PlacaDodatak();
+        private readonly PlacaDodatak _placaDodatak = new PlacaDodatak();
     }
 }

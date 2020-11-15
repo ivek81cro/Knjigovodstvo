@@ -79,6 +79,6 @@ namespace Knjigovodstvo.Settings
             }
         }
 
-        private Postavke _postavke = new Postavke();
+        private readonly Postavke _postavke = new Postavke();
     }
 }

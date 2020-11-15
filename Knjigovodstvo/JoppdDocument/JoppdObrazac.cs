@@ -38,7 +38,7 @@ namespace Knjigovodstvo.JoppdDocument
                     P72 = (tOznakaInvaliditet)Enum.Parse(typeof(tOznakaInvaliditet), "Item" + e.Invaliditet),
                     P8 = (tOznakaMjesec)Enum.Parse(typeof(tOznakaMjesec), "Item" + e.Mjesec),
                     P9 = (tOznakaRadnoVrijeme)Enum.Parse(typeof(tOznakaRadnoVrijeme), "Item" + e.Vrijeme),
-                    P10 = e.IsPoslodavac()? int.Parse((Convert.ToDateTime(e.Datum_Do) - Convert.ToDateTime(e.Datum_Od)).Days.ToString()) : e.Sati,
+                    P10 = e.IsPoslodavac()? int.Parse((Convert.ToDateTime(e.Datum_Do) - Convert.ToDateTime(e.Datum_Od)).Days.ToString()) + 1 : e.Sati,
                     P101 = Convert.ToDateTime(e.Datum_Od),
                     P102 = Convert.ToDateTime(e.Datum_Do),
                     P11 = e.Bruto,
@@ -186,8 +186,8 @@ namespace Knjigovodstvo.JoppdDocument
             return _sObrazacJoppd;
         }
 
-        private JoppdB _joppdB = new JoppdB();
-        private Komitent _komitent = new Komitent();
-        private sObrazacJOPPD _sObrazacJoppd = new sObrazacJOPPD();
+        private readonly JoppdB _joppdB = new JoppdB();
+        private readonly Komitent _komitent = new Komitent();
+        private readonly sObrazacJOPPD _sObrazacJoppd = new sObrazacJOPPD();
     }
 }

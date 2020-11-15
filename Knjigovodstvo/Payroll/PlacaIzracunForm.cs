@@ -328,7 +328,7 @@ namespace Knjigovodstvo.Payroll
 
         private ZaposlenikJoppd _zaposlenikJoppd = new ZaposlenikJoppd();
         private Placa _placa = new Placa();
-        private Zaposlenik _zaposlenik = new Zaposlenik();
+        private readonly Zaposlenik _zaposlenik = new Zaposlenik();
         private List<PlacaDodatak> _dodaci = new List<PlacaDodatak>();
         private decimal _prirez = 0;
     }

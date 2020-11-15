@@ -103,7 +103,7 @@ namespace Knjigovodstvo.JoppdDocument
             this.comboBoxDodaci.Name = "comboBoxDodaci";
             this.comboBoxDodaci.Size = new System.Drawing.Size(199, 23);
             this.comboBoxDodaci.TabIndex = 5;
-            this.comboBoxDodaci.SelectionChangeCommitted += new System.EventHandler(this.comboBoxDodaci_SelectionChangeCommitted);
+            this.comboBoxDodaci.SelectionChangeCommitted += new System.EventHandler(this.ComboBoxDodaci_SelectionChangeCommitted);
             // 
             // checkBoxBezDodataka
             // 
