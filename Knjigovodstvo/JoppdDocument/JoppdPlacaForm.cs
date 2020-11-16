@@ -333,6 +333,7 @@ namespace Knjigovodstvo.JoppdDocument
             dataGridView1.DataSource = _list;
             dataGridView1.ReadOnly = false;
             dataGridView1.AllowUserToDeleteRows = true;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
         }
         /// <summary>
         /// Locks edit mode for form's datagridview and saves data to XML file, result is shown in datagridview
@@ -343,6 +344,7 @@ namespace Knjigovodstvo.JoppdDocument
         {
             dataGridView1.ReadOnly = true;
             dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             _joppdB.Entitet = _list.ToList();
             _broj_osoba = _joppdB.Entitet.Select(o => o.Oib).Distinct().ToList().Count();
             if (CreateJoppdXmlFile())
