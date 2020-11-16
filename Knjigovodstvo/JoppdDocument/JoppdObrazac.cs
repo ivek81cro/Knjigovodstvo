@@ -167,7 +167,7 @@ namespace Knjigovodstvo.JoppdDocument
 
             sJOPPDmetapodaci meta = new sJOPPDmetapodaci()
             {
-                Datum = new sDatumTemeljni() { Value = datum },
+                Datum = new sDatumTemeljni() { Value = datum.AddHours(12) },
                 Naslov = new sNaslovTemeljni() { Value = "Izvješće o primicima, porezu na dohodak i prirezu te doprinosima za obvezna osiguranja" },
                 Autor = new sAutorTemeljni() { Value = "Ivan Batinić" },
                 Format = new sFormatTemeljni() { Value = tFormat.textxml },
