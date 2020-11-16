@@ -140,7 +140,6 @@ namespace Knjigovodstvo.JoppdDocument
             }
             _joppdB.Entitet.Clear();
             int redni_broj = 1;
-            _broj_osoba = 0;
             foreach (DataRow dr in rows)
             {
                 //Add row for payroll
@@ -228,14 +227,6 @@ namespace Knjigovodstvo.JoppdDocument
                 }
             }
         }
-
-        private void TextBoxSatiRada_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
         /// <summary>
         /// Creates XML file for sending to Porezna Uprava
         /// </summary>
@@ -287,6 +278,14 @@ namespace Knjigovodstvo.JoppdDocument
             DataSet dataSet = new DataSet();
             dataSet.ReadXml(_path);
             dataGridView1.DataSource = dataSet.Tables[dataSet.Tables.Count - 1];
+        }
+
+        private void TextBoxSatiRada_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void ComboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)

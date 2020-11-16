@@ -5,7 +5,7 @@ namespace Knjigovodstvo.JoppdDocument
 {
     class JoppdA
     {
-        private List<sPrimateljiP> _pArr;
+        private readonly List<sPrimateljiP> _pArr;
 
         public JoppdA(List<sPrimateljiP> pArr)
         {
