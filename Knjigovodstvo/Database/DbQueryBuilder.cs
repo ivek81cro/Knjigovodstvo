@@ -115,16 +115,16 @@ namespace Knjigovodstvo.Database
         {
             string query = "INSERT INTO " + _table + " ";
             query += "(";
-
-            for (int i = 1; i < _name.Count; ++i)
+            int i = _name[0] == "Id" ? 1 : 0;
+            for (; i < _name.Count; ++i)
             {
                 query += _name[i] + ", ";
             }
 
             query = query.Substring(0, query.Length - 2);
             query += ") VALUES (";
-
-            for (int i = 1; i < _value.Count; ++i)
+            i = _name[0] == "Id" ? 1 : 0;
+            for (; i < _value.Count; ++i)
             {
                 if (_type[i] == "Decimal")
                     query += _value[i].Replace(',', '.') + ", ";

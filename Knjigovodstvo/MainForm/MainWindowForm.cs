@@ -5,6 +5,7 @@ using Knjigovodstvo.JoppdDocument;
 using Knjigovodstvo.Partners;
 using Knjigovodstvo.Payroll;
 using Knjigovodstvo.Settings;
+using Knjigovodstvo.URA;
 using System;
 using System.Windows.Forms;
 
@@ -127,6 +128,19 @@ namespace Knjigovodstvo.MainForm
             else
             {
                 _openForm.Open(new JoppdPlacaForm(), this);
+            }
+        }
+        private void ShowNewFormUraPregled(object sender, EventArgs e)
+        {
+            string formName = ChildWindowName.UraPregledForm.ToString();
+            if (_isOpen.Check(MdiChildren, formName))
+            {
+                Form f = _isOpen.GetChild(MdiChildren, formName);
+                f.Focus();
+            }
+            else
+            {
+                _openForm.Open(new UraPregledForm(), this);
             }
         }
 

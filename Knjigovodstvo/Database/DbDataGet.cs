@@ -18,8 +18,6 @@ namespace Knjigovodstvo.Database
         /// <returns>DataTable based on condition</returns>
         public DataTable GetTable(IDbObject dbObject, string condition=null)
         {
-            DataTable dt = new DataTable();
-
             GenericPropertyFinder<IDbObject> property = new GenericPropertyFinder<IDbObject>();
 
             IEnumerable<List<string>> obj = property.PrintTModelPropertyAndValue(dbObject);
@@ -33,6 +31,7 @@ namespace Knjigovodstvo.Database
                 query += $" WHERE {condition};";
             }
 
+            DataTable dt = new DataTable();
             try
             {
                 using SqlConnection conn = new SqlConnection(ConnHelper.ConnStr(connection_name));

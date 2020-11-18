@@ -1,5 +1,4 @@
 ﻿using Knjigovodstvo.Database;
-using Knjigovodstvo.Global;
 using System;
 using System.Data;
 using System.Windows.Forms;

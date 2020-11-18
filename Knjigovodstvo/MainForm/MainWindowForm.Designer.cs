@@ -148,6 +148,7 @@ namespace Knjigovodstvo.MainForm
             this.menuUra.Name = "menuUra";
             this.menuUra.Size = new System.Drawing.Size(97, 22);
             this.menuUra.Text = "URA";
+            this.menuUra.Click += new System.EventHandler(this.ShowNewFormUraPregled);
             // 
             // menuIra
             // 
