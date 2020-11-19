@@ -12,7 +12,8 @@ namespace Knjigovodstvo.MainForm
         PlacaTableForm,
         PlacaObracunForm,
         JoppdPlacaForm,
-        UraPregledForm
+        UraPregledForm,
+        UraKnjigaForm
     }
     public class IsChildOpen
     {

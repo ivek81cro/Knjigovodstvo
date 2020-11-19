@@ -41,6 +41,8 @@ namespace Knjigovodstvo.MainForm
             this.menuGradovi = new System.Windows.Forms.ToolStripMenuItem();
             this.menuKnjige = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUra = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPrimke = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuUraKnjiga = new System.Windows.Forms.ToolStripMenuItem();
             this.menuIra = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPlaca = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemIzracun = new System.Windows.Forms.ToolStripMenuItem();
@@ -145,10 +147,26 @@ namespace Knjigovodstvo.MainForm
             // 
             // menuUra
             // 
+            this.menuUra.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuPrimke,
+            this.menuUraKnjiga});
             this.menuUra.Name = "menuUra";
             this.menuUra.Size = new System.Drawing.Size(97, 22);
             this.menuUra.Text = "URA";
-            this.menuUra.Click += new System.EventHandler(this.ShowNewFormUraPregled);
+            // 
+            // menuPrimke
+            // 
+            this.menuPrimke.Name = "menuPrimke";
+            this.menuPrimke.Size = new System.Drawing.Size(142, 22);
+            this.menuPrimke.Text = "Primke";
+            this.menuPrimke.Click += new System.EventHandler(this.ShowNewFormUraPregled);
+            // 
+            // menuUraKnjiga
+            // 
+            this.menuUraKnjiga.Name = "menuUraKnjiga";
+            this.menuUraKnjiga.Size = new System.Drawing.Size(142, 22);
+            this.menuUraKnjiga.Text = "Ulazni računi";
+            this.menuUraKnjiga.Click += new System.EventHandler(this.ShowNewFormUraKnjigaPregled);
             // 
             // menuIra
             // 
@@ -381,6 +399,8 @@ namespace Knjigovodstvo.MainForm
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemIzracun;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemJoppd;
+        private System.Windows.Forms.ToolStripMenuItem menuPrimke;
+        private System.Windows.Forms.ToolStripMenuItem menuUraKnjiga;
     }
 }
 

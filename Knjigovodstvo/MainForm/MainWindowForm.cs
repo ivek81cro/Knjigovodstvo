@@ -144,6 +144,20 @@ namespace Knjigovodstvo.MainForm
             }
         }
 
+        private void ShowNewFormUraKnjigaPregled(object sender, EventArgs e)
+        {
+            string formName = ChildWindowName.UraKnjigaForm.ToString();
+            if (_isOpen.Check(MdiChildren, formName))
+            {
+                Form f = _isOpen.GetChild(MdiChildren, formName);
+                f.Focus();
+            }
+            else
+            {
+                _openForm.Open(new UraKnjigaForm(), this);
+            }
+        }
+
         private void ShowDialogIzracunPlace(object sender, EventArgs e)
         {
             PlacaIzracunForm dialog = new PlacaIzracunForm();

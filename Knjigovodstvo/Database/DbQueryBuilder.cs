@@ -128,6 +128,8 @@ namespace Knjigovodstvo.Database
             {
                 if (_type[i] == "Decimal")
                     query += _value[i].Replace(',', '.') + ", ";
+                else if(_value[i] == "Null")
+                    query +=  _value[i] + ", ";
                 else
                     query += "'" + _value[i] + "', ";
             }
@@ -147,6 +149,8 @@ namespace Knjigovodstvo.Database
             {
                 if (_type[i] == "Decimal")
                     query += _name[i] + "=" + _value[i].Replace(',', '.') + ", ";
+                else if (_value[i] == "Null")
+                    query += _name[i] + "=" + _value[i] + ", ";
                 else
                     query += _name[i] + "='" + _value[i] + "', ";
             }

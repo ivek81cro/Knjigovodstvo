@@ -80,7 +80,7 @@ namespace Knjigovodstvo.Employee
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            string odlazak = "";
+            string odlazak = "Null";
             if (dateTimePickerDatumOdlaska.Visible == true)
                 odlazak = dateTimePickerDatumOdlaska.Value.ToString("yyyy-MM-dd");
 
