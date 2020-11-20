@@ -15,7 +15,8 @@ namespace Knjigovodstvo.Database
         Prebaci_prirez,
         /// <summary> params: @datumOd, @day = null</summary>
         Joppd_podaci,
-        Get_Table_Names
+        Get_Table_Names,
+        Izdvoji_Troskove
     }
 
     class DbDataExecProcedure
@@ -68,6 +69,7 @@ namespace Knjigovodstvo.Database
                 ProcedureNames.Prebaci_prirez => "Prebaci_prirez",
                 ProcedureNames.Joppd_podaci => "Joppd_podaci " + param,
                 ProcedureNames.Get_Table_Names => "Get_Table_Names",
+                ProcedureNames.Izdvoji_Troskove => "Izdvoji_Troskove",
                 _ => "",
             };
         }

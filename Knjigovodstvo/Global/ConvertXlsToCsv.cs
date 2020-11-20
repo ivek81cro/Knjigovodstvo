@@ -26,7 +26,7 @@ namespace Knjigovodstvo.Global
             {
                 put = choofdlog.FileName.ToString();
             }
-            if (put == null)
+            if (put == null || put == "")
             {
                 MessageBox.Show("Nije odabrana datoteka");
                 return false;
