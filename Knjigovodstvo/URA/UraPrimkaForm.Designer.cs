@@ -70,7 +70,7 @@ namespace Knjigovodstvo.URA
             this.buttonSpremi.TabIndex = 12;
             this.buttonSpremi.Text = "Spremi";
             this.buttonSpremi.UseVisualStyleBackColor = true;
-            this.buttonSpremi.Click += new System.EventHandler(this.buttonSpremi_Click);
+            this.buttonSpremi.Click += new System.EventHandler(this.ButtonSpremi_Click);
             // 
             // UraPregledForm
             // 

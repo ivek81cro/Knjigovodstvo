@@ -45,13 +45,19 @@ namespace Knjigovodstvo.URA
         /// <param name="e"></param>
         private void ButtonUcitajTablicu_Click(object sender, EventArgs e)
         {
-            ConvertXlsToCsv conv = new ConvertXlsToCsv();
-            conv.Convert(ref put);
+            ConvertXlsToCsv conv = new ConvertXlsToCsv("Primke");
+            if (!conv.Convert(ref put))
+            {
+                MessageBox.Show("Krivo odabrana datoteka", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
             _listaPrimki = File.ReadAllLines(put).Skip(3).Select(v => new Primka().FromCsv(v)).ToList();
 
-            var data = new BindingSource();
-            data.DataSource = _listaPrimki;
+            var data = new BindingSource
+            {
+                DataSource = _listaPrimki
+            };
             dataGridView1.DataSource = data;
             FixColumnHeaders();
         }
@@ -60,7 +66,7 @@ namespace Knjigovodstvo.URA
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonSpremi_Click(object sender, EventArgs e)
+        private void ButtonSpremi_Click(object sender, EventArgs e)
         {
             DbDataInsert ins = new DbDataInsert();
             foreach (Primka primka in _listaPrimki)
@@ -73,6 +79,6 @@ namespace Knjigovodstvo.URA
 
         private string put = "";
         private List<Primka> _listaPrimki = new List<Primka>();
-        private int _lastRecord = 0;
+        private readonly int _lastRecord = 0;
     }
 }

@@ -40,8 +40,12 @@ namespace Knjigovodstvo.IRA
         }
         private void ButtonUcitaj_Click(object sender, EventArgs e)
         {
-            ConvertXlsToCsv conv = new ConvertXlsToCsv();
-            conv.Convert(ref put);
+            ConvertXlsToCsv conv = new ConvertXlsToCsv("izlaznih");
+            if (!conv.Convert(ref put)) 
+            {
+                MessageBox.Show("Krivo odabrana datoteka", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
             _listaStavki = File.ReadAllLines(put).Skip(3).Select(v => new IraKnjiga().FromCsv(v)).ToList();
 

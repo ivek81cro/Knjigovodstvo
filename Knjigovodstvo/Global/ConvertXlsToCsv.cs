@@ -8,11 +8,12 @@ namespace Knjigovodstvo.Global
 {
     class ConvertXlsToCsv
     {
-        public ConvertXlsToCsv()
+        public ConvertXlsToCsv(string identifier)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            _identifier = identifier;
         }
-        public void Convert(ref string put)
+        public bool Convert(ref string put)
         {
             OpenFileDialog choofdlog = new OpenFileDialog
             {
@@ -27,11 +28,11 @@ namespace Knjigovodstvo.Global
             }
             if (put == null)
             {
-                MessageBox.Show("Nije odabran file");
-                return;
+                MessageBox.Show("Nije odabrana datoteka");
+                return false;
             }
 
-            if (put.Contains(".csv")) return;
+            if (put.Contains(".csv")) return false;
 
             FileStream stream = File.Open(put, FileMode.Open, FileAccess.Read);
             IExcelDataReader excelReader;
@@ -73,6 +74,13 @@ namespace Knjigovodstvo.Global
             StreamWriter csv = new StreamWriter(@output, false, Encoding.UTF8);
             csv.Write(csvData);
             csv.Close();
+
+            if (!csvData.Contains(_identifier))
+                return false;
+
+            return true;
         }
-    }        
+
+        private readonly string _identifier = "";
+    }    
 }
