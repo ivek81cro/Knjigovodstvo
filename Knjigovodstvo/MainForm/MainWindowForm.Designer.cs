@@ -67,6 +67,7 @@ namespace Knjigovodstvo.MainForm
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.menuIraKnjiga = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -159,7 +160,7 @@ namespace Knjigovodstvo.MainForm
             this.menuPrimke.Name = "menuPrimke";
             this.menuPrimke.Size = new System.Drawing.Size(142, 22);
             this.menuPrimke.Text = "Primke";
-            this.menuPrimke.Click += new System.EventHandler(this.ShowNewFormUraPregled);
+            this.menuPrimke.Click += new System.EventHandler(this.ShowNewFormUraPrimkaForm);
             // 
             // menuUraKnjiga
             // 
@@ -170,10 +171,19 @@ namespace Knjigovodstvo.MainForm
             // 
             // menuIra
             // 
+            this.menuIra.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuIraKnjiga});
             this.menuIra.Name = "menuIra";
             this.menuIra.Size = new System.Drawing.Size(97, 22);
             this.menuIra.Text = "IRA";
             // 
+            // menuIraKnjiga
+            // 
+            this.menuIraKnjiga.Name = "menuIraKnjiga";
+            this.menuIraKnjiga.Size = new System.Drawing.Size(142, 22);
+            this.menuIraKnjiga.Text = "Izlazni računi";
+            this.menuIraKnjiga.Click += new System.EventHandler(this.ShowNewFormIraKnjigaPregled);
+            //
             // menuPlaca
             // 
             this.menuPlaca.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -341,7 +351,7 @@ namespace Knjigovodstvo.MainForm
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
-            this.toolStripStatusLabel.Text = "Status";
+            this.toolStripStatusLabel.Text = "Status";            
             // 
             // MainWindowForm
             // 
@@ -401,6 +411,7 @@ namespace Knjigovodstvo.MainForm
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemJoppd;
         private System.Windows.Forms.ToolStripMenuItem menuPrimke;
         private System.Windows.Forms.ToolStripMenuItem menuUraKnjiga;
+        private System.Windows.Forms.ToolStripMenuItem menuIraKnjiga;
     }
 }
 

@@ -1,7 +1,7 @@
 ﻿
-namespace Knjigovodstvo.URA
+namespace Knjigovodstvo.IRA
 {
-    partial class UraKnjigaForm
+    partial class IraKnjigaForm
     {
         /// <summary>
         /// Required designer variable.
@@ -39,8 +39,8 @@ namespace Knjigovodstvo.URA
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -72,7 +72,7 @@ namespace Knjigovodstvo.URA
             this.buttonSpremi.UseVisualStyleBackColor = true;
             this.buttonSpremi.Click += new System.EventHandler(this.ButtonSpremi_Click);
             // 
-            // UraKnjigaForm
+            // IraKnjigaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -80,13 +80,13 @@ namespace Knjigovodstvo.URA
             this.Controls.Add(this.buttonSpremi);
             this.Controls.Add(this.buttonUcitaj);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "UraKnjigaForm";
-            this.Text = "UraKnjigaForm";
+            this.Name = "IraKnjigaForm";
+            this.Text = "IraKnjigaForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
-        #endregion
+        # endregion
         private DBDataGridView dataGridView1;
         private System.Windows.Forms.Button buttonUcitaj;
         private System.Windows.Forms.Button buttonSpremi;

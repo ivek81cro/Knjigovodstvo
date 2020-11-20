@@ -8,15 +8,15 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Knjigovodstvo.URA
+namespace Knjigovodstvo.IRA
 {
-    public partial class UraKnjigaForm : Form
+    public partial class IraKnjigaForm : Form
     {
-        public UraKnjigaForm()
+        public IraKnjigaForm()
         {
             InitializeComponent();
             DataTable dt = new DbDataCustomQuery()
-                .ExecuteQuery("SELECT TOP 1 Redni_broj FROM UraKnjiga WHERE Redni_broj IS NOT NULL ORDER BY Redni_broj DESC;");
+                    .ExecuteQuery("SELECT TOP 1 Redni_broj FROM IraKnjiga WHERE Redni_broj IS NOT NULL ORDER BY Redni_broj DESC;");
             if (dt.Rows.Count != 0)
                 _lastRecord = int.Parse(dt.Rows[0].ItemArray[0].ToString());
             else
@@ -26,7 +26,7 @@ namespace Knjigovodstvo.URA
 
         private void LoadDatagrid()
         {
-            dataGridView1.DataSource = new DbDataGet().GetTable(new UraKnjiga());
+            dataGridView1.DataSource = new DbDataGet().GetTable(new IraKnjiga());
             FixColumnHeaders();
         }
 
@@ -38,13 +38,12 @@ namespace Knjigovodstvo.URA
                     new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
             }
         }
-
         private void ButtonUcitaj_Click(object sender, EventArgs e)
         {
             ConvertXlsToCsv conv = new ConvertXlsToCsv();
             conv.Convert(ref put);
 
-            _listaStavki = File.ReadAllLines(put).Skip(3).Select(v => new UraKnjiga().FromCsv(v)).ToList();
+            _listaStavki = File.ReadAllLines(put).Skip(3).Select(v => new IraKnjiga().FromCsv(v)).ToList();
 
             var data = new BindingSource
             {
@@ -53,11 +52,10 @@ namespace Knjigovodstvo.URA
             dataGridView1.DataSource = data;
             FixColumnHeaders();
         }
-
         private void ButtonSpremi_Click(object sender, EventArgs e)
         {
             DbDataInsert ins = new DbDataInsert();
-            foreach (UraKnjiga stavka in _listaStavki)
+            foreach (IraKnjiga stavka in _listaStavki)
             {
                 if (stavka.Redni_broj > _lastRecord)
                     ins.InsertData(stavka);
@@ -66,7 +64,7 @@ namespace Knjigovodstvo.URA
         }
 
         private string put = "";
-        private List<UraKnjiga> _listaStavki = new List<UraKnjiga>();
+        private List<IraKnjiga> _listaStavki = new List<IraKnjiga>();
         private readonly int _lastRecord = 0;
     }
 }

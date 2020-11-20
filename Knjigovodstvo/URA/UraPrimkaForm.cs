@@ -10,9 +10,9 @@ using Knjigovodstvo.Helpers;
 
 namespace Knjigovodstvo.URA
 {
-    public partial class UraPregledForm : Form
+    public partial class UraPrimkaForm : Form
     {
-        public UraPregledForm()
+        public UraPrimkaForm()
         {
             InitializeComponent();
             DataTable dt = new DbDataCustomQuery()

@@ -177,11 +177,11 @@ namespace Knjigovodstvo.Database
             return $"DELETE FROM {_table} WHERE Id={_value[0]};";
         }
 
-        private IEnumerable<List<string>> _obj;
-        private string _table;
-        private string _whereColumn;
-        private List<string> _name;
-        private List<string> _value;
-        private List<string> _type;
+        private readonly IEnumerable<List<string>> _obj;
+        private readonly string _table;
+        private readonly string _whereColumn;
+        private readonly List<string> _name;
+        private readonly List<string> _value;
+        private readonly List<string> _type;
     }
 }

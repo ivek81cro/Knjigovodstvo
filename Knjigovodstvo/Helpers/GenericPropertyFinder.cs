@@ -86,10 +86,10 @@ namespace Knjigovodstvo.Helpers
             return false;
         }
 
-        private List<string> _propName = new List<string>();
-        private List<string> _propValue = new List<string>();
-        private List<string> _propType = new List<string>();
-        private List<string> _items = new List<string>();
-        private string[] _tableName = new string[10];
+        private readonly List<string> _propName = new List<string>();
+        private readonly List<string> _propValue = new List<string>();
+        private readonly List<string> _propType = new List<string>();
+        private readonly List<string> _items = new List<string>();
+        private readonly string[] _tableName = new string[10];
     }
 }

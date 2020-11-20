@@ -13,7 +13,7 @@ namespace Knjigovodstvo.URA
             Redni_broj = int.Parse(val[1]);
             Datum = DateTime.ParseExact(val[2], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             Broj_racuna = val[3];
-            Storno = val[4] == "*" ? true : false;
+            Storno = val[4] == "*";
             Storno_broja = int.Parse(val[5]);
             Datum_racuna = DateTime.ParseExact(val[6], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             Starost_racuna = int.Parse(val[7]);

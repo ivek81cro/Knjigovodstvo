@@ -1,6 +1,7 @@
 ﻿using Knjigovodstvo.City;
 using Knjigovodstvo.Employee;
 using Knjigovodstvo.Gui;
+using Knjigovodstvo.IRA;
 using Knjigovodstvo.JoppdDocument;
 using Knjigovodstvo.Partners;
 using Knjigovodstvo.Payroll;
@@ -130,9 +131,9 @@ namespace Knjigovodstvo.MainForm
                 _openForm.Open(new JoppdPlacaForm(), this);
             }
         }
-        private void ShowNewFormUraPregled(object sender, EventArgs e)
+        private void ShowNewFormUraPrimkaForm(object sender, EventArgs e)
         {
-            string formName = ChildWindowName.UraPregledForm.ToString();
+            string formName = ChildWindowName.UraPrimkaForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
                 Form f = _isOpen.GetChild(MdiChildren, formName);
@@ -140,7 +141,7 @@ namespace Knjigovodstvo.MainForm
             }
             else
             {
-                _openForm.Open(new UraPregledForm(), this);
+                _openForm.Open(new UraPrimkaForm(), this);
             }
         }
 
@@ -155,6 +156,20 @@ namespace Knjigovodstvo.MainForm
             else
             {
                 _openForm.Open(new UraKnjigaForm(), this);
+            }
+        }
+
+        private void ShowNewFormIraKnjigaPregled(object sender, EventArgs e)
+        {
+            string formName = ChildWindowName.UraKnjigaForm.ToString();
+            if (_isOpen.Check(MdiChildren, formName))
+            {
+                Form f = _isOpen.GetChild(MdiChildren, formName);
+                f.Focus();
+            }
+            else
+            {
+                _openForm.Open(new IraKnjigaForm(), this);
             }
         }
 
@@ -193,7 +208,7 @@ namespace Knjigovodstvo.MainForm
             }
         }
 
-        private IsChildOpen _isOpen = new IsChildOpen();
-        private OpenChildForm _openForm = new OpenChildForm();
+        private readonly IsChildOpen _isOpen = new IsChildOpen();
+        private readonly OpenChildForm _openForm = new OpenChildForm();
     }
 }

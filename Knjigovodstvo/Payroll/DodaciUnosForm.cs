@@ -162,8 +162,8 @@ namespace Knjigovodstvo.Payroll
             }
         }
 
-        private PlacaDodatak _dodaci = new PlacaDodatak();
-        private Zaposlenik _zaposlenik = new Zaposlenik();
+        private readonly PlacaDodatak _dodaci = new PlacaDodatak();
+        private readonly Zaposlenik _zaposlenik = new Zaposlenik();
         private Placa _placa = new Placa();
         private string _sifra = "";
     }

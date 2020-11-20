@@ -1,7 +1,7 @@
 ﻿
 namespace Knjigovodstvo.URA
 {
-    partial class UraPregledForm
+    partial class UraPrimkaForm
     {
         /// <summary>
         /// Required designer variable.
