@@ -39,9 +39,51 @@ namespace Knjigovodstvo.URA
             }
         }
 
-        private void textBoxFilterNaziv_KeyUp(object sender, KeyEventArgs e)
+        private void FilterDataGridView(object sender, KeyEventArgs e)
         {
-            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("[Naziv_dobavljaca] LIKE '%{0}%'", textBoxFilterNaziv.Text);
+            string filterCondition = $"[Naziv_dobavljaca] LIKE '%{textBoxFilterNaziv.Text}%'";
+
+            if (checkBoxDatumi.Checked)
+            {
+                filterCondition = $"[Datum]>='{dateTimePickerOd.Value.ToString("yyyy-MM-dd")}' " +
+                    $"AND [Datum]<='{dateTimePickerDo.Value.ToString("yyyy-MM-dd")}' " +
+                    $"AND [Naziv_dobavljaca] LIKE '%{textBoxFilterNaziv.Text}%'";
+            }
+
+            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = filterCondition;
+        }
+
+        private void CheckValidRange(object sender, EventArgs e)
+        {
+            if (dateTimePickerOd.Value > dateTimePickerDo.Value)
+            {
+                MessageBox.Show(
+                    "Početni datum mora biti manji ili jednak završnom.", 
+                    "Upozorenje", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Warning);
+
+                dateTimePickerDo.Value = dateTimePickerOd.Value;
+            }
+        }
+
+        private void checkBoxDatumi_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (checkBoxDatumi.Checked)
+            {
+                dateTimePickerOd.Enabled = true;
+                dateTimePickerDo.Enabled = true;
+            }
+            else
+            {
+                dateTimePickerOd.Enabled = false;
+                dateTimePickerDo.Enabled = false;
+            }
+        }
+
+        private void buttonFilterDatum_Click(object sender, EventArgs e)
+        {
+            FilterDataGridView(null, null);
         }
 
         private void ButtonUcitaj_Click(object sender, EventArgs e)

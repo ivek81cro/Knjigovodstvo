@@ -161,7 +161,7 @@ namespace Knjigovodstvo.MainForm
 
         private void ShowNewFormIraKnjigaPregled(object sender, EventArgs e)
         {
-            string formName = ChildWindowName.UraKnjigaForm.ToString();
+            string formName = ChildWindowName.IraKnjigaForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
                 Form f = _isOpen.GetChild(MdiChildren, formName);
