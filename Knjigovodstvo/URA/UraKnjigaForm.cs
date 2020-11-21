@@ -84,6 +84,5 @@ namespace Knjigovodstvo.URA
         private List<UraKnjiga> _listaStavki = new List<UraKnjiga>();
         private readonly int _lastRecord = 0;
         private DataTable _dt;
-        private Filter _filter = new Filter();
     }
 }
