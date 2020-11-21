@@ -124,7 +124,7 @@ namespace Knjigovodstvo.URA
             this.checkBoxDatumi.TabIndex = 18;
             this.checkBoxDatumi.Text = "Uključi datume za filter";
             this.checkBoxDatumi.UseVisualStyleBackColor = true;
-            this.checkBoxDatumi.CheckStateChanged += new System.EventHandler(this.checkBoxDatumi_CheckStateChanged);
+            this.checkBoxDatumi.CheckStateChanged += new System.EventHandler(this.CheckBoxDatumi_CheckStateChanged);
             // 
             // buttonFilterDatum
             // 
@@ -134,7 +134,7 @@ namespace Knjigovodstvo.URA
             this.buttonFilterDatum.TabIndex = 17;
             this.buttonFilterDatum.Text = "Prikaži";
             this.buttonFilterDatum.UseVisualStyleBackColor = true;
-            this.buttonFilterDatum.Click += new System.EventHandler(this.buttonFilterDatum_Click);
+            this.buttonFilterDatum.Click += new System.EventHandler(this.ButtonFilterDatum_Click);
             // 
             // dateTimePickerDo
             // 

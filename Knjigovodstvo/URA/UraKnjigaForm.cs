@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.URA
 {
-    public partial class UraKnjigaForm : Form
+    partial class UraKnjigaForm : Form
     {
         public UraKnjigaForm()
         {
@@ -24,13 +24,13 @@ namespace Knjigovodstvo.URA
             LoadDatagrid();
         }
 
-        private void LoadDatagrid()
+        void LoadDatagrid()
         {
             dataGridView1.DataSource = new DbDataGet().GetTable(new UraKnjiga());
             FixColumnHeaders();
         }
 
-        private void FixColumnHeaders()
+        void FixColumnHeaders()
         {
             for (int i = 0; i < dataGridView1.Columns.Count; i++)
             {
@@ -39,7 +39,7 @@ namespace Knjigovodstvo.URA
             }
         }
 
-        private void FilterDataGridView(object sender, KeyEventArgs e)
+        void FilterDataGridView(object sender, KeyEventArgs e)
         {
             string filterCondition = $"[Naziv_dobavljaca] LIKE '%{textBoxFilterNaziv.Text}%'";
 
@@ -53,7 +53,7 @@ namespace Knjigovodstvo.URA
             (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = filterCondition;
         }
 
-        private void CheckValidRange(object sender, EventArgs e)
+        void CheckValidRange(object sender, EventArgs e)
         {
             if (dateTimePickerOd.Value > dateTimePickerDo.Value)
             {
@@ -67,7 +67,7 @@ namespace Knjigovodstvo.URA
             }
         }
 
-        private void checkBoxDatumi_CheckStateChanged(object sender, EventArgs e)
+        void CheckBoxDatumi_CheckStateChanged(object sender, EventArgs e)
         {
             if (checkBoxDatumi.Checked)
             {
@@ -81,7 +81,7 @@ namespace Knjigovodstvo.URA
             }
         }
 
-        private void buttonFilterDatum_Click(object sender, EventArgs e)
+        private void ButtonFilterDatum_Click(object sender, EventArgs e)
         {
             FilterDataGridView(null, null);
         }

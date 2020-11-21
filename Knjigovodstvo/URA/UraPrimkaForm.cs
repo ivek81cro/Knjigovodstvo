@@ -38,6 +38,48 @@ namespace Knjigovodstvo.URA
                     new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
             }
         }
+
+        void CheckValidRange(object sender, EventArgs e)
+        {
+            if (dateTimePickerOd.Value > dateTimePickerDo.Value)
+            {
+                MessageBox.Show(
+                    "Početni datum mora biti manji ili jednak završnom.",
+                    "Upozorenje",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                dateTimePickerDo.Value = dateTimePickerOd.Value;
+            }
+        }
+
+        void CheckBoxDatumi_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (checkBoxDatumi.Checked)
+            {
+                dateTimePickerOd.Enabled = true;
+                dateTimePickerDo.Enabled = true;
+            }
+            else
+            {
+                dateTimePickerOd.Enabled = false;
+                dateTimePickerDo.Enabled = false;
+            }
+        }
+
+        void FilterDataGridView(object sender, KeyEventArgs e)
+        {
+            string filterCondition = $"[Naziv_dobavljaca] LIKE '%{textBoxFilterNaziv.Text}%'";
+
+            if (checkBoxDatumi.Checked)
+            {
+                filterCondition = $"[Datum_knjizenja]>='{dateTimePickerOd.Value.ToString("yyyy-MM-dd")}' " +
+                    $"AND [Datum_knjizenja]<='{dateTimePickerDo.Value.ToString("yyyy-MM-dd")}' " +
+                    $"AND [Naziv_dobavljaca] LIKE '%{textBoxFilterNaziv.Text}%'";
+            }
+
+           (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = filterCondition;
+        }
         /// <summary>
         /// Read CSV file into List and fill DataGridView with data for review before saving to database
         /// </summary>
@@ -75,6 +117,11 @@ namespace Knjigovodstvo.URA
                     ins.InsertData(primka);
             }
             LoadDatagrid();
+        }
+
+        private void ButtonFilterDatum_Click(object sender, EventArgs e)
+        {
+            FilterDataGridView(null, null);
         }
 
         private string put = "";

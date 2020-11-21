@@ -38,6 +38,48 @@ namespace Knjigovodstvo.IRA
                     new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
             }
         }
+        void CheckValidRange(object sender, EventArgs e)
+        {
+            if (dateTimePickerOd.Value > dateTimePickerDo.Value)
+            {
+                MessageBox.Show(
+                    "Početni datum mora biti manji ili jednak završnom.",
+                    "Upozorenje",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                dateTimePickerDo.Value = dateTimePickerOd.Value;
+            }
+        }
+
+        void CheckBoxDatumi_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (checkBoxDatumi.Checked)
+            {
+                dateTimePickerOd.Enabled = true;
+                dateTimePickerDo.Enabled = true;
+            }
+            else
+            {
+                dateTimePickerOd.Enabled = false;
+                dateTimePickerDo.Enabled = false;
+            }
+        }
+
+        void FilterDataGridView(object sender, KeyEventArgs e)
+        {
+            string filterCondition = $"[Naziv_i_sjediste_kupca] LIKE '%{textBoxFilterNaziv.Text}%'";
+
+            if (checkBoxDatumi.Checked)
+            {
+                filterCondition = $"[Datum]>='{dateTimePickerOd.Value.ToString("yyyy-MM-dd")}' " +
+                    $"AND [Datum]<='{dateTimePickerDo.Value.ToString("yyyy-MM-dd")}' " +
+                    $"AND [Naziv_i_sjediste_kupca] LIKE '%{textBoxFilterNaziv.Text}%'";
+            }
+
+           (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = filterCondition;
+        }
+
         private void ButtonUcitaj_Click(object sender, EventArgs e)
         {
             ConvertXlsToCsv conv = new ConvertXlsToCsv("izlaznih");
@@ -65,6 +107,11 @@ namespace Knjigovodstvo.IRA
                     ins.InsertData(stavka);
             }
             LoadDatagrid();
+        }
+
+        private void ButtonFilterDatum_Click(object sender, EventArgs e)
+        {
+            FilterDataGridView(null, null);
         }
 
         private string put = "";
