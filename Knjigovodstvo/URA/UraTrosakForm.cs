@@ -1,5 +1,6 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Helpers;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -28,9 +29,51 @@ namespace Knjigovodstvo.URA
             }
         }
 
-        private void textBoxFilterNaziv_KeyUp(object sender, KeyEventArgs e)
+        void CheckValidRange(object sender, EventArgs e)
         {
-            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("[Naziv_dobavljaca] LIKE '%{0}%'", textBoxFilterNaziv.Text);
+            if (dateTimePickerOd.Value > dateTimePickerDo.Value)
+            {
+                MessageBox.Show(
+                    "Početni datum mora biti manji ili jednak završnom.",
+                    "Upozorenje",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                dateTimePickerDo.Value = dateTimePickerOd.Value;
+            }
+        }
+
+        void CheckBoxDatumi_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (checkBoxDatumi.Checked)
+            {
+                dateTimePickerOd.Enabled = true;
+                dateTimePickerDo.Enabled = true;
+            }
+            else
+            {
+                dateTimePickerOd.Enabled = false;
+                dateTimePickerDo.Enabled = false;
+            }
+        }
+
+        void FilterDataGridView(object sender, KeyEventArgs e)
+        {
+            string filterCondition = $"[Naziv_dobavljaca] LIKE '%{textBoxFilterNaziv.Text}%'";
+
+            if (checkBoxDatumi.Checked)
+            {
+                filterCondition = $"[Datum_knjizenja]>='{dateTimePickerOd.Value.ToString("yyyy-MM-dd")}' " +
+                    $"AND [Datum_knjizenja]<='{dateTimePickerDo.Value.ToString("yyyy-MM-dd")}' " +
+                    $"AND [Naziv_dobavljaca] LIKE '%{textBoxFilterNaziv.Text}%'";
+            }
+
+           (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = filterCondition;
+        }
+
+        private void ButtonFilterDatum_Click(object sender, EventArgs e)
+        {
+            FilterDataGridView(null, null);
         }
     }
 }
