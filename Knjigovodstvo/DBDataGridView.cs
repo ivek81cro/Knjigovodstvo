@@ -2,7 +2,7 @@
 
 namespace Knjigovodstvo
 {
-    class DBDataGridView : DataGridView
+    public class DBDataGridView : DataGridView
     {
         public DBDataGridView()
         {

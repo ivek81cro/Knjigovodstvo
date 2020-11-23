@@ -14,6 +14,8 @@ namespace Knjigovodstvo.IRA
     {
         public IraKnjigaForm()
         {
+            _columns.Add(0, "Datum");
+            _columns.Add(1, "Naziv_i_sjediste_kupca");
             InitializeComponent();
             DataTable dt = new DbDataCustomQuery()
                     .ExecuteQuery("SELECT TOP 1 Redni_broj FROM IraKnjiga WHERE Redni_broj IS NOT NULL ORDER BY Redni_broj DESC;");
@@ -37,47 +39,6 @@ namespace Knjigovodstvo.IRA
                 dataGridView1.Columns[i].HeaderText =
                     new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
             }
-        }
-        void CheckValidRange(object sender, EventArgs e)
-        {
-            if (dateTimePickerOd.Value > dateTimePickerDo.Value)
-            {
-                MessageBox.Show(
-                    "Početni datum mora biti manji ili jednak završnom.",
-                    "Upozorenje",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-
-                dateTimePickerDo.Value = dateTimePickerOd.Value;
-            }
-        }
-
-        void CheckBoxDatumi_CheckStateChanged(object sender, EventArgs e)
-        {
-            if (checkBoxDatumi.Checked)
-            {
-                dateTimePickerOd.Enabled = true;
-                dateTimePickerDo.Enabled = true;
-            }
-            else
-            {
-                dateTimePickerOd.Enabled = false;
-                dateTimePickerDo.Enabled = false;
-            }
-        }
-
-        void FilterDataGridView(object sender, KeyEventArgs e)
-        {
-            string filterCondition = $"[Naziv_i_sjediste_kupca] LIKE '%{textBoxFilterNaziv.Text}%'";
-
-            if (checkBoxDatumi.Checked)
-            {
-                filterCondition = $"[Datum]>='{dateTimePickerOd.Value.ToString("yyyy-MM-dd")}' " +
-                    $"AND [Datum]<='{dateTimePickerDo.Value.ToString("yyyy-MM-dd")}' " +
-                    $"AND [Naziv_i_sjediste_kupca] LIKE '%{textBoxFilterNaziv.Text}%'";
-            }
-
-           (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = filterCondition;
         }
 
         private void ButtonUcitaj_Click(object sender, EventArgs e)
@@ -109,13 +70,9 @@ namespace Knjigovodstvo.IRA
             LoadDatagrid();
         }
 
-        private void ButtonFilterDatum_Click(object sender, EventArgs e)
-        {
-            FilterDataGridView(null, null);
-        }
-
         private string put = "";
         private List<IraKnjiga> _listaStavki = new List<IraKnjiga>();
         private readonly int _lastRecord = 0;
+        private Dictionary<int, string> _columns = new Dictionary<int, string>();
     }
 }

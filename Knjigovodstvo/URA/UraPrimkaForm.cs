@@ -14,6 +14,8 @@ namespace Knjigovodstvo.URA
     {
         public UraPrimkaForm()
         {
+            _columns.Add(0, "Datum_knjizenja");
+            _columns.Add(1, "Naziv_dobavljaca");
             InitializeComponent();
             DataTable dt = new DbDataCustomQuery()
                 .ExecuteQuery("SELECT TOP 1 Broj_u_knjizi_ura FROM Primka WHERE Redni_broj IS NOT NULL ORDER BY Broj_u_knjizi_ura DESC;");
@@ -37,48 +39,6 @@ namespace Knjigovodstvo.URA
                 dataGridView1.Columns[i].HeaderText =
                     new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
             }
-        }
-
-        void CheckValidRange(object sender, EventArgs e)
-        {
-            if (dateTimePickerOd.Value > dateTimePickerDo.Value)
-            {
-                MessageBox.Show(
-                    "Početni datum mora biti manji ili jednak završnom.",
-                    "Upozorenje",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-
-                dateTimePickerDo.Value = dateTimePickerOd.Value;
-            }
-        }
-
-        void CheckBoxDatumi_CheckStateChanged(object sender, EventArgs e)
-        {
-            if (checkBoxDatumi.Checked)
-            {
-                dateTimePickerOd.Enabled = true;
-                dateTimePickerDo.Enabled = true;
-            }
-            else
-            {
-                dateTimePickerOd.Enabled = false;
-                dateTimePickerDo.Enabled = false;
-            }
-        }
-
-        void FilterDataGridView(object sender, KeyEventArgs e)
-        {
-            string filterCondition = $"[Naziv_dobavljaca] LIKE '%{textBoxFilterNaziv.Text}%'";
-
-            if (checkBoxDatumi.Checked)
-            {
-                filterCondition = $"[Datum_knjizenja]>='{dateTimePickerOd.Value.ToString("yyyy-MM-dd")}' " +
-                    $"AND [Datum_knjizenja]<='{dateTimePickerDo.Value.ToString("yyyy-MM-dd")}' " +
-                    $"AND [Naziv_dobavljaca] LIKE '%{textBoxFilterNaziv.Text}%'";
-            }
-
-           (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = filterCondition;
         }
         /// <summary>
         /// Read CSV file into List and fill DataGridView with data for review before saving to database
@@ -119,13 +79,9 @@ namespace Knjigovodstvo.URA
             LoadDatagrid();
         }
 
-        private void ButtonFilterDatum_Click(object sender, EventArgs e)
-        {
-            FilterDataGridView(null, null);
-        }
-
         private string put = "";
         private List<Primka> _listaPrimki = new List<Primka>();
         private readonly int _lastRecord = 0;
+        private Dictionary<int, string> _columns=new Dictionary<int, string>();
     }
 }

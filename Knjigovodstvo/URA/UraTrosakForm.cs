@@ -1,6 +1,7 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -10,6 +11,8 @@ namespace Knjigovodstvo.URA
     {
         public UraTrosakForm()
         {
+            _columns.Add(0, "Datum");
+            _columns.Add(1, "Naziv_dobavljaca");
             InitializeComponent();
             LoadDatagrid();
         }
@@ -29,51 +32,6 @@ namespace Knjigovodstvo.URA
             }
         }
 
-        void CheckValidRange(object sender, EventArgs e)
-        {
-            if (dateTimePickerOd.Value > dateTimePickerDo.Value)
-            {
-                MessageBox.Show(
-                    "Početni datum mora biti manji ili jednak završnom.",
-                    "Upozorenje",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-
-                dateTimePickerDo.Value = dateTimePickerOd.Value;
-            }
-        }
-
-        void CheckBoxDatumi_CheckStateChanged(object sender, EventArgs e)
-        {
-            if (checkBoxDatumi.Checked)
-            {
-                dateTimePickerOd.Enabled = true;
-                dateTimePickerDo.Enabled = true;
-            }
-            else
-            {
-                dateTimePickerOd.Enabled = false;
-                dateTimePickerDo.Enabled = false;
-            }
-        }
-
-        void FilterDataGridView(object sender, KeyEventArgs e)
-        {
-            string filterCondition = $"[Naziv_dobavljaca] LIKE '%{textBoxFilterNaziv.Text}%'";
-
-            if (checkBoxDatumi.Checked)
-            {
-                filterCondition = $"[Datum_knjizenja]>='{dateTimePickerOd.Value.ToString("yyyy-MM-dd")}' " +
-                    $"AND [Datum_knjizenja]<='{dateTimePickerDo.Value.ToString("yyyy-MM-dd")}' " +
-                    $"AND [Naziv_dobavljaca] LIKE '%{textBoxFilterNaziv.Text}%'";
-            }
-
-           (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = filterCondition;
-        }
-
-        private void ButtonFilterDatum_Click(object sender, EventArgs e)
-        {
-            FilterDataGridView(null, null);
-        }
+        private Dictionary<int, string> _columns = new Dictionary<int, string>();
     }
 }
