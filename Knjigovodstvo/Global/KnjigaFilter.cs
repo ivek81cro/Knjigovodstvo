@@ -9,10 +9,11 @@ namespace Knjigovodstvo.Global
     {
         /// <summary>
         /// Filters for URA and IRA datagridview's.
-        /// Dictionary key 0: date column title, key 1: name column title that will be filtered
+        /// Dictionary key 0: date column title, key 1: name column title that will be filtered,
+        /// key 2: Invoice number clumn title
         /// </summary>
         /// <param name="dgv"></param>
-        /// <param name="columns">key1:Name column title, key2:Date column title</param>
+        /// <param name="columns">key0:Name column title, key1:Date column title, key 2: Invoice number clumn title</param>
         public KnjigaFilter(DBDataGridView dgv, Dictionary<int, string> columns)
         {
             InitializeComponent();
@@ -55,13 +56,13 @@ namespace Knjigovodstvo.Global
 
         void FilterDataGridView(object sender, KeyEventArgs e)
         {
-            string filterCondition = $"[{_columns[1]}] LIKE '%{textBoxFilterNaziv.Text}%'";
+            string filterCondition = $"[{_columns[1]}] LIKE '%{textBoxFilterNaziv.Text}%'" + 
+                $" AND [{_columns[2]}] LIKE '%{textBoxFilterBrojRacuna.Text}%'";
 
             if (checkBoxDatumi.Checked)
             {
-                filterCondition = $"[{_columns[0]}]>='{dateTimePickerOd.Value.ToString("yyyy-MM-dd")}' " +
-                    $"AND [{_columns[0]}]<='{dateTimePickerDo.Value.ToString("yyyy-MM-dd")}' " +
-                    $"AND [{_columns[1]}] LIKE '%{textBoxFilterNaziv.Text}%'";
+                filterCondition += $" AND [{_columns[0]}]>='{dateTimePickerOd.Value.ToString("yyyy-MM-dd")}' " +
+                    $" AND [{_columns[0]}]<='{dateTimePickerDo.Value.ToString("yyyy-MM-dd")}'";
             }
 
             (_dgv.DataSource as DataTable).DefaultView.RowFilter = filterCondition;

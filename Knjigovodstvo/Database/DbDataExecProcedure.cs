@@ -16,7 +16,8 @@ namespace Knjigovodstvo.Database
         /// <summary> params: @datumOd, @day = null</summary>
         Joppd_podaci,
         Get_Table_Names,
-        Izdvoji_Troskove
+        Izdvoji_Troskove,
+        Izdvoji_Odobrenja
     }
 
     class DbDataExecProcedure
@@ -70,6 +71,7 @@ namespace Knjigovodstvo.Database
                 ProcedureNames.Joppd_podaci => "Joppd_podaci " + param,
                 ProcedureNames.Get_Table_Names => "Get_Table_Names",
                 ProcedureNames.Izdvoji_Troskove => "Izdvoji_Troskove",
+                ProcedureNames.Izdvoji_Odobrenja => "Izdvoji_Odobrenja",
                 _ => "",
             };
         }

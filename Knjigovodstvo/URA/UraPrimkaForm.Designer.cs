@@ -60,7 +60,7 @@ namespace Knjigovodstvo.URA
             this.buttonUcitajTablicu.Location = new System.Drawing.Point(13, 13);
             this.buttonUcitajTablicu.Name = "buttonUcitajTablicu";
             this.buttonUcitajTablicu.Size = new System.Drawing.Size(75, 23);
-            this.buttonUcitajTablicu.TabIndex = 11;
+            this.buttonUcitajTablicu.TabIndex = 0;
             this.buttonUcitajTablicu.Text = "Učitaj";
             this.buttonUcitajTablicu.UseVisualStyleBackColor = true;
             this.buttonUcitajTablicu.Click += new System.EventHandler(this.ButtonUcitajTablicu_Click);
@@ -70,7 +70,7 @@ namespace Knjigovodstvo.URA
             this.buttonSpremi.Location = new System.Drawing.Point(95, 12);
             this.buttonSpremi.Name = "buttonSpremi";
             this.buttonSpremi.Size = new System.Drawing.Size(75, 23);
-            this.buttonSpremi.TabIndex = 12;
+            this.buttonSpremi.TabIndex = 1;
             this.buttonSpremi.Text = "Spremi";
             this.buttonSpremi.UseVisualStyleBackColor = true;
             this.buttonSpremi.Click += new System.EventHandler(this.ButtonSpremi_Click);
@@ -89,10 +89,10 @@ namespace Knjigovodstvo.URA
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1122, 617);
-            this.Controls.Add(this.knjigaFilter1);
             this.Controls.Add(this.buttonSpremi);
             this.Controls.Add(this.buttonUcitajTablicu);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.knjigaFilter1);
             this.Name = "UraPrimkaForm";
             this.Text = "UraPregledForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

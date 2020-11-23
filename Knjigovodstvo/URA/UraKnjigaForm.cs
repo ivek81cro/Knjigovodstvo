@@ -16,6 +16,7 @@ namespace Knjigovodstvo.URA
         {
             _columns.Add(0, "Datum");
             _columns.Add(1, "Naziv_dobavljaca");
+            _columns.Add(2, "Broj_racuna");
             InitializeComponent();
             _dt = new DbDataCustomQuery()
                 .ExecuteQuery("SELECT TOP 1 Redni_broj FROM UraKnjiga WHERE Redni_broj IS NOT NULL ORDER BY Redni_broj DESC;");
@@ -73,8 +74,14 @@ namespace Knjigovodstvo.URA
 
         private void ButtonTroskovi_Click(object sender, EventArgs e)
         {
-            UraTrosakForm utf = new UraTrosakForm();
-            utf.ShowDialog();
+            dataGridView1.DataSource = new DbDataExecProcedure().GetTable(ProcedureNames.Izdvoji_Troskove);
+            FixColumnHeaders();
+        }
+
+        private void buttonOdobrenja_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = new DbDataExecProcedure().GetTable(ProcedureNames.Izdvoji_Odobrenja);
+            FixColumnHeaders();
         }
 
         private string put = "";

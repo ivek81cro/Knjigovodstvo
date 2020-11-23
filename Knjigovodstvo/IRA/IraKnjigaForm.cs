@@ -16,6 +16,7 @@ namespace Knjigovodstvo.IRA
         {
             _columns.Add(0, "Datum");
             _columns.Add(1, "Naziv_i_sjediste_kupca");
+            _columns.Add(2, "Broj_racuna");
             InitializeComponent();
             DataTable dt = new DbDataCustomQuery()
                     .ExecuteQuery("SELECT TOP 1 Redni_broj FROM IraKnjiga WHERE Redni_broj IS NOT NULL ORDER BY Redni_broj DESC;");

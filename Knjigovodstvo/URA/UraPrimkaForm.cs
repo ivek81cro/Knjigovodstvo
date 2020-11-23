@@ -16,6 +16,7 @@ namespace Knjigovodstvo.URA
         {
             _columns.Add(0, "Datum_knjizenja");
             _columns.Add(1, "Naziv_dobavljaca");
+            _columns.Add(2, "Broj_racuna");
             InitializeComponent();
             DataTable dt = new DbDataCustomQuery()
                 .ExecuteQuery("SELECT TOP 1 Broj_u_knjizi_ura FROM Primka WHERE Redni_broj IS NOT NULL ORDER BY Broj_u_knjizi_ura DESC;");

@@ -35,6 +35,7 @@ namespace Knjigovodstvo.Global
             this.buttonFilterDatum = new System.Windows.Forms.Button();
             this.dateTimePickerDo = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerOd = new System.Windows.Forms.DateTimePicker();
+            this.textBoxFilterBrojRacuna = new System.Windows.Forms.TextBox();
             this.groupBoxFilteri.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,13 +45,14 @@ namespace Knjigovodstvo.Global
             this.textBoxFilterNaziv.Name = "textBoxFilterNaziv";
             this.textBoxFilterNaziv.PlaceholderText = "Filter po nazivu";
             this.textBoxFilterNaziv.Size = new System.Drawing.Size(175, 23);
-            this.textBoxFilterNaziv.TabIndex = 14;
+            this.textBoxFilterNaziv.TabIndex = 4;
             this.textBoxFilterNaziv.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FilterDataGridView);
             // 
             // groupBoxFilteri
             // 
             this.groupBoxFilteri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxFilteri.Controls.Add(this.textBoxFilterBrojRacuna);
             this.groupBoxFilteri.Controls.Add(this.checkBoxDatumi);
             this.groupBoxFilteri.Controls.Add(this.buttonFilterDatum);
             this.groupBoxFilteri.Controls.Add(this.dateTimePickerDo);
@@ -69,17 +71,17 @@ namespace Knjigovodstvo.Global
             this.checkBoxDatumi.Location = new System.Drawing.Point(221, 20);
             this.checkBoxDatumi.Name = "checkBoxDatumi";
             this.checkBoxDatumi.Size = new System.Drawing.Size(147, 19);
-            this.checkBoxDatumi.TabIndex = 18;
+            this.checkBoxDatumi.TabIndex = 3;
             this.checkBoxDatumi.Text = "Uključi datume za filter";
             this.checkBoxDatumi.UseVisualStyleBackColor = true;
             this.checkBoxDatumi.CheckStateChanged += new System.EventHandler(this.CheckBoxDatumi_CheckStateChanged);
             // 
             // buttonFilterDatum
             // 
-            this.buttonFilterDatum.Location = new System.Drawing.Point(555, 18);
+            this.buttonFilterDatum.Location = new System.Drawing.Point(736, 18);
             this.buttonFilterDatum.Name = "buttonFilterDatum";
             this.buttonFilterDatum.Size = new System.Drawing.Size(75, 23);
-            this.buttonFilterDatum.TabIndex = 17;
+            this.buttonFilterDatum.TabIndex = 6;
             this.buttonFilterDatum.Text = "Prikaži";
             this.buttonFilterDatum.UseVisualStyleBackColor = true;
             this.buttonFilterDatum.Click += new System.EventHandler(this.ButtonFilterDatum_Click);
@@ -91,7 +93,7 @@ namespace Knjigovodstvo.Global
             this.dateTimePickerDo.Location = new System.Drawing.Point(114, 18);
             this.dateTimePickerDo.Name = "dateTimePickerDo";
             this.dateTimePickerDo.Size = new System.Drawing.Size(101, 23);
-            this.dateTimePickerDo.TabIndex = 16;
+            this.dateTimePickerDo.TabIndex = 8;
             this.dateTimePickerDo.ValueChanged += new System.EventHandler(this.CheckValidRange);
             // 
             // dateTimePickerOd
@@ -101,8 +103,17 @@ namespace Knjigovodstvo.Global
             this.dateTimePickerOd.Location = new System.Drawing.Point(7, 18);
             this.dateTimePickerOd.Name = "dateTimePickerOd";
             this.dateTimePickerOd.Size = new System.Drawing.Size(101, 23);
-            this.dateTimePickerOd.TabIndex = 15;
+            this.dateTimePickerOd.TabIndex = 7;
             this.dateTimePickerOd.ValueChanged += new System.EventHandler(this.CheckValidRange);
+            // 
+            // textBoxFilterBrojRacuna
+            // 
+            this.textBoxFilterBrojRacuna.Location = new System.Drawing.Point(555, 18);
+            this.textBoxFilterBrojRacuna.Name = "textBoxFilterBrojRacuna";
+            this.textBoxFilterBrojRacuna.PlaceholderText = "Filter po broju računa";
+            this.textBoxFilterBrojRacuna.Size = new System.Drawing.Size(175, 23);
+            this.textBoxFilterBrojRacuna.TabIndex = 5;
+            this.textBoxFilterBrojRacuna.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FilterDataGridView);
             // 
             // KnjigaFilter
             // 
@@ -124,5 +135,6 @@ namespace Knjigovodstvo.Global
         private System.Windows.Forms.DateTimePicker dateTimePickerDo;
         private System.Windows.Forms.DateTimePicker dateTimePickerOd;
         private System.Windows.Forms.CheckBox checkBoxDatumi;
+        private System.Windows.Forms.TextBox textBoxFilterBrojRacuna;
     }
 }

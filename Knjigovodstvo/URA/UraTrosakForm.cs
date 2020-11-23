@@ -1,8 +1,6 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Helpers;
-using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.URA
@@ -13,6 +11,7 @@ namespace Knjigovodstvo.URA
         {
             _columns.Add(0, "Datum");
             _columns.Add(1, "Naziv_dobavljaca");
+            _columns.Add(2, "Broj_racuna");
             InitializeComponent();
             LoadDatagrid();
         }
