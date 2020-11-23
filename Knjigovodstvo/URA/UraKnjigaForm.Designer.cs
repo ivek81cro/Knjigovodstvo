@@ -36,7 +36,7 @@ namespace Knjigovodstvo.URA
             this.buttonSpremi = new System.Windows.Forms.Button();
             this.buttonTroskovi = new System.Windows.Forms.Button();
             this.buttonOdobrenja = new System.Windows.Forms.Button();
-            this.knjigaFilter1 = new Knjigovodstvo.Global.KnjigaFilter();
+            this.knjigaFilter1 = new KnjigaFilter(dataGridView1, _columns);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,7 +95,7 @@ namespace Knjigovodstvo.URA
             this.buttonOdobrenja.TabIndex = 11;
             this.buttonOdobrenja.Text = "Odobrenja";
             this.buttonOdobrenja.UseVisualStyleBackColor = true;
-            this.buttonOdobrenja.Click += new System.EventHandler(this.buttonOdobrenja_Click);
+            this.buttonOdobrenja.Click += new System.EventHandler(this.ButtonOdobrenja_Click);
             // 
             // knjigaFilter1
             // 

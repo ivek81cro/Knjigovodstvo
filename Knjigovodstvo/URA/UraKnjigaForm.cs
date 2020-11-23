@@ -78,7 +78,7 @@ namespace Knjigovodstvo.URA
             FixColumnHeaders();
         }
 
-        private void buttonOdobrenja_Click(object sender, EventArgs e)
+        private void ButtonOdobrenja_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = new DbDataExecProcedure().GetTable(ProcedureNames.Izdvoji_Odobrenja);
             FixColumnHeaders();
