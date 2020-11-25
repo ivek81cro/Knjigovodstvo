@@ -13,7 +13,7 @@ namespace Knjigovodstvo.Database
         PlacaPregled,
         Prebaci_postBroj,
         Prebaci_prirez,
-        /// <summary> params: @datumOd, @day = null</summary>
+        /// <summary> params: @datumOd, yyyy-MM, @day = null, dd</summary>
         Joppd_podaci,
         Get_Table_Names,
         Izdvoji_Troskove,

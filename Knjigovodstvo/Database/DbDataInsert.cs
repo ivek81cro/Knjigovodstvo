@@ -28,6 +28,7 @@ namespace Knjigovodstvo.Database
                 using SqlCommand command = new SqlCommand(query, conn);
                 conn.Open();
                 command.ExecuteNonQuery();
+                command.Dispose();
                 conn.Close();
 
                 return true;

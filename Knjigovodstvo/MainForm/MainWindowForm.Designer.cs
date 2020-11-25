@@ -44,6 +44,7 @@ namespace Knjigovodstvo.MainForm
             this.menuPrimke = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUraKnjiga = new System.Windows.Forms.ToolStripMenuItem();
             this.menuIra = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuIraKnjiga = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPlaca = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemIzracun = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPregledPlace = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,8 +52,8 @@ namespace Knjigovodstvo.MainForm
             this.menuObracunPlace = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemJoppd = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.izvodiMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPregledIzvoda = new System.Windows.Forms.ToolStripMenuItem();
             this.prozoriMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +68,6 @@ namespace Knjigovodstvo.MainForm
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.menuIraKnjiga = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -78,7 +78,7 @@ namespace Knjigovodstvo.MainForm
             this.postavkeMenu,
             this.menuKnjige,
             this.menuPlaca,
-            this.toolsMenu,
+            this.izvodiMenu,
             this.prozoriMenu,
             this.helpMenu});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
@@ -183,7 +183,7 @@ namespace Knjigovodstvo.MainForm
             this.menuIraKnjiga.Size = new System.Drawing.Size(142, 22);
             this.menuIraKnjiga.Text = "Izlazni računi";
             this.menuIraKnjiga.Click += new System.EventHandler(this.ShowNewFormIraKnjigaPregled);
-            //
+            // 
             // menuPlaca
             // 
             this.menuPlaca.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -237,19 +237,20 @@ namespace Knjigovodstvo.MainForm
             this.toolStripMenuItemJoppd.Text = "Joppd obrazac";
             this.toolStripMenuItemJoppd.Click += new System.EventHandler(this.ShowNewFormPlacaJoppdForm);
             // 
-            // toolsMenu
+            // izvodiMenu
             // 
-            this.toolsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem});
-            this.toolsMenu.Name = "toolsMenu";
-            this.toolsMenu.Size = new System.Drawing.Size(46, 20);
-            this.toolsMenu.Text = "&Tools";
+            this.izvodiMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuPregledIzvoda});
+            this.izvodiMenu.Name = "izvodiMenu";
+            this.izvodiMenu.Size = new System.Drawing.Size(50, 20);
+            this.izvodiMenu.Text = "&Izvodi";
             // 
-            // optionsToolStripMenuItem
+            // menuPregledIzvoda
             // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.optionsToolStripMenuItem.Text = "&Options";
+            this.menuPregledIzvoda.Name = "menuPregledIzvoda";
+            this.menuPregledIzvoda.Size = new System.Drawing.Size(114, 22);
+            this.menuPregledIzvoda.Text = "&Pregled";
+            this.menuPregledIzvoda.Click += new System.EventHandler(this.ShowNewFormPregledIzvodaForm);
             // 
             // prozoriMenu
             // 
@@ -351,7 +352,7 @@ namespace Knjigovodstvo.MainForm
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
-            this.toolStripStatusLabel.Text = "Status";            
+            this.toolStripStatusLabel.Text = "Status";
             // 
             // MainWindowForm
             // 
@@ -386,8 +387,8 @@ namespace Knjigovodstvo.MainForm
         private System.Windows.Forms.ToolStripMenuItem menuKnjige;
         private System.Windows.Forms.ToolStripMenuItem menuPlaca;
         private System.Windows.Forms.ToolStripMenuItem menuObracunPlace;
-        private System.Windows.Forms.ToolStripMenuItem toolsMenu;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem izvodiMenu;
+        private System.Windows.Forms.ToolStripMenuItem menuPregledIzvoda;
         private System.Windows.Forms.ToolStripMenuItem prozoriMenu;
         private System.Windows.Forms.ToolStripMenuItem cascadeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tileVerticalToolStripMenuItem;

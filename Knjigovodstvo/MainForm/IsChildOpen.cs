@@ -14,7 +14,8 @@ namespace Knjigovodstvo.MainForm
         JoppdPlacaForm,
         UraPrimkaForm,
         UraKnjigaForm,
-        IraKnjigaForm
+        IraKnjigaForm,
+        IzvodiPregledForm
     }
     public class IsChildOpen
     {
