@@ -33,6 +33,7 @@ namespace Knjigovodstvo.BankStatements
             this.buttonUcitajIzvod = new System.Windows.Forms.Button();
             this.dataGridViewIzvodi = new System.Windows.Forms.DataGridView();
             this.buttonOpenIzvod = new System.Windows.Forms.Button();
+            this.buttonDeleteIzvod = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStavke)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIzvodi)).BeginInit();
             this.SuspendLayout();
@@ -89,11 +90,22 @@ namespace Knjigovodstvo.BankStatements
             this.buttonOpenIzvod.UseVisualStyleBackColor = true;
             this.buttonOpenIzvod.Click += new System.EventHandler(this.ButtonOpenIzvod_Click);
             // 
+            // buttonDeleteIzvod
+            // 
+            this.buttonDeleteIzvod.Location = new System.Drawing.Point(958, 110);
+            this.buttonDeleteIzvod.Name = "buttonDeleteIzvod";
+            this.buttonDeleteIzvod.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeleteIzvod.TabIndex = 14;
+            this.buttonDeleteIzvod.Text = "Briši";
+            this.buttonDeleteIzvod.UseVisualStyleBackColor = true;
+            this.buttonDeleteIzvod.Click += new System.EventHandler(this.ButtonDeleteIzvod_Click);
+            // 
             // IzvodiPregledForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 633);
+            this.Controls.Add(this.buttonDeleteIzvod);
             this.Controls.Add(this.buttonOpenIzvod);
             this.Controls.Add(this.dataGridViewIzvodi);
             this.Controls.Add(this.buttonUcitajIzvod);
@@ -112,5 +124,6 @@ namespace Knjigovodstvo.BankStatements
         private System.Windows.Forms.Button buttonUcitajIzvod;
         private System.Windows.Forms.DataGridView dataGridViewIzvodi;
         private System.Windows.Forms.Button buttonOpenIzvod;
+        private System.Windows.Forms.Button buttonDeleteIzvod;
     }
 }

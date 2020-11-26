@@ -120,6 +120,12 @@ namespace Knjigovodstvo.BankStatements
             }
         }
 
+        private void ButtonDeleteIzvod_Click(object sender, EventArgs e)
+        {
+            new DbDataDelete().DeleteItem(_izvodKnjiga);
+            LoadExistingIzvodi();
+        }
+
         private IzvodiXml _izvodi = new IzvodiXml();
         private IzvodKnjiga _izvodKnjiga = new IzvodKnjiga();
         private string _path = "";
