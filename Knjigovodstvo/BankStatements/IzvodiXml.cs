@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace Knjigovodstvo.BankStatements
 {
     [XmlRoot("Izvodi")]
-    public class Izvodi
+    public class IzvodiXml
     {
         [XmlElement("Banka")]
         public sBanka Banka { get; set; }
