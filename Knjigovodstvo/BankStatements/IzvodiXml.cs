@@ -87,12 +87,8 @@ namespace Knjigovodstvo.BankStatements
     [XmlType("Prometi")]
     public class sPrometi
     {
-        public sPrometi()
-        {
-            List<sPromet>Promet = new List<sPromet>();
-        }
         [XmlElement("Promet")]
-        public List<sPromet> Promet { get; set; }
+        public List<sPromet> Promet { get; set; } = new List<sPromet>();
     }
 
     [XmlType("DStrana")]

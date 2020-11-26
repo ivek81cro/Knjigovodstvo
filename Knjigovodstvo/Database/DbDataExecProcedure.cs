@@ -17,7 +17,8 @@ namespace Knjigovodstvo.Database
         Joppd_podaci,
         Get_Table_Names,
         Izdvoji_Troskove,
-        Izdvoji_Odobrenja
+        Izdvoji_Odobrenja,
+        IzvodKnjiga_GetLastId
     }
 
     class DbDataExecProcedure
@@ -72,6 +73,7 @@ namespace Knjigovodstvo.Database
                 ProcedureNames.Get_Table_Names => "Get_Table_Names",
                 ProcedureNames.Izdvoji_Troskove => "Izdvoji_Troskove",
                 ProcedureNames.Izdvoji_Odobrenja => "Izdvoji_Odobrenja",
+                ProcedureNames.IzvodKnjiga_GetLastId => "IzvodKnjiga_GetLastId",
                 _ => "",
             };
         }

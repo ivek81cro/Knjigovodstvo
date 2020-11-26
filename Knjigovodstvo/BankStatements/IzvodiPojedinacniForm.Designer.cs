@@ -33,6 +33,7 @@ namespace Knjigovodstvo.BankStatements
             this.labelRedniBroj = new System.Windows.Forms.Label();
             this.labelStanjeZavrsno = new System.Windows.Forms.Label();
             this.dataGridView1 = new Knjigovodstvo.DBDataGridView();
+            this.buttonSpremi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,17 +81,28 @@ namespace Knjigovodstvo.BankStatements
             this.dataGridView1.TabIndex = 10;
             this.dataGridView1.Text = "dataGridView1";
             // 
+            // buttonSpremi
+            // 
+            this.buttonSpremi.Location = new System.Drawing.Point(13, 92);
+            this.buttonSpremi.Name = "buttonSpremi";
+            this.buttonSpremi.Size = new System.Drawing.Size(75, 23);
+            this.buttonSpremi.TabIndex = 11;
+            this.buttonSpremi.Text = "Spremi";
+            this.buttonSpremi.UseVisualStyleBackColor = true;
+            this.buttonSpremi.Click += new System.EventHandler(this.ButtonSpremi_Click);
+            // 
             // IzvodiPojedinacniForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1241, 652);
+            this.Controls.Add(this.buttonSpremi);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.labelStanjeZavrsno);
             this.Controls.Add(this.labelRedniBroj);
             this.Controls.Add(this.labelDatumIzvoda);
             this.Name = "IzvodiPojedinacniForm";
-            this.Text = "IzvodiPojedinacniForm";
+            this.Text = "Izvod";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -103,5 +115,6 @@ namespace Knjigovodstvo.BankStatements
         private System.Windows.Forms.Label labelRedniBroj;
         private System.Windows.Forms.Label labelStanjeZavrsno;
         private DBDataGridView dataGridView1;
+        private System.Windows.Forms.Button buttonSpremi;
     }
 }

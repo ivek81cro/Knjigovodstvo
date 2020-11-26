@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Knjigovodstvo.Database;
+using System.Data;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.BankStatements
@@ -42,6 +43,26 @@ namespace Knjigovodstvo.BankStatements
             dataGridView1.DataSource = dt;
         }
 
+
+        private void ButtonSpremi_Click(object sender, System.EventArgs e)
+        {
+            if (new DbDataInsert().InsertData(_izvodKnjiga))
+            {
+                _izvodKnjiga.GetCurrentId();
+            }
+
+            if(_izvodKnjiga.Id != 0)
+            {
+                foreach( var promet in _izvodKnjiga.Promet)
+                {
+                    promet.Id_izvod = _izvodKnjiga.Id;
+                    new DbDataInsert().InsertData(promet);
+                }
+            }
+
+            this.Close();
+        }
+        
         private IzvodKnjiga _izvodKnjiga;
     }
 }
