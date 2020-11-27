@@ -46,6 +46,12 @@ namespace Knjigovodstvo.FinancialReports
             FilterClass("Opis");
         }
 
+        private void ButtonDodajKonto_Click(object sender, EventArgs e)
+        {
+            KontniPlanNoviForm form = new KontniPlanNoviForm();
+            form.ShowDialog();
+        }
+
         private readonly KontniPlan _kontniPlan = new KontniPlan();
     }
 }

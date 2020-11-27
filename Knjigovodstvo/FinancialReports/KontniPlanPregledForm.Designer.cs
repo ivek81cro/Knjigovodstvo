@@ -60,6 +60,7 @@ namespace Knjigovodstvo.FinancialReports
             this.buttonDodajKonto.TabIndex = 11;
             this.buttonDodajKonto.Text = "Dodaj";
             this.buttonDodajKonto.UseVisualStyleBackColor = true;
+            this.buttonDodajKonto.Click += new System.EventHandler(this.ButtonDodajKonto_Click);
             // 
             // textBoxFilterKonto
             // 
