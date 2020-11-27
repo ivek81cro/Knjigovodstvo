@@ -73,7 +73,7 @@ namespace Knjigovodstvo.Global
             FilterDataGridView(null, null);
         }
 
-        private DBDataGridView _dgv;
-        private Dictionary<int, string> _columns;
+        private readonly DBDataGridView _dgv;
+        private readonly Dictionary<int, string> _columns;
     }
 }

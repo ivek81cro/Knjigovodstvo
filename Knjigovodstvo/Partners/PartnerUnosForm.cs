@@ -29,8 +29,8 @@ namespace Knjigovodstvo.Partners
             textBoxEmail.Text = _partner.Kontakt.Email;
             textBoxIban.Text = _partner.OpciPodaci.Iban;
             textBoxMbo.Text = _partner.OpciPodaci.Mbo;
-            checkBoxBuyer.Checked = _partner.Kupac != 'n' ? true : false;
-            checkBoxSeller.Checked = _partner.Dobavljac != 'n' ? true : false;
+            checkBoxBuyer.Checked = _partner.KontoK.StartsWith("12");
+            checkBoxSeller.Checked = _partner.KontoD.StartsWith("22");
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -48,8 +48,8 @@ namespace Knjigovodstvo.Partners
             _partner.Kontakt.Email = textBoxEmail.Text;
             _partner.OpciPodaci.Iban = textBoxIban.Text;
             _partner.OpciPodaci.Mbo = textBoxMbo.Text;
-            _partner.Kupac = checkBoxBuyer.Checked ? 'k' : 'n';
-            _partner.Dobavljac = checkBoxSeller.Checked ? 'd' : 'n';
+            _partner.KontoK = checkBoxBuyer.Checked ? "12" : "";
+            _partner.KontoD = checkBoxSeller.Checked ? "22" : "";
 
             FormError validateResult = _partner.ValidateData();
             if ( validateResult == FormError.None)
@@ -93,6 +93,6 @@ namespace Knjigovodstvo.Partners
                 textBoxPost.Text = grad.Posta;
             }
         }
-        private Partneri _partner = new Partneri();
+        private readonly Partneri _partner = new Partneri();
     }
 }

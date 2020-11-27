@@ -46,15 +46,17 @@ namespace Knjigovodstvo.BankStatements
 
         private void CreateIzvodKnjigaElement()
         {
-            _izvodKnjiga = new IzvodKnjiga();
-            _izvodKnjiga.Datum_izvoda = DateTime
+            _izvodKnjiga = new IzvodKnjiga
+            {
+                Datum_izvoda = DateTime
                 .ParseExact(_izvodi.Izvod.DatumIzvoda, ("yyyyMMdd"), CultureInfo.InvariantCulture)
-                .ToString("yyyy-MM-dd");
-            _izvodKnjiga.Redni_broj = int.Parse(_izvodi.Izvod.RedniBroj);
-            _izvodKnjiga.Suma_potrazna = decimal.Parse(_izvodi.Izvod.Sekcije.Sekcija.PStrana.UkupnaSuma);
-            _izvodKnjiga.Suma_dugovna = decimal.Parse(_izvodi.Izvod.Sekcije.Sekcija.DStrana.UkupnaSuma);
-            _izvodKnjiga.Stanje_prethodnog_izvoda = decimal.Parse(_izvodi.Izvod.Sekcije.Sekcija.PrethodnoStanje);
-            _izvodKnjiga.Novo_stanje = decimal.Parse(_izvodi.Izvod.Sekcije.Sekcija.NovoStanje);
+                .ToString("yyyy-MM-dd"),
+                Redni_broj = int.Parse(_izvodi.Izvod.RedniBroj),
+                Suma_potrazna = decimal.Parse(_izvodi.Izvod.Sekcije.Sekcija.PStrana.UkupnaSuma),
+                Suma_dugovna = decimal.Parse(_izvodi.Izvod.Sekcije.Sekcija.DStrana.UkupnaSuma),
+                Stanje_prethodnog_izvoda = decimal.Parse(_izvodi.Izvod.Sekcije.Sekcija.PrethodnoStanje),
+                Novo_stanje = decimal.Parse(_izvodi.Izvod.Sekcije.Sekcija.NovoStanje)
+            };
 
             CreatePrometElements();
 
@@ -108,11 +110,10 @@ namespace Knjigovodstvo.BankStatements
 
         private void ButtonOpenIzvod_Click(object sender, EventArgs e)
         {
-            int redniBroj = 0;
             if (dataGridViewIzvodi.SelectedRows.Count != 0)
             {
                 DataGridViewRow row = this.dataGridViewIzvodi.SelectedRows[0];
-                redniBroj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
+                int redniBroj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
                 _izvodKnjiga.GetIzvodByRedniBroj(redniBroj);
 
                 dataGridViewStavke.DataSource = _izvodKnjiga.GetPrometData();

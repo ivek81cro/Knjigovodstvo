@@ -36,8 +36,6 @@ namespace Knjigovodstvo.FinancialReports
             (dbDataGridView1.DataSource as DataTable).DefaultView.RowFilter = filterCondition;
         }
 
-        private KontniPlan _kontniPlan = new KontniPlan();
-
         private void TextBoxFilterKonto_KeyUp(object sender, KeyEventArgs e)
         {
             FilterClass("Konto");
@@ -47,5 +45,7 @@ namespace Knjigovodstvo.FinancialReports
         {
             FilterClass("Opis");
         }
+
+        private readonly KontniPlan _kontniPlan = new KontniPlan();
     }
 }

@@ -10,7 +10,6 @@
         County,
         Country,
         Iban,
-        Kupac_Dobavljac,
         Prazno,
         NumberFormat,
         Sifra,

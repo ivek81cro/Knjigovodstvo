@@ -23,22 +23,47 @@ namespace Knjigovodstvo.Partners
                 return FormError.City;
             if (!new IbanValidator().Validate(OpciPodaci.Iban))
                 return FormError.Iban;
-            if (Kupac != 'k' && Dobavljac != 'd')
-                return FormError.Kupac_Dobavljac;
 
             return FormError.None;
         }
 
         public bool InsertNew()
         {
+            SetKonto();
+
             if(new DbDataInsert().InsertData(this))
                 return true;
 
             return false;
         }
 
+        private void SetKonto()
+        {
+            string sifra = OpciPodaci.Id.ToString();
+            string kontoK = KontoK;
+            string kontoD = KontoD;
+
+            if (KontoD.StartsWith("22"))
+            {
+                while (kontoK.Length + sifra.Length < 9)
+                    kontoK += "0";
+                kontoK += sifra;
+            }
+
+            if (kontoK.StartsWith("12"))
+            {
+                while (kontoD.Length + sifra.Length < 9)
+                    kontoD += "0";
+                kontoD += sifra;
+            }
+
+            KontoK = kontoK;
+            KontoD = kontoD;
+        }
+
         public bool UpdateData()
         {
+            SetKonto();
             if (new DbDataUpdate().UpdateData(this))
                 return true;
 
@@ -62,15 +87,15 @@ namespace Knjigovodstvo.Partners
             Kontakt.Email = dt.Rows[0]["Email"].ToString();
             OpciPodaci.Iban = dt.Rows[0]["Iban"].ToString();
             OpciPodaci.Mbo = dt.Rows[0]["Mbo"].ToString();
-            Kupac = char.Parse(dt.Rows[0]["Kupac"].ToString());
-            Dobavljac = char.Parse(dt.Rows[0]["Dobavljac"].ToString());
+            KontoK = dt.Rows[0]["KontoK"].ToString();
+            KontoD = dt.Rows[0]["KontoD"].ToString();
         }
 
         public OpciPodaci OpciPodaci { get; set; } = new OpciPodaci();
         public Adresa Adresa { get; set; } = new Adresa();
         public Kontakt Kontakt { get; set; } = new Kontakt();
-        public char Kupac { get; set; } = 'n';
-        public char Dobavljac { get; set; } = 'n';
+        public string KontoK { get; set; } = "";
+        public string KontoD { get; set; } = "";
     }
 
 }

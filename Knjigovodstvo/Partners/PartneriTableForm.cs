@@ -15,7 +15,8 @@ namespace Knjigovodstvo.Partners
         }
         private void LoadDatagrid()
         {
-            dataGridView1.DataSource = new DbDataGet().GetTable(_partner);
+            dataGridView1.DataSource = new DataView(new DbDataGet().GetTable(_partner))
+                .ToTable(false, "Id", "Oib", "Naziv", "Ulica", "Broj", "Posta", "Mjesto", "Telefon", "Fax", "Email", "Iban", "Mbo");
         }
 
         private void TextBoxFilterPartner_TextChanged(object sender, EventArgs e)
@@ -59,6 +60,6 @@ namespace Knjigovodstvo.Partners
             }
         }
 
-        Partneri _partner = new Partneri();
+        private readonly Partneri _partner = new Partneri();
     }
 }

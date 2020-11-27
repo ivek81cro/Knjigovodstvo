@@ -63,6 +63,6 @@ namespace Knjigovodstvo.BankStatements
             this.Close();
         }
         
-        private IzvodKnjiga _izvodKnjiga;
+        private readonly IzvodKnjiga _izvodKnjiga;
     }
 }
