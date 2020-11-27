@@ -30,7 +30,7 @@ namespace Knjigovodstvo.Partners
             textBoxIban.Text = _partner.OpciPodaci.Iban;
             textBoxMbo.Text = _partner.OpciPodaci.Mbo;
             checkBoxBuyer.Checked = _partner.KontoK.StartsWith("12");
-            checkBoxSeller.Checked = _partner.KontoD.StartsWith("22");
+            checkBoxSupplier.Checked = _partner.KontoD.StartsWith("22");
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace Knjigovodstvo.Partners
             _partner.OpciPodaci.Iban = textBoxIban.Text;
             _partner.OpciPodaci.Mbo = textBoxMbo.Text;
             _partner.KontoK = checkBoxBuyer.Checked ? "12" : "";
-            _partner.KontoD = checkBoxSeller.Checked ? "22" : "";
+            _partner.KontoD = checkBoxSupplier.Checked ? "22" : "";
 
             FormError validateResult = _partner.ValidateData();
             if ( validateResult == FormError.None)

@@ -1,5 +1,6 @@
 ﻿using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Database;
+using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Interface;
 using System.Data;
@@ -31,9 +32,11 @@ namespace Knjigovodstvo.Partners
         {
             SetKonto();
 
-            if(new DbDataInsert().InsertData(this))
+            if (new DbDataInsert().InsertData(this))
+            {
+                InsertNewKonto();
                 return true;
-
+            }
             return false;
         }
 
@@ -43,16 +46,16 @@ namespace Knjigovodstvo.Partners
             string kontoK = KontoK;
             string kontoD = KontoD;
 
-            if (KontoD.StartsWith("22"))
+            if (KontoK.StartsWith("12"))
             {
-                while (kontoK.Length + sifra.Length < 9)
+                while (kontoK.Length + sifra.Length < 8)
                     kontoK += "0";
                 kontoK += sifra;
             }
 
-            if (kontoK.StartsWith("12"))
+            if (KontoD.StartsWith("22"))
             {
-                while (kontoD.Length + sifra.Length < 9)
+                while (kontoD.Length + sifra.Length < 8)
                     kontoD += "0";
                 kontoD += sifra;
             }
@@ -61,10 +64,44 @@ namespace Knjigovodstvo.Partners
             KontoD = kontoD;
         }
 
+        private void InsertNewKonto()
+        {
+            if(KontoK.Length == 8)
+            {
+                _kontniPlan.Konto = KontoK;
+                _kontniPlan.Opis = OpciPodaci.Naziv;
+                _dataInsert.InsertData(_kontniPlan);
+            }
+
+            if (KontoD.Length == 8)
+            {
+                _kontniPlan.Konto = KontoD;
+                _kontniPlan.Opis = OpciPodaci.Naziv;
+                _dataInsert.InsertData(_kontniPlan);
+            }
+        }
+
         public bool UpdateData()
         {
+            DbDataUpdate dbUpdate = new DbDataUpdate();
             SetKonto();
-            if (new DbDataUpdate().UpdateData(this))
+            DataTable dtD = new DbDataGet().GetTable(_kontniPlan, $"Konto = '{KontoD}'");
+            if (dtD.Rows.Count > 0 && _kontniPlan.GetKontniPlanIdByKonto(KontoD))
+            {
+                _kontniPlan.Opis = OpciPodaci.Naziv;
+                _kontniPlan.Konto = KontoD;
+                dbUpdate.UpdateData(_kontniPlan);
+            }
+
+            DataTable dtK = new DbDataGet().GetTable(_kontniPlan, $"Konto = '{KontoK}'");
+            if (dtK.Rows.Count > 0 && _kontniPlan.GetKontniPlanIdByKonto(KontoD))
+            {
+                _kontniPlan.Opis = OpciPodaci.Naziv;
+                _kontniPlan.Konto = KontoK;
+                dbUpdate.UpdateData(_kontniPlan);
+            }
+
+            if (dbUpdate.UpdateData(this))
                 return true;
 
             return false;
@@ -96,6 +133,9 @@ namespace Knjigovodstvo.Partners
         public Kontakt Kontakt { get; set; } = new Kontakt();
         public string KontoK { get; set; } = "";
         public string KontoD { get; set; } = "";
+
+        private KontniPlan _kontniPlan = new KontniPlan();
+        private DbDataInsert _dataInsert = new DbDataInsert();
     }
 
 }

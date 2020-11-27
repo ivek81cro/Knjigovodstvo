@@ -1,5 +1,7 @@
-﻿using Knjigovodstvo.Interface;
+﻿using Knjigovodstvo.Database;
+using Knjigovodstvo.Interface;
 using System;
+using System.Data;
 
 namespace Knjigovodstvo.FinancialReports
 {
@@ -8,6 +10,17 @@ namespace Knjigovodstvo.FinancialReports
         public FormError ValidateData()
         {
             throw new NotImplementedException();
+        }
+
+        public bool GetKontniPlanIdByKonto(string konto)
+        {
+            DataTable dt = new DbDataGet().GetTable(this, $"Konto='{konto}'");
+            if(dt.Rows.Count > 0)
+            {
+                Id = int.Parse(dt.Rows[0]["Id"].ToString());
+                return true;
+            }
+            return false;
         }
 
         public int Id { get; set; } = 0;

@@ -14,7 +14,6 @@ namespace Knjigovodstvo.Code.Validators
                 FormError.City => "Provjerite unešeni grad.",
                 FormError.Post => "Provjerite unešeni broj pošte.",
                 FormError.Iban => "Provjerite unešeni IBAN.",
-                FormError.Kupac_Dobavljac => "Mora biti označeno Kupac/Dobavljač ili oboje.",
                 FormError.Prazno => "Polje ne može ostati prazno",
                 FormError.NumberFormat => "Neispravan format unešenog broja",
                 FormError.Sifra => "Neispravan format šifre općine/grada",

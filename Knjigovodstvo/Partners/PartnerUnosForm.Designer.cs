@@ -39,7 +39,7 @@
             this.textBoxIban = new System.Windows.Forms.TextBox();
             this.textBoxMbo = new System.Windows.Forms.TextBox();
             this.checkBoxBuyer = new System.Windows.Forms.CheckBox();
-            this.checkBoxSeller = new System.Windows.Forms.CheckBox();
+            this.checkBoxSupplier = new System.Windows.Forms.CheckBox();
             this.labelOib = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.labelPost = new System.Windows.Forms.Label();
@@ -147,13 +147,13 @@
             // 
             // checkBoxSeller
             // 
-            this.checkBoxSeller.AutoSize = true;
-            this.checkBoxSeller.Location = new System.Drawing.Point(69, 412);
-            this.checkBoxSeller.Name = "checkBoxSeller";
-            this.checkBoxSeller.Size = new System.Drawing.Size(78, 19);
-            this.checkBoxSeller.TabIndex = 10;
-            this.checkBoxSeller.Text = "Dobavljač";
-            this.checkBoxSeller.UseVisualStyleBackColor = true;
+            this.checkBoxSupplier.AutoSize = true;
+            this.checkBoxSupplier.Location = new System.Drawing.Point(69, 412);
+            this.checkBoxSupplier.Name = "checkBoxSeller";
+            this.checkBoxSupplier.Size = new System.Drawing.Size(78, 19);
+            this.checkBoxSupplier.TabIndex = 10;
+            this.checkBoxSupplier.Text = "Dobavljač";
+            this.checkBoxSupplier.UseVisualStyleBackColor = true;
             // 
             // labelOib
             // 
@@ -320,7 +320,7 @@
             this.Controls.Add(this.labelPost);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.labelOib);
-            this.Controls.Add(this.checkBoxSeller);
+            this.Controls.Add(this.checkBoxSupplier);
             this.Controls.Add(this.checkBoxBuyer);
             this.Controls.Add(this.textBoxMbo);
             this.Controls.Add(this.textBoxIban);
@@ -355,7 +355,7 @@
         private System.Windows.Forms.TextBox textBoxIban;
         private System.Windows.Forms.TextBox textBoxMbo;
         private System.Windows.Forms.CheckBox checkBoxBuyer;
-        private System.Windows.Forms.CheckBox checkBoxSeller;
+        private System.Windows.Forms.CheckBox checkBoxSupplier;
         private System.Windows.Forms.Label labelOib;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Label labelPost;
