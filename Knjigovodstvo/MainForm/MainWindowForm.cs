@@ -1,6 +1,7 @@
 ﻿using Knjigovodstvo.BankStatements;
 using Knjigovodstvo.City;
 using Knjigovodstvo.Employee;
+using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Gui;
 using Knjigovodstvo.IRA;
 using Knjigovodstvo.JoppdDocument;
@@ -185,6 +186,20 @@ namespace Knjigovodstvo.MainForm
             else
             {
                 _openForm.Open(new IzvodiPregledForm(), this);
+            }
+        }
+
+        private void ShowNewFormKontniPlanPregledForm(object sender, EventArgs e)
+        {
+            string formName = ChildWindowName.KontniPlanPregledForm.ToString();
+            if (_isOpen.Check(MdiChildren, formName))
+            {
+                Form f = _isOpen.GetChild(MdiChildren, formName);
+                f.Focus();
+            }
+            else
+            {
+                _openForm.Open(new KontniPlanPregledForm(), this);
             }
         }
 

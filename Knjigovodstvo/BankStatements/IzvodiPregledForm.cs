@@ -47,7 +47,9 @@ namespace Knjigovodstvo.BankStatements
         private void CreateIzvodKnjigaElement()
         {
             _izvodKnjiga = new IzvodKnjiga();
-            _izvodKnjiga.Datum_izvoda = DateTime.ParseExact(_izvodi.Izvod.DatumIzvoda, ("yyyyMMdd"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+            _izvodKnjiga.Datum_izvoda = DateTime
+                .ParseExact(_izvodi.Izvod.DatumIzvoda, ("yyyyMMdd"), CultureInfo.InvariantCulture)
+                .ToString("yyyy-MM-dd");
             _izvodKnjiga.Redni_broj = int.Parse(_izvodi.Izvod.RedniBroj);
             _izvodKnjiga.Suma_potrazna = decimal.Parse(_izvodi.Izvod.Sekcije.Sekcija.PStrana.UkupnaSuma);
             _izvodKnjiga.Suma_dugovna = decimal.Parse(_izvodi.Izvod.Sekcije.Sekcija.DStrana.UkupnaSuma);

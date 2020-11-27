@@ -68,6 +68,8 @@ namespace Knjigovodstvo.MainForm
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.menuFinancijsko = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuKontniPlan = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +81,7 @@ namespace Knjigovodstvo.MainForm
             this.menuKnjige,
             this.menuPlaca,
             this.izvodiMenu,
+            this.menuFinancijsko,
             this.prozoriMenu,
             this.helpMenu});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
@@ -354,6 +357,21 @@ namespace Knjigovodstvo.MainForm
             this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
+            // menuFinancijsko
+            // 
+            this.menuFinancijsko.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuKontniPlan});
+            this.menuFinancijsko.Name = "menuFinancijsko";
+            this.menuFinancijsko.Size = new System.Drawing.Size(78, 20);
+            this.menuFinancijsko.Text = "Financijsko";
+            // 
+            // menuKontniPlan
+            // 
+            this.menuKontniPlan.Name = "menuKontniPlan";
+            this.menuKontniPlan.Size = new System.Drawing.Size(135, 22);
+            this.menuKontniPlan.Text = "Kontni Plan";
+            this.menuKontniPlan.Click += new System.EventHandler(this.ShowNewFormKontniPlanPregledForm);
+            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -413,6 +431,8 @@ namespace Knjigovodstvo.MainForm
         private System.Windows.Forms.ToolStripMenuItem menuPrimke;
         private System.Windows.Forms.ToolStripMenuItem menuUraKnjiga;
         private System.Windows.Forms.ToolStripMenuItem menuIraKnjiga;
+        private System.Windows.Forms.ToolStripMenuItem menuFinancijsko;
+        private System.Windows.Forms.ToolStripMenuItem menuKontniPlan;
     }
 }
 
