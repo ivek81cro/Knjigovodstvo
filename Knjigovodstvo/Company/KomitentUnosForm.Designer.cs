@@ -70,12 +70,36 @@
             this.textBoxOib.Size = new System.Drawing.Size(251, 23);
             this.textBoxOib.TabIndex = 0;
             // 
+            // textBoxName
+            // 
+            this.textBoxName.Location = new System.Drawing.Point(75, 81);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(251, 23);
+            this.textBoxName.TabIndex = 1;
+            // 
             // textBoxStreet
             // 
             this.textBoxStreet.Location = new System.Drawing.Point(75, 112);
             this.textBoxStreet.Name = "textBoxStreet";
             this.textBoxStreet.Size = new System.Drawing.Size(251, 23);
             this.textBoxStreet.TabIndex = 2;
+            // 
+            // textBoxUlicaBroj
+            // 
+            this.textBoxUlicaBroj.Location = new System.Drawing.Point(75, 141);
+            this.textBoxUlicaBroj.Name = "textBoxUlicaBroj";
+            this.textBoxUlicaBroj.Size = new System.Drawing.Size(251, 23);
+            this.textBoxUlicaBroj.TabIndex = 3;
+            // 
+            // buttonSelectCity
+            // 
+            this.buttonSelectCity.Location = new System.Drawing.Point(251, 185);
+            this.buttonSelectCity.Name = "buttonSelectCity";
+            this.buttonSelectCity.Size = new System.Drawing.Size(75, 23);
+            this.buttonSelectCity.TabIndex = 4;
+            this.buttonSelectCity.Text = "Odaberi";
+            this.buttonSelectCity.UseVisualStyleBackColor = true;
+            this.buttonSelectCity.Click += new System.EventHandler(this.ButtonSelectCity_Click);
             // 
             // textBoxPost
             // 
@@ -84,7 +108,6 @@
             this.textBoxPost.Name = "textBoxPost";
             this.textBoxPost.ReadOnly = true;
             this.textBoxPost.Size = new System.Drawing.Size(161, 23);
-            this.textBoxPost.TabIndex = 0;
             this.textBoxPost.TabStop = false;
             // 
             // textBoxCity
@@ -93,7 +116,6 @@
             this.textBoxCity.Name = "textBoxCity";
             this.textBoxCity.ReadOnly = true;
             this.textBoxCity.Size = new System.Drawing.Size(161, 23);
-            this.textBoxCity.TabIndex = 0;
             this.textBoxCity.TabStop = false;
             // 
             // textBoxPhone
@@ -101,21 +123,21 @@
             this.textBoxPhone.Location = new System.Drawing.Point(75, 232);
             this.textBoxPhone.Name = "textBoxPhone";
             this.textBoxPhone.Size = new System.Drawing.Size(251, 23);
-            this.textBoxPhone.TabIndex = 4;
+            this.textBoxPhone.TabIndex = 5;
             // 
             // textBoxFax
             // 
             this.textBoxFax.Location = new System.Drawing.Point(75, 263);
             this.textBoxFax.Name = "textBoxFax";
             this.textBoxFax.Size = new System.Drawing.Size(251, 23);
-            this.textBoxFax.TabIndex = 5;
+            this.textBoxFax.TabIndex = 6;
             // 
             // textBoxEmail
             // 
             this.textBoxEmail.Location = new System.Drawing.Point(75, 294);
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(251, 23);
-            this.textBoxEmail.TabIndex = 6;
+            this.textBoxEmail.TabIndex = 7;
             // 
             // textBoxIban
             // 
@@ -123,109 +145,43 @@
             this.textBoxIban.MaxLength = 21;
             this.textBoxIban.Name = "textBoxIban";
             this.textBoxIban.Size = new System.Drawing.Size(251, 23);
-            this.textBoxIban.TabIndex = 7;
+            this.textBoxIban.TabIndex = 8;
+            // 
+            // textBoxMbo
+            // 
+            this.textBoxMbo.Location = new System.Drawing.Point(75, 354);
+            this.textBoxMbo.Name = "textBoxMbo";
+            this.textBoxMbo.Size = new System.Drawing.Size(251, 23);
+            this.textBoxMbo.TabIndex = 9;
+            // 
+            // textBoxType
+            // 
+            this.textBoxType.Location = new System.Drawing.Point(115, 385);
+            this.textBoxType.Name = "textBoxType";
+            this.textBoxType.Size = new System.Drawing.Size(211, 23);
+            this.textBoxType.TabIndex = 10;
+            // 
+            // textBoxCode
+            // 
+            this.textBoxCode.Location = new System.Drawing.Point(115, 416);
+            this.textBoxCode.MaxLength = 21;
+            this.textBoxCode.Name = "textBoxCode";
+            this.textBoxCode.Size = new System.Drawing.Size(211, 23);
+            this.textBoxCode.TabIndex = 11;
             // 
             // textBoxTypeName
             // 
             this.textBoxTypeName.Location = new System.Drawing.Point(115, 445);
             this.textBoxTypeName.Name = "textBoxTypeName";
             this.textBoxTypeName.Size = new System.Drawing.Size(211, 23);
-            this.textBoxTypeName.TabIndex = 11;
-            // 
-            // textBoxName
-            // 
-            this.textBoxName.Location = new System.Drawing.Point(75, 81);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(251, 23);
-            this.textBoxName.TabIndex = 1;
-            // 
-            // labelOib
-            // 
-            this.labelOib.AutoSize = true;
-            this.labelOib.Location = new System.Drawing.Point(18, 53);
-            this.labelOib.Name = "labelOib";
-            this.labelOib.Size = new System.Drawing.Size(26, 15);
-            this.labelOib.TabIndex = 2;
-            this.labelOib.Text = "OIB";
-            // 
-            // labelPost
-            // 
-            this.labelPost.AutoSize = true;
-            this.labelPost.Location = new System.Drawing.Point(18, 173);
-            this.labelPost.Name = "labelPost";
-            this.labelPost.Size = new System.Drawing.Size(36, 15);
-            this.labelPost.TabIndex = 2;
-            this.labelPost.Text = "Pošta";
-            // 
-            // labelCity
-            // 
-            this.labelCity.AutoSize = true;
-            this.labelCity.Location = new System.Drawing.Point(18, 204);
-            this.labelCity.Name = "labelCity";
-            this.labelCity.Size = new System.Drawing.Size(32, 15);
-            this.labelCity.TabIndex = 2;
-            this.labelCity.Text = "Grad";
-            // 
-            // labelPhone
-            // 
-            this.labelPhone.AutoSize = true;
-            this.labelPhone.Location = new System.Drawing.Point(18, 235);
-            this.labelPhone.Name = "labelPhone";
-            this.labelPhone.Size = new System.Drawing.Size(45, 15);
-            this.labelPhone.TabIndex = 2;
-            this.labelPhone.Text = "Telefon";
-            // 
-            // labelFax
-            // 
-            this.labelFax.AutoSize = true;
-            this.labelFax.Location = new System.Drawing.Point(18, 266);
-            this.labelFax.Name = "labelFax";
-            this.labelFax.Size = new System.Drawing.Size(25, 15);
-            this.labelFax.TabIndex = 2;
-            this.labelFax.Text = "Fax";
-            // 
-            // labelEmail
-            // 
-            this.labelEmail.AutoSize = true;
-            this.labelEmail.Location = new System.Drawing.Point(18, 297);
-            this.labelEmail.Name = "labelEmail";
-            this.labelEmail.Size = new System.Drawing.Size(36, 15);
-            this.labelEmail.TabIndex = 2;
-            this.labelEmail.Text = "Email";
-            // 
-            // labelIban
-            // 
-            this.labelIban.AutoSize = true;
-            this.labelIban.Location = new System.Drawing.Point(18, 328);
-            this.labelIban.Name = "labelIban";
-            this.labelIban.Size = new System.Drawing.Size(34, 15);
-            this.labelIban.TabIndex = 2;
-            this.labelIban.Text = "IBAN";
-            // 
-            // labelTypeName
-            // 
-            this.labelTypeName.AutoSize = true;
-            this.labelTypeName.Location = new System.Drawing.Point(18, 448);
-            this.labelTypeName.Name = "labelTypeName";
-            this.labelTypeName.Size = new System.Drawing.Size(94, 15);
-            this.labelTypeName.TabIndex = 2;
-            this.labelTypeName.Text = "Naziv djelatnosti";
-            // 
-            // labelStreet
-            // 
-            this.labelStreet.AutoSize = true;
-            this.labelStreet.Location = new System.Drawing.Point(18, 115);
-            this.labelStreet.Name = "labelStreet";
-            this.labelStreet.Size = new System.Drawing.Size(33, 15);
-            this.labelStreet.TabIndex = 2;
-            this.labelStreet.Text = "Ulica";
+            this.textBoxTypeName.TabIndex = 12;
             // 
             // buttonSave
             // 
             this.buttonSave.Location = new System.Drawing.Point(23, 494);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 25);
-            this.buttonSave.TabIndex = 12;
+            this.buttonSave.TabIndex = 13;
             this.buttonSave.Text = "Spremi";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
@@ -235,10 +191,82 @@
             this.buttonClose.Location = new System.Drawing.Point(303, 494);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 25);
-            this.buttonClose.TabIndex = 13;
+            this.buttonClose.TabIndex = 14;
             this.buttonClose.Text = "Zatvori";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
+            // 
+            // labelOib
+            // 
+            this.labelOib.AutoSize = true;
+            this.labelOib.Location = new System.Drawing.Point(18, 53);
+            this.labelOib.Name = "labelOib";
+            this.labelOib.Size = new System.Drawing.Size(26, 15);
+            this.labelOib.Text = "OIB";
+            // 
+            // labelPost
+            // 
+            this.labelPost.AutoSize = true;
+            this.labelPost.Location = new System.Drawing.Point(18, 173);
+            this.labelPost.Name = "labelPost";
+            this.labelPost.Size = new System.Drawing.Size(36, 15);
+            this.labelPost.Text = "Pošta";
+            // 
+            // labelCity
+            // 
+            this.labelCity.AutoSize = true;
+            this.labelCity.Location = new System.Drawing.Point(18, 204);
+            this.labelCity.Name = "labelCity";
+            this.labelCity.Size = new System.Drawing.Size(32, 15);
+            this.labelCity.Text = "Grad";
+            // 
+            // labelPhone
+            // 
+            this.labelPhone.AutoSize = true;
+            this.labelPhone.Location = new System.Drawing.Point(18, 235);
+            this.labelPhone.Name = "labelPhone";
+            this.labelPhone.Size = new System.Drawing.Size(45, 15);
+            this.labelPhone.Text = "Telefon";
+            // 
+            // labelFax
+            // 
+            this.labelFax.AutoSize = true;
+            this.labelFax.Location = new System.Drawing.Point(18, 266);
+            this.labelFax.Name = "labelFax";
+            this.labelFax.Size = new System.Drawing.Size(25, 15);
+            this.labelFax.Text = "Fax";
+            // 
+            // labelEmail
+            // 
+            this.labelEmail.AutoSize = true;
+            this.labelEmail.Location = new System.Drawing.Point(18, 297);
+            this.labelEmail.Name = "labelEmail";
+            this.labelEmail.Size = new System.Drawing.Size(36, 15);
+            this.labelEmail.Text = "Email";
+            // 
+            // labelIban
+            // 
+            this.labelIban.AutoSize = true;
+            this.labelIban.Location = new System.Drawing.Point(18, 328);
+            this.labelIban.Name = "labelIban";
+            this.labelIban.Size = new System.Drawing.Size(34, 15);
+            this.labelIban.Text = "IBAN";
+            // 
+            // labelTypeName
+            // 
+            this.labelTypeName.AutoSize = true;
+            this.labelTypeName.Location = new System.Drawing.Point(18, 448);
+            this.labelTypeName.Name = "labelTypeName";
+            this.labelTypeName.Size = new System.Drawing.Size(94, 15);
+            this.labelTypeName.Text = "Naziv djelatnosti";
+            // 
+            // labelStreet
+            // 
+            this.labelStreet.AutoSize = true;
+            this.labelStreet.Location = new System.Drawing.Point(18, 115);
+            this.labelStreet.Name = "labelStreet";
+            this.labelStreet.Size = new System.Drawing.Size(33, 15);
+            this.labelStreet.Text = "Ulica";
             // 
             // labelName
             // 
@@ -246,18 +274,7 @@
             this.labelName.Location = new System.Drawing.Point(18, 84);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(36, 15);
-            this.labelName.TabIndex = 2;
             this.labelName.Text = "Naziv";
-            // 
-            // buttonSelectCity
-            // 
-            this.buttonSelectCity.Location = new System.Drawing.Point(251, 185);
-            this.buttonSelectCity.Name = "buttonSelectCity";
-            this.buttonSelectCity.Size = new System.Drawing.Size(75, 23);
-            this.buttonSelectCity.TabIndex = 3;
-            this.buttonSelectCity.Text = "Odaberi";
-            this.buttonSelectCity.UseVisualStyleBackColor = true;
-            this.buttonSelectCity.Click += new System.EventHandler(this.ButtonSelectCity_Click);
             // 
             // labelCode
             // 
@@ -265,7 +282,6 @@
             this.labelCode.Location = new System.Drawing.Point(18, 419);
             this.labelCode.Name = "labelCode";
             this.labelCode.Size = new System.Drawing.Size(88, 15);
-            this.labelCode.TabIndex = 2;
             this.labelCode.Text = "Šifra djelatnosti";
             // 
             // labelType
@@ -274,7 +290,6 @@
             this.labelType.Location = new System.Drawing.Point(18, 388);
             this.labelType.Name = "labelType";
             this.labelType.Size = new System.Drawing.Size(91, 15);
-            this.labelType.TabIndex = 2;
             this.labelType.Text = "Vrsta djelatnosti";
             // 
             // labelMbo
@@ -283,30 +298,7 @@
             this.labelMbo.Location = new System.Drawing.Point(18, 357);
             this.labelMbo.Name = "labelMbo";
             this.labelMbo.Size = new System.Drawing.Size(32, 15);
-            this.labelMbo.TabIndex = 2;
-            this.labelMbo.Text = "Mbo";
-            // 
-            // textBoxCode
-            // 
-            this.textBoxCode.Location = new System.Drawing.Point(115, 416);
-            this.textBoxCode.MaxLength = 21;
-            this.textBoxCode.Name = "textBoxCode";
-            this.textBoxCode.Size = new System.Drawing.Size(211, 23);
-            this.textBoxCode.TabIndex = 10;
-            // 
-            // textBoxType
-            // 
-            this.textBoxType.Location = new System.Drawing.Point(115, 385);
-            this.textBoxType.Name = "textBoxType";
-            this.textBoxType.Size = new System.Drawing.Size(211, 23);
-            this.textBoxType.TabIndex = 9;
-            // 
-            // textBoxMbo
-            // 
-            this.textBoxMbo.Location = new System.Drawing.Point(75, 354);
-            this.textBoxMbo.Name = "textBoxMbo";
-            this.textBoxMbo.Size = new System.Drawing.Size(251, 23);
-            this.textBoxMbo.TabIndex = 8;
+            this.labelMbo.Text = "Mbo";            
             // 
             // labelMessage
             // 
@@ -314,14 +306,6 @@
             this.labelMessage.Location = new System.Drawing.Point(18, 13);
             this.labelMessage.Name = "labelMessage";
             this.labelMessage.Size = new System.Drawing.Size(0, 15);
-            this.labelMessage.TabIndex = 14;
-            // 
-            // textBoxUlicaBroj
-            // 
-            this.textBoxUlicaBroj.Location = new System.Drawing.Point(75, 141);
-            this.textBoxUlicaBroj.Name = "textBoxUlicaBroj";
-            this.textBoxUlicaBroj.Size = new System.Drawing.Size(251, 23);
-            this.textBoxUlicaBroj.TabIndex = 2;
             // 
             // labelUlicaBroj
             // 
@@ -329,7 +313,6 @@
             this.labelUlicaBroj.Location = new System.Drawing.Point(18, 144);
             this.labelUlicaBroj.Name = "labelUlicaBroj";
             this.labelUlicaBroj.Size = new System.Drawing.Size(28, 15);
-            this.labelUlicaBroj.TabIndex = 2;
             this.labelUlicaBroj.Text = "Broj";
             // 
             // KomitentUnosForm

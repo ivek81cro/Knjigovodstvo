@@ -56,7 +56,6 @@ namespace Knjigovodstvo.Payroll
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(779, 288);
-            this.dataGridView1.TabIndex = 8;
             this.dataGridView1.Text = "dataGridView1";
             // 
             // labelOdabirZaposlenika

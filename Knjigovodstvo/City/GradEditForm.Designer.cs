@@ -45,50 +45,7 @@
             this.textBoxSifra = new System.Windows.Forms.TextBox();
             this.labelSifra = new System.Windows.Forms.Label();
             this.checkBoxNoviGrad = new System.Windows.Forms.CheckBox();
-            this.SuspendLayout();
-            // 
-            // labelNaziv
-            // 
-            this.labelNaziv.AutoSize = true;
-            this.labelNaziv.Location = new System.Drawing.Point(12, 73);
-            this.labelNaziv.Name = "labelNaziv";
-            this.labelNaziv.Size = new System.Drawing.Size(32, 15);
-            this.labelNaziv.TabIndex = 0;
-            this.labelNaziv.Text = "Grad";
-            // 
-            // labelPosta
-            // 
-            this.labelPosta.AutoSize = true;
-            this.labelPosta.Location = new System.Drawing.Point(12, 102);
-            this.labelPosta.Name = "labelPosta";
-            this.labelPosta.Size = new System.Drawing.Size(36, 15);
-            this.labelPosta.TabIndex = 0;
-            this.labelPosta.Text = "Pošta";
-            // 
-            // labelZupanija
-            // 
-            this.labelZupanija.AutoSize = true;
-            this.labelZupanija.Location = new System.Drawing.Point(12, 44);
-            this.labelZupanija.Name = "labelZupanija";
-            this.labelZupanija.Size = new System.Drawing.Size(53, 15);
-            this.labelZupanija.TabIndex = 0;
-            this.labelZupanija.Text = "Županija";
-            // 
-            // labelDrzava
-            // 
-            this.labelDrzava.AutoSize = true;
-            this.labelDrzava.Location = new System.Drawing.Point(12, 15);
-            this.labelDrzava.Name = "labelDrzava";
-            this.labelDrzava.Size = new System.Drawing.Size(42, 15);
-            this.labelDrzava.TabIndex = 0;
-            this.labelDrzava.Text = "Država";
-            // 
-            // comboBoxPosta
-            // 
-            this.comboBoxPosta.Location = new System.Drawing.Point(68, 99);
-            this.comboBoxPosta.Name = "comboBoxPosta";
-            this.comboBoxPosta.Size = new System.Drawing.Size(96, 23);
-            this.comboBoxPosta.TabIndex = 3;
+            this.SuspendLayout();            
             // 
             // textBoxDrzava
             // 
@@ -98,26 +55,6 @@
             this.textBoxDrzava.Size = new System.Drawing.Size(240, 23);
             this.textBoxDrzava.TabIndex = 0;
             this.textBoxDrzava.Text = "Hrvatska";
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(13, 239);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 5;
-            this.btnSave.Text = "Spremi";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
-            // 
-            // btnOdaberi
-            // 
-            this.btnOdaberi.Location = new System.Drawing.Point(337, 239);
-            this.btnOdaberi.Name = "btnOdaberi";
-            this.btnOdaberi.Size = new System.Drawing.Size(75, 23);
-            this.btnOdaberi.TabIndex = 6;
-            this.btnOdaberi.Text = "Zatvori";
-            this.btnOdaberi.UseVisualStyleBackColor = true;
-            this.btnOdaberi.Click += new System.EventHandler(this.BtnOdaberi_Click);
             // 
             // comboBoxZupanija
             // 
@@ -138,6 +75,59 @@
             this.comboBoxGrad.TabIndex = 2;
             this.comboBoxGrad.SelectionChangeCommitted += new System.EventHandler(this.ComboBoxGrad_SelectionChangeCommitted);
             // 
+            // checkBoxNoviGrad
+            // 
+            this.checkBoxNoviGrad.AutoSize = true;
+            this.checkBoxNoviGrad.Location = new System.Drawing.Point(314, 72);
+            this.checkBoxNoviGrad.Name = "checkBoxNoviGrad";
+            this.checkBoxNoviGrad.Size = new System.Drawing.Size(56, 19);
+            this.checkBoxNoviGrad.TabIndex = 3;
+            this.checkBoxNoviGrad.Text = "Novi?";
+            this.checkBoxNoviGrad.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxPosta
+            // 
+            this.comboBoxPosta.Location = new System.Drawing.Point(68, 99);
+            this.comboBoxPosta.Name = "comboBoxPosta";
+            this.comboBoxPosta.Size = new System.Drawing.Size(96, 23);
+            this.comboBoxPosta.TabIndex = 4;
+            // 
+            // textBoxPrirez
+            // 
+            this.textBoxPrirez.Location = new System.Drawing.Point(68, 128);
+            this.textBoxPrirez.Name = "textBoxPrirez";
+            this.textBoxPrirez.Size = new System.Drawing.Size(96, 23);
+            this.textBoxPrirez.TabIndex = 5;
+            this.textBoxPrirez.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            // 
+            // textBoxSifra
+            // 
+            this.textBoxSifra.Location = new System.Drawing.Point(68, 157);
+            this.textBoxSifra.Name = "textBoxSifra";
+            this.textBoxSifra.Size = new System.Drawing.Size(96, 23);
+            this.textBoxSifra.TabIndex = 6;
+            this.textBoxSifra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(13, 239);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 7;
+            this.btnSave.Text = "Spremi";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            // 
+            // btnOdaberi
+            // 
+            this.btnOdaberi.Location = new System.Drawing.Point(337, 239);
+            this.btnOdaberi.Name = "btnOdaberi";
+            this.btnOdaberi.Size = new System.Drawing.Size(75, 23);
+            this.btnOdaberi.TabIndex = 8;
+            this.btnOdaberi.Text = "Zatvori";
+            this.btnOdaberi.UseVisualStyleBackColor = true;
+            this.btnOdaberi.Click += new System.EventHandler(this.BtnOdaberi_Click);
+            // 
             // labelUpozorenja
             // 
             this.labelUpozorenja.AutoSize = true;
@@ -146,16 +136,7 @@
             this.labelUpozorenja.Location = new System.Drawing.Point(13, 184);
             this.labelUpozorenja.Name = "labelUpozorenja";
             this.labelUpozorenja.Size = new System.Drawing.Size(106, 21);
-            this.labelUpozorenja.TabIndex = 5;
             this.labelUpozorenja.Text = "Warning label";
-            // 
-            // textBoxPrirez
-            // 
-            this.textBoxPrirez.Location = new System.Drawing.Point(68, 128);
-            this.textBoxPrirez.Name = "textBoxPrirez";
-            this.textBoxPrirez.Size = new System.Drawing.Size(96, 23);
-            this.textBoxPrirez.TabIndex = 4;
-            this.textBoxPrirez.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // labelPrirez
             // 
@@ -163,7 +144,6 @@
             this.labelPrirez.Location = new System.Drawing.Point(12, 131);
             this.labelPrirez.Name = "labelPrirez";
             this.labelPrirez.Size = new System.Drawing.Size(36, 15);
-            this.labelPrirez.TabIndex = 0;
             this.labelPrirez.Text = "Prirez";
             // 
             // label2
@@ -173,16 +153,7 @@
             this.label2.Location = new System.Drawing.Point(164, 131);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(17, 15);
-            this.label2.TabIndex = 0;
             this.label2.Text = "%";
-            // 
-            // textBoxSifra
-            // 
-            this.textBoxSifra.Location = new System.Drawing.Point(68, 157);
-            this.textBoxSifra.Name = "textBoxSifra";
-            this.textBoxSifra.Size = new System.Drawing.Size(96, 23);
-            this.textBoxSifra.TabIndex = 4;
-            this.textBoxSifra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // labelSifra
             // 
@@ -190,18 +161,39 @@
             this.labelSifra.Location = new System.Drawing.Point(12, 160);
             this.labelSifra.Name = "labelSifra";
             this.labelSifra.Size = new System.Drawing.Size(30, 15);
-            this.labelSifra.TabIndex = 0;
             this.labelSifra.Text = "Šifra";
             // 
-            // checkBoxNoviGrad
+            // labelNaziv
             // 
-            this.checkBoxNoviGrad.AutoSize = true;
-            this.checkBoxNoviGrad.Location = new System.Drawing.Point(314, 72);
-            this.checkBoxNoviGrad.Name = "checkBoxNoviGrad";
-            this.checkBoxNoviGrad.Size = new System.Drawing.Size(56, 19);
-            this.checkBoxNoviGrad.TabIndex = 7;
-            this.checkBoxNoviGrad.Text = "Novi?";
-            this.checkBoxNoviGrad.UseVisualStyleBackColor = true;
+            this.labelNaziv.AutoSize = true;
+            this.labelNaziv.Location = new System.Drawing.Point(12, 73);
+            this.labelNaziv.Name = "labelNaziv";
+            this.labelNaziv.Size = new System.Drawing.Size(32, 15);
+            this.labelNaziv.Text = "Grad";
+            // 
+            // labelPosta
+            // 
+            this.labelPosta.AutoSize = true;
+            this.labelPosta.Location = new System.Drawing.Point(12, 102);
+            this.labelPosta.Name = "labelPosta";
+            this.labelPosta.Size = new System.Drawing.Size(36, 15);
+            this.labelPosta.Text = "Pošta";
+            // 
+            // labelZupanija
+            // 
+            this.labelZupanija.AutoSize = true;
+            this.labelZupanija.Location = new System.Drawing.Point(12, 44);
+            this.labelZupanija.Name = "labelZupanija";
+            this.labelZupanija.Size = new System.Drawing.Size(53, 15);
+            this.labelZupanija.Text = "Županija";
+            // 
+            // labelDrzava
+            // 
+            this.labelDrzava.AutoSize = true;
+            this.labelDrzava.Location = new System.Drawing.Point(12, 15);
+            this.labelDrzava.Name = "labelDrzava";
+            this.labelDrzava.Size = new System.Drawing.Size(42, 15);
+            this.labelDrzava.Text = "Država";
             // 
             // GradUnosForm
             // 

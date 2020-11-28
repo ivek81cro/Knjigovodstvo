@@ -83,7 +83,6 @@
             this.textBoxId.Name = "textBoxId";
             this.textBoxId.ReadOnly = true;
             this.textBoxId.Size = new System.Drawing.Size(111, 23);
-            this.textBoxId.TabIndex = 4;
             // 
             // textBoxNaziv
             // 
@@ -91,7 +90,6 @@
             this.textBoxNaziv.Name = "textBoxNaziv";
             this.textBoxNaziv.ReadOnly = true;
             this.textBoxNaziv.Size = new System.Drawing.Size(111, 23);
-            this.textBoxNaziv.TabIndex = 4;
             // 
             // textBoxVrsta
             // 
@@ -99,14 +97,13 @@
             this.textBoxVrsta.Name = "textBoxVrsta";
             this.textBoxVrsta.ReadOnly = true;
             this.textBoxVrsta.Size = new System.Drawing.Size(111, 23);
-            this.textBoxVrsta.TabIndex = 4;
             // 
             // textBoxVrijednost
             // 
             this.textBoxVrijednost.Location = new System.Drawing.Point(98, 149);
             this.textBoxVrijednost.Name = "textBoxVrijednost";
             this.textBoxVrijednost.Size = new System.Drawing.Size(111, 23);
-            this.textBoxVrijednost.TabIndex = 4;
+            this.textBoxVrijednost.TabIndex = 0;
             this.textBoxVrijednost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // buttonSave
@@ -114,7 +111,7 @@
             this.buttonSave.Location = new System.Drawing.Point(12, 266);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 5;
+            this.buttonSave.TabIndex = 1;
             this.buttonSave.Text = "Spremi";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
@@ -124,7 +121,7 @@
             this.buttonClose.Location = new System.Drawing.Point(183, 266);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
-            this.buttonClose.TabIndex = 5;
+            this.buttonClose.TabIndex = 2;
             this.buttonClose.Text = "Zatvori";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
@@ -136,7 +133,6 @@
             this.labelMessage.Location = new System.Drawing.Point(13, 192);
             this.labelMessage.Name = "labelMessage";
             this.labelMessage.Size = new System.Drawing.Size(100, 20);
-            this.labelMessage.TabIndex = 6;
             this.labelMessage.Text = "labelMessage";
             // 
             // PostavkePromjenaForm

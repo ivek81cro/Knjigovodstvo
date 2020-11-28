@@ -104,7 +104,6 @@ namespace Knjigovodstvo.Payroll
             this.labelOdabirZaposlenika.Location = new System.Drawing.Point(333, 15);
             this.labelOdabirZaposlenika.Name = "labelOdabirZaposlenika";
             this.labelOdabirZaposlenika.Size = new System.Drawing.Size(107, 15);
-            this.labelOdabirZaposlenika.TabIndex = 1;
             this.labelOdabirZaposlenika.Text = "Odabir zaposlenika";
             // 
             // labelBruto
@@ -113,7 +112,6 @@ namespace Knjigovodstvo.Payroll
             this.labelBruto.Location = new System.Drawing.Point(12, 62);
             this.labelBruto.Name = "labelBruto";
             this.labelBruto.Size = new System.Drawing.Size(39, 15);
-            this.labelBruto.TabIndex = 2;
             this.labelBruto.Text = "Bruto:";
             // 
             // textBoxBruto
@@ -121,7 +119,7 @@ namespace Knjigovodstvo.Payroll
             this.textBoxBruto.Location = new System.Drawing.Point(57, 59);
             this.textBoxBruto.Name = "textBoxBruto";
             this.textBoxBruto.Size = new System.Drawing.Size(150, 23);
-            this.textBoxBruto.TabIndex = 3;
+            this.textBoxBruto.TabIndex = 1;
             this.textBoxBruto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // checkBoxSamoMio1
@@ -130,7 +128,7 @@ namespace Knjigovodstvo.Payroll
             this.checkBoxSamoMio1.Location = new System.Drawing.Point(229, 61);
             this.checkBoxSamoMio1.Name = "checkBoxSamoMio1";
             this.checkBoxSamoMio1.Size = new System.Drawing.Size(213, 19);
-            this.checkBoxSamoMio1.TabIndex = 4;
+            this.checkBoxSamoMio1.TabIndex = 2;
             this.checkBoxSamoMio1.Text = "Mirovinsko osiguranje samo 1. stup";
             this.checkBoxSamoMio1.UseVisualStyleBackColor = true;
             // 
@@ -139,7 +137,7 @@ namespace Knjigovodstvo.Payroll
             this.buttonIzracunaj.Location = new System.Drawing.Point(12, 100);
             this.buttonIzracunaj.Name = "buttonIzracunaj";
             this.buttonIzracunaj.Size = new System.Drawing.Size(75, 23);
-            this.buttonIzracunaj.TabIndex = 5;
+            this.buttonIzracunaj.TabIndex = 3;
             this.buttonIzracunaj.Text = "Izračunaj";
             this.buttonIzracunaj.UseVisualStyleBackColor = true;
             this.buttonIzracunaj.Click += new System.EventHandler(this.ButtonIzracunaj_Click);
@@ -150,7 +148,6 @@ namespace Knjigovodstvo.Payroll
             this.labelMio1.Location = new System.Drawing.Point(10, 181);
             this.labelMio1.Name = "labelMio1";
             this.labelMio1.Size = new System.Drawing.Size(66, 15);
-            this.labelMio1.TabIndex = 6;
             this.labelMio1.Text = "Mio 1. stup";
             // 
             // labelMio2
@@ -159,7 +156,6 @@ namespace Knjigovodstvo.Payroll
             this.labelMio2.Location = new System.Drawing.Point(10, 214);
             this.labelMio2.Name = "labelMio2";
             this.labelMio2.Size = new System.Drawing.Size(66, 15);
-            this.labelMio2.TabIndex = 6;
             this.labelMio2.Text = "Mio 2. stup";
             // 
             // textBoxMio1
@@ -168,7 +164,6 @@ namespace Knjigovodstvo.Payroll
             this.textBoxMio1.Name = "textBoxMio1";
             this.textBoxMio1.ReadOnly = true;
             this.textBoxMio1.Size = new System.Drawing.Size(123, 23);
-            this.textBoxMio1.TabIndex = 7;
             // 
             // textBoxMio2
             // 
@@ -176,7 +171,6 @@ namespace Knjigovodstvo.Payroll
             this.textBoxMio2.Name = "textBoxMio2";
             this.textBoxMio2.ReadOnly = true;
             this.textBoxMio2.Size = new System.Drawing.Size(123, 23);
-            this.textBoxMio2.TabIndex = 7;
             // 
             // labelDohodak
             // 
@@ -184,7 +178,6 @@ namespace Knjigovodstvo.Payroll
             this.labelDohodak.Location = new System.Drawing.Point(10, 247);
             this.labelDohodak.Name = "labelDohodak";
             this.labelDohodak.Size = new System.Drawing.Size(55, 15);
-            this.labelDohodak.TabIndex = 8;
             this.labelDohodak.Text = "Dohodak";
             // 
             // textBoxDohodak
@@ -193,7 +186,6 @@ namespace Knjigovodstvo.Payroll
             this.textBoxDohodak.Name = "textBoxDohodak";
             this.textBoxDohodak.ReadOnly = true;
             this.textBoxDohodak.Size = new System.Drawing.Size(123, 23);
-            this.textBoxDohodak.TabIndex = 7;
             // 
             // labelOsobniOdbitak
             // 
@@ -201,7 +193,6 @@ namespace Knjigovodstvo.Payroll
             this.labelOsobniOdbitak.Location = new System.Drawing.Point(10, 280);
             this.labelOsobniOdbitak.Name = "labelOsobniOdbitak";
             this.labelOsobniOdbitak.Size = new System.Drawing.Size(90, 15);
-            this.labelOsobniOdbitak.TabIndex = 9;
             this.labelOsobniOdbitak.Text = "Osobni Odbitak";
             // 
             // labelPoreznaOsnovica
@@ -210,7 +201,6 @@ namespace Knjigovodstvo.Payroll
             this.labelPoreznaOsnovica.Location = new System.Drawing.Point(10, 313);
             this.labelPoreznaOsnovica.Name = "labelPoreznaOsnovica";
             this.labelPoreznaOsnovica.Size = new System.Drawing.Size(99, 15);
-            this.labelPoreznaOsnovica.TabIndex = 10;
             this.labelPoreznaOsnovica.Text = "Porezna osnovica";
             // 
             // labelPorez24
@@ -219,7 +209,6 @@ namespace Knjigovodstvo.Payroll
             this.labelPorez24.Location = new System.Drawing.Point(10, 346);
             this.labelPorez24.Name = "labelPorez24";
             this.labelPorez24.Size = new System.Drawing.Size(61, 15);
-            this.labelPorez24.TabIndex = 11;
             this.labelPorez24.Text = "Porez 24%";
             // 
             // labelPorez36
@@ -228,7 +217,6 @@ namespace Knjigovodstvo.Payroll
             this.labelPorez36.Location = new System.Drawing.Point(10, 379);
             this.labelPorez36.Name = "labelPorez36";
             this.labelPorez36.Size = new System.Drawing.Size(61, 15);
-            this.labelPorez36.TabIndex = 12;
             this.labelPorez36.Text = "Porez 36%";
             // 
             // labelPorezUkupno
@@ -237,7 +225,6 @@ namespace Knjigovodstvo.Payroll
             this.labelPorezUkupno.Location = new System.Drawing.Point(10, 412);
             this.labelPorezUkupno.Name = "labelPorezUkupno";
             this.labelPorezUkupno.Size = new System.Drawing.Size(80, 15);
-            this.labelPorezUkupno.TabIndex = 13;
             this.labelPorezUkupno.Text = "Porez ukupno";
             // 
             // labelPrirez
@@ -246,7 +233,6 @@ namespace Knjigovodstvo.Payroll
             this.labelPrirez.Location = new System.Drawing.Point(10, 445);
             this.labelPrirez.Name = "labelPrirez";
             this.labelPrirez.Size = new System.Drawing.Size(36, 15);
-            this.labelPrirez.TabIndex = 14;
             this.labelPrirez.Text = "Prirez";
             // 
             // labelUkupnoPorezPrirez
@@ -255,7 +241,6 @@ namespace Knjigovodstvo.Payroll
             this.labelUkupnoPorezPrirez.Location = new System.Drawing.Point(10, 478);
             this.labelUkupnoPorezPrirez.Name = "labelUkupnoPorezPrirez";
             this.labelUkupnoPorezPrirez.Size = new System.Drawing.Size(94, 15);
-            this.labelUkupnoPorezPrirez.TabIndex = 15;
             this.labelUkupnoPorezPrirez.Text = "Uk. porez i prirez";
             // 
             // labelNetto
@@ -264,7 +249,6 @@ namespace Knjigovodstvo.Payroll
             this.labelNetto.Location = new System.Drawing.Point(10, 511);
             this.labelNetto.Name = "labelNetto";
             this.labelNetto.Size = new System.Drawing.Size(37, 15);
-            this.labelNetto.TabIndex = 16;
             this.labelNetto.Text = "Netto";
             // 
             // labelDoprinosZdravstvo
@@ -273,7 +257,6 @@ namespace Knjigovodstvo.Payroll
             this.labelDoprinosZdravstvo.Location = new System.Drawing.Point(11, 544);
             this.labelDoprinosZdravstvo.Name = "labelDoprinosZdravstvo";
             this.labelDoprinosZdravstvo.Size = new System.Drawing.Size(108, 15);
-            this.labelDoprinosZdravstvo.TabIndex = 17;
             this.labelDoprinosZdravstvo.Text = "Doprinos zdravstvo";
             // 
             // textBoxOdbitak
@@ -282,7 +265,6 @@ namespace Knjigovodstvo.Payroll
             this.textBoxOdbitak.Name = "textBoxOdbitak";
             this.textBoxOdbitak.ReadOnly = true;
             this.textBoxOdbitak.Size = new System.Drawing.Size(123, 23);
-            this.textBoxOdbitak.TabIndex = 7;
             // 
             // textBoxPoreznaOsnovica
             // 
@@ -290,7 +272,6 @@ namespace Knjigovodstvo.Payroll
             this.textBoxPoreznaOsnovica.Name = "textBoxPoreznaOsnovica";
             this.textBoxPoreznaOsnovica.ReadOnly = true;
             this.textBoxPoreznaOsnovica.Size = new System.Drawing.Size(123, 23);
-            this.textBoxPoreznaOsnovica.TabIndex = 7;
             // 
             // textBoxPorez24
             // 
@@ -298,7 +279,6 @@ namespace Knjigovodstvo.Payroll
             this.textBoxPorez24.Name = "textBoxPorez24";
             this.textBoxPorez24.ReadOnly = true;
             this.textBoxPorez24.Size = new System.Drawing.Size(123, 23);
-            this.textBoxPorez24.TabIndex = 7;
             // 
             // textBoxPorez36
             // 
@@ -306,7 +286,6 @@ namespace Knjigovodstvo.Payroll
             this.textBoxPorez36.Name = "textBoxPorez36";
             this.textBoxPorez36.ReadOnly = true;
             this.textBoxPorez36.Size = new System.Drawing.Size(123, 23);
-            this.textBoxPorez36.TabIndex = 7;
             // 
             // textBoxPorezUkupno
             // 
@@ -314,7 +293,6 @@ namespace Knjigovodstvo.Payroll
             this.textBoxPorezUkupno.Name = "textBoxPorezUkupno";
             this.textBoxPorezUkupno.ReadOnly = true;
             this.textBoxPorezUkupno.Size = new System.Drawing.Size(123, 23);
-            this.textBoxPorezUkupno.TabIndex = 7;
             // 
             // textBoxPrirez
             // 
@@ -322,7 +300,6 @@ namespace Knjigovodstvo.Payroll
             this.textBoxPrirez.Name = "textBoxPrirez";
             this.textBoxPrirez.ReadOnly = true;
             this.textBoxPrirez.Size = new System.Drawing.Size(123, 23);
-            this.textBoxPrirez.TabIndex = 7;
             // 
             // textBoxUkupnoPorezPrirez
             // 
@@ -330,7 +307,6 @@ namespace Knjigovodstvo.Payroll
             this.textBoxUkupnoPorezPrirez.Name = "textBoxUkupnoPorezPrirez";
             this.textBoxUkupnoPorezPrirez.ReadOnly = true;
             this.textBoxUkupnoPorezPrirez.Size = new System.Drawing.Size(123, 23);
-            this.textBoxUkupnoPorezPrirez.TabIndex = 7;
             // 
             // textBoxNetto
             // 
@@ -338,7 +314,6 @@ namespace Knjigovodstvo.Payroll
             this.textBoxNetto.Name = "textBoxNetto";
             this.textBoxNetto.ReadOnly = true;
             this.textBoxNetto.Size = new System.Drawing.Size(123, 23);
-            this.textBoxNetto.TabIndex = 7;
             // 
             // textBoxDoprinosZdravstvo
             // 
@@ -346,14 +321,13 @@ namespace Knjigovodstvo.Payroll
             this.textBoxDoprinosZdravstvo.Name = "textBoxDoprinosZdravstvo";
             this.textBoxDoprinosZdravstvo.ReadOnly = true;
             this.textBoxDoprinosZdravstvo.Size = new System.Drawing.Size(123, 23);
-            this.textBoxDoprinosZdravstvo.TabIndex = 7;
             // 
             // buttonSave
             // 
             this.buttonSave.Location = new System.Drawing.Point(510, 609);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 18;
+            this.buttonSave.TabIndex = 13;
             this.buttonSave.Text = "Spremi";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
@@ -363,7 +337,7 @@ namespace Knjigovodstvo.Payroll
             this.buttonClose.Location = new System.Drawing.Point(591, 609);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
-            this.buttonClose.TabIndex = 19;
+            this.buttonClose.TabIndex = 14;
             this.buttonClose.Text = "Zatvori";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
@@ -374,7 +348,6 @@ namespace Knjigovodstvo.Payroll
             this.labelBrutoRaed.Location = new System.Drawing.Point(10, 152);
             this.labelBrutoRaed.Name = "labelBrutoRaed";
             this.labelBrutoRaed.Size = new System.Drawing.Size(36, 15);
-            this.labelBrutoRaed.TabIndex = 6;
             this.labelBrutoRaed.Text = "Bruto";
             // 
             // textBoxBrutoRead
@@ -383,14 +356,13 @@ namespace Knjigovodstvo.Payroll
             this.textBoxBrutoRead.Name = "textBoxBrutoRead";
             this.textBoxBrutoRead.ReadOnly = true;
             this.textBoxBrutoRead.Size = new System.Drawing.Size(123, 23);
-            this.textBoxBrutoRead.TabIndex = 7;
             // 
             // buttonDodaci
             // 
             this.buttonDodaci.Location = new System.Drawing.Point(6, 29);
             this.buttonDodaci.Name = "buttonDodaci";
             this.buttonDodaci.Size = new System.Drawing.Size(75, 23);
-            this.buttonDodaci.TabIndex = 20;
+            this.buttonDodaci.TabIndex = 4;
             this.buttonDodaci.Text = "Dodaci";
             this.buttonDodaci.UseVisualStyleBackColor = true;
             this.buttonDodaci.Click += new System.EventHandler(this.ButtonDodaci_Click);
@@ -401,7 +373,6 @@ namespace Knjigovodstvo.Payroll
             this.textBoxDodaci.Name = "textBoxDodaci";
             this.textBoxDodaci.ReadOnly = true;
             this.textBoxDodaci.Size = new System.Drawing.Size(123, 23);
-            this.textBoxDodaci.TabIndex = 7;
             // 
             // labelDodaci
             // 
@@ -409,7 +380,6 @@ namespace Knjigovodstvo.Payroll
             this.labelDodaci.Location = new System.Drawing.Point(6, 63);
             this.labelDodaci.Name = "labelDodaci";
             this.labelDodaci.Size = new System.Drawing.Size(88, 15);
-            this.labelDodaci.TabIndex = 21;
             this.labelDodaci.Text = "Dodaci ukupno";
             // 
             // groupBoxDodaci
@@ -420,7 +390,6 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxDodaci.Location = new System.Drawing.Point(297, 149);
             this.groupBoxDodaci.Name = "groupBoxDodaci";
             this.groupBoxDodaci.Size = new System.Drawing.Size(369, 146);
-            this.groupBoxDodaci.TabIndex = 22;
             this.groupBoxDodaci.TabStop = false;
             this.groupBoxDodaci.Text = "Dodaci na plaću";
             // 
@@ -444,7 +413,6 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxJoppd.Location = new System.Drawing.Point(297, 301);
             this.groupBoxJoppd.Name = "groupBoxJoppd";
             this.groupBoxJoppd.Size = new System.Drawing.Size(369, 287);
-            this.groupBoxJoppd.TabIndex = 22;
             this.groupBoxJoppd.TabStop = false;
             this.groupBoxJoppd.Text = "Podaci za JOPPD obrazac";
             // 
@@ -453,7 +421,7 @@ namespace Knjigovodstvo.Payroll
             this.buttonSpremiJoppdPostavke.Location = new System.Drawing.Point(213, 22);
             this.buttonSpremiJoppdPostavke.Name = "buttonSpremiJoppdPostavke";
             this.buttonSpremiJoppdPostavke.Size = new System.Drawing.Size(150, 23);
-            this.buttonSpremiJoppdPostavke.TabIndex = 6;
+            this.buttonSpremiJoppdPostavke.TabIndex = 12;
             this.buttonSpremiJoppdPostavke.Text = "Spremi JOPPD postavke";
             this.buttonSpremiJoppdPostavke.UseVisualStyleBackColor = true;
             this.buttonSpremiJoppdPostavke.Click += new System.EventHandler(this.ButtonSpremiJoppdPostavke_Click);
@@ -464,7 +432,6 @@ namespace Knjigovodstvo.Payroll
             this.labelNacinIsplate.Location = new System.Drawing.Point(133, 48);
             this.labelNacinIsplate.Name = "labelNacinIsplate";
             this.labelNacinIsplate.Size = new System.Drawing.Size(75, 15);
-            this.labelNacinIsplate.TabIndex = 5;
             this.labelNacinIsplate.Text = "Način isplate";
             // 
             // comboBoxNacinIsplate
@@ -475,7 +442,7 @@ namespace Knjigovodstvo.Payroll
             this.comboBoxNacinIsplate.Location = new System.Drawing.Point(6, 45);
             this.comboBoxNacinIsplate.Name = "comboBoxNacinIsplate";
             this.comboBoxNacinIsplate.Size = new System.Drawing.Size(121, 23);
-            this.comboBoxNacinIsplate.TabIndex = 0;
+            this.comboBoxNacinIsplate.TabIndex = 5;
             this.comboBoxNacinIsplate.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
             // 
             // labelPrimitak
@@ -484,7 +451,6 @@ namespace Knjigovodstvo.Payroll
             this.labelPrimitak.Location = new System.Drawing.Point(133, 115);
             this.labelPrimitak.Name = "labelPrimitak";
             this.labelPrimitak.Size = new System.Drawing.Size(93, 15);
-            this.labelPrimitak.TabIndex = 5;
             this.labelPrimitak.Text = "Oznaka Primitka";
             // 
             // labelStjecatelj
@@ -493,7 +459,6 @@ namespace Knjigovodstvo.Payroll
             this.labelStjecatelj.Location = new System.Drawing.Point(133, 83);
             this.labelStjecatelj.Name = "labelStjecatelj";
             this.labelStjecatelj.Size = new System.Drawing.Size(101, 15);
-            this.labelStjecatelj.TabIndex = 5;
             this.labelStjecatelj.Text = "Oznaka stjecatelja";
             // 
             // labelRadnoVrijeme
@@ -502,7 +467,6 @@ namespace Knjigovodstvo.Payroll
             this.labelRadnoVrijeme.Location = new System.Drawing.Point(133, 245);
             this.labelRadnoVrijeme.Name = "labelRadnoVrijeme";
             this.labelRadnoVrijeme.Size = new System.Drawing.Size(192, 30);
-            this.labelRadnoVrijeme.TabIndex = 4;
             this.labelRadnoVrijeme.Text = "Oznaka punog, nepunog, polovice \r\nradnog vremena";
             // 
             // labelPrviZadnjiMjesec
@@ -511,7 +475,6 @@ namespace Knjigovodstvo.Payroll
             this.labelPrviZadnjiMjesec.Location = new System.Drawing.Point(133, 212);
             this.labelPrviZadnjiMjesec.Name = "labelPrviZadnjiMjesec";
             this.labelPrviZadnjiMjesec.Size = new System.Drawing.Size(216, 30);
-            this.labelPrviZadnjiMjesec.TabIndex = 3;
             this.labelPrviZadnjiMjesec.Text = "Oznaka prvog/zadnjeg mjeseca u obv. \r\nmirovinskom osiguranju po istoj osnovi";
             // 
             // labelInvaliditet
@@ -520,7 +483,6 @@ namespace Knjigovodstvo.Payroll
             this.labelInvaliditet.Location = new System.Drawing.Point(133, 176);
             this.labelInvaliditet.Name = "labelInvaliditet";
             this.labelInvaliditet.Size = new System.Drawing.Size(227, 30);
-            this.labelInvaliditet.TabIndex = 2;
             this.labelInvaliditet.Text = "Oznaka posebnog doprinosa za poticanje \r\nzapošljavanja osoba sa invaliditetom";
             // 
             // labelOznakaDodatniMio
@@ -529,7 +491,6 @@ namespace Knjigovodstvo.Payroll
             this.labelOznakaDodatniMio.Location = new System.Drawing.Point(133, 149);
             this.labelOznakaDodatniMio.Name = "labelOznakaDodatniMio";
             this.labelOznakaDodatniMio.Size = new System.Drawing.Size(195, 15);
-            this.labelOznakaDodatniMio.TabIndex = 1;
             this.labelOznakaDodatniMio.Text = "Oznaka dodatnog doprinosa za Mio";
             // 
             // comboBoxRadnoVrijeme
@@ -540,7 +501,7 @@ namespace Knjigovodstvo.Payroll
             this.comboBoxRadnoVrijeme.Location = new System.Drawing.Point(6, 248);
             this.comboBoxRadnoVrijeme.Name = "comboBoxRadnoVrijeme";
             this.comboBoxRadnoVrijeme.Size = new System.Drawing.Size(121, 23);
-            this.comboBoxRadnoVrijeme.TabIndex = 0;
+            this.comboBoxRadnoVrijeme.TabIndex = 11;
             this.comboBoxRadnoVrijeme.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
             // 
             // comboBoxMjesecPrviZadnji
@@ -551,7 +512,7 @@ namespace Knjigovodstvo.Payroll
             this.comboBoxMjesecPrviZadnji.Location = new System.Drawing.Point(6, 214);
             this.comboBoxMjesecPrviZadnji.Name = "comboBoxMjesecPrviZadnji";
             this.comboBoxMjesecPrviZadnji.Size = new System.Drawing.Size(121, 23);
-            this.comboBoxMjesecPrviZadnji.TabIndex = 0;
+            this.comboBoxMjesecPrviZadnji.TabIndex = 10;
             this.comboBoxMjesecPrviZadnji.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
             // 
             // comboBoxInvaliditet
@@ -562,7 +523,7 @@ namespace Knjigovodstvo.Payroll
             this.comboBoxInvaliditet.Location = new System.Drawing.Point(6, 180);
             this.comboBoxInvaliditet.Name = "comboBoxInvaliditet";
             this.comboBoxInvaliditet.Size = new System.Drawing.Size(121, 23);
-            this.comboBoxInvaliditet.TabIndex = 0;
+            this.comboBoxInvaliditet.TabIndex = 9;
             this.comboBoxInvaliditet.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
             // 
             // comboBoxDodatniMio
@@ -573,7 +534,7 @@ namespace Knjigovodstvo.Payroll
             this.comboBoxDodatniMio.Location = new System.Drawing.Point(6, 146);
             this.comboBoxDodatniMio.Name = "comboBoxDodatniMio";
             this.comboBoxDodatniMio.Size = new System.Drawing.Size(121, 23);
-            this.comboBoxDodatniMio.TabIndex = 0;
+            this.comboBoxDodatniMio.TabIndex = 8;
             this.comboBoxDodatniMio.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
             // 
             // comboBoxPrimitak
@@ -584,7 +545,7 @@ namespace Knjigovodstvo.Payroll
             this.comboBoxPrimitak.Location = new System.Drawing.Point(6, 112);
             this.comboBoxPrimitak.Name = "comboBoxPrimitak";
             this.comboBoxPrimitak.Size = new System.Drawing.Size(121, 23);
-            this.comboBoxPrimitak.TabIndex = 0;
+            this.comboBoxPrimitak.TabIndex = 7;
             this.comboBoxPrimitak.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
             // 
             // comboBoxStjecatelj
@@ -595,7 +556,7 @@ namespace Knjigovodstvo.Payroll
             this.comboBoxStjecatelj.Location = new System.Drawing.Point(6, 78);
             this.comboBoxStjecatelj.Name = "comboBoxStjecatelj";
             this.comboBoxStjecatelj.Size = new System.Drawing.Size(121, 23);
-            this.comboBoxStjecatelj.TabIndex = 0;
+            this.comboBoxStjecatelj.TabIndex = 6;
             this.comboBoxStjecatelj.SelectionChangeCommitted += new System.EventHandler(this.PromjenaZaposlenikJoppd_SelectionChangeCommitted);
             // 
             // PlacaIzracunForm

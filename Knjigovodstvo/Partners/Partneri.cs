@@ -30,14 +30,23 @@ namespace Knjigovodstvo.Partners
 
         public bool InsertNew()
         {
-            SetKonto();
-
             if (new DbDataInsert().InsertData(this))
             {
+                OpciPodaci.Id = GetId();
+                SetKonto();
                 InsertNewKonto();
                 return true;
             }
             return false;
+        }
+
+        private int GetId()
+        {
+            return int.Parse(
+                new DbDataCustomQuery()
+                .ExecuteQuery($"SELECT TOP 1 Id FROM Partneri ORDER BY Id DESC;")
+                .Rows[0]["Id"]
+                .ToString());
         }
 
         private void SetKonto()
@@ -85,16 +94,14 @@ namespace Knjigovodstvo.Partners
         {
             DbDataUpdate dbUpdate = new DbDataUpdate();
             SetKonto();
-            DataTable dtD = new DbDataGet().GetTable(_kontniPlan, $"Konto = '{KontoD}'");
-            if (dtD.Rows.Count > 0 && _kontniPlan.GetKontniPlanIdByKonto(KontoD))
+            if (_kontniPlan.ExistsKonto(KontoD))
             {
                 _kontniPlan.Opis = OpciPodaci.Naziv;
                 _kontniPlan.Konto = KontoD;
                 dbUpdate.UpdateData(_kontniPlan);
             }
 
-            DataTable dtK = new DbDataGet().GetTable(_kontniPlan, $"Konto = '{KontoK}'");
-            if (dtK.Rows.Count > 0 && _kontniPlan.GetKontniPlanIdByKonto(KontoD))
+            if (_kontniPlan.ExistsKonto(KontoK))
             {
                 _kontniPlan.Opis = OpciPodaci.Naziv;
                 _kontniPlan.Konto = KontoK;

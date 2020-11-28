@@ -12,7 +12,7 @@ namespace Knjigovodstvo.FinancialReports
             throw new NotImplementedException();
         }
 
-        public bool GetKontniPlanIdByKonto(string konto)
+        public bool ExistsKonto(string konto)
         {
             DataTable dt = new DbDataGet().GetTable(this, $"Konto='{konto}'");
             if(dt.Rows.Count > 0)
