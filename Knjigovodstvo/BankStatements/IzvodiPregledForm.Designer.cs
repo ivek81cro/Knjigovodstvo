@@ -79,6 +79,7 @@ namespace Knjigovodstvo.BankStatements
             this.dataGridViewIzvodi.Size = new System.Drawing.Size(255, 482);
             this.dataGridViewIzvodi.TabIndex = 12;
             this.dataGridViewIzvodi.Text = "dataGridView2";
+            this.dataGridViewIzvodi.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewIzvodi_CellMouseDoubleClick);
             // 
             // buttonOpenIzvod
             // 

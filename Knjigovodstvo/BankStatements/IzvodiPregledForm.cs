@@ -90,6 +90,26 @@ namespace Knjigovodstvo.BankStatements
             LoadExistingIzvodi();
         }
 
+        private void OpenIzvodDetails()
+        {
+            if (dataGridViewIzvodi.SelectedRows.Count != 0)
+            {
+                DataGridViewRow row = this.dataGridViewIzvodi.SelectedRows[0];
+                int redniBroj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
+                _izvodKnjiga.GetIzvodByRedniBroj(redniBroj);
+
+                dataGridViewStavke.DataSource = _izvodKnjiga.GetPrometData();
+
+                dataGridViewStavke.Columns[0].Width = (int)(dataGridViewStavke.Width * 0.3);
+                dataGridViewStavke.Columns[1].Width = (int)(dataGridViewStavke.Width * 0.3);
+            }
+        }
+
+        private void DataGridViewIzvodi_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            OpenIzvodDetails();
+        }
+
         private void ButtonUcitajIzvod_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog
@@ -110,17 +130,7 @@ namespace Knjigovodstvo.BankStatements
 
         private void ButtonOpenIzvod_Click(object sender, EventArgs e)
         {
-            if (dataGridViewIzvodi.SelectedRows.Count != 0)
-            {
-                DataGridViewRow row = this.dataGridViewIzvodi.SelectedRows[0];
-                int redniBroj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
-                _izvodKnjiga.GetIzvodByRedniBroj(redniBroj);
-
-                dataGridViewStavke.DataSource = _izvodKnjiga.GetPrometData();
-
-                dataGridViewStavke.Columns[0].Width = (int)(dataGridViewStavke.Width * 0.3);
-                dataGridViewStavke.Columns[1].Width = (int)(dataGridViewStavke.Width * 0.3);
-            }
+            OpenIzvodDetails();
         }
 
         private void ButtonDeleteIzvod_Click(object sender, EventArgs e)
