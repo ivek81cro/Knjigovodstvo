@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Settings
 {
-    partial class PostavkeTablicaForm
+    partial class PostavkePlaceTablicaForm
     {
         /// <summary>
         /// Required designer variable.

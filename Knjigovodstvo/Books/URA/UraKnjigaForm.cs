@@ -84,6 +84,11 @@ namespace Knjigovodstvo.URA
             FixColumnHeaders();
         }
 
+        private void OpenPostavkeForm(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         private string put = "";
         private List<UraKnjiga> _listaStavki = new List<UraKnjiga>();
         private readonly int _lastRecord = 0;

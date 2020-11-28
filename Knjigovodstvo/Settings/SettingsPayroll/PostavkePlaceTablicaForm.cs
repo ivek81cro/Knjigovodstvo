@@ -4,23 +4,23 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Settings
 {
-    public partial class PostavkeTablicaForm : Form
+    public partial class PostavkePlaceTablicaForm : Form
     {
-        public PostavkeTablicaForm()
+        public PostavkePlaceTablicaForm()
         {
             InitializeComponent();
             LoadDatagrid();
         }
         private void LoadDatagrid()
         {
-            dataGridView1.DataSource = new DbDataGet().GetTable(new Postavke());
+            dataGridView1.DataSource = new DbDataGet().GetTable(new PostavkePlace());
         }
 
         private void ButtonEditPostavke_Click(object sender, EventArgs e)
         {
             int id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             _postavke.GetPostavkaById(id);
-            PostavkePromjenaForm pn = new PostavkePromjenaForm(_postavke);
+            PostavkePlacePromjenaForm pn = new PostavkePlacePromjenaForm(_postavke);
             pn.FormClosing += new FormClosingEventHandler(PostavkePromjena_FormClosing);
         }
 
@@ -29,6 +29,6 @@ namespace Knjigovodstvo.Settings
             LoadDatagrid();
         }
 
-        private Postavke _postavke = new Postavke();
+        private PostavkePlace _postavke = new PostavkePlace();
     }
 }

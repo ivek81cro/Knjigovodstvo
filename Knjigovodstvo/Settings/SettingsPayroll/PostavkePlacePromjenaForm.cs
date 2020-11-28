@@ -6,14 +6,43 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Settings
 {
-    public partial class PostavkePromjenaForm : Form
+    public partial class PostavkePlacePromjenaForm : Form
     {
-        public PostavkePromjenaForm(Postavke postavke)
+        public PostavkePlacePromjenaForm(PostavkePlace postavke)
         {
             _postavke = postavke;
             InitializeComponent();
             labelMessage.Text = "";
             EditPostavka();
+        }
+
+        private void SetMessageLabel(FormError errorType)
+        {
+            labelMessage.Text = new ProcessFormErrors().FormErrorMessage(errorType);
+        }
+
+        internal void EditPostavka()
+        {
+            textBoxId.Text = _postavke.Id.ToString();
+            textBoxNaziv.Text = _postavke.Naziv;
+            textBoxVrsta.Text = _postavke.Vrsta;
+            textBoxVrijednost.Text = _postavke.Vrijednost.ToString();
+
+            ShowDialog();
+        }
+
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
+            {
+                e.Handled = true;
+            }
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)
@@ -50,35 +79,7 @@ namespace Knjigovodstvo.Settings
                 }
             }
         }
-        private void SetMessageLabel(FormError errorType)
-        {
-            labelMessage.Text = new ProcessFormErrors().FormErrorMessage(errorType);
-        }
 
-        internal void EditPostavka()
-        {
-            textBoxId.Text = _postavke.Id.ToString();
-            textBoxNaziv.Text = _postavke.Naziv;
-            textBoxVrsta.Text = _postavke.Vrsta;
-            textBoxVrijednost.Text = _postavke.Vrijednost.ToString();
-
-            ShowDialog();
-        }
-
-        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ','))
-            {
-                e.Handled = true;
-            }
-
-            // only allow one decimal point
-            if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private readonly Postavke _postavke = new Postavke();
+        private readonly PostavkePlace _postavke = new PostavkePlace();
     }
 }

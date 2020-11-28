@@ -34,10 +34,13 @@ namespace Knjigovodstvo.URA
             this.dataGridView1 = new Knjigovodstvo.DBDataGridView();
             this.buttonUcitaj = new System.Windows.Forms.Button();
             this.buttonSpremi = new System.Windows.Forms.Button();
-            this.buttonTroskovi = new System.Windows.Forms.Button();
-            this.buttonOdobrenja = new System.Windows.Forms.Button();
-            this.knjigaFilter1 = new KnjigaFilter(dataGridView1, _columns);
+            this.buttonKnjizi = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuITroskovi = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOdobrenja = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPostavke = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -59,7 +62,7 @@ namespace Knjigovodstvo.URA
             // 
             // buttonUcitaj
             // 
-            this.buttonUcitaj.Location = new System.Drawing.Point(12, 13);
+            this.buttonUcitaj.Location = new System.Drawing.Point(12, 27);
             this.buttonUcitaj.Name = "buttonUcitaj";
             this.buttonUcitaj.Size = new System.Drawing.Size(75, 23);
             this.buttonUcitaj.TabIndex = 0;
@@ -69,7 +72,7 @@ namespace Knjigovodstvo.URA
             // 
             // buttonSpremi
             // 
-            this.buttonSpremi.Location = new System.Drawing.Point(93, 13);
+            this.buttonSpremi.Location = new System.Drawing.Point(93, 27);
             this.buttonSpremi.Name = "buttonSpremi";
             this.buttonSpremi.Size = new System.Drawing.Size(75, 23);
             this.buttonSpremi.TabIndex = 1;
@@ -77,58 +80,79 @@ namespace Knjigovodstvo.URA
             this.buttonSpremi.UseVisualStyleBackColor = true;
             this.buttonSpremi.Click += new System.EventHandler(this.ButtonSpremi_Click);
             // 
-            // buttonTroskovi
+            // buttonKnjizi
             // 
-            this.buttonTroskovi.Location = new System.Drawing.Point(174, 12);
-            this.buttonTroskovi.Name = "buttonTroskovi";
-            this.buttonTroskovi.Size = new System.Drawing.Size(75, 23);
-            this.buttonTroskovi.TabIndex = 2;
-            this.buttonTroskovi.Text = "Troškovi";
-            this.buttonTroskovi.UseVisualStyleBackColor = true;
-            this.buttonTroskovi.Click += new System.EventHandler(this.ButtonTroskovi_Click);
+            this.buttonKnjizi.Location = new System.Drawing.Point(174, 27);
+            this.buttonKnjizi.Name = "buttonKnjizi";
+            this.buttonKnjizi.Size = new System.Drawing.Size(75, 23);
+            this.buttonKnjizi.TabIndex = 12;
+            this.buttonKnjizi.Text = "Knjiži";
+            this.buttonKnjizi.UseVisualStyleBackColor = true;
             // 
-            // buttonOdobrenja
+            // menuStrip1
             // 
-            this.buttonOdobrenja.Location = new System.Drawing.Point(255, 12);
-            this.buttonOdobrenja.Name = "buttonOdobrenja";
-            this.buttonOdobrenja.Size = new System.Drawing.Size(75, 23);
-            this.buttonOdobrenja.TabIndex = 11;
-            this.buttonOdobrenja.Text = "Odobrenja";
-            this.buttonOdobrenja.UseVisualStyleBackColor = true;
-            this.buttonOdobrenja.Click += new System.EventHandler(this.ButtonOdobrenja_Click);
+            this.menuStrip1.AllowMerge = false;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuITroskovi,
+            this.menuOdobrenja,
+            this.menuPostavke});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.menuStrip1.Size = new System.Drawing.Size(1265, 24);
+            this.menuStrip1.TabIndex = 13;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // knjigaFilter1
+            // menuITroskovi
             // 
-            this.knjigaFilter1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.knjigaFilter1.Location = new System.Drawing.Point(12, 69);
-            this.knjigaFilter1.Name = "knjigaFilter1";
-            this.knjigaFilter1.Size = new System.Drawing.Size(1241, 64);
-            this.knjigaFilter1.TabIndex = 13;
+            this.menuITroskovi.Name = "menuITroskovi";
+            this.menuITroskovi.Size = new System.Drawing.Size(62, 20);
+            this.menuITroskovi.Text = "Troškovi";
+            this.menuITroskovi.Click += new System.EventHandler(this.ButtonTroskovi_Click);
+            // 
+            // menuOdobrenja
+            // 
+            this.menuOdobrenja.Name = "menuOdobrenja";
+            this.menuOdobrenja.Size = new System.Drawing.Size(75, 20);
+            this.menuOdobrenja.Text = "Odobrenja";
+            this.menuOdobrenja.Click += new System.EventHandler(this.ButtonOdobrenja_Click);
+            // 
+            // menuPostavke
+            // 
+            this.menuPostavke.Name = "menuPostavke";
+            this.menuPostavke.Size = new System.Drawing.Size(115, 20);
+            this.menuPostavke.Text = "Postavke knjiženja";
+            this.menuPostavke.Click += new System.EventHandler(this.OpenPostavkeForm);
             // 
             // UraKnjigaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 617);
-            this.Controls.Add(this.knjigaFilter1);
-            this.Controls.Add(this.buttonOdobrenja);
-            this.Controls.Add(this.buttonTroskovi);
+            this.Controls.Add(this.buttonKnjizi);
             this.Controls.Add(this.buttonSpremi);
             this.Controls.Add(this.buttonUcitaj);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "UraKnjigaForm";
             this.Text = "Knjiga ulaznih računa";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
         #endregion
         private DBDataGridView dataGridView1;
         private System.Windows.Forms.Button buttonUcitaj;
         private System.Windows.Forms.Button buttonSpremi;
-        private System.Windows.Forms.Button buttonTroskovi;
-        private System.Windows.Forms.Button buttonOdobrenja;
         private Global.KnjigaFilter knjigaFilter1;
+        private System.Windows.Forms.Button buttonKnjizi;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuITroskovi;
+        private System.Windows.Forms.ToolStripMenuItem menuOdobrenja;
+        private System.Windows.Forms.ToolStripMenuItem menuPostavke;
     }
 }

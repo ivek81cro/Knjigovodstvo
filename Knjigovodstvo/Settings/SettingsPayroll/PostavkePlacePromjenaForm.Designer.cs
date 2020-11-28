@@ -1,6 +1,6 @@
 ﻿namespace Knjigovodstvo.Settings
 {
-    partial class PostavkePromjenaForm
+    partial class PostavkePlacePromjenaForm
     {
         /// <summary>
         /// Required designer variable.

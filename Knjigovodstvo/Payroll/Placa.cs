@@ -14,7 +14,7 @@ namespace Knjigovodstvo.Payroll
 
         public Placa Izracun(decimal bruto, decimal prirez, decimal dodaci, decimal odbitak, bool drugi = false)
         {
-            Postavke p = new Postavke();
+            PostavkePlace p = new PostavkePlace();
             decimal iznos = bruto;
             Bruto = iznos;
             if (drugi)

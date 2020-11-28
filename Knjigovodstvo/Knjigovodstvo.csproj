@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Partners\PartneriTableForm.Designer.cs~RFfcf6898.TMP" />
+    <None Remove="GeneralData\Partners\PartneriTableForm.Designer.cs~RFfcf6898.TMP" />
   </ItemGroup>
 
   <ItemGroup>

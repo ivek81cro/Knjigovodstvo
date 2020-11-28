@@ -109,5 +109,6 @@ namespace Knjigovodstvo.URA
         public decimal Ukupno_uplaceno { get; set; } = 0;
         public decimal Preostalo_za_uplatit { get; set; } = 0;
         public int Dospijece_dana { get; set; } = 0;
+        public bool Knjizen { get; set; } = false;
     }
 }

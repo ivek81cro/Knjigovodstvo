@@ -45,7 +45,7 @@ namespace Knjigovodstvo.MainForm
             }
             else
             {
-                _openForm.Open(new PostavkeTablicaForm(), this);
+                _openForm.Open(new PostavkePlaceTablicaForm(), this);
                 
             }
         }
