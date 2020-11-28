@@ -39,6 +39,7 @@ namespace Knjigovodstvo.URA
             this.menuITroskovi = new System.Windows.Forms.ToolStripMenuItem();
             this.menuOdobrenja = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPostavke = new System.Windows.Forms.ToolStripMenuItem();
+            this.knjigaFilter1 = new KnjigaFilter(dataGridView1, _columns);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -124,11 +125,21 @@ namespace Knjigovodstvo.URA
             this.menuPostavke.Text = "Postavke knjiženja";
             this.menuPostavke.Click += new System.EventHandler(this.OpenPostavkeForm);
             // 
+            // knjigaFilter1
+            // 
+            this.knjigaFilter1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.knjigaFilter1.Location = new System.Drawing.Point(12, 69);
+            this.knjigaFilter1.Name = "knjigaFilter1";
+            this.knjigaFilter1.Size = new System.Drawing.Size(1241, 64);
+            this.knjigaFilter1.TabIndex = 13;
+            // 
             // UraKnjigaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 617);
+            this.Controls.Add(this.knjigaFilter1);
             this.Controls.Add(this.buttonKnjizi);
             this.Controls.Add(this.buttonSpremi);
             this.Controls.Add(this.buttonUcitaj);

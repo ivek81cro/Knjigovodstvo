@@ -1,6 +1,7 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Helpers;
+using Knjigovodstvo.Settings.SettingsBookkeeping;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -86,7 +87,8 @@ namespace Knjigovodstvo.URA
 
         private void OpenPostavkeForm(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            PostavkeKnjizenjaPregledForm form = new PostavkeKnjizenjaPregledForm("Ura");
+            form.ShowDialog();
         }
 
         private string put = "";

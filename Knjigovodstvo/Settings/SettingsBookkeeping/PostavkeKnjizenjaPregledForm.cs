@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using Knjigovodstvo.Database;
+using System;
+using System.Windows.Forms;
 
 namespace Knjigovodstvo.Settings.SettingsBookkeeping
 {
@@ -8,8 +10,15 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
         {
             _knjiga = knjiga;
             InitializeComponent();
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            dbDataGridView1.DataSource = new DbDataGet().GetTable(_postavkeKnjizenja, $"Knjiga='{_knjiga}'");
         }
 
         private readonly string _knjiga;
+        private PostavkeKnjizenja _postavkeKnjizenja = new PostavkeKnjizenja();
     }
 }

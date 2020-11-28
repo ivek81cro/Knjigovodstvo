@@ -38,17 +38,17 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             // 
             this.dbDataGridView1.AllowUserToAddRows = false;
             this.dbDataGridView1.AllowUserToDeleteRows = false;
-            this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dbDataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             this.dbDataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dbDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dbDataGridView1.Location = new System.Drawing.Point(9, 118);
+            this.dbDataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dbDataGridView1.Location = new System.Drawing.Point(9, 84);
             this.dbDataGridView1.Name = "dbDataGridView1";
             this.dbDataGridView1.ReadOnly = true;
-            this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dbDataGridView1.Size = new System.Drawing.Size(632, 459);
-            this.dbDataGridView1.TabIndex = 0;
+            this.dbDataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.dbDataGridView1.Size = new System.Drawing.Size(460, 447);
             this.dbDataGridView1.Text = "dbDataGridView1";
             // 
             // PostavkeKnjizenjaPregledForm

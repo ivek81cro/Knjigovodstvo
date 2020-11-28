@@ -10,8 +10,8 @@ namespace Knjigovodstvo.Settings
         }
 
         public int Id { get; set; } = 0;
-        public string Book { get; set; } = "";
-        public string Column_name { get; set; } = "";
+        public string Knjiga { get; set; } = "";
+        public string Naziv_stupca { get; set; } = "";
         public string Konto { get; set; } = "";
     }
 }
