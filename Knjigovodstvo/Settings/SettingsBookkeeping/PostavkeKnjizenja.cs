@@ -13,5 +13,6 @@ namespace Knjigovodstvo.Settings
         public string Knjiga { get; set; } = "";
         public string Naziv_stupca { get; set; } = "";
         public string Konto { get; set; } = "";
+        public string Strana { get; set; } = "";
     }
 }

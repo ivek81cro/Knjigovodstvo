@@ -31,6 +31,13 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
         private void InitializeComponent()
         {
             this.dbDataGridView1 = new Knjigovodstvo.DBDataGridView();
+            this.comboBoxStupac = new System.Windows.Forms.ComboBox();
+            this.labelStupac = new System.Windows.Forms.Label();
+            this.labelKonto = new System.Windows.Forms.Label();
+            this.textBoxKonto = new System.Windows.Forms.TextBox();
+            this.comboBoxStrana = new System.Windows.Forms.ComboBox();
+            this.labelStrana = new System.Windows.Forms.Label();
+            this.buttonSpremi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -38,34 +45,115 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             // 
             this.dbDataGridView1.AllowUserToAddRows = false;
             this.dbDataGridView1.AllowUserToDeleteRows = false;
-            this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dbDataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             this.dbDataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dbDataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dbDataGridView1.Location = new System.Drawing.Point(9, 84);
+            this.dbDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dbDataGridView1.Location = new System.Drawing.Point(12, 155);
             this.dbDataGridView1.Name = "dbDataGridView1";
             this.dbDataGridView1.ReadOnly = true;
-            this.dbDataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.dbDataGridView1.Size = new System.Drawing.Size(460, 447);
+            this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dbDataGridView1.Size = new System.Drawing.Size(813, 422);
+            this.dbDataGridView1.TabIndex = 0;
+            this.dbDataGridView1.TabStop = false;
             this.dbDataGridView1.Text = "dbDataGridView1";
+            // 
+            // comboBoxStupac
+            // 
+            this.comboBoxStupac.FormattingEnabled = true;
+            this.comboBoxStupac.Location = new System.Drawing.Point(105, 126);
+            this.comboBoxStupac.Name = "comboBoxStupac";
+            this.comboBoxStupac.Size = new System.Drawing.Size(175, 23);
+            this.comboBoxStupac.TabIndex = 1;
+            // 
+            // labelStupac
+            // 
+            this.labelStupac.AutoSize = true;
+            this.labelStupac.Location = new System.Drawing.Point(12, 129);
+            this.labelStupac.Name = "labelStupac";
+            this.labelStupac.Size = new System.Drawing.Size(87, 15);
+            this.labelStupac.TabIndex = 2;
+            this.labelStupac.Text = "Odaberi stupac";
+            // 
+            // labelKonto
+            // 
+            this.labelKonto.AutoSize = true;
+            this.labelKonto.Location = new System.Drawing.Point(286, 129);
+            this.labelKonto.Name = "labelKonto";
+            this.labelKonto.Size = new System.Drawing.Size(83, 15);
+            this.labelKonto.TabIndex = 3;
+            this.labelKonto.Text = "Odaberi konto";
+            // 
+            // textBoxKonto
+            // 
+            this.textBoxKonto.Location = new System.Drawing.Point(375, 126);
+            this.textBoxKonto.Name = "textBoxKonto";
+            this.textBoxKonto.PlaceholderText = "Broj konta";
+            this.textBoxKonto.Size = new System.Drawing.Size(116, 23);
+            this.textBoxKonto.TabIndex = 2;
+            this.textBoxKonto.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxKonto_MouseClick);
+            // 
+            // comboBoxStrana
+            // 
+            this.comboBoxStrana.FormattingEnabled = true;
+            this.comboBoxStrana.Items.AddRange(new object[] {
+            "Dugovna",
+            "Potražna"});
+            this.comboBoxStrana.Location = new System.Drawing.Point(543, 126);
+            this.comboBoxStrana.Name = "comboBoxStrana";
+            this.comboBoxStrana.Size = new System.Drawing.Size(89, 23);
+            this.comboBoxStrana.TabIndex = 3;
+            // 
+            // labelStrana
+            // 
+            this.labelStrana.AutoSize = true;
+            this.labelStrana.Location = new System.Drawing.Point(497, 129);
+            this.labelStrana.Name = "labelStrana";
+            this.labelStrana.Size = new System.Drawing.Size(40, 15);
+            this.labelStrana.TabIndex = 6;
+            this.labelStrana.Text = "Strana";
+            // 
+            // buttonSpremi
+            // 
+            this.buttonSpremi.Location = new System.Drawing.Point(12, 13);
+            this.buttonSpremi.Name = "buttonSpremi";
+            this.buttonSpremi.Size = new System.Drawing.Size(75, 23);
+            this.buttonSpremi.TabIndex = 0;
+            this.buttonSpremi.Text = "Spremi";
+            this.buttonSpremi.UseVisualStyleBackColor = true;
+            this.buttonSpremi.Click += new System.EventHandler(this.buttonSpremi_Click);
             // 
             // PostavkeKnjizenjaPregledForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1188, 589);
+            this.ClientSize = new System.Drawing.Size(837, 589);
+            this.Controls.Add(this.buttonSpremi);
+            this.Controls.Add(this.labelStrana);
+            this.Controls.Add(this.comboBoxStrana);
+            this.Controls.Add(this.textBoxKonto);
+            this.Controls.Add(this.labelKonto);
+            this.Controls.Add(this.labelStupac);
+            this.Controls.Add(this.comboBoxStupac);
             this.Controls.Add(this.dbDataGridView1);
             this.Name = "PostavkeKnjizenjaPregledForm";
             this.Text = "Postavke knjiženja";
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private DBDataGridView dbDataGridView1;
+        private ComboBox comboBoxStupac;
+        private Label labelStupac;
+        private Label labelKonto;
+        private TextBox textBoxKonto;
+        private ComboBox comboBoxStrana;
+        private Label labelStrana;
+        private Button buttonSpremi;
     }
 }
