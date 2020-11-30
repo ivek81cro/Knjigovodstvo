@@ -135,6 +135,11 @@ namespace Knjigovodstvo.Partners
             KontoD = dt.Rows[0]["KontoD"].ToString();
         }
 
+        public string GetKontoDByNaziv(string naziv) 
+        {
+            return new DbDataGet().GetTable(this, $"Naziv LIKE '{naziv}%'").Rows[0]["KontoD"].ToString();
+        }
+
         public OpciPodaci OpciPodaci { get; set; } = new OpciPodaci();
         public Adresa Adresa { get; set; } = new Adresa();
         public Kontakt Kontakt { get; set; } = new Kontakt();

@@ -89,6 +89,7 @@ namespace Knjigovodstvo.URA
             this.buttonKnjizi.TabIndex = 12;
             this.buttonKnjizi.Text = "Knjiži";
             this.buttonKnjizi.UseVisualStyleBackColor = true;
+            this.buttonKnjizi.Click += new System.EventHandler(this.ButtonKnjizi_Click);
             // 
             // menuStrip1
             // 

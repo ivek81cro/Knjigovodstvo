@@ -3,7 +3,7 @@
     /// <summary>
     /// Database object.
     /// </summary>
-    interface IDbObject
+    public interface IDbObject
     {
         /// <summary>
         /// Validate data.

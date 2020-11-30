@@ -52,7 +52,7 @@ namespace Knjigovodstvo.BankStatements
             this.dataGridViewStavke.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewStavke.Size = new System.Drawing.Size(859, 482);
             this.dataGridViewStavke.TabIndex = 10;
-            this.dataGridViewStavke.Text = "dataGridView1";
+            this.dataGridViewStavke.Text = "dataGridViewStavke";
             // 
             // buttonUcitajIzvod
             // 

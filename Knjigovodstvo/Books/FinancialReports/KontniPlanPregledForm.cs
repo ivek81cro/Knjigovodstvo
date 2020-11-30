@@ -48,6 +48,19 @@ namespace Knjigovodstvo.FinancialReports
             form.ShowDialog();
         }
 
+        private void DbDataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow selectedRow = dbDataGridView1.SelectedRows[0];
+            KontoBroj = selectedRow.Cells["Konto"].Value.ToString();
+            
+        }
+
+        private void ButtonClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private readonly KontniPlan _kontniPlan = new KontniPlan();
+        public string KontoBroj { get; private set; }
     }
 }

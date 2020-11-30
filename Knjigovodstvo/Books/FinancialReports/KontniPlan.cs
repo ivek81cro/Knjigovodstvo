@@ -23,6 +23,15 @@ namespace Knjigovodstvo.FinancialReports
             return false;
         }
 
+        public int GetIdByKontoNumber()
+        {
+            DataTable dt = new DbDataGet()
+                .GetTable(this, $"Konto='{Konto}'");
+            Opis = dt.Rows[0]["Opis"].ToString();
+
+            return Id = int.Parse(dt.Rows[0]["Id"].ToString());
+        }
+
         public int Id { get; set; } = 0;
         public string Konto { get; set; } = "";
         public string Opis { get; set; } = "";

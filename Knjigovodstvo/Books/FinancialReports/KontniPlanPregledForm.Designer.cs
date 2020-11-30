@@ -33,6 +33,7 @@ namespace Knjigovodstvo.FinancialReports
             this.buttonDodajKonto = new System.Windows.Forms.Button();
             this.textBoxFilterKonto = new System.Windows.Forms.TextBox();
             this.textBoxFilterOpis = new System.Windows.Forms.TextBox();
+            this.buttonClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,6 +52,7 @@ namespace Knjigovodstvo.FinancialReports
             this.dbDataGridView1.Size = new System.Drawing.Size(1222, 430);
             this.dbDataGridView1.TabIndex = 10;
             this.dbDataGridView1.Text = "dataGridView1";
+            this.dbDataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DbDataGridView1_CellClick);
             // 
             // buttonDodajKonto
             // 
@@ -84,11 +86,22 @@ namespace Knjigovodstvo.FinancialReports
             this.textBoxFilterOpis.TabIndex = 13;
             this.textBoxFilterOpis.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxFilterOpis_KeyUp);
             // 
+            // buttonClose
+            // 
+            this.buttonClose.Location = new System.Drawing.Point(95, 12);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonClose.TabIndex = 14;
+            this.buttonClose.Text = "Zatvori";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
+            // 
             // KontniPlanPregledForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1246, 632);
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.textBoxFilterOpis);
             this.Controls.Add(this.textBoxFilterKonto);
             this.Controls.Add(this.buttonDodajKonto);
@@ -107,5 +120,6 @@ namespace Knjigovodstvo.FinancialReports
         private System.Windows.Forms.Button buttonDodajKonto;
         private System.Windows.Forms.TextBox textBoxFilterKonto;
         private System.Windows.Forms.TextBox textBoxFilterOpis;
+        private System.Windows.Forms.Button buttonClose;
     }
 }

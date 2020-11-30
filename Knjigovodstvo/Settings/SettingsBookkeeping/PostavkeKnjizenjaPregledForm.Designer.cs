@@ -38,6 +38,8 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             this.comboBoxStrana = new System.Windows.Forms.ComboBox();
             this.labelStrana = new System.Windows.Forms.Label();
             this.buttonSpremi = new System.Windows.Forms.Button();
+            this.buttonIzmjeni = new System.Windows.Forms.Button();
+            this.buttonBrisi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,6 +60,7 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             this.dbDataGridView1.TabIndex = 0;
             this.dbDataGridView1.TabStop = false;
             this.dbDataGridView1.Text = "dbDataGridView1";
+            this.dbDataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DbDataGridView1_CellClick);
             // 
             // comboBoxStupac
             // 
@@ -92,7 +95,7 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             this.textBoxKonto.PlaceholderText = "Broj konta";
             this.textBoxKonto.Size = new System.Drawing.Size(116, 23);
             this.textBoxKonto.TabIndex = 2;
-            this.textBoxKonto.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxKonto_MouseClick);
+            this.textBoxKonto.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TextBoxKonto_MouseClick);
             // 
             // comboBoxStrana
             // 
@@ -122,13 +125,35 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             this.buttonSpremi.TabIndex = 0;
             this.buttonSpremi.Text = "Spremi";
             this.buttonSpremi.UseVisualStyleBackColor = true;
-            this.buttonSpremi.Click += new System.EventHandler(this.buttonSpremi_Click);
+            this.buttonSpremi.Click += new System.EventHandler(this.ButtonSpremi_Click);
+            // 
+            // buttonIzmjeni
+            // 
+            this.buttonIzmjeni.Location = new System.Drawing.Point(93, 13);
+            this.buttonIzmjeni.Name = "buttonIzmjeni";
+            this.buttonIzmjeni.Size = new System.Drawing.Size(75, 23);
+            this.buttonIzmjeni.TabIndex = 7;
+            this.buttonIzmjeni.Text = "Izmjeni";
+            this.buttonIzmjeni.UseVisualStyleBackColor = true;
+            this.buttonIzmjeni.Click += new System.EventHandler(this.ButtonIzmjeni_Click);
+            // 
+            // buttonBrisi
+            // 
+            this.buttonBrisi.Location = new System.Drawing.Point(174, 13);
+            this.buttonBrisi.Name = "buttonBrisi";
+            this.buttonBrisi.Size = new System.Drawing.Size(75, 23);
+            this.buttonBrisi.TabIndex = 8;
+            this.buttonBrisi.Text = "Briši";
+            this.buttonBrisi.UseVisualStyleBackColor = true;
+            this.buttonBrisi.Click += new System.EventHandler(this.ButtonBrisi_Click);
             // 
             // PostavkeKnjizenjaPregledForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(837, 589);
+            this.Controls.Add(this.buttonBrisi);
+            this.Controls.Add(this.buttonIzmjeni);
             this.Controls.Add(this.buttonSpremi);
             this.Controls.Add(this.labelStrana);
             this.Controls.Add(this.comboBoxStrana);
@@ -155,5 +180,7 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
         private ComboBox comboBoxStrana;
         private Label labelStrana;
         private Button buttonSpremi;
+        private Button buttonIzmjeni;
+        private Button buttonBrisi;
     }
 }

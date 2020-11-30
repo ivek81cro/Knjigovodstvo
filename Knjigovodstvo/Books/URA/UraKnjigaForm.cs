@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Database;
+﻿using Knjigovodstvo.Books.PrepareForBalanceSheet;
+using Knjigovodstvo.Database;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Settings.SettingsBookkeeping;
@@ -28,19 +29,26 @@ namespace Knjigovodstvo.URA
             LoadDatagrid();
         }
 
-        void LoadDatagrid()
+        private void LoadDatagrid()
         {
             dataGridView1.DataSource = new DbDataGet().GetTable(new UraKnjiga());
             FixColumnHeaders();
         }
 
-        void FixColumnHeaders()
+        private void FixColumnHeaders()
         {
             for (int i = 0; i < dataGridView1.Columns.Count; i++)
             {
                 dataGridView1.Columns[i].HeaderText =
                     new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
             }
+        }
+
+        private void SetSelectedItem() 
+        {
+            var row = dataGridView1.SelectedRows[0];
+            _uraKnjiga.Redni_broj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
+            _uraKnjiga.GetDataFromDatabaseByRedbiBroj();
         }
 
         private void ButtonUcitaj_Click(object sender, EventArgs e)
@@ -91,10 +99,18 @@ namespace Knjigovodstvo.URA
             form.ShowDialog();
         }
 
+        private void ButtonKnjizi_Click(object sender, EventArgs e)
+        {
+            SetSelectedItem();
+            TemeljnicaForm form = new TemeljnicaForm(_uraKnjiga);
+            form.ShowDialog();
+        }
+
         private string put = "";
         private List<UraKnjiga> _listaStavki = new List<UraKnjiga>();
         private readonly int _lastRecord = 0;
         private DataTable _dt;
         private Dictionary<int, string> _columns = new Dictionary<int, string>();
+        private UraKnjiga _uraKnjiga = new UraKnjiga();
     }
 }

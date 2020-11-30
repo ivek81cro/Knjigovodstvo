@@ -40,36 +40,67 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             comboBoxStupac.DataSource = obj.ElementAt(0);
         }
 
-        private void textBoxKonto_MouseClick(object sender, MouseEventArgs e)
+        private void TextBoxKonto_MouseClick(object sender, MouseEventArgs e)
         {
-            KontniPlanPregledForm form = new KontniPlanPregledForm();
+            using var form = new KontniPlanPregledForm();
             form.ShowDialog();
+            textBoxKonto.Text = form.KontoBroj;
         }
 
-        private void buttonSpremi_Click(object sender, EventArgs e)
+        private void DbDataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = dbDataGridView1.SelectedRows[0];
+            textBoxKonto.Text = _postavkeKnjizenja.Konto =  row.Cells["Konto"].Value.ToString();
+            comboBoxStupac.Text = _postavkeKnjizenja.Naziv_stupca =  row.Cells["Naziv_stupca"].Value.ToString();
+            comboBoxStrana.Text = _postavkeKnjizenja.Strana =  row.Cells["Strana"].Value.ToString();
+        }
+
+        private void ButtonSpremi_Click(object sender, EventArgs e)
         {
             string konto = textBoxKonto.Text;
             if(new IntValidator().Check(konto) 
                 && comboBoxStrana.Text != ""
                 && comboBoxStupac.Text != "")
             {
-                if (_kontniPlan.ExistsKonto(konto))
-                {
-                    _postavkeKnjizenja.Konto = konto;
-                    _postavkeKnjizenja.Naziv_stupca = comboBoxStupac.Text;
-                    _postavkeKnjizenja.Strana = comboBoxStrana.Text;
-                    
-                    new DbDataInsert().InsertData(_postavkeKnjizenja);
-                }
-                else
-                {
-                    MessageBox.Show("Nepostojeći konto, kreirajte novi.", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                SetPostavkeKnjizenjaMember(konto);
+                new DbDataInsert().InsertData(_postavkeKnjizenja);
             }
             else
             {
                 MessageBox.Show("Provjerite odabrane i unešene podatke", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            LoadData();
+        }
+
+        private void SetPostavkeKnjizenjaMember(string konto)
+        {
+            if (_kontniPlan.ExistsKonto(konto))
+            {
+                _postavkeKnjizenja.Konto = textBoxKonto.Text;
+                _postavkeKnjizenja.Naziv_stupca = comboBoxStupac.Text;
+                _postavkeKnjizenja.Strana = comboBoxStrana.Text;
+            }
+            else
+            {
+                MessageBox.Show("Nepostojeći konto, kreirajte novi.", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+        }
+
+        private void ButtonIzmjeni_Click(object sender, EventArgs e)
+        {
+            _postavkeKnjizenja.GetIdByKontoNazivStupca();
+            SetPostavkeKnjizenjaMember(_postavkeKnjizenja.Konto);
+            new DbDataUpdate().UpdateData(_postavkeKnjizenja);
+
+            LoadData();
+        }
+
+        private void ButtonBrisi_Click(object sender, EventArgs e)
+        {
+            _postavkeKnjizenja.GetIdByKontoNazivStupca();
+            new DbDataDelete().DeleteItem(_postavkeKnjizenja);
+
             LoadData();
         }
 
