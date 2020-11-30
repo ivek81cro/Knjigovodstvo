@@ -51,12 +51,12 @@ namespace Knjigovodstvo.FinancialReports
         private void DbDataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow selectedRow = dbDataGridView1.SelectedRows[0];
-            KontoBroj = selectedRow.Cells["Konto"].Value.ToString();
-            
+            KontoBroj = selectedRow.Cells["Konto"].Value.ToString();            
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)
         {
+            DbDataGridView1_CellClick(null, null);
             Close();
         }
 

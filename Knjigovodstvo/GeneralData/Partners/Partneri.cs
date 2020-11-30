@@ -4,6 +4,7 @@ using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Interface;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Knjigovodstvo.Partners
 {
@@ -35,6 +36,7 @@ namespace Knjigovodstvo.Partners
                 OpciPodaci.Id = GetId();
                 SetKonto();
                 InsertNewKonto();
+                new DbDataUpdate().UpdateData(this);
                 return true;
             }
             return false;
@@ -135,9 +137,14 @@ namespace Knjigovodstvo.Partners
             KontoD = dt.Rows[0]["KontoD"].ToString();
         }
 
-        public string GetKontoDByNaziv(string naziv) 
+        public string GetKontoDByNaziv(string naziv)
         {
-            return new DbDataGet().GetTable(this, $"Naziv LIKE '{naziv}%'").Rows[0]["KontoD"].ToString();
+            DataTable dt = new DbDataGet().GetTable(this, $"Naziv='{naziv}'");
+            string kontoPartnera = "";
+            if (dt.Rows.Count > 0)
+                kontoPartnera = dt.Rows[0]["KontoD"].ToString();
+
+            return kontoPartnera;
         }
 
         public OpciPodaci OpciPodaci { get; set; } = new OpciPodaci();

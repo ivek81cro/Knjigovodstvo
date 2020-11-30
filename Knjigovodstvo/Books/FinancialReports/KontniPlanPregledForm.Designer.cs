@@ -107,6 +107,7 @@ namespace Knjigovodstvo.FinancialReports
             this.Controls.Add(this.buttonDodajKonto);
             this.Controls.Add(this.dbDataGridView1);
             this.Name = "KontniPlanPregledForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Kontni Plan";
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).EndInit();
             this.ResumeLayout(false);

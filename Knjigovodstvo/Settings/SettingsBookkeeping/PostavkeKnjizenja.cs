@@ -4,7 +4,7 @@ using System.Data;
 
 namespace Knjigovodstvo.Settings
 {
-    class PostavkeKnjizenja : IDbObject
+    public class PostavkeKnjizenja : IDbObject
     {
         public FormError ValidateData()
         {

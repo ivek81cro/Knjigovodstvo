@@ -2,6 +2,7 @@
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Helpers;
+using Knjigovodstvo.Settings;
 using Knjigovodstvo.Settings.SettingsBookkeeping;
 using System;
 using System.Collections.Generic;
@@ -27,12 +28,28 @@ namespace Knjigovodstvo.URA
             else
                 _lastRecord = 0;
             LoadDatagrid();
+            LoadPostavkeKnjizenja();
         }
 
         private void LoadDatagrid()
         {
             dataGridView1.DataSource = new DbDataGet().GetTable(new UraKnjiga());
             FixColumnHeaders();
+        }
+
+        private void LoadPostavkeKnjizenja()
+        {
+            List<DataRow> dr = new DbDataGet().GetTable(new PostavkeKnjizenja(), $"Knjiga='{BookNames.Ura}'").AsEnumerable().ToList();
+            _postavkeKnjizenja = (from DataRow dRow in dr
+                                  select new PostavkeKnjizenja()
+                                  {
+                                      Id = int.Parse(dRow["Id"].ToString()),
+                                      Knjiga = dRow["Knjiga"].ToString(),
+                                      Naziv_stupca = dRow["Naziv_stupca"].ToString(),
+                                      Konto = dRow["Konto"].ToString(),
+                                      Strana = dRow["Strana"].ToString()
+                                  }).ToList();
+            
         }
 
         private void FixColumnHeaders()
@@ -102,7 +119,7 @@ namespace Knjigovodstvo.URA
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
             SetSelectedItem();
-            TemeljnicaForm form = new TemeljnicaForm(_uraKnjiga);
+            TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_uraKnjiga, _postavkeKnjizenja);
             form.ShowDialog();
         }
 
@@ -112,5 +129,6 @@ namespace Knjigovodstvo.URA
         private DataTable _dt;
         private Dictionary<int, string> _columns = new Dictionary<int, string>();
         private UraKnjiga _uraKnjiga = new UraKnjiga();
+        private List<PostavkeKnjizenja> _postavkeKnjizenja = new List<PostavkeKnjizenja>();
     }
 }

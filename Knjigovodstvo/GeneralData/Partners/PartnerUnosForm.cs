@@ -33,6 +33,11 @@ namespace Knjigovodstvo.Partners
             checkBoxSupplier.Checked = _partner.KontoD.StartsWith("22");
         }
 
+        private void SetMessageLabel(FormError errorType)
+        {
+            labelMessage.Text = new ProcessFormErrors().FormErrorMessage(errorType);
+        }
+
         private void BtnSave_Click(object sender, EventArgs e)
         {
             labelMessage.Text = "";
@@ -70,11 +75,6 @@ namespace Knjigovodstvo.Partners
             {
                 SetMessageLabel(validateResult);
             }
-        }
-
-        private void SetMessageLabel(FormError errorType)
-        {
-            labelMessage.Text = new ProcessFormErrors().FormErrorMessage(errorType);
         }
 
         private void BtnClose_Click(object sender, EventArgs e)
