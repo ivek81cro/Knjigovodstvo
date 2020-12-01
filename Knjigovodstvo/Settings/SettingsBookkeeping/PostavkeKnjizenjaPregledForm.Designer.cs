@@ -40,6 +40,7 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             this.buttonSpremi = new System.Windows.Forms.Button();
             this.buttonIzmjeni = new System.Windows.Forms.Button();
             this.buttonBrisi = new System.Windows.Forms.Button();
+            this.checkBoxPredznak = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -147,11 +148,22 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             this.buttonBrisi.UseVisualStyleBackColor = true;
             this.buttonBrisi.Click += new System.EventHandler(this.ButtonBrisi_Click);
             // 
+            // checkBoxPredznak
+            // 
+            this.checkBoxPredznak.AutoSize = true;
+            this.checkBoxPredznak.Location = new System.Drawing.Point(638, 128);
+            this.checkBoxPredznak.Name = "checkBoxPredznak";
+            this.checkBoxPredznak.Size = new System.Drawing.Size(121, 19);
+            this.checkBoxPredznak.TabIndex = 9;
+            this.checkBoxPredznak.Text = "Mijenja predznak?";
+            this.checkBoxPredznak.UseVisualStyleBackColor = true;
+            // 
             // PostavkeKnjizenjaPregledForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(837, 589);
+            this.Controls.Add(this.checkBoxPredznak);
             this.Controls.Add(this.buttonBrisi);
             this.Controls.Add(this.buttonIzmjeni);
             this.Controls.Add(this.buttonSpremi);
@@ -182,5 +194,6 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
         private Button buttonSpremi;
         private Button buttonIzmjeni;
         private Button buttonBrisi;
+        private CheckBox checkBoxPredznak;
     }
 }

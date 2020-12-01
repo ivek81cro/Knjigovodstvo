@@ -28,6 +28,7 @@ namespace Knjigovodstvo.URA
             else
                 _lastRecord = 0;
             LoadDatagrid();
+            _bookName = BookNames.Ura_trošak;
             LoadPostavkeKnjizenja();
         }
 
@@ -39,7 +40,8 @@ namespace Knjigovodstvo.URA
 
         private void LoadPostavkeKnjizenja()
         {
-            List<DataRow> dr = new DbDataGet().GetTable(new PostavkeKnjizenja(), $"Knjiga='{BookNames.Ura}'").AsEnumerable().ToList();
+            List<DataRow> dr = new DbDataGet().GetTable(new PostavkeKnjizenja(), $"Knjiga='{_bookName}'").AsEnumerable().ToList();
+            _postavkeKnjizenja = new List<PostavkeKnjizenja>();
             _postavkeKnjizenja = (from DataRow dRow in dr
                                   select new PostavkeKnjizenja()
                                   {
@@ -47,7 +49,8 @@ namespace Knjigovodstvo.URA
                                       Knjiga = dRow["Knjiga"].ToString(),
                                       Naziv_stupca = dRow["Naziv_stupca"].ToString(),
                                       Konto = dRow["Konto"].ToString(),
-                                      Strana = dRow["Strana"].ToString()
+                                      Strana = dRow["Strana"].ToString(),
+                                      Mijenja_predznak = dRow["Mijenja_predznak"].ToString() == "True"
                                   }).ToList();
             
         }
@@ -101,18 +104,22 @@ namespace Knjigovodstvo.URA
         private void ButtonTroskovi_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = new DbDataExecProcedure().GetTable(ProcedureNames.Izdvoji_Troskove);
+            _bookName = BookNames.Ura_trošak;
+            LoadPostavkeKnjizenja();
             FixColumnHeaders();
         }
 
         private void ButtonOdobrenja_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = new DbDataExecProcedure().GetTable(ProcedureNames.Izdvoji_Odobrenja);
+            _bookName = BookNames.Ura_odobrenje;
+            LoadPostavkeKnjizenja();
             FixColumnHeaders();
         }
 
         private void OpenPostavkeForm(object sender, EventArgs e)
         {
-            PostavkeKnjizenjaPregledForm form = new PostavkeKnjizenjaPregledForm("Ura");
+            PostavkeKnjizenjaPregledForm form = new PostavkeKnjizenjaPregledForm(_bookName);
             form.ShowDialog();
         }
 
@@ -123,12 +130,13 @@ namespace Knjigovodstvo.URA
             form.ShowDialog();
         }
 
+        private BookNames _bookName;
         private string put = "";
         private List<UraKnjiga> _listaStavki = new List<UraKnjiga>();
         private readonly int _lastRecord = 0;
         private DataTable _dt;
         private Dictionary<int, string> _columns = new Dictionary<int, string>();
         private UraKnjiga _uraKnjiga = new UraKnjiga();
-        private List<PostavkeKnjizenja> _postavkeKnjizenja = new List<PostavkeKnjizenja>();
+        private List<PostavkeKnjizenja> _postavkeKnjizenja;
     }
 }

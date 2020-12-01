@@ -14,9 +14,9 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
 {
     public partial class PostavkeKnjizenjaPregledForm : Form
     {
-        public PostavkeKnjizenjaPregledForm(string knjiga)
+        public PostavkeKnjizenjaPregledForm(BookNames knjiga)
         {
-            _knjiga = knjiga;
+            _postavkeKnjizenja.Knjiga = knjiga.ToString();
             InitializeComponent();
             LoadData();
             PopulateComboBoxStupac();
@@ -25,8 +25,8 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
         private void LoadData()
         {
             dbDataGridView1.DataSource = new DataView(
-                new DbDataGet().GetTable(_postavkeKnjizenja, $"Knjiga='{_knjiga}'"))
-                .ToTable(false, "Naziv_stupca", "Konto", "Strana");
+                new DbDataGet().GetTable(_postavkeKnjizenja, $"Knjiga='{_postavkeKnjizenja.Knjiga}'"))
+                .ToTable(false, "Naziv_stupca", "Konto", "Strana", "Mijenja_predznak");
 
             dbDataGridView1.Columns[0].Width = (int)(dbDataGridView1.Width * 0.3);
             dbDataGridView1.Columns[1].Width = (int)(dbDataGridView1.Width * 0.3);
@@ -58,6 +58,7 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
         private void ButtonSpremi_Click(object sender, EventArgs e)
         {
             string konto = textBoxKonto.Text;
+
             if(new IntValidator().Check(konto) 
                 && comboBoxStrana.Text != ""
                 && comboBoxStupac.Text != "")
@@ -79,6 +80,7 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
                 _postavkeKnjizenja.Konto = textBoxKonto.Text;
                 _postavkeKnjizenja.Naziv_stupca = comboBoxStupac.Text;
                 _postavkeKnjizenja.Strana = comboBoxStrana.Text;
+                _postavkeKnjizenja.Mijenja_predznak = checkBoxPredznak.Checked;
             }
             else
             {
@@ -104,8 +106,7 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             LoadData();
         }
 
-        private readonly string _knjiga;
-        private PostavkeKnjizenja _postavkeKnjizenja = new PostavkeKnjizenja() { Knjiga="Ura" };
+        private PostavkeKnjizenja _postavkeKnjizenja = new PostavkeKnjizenja();
         private UraKnjiga _uraKnjiga = new UraKnjiga();
         private KontniPlan _kontniPlan = new KontniPlan();
     }

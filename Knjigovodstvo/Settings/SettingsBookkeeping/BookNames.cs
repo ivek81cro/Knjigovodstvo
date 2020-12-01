@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Knjigovodstvo.Settings.SettingsBookkeeping
+﻿namespace Knjigovodstvo.Settings.SettingsBookkeeping
 {
     public enum BookNames
     {
-        Ura,
+        Ura_primka,
+        Ura_odobrenje,
+        Ura_trošak,
         Ira
     }
 }

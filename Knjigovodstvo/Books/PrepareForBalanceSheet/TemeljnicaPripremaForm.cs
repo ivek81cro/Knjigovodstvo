@@ -23,7 +23,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             InitializeComponent();
             _dt = new DataTable()
             {
-                Columns = { "Opis stavke", "Opis knjiženja", "Konto", "Datum dokumenta", "Dugovna", "Potražna" }
+                Columns = { "Opis stavke", "Opis knjiženja", "Konto", "Datum dokumenta", "Dugovna", "Potražna", "Mijenja predznak" }
             };
             SelectType(model);
         }
@@ -52,12 +52,14 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     postavka.Konto,
                     knjiga.Datum_racuna.Split(' ')[0],
                     postavka.Strana == "Dugovna",
-                    postavka.Strana == "Potražna"
+                    postavka.Strana == "Potražna",
+                    postavka.Mijenja_predznak == true
                     );
             }
             _dt.Rows[0]["Konto"] = _partner.GetKontoDByNaziv(_dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0]);
             
             PopuniVrijednosti();
+            _dt.Columns.Remove("Mijenja predznak");
             dbDataGridView1.DataSource = _dt;
         }
 
@@ -78,7 +80,8 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 if (row["Dugovna"].ToString() == "True")
                 {
                     if (iznosi.TryGetValue(kljuc, out value))
-                        row["Dugovna"] = decimal.Parse(value);
+                        row["Dugovna"] = 
+                            row["Mijenja predznak"].ToString() == "True"?decimal.Parse(value) * -1: decimal.Parse(value);
                 }
                 else
                 {
@@ -88,7 +91,8 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 if (row["Potražna"].ToString() == "True")
                 {
                     if (iznosi.TryGetValue($"{kljuc}", out value))
-                        row["Potražna"] = decimal.Parse(value);
+                        row["Potražna"] = 
+                            row["Mijenja predznak"].ToString() == "True" ? decimal.Parse(value) * -1 : decimal.Parse(value);
                 }
                 else
                 {
