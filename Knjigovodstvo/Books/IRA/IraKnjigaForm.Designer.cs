@@ -33,7 +33,11 @@ namespace Knjigovodstvo.IRA
             this.buttonUcitaj = new System.Windows.Forms.Button();
             this.buttonSpremi = new System.Windows.Forms.Button();
             this.knjigaFilter1 = new Knjigovodstvo.Global.KnjigaFilter(dataGridView1, _columns);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuPostavke = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonKnjizi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -55,7 +59,7 @@ namespace Knjigovodstvo.IRA
             // 
             // buttonUcitaj
             // 
-            this.buttonUcitaj.Location = new System.Drawing.Point(12, 13);
+            this.buttonUcitaj.Location = new System.Drawing.Point(12, 27);
             this.buttonUcitaj.Name = "buttonUcitaj";
             this.buttonUcitaj.Size = new System.Drawing.Size(75, 23);
             this.buttonUcitaj.TabIndex = 11;
@@ -65,7 +69,7 @@ namespace Knjigovodstvo.IRA
             // 
             // buttonSpremi
             // 
-            this.buttonSpremi.Location = new System.Drawing.Point(93, 13);
+            this.buttonSpremi.Location = new System.Drawing.Point(93, 27);
             this.buttonSpremi.Name = "buttonSpremi";
             this.buttonSpremi.Size = new System.Drawing.Size(75, 23);
             this.buttonSpremi.TabIndex = 12;
@@ -75,12 +79,40 @@ namespace Knjigovodstvo.IRA
             // 
             // knjigaFilter1
             // 
-            this.knjigaFilter1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.knjigaFilter1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.knjigaFilter1.Location = new System.Drawing.Point(12, 79);
             this.knjigaFilter1.Name = "knjigaFilter1";
             this.knjigaFilter1.Size = new System.Drawing.Size(1241, 54);
             this.knjigaFilter1.TabIndex = 13;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.AllowMerge = false;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuPostavke});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1265, 24);
+            this.menuStrip1.TabIndex = 13;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // menuPostavke
+            // 
+            this.menuPostavke.Name = "menuPostavke";
+            this.menuPostavke.Size = new System.Drawing.Size(115, 20);
+            this.menuPostavke.Text = "Postavke knjiženja";
+            this.menuPostavke.Click += new System.EventHandler(this.ButtonPostavke_Click);
+            // 
+            // buttonKnjizi
+            // 
+            this.buttonKnjizi.Location = new System.Drawing.Point(174, 27);
+            this.buttonKnjizi.Name = "buttonKnjizi";
+            this.buttonKnjizi.Size = new System.Drawing.Size(75, 23);
+            this.buttonKnjizi.TabIndex = 14;
+            this.buttonKnjizi.Text = "Knjiži";
+            this.buttonKnjizi.UseVisualStyleBackColor = true;
+            this.buttonKnjizi.Click += new System.EventHandler(this.ButtonKnjizi_Click);
             // 
             // IraKnjigaForm
             // 
@@ -88,13 +120,19 @@ namespace Knjigovodstvo.IRA
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 617);
             this.Controls.Add(this.knjigaFilter1);
+            this.Controls.Add(this.buttonKnjizi);
             this.Controls.Add(this.buttonSpremi);
             this.Controls.Add(this.buttonUcitaj);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "IraKnjigaForm";
             this.Text = "IraKnjigaForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
         # endregion
@@ -102,5 +140,8 @@ namespace Knjigovodstvo.IRA
         private System.Windows.Forms.Button buttonUcitaj;
         private System.Windows.Forms.Button buttonSpremi;
         private Global.KnjigaFilter knjigaFilter1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuPostavke;
+        private System.Windows.Forms.Button buttonKnjizi;
     }
 }

@@ -1,6 +1,9 @@
-﻿using Knjigovodstvo.Database;
+﻿using Knjigovodstvo.Books.PrepareForBalanceSheet;
+using Knjigovodstvo.Database;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Helpers;
+using Knjigovodstvo.Settings;
+using Knjigovodstvo.Settings.SettingsBookkeeping;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -25,6 +28,8 @@ namespace Knjigovodstvo.IRA
             else
                 _lastRecord = 0;
             LoadDatagrid();
+            _bookNames = BookNames.Ira;
+            LoadPostavkeKnjizenja();
         }
 
         private void LoadDatagrid()
@@ -40,6 +45,23 @@ namespace Knjigovodstvo.IRA
                 dataGridView1.Columns[i].HeaderText =
                     new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
             }
+        }
+
+        private void LoadPostavkeKnjizenja()
+        {
+            List<DataRow> dr = new DbDataGet().GetTable(new PostavkeKnjizenja(), $"Knjiga='{_bookNames}'").AsEnumerable().ToList();
+            _postavkeKnjizenja = new List<PostavkeKnjizenja>();
+            _postavkeKnjizenja = (from DataRow dRow in dr
+                                  select new PostavkeKnjizenja()
+                                  {
+                                      Id = int.Parse(dRow["Id"].ToString()),
+                                      Knjiga = dRow["Knjiga"].ToString(),
+                                      Naziv_stupca = dRow["Naziv_stupca"].ToString(),
+                                      Konto = dRow["Konto"].ToString(),
+                                      Strana = dRow["Strana"].ToString(),
+                                      Mijenja_predznak = dRow["Mijenja_predznak"].ToString() == "True"
+                                  }).ToList();
+
         }
 
         private void ButtonUcitaj_Click(object sender, EventArgs e)
@@ -71,6 +93,34 @@ namespace Knjigovodstvo.IRA
             LoadDatagrid();
         }
 
+        private void ButtonPostavke_Click(object sender, EventArgs e)
+        {
+            PostavkeKnjizenjaPregledForm form = new PostavkeKnjizenjaPregledForm(_bookNames);
+            form.FormClosing += new FormClosingEventHandler(PostavkeClosing_Event);
+            form.ShowDialog();
+        }
+
+        private void PostavkeClosing_Event(object sender, FormClosingEventArgs e)
+        {
+            LoadPostavkeKnjizenja();
+        }
+
+        private void ButtonKnjizi_Click(object sender, EventArgs e)
+        {
+            SetSelectedItem();
+            TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_iraKnjiga, _postavkeKnjizenja);
+            form.ShowDialog();
+        }
+        private void SetSelectedItem()
+        {
+            var row = dataGridView1.SelectedRows[0];
+            _iraKnjiga.Redni_broj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
+            _iraKnjiga.GetDataFromDatabaseByRedniBroj();
+        }
+
+        private List<PostavkeKnjizenja> _postavkeKnjizenja;
+        private IraKnjiga _iraKnjiga = new IraKnjiga();
+        private BookNames _bookNames;
         private string put = "";
         private List<IraKnjiga> _listaStavki = new List<IraKnjiga>();
         private readonly int _lastRecord = 0;

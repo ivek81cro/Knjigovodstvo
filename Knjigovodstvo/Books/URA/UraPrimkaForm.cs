@@ -64,6 +64,13 @@ namespace Knjigovodstvo.URA
                     new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
             }
         }
+
+        private void SetSelectedItem()
+        {
+            var row = dataGridView1.SelectedRows[0];
+            _primka.Redni_broj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
+            _primka.GetDataFromDatabaseByRedniBroj();
+        }
         /// <summary>
         /// Read CSV file into List and fill DataGridView with data for review before saving to database
         /// </summary>
@@ -120,13 +127,6 @@ namespace Knjigovodstvo.URA
             SetSelectedItem();
             TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_primka, _postavkeKnjizenja);
             form.ShowDialog();
-        }
-
-        private void SetSelectedItem()
-        {
-            var row = dataGridView1.SelectedRows[0];
-            _primka.Redni_broj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
-            _primka.GetDataFromDatabaseByRedniBroj();
         }
 
         private Primka _primka = new Primka();

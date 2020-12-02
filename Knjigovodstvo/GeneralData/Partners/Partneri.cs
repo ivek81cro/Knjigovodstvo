@@ -3,6 +3,7 @@ using Knjigovodstvo.Database;
 using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Interface;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -143,6 +144,17 @@ namespace Knjigovodstvo.Partners
             string kontoPartnera = "";
             if (dt.Rows.Count > 0)
                 kontoPartnera = dt.Rows[0]["KontoD"].ToString();
+
+            return kontoPartnera;
+        }
+
+
+        internal object GetKontoPByNaziv(string naziv)
+        {
+            DataTable dt = new DbDataGet().GetTable(this, $"Naziv='{naziv}'");
+            string kontoPartnera = "";
+            if (dt.Rows.Count > 0)
+                kontoPartnera = dt.Rows[0]["KontoP"].ToString();
 
             return kontoPartnera;
         }

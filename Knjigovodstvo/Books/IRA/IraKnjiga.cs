@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Interface;
+﻿using Knjigovodstvo.Database;
+using Knjigovodstvo.Interface;
 using System;
 using System.Globalization;
 
@@ -42,12 +43,49 @@ namespace Knjigovodstvo.IRA
             Ukupni_PDV = decimal.Parse(val[25]);
             Ukupno_uplaceno = decimal.Parse(val[26]);
             Preostalo_za_uplatit = decimal.Parse(val[27]);
-            Napomana_o_racunu = val[28];
+            Napomena_o_racunu = val[28];
             Zaprimljen_u_HZZO = val[29] == "" ? "Null" : DateTime.ParseExact(val[29], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             Dana_od_zaprimanja = int.Parse(val[30]);
             Dana_neplacanja = int.Parse(val[31]);
 
             return this;
+        }
+
+        internal void GetDataFromDatabaseByRedniBroj()
+        {
+            var row = new DbDataGet().GetTable(this, $"Redni_broj={Redni_broj}").Rows[0];
+
+            Redni_broj = int.Parse(row["Redni_broj"].ToString());
+            Broj_racuna = row["Broj_racuna"].ToString();
+            Storno = row["Storno"].ToString() == "1";
+            Iz_racuna = int.Parse(row["Iz_racuna"].ToString());
+            Datum = row["Datum"].ToString();
+            Dospijece = row["Dospijece"].ToString();
+            Datum_zadnje_uplate = row["Datum_zadnje_uplate"].ToString();
+            Naziv_i_sjediste_kupca = row["Naziv_i_sjediste_kupca"].ToString();
+            OIB = row["OIB"].ToString();
+            Iznos_s_PDVom = decimal.Parse(row["Iznos_s_PDVom"].ToString());
+            Oslobodjeno_PDVa_EU = decimal.Parse(row["Oslobodjeno_PDVa_EU"].ToString());
+            Oslobodjeno_PDVa_ostalo = decimal.Parse(row["Oslobodjeno_PDVa_ostalo"].ToString());
+            Prolazna_stavka = decimal.Parse(row["Prolazna_stavka"].ToString());
+            Porezna_osnovica_0_per = decimal.Parse(row["Porezna_osnovica_0_per"].ToString());
+            Porezna_osnovica_5_per = decimal.Parse(row["Porezna_osnovica_5_per"].ToString());
+            PDV_5_per = decimal.Parse(row["PDV_5_per"].ToString());
+            Porezna_osnovica_10_per = decimal.Parse(row["Porezna_osnovica_10_per"].ToString());
+            PDV_10_per = decimal.Parse(row["PDV_10_per"].ToString());
+            Porezna_osnovica_13_per = decimal.Parse(row["Porezna_osnovica_13_per"].ToString());
+            PDV_13_per = decimal.Parse(row["PDV_13_per"].ToString());
+            Porezna_osnovica_23_per = decimal.Parse(row["Porezna_osnovica_23_per"].ToString());
+            PDV_23_per = decimal.Parse(row["PDV_23_per"].ToString());
+            Porezna_osnovica_25_per = decimal.Parse(row["Porezna_osnovica_25_per"].ToString());
+            PDV_25_per = decimal.Parse(row["PDV_25_per"].ToString());
+            Ukupni_PDV = decimal.Parse(row["Ukupni_PDV"].ToString());
+            Ukupno_uplaceno = decimal.Parse(row["Ukupno_uplaceno"].ToString());
+            Preostalo_za_uplatit = decimal.Parse(row["Preostalo_za_uplatit"].ToString());
+            Napomena_o_racunu = row["Napomena_o_racunu"].ToString();
+            Zaprimljen_u_HZZO = row["Zaprimljen_u_HZZO"].ToString();
+            Dana_od_zaprimanja = int.Parse(row["Dana_od_zaprimanja"].ToString());
+            Dana_neplacanja = int.Parse(row["Dana_neplacanja"].ToString());
         }
 
         public int Redni_broj { get; set; } = 0;
@@ -77,7 +115,7 @@ namespace Knjigovodstvo.IRA
         public decimal Ukupni_PDV { get; set; } = 0;
         public decimal Ukupno_uplaceno { get; set; } = 0;
         public decimal Preostalo_za_uplatit { get; set; } = 0;
-        public string Napomana_o_racunu { get; set; } = "";
+        public string Napomena_o_racunu { get; set; } = "";
         public string Zaprimljen_u_HZZO { get; set; } = "";
         public int Dana_od_zaprimanja { get; set; } = 0;
         public int Dana_neplacanja { get; set; } = 0;

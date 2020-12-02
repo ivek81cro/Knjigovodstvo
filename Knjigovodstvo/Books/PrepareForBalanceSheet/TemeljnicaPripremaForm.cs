@@ -1,6 +1,7 @@
 ﻿using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Interface;
+using Knjigovodstvo.IRA;
 using Knjigovodstvo.Partners;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.URA;
@@ -39,9 +40,35 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 case "Primka":
                     PrepareDataPrimka();
                     break;
+                case "IraKnjiga":
+                    PrepareDataIra();
+                    break;
                 default:
                     break;
             }
+        }
+
+        private void PrepareDataIra()
+        {
+            IraKnjiga knjiga = (IraKnjiga)_obj;
+
+            foreach (var postavka in _postavkeKnjizenja)
+            {
+                _dt.Rows.Add(
+                    postavka.Naziv_stupca,
+                    knjiga.Naziv_i_sjediste_kupca.Split(' ')[0] + ":" + knjiga.Broj_racuna,
+                    postavka.Konto,
+                    knjiga.Datum.Split(' ')[0],
+                    postavka.Strana == "Dugovna",
+                    postavka.Strana == "Potražna",
+                    postavka.Mijenja_predznak == true
+                    );
+            }
+            _dt.Rows[0]["Konto"] = _partner.GetKontoPByNaziv(_dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0]);
+
+            PopuniVrijednosti();
+            _dt.Columns.Remove("Mijenja predznak");
+            dbDataGridView1.DataSource = _dt;
         }
 
         private void PrepareDataUra()

@@ -124,7 +124,7 @@ namespace Knjigovodstvo.URA
             this.menuPostavke.Name = "menuPostavke";
             this.menuPostavke.Size = new System.Drawing.Size(115, 20);
             this.menuPostavke.Text = "Postavke knjiženja";
-            this.menuPostavke.Click += new System.EventHandler(this.OpenPostavkeForm);
+            this.menuPostavke.Click += new System.EventHandler(this.ButtonOpenPostavkeForm);
             // 
             // knjigaFilter1
             // 

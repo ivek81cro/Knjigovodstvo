@@ -117,7 +117,7 @@ namespace Knjigovodstvo.URA
             FixColumnHeaders();
         }
 
-        private void OpenPostavkeForm(object sender, EventArgs e)
+        private void ButtonOpenPostavkeForm(object sender, EventArgs e)
         {
             PostavkeKnjizenjaPregledForm form = new PostavkeKnjizenjaPregledForm(_bookName);
             form.FormClosing += new FormClosingEventHandler(PostavkeClosing_Event);

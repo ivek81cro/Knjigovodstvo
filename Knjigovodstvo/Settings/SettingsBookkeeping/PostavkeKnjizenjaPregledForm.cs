@@ -2,6 +2,7 @@
 using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Interface;
+using Knjigovodstvo.IRA;
 using Knjigovodstvo.URA;
 using Knjigovodstvo.Validators;
 using System;
@@ -28,6 +29,9 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
                     break;
                 case BookNames.Ura_primka:
                     PopulateComboBoxStupac(new Primka());
+                    break;
+                case BookNames.Ira:
+                    PopulateComboBoxStupac(new IraKnjiga());
                     break;
                 default:
                     break;
