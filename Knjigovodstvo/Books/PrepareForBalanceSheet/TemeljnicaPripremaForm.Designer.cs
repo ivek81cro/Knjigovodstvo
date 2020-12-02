@@ -73,7 +73,7 @@
             this.dbDataGridView1.TabStop = false;
             this.dbDataGridView1.Text = "dataGridView1";
             this.dbDataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DbDataGridView1_CellDoubleClick);
-            this.dbDataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbDataGridView1_CellValueChanged);
+            this.dbDataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DbDataGridView1_CellValueChanged);
             // 
             // buttonKnjizi
             // 

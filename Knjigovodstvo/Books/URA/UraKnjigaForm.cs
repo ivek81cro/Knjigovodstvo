@@ -29,7 +29,7 @@ namespace Knjigovodstvo.URA
                 _lastRecord = 0;
             LoadDatagrid();
             _bookName = BookNames.Ura_trošak;
-            LoadPostavkeKnjizenja();
+            LoadBookkeepingsettings();
         }
 
         private void LoadDatagrid()
@@ -38,7 +38,7 @@ namespace Knjigovodstvo.URA
             FixColumnHeaders();
         }
 
-        private void LoadPostavkeKnjizenja()
+        private void LoadBookkeepingsettings()
         {
             List<DataRow> dr = new DbDataGet().GetTable(new PostavkeKnjizenja(), $"Knjiga='{_bookName}'").AsEnumerable().ToList();
             _postavkeKnjizenja = new List<PostavkeKnjizenja>();
@@ -105,7 +105,7 @@ namespace Knjigovodstvo.URA
         {
             dataGridView1.DataSource = new DbDataExecProcedure().GetTable(ProcedureNames.Izdvoji_Troskove);
             _bookName = BookNames.Ura_trošak;
-            LoadPostavkeKnjizenja();
+            LoadBookkeepingsettings();
             FixColumnHeaders();
         }
 
@@ -113,7 +113,7 @@ namespace Knjigovodstvo.URA
         {
             dataGridView1.DataSource = new DbDataExecProcedure().GetTable(ProcedureNames.Izdvoji_Odobrenja);
             _bookName = BookNames.Ura_odobrenje;
-            LoadPostavkeKnjizenja();
+            LoadBookkeepingsettings();
             FixColumnHeaders();
         }
 
@@ -126,7 +126,7 @@ namespace Knjigovodstvo.URA
 
         private void PostavkeClosing_Event(object sender, FormClosingEventArgs e)
         {
-            LoadPostavkeKnjizenja();
+            LoadBookkeepingsettings();
         }
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
@@ -140,9 +140,9 @@ namespace Knjigovodstvo.URA
         private string put = "";
         private List<UraKnjiga> _listaStavki = new List<UraKnjiga>();
         private readonly int _lastRecord = 0;
-        private DataTable _dt;
-        private Dictionary<int, string> _columns = new Dictionary<int, string>();
-        private UraKnjiga _uraKnjiga = new UraKnjiga();
+        private readonly DataTable _dt;
+        private readonly Dictionary<int, string> _columns = new Dictionary<int, string>();
+        private readonly UraKnjiga _uraKnjiga = new UraKnjiga();
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
     }
 }

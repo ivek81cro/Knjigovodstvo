@@ -30,7 +30,7 @@ namespace Knjigovodstvo.URA
 
             _bookNames = BookNames.Ura_primka;
             LoadDatagrid();
-            LoadPostavkeKnjizenja();
+            LoadBookkeepingSettings();
         }
 
         private void LoadDatagrid()
@@ -39,7 +39,7 @@ namespace Knjigovodstvo.URA
             FixColumnHeaders();
         }
 
-        private void LoadPostavkeKnjizenja()
+        private void LoadBookkeepingSettings()
         {
             List<DataRow> dr = new DbDataGet().GetTable(new PostavkeKnjizenja(), $"Knjiga='{_bookNames}'").AsEnumerable().ToList();
             _postavkeKnjizenja = new List<PostavkeKnjizenja>();
@@ -76,7 +76,7 @@ namespace Knjigovodstvo.URA
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonUcitajTablicu_Click(object sender, EventArgs e)
+        private void ButtonLoadTable_Click(object sender, EventArgs e)
         {
             ConvertXlsToCsv conv = new ConvertXlsToCsv("Primke");
             if (!conv.Convert(ref put))
@@ -119,7 +119,7 @@ namespace Knjigovodstvo.URA
 
         private void PostavkeClosing_Event(object sender, FormClosingEventArgs e)
         {
-            LoadPostavkeKnjizenja();
+            LoadBookkeepingSettings();
         }
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
@@ -129,12 +129,12 @@ namespace Knjigovodstvo.URA
             form.ShowDialog();
         }
 
-        private Primka _primka = new Primka();
+        private readonly Primka _primka = new Primka();
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
-        private BookNames _bookNames;
+        private readonly BookNames _bookNames;
         private string put = "";
         private List<Primka> _listaPrimki = new List<Primka>();
         private readonly int _lastRecord = 0;
-        private Dictionary<int, string> _columns=new Dictionary<int, string>();
+        private readonly Dictionary<int, string> _columns=new Dictionary<int, string>();
     }
 }

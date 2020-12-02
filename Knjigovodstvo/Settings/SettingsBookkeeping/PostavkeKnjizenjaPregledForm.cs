@@ -36,10 +36,10 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
                 default:
                     break;
             }
-            LoadData();
+            LoadDatagrid();
         }
 
-        private void LoadData()
+        private void LoadDatagrid()
         {
             dbDataGridView1.DataSource = new DataView(
                 new DbDataGet().GetTable(_postavkeKnjizenja, $"Knjiga='{_postavkeKnjizenja.Knjiga}'"))
@@ -87,7 +87,7 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             {
                 MessageBox.Show("Provjerite odabrane i unešene podatke", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            LoadData();
+            LoadDatagrid();
         }
 
         private void SetPostavkeKnjizenjaMember(string konto)
@@ -112,7 +112,7 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             SetPostavkeKnjizenjaMember(_postavkeKnjizenja.Konto);
             new DbDataUpdate().UpdateData(_postavkeKnjizenja);
 
-            LoadData();
+            LoadDatagrid();
         }
 
         private void ButtonBrisi_Click(object sender, EventArgs e)
@@ -120,10 +120,10 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             _postavkeKnjizenja.GetIdByKontoNazivStupca();
             new DbDataDelete().DeleteItem(_postavkeKnjizenja);
 
-            LoadData();
+            LoadDatagrid();
         }
 
-        private PostavkeKnjizenja _postavkeKnjizenja = new PostavkeKnjizenja();
-        private KontniPlan _kontniPlan = new KontniPlan();
+        private readonly PostavkeKnjizenja _postavkeKnjizenja = new PostavkeKnjizenja();
+        private readonly KontniPlan _kontniPlan = new KontniPlan();
     }
 }

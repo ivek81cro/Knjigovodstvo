@@ -77,7 +77,7 @@ namespace Knjigovodstvo.City
             }
         }
 
-        private Grad _grad = new Grad();
+        private readonly Grad _grad = new Grad();
         private bool _odabir = false;
     }
 }

@@ -21,13 +21,13 @@ namespace Knjigovodstvo.Database
             GenericPropertyFinder<IDbObject> property = new GenericPropertyFinder<IDbObject>();
 
             IEnumerable<List<string>> obj = property.PrintTModelPropertyAndValue(dbObject);
-            string table = dbObject.GetType().ToString().Substring(dbObject.GetType().ToString().LastIndexOf('.') + 1);
+            string table = dbObject.GetType().ToString()[(dbObject.GetType().ToString().LastIndexOf('.') + 1)..];
             string query = new DbQueryBuilder(obj, table).BuildQuery(QueryType.Select);
 
             if(condition != null)
             {
                 if(query.EndsWith(';'))
-                    query = query.Substring(0, query.Length - 1);
+                    query = query[0..^1];
                 query += $" WHERE {condition};";
             }
 

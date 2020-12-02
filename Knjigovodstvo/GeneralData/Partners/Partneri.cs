@@ -3,9 +3,7 @@ using Knjigovodstvo.Database;
 using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Interface;
-using System;
 using System.Data;
-using System.Windows.Forms;
 
 namespace Knjigovodstvo.Partners
 {
@@ -140,10 +138,10 @@ namespace Knjigovodstvo.Partners
 
         public string GetKontoDByNaziv(string naziv)
         {
-            DataTable dt = new DbDataGet().GetTable(this, $"Naziv='{naziv}'");
+            _dt = new DbDataGet().GetTable(this, $"Naziv='{naziv}'");
             string kontoPartnera = "";
-            if (dt.Rows.Count > 0)
-                kontoPartnera = dt.Rows[0]["KontoD"].ToString();
+            if (_dt.Rows.Count > 0)
+                kontoPartnera = _dt.Rows[0]["KontoD"].ToString();
 
             return kontoPartnera;
         }
@@ -151,10 +149,10 @@ namespace Knjigovodstvo.Partners
 
         internal object GetKontoPByNaziv(string naziv)
         {
-            DataTable dt = new DbDataGet().GetTable(this, $"Naziv='{naziv}'");
+            _dt = new DbDataGet().GetTable(this, $"Naziv='{naziv}'");
             string kontoPartnera = "";
-            if (dt.Rows.Count > 0)
-                kontoPartnera = dt.Rows[0]["KontoP"].ToString();
+            if (_dt.Rows.Count > 0)
+                kontoPartnera = _dt.Rows[0]["KontoP"].ToString();
 
             return kontoPartnera;
         }
@@ -165,8 +163,9 @@ namespace Knjigovodstvo.Partners
         public string KontoK { get; set; } = "";
         public string KontoD { get; set; } = "";
 
-        private KontniPlan _kontniPlan = new KontniPlan();
-        private DbDataInsert _dataInsert = new DbDataInsert();
+        private readonly KontniPlan _kontniPlan = new KontniPlan();
+        private readonly DbDataInsert _dataInsert = new DbDataInsert();
+        private DataTable _dt = new DataTable();
     }
 
 }

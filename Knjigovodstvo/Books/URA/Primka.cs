@@ -19,12 +19,12 @@ namespace Knjigovodstvo.URA
             Redni_broj = int.Parse(val[0]);
             Datum_knjizenja = DateTime.ParseExact(val[1], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             Broj_primke = int.Parse(val[2]);
-            Storno = val[3] == "*" ? true : false;
+            Storno = val[3] == "*";
             Maloprodajna_vrijednost = decimal.Parse(val[4]);
             Naziv_dobavljaca = val[5];
             Broj_racuna = val[6];
             Datum_racuna = DateTime.ParseExact(val[7], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
-            Otpremnica = val[8] == "DA" ? true : false;
+            Otpremnica = val[8] == "DA";
             Dospijece_placanja = DateTime.ParseExact(val[9], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             Fakturna_vrijednost = decimal.Parse(val[10]);
             Maloprodajna_marza = decimal.Parse(val[11]);

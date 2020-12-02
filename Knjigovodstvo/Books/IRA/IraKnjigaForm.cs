@@ -29,7 +29,7 @@ namespace Knjigovodstvo.IRA
                 _lastRecord = 0;
             LoadDatagrid();
             _bookNames = BookNames.Ira;
-            LoadPostavkeKnjizenja();
+            LoadBookkeepingSettings();
         }
 
         private void LoadDatagrid()
@@ -47,7 +47,7 @@ namespace Knjigovodstvo.IRA
             }
         }
 
-        private void LoadPostavkeKnjizenja()
+        private void LoadBookkeepingSettings()
         {
             List<DataRow> dr = new DbDataGet().GetTable(new PostavkeKnjizenja(), $"Knjiga='{_bookNames}'").AsEnumerable().ToList();
             _postavkeKnjizenja = new List<PostavkeKnjizenja>();
@@ -102,7 +102,7 @@ namespace Knjigovodstvo.IRA
 
         private void PostavkeClosing_Event(object sender, FormClosingEventArgs e)
         {
-            LoadPostavkeKnjizenja();
+            LoadBookkeepingSettings();
         }
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
@@ -119,11 +119,11 @@ namespace Knjigovodstvo.IRA
         }
 
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
-        private IraKnjiga _iraKnjiga = new IraKnjiga();
-        private BookNames _bookNames;
+        private readonly IraKnjiga _iraKnjiga = new IraKnjiga();
+        private readonly BookNames _bookNames;
         private string put = "";
         private List<IraKnjiga> _listaStavki = new List<IraKnjiga>();
         private readonly int _lastRecord = 0;
-        private Dictionary<int, string> _columns = new Dictionary<int, string>();
+        private readonly Dictionary<int, string> _columns = new Dictionary<int, string>();
     }
 }

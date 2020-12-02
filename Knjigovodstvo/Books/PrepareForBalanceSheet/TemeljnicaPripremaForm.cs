@@ -63,11 +63,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     postavka.Mijenja_predznak == true
                     );
             }
-            _dt.Rows[0]["Konto"] = _partner.GetKontoPByNaziv(_dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0]);
-
-            PopuniVrijednosti();
-            _dt.Columns.Remove("Mijenja predznak");
-            dbDataGridView1.DataSource = _dt;
+            PrepareDataShared();
         }
 
         private void PrepareDataUra()
@@ -86,11 +82,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     postavka.Mijenja_predznak == true
                     );
             }
-            _dt.Rows[0]["Konto"] = _partner.GetKontoDByNaziv(_dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0]);
-            
-            PopuniVrijednosti();
-            _dt.Columns.Remove("Mijenja predznak");
-            dbDataGridView1.DataSource = _dt;
+            PrepareDataShared();
         }
 
         private void PrepareDataPrimka()
@@ -109,14 +101,19 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     postavka.Mijenja_predznak == true
                     );
             }
+            PrepareDataShared();
+        }
+
+        private void PrepareDataShared() 
+        {
             _dt.Rows[0]["Konto"] = _partner.GetKontoDByNaziv(_dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0]);
 
-            PopuniVrijednosti();
+            LoadValuesDebitAndCredit();
             _dt.Columns.Remove("Mijenja predznak");
             dbDataGridView1.DataSource = _dt;
         }
 
-        private void PopuniVrijednosti()
+        private void LoadValuesDebitAndCredit()
         {
             GenericPropertyFinder<IDbObject> property = new GenericPropertyFinder<IDbObject>();
             IEnumerable<List<string>> obj = property.PrintTModelPropertyAndValue(_obj);
@@ -129,7 +126,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             foreach (DataRow row in _dt.Rows)
             {
                 string kljuc = row["Opis stavke"].ToString();
-                string value = "";
+                string value;
                 if (row["Dugovna"].ToString() == "True")
                 {
                     if (iznosi.TryGetValue(kljuc, out value))
@@ -153,7 +150,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 }
 
                 row["Opis stavke"] = new TableHeaderFormat().FormatHeader(row["Opis stavke"].ToString());
-                KontrolaProvjera();
+                CheckAreSidesEqual();
             }
             //Remove rows with both sides 0,00
             for (int i = 0; i < _dt.Rows.Count; i++)
@@ -167,7 +164,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             }
         }
 
-        private void KontrolaProvjera()
+        private void CheckAreSidesEqual()
         {
             _dugovna = 0;
             _potrazna = 0;
@@ -198,13 +195,13 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         {
             if(dbDataGridView1.SelectedCells.Count > 0)
                 dbDataGridView1.Rows.RemoveAt(dbDataGridView1.SelectedCells[0].RowIndex);
-            KontrolaProvjera();
+            CheckAreSidesEqual();
         }
 
         private void ButtonDodajRed_Click(object sender, System.EventArgs e)
         {
             _dt.Rows.Add("", "", "", "", "", "");
-            KontrolaProvjera();
+            CheckAreSidesEqual();
         }
 
         private void DbDataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -217,16 +214,16 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             }
         }
 
-        private void dbDataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void DbDataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            KontrolaProvjera();
+            CheckAreSidesEqual();
         }
 
-        private Partneri _partner = new Partneri();
+        private readonly Partneri _partner = new Partneri();
         private List<TemeljnicaStavka> _temeljnicaStavka = new List<TemeljnicaStavka>();
         private readonly IDbObject _obj;
         private readonly List<PostavkeKnjizenja> _postavkeKnjizenja;
-        private DataTable _dt;
+        private readonly DataTable _dt;
         private decimal _potrazna = 0;
         private decimal _dugovna = 0;
     }       
