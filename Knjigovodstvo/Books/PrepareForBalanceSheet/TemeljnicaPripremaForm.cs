@@ -6,7 +6,6 @@ using Knjigovodstvo.Partners;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.URA;
 using Knjigovodstvo.Validators;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
