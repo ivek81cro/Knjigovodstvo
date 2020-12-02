@@ -68,7 +68,7 @@ namespace Knjigovodstvo.URA
         {
             var row = dataGridView1.SelectedRows[0];
             _uraKnjiga.Redni_broj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
-            _uraKnjiga.GetDataFromDatabaseByRedbiBroj();
+            _uraKnjiga.GetDataFromDatabaseByRedniBroj();
         }
 
         private void ButtonUcitaj_Click(object sender, EventArgs e)
@@ -120,7 +120,13 @@ namespace Knjigovodstvo.URA
         private void OpenPostavkeForm(object sender, EventArgs e)
         {
             PostavkeKnjizenjaPregledForm form = new PostavkeKnjizenjaPregledForm(_bookName);
+            form.FormClosing += new FormClosingEventHandler(PostavkeClosing_Event);
             form.ShowDialog();
+        }
+
+        private void PostavkeClosing_Event(object sender, FormClosingEventArgs e)
+        {
+            LoadPostavkeKnjizenja();
         }
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)

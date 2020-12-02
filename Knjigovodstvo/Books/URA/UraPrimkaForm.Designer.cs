@@ -35,7 +35,11 @@ namespace Knjigovodstvo.URA
             this.buttonUcitajTablicu = new System.Windows.Forms.Button();
             this.buttonSpremi = new System.Windows.Forms.Button();
             this.knjigaFilter1 = new KnjigaFilter(dataGridView1, _columns);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuPostavke = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonKnjizi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -57,7 +61,7 @@ namespace Knjigovodstvo.URA
             // 
             // buttonUcitajTablicu
             // 
-            this.buttonUcitajTablicu.Location = new System.Drawing.Point(13, 13);
+            this.buttonUcitajTablicu.Location = new System.Drawing.Point(9, 27);
             this.buttonUcitajTablicu.Name = "buttonUcitajTablicu";
             this.buttonUcitajTablicu.Size = new System.Drawing.Size(75, 23);
             this.buttonUcitajTablicu.TabIndex = 0;
@@ -67,7 +71,7 @@ namespace Knjigovodstvo.URA
             // 
             // buttonSpremi
             // 
-            this.buttonSpremi.Location = new System.Drawing.Point(95, 12);
+            this.buttonSpremi.Location = new System.Drawing.Point(91, 26);
             this.buttonSpremi.Name = "buttonSpremi";
             this.buttonSpremi.Size = new System.Drawing.Size(75, 23);
             this.buttonSpremi.TabIndex = 1;
@@ -84,19 +88,53 @@ namespace Knjigovodstvo.URA
             this.knjigaFilter1.Size = new System.Drawing.Size(1101, 64);
             this.knjigaFilter1.TabIndex = 13;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.AllowMerge = false;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuPostavke});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1122, 24);
+            this.menuStrip1.TabIndex = 11;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // menuPostavke
+            // 
+            this.menuPostavke.Name = "menuPostavke";
+            this.menuPostavke.Size = new System.Drawing.Size(115, 20);
+            this.menuPostavke.Text = "Postavke knjiženja";
+            this.menuPostavke.Click += new System.EventHandler(this.ButtonPostavke_Click);
+            // 
+            // buttonKnjizi
+            // 
+            this.buttonKnjizi.Location = new System.Drawing.Point(172, 27);
+            this.buttonKnjizi.Name = "buttonKnjizi";
+            this.buttonKnjizi.Size = new System.Drawing.Size(75, 23);
+            this.buttonKnjizi.TabIndex = 12;
+            this.buttonKnjizi.Text = "Knjiži";
+            this.buttonKnjizi.UseVisualStyleBackColor = true;
+            this.buttonKnjizi.Click += new System.EventHandler(this.ButtonKnjizi_Click);
+            // 
             // UraPrimkaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1122, 617);
+            this.Controls.Add(this.buttonKnjizi);
             this.Controls.Add(this.buttonSpremi);
             this.Controls.Add(this.buttonUcitajTablicu);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.knjigaFilter1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "UraPrimkaForm";
-            this.Text = "UraPregledForm";
+            this.Text = "Ura Primke";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
         #endregion
@@ -104,5 +142,8 @@ namespace Knjigovodstvo.URA
         private System.Windows.Forms.Button buttonUcitajTablicu;
         private System.Windows.Forms.Button buttonSpremi;
         private Global.KnjigaFilter knjigaFilter1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuPostavke;
+        private System.Windows.Forms.Button buttonKnjizi;
     }
 }

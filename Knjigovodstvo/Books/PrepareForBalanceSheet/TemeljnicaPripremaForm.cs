@@ -5,6 +5,7 @@ using Knjigovodstvo.Partners;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.URA;
 using Knjigovodstvo.Validators;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -35,6 +36,9 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 case "UraKnjiga":
                     PrepareDataUra();
                     break;
+                case "Primka":
+                    PrepareDataPrimka();
+                    break;
                 default:
                     break;
             }
@@ -58,6 +62,29 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             }
             _dt.Rows[0]["Konto"] = _partner.GetKontoDByNaziv(_dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0]);
             
+            PopuniVrijednosti();
+            _dt.Columns.Remove("Mijenja predznak");
+            dbDataGridView1.DataSource = _dt;
+        }
+
+        private void PrepareDataPrimka()
+        {
+            Primka knjiga = (Primka)_obj;
+
+            foreach (var postavka in _postavkeKnjizenja)
+            {
+                _dt.Rows.Add(
+                    postavka.Naziv_stupca,
+                    knjiga.Naziv_dobavljaca + ":" + knjiga.Broj_racuna,
+                    postavka.Konto,
+                    knjiga.Datum_knjizenja.Split(' ')[0],
+                    postavka.Strana == "Dugovna",
+                    postavka.Strana == "Potražna",
+                    postavka.Mijenja_predznak == true
+                    );
+            }
+            _dt.Rows[0]["Konto"] = _partner.GetKontoDByNaziv(_dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0]);
+
             PopuniVrijednosti();
             _dt.Columns.Remove("Mijenja predznak");
             dbDataGridView1.DataSource = _dt;
@@ -102,6 +129,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 row["Opis stavke"] = new TableHeaderFormat().FormatHeader(row["Opis stavke"].ToString());
                 KontrolaProvjera();
             }
+            //Remove rows with both sides 0,00
             for (int i = 0; i < _dt.Rows.Count; i++)
             {
                 if (string.Equals(_dt.Rows[i][4].ToString(), "0,00")

@@ -60,7 +60,7 @@ namespace Knjigovodstvo.URA
             return this;
         }
 
-        public void GetDataFromDatabaseByRedbiBroj()
+        public void GetDataFromDatabaseByRedniBroj()
         {
             var row = new DbDataGet().GetTable(this, $"Redni_broj={Redni_broj}").Rows[0];
 

@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Interface;
+﻿using Knjigovodstvo.Database;
+using Knjigovodstvo.Interface;
 using System;
 using System.Globalization;
 
@@ -41,6 +42,36 @@ namespace Knjigovodstvo.URA
             Broj_u_knjizi_ura = int.Parse(val[23]);
 
             return this;
+        }
+
+        public void GetDataFromDatabaseByRedniBroj()
+        {
+            var row = new DbDataGet().GetTable(this, $"Redni_broj={Redni_broj}").Rows[0];
+
+            Redni_broj = int.Parse(row["Redni_broj"].ToString());
+            Datum_knjizenja = row["Datum_knjizenja"].ToString();
+            Broj_primke = int.Parse(row["Broj_primke"].ToString());
+            Storno = row["Storno"].ToString() == "1";
+            Maloprodajna_vrijednost = decimal.Parse(row["Maloprodajna_vrijednost"].ToString());
+            Naziv_dobavljaca = row["Naziv_dobavljaca"].ToString();
+            Broj_racuna = row["Broj_racuna"].ToString();
+            Datum_racuna = row["Datum_racuna"].ToString();
+            Otpremnica = row["Otpremnica"].ToString() == "1";
+            Dospijece_placanja = row["Dospijece_placanja"].ToString();
+            Fakturna_vrijednost = decimal.Parse(row["Fakturna_vrijednost"].ToString());
+            Maloprodajna_marza = decimal.Parse(row["Maloprodajna_marza"].ToString());
+            Iznos_pdv = decimal.Parse(row["Iznos_pdv"].ToString());
+            Vrijednost_bez_poreza = decimal.Parse(row["Vrijednost_bez_poreza"].ToString());
+            Nabavna_vrijednost = decimal.Parse(row["Nabavna_vrijednost"].ToString());
+            Maloprodajni_rabat = decimal.Parse(row["Maloprodajni_rabat"].ToString());
+            Netto_nabavna_vrijednost = decimal.Parse(row["Netto_nabavna_vrijednost"].ToString());
+            Pretporez = decimal.Parse(row["Pretporez"].ToString());
+            Veleprodajni_rabat = decimal.Parse(row["Veleprodajni_rabat"].ToString());
+            Cassa_sconto = decimal.Parse(row["Cassa_sconto"].ToString());
+            Netto_ruc = decimal.Parse(row["Netto_ruc"].ToString());
+            Povratna_naknada = decimal.Parse(row["Povratna_naknada"].ToString());
+            Porezni_broj = row["Porezni_broj"].ToString();
+            Broj_u_knjizi_ura = int.Parse(row["Broj_u_knjizi_ura"].ToString());
         }
 
         public int Redni_broj { get; set; } = 0;

@@ -16,10 +16,23 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
     {
         public PostavkeKnjizenjaPregledForm(BookNames knjiga)
         {
-            _postavkeKnjizenja.Knjiga = knjiga.ToString();
             InitializeComponent();
+            _postavkeKnjizenja.Knjiga = knjiga.ToString();
+            switch (knjiga) 
+            {
+                case BookNames.Ura_odobrenje:
+                    PopulateComboBoxStupac(new UraKnjiga());
+                    break;
+                case BookNames.Ura_trošak:
+                    PopulateComboBoxStupac(new UraKnjiga());
+                    break;
+                case BookNames.Ura_primka:
+                    PopulateComboBoxStupac(new Primka());
+                    break;
+                default:
+                    break;
+            }
             LoadData();
-            PopulateComboBoxStupac();
         }
 
         private void LoadData()
@@ -32,10 +45,10 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             dbDataGridView1.Columns[1].Width = (int)(dbDataGridView1.Width * 0.3);
         }
 
-        private void PopulateComboBoxStupac()
+        private void PopulateComboBoxStupac(IDbObject knjigaVrsta)
         {
             GenericPropertyFinder<IDbObject> property = new GenericPropertyFinder<IDbObject>();
-            IEnumerable<List<string>> obj = property.PrintTModelPropertyAndValue(_uraKnjiga);
+            IEnumerable<List<string>> obj = property.PrintTModelPropertyAndValue(knjigaVrsta);
 
             comboBoxStupac.DataSource = obj.ElementAt(0);
         }
@@ -107,7 +120,6 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
         }
 
         private PostavkeKnjizenja _postavkeKnjizenja = new PostavkeKnjizenja();
-        private UraKnjiga _uraKnjiga = new UraKnjiga();
         private KontniPlan _kontniPlan = new KontniPlan();
     }
 }
