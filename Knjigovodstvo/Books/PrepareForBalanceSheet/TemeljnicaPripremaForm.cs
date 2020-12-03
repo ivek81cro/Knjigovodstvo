@@ -197,7 +197,8 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private void DbDataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(dbDataGridView1.SelectedCells[0].ColumnIndex == 2)
+            int index = dbDataGridView1.SelectedCells[0].ColumnIndex;
+            if (dbDataGridView1.Columns[index].HeaderText == "Konto")
             using (var form = new KontniPlanPregledForm()) 
             {
                 form.ShowDialog();
@@ -225,9 +226,9 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private void ButtonKnjizi_Click(object sender, System.EventArgs e)
         {
-            TemeljnicaSave save = new TemeljnicaSave();
-            save.PrepareSave(_dt, _postavkeKnjizenja);
-            save.SaveToDatabase();
+            TemeljnicaPrepSave save = new TemeljnicaPrepSave();
+            if (save.PrepareSave(_dt, _postavkeKnjizenja))
+                save.SaveToDatabase();
             Close();
         }
 

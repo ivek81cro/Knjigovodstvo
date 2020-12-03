@@ -27,5 +27,6 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         public decimal Potrazuje1 { get; set; } = 0;
         public decimal Duguje2 { get; set; } = 0;
         public decimal Potrazuje2 { get; set; } = 0;
+        public int Broj_temeljnice { get; set; } = 0;
     }
 }

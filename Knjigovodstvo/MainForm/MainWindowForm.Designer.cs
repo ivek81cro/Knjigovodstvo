@@ -54,6 +54,8 @@ namespace Knjigovodstvo.MainForm
             this.toolStripMenuItemJoppd = new System.Windows.Forms.ToolStripMenuItem();
             this.izvodiMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPregledIzvoda = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuFinancijsko = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuKontniPlan = new System.Windows.Forms.ToolStripMenuItem();
             this.prozoriMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,8 +70,7 @@ namespace Knjigovodstvo.MainForm
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.menuFinancijsko = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuKontniPlan = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuTemeljnice = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -144,7 +145,8 @@ namespace Knjigovodstvo.MainForm
             // 
             this.menuKnjige.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuUra,
-            this.menuIra});
+            this.menuIra,
+            this.menuTemeljnice});
             this.menuKnjige.Name = "menuKnjige";
             this.menuKnjige.Size = new System.Drawing.Size(52, 20);
             this.menuKnjige.Text = "&Knjige";
@@ -155,7 +157,7 @@ namespace Knjigovodstvo.MainForm
             this.menuPrimke,
             this.menuUraKnjiga});
             this.menuUra.Name = "menuUra";
-            this.menuUra.Size = new System.Drawing.Size(97, 22);
+            this.menuUra.Size = new System.Drawing.Size(130, 22);
             this.menuUra.Text = "URA";
             // 
             // menuPrimke
@@ -177,7 +179,7 @@ namespace Knjigovodstvo.MainForm
             this.menuIra.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuIraKnjiga});
             this.menuIra.Name = "menuIra";
-            this.menuIra.Size = new System.Drawing.Size(97, 22);
+            this.menuIra.Size = new System.Drawing.Size(130, 22);
             this.menuIra.Text = "IRA";
             // 
             // menuIraKnjiga
@@ -186,6 +188,13 @@ namespace Knjigovodstvo.MainForm
             this.menuIraKnjiga.Size = new System.Drawing.Size(142, 22);
             this.menuIraKnjiga.Text = "Izlazni računi";
             this.menuIraKnjiga.Click += new System.EventHandler(this.ShowNewFormIraKnjigaPregled);
+            // 
+            // menuTemeljnice
+            // 
+            this.menuTemeljnice.Name = "menuTemeljnice";
+            this.menuTemeljnice.Size = new System.Drawing.Size(130, 22);
+            this.menuTemeljnice.Text = "Temeljnice";
+            this.menuTemeljnice.Click += new System.EventHandler(this.ShowNewFormTemeljnice);
             // 
             // menuPlaca
             // 
@@ -254,6 +263,21 @@ namespace Knjigovodstvo.MainForm
             this.menuPregledIzvoda.Size = new System.Drawing.Size(114, 22);
             this.menuPregledIzvoda.Text = "&Pregled";
             this.menuPregledIzvoda.Click += new System.EventHandler(this.ShowNewFormPregledIzvodaForm);
+            // 
+            // menuFinancijsko
+            // 
+            this.menuFinancijsko.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuKontniPlan});
+            this.menuFinancijsko.Name = "menuFinancijsko";
+            this.menuFinancijsko.Size = new System.Drawing.Size(78, 20);
+            this.menuFinancijsko.Text = "Financijsko";
+            // 
+            // menuKontniPlan
+            // 
+            this.menuKontniPlan.Name = "menuKontniPlan";
+            this.menuKontniPlan.Size = new System.Drawing.Size(135, 22);
+            this.menuKontniPlan.Text = "Kontni Plan";
+            this.menuKontniPlan.Click += new System.EventHandler(this.ShowNewFormKontniPlanPregledForm);
             // 
             // prozoriMenu
             // 
@@ -357,21 +381,6 @@ namespace Knjigovodstvo.MainForm
             this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
-            // menuFinancijsko
-            // 
-            this.menuFinancijsko.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuKontniPlan});
-            this.menuFinancijsko.Name = "menuFinancijsko";
-            this.menuFinancijsko.Size = new System.Drawing.Size(78, 20);
-            this.menuFinancijsko.Text = "Financijsko";
-            // 
-            // menuKontniPlan
-            // 
-            this.menuKontniPlan.Name = "menuKontniPlan";
-            this.menuKontniPlan.Size = new System.Drawing.Size(135, 22);
-            this.menuKontniPlan.Text = "Kontni Plan";
-            this.menuKontniPlan.Click += new System.EventHandler(this.ShowNewFormKontniPlanPregledForm);
-            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -433,6 +442,7 @@ namespace Knjigovodstvo.MainForm
         private System.Windows.Forms.ToolStripMenuItem menuIraKnjiga;
         private System.Windows.Forms.ToolStripMenuItem menuFinancijsko;
         private System.Windows.Forms.ToolStripMenuItem menuKontniPlan;
+        private System.Windows.Forms.ToolStripMenuItem menuTemeljnice;
     }
 }
 

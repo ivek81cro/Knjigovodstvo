@@ -1,15 +1,17 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Settings;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 {
-    public class TemeljnicaSave
+    public class TemeljnicaPrepSave
     {
-        public void PrepareSave(DataTable _dt, List<PostavkeKnjizenja> _postavkeKnjizenja) 
+        public bool PrepareSave(DataTable _dt, List<PostavkeKnjizenja> _postavkeKnjizenja) 
         {
             foreach (DataRow row in _dt.Rows)
             {
@@ -17,11 +19,12 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 {
                     _temeljnicaStavka.Add(new TemeljnicaStavka()
                     {
-                        Opis = row["Opis knjiženja"].ToString(),
+                        Opis = row["Opis knjiženja"].ToString() + 
+                        " - " + row["Opis stavke"].ToString(),
                         Dokument = _postavkeKnjizenja.ElementAt(0).Knjiga,
                         Broj = int.Parse(row["Redni broj"].ToString()),
                         Konto = row["Konto"].ToString(),
-                        Datum = row["Datum dokumenta"].ToString(),
+                        Datum = DateTime.ParseExact(row["Datum dokumenta"].ToString(), "dd.MM.yyyy", CultureInfo.InvariantCulture).ToString(),
                         Duguje2 = decimal.Parse(row["Dugovna"].ToString()),
                         Potrazuje2 = decimal.Parse(row["Potražna"].ToString())
                     });
@@ -29,8 +32,10 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 else
                 {
                     MessageBox.Show("Niste unijeli ispravan konto", "Neispravan konto");
+                    return false;
                 }
             }
+            return true;
         }
 
         public void SaveToDatabase()

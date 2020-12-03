@@ -1,4 +1,5 @@
 ﻿using Knjigovodstvo.BankStatements;
+using Knjigovodstvo.Books.BalanceSheetJournal;
 using Knjigovodstvo.City;
 using Knjigovodstvo.Employee;
 using Knjigovodstvo.FinancialReports;
@@ -172,6 +173,20 @@ namespace Knjigovodstvo.MainForm
             else
             {
                 _openForm.Open(new IraKnjigaForm(), this);
+            }
+        }
+
+        private void ShowNewFormTemeljnice(object sender, EventArgs e)
+        {
+            string formName = ChildWindowName.TemeljnicePregledForm.ToString();
+            if (_isOpen.Check(MdiChildren, formName))
+            {
+                Form f = _isOpen.GetChild(MdiChildren, formName);
+                f.Focus();
+            }
+            else
+            {
+                _openForm.Open(new TemeljnicePregledForm(), this);
             }
         }
 
