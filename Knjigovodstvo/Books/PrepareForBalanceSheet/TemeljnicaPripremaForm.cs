@@ -232,7 +232,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     Dokument = _postavkeKnjizenja.ElementAt(0).Knjiga,
                     Broj = int.Parse(row["Redni broj"].ToString()),
                     Konto = row["Konto"].ToString(),
-                    Datum = row["Datum knjiženja"].ToString(),
+                    Datum = row["Datum dokumenta"].ToString(),
                     Duguje2 = decimal.Parse(row["Dugovna"].ToString()),
                     Potrazuje2 = decimal.Parse(row["Potražna"].ToString())
                 });
