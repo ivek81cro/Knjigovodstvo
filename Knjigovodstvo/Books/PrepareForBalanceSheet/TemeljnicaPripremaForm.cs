@@ -24,7 +24,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             InitializeComponent();
             _dt = new DataTable()
             {
-                Columns = { "Opis stavke", "Opis knjiženja", "Konto", "Datum dokumenta", "Dugovna", "Potražna", "Mijenja predznak" }
+                Columns = { "Redni broj", "Opis stavke", "Opis knjiženja", "Konto", "Datum dokumenta", "Dugovna", "Potražna", "Mijenja predznak" }
             };
             SelectType(model);
         }
@@ -54,10 +54,11 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             foreach (var postavka in _postavkeKnjizenja)
             {
                 _dt.Rows.Add(
+                    knjiga.Redni_broj,
                     postavka.Naziv_stupca,
-                    knjiga.Naziv_i_sjediste_kupca.Split(' ')[0] + ":" + knjiga.Broj_racuna,
+                    knjiga.Naziv_i_sjediste_kupca.Split(' ')[0] + ": " + knjiga.Broj_racuna,
                     postavka.Konto,
-                    knjiga.Datum.Split(' ')[0],
+                   knjiga.Datum.Split(' ')[0],
                     postavka.Strana == "Dugovna",
                     postavka.Strana == "Potražna",
                     postavka.Mijenja_predznak == true
@@ -73,6 +74,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             foreach (var postavka in _postavkeKnjizenja)
             {
                 _dt.Rows.Add(
+                    knjiga.Redni_broj,
                     postavka.Naziv_stupca,
                     knjiga.Naziv_dobavljaca + ":" + knjiga.Broj_racuna,
                     postavka.Konto,
@@ -92,6 +94,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             foreach (var postavka in _postavkeKnjizenja)
             {
                 _dt.Rows.Add(
+                    knjiga.Redni_broj,
                     postavka.Naziv_stupca,
                     knjiga.Naziv_dobavljaca + ":" + knjiga.Broj_racuna,
                     postavka.Konto,
@@ -191,19 +194,6 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             }
         }
 
-        private void ButtonBrisiRed_Click(object sender, System.EventArgs e)
-        {
-            if(dbDataGridView1.SelectedCells.Count > 0)
-                dbDataGridView1.Rows.RemoveAt(dbDataGridView1.SelectedCells[0].RowIndex);
-            CheckAreSidesEqual();
-        }
-
-        private void ButtonDodajRed_Click(object sender, System.EventArgs e)
-        {
-            _dt.Rows.Add("", "", "", "", "", "");
-            CheckAreSidesEqual();
-        }
-
         private void DbDataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if(dbDataGridView1.SelectedCells[0].ColumnIndex == 2)
@@ -217,6 +207,36 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         private void DbDataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             CheckAreSidesEqual();
+        }
+
+        private void ButtonBrisiRed_Click(object sender, System.EventArgs e)
+        {
+            if(dbDataGridView1.SelectedCells.Count > 0)
+                dbDataGridView1.Rows.RemoveAt(dbDataGridView1.SelectedCells[0].RowIndex);
+            CheckAreSidesEqual();
+        }
+
+        private void ButtonDodajRed_Click(object sender, System.EventArgs e)
+        {
+            _dt.Rows.Add("", "", "", "", "", "");
+            CheckAreSidesEqual();
+        }
+
+        private void ButtonKnjizi_Click(object sender, System.EventArgs e)
+        {
+            foreach(DataRow row in _dt.Rows)
+            {
+                _temeljnicaStavka.Add(new TemeljnicaStavka()
+                {
+                    Opis = row["Opis knjiženja"].ToString(),
+                    Dokument = _postavkeKnjizenja.ElementAt(0).Knjiga,
+                    Broj = int.Parse(row["Redni broj"].ToString()),
+                    Konto = row["Konto"].ToString(),
+                    Datum = row["Datum knjiženja"].ToString(),
+                    Duguje2 = decimal.Parse(row["Dugovna"].ToString()),
+                    Potrazuje2 = decimal.Parse(row["Potražna"].ToString())
+                });
+            }
         }
 
         private readonly Partneri _partner = new Partneri();

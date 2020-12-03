@@ -1,5 +1,4 @@
 ﻿using Knjigovodstvo.Interface;
-using Knjigovodstvo.URA;
 using System;
 
 namespace Knjigovodstvo.Books.PrepareForBalanceSheet

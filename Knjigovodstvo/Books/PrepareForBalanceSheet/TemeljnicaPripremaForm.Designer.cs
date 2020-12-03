@@ -83,6 +83,7 @@
             this.buttonKnjizi.TabIndex = 11;
             this.buttonKnjizi.Text = "Knjiži";
             this.buttonKnjizi.UseVisualStyleBackColor = true;
+            this.buttonKnjizi.Click += new System.EventHandler(this.ButtonKnjizi_Click);
             // 
             // buttonBrisiRed
             // 
