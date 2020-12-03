@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Interface;
+﻿using Knjigovodstvo.Database;
+using Knjigovodstvo.Interface;
 using System;
 
 namespace Knjigovodstvo.Books.PrepareForBalanceSheet
@@ -8,6 +9,11 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         public FormError ValidateData()
         {
             throw new NotImplementedException();
+        }
+
+        public void SaveToDatabase()
+        {
+            new DbDataInsert().InsertData(this);
         }
 
         public int Id { get; set; } = 0;
@@ -21,6 +27,5 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         public decimal Potrazuje1 { get; set; } = 0;
         public decimal Duguje2 { get; set; } = 0;
         public decimal Potrazuje2 { get; set; } = 0;
-
     }
 }

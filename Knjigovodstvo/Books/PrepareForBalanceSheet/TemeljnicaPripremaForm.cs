@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.FinancialReports;
+﻿using Knjigovodstvo.Database;
+using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Interface;
 using Knjigovodstvo.IRA;
@@ -224,23 +225,13 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private void ButtonKnjizi_Click(object sender, System.EventArgs e)
         {
-            foreach(DataRow row in _dt.Rows)
-            {
-                _temeljnicaStavka.Add(new TemeljnicaStavka()
-                {
-                    Opis = row["Opis knjiženja"].ToString(),
-                    Dokument = _postavkeKnjizenja.ElementAt(0).Knjiga,
-                    Broj = int.Parse(row["Redni broj"].ToString()),
-                    Konto = row["Konto"].ToString(),
-                    Datum = row["Datum dokumenta"].ToString(),
-                    Duguje2 = decimal.Parse(row["Dugovna"].ToString()),
-                    Potrazuje2 = decimal.Parse(row["Potražna"].ToString())
-                });
-            }
+            TemeljnicaSave save = new TemeljnicaSave();
+            save.PrepareSave(_dt, _postavkeKnjizenja);
+            save.SaveToDatabase();
+            Close();
         }
 
         private readonly Partneri _partner = new Partneri();
-        private List<TemeljnicaStavka> _temeljnicaStavka = new List<TemeljnicaStavka>();
         private readonly IDbObject _obj;
         private readonly List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly DataTable _dt;
