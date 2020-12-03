@@ -1,11 +1,8 @@
-﻿using Knjigovodstvo.Database;
-using Knjigovodstvo.FinancialReports;
+﻿using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Interface;
-using Knjigovodstvo.IRA;
 using Knjigovodstvo.Partners;
 using Knjigovodstvo.Settings;
-using Knjigovodstvo.URA;
 using Knjigovodstvo.Validators;
 using System.Collections.Generic;
 using System.Data;
@@ -32,81 +29,23 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private void SelectType(string model)
         {
+            TemeljnicaDataPrepare tp = new TemeljnicaDataPrepare();
             switch (model)
             {
                 case "UraKnjiga":
-                    PrepareDataUra();
+                    tp.PrepareDataUra(_dt, _postavkeKnjizenja, _obj);
                     break;
                 case "Primka":
-                    PrepareDataPrimka();
+                    tp.PrepareDataPrimka(_dt, _postavkeKnjizenja, _obj);
                     break;
                 case "IraKnjiga":
-                    PrepareDataIra();
+                    tp.PrepareDataIra(_dt, _postavkeKnjizenja, _obj);
                     break;
                 default:
                     break;
             }
-        }
-
-        private void PrepareDataIra()
-        {
-            IraKnjiga knjiga = (IraKnjiga)_obj;
-
-            foreach (var postavka in _postavkeKnjizenja)
-            {
-                _dt.Rows.Add(
-                    knjiga.Redni_broj,
-                    postavka.Naziv_stupca,
-                    knjiga.Naziv_i_sjediste_kupca.Split(' ')[0] + ": " + knjiga.Broj_racuna,
-                    postavka.Konto,
-                   knjiga.Datum.Split(' ')[0],
-                    postavka.Strana == "Dugovna",
-                    postavka.Strana == "Potražna",
-                    postavka.Mijenja_predznak == true
-                    );
-            }
             PrepareDataShared();
-        }
-
-        private void PrepareDataUra()
-        {
-            UraKnjiga knjiga = (UraKnjiga)_obj;
-
-            foreach (var postavka in _postavkeKnjizenja)
-            {
-                _dt.Rows.Add(
-                    knjiga.Redni_broj,
-                    postavka.Naziv_stupca,
-                    knjiga.Naziv_dobavljaca + ":" + knjiga.Broj_racuna,
-                    postavka.Konto,
-                    knjiga.Datum_racuna.Split(' ')[0],
-                    postavka.Strana == "Dugovna",
-                    postavka.Strana == "Potražna",
-                    postavka.Mijenja_predznak == true
-                    );
-            }
-            PrepareDataShared();
-        }
-
-        private void PrepareDataPrimka()
-        {
-            Primka knjiga = (Primka)_obj;
-
-            foreach (var postavka in _postavkeKnjizenja)
-            {
-                _dt.Rows.Add(
-                    knjiga.Redni_broj,
-                    postavka.Naziv_stupca,
-                    knjiga.Naziv_dobavljaca + ":" + knjiga.Broj_racuna,
-                    postavka.Konto,
-                    knjiga.Datum_knjizenja.Split(' ')[0],
-                    postavka.Strana == "Dugovna",
-                    postavka.Strana == "Potražna",
-                    postavka.Mijenja_predznak == true
-                    );
-            }
-            PrepareDataShared();
-        }
+        }        
 
         private void PrepareDataShared() 
         {
@@ -154,7 +93,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 }
 
                 row["Opis stavke"] = new TableHeaderFormat().FormatHeader(row["Opis stavke"].ToString());
-                CheckAreSidesEqual();
+                CheckEndBalance();
             }
             //Remove rows with both sides 0,00
             for (int i = 0; i < _dt.Rows.Count; i++)
@@ -168,7 +107,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             }
         }
 
-        private void CheckAreSidesEqual()
+        private void CheckEndBalance()
         {
             _dugovna = 0;
             _potrazna = 0;
@@ -208,20 +147,20 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private void DbDataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            CheckAreSidesEqual();
+            CheckEndBalance();
         }
 
         private void ButtonBrisiRed_Click(object sender, System.EventArgs e)
         {
             if(dbDataGridView1.SelectedCells.Count > 0)
                 dbDataGridView1.Rows.RemoveAt(dbDataGridView1.SelectedCells[0].RowIndex);
-            CheckAreSidesEqual();
+            CheckEndBalance();
         }
 
         private void ButtonDodajRed_Click(object sender, System.EventArgs e)
         {
             _dt.Rows.Add("", "", "", "", "", "");
-            CheckAreSidesEqual();
+            CheckEndBalance();
         }
 
         private void ButtonKnjizi_Click(object sender, System.EventArgs e)

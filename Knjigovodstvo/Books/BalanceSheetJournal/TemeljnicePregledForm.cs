@@ -52,10 +52,9 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
         {
             decimal duguje = 0;
             decimal potrazuje = 0;
-            decimal temp;
-            foreach (DataRow row in _dt.Rows) 
+            foreach (DataRow row in _dt.Rows)
             {
-                if(decimal.TryParse(row["Duguje2"].ToString(), out temp))
+                if (decimal.TryParse(row["Duguje2"].ToString(), out decimal temp))
                 {
                     duguje += temp;
                     temp = 0;
