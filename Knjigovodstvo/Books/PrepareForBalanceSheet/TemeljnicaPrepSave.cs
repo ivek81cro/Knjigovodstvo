@@ -1,5 +1,4 @@
-﻿using Knjigovodstvo.Database;
-using Knjigovodstvo.Settings;
+﻿using Knjigovodstvo.Settings;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -43,7 +42,18 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             if (_temeljnicaStavka.Count > 0)
             {
                 foreach (var stavka in _temeljnicaStavka)
-                    new DbDataInsert().InsertData(stavka);
+                {
+                    if (!stavka.CheckIfExistsInDatabase())
+                        stavka.SaveToDatabase();
+                    else 
+                    {
+                        DialogResult dr = 
+                            MessageBox.Show("Podatak već postoji na temeljnici, radi li se o ispravci?"
+                            , "Neispravan konto", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dr == DialogResult.Yes)
+                            stavka.UpdateStavka();
+                    }
+                }
             }
             else
             {

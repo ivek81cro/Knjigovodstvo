@@ -51,7 +51,8 @@ namespace Knjigovodstvo.FinancialReports
         private void DbDataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow selectedRow = dbDataGridView1.SelectedRows[0];
-            KontoBroj = selectedRow.Cells["Konto"].Value.ToString();            
+            KontoBroj = selectedRow.Cells["Konto"].Value.ToString(); 
+            Opis = selectedRow.Cells["Opis"].Value.ToString();
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)
@@ -62,5 +63,6 @@ namespace Knjigovodstvo.FinancialReports
 
         private readonly KontniPlan _kontniPlan = new KontniPlan();
         public string KontoBroj { get; private set; }
+        public string Opis { get; set; }
     }
 }

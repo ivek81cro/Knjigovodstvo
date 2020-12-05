@@ -54,6 +54,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             LoadValuesDebitAndCredit();
             _dt.Columns.Remove("Mijenja predznak");
             dbDataGridView1.DataSource = _dt;
+            dbDataGridView1.Columns[0].ReadOnly = true;
         }
 
         private void LoadValuesDebitAndCredit()
@@ -111,7 +112,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         {
             _dugovna = 0;
             _potrazna = 0;
-            var validate = new FloatValidator();
+            var validate = new DecimalValidate();
             foreach (DataRow row in _dt.Rows)
             {
                 if (validate.Check(row["Dugovna"].ToString()))
@@ -141,12 +142,20 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             using (var form = new KontniPlanPregledForm()) 
             {
                 form.ShowDialog();
-                _dt.Rows[dbDataGridView1.SelectedCells[0].RowIndex][dbDataGridView1.SelectedCells[0].ColumnIndex] = form.KontoBroj;
+                _dt.Rows[dbDataGridView1.SelectedCells[0]
+                    .RowIndex]["Konto"] = form.KontoBroj;
             }
         }
 
         private void DbDataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            DecimalValidate validate = new DecimalValidate();
+            foreach (DataGridViewRow row in dbDataGridView1.Rows)
+            {
+                if (!validate.Check(row.Cells["Potražna"].Value.ToString())
+                    || !validate.Check(row.Cells["Dugovna"].Value.ToString()))
+                    MessageBox.Show("Vrijednosti u poljima iznosa nisu u odgovarajućem formatu(0,00)", "Upozorenja");
+            }
             CheckEndBalance();
         }
 
@@ -159,7 +168,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private void ButtonDodajRed_Click(object sender, System.EventArgs e)
         {
-            _dt.Rows.Add("", "", "", "", "", "");
+            _dt.Rows.Add();
             CheckEndBalance();
         }
 

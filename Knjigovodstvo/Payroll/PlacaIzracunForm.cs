@@ -303,7 +303,7 @@ namespace Knjigovodstvo.Payroll
         {
             SetZaposlenikJoppd();
 
-            if (new FloatValidator().Check(textBoxBruto.Text))
+            if (new DecimalValidate().Check(textBoxBruto.Text))
             {
                 if (comboBoxZaposlenik.SelectedItem != null)
                 {

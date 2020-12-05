@@ -1,5 +1,7 @@
 ﻿using Knjigovodstvo.Books.PrepareForBalanceSheet;
 using Knjigovodstvo.Database;
+using Knjigovodstvo.FinancialReports;
+using Knjigovodstvo.Settings.SettingsBookkeeping;
 using System;
 using System.Data;
 using System.Drawing;
@@ -26,6 +28,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
                     comboBoxVrstaTemeljnice.Items.Add(row["Dokument"].ToString());
                 }
             }
+            comboBoxVrstaTemeljnice.Items.Add(BookNames.Slobodna);
         }
 
         private void ComboBoxVrstaTemeljnice_SelectionChangeCommitted(object sender, System.EventArgs e)
@@ -33,7 +36,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             _dt = new DbDataGet().GetTable(new TemeljnicaStavka(), 
                 $"Dokument = '{comboBoxVrstaTemeljnice.SelectedItem}' AND Broj_temeljnice = 0");
             LoadDataView();
-            CheckBalance();
+            CheckEndBalance();
         }
 
         private void LoadDataView()
@@ -41,6 +44,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             dbDataGridView1.DataSource = _dt;
             dbDataGridView1.Columns.RemoveAt(0);
             dbDataGridView1.Columns.RemoveAt(dbDataGridView1.Columns.Count - 1);
+            dbDataGridView1.Columns[0].ReadOnly = true;
 
             foreach (DataGridViewColumn col in dbDataGridView1.Columns)
             {
@@ -48,7 +52,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             }
         }
 
-        private void CheckBalance()
+        private void CheckEndBalance()
         {
             decimal duguje = 0;
             decimal potrazuje = 0;
@@ -78,6 +82,31 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
                 labelPotrazuje.ForeColor = Color.Green;
                 labelDuguje.ForeColor = Color.Green;
             }
+        }
+
+        private void DbDataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = dbDataGridView1.SelectedCells[0].ColumnIndex;
+
+            if (dbDataGridView1.Columns[index].HeaderText == "Konto")
+                using (var form = new KontniPlanPregledForm())
+                {
+                    form.ShowDialog();
+                    _dt.Rows[dbDataGridView1.SelectedCells[0]
+                        .RowIndex]["Konto"] = form.KontoBroj;
+                    _dt.Rows[dbDataGridView1.SelectedCells[0]
+                        .RowIndex]["Opis"] = form.Opis;
+                }
+
+            if (dbDataGridView1.Columns[index].HeaderText == "Datum")                
+                    _dt.Rows[dbDataGridView1.SelectedCells[0]
+                        .RowIndex]["Datum"] = DateTime.Today;
+        }
+       
+        private void ButtonDodajRed_Click(object sender, EventArgs e)
+        {
+            _dt.Rows.Add();
+            CheckEndBalance();
         }
 
         private DataTable _dt = new DataTable();

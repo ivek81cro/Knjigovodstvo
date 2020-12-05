@@ -36,11 +36,13 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             this.labelVrsta = new System.Windows.Forms.Label();
             this.labelDuguje = new System.Windows.Forms.Label();
             this.labelPotrazuje = new System.Windows.Forms.Label();
+            this.buttonDodajRed = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dbDataGridView1
             // 
+            this.dbDataGridView1.AllowUserToAddRows = false;
             this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dbDataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
@@ -50,6 +52,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             this.dbDataGridView1.RowTemplate.Height = 25;
             this.dbDataGridView1.Size = new System.Drawing.Size(1186, 395);
             this.dbDataGridView1.TabIndex = 0;
+            this.dbDataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DbDataGridView1_CellDoubleClick);
             // 
             // comboBoxVrstaTemeljnice
             // 
@@ -91,11 +94,22 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             this.labelPotrazuje.TabIndex = 4;
             this.labelPotrazuje.Text = "Potražuje:";
             // 
+            // buttonDodajRed
+            // 
+            this.buttonDodajRed.Location = new System.Drawing.Point(13, 584);
+            this.buttonDodajRed.Name = "buttonDodajRed";
+            this.buttonDodajRed.Size = new System.Drawing.Size(75, 23);
+            this.buttonDodajRed.TabIndex = 5;
+            this.buttonDodajRed.Text = "Dodaj red";
+            this.buttonDodajRed.UseVisualStyleBackColor = true;
+            this.buttonDodajRed.Click += new System.EventHandler(this.ButtonDodajRed_Click);
+            // 
             // TemeljnicePregledForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1211, 631);
+            this.Controls.Add(this.buttonDodajRed);
             this.Controls.Add(this.labelPotrazuje);
             this.Controls.Add(this.labelDuguje);
             this.Controls.Add(this.labelVrsta);
@@ -116,5 +130,6 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
         private System.Windows.Forms.Label labelVrsta;
         private System.Windows.Forms.Label labelDuguje;
         private System.Windows.Forms.Label labelPotrazuje;
+        private System.Windows.Forms.Button buttonDodajRed;
     }
 }

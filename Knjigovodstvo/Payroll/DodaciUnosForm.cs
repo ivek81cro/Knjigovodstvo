@@ -63,7 +63,7 @@ namespace Knjigovodstvo.Payroll
         {
             if (textBoxIznos.Text != "")
             {
-                if (new FloatValidator().Check(textBoxIznos.Text))
+                if (new DecimalValidate().Check(textBoxIznos.Text))
                 {
                     _dodaci.Oib = _zaposlenik.Oib;
                     _dodaci.Sifra = _sifra;

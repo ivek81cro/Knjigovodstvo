@@ -1,6 +1,7 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
 using System;
+using System.Data;
 
 namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 {
@@ -14,6 +15,22 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         public void SaveToDatabase()
         {
             new DbDataInsert().InsertData(this);
+        }
+
+        public bool CheckIfExistsInDatabase() 
+        {
+            DataTable dt = new DbDataGet().GetTable(this, $"Broj={Broj} AND Konto='{Konto}'");
+            if (dt.Rows.Count > 0)
+            {
+                Id= int.Parse(dt.Rows[0]["Id"].ToString());
+                return true;
+            }
+            return false;
+        }
+
+        public void UpdateStavka()
+        {
+            new DbDataUpdate().UpdateData(this);
         }
 
         public int Id { get; set; } = 0;

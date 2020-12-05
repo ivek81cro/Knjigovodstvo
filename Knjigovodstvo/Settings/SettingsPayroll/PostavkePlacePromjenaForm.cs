@@ -52,7 +52,7 @@ namespace Knjigovodstvo.Settings
 
         private void ButtonSave_Click(object sender, EventArgs e)
         {
-            if (!new FloatValidator().Check(textBoxVrijednost.Text))
+            if (!new DecimalValidate().Check(textBoxVrijednost.Text))
             {
                 MessageBox.Show("Vrijednost nije ispravno unešena.", "Izmjena vrijednosti postavke", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
