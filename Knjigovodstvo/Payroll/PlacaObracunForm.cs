@@ -1,6 +1,8 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
 using Knjigovodstvo.Helpers;
+using Knjigovodstvo.Settings;
+using Knjigovodstvo.Settings.SettingsBookkeeping;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,10 +21,12 @@ namespace Knjigovodstvo.Payroll
             var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
             dateTimePickerDatumOd.Value = firstDayOfMonth;
             dateTimePickerDatumDo.Value = lastDayOfMonth;
+            _bookName = BookNames.Place;
             FillListPlaca();
             FillComboBoxMjesec();
             FillComboBoxZaposlenik();
             LoadDatagrid();
+            LoadBookkeepingsettings();
         }
 
         private void FillListPlaca()
@@ -125,6 +129,55 @@ namespace Knjigovodstvo.Payroll
             LoadDatagrid();
         }
 
+        private void PostavkeClosing_Event(object sender, FormClosingEventArgs e)
+        {
+            LoadBookkeepingsettings();
+        }
+
+        private void LoadBookkeepingsettings()
+        {
+            List<DataRow> dr = new DbDataGet().GetTable(new PostavkeKnjizenja(), $"Knjiga='{_bookName}'").AsEnumerable().ToList();
+            _postavkeKnjizenja = new List<PostavkeKnjizenja>();
+            _postavkeKnjizenja = (from DataRow dRow in dr
+                                  select new PostavkeKnjizenja()
+                                  {
+                                      Id = int.Parse(dRow["Id"].ToString()),
+                                      Knjiga = dRow["Knjiga"].ToString(),
+                                      Naziv_stupca = dRow["Naziv_stupca"].ToString(),
+                                      Konto = dRow["Konto"].ToString(),
+                                      Strana = dRow["Strana"].ToString(),
+                                      Mijenja_predznak = dRow["Mijenja_predznak"].ToString() == "True"
+                                  }).ToList();
+
+        }
+
+        private void SaveObracun()
+        {            
+            DbDataInsert insert = new DbDataInsert();
+            DbDataUpdate update = new DbDataUpdate();
+
+            foreach (PlacaObracun placaObracun in _placeObracun)
+            {
+                if ((placaObracun.Id = placaObracun.Exists()) > 0)
+                {
+                    update.UpdateData(placaObracun);
+                    continue;
+                }
+
+                insert.InsertData(placaObracun);
+            }
+
+            MessageBox.Show("Obračun izvršen", "Obračun", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadDatagrid();
+        }
+
+        private void ButtonOpenPostavkeForm(object sender, EventArgs e)
+        {
+            PostavkeKnjizenjaPregledForm form = new PostavkeKnjizenjaPregledForm(_bookName);
+            form.FormClosing += new FormClosingEventHandler(PostavkeClosing_Event);
+            form.ShowDialog();
+        }
+
         private void ButtonPonisti_Click(object sender, EventArgs e)
         {
             comboBoxFilterDjelatnik.SelectedItem = null;
@@ -161,28 +214,15 @@ namespace Knjigovodstvo.Payroll
             SaveObracun();
         }
 
-        private void SaveObracun()
-        {            
-            DbDataInsert insert = new DbDataInsert();
-            DbDataUpdate update = new DbDataUpdate();
+        private void buttonKnjizi_Click(object sender, EventArgs e)
+        {
 
-            foreach (PlacaObracun placaObracun in _placeObracun)
-            {
-                if ((placaObracun.Id = placaObracun.Exists()) > 0)
-                {
-                    update.UpdateData(placaObracun);
-                    continue;
-                }
-
-                insert.InsertData(placaObracun);
-            }
-
-            MessageBox.Show("Obračun izvršen", "Obračun", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            LoadDatagrid();
         }
 
         private List<PlacaObracun> _placeObracun = new List<PlacaObracun>();
         private List<Placa> _place = new List<Placa>();
         private DbDataGet _dbDataGet = new DbDataGet();
+        private BookNames _bookName;
+        private List<PostavkeKnjizenja> _postavkeKnjizenja;
     }
 }

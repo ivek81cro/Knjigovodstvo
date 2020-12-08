@@ -36,19 +36,23 @@ namespace Knjigovodstvo.Payroll
             this.dateTimePickerDatumDo = new System.Windows.Forms.DateTimePicker();
             this.labelDatumDo = new System.Windows.Forms.Label();
             this.buttonObracunajSve = new System.Windows.Forms.Button();
-            this.dataGridView1 = new DBDataGridView();
+            this.dataGridView1 = new Knjigovodstvo.DBDataGridView();
             this.comboBoxFilterDjelatnik = new System.Windows.Forms.ComboBox();
             this.labelFilterDjelatnik = new System.Windows.Forms.Label();
             this.buttonPonisti = new System.Windows.Forms.Button();
             this.comboBoxFilterPoMjesecu = new System.Windows.Forms.ComboBox();
             this.labelFilterMjesec = new System.Windows.Forms.Label();
+            this.menuPostavke = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.buttonKnjizi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelRazdoblje
             // 
             this.labelRazdoblje.AutoSize = true;
-            this.labelRazdoblje.Location = new System.Drawing.Point(12, 23);
+            this.labelRazdoblje.Location = new System.Drawing.Point(13, 37);
             this.labelRazdoblje.Name = "labelRazdoblje";
             this.labelRazdoblje.Size = new System.Drawing.Size(152, 15);
             this.labelRazdoblje.TabIndex = 0;
@@ -57,7 +61,7 @@ namespace Knjigovodstvo.Payroll
             // dateTimePickerDatumOd
             // 
             this.dateTimePickerDatumOd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerDatumOd.Location = new System.Drawing.Point(35, 41);
+            this.dateTimePickerDatumOd.Location = new System.Drawing.Point(194, 34);
             this.dateTimePickerDatumOd.Name = "dateTimePickerDatumOd";
             this.dateTimePickerDatumOd.Size = new System.Drawing.Size(91, 23);
             this.dateTimePickerDatumOd.TabIndex = 1;
@@ -65,7 +69,7 @@ namespace Knjigovodstvo.Payroll
             // labelDatumOd
             // 
             this.labelDatumOd.AutoSize = true;
-            this.labelDatumOd.Location = new System.Drawing.Point(12, 45);
+            this.labelDatumOd.Location = new System.Drawing.Point(171, 38);
             this.labelDatumOd.Name = "labelDatumOd";
             this.labelDatumOd.Size = new System.Drawing.Size(23, 15);
             this.labelDatumOd.TabIndex = 2;
@@ -74,7 +78,7 @@ namespace Knjigovodstvo.Payroll
             // dateTimePickerDatumDo
             // 
             this.dateTimePickerDatumDo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerDatumDo.Location = new System.Drawing.Point(161, 41);
+            this.dateTimePickerDatumDo.Location = new System.Drawing.Point(320, 34);
             this.dateTimePickerDatumDo.Name = "dateTimePickerDatumDo";
             this.dateTimePickerDatumDo.Size = new System.Drawing.Size(91, 23);
             this.dateTimePickerDatumDo.TabIndex = 1;
@@ -82,7 +86,7 @@ namespace Knjigovodstvo.Payroll
             // labelDatumDo
             // 
             this.labelDatumDo.AutoSize = true;
-            this.labelDatumDo.Location = new System.Drawing.Point(137, 45);
+            this.labelDatumDo.Location = new System.Drawing.Point(296, 38);
             this.labelDatumDo.Name = "labelDatumDo";
             this.labelDatumDo.Size = new System.Drawing.Size(22, 15);
             this.labelDatumDo.TabIndex = 2;
@@ -90,7 +94,7 @@ namespace Knjigovodstvo.Payroll
             // 
             // buttonObracunajSve
             // 
-            this.buttonObracunajSve.Location = new System.Drawing.Point(263, 41);
+            this.buttonObracunajSve.Location = new System.Drawing.Point(422, 34);
             this.buttonObracunajSve.Name = "buttonObracunajSve";
             this.buttonObracunajSve.Size = new System.Drawing.Size(99, 23);
             this.buttonObracunajSve.TabIndex = 3;
@@ -106,11 +110,11 @@ namespace Knjigovodstvo.Payroll
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(9, 187);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1017, 361);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.Text = "dataGridView1";
@@ -161,11 +165,43 @@ namespace Knjigovodstvo.Payroll
             this.labelFilterMjesec.TabIndex = 9;
             this.labelFilterMjesec.Text = "Filter po mjesecu";
             // 
+            // menuPostavke
+            // 
+            this.menuPostavke.Name = "menuPostavke";
+            this.menuPostavke.Size = new System.Drawing.Size(115, 20);
+            this.menuPostavke.Text = "Postavke knjiženja";
+            this.menuPostavke.Click += new System.EventHandler(this.ButtonOpenPostavkeForm);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.AllowMerge = false;
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuPostavke});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.menuStrip1.Size = new System.Drawing.Size(1038, 24);
+            this.menuStrip1.TabIndex = 13;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // buttonKnjizi
+            // 
+            this.buttonKnjizi.Enabled = false;
+            this.buttonKnjizi.Location = new System.Drawing.Point(13, 70);
+            this.buttonKnjizi.Name = "buttonKnjizi";
+            this.buttonKnjizi.Size = new System.Drawing.Size(124, 23);
+            this.buttonKnjizi.TabIndex = 14;
+            this.buttonKnjizi.Text = "Knjiži na temeljnicu";
+            this.buttonKnjizi.UseVisualStyleBackColor = true;
+            this.buttonKnjizi.Click += new System.EventHandler(this.buttonKnjizi_Click);
+            // 
             // PlacaObracunForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 560);
+            this.Controls.Add(this.buttonKnjizi);
             this.Controls.Add(this.labelFilterMjesec);
             this.Controls.Add(this.comboBoxFilterPoMjesecu);
             this.Controls.Add(this.buttonPonisti);
@@ -178,9 +214,13 @@ namespace Knjigovodstvo.Payroll
             this.Controls.Add(this.labelDatumOd);
             this.Controls.Add(this.dateTimePickerDatumOd);
             this.Controls.Add(this.labelRazdoblje);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "PlacaObracunForm";
             this.Text = "Obračun plaće";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,5 +240,8 @@ namespace Knjigovodstvo.Payroll
         private System.Windows.Forms.Button buttonPonisti;
         private System.Windows.Forms.ComboBox comboBoxFilterPoMjesecu;
         private System.Windows.Forms.Label labelFilterMjesec;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuPostavke;
+        private Button buttonKnjizi;
     }
 }

@@ -43,15 +43,18 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             {
                 foreach (var stavka in _temeljnicaStavka)
                 {
-                    if (!stavka.CheckIfExistsInDatabase())
+                    if (!stavka.CheckIfExistsInDatabase() && !_updateConfirmed)
                         stavka.SaveToDatabase();
+                    else if(_updateConfirmed)
+                        stavka.UpdateStavka();
                     else 
                     {
-                        DialogResult dr = 
-                            MessageBox.Show("Podatak već postoji na temeljnici, radi li se o ispravci?"
-                            , "Neispravan konto", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (dr == DialogResult.Yes)
+                        if(MessageBox.Show("Podatak već postoji na temeljnici, radi li se o ispravci?"
+                            , "Neispravan konto", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            _updateConfirmed = true;
                             stavka.UpdateStavka();
+                        }
                     }
                 }
             }
@@ -68,6 +71,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             return true;
         }
 
-        private List<TemeljnicaStavka> _temeljnicaStavka = new List<TemeljnicaStavka>();
+        private bool _updateConfirmed = false;
+        private readonly List<TemeljnicaStavka> _temeljnicaStavka = new List<TemeljnicaStavka>();
     }
 }

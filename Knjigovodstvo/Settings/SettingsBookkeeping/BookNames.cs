@@ -6,6 +6,7 @@
         Ura_primka,
         Ura_odobrenje,
         Ura_trošak,
-        Ira
+        Ira,
+        Place
     }
 }

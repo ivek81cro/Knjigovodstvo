@@ -3,6 +3,7 @@ using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Interface;
 using Knjigovodstvo.IRA;
+using Knjigovodstvo.Payroll;
 using Knjigovodstvo.URA;
 using Knjigovodstvo.Validators;
 using System;
@@ -32,6 +33,9 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
                     break;
                 case BookNames.Ira:
                     PopulateComboBoxStupac(new IraKnjiga());
+                    break;
+                case BookNames.Place:
+                    PopulateComboBoxStupac(new Placa());
                     break;
                 default:
                     break;
