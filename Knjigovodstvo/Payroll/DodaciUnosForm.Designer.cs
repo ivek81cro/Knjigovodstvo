@@ -131,7 +131,7 @@ namespace Knjigovodstvo.Payroll
             this.buttonDelete.TabIndex = 9;
             this.buttonDelete.Text = "Briši";
             this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.Button1_Click);
+            this.buttonDelete.Click += new System.EventHandler(this.ButtonDeleteDodatak_Click);
             // 
             // DodaciUnosForm
             // 

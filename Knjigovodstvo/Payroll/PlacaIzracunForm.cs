@@ -130,21 +130,6 @@ namespace Knjigovodstvo.Payroll
             comboBoxRadnoVrijeme.DataSource = dt;
             comboBoxRadnoVrijeme.ValueMember = "Sifra";
             comboBoxRadnoVrijeme.DisplayMember = "Sifra i opis";
-        }        
-
-        //TODO: not needed, refactor
-        internal void EditPlaca()
-        {
-            PopuniKontrole(_placa);
-            int index = comboBoxZaposlenik.FindString(_placa.Oib);
-            comboBoxZaposlenik.SelectedIndex = index;
-
-            ShowDialog();
-        }
-
-        private void ButtonClose_Click(object sender, EventArgs e)
-        {
-            Close();
         }
 
         private void ComboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)
@@ -199,16 +184,16 @@ namespace Knjigovodstvo.Payroll
         {
             DataTable dt = new PlacaDodatak().GetDodaciByOib(_zaposlenik.Oib);
             List<DataRow> rows = dt.AsEnumerable().ToList();
-            _dodaci = (from DataRow row in rows
-                       select new PlacaDodatak()
-                       {
-                           Id = int.Parse(row["Id"].ToString()),
-                           Oib = row["Oib"].ToString(),
-                           Sifra = row["Sifra"].ToString(),
-                           Iznos = decimal.Parse(row["Iznos"].ToString())
-                       }).ToList();
+            _placa.AddDodaci((from DataRow row in rows
+                              select new PlacaDodatak()
+                              {
+                                  Id = int.Parse(row["Id"].ToString()),
+                                  Oib = row["Oib"].ToString(),
+                                  Sifra = row["Sifra"].ToString(),
+                                  Iznos = decimal.Parse(row["Iznos"].ToString())
+                              }).ToList());
             decimal dodaciUkupno = 0;
-            if (_dodaci.Count > 0)
+            if (_placa.GetDodaci().Count > 0)
             {
                 dodaciUkupno = ZbrojiDodatke();
             }
@@ -218,7 +203,7 @@ namespace Knjigovodstvo.Payroll
         private decimal ZbrojiDodatke()
         {
             decimal dodaciUkupno = 0;
-            foreach (PlacaDodatak d in _dodaci)
+            foreach (PlacaDodatak d in _placa.GetDodaci())
             {
                 dodaciUkupno += d.Iznos;
             }
@@ -273,7 +258,7 @@ namespace Knjigovodstvo.Payroll
             if (comboBoxZaposlenik.SelectedItem != null)
             {
                 DodaciUnosForm dodaci = new DodaciUnosForm(_zaposlenik, _placa);
-                _placa= dodaci.ShowDialogValue();
+                _placa = dodaci.ShowDialogValue();
                 dodaci.FormClosing += new FormClosingEventHandler(this.DodaciNew_FormClosing);
             }
             else
@@ -308,9 +293,9 @@ namespace Knjigovodstvo.Payroll
                 if (comboBoxZaposlenik.SelectedItem != null)
                 {
                     PopuniDodaci();
-                    decimal iznosBruto = decimal.Parse(textBoxBruto.Text);
+                    _placa.Bruto = decimal.Parse(textBoxBruto.Text);
                     labelPrirez.Text = "Prirez " + _prirez.ToString() + '%';
-                    _placa.Izracun(iznosBruto, _prirez, ZbrojiDodatke(), _zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
+                    new PlacaIzracun().Calculate(_placa, _prirez, _zaposlenik.Olaksica, checkBoxSamoMio1.Checked);
                     _placa.Oib = _zaposlenik.Oib;
 
                     PopuniKontrole(_placa);
@@ -326,10 +311,14 @@ namespace Knjigovodstvo.Payroll
             }
         }
 
+        private void ButtonClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private ZaposlenikJoppd _zaposlenikJoppd = new ZaposlenikJoppd();
         private Placa _placa = new Placa();
         private readonly Zaposlenik _zaposlenik = new Zaposlenik();
-        private List<PlacaDodatak> _dodaci = new List<PlacaDodatak>();
         private decimal _prirez = 0;
     }
 }

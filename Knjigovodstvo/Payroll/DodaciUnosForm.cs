@@ -59,43 +59,6 @@ namespace Knjigovodstvo.Payroll
             comboBoxOdabirDodatka.Text = "--Odaberi dodatak--";
         }
 
-        private void ButtonSave_Click(object sender, EventArgs e)
-        {
-            if (textBoxIznos.Text != "")
-            {
-                if (new DecimalValidate().Check(textBoxIznos.Text))
-                {
-                    _dodaci.Oib = _zaposlenik.Oib;
-                    _dodaci.Sifra = _sifra;
-                    _dodaci.Iznos = decimal.Parse(textBoxIznos.Text);
-                    
-
-                    int existsId = CheckDuplicate(_dodaci);
-
-                    if (existsId != 0)
-                    {
-                        _dodaci.Id = existsId;
-                        new DbDataUpdate().UpdateData(_dodaci);
-                        _placa = _dodaci.ZbrojiDodatke(_placa, _zaposlenik);
-                        new DbDataUpdate().UpdateData(_placa);
-
-                        MessageBox.Show("Izmjena uspješna.", "Dodaci", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else if(new DbDataInsert().InsertData(_dodaci))
-                    {
-                        _placa = _dodaci.ZbrojiDodatke(_placa, _zaposlenik);
-                        new DbDataUpdate().UpdateData(_placa);
-                        MessageBox.Show("Unos uspješan.", "Dodaci", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadDatagrid();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Neispravan format unešenog broja.", "Dodaci", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-        }
-
         private int CheckDuplicate(PlacaDodatak dodatak)
         {
             DataTable table = new DbDataGet().GetTable(dodatak, $"Oib='{_zaposlenik.Oib}' AND Sifra={_sifra};");
@@ -143,7 +106,44 @@ namespace Knjigovodstvo.Payroll
             }
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
+        {
+            if (textBoxIznos.Text != "")
+            {
+                if (new DecimalValidate().Check(textBoxIznos.Text))
+                {
+                    _dodaci.Oib = _zaposlenik.Oib;
+                    _dodaci.Sifra = _sifra;
+                    _dodaci.Iznos = decimal.Parse(textBoxIznos.Text);
+
+
+                    int existsId = CheckDuplicate(_dodaci);
+
+                    if (existsId != 0)
+                    {
+                        _dodaci.Id = existsId;
+                        new DbDataUpdate().UpdateData(_dodaci);
+                        _placa.SumAllDodaci();
+                        new DbDataUpdate().UpdateData(_placa);
+
+                        MessageBox.Show("Izmjena uspješna.", "Dodaci", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (new DbDataInsert().InsertData(_dodaci))
+                    {
+                        _placa.SumAllDodaci();
+                        new DbDataUpdate().UpdateData(_placa);
+                        MessageBox.Show("Unos uspješan.", "Dodaci", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadDatagrid();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Neispravan format unešenog broja.", "Dodaci", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        private void ButtonDeleteDodatak_Click(object sender, EventArgs e)
         {
             Int32 selectedRowCount = dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0)

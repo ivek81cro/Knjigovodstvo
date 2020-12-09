@@ -194,7 +194,7 @@ namespace Knjigovodstvo.Payroll
             this.buttonKnjizi.TabIndex = 14;
             this.buttonKnjizi.Text = "Knjiži na temeljnicu";
             this.buttonKnjizi.UseVisualStyleBackColor = true;
-            this.buttonKnjizi.Click += new System.EventHandler(this.buttonKnjizi_Click);
+            this.buttonKnjizi.Click += new System.EventHandler(this.ButtonKnjizi_Click);
             // 
             // PlacaObracunForm
             // 

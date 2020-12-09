@@ -29,7 +29,7 @@ namespace Knjigovodstvo.Settings
         internal void GetPostavkaById(int id)
         {
             string condition = $"Id={id};";
-            DataTable postavka = new DbDataGet().GetTable(new PostavkePlace(), condition);
+            DataTable postavka = new DbDataGet().GetTable(this, condition);
 
             Id = int.Parse(postavka.Rows[0]["Id"].ToString());
             Naziv = postavka.Rows[0]["Naziv"].ToString();
@@ -49,7 +49,7 @@ namespace Knjigovodstvo.Settings
         internal decimal GetStopaByName(PlacaStope naziv)
         {
             string condition = $"Naziv='{naziv}';";
-            DataTable postavka = new DbDataGet().GetTable(new PostavkePlace(), condition);
+            DataTable postavka = new DbDataGet().GetTable(this, condition);
 
             return decimal.Parse(postavka.Rows[0]["Vrijednost"].ToString());
         }

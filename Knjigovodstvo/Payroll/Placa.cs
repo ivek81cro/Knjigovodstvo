@@ -1,6 +1,6 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
-using Knjigovodstvo.Settings;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Knjigovodstvo.Payroll
@@ -10,53 +10,6 @@ namespace Knjigovodstvo.Payroll
         public FormError ValidateData() 
         {
             return FormError.None;
-        }
-
-        public Placa Izracun(decimal bruto, decimal prirez, decimal dodaci, decimal odbitak, bool drugi = false)
-        {
-            PostavkePlace p = new PostavkePlace();
-            decimal iznos = bruto;
-            Bruto = iznos;
-            if (drugi)
-            {
-                iznos -= Mio_1 = iznos * (p.GetStopaByName(PlacaStope.Mio_1) + p.GetStopaByName(PlacaStope.Mio_2));
-                Mio_2 = 0;
-            }
-            else
-            {
-                Mio_1 = iznos * p.GetStopaByName(PlacaStope.Mio_1);
-                Mio_2 = iznos * p.GetStopaByName(PlacaStope.Mio_2);
-                iznos -= Mio_1 + Mio_2;
-            }
-            Dohodak = iznos;
-            iznos -= Osobni_Odbitak = p.GetStopaByName(PlacaStope.Osnovica_odbitka) * 
-                (p.GetStopaByName(PlacaStope.Osnovni_odbitak_koeficjent) + odbitak);
-            if (iznos < 0)
-            {
-                iznos = 0;
-                Osobni_Odbitak = Dohodak;
-            }
-            Porezna_Osnovica = iznos;
-
-            if (Porezna_Osnovica > 30000)
-            {
-                iznos -= Porez_24_per = 30000.0m * p.GetStopaByName(PlacaStope.Porez_Dohodak_1);
-                iznos -= Porez_36_per = (Porezna_Osnovica - 30000) * p.GetStopaByName(PlacaStope.Porez_Dohodak_2);
-            }
-            else
-            {
-                iznos -= Porez_24_per = Porezna_Osnovica * p.GetStopaByName(PlacaStope.Porez_Dohodak_1);
-                Porez_36_per = 0;
-            }
-            iznos -= Prirez = ( Porez_Ukupno = Porez_24_per + Porez_36_per) * prirez/100;
-            Ukupno_Porez_i_Prirez = Porez_Ukupno + Prirez;
-            Neto = iznos + Osobni_Odbitak;
-
-            Doprinos_Zdravstvo = Bruto * p.GetStopaByName(PlacaStope.Doprinos_Zdravstveno);
-            Dodaci_Ukupno = dodaci;
-
-
-            return this;
         }
 
         public void GetPlacaByOib(string oib) 
@@ -87,6 +40,28 @@ namespace Knjigovodstvo.Payroll
             }
         }
 
+        public void SumAllDodaci()
+        {
+            Dodaci_Ukupno = 0;
+            foreach(var dodatak in _dodaci)
+            {
+                Dodaci_Ukupno += dodatak.Iznos;
+            }
+        }
+
+        internal void AddDodaci(List<PlacaDodatak> dodaci)
+        {
+            _dodaci = dodaci;
+            SumAllDodaci();
+        }
+
+        internal List<PlacaDodatak> GetDodaci()
+        {
+            return _dodaci;
+        }
+
+        private List<PlacaDodatak> _dodaci = new List<PlacaDodatak>();
+
         public int Id { get; set; } = 0;
         public string Oib { get; set; } = "";
         public decimal Bruto { get; set; } = 0;
@@ -103,5 +78,6 @@ namespace Knjigovodstvo.Payroll
         public decimal Neto { get; set; } = 0;
         public decimal Doprinos_Zdravstvo { get; set; } = 0;
         public decimal Dodaci_Ukupno { get; set; } = 0;
+
     }
 }

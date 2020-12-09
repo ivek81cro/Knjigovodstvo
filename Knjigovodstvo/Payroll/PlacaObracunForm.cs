@@ -148,7 +148,6 @@ namespace Knjigovodstvo.Payroll
                                       Strana = dRow["Strana"].ToString(),
                                       Mijenja_predznak = dRow["Mijenja_predznak"].ToString() == "True"
                                   }).ToList();
-
         }
 
         private void SaveObracun()
@@ -214,7 +213,7 @@ namespace Knjigovodstvo.Payroll
             SaveObracun();
         }
 
-        private void buttonKnjizi_Click(object sender, EventArgs e)
+        private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
 
         }
