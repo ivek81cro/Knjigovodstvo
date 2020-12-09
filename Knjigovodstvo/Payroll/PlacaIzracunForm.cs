@@ -53,7 +53,7 @@ namespace Knjigovodstvo.Payroll
 
         private void FillComboBoxZaposlenik()
         {
-            DataTable dt = new DbDataGet().GetTable(_zaposlenik);
+            DataTable dt = _dbGet.GetTable(_zaposlenik);
             dt.Columns.Add(
                 "Ime i prezime", 
                 typeof(string),
@@ -66,9 +66,8 @@ namespace Knjigovodstvo.Payroll
 
         private void FillComboBoxJoppd()
         {
-            DbDataGet data = new DbDataGet();
             //TODO: shorten this and simplify
-            DataTable dt = data.GetTable(new JoppdSifre(), $"Skupina='Nacin_Isplate';");
+            DataTable dt = _dbGet.GetTable(new JoppdSifre(), $"Skupina='Nacin_Isplate';");
             dt.Columns.Add(
                 "Sifra i opis",
                 typeof(string),
@@ -77,7 +76,7 @@ namespace Knjigovodstvo.Payroll
             comboBoxNacinIsplate.ValueMember = "Sifra";
             comboBoxNacinIsplate.DisplayMember = "Sifra i Opis";
 
-            dt = data.GetTable(new JoppdSifre(), $"Skupina='Stjecatelj';");
+            dt = _dbGet.GetTable(new JoppdSifre(), $"Skupina='Stjecatelj';");
             dt.Columns.Add(
                 "Sifra i opis",
                 typeof(string),
@@ -86,7 +85,7 @@ namespace Knjigovodstvo.Payroll
             comboBoxStjecatelj.ValueMember = "Sifra";
             comboBoxStjecatelj.DisplayMember = "Sifra i Opis";
 
-            dt = data.GetTable(new JoppdSifre(), $"Skupina='Primici';");
+            dt = _dbGet.GetTable(new JoppdSifre(), $"Skupina='Primici';");
             dt.Columns.Add(
                 "Sifra i opis",
                 typeof(string),
@@ -95,7 +94,7 @@ namespace Knjigovodstvo.Payroll
             comboBoxPrimitak.ValueMember = "Sifra";
             comboBoxPrimitak.DisplayMember = "Sifra i opis";
 
-            dt = data.GetTable(new JoppdSifre(), $"Skupina='Beneficirani';");
+            dt = _dbGet.GetTable(new JoppdSifre(), $"Skupina='Beneficirani';");
             dt.Columns.Add(
                 "Sifra i opis",
                 typeof(string),
@@ -104,7 +103,7 @@ namespace Knjigovodstvo.Payroll
             comboBoxDodatniMio.ValueMember = "Sifra";
             comboBoxDodatniMio.DisplayMember = "Sifra i opis";
 
-            dt = data.GetTable(new JoppdSifre(), $"Skupina='Invaliditet';");
+            dt = _dbGet.GetTable(new JoppdSifre(), $"Skupina='Invaliditet';");
             dt.Columns.Add(
                 "Sifra i opis",
                 typeof(string),
@@ -113,7 +112,7 @@ namespace Knjigovodstvo.Payroll
             comboBoxInvaliditet.ValueMember = "Sifra";
             comboBoxInvaliditet.DisplayMember = "Sifra i opis";
 
-            dt = data.GetTable(new JoppdSifre(), $"Skupina='Mjesec';");
+            dt = _dbGet.GetTable(new JoppdSifre(), $"Skupina='Mjesec';");
             dt.Columns.Add(
                 "Sifra i opis",
                 typeof(string),
@@ -122,7 +121,7 @@ namespace Knjigovodstvo.Payroll
             comboBoxMjesecPrviZadnji.ValueMember = "Sifra";
             comboBoxMjesecPrviZadnji.DisplayMember = "Sifra i opis";
 
-            dt = data.GetTable(new JoppdSifre(), $"Skupina='Vrijeme';");
+            dt = _dbGet.GetTable(new JoppdSifre(), $"Skupina='Vrijeme';");
             dt.Columns.Add(
                 "Sifra i opis",
                 typeof(string),
@@ -192,23 +191,7 @@ namespace Knjigovodstvo.Payroll
                                   Sifra = row["Sifra"].ToString(),
                                   Iznos = decimal.Parse(row["Iznos"].ToString())
                               }).ToList());
-            decimal dodaciUkupno = 0;
-            if (_placa.GetDodaci().Count > 0)
-            {
-                dodaciUkupno = ZbrojiDodatke();
-            }
-            textBoxDodaci.Text = dodaciUkupno.ToString();
-        }
-
-        private decimal ZbrojiDodatke()
-        {
-            decimal dodaciUkupno = 0;
-            foreach (PlacaDodatak d in _placa.GetDodaci())
-            {
-                dodaciUkupno += d.Iznos;
-            }
-
-            return dodaciUkupno;
+            textBoxDodaci.Text = _placa.Dodaci_Ukupno.ToString();
         }
 
         private void PromjenaZaposlenikJoppd_SelectionChangeCommitted(object sender, EventArgs e)
@@ -216,8 +199,9 @@ namespace Knjigovodstvo.Payroll
             SetZaposlenikJoppd();
         }
 
-        private void DodaciNew_FormClosing(object sender, FormClosingEventArgs e)
+        private void DodaciFormClosed()
         {
+            PopuniDodaci();
             PopuniKontrole(_placa);
             PopuniJoppd(_zaposlenikJoppd);
         }
@@ -229,7 +213,7 @@ namespace Knjigovodstvo.Payroll
                 e.Handled = true;
             }
 
-            // only allow one decimal point
+            // only allow one decimal comma
             if ((e.KeyChar == ',') && ((sender as TextBox).Text.IndexOf(',') > -1))
             {
                 e.Handled = true;
@@ -259,7 +243,7 @@ namespace Knjigovodstvo.Payroll
             {
                 DodaciUnosForm dodaci = new DodaciUnosForm(_zaposlenik, _placa);
                 _placa = dodaci.ShowDialogValue();
-                dodaci.FormClosing += new FormClosingEventHandler(this.DodaciNew_FormClosing);
+                DodaciFormClosed();
             }
             else
             {
@@ -320,5 +304,6 @@ namespace Knjigovodstvo.Payroll
         private Placa _placa = new Placa();
         private readonly Zaposlenik _zaposlenik = new Zaposlenik();
         private decimal _prirez = 0;
+        private DbDataGet _dbGet = new DbDataGet();
     }
 }

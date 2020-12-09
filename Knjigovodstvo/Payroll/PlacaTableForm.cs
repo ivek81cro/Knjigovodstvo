@@ -30,19 +30,15 @@ namespace Knjigovodstvo.Payroll
             string oib = dataGridView1.SelectedRows[0].Cells["Oib"].Value.ToString();
             _placa.GetPlacaByOib(oib);
             PlacaIzracunForm pn = new PlacaIzracunForm(_placa);
-            pn.FormClosing += new FormClosingEventHandler(this.PlacaNew_FormClosing);
-        }
-
-        private void PlacaNew_FormClosing(object sender, FormClosingEventArgs e)
-        {
+            pn.ShowDialog();
             LoadDatagrid();
         }
 
         private void BtnNewPlaca_Click(object sender, EventArgs e)
         {
             PlacaIzracunForm pn = new PlacaIzracunForm();
-            pn.FormClosing += new FormClosingEventHandler(this.PlacaNew_FormClosing);
             pn.ShowDialog();
+            LoadDatagrid();
         }
 
         private void TextBoxFilterPlaca_TextChanged(object sender, EventArgs e)

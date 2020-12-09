@@ -30,7 +30,9 @@ namespace Knjigovodstvo.Payroll
 
         private void LoadDatagrid()
         {
-            dataGridView1.DataSource = new DbDataGet().GetTable(_dodaci, $"Oib='{_zaposlenik.Oib}';");
+            dbDataGridView1.DataSource = _dbGet.GetTable(_dodaci, $"Oib='{_zaposlenik.Oib}';");
+            dbDataGridView1.Columns["Id"].Visible = false;
+            dbDataGridView1.Columns["Id_placa"].Visible = false;
         }
 
         private void FillComboBoxZaposlenici()
@@ -127,6 +129,7 @@ namespace Knjigovodstvo.Payroll
                         new DbDataUpdate().UpdateData(_placa);
 
                         MessageBox.Show("Izmjena uspješna.", "Dodaci", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadDatagrid();
                     }
                     else if (new DbDataInsert().InsertData(_dodaci))
                     {
@@ -145,10 +148,10 @@ namespace Knjigovodstvo.Payroll
 
         private void ButtonDeleteDodatak_Click(object sender, EventArgs e)
         {
-            Int32 selectedRowCount = dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            int selectedRowCount = dbDataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0)
             {
-                _dodaci.Id = int.Parse(dataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
+                _dodaci.Id = int.Parse(dbDataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
 
                 if(new DbDataDelete().DeleteItem(_dodaci))
                 {
@@ -166,5 +169,6 @@ namespace Knjigovodstvo.Payroll
         private readonly Zaposlenik _zaposlenik = new Zaposlenik();
         private Placa _placa = new Placa();
         private string _sifra = "";
+        private DbDataGet _dbGet = new DbDataGet();
     }
 }
