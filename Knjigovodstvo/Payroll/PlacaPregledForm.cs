@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Payroll
 {
-    public partial class PlacaTableForm : Form
+    public partial class PlacaPregledForm : Form
     {
-        public PlacaTableForm()
+        public PlacaPregledForm()
         {
             InitializeComponent();
             LoadDatagrid();
@@ -25,18 +25,11 @@ namespace Knjigovodstvo.Payroll
             }
         }
 
-        private void BtnEditPlaca_Click(object sender, EventArgs e)
+        private void ButtonIzracun_Click(object sender, EventArgs e)
         {
             string oib = dataGridView1.SelectedRows[0].Cells["Oib"].Value.ToString();
             _placa.GetPlacaByOib(oib);
             PlacaIzracunForm pn = new PlacaIzracunForm(_placa);
-            pn.ShowDialog();
-            LoadDatagrid();
-        }
-
-        private void BtnNewPlaca_Click(object sender, EventArgs e)
-        {
-            PlacaIzracunForm pn = new PlacaIzracunForm();
             pn.ShowDialog();
             LoadDatagrid();
         }
@@ -47,6 +40,6 @@ namespace Knjigovodstvo.Payroll
                 $"Prezime LIKE '{textBoxFilterPlaca.Text}%' OR Prezime LIKE '% {textBoxFilterPlaca.Text}%'";
         }
 
-        private Placa _placa = new Placa();
+        private readonly Placa _placa = new Placa();
     }    
 }

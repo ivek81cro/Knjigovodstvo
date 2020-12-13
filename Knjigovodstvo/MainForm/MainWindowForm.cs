@@ -95,7 +95,7 @@ namespace Knjigovodstvo.MainForm
 
         private void ShowNewFormPregledPlaca(object sender, EventArgs e)
         {
-            string formName = ChildWindowName.PlacaTableForm.ToString();
+            string formName = ChildWindowName.PlacaPregledForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
                 Form f = _isOpen.GetChild(MdiChildren, formName);
@@ -103,7 +103,7 @@ namespace Knjigovodstvo.MainForm
             }
             else
             {
-                _openForm.Open(new PlacaTableForm(), this);
+                _openForm.Open(new PlacaPregledForm(), this);
             }
         }
 
@@ -216,18 +216,6 @@ namespace Knjigovodstvo.MainForm
             {
                 _openForm.Open(new KontniPlanPregledForm(), this);
             }
-        }
-
-        private void ShowDialogIzracunPlace(object sender, EventArgs e)
-        {
-            PlacaIzracunForm dialog = new PlacaIzracunForm();
-            dialog.ShowDialog();
-        }
-
-        private void ShowDialogDodaci(object sender, EventArgs e)
-        {
-            DodaciUnosForm dialog = new DodaciUnosForm();
-            dialog.ShowDialog();
         }
 
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)

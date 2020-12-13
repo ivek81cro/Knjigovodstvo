@@ -5,7 +5,7 @@ using System.Data;
 
 namespace Knjigovodstvo.Payroll
 {
-    public class PlacaDodatak : IDbObject
+    public class Dodatak : IDbObject
     {
         public FormError ValidateData()
         {
@@ -21,6 +21,5 @@ namespace Knjigovodstvo.Payroll
         public string Oib { get; set; } = "";
         public string Sifra { get; set; } = "";
         public decimal Iznos { get; set; } = 0;
-        public int Id_placa { get; set; } = 0;
     }
 }

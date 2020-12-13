@@ -17,10 +17,10 @@ namespace Knjigovodstvo.JoppdDocument
         }
         public void PopuniDodatke()
         {
-            DataTable _dt = new DbDataGet().GetTable(new PlacaDodatak(), $"Oib='{Oib}'");
+            DataTable _dt = new DbDataGet().GetTable(new Dodatak(), $"Oib='{Oib}'");
             List<DataRow> rows = _dt.AsEnumerable().ToList();
             _dodaci = (from DataRow dr in rows
-                              select new PlacaDodatak()
+                              select new Dodatak()
                               {
                                   Id = int.Parse(dr["Id"].ToString()),
                                   Oib = dr["Oib"].ToString(),
@@ -51,10 +51,10 @@ namespace Knjigovodstvo.JoppdDocument
             return _dodaci.Count;
         }
 
-        public List<PlacaDodatak> GetDodatakList(int dodatak_start_number)
+        public List<Dodatak> GetDodatakList(int dodatak_start_number)
         {
             int i = dodatak_start_number;
-            List<PlacaDodatak> dodaci = new List<PlacaDodatak>();
+            List<Dodatak> dodaci = new List<Dodatak>();
             for(; i<_dodaci.Count; ++i)
             {
                 dodaci.Add(_dodaci[i]);
@@ -77,7 +77,7 @@ namespace Knjigovodstvo.JoppdDocument
             throw new NotImplementedException();
         }
 
-        private List<PlacaDodatak> _dodaci = new List<PlacaDodatak>();
+        private List<Dodatak> _dodaci = new List<Dodatak>();
 
         [XmlElement("P1")]
         public int Redni_Broj = 0;

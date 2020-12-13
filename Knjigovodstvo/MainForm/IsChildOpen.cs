@@ -9,7 +9,7 @@ namespace Knjigovodstvo.MainForm
         ZaposleniciTableForm,
         PartneriTableForm,
         GradoviTableForm,
-        PlacaTableForm,
+        PlacaPregledForm,
         PlacaObracunForm,
         JoppdPlacaForm,
         UraPrimkaForm,

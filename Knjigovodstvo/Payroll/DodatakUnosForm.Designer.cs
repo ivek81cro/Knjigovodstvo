@@ -2,7 +2,7 @@
 
 namespace Knjigovodstvo.Payroll
 {
-    partial class DodaciUnosForm
+    partial class DodatakUnosForm
     {
         /// <summary>
         /// Required designer variable.

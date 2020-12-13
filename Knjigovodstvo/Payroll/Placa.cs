@@ -49,18 +49,18 @@ namespace Knjigovodstvo.Payroll
             }
         }
 
-        internal void AddDodaci(List<PlacaDodatak> dodaci)
+        internal void AddDodaci(List<Dodatak> dodaci)
         {
             _dodaci = dodaci;
             SumAllDodaci();
         }
 
-        internal List<PlacaDodatak> GetDodaci()
+        internal List<Dodatak> GetDodaci()
         {
             return _dodaci;
         }
 
-        private List<PlacaDodatak> _dodaci = new List<PlacaDodatak>();
+        private List<Dodatak> _dodaci = new List<Dodatak>();
 
         public int Id { get; set; } = 0;
         public string Oib { get; set; } = "";
@@ -78,6 +78,5 @@ namespace Knjigovodstvo.Payroll
         public decimal Neto { get; set; } = 0;
         public decimal Doprinos_Zdravstvo { get; set; } = 0;
         public decimal Dodaci_Ukupno { get; set; } = 0;
-
     }
 }

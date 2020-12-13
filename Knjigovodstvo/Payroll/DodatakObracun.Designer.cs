@@ -1,8 +1,9 @@
-﻿using System.Windows.Forms;
+﻿
+using System.Windows.Forms;
 
 namespace Knjigovodstvo.Payroll
 {
-    partial class PlacaObracunForm
+    partial class DodatakObracun
     {
         /// <summary>
         /// Required designer variable.
@@ -35,7 +36,7 @@ namespace Knjigovodstvo.Payroll
             this.labelDatumOd = new System.Windows.Forms.Label();
             this.dateTimePickerDatumDo = new System.Windows.Forms.DateTimePicker();
             this.labelDatumDo = new System.Windows.Forms.Label();
-            this.buttonObracunajSve = new System.Windows.Forms.Button();
+            this.buttonObracunajDodatke = new System.Windows.Forms.Button();
             this.dataGridView1 = new Knjigovodstvo.DBDataGridView();
             this.comboBoxFilterDjelatnik = new System.Windows.Forms.ComboBox();
             this.labelFilterDjelatnik = new System.Windows.Forms.Label();
@@ -92,15 +93,14 @@ namespace Knjigovodstvo.Payroll
             this.labelDatumDo.TabIndex = 2;
             this.labelDatumDo.Text = "Do";
             // 
-            // buttonObracunajSve
+            // buttonObracunajDodatke
             // 
-            this.buttonObracunajSve.Location = new System.Drawing.Point(422, 34);
-            this.buttonObracunajSve.Name = "buttonObracunajSve";
-            this.buttonObracunajSve.Size = new System.Drawing.Size(103, 23);
-            this.buttonObracunajSve.TabIndex = 3;
-            this.buttonObracunajSve.Text = "Obračunaj Plaće";
-            this.buttonObracunajSve.UseVisualStyleBackColor = true;
-            this.buttonObracunajSve.Click += new System.EventHandler(this.ButtonObracunajPlacu_Click);
+            this.buttonObracunajDodatke.Location = new System.Drawing.Point(422, 34);
+            this.buttonObracunajDodatke.Name = "buttonObracunajDodatke";
+            this.buttonObracunajDodatke.Size = new System.Drawing.Size(117, 23);
+            this.buttonObracunajDodatke.TabIndex = 3;
+            this.buttonObracunajDodatke.Text = "Obračunaj Dodatke";
+            this.buttonObracunajDodatke.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -196,7 +196,7 @@ namespace Knjigovodstvo.Payroll
             this.buttonKnjizi.UseVisualStyleBackColor = true;
             this.buttonKnjizi.Click += new System.EventHandler(this.ButtonKnjizi_Click);
             // 
-            // PlacaObracunForm
+            // DodatakObracun
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -208,7 +208,7 @@ namespace Knjigovodstvo.Payroll
             this.Controls.Add(this.labelFilterDjelatnik);
             this.Controls.Add(this.comboBoxFilterDjelatnik);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.buttonObracunajSve);
+            this.Controls.Add(this.buttonObracunajDodatke);
             this.Controls.Add(this.labelDatumDo);
             this.Controls.Add(this.dateTimePickerDatumDo);
             this.Controls.Add(this.labelDatumOd);
@@ -216,8 +216,8 @@ namespace Knjigovodstvo.Payroll
             this.Controls.Add(this.labelRazdoblje);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "PlacaObracunForm";
-            this.Text = "Obračun plaće";
+            this.Name = "DodatakObracun";
+            this.Text = "Obračun dodataka";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -233,7 +233,7 @@ namespace Knjigovodstvo.Payroll
         private System.Windows.Forms.Label labelDatumOd;
         private System.Windows.Forms.DateTimePicker dateTimePickerDatumDo;
         private System.Windows.Forms.Label labelDatumDo;
-        private System.Windows.Forms.Button buttonObracunajSve;
+        private System.Windows.Forms.Button buttonObracunajDodatke;
         private DBDataGridView dataGridView1;
         private System.Windows.Forms.ComboBox comboBoxFilterDjelatnik;
         private System.Windows.Forms.Label labelFilterDjelatnik;
@@ -243,5 +243,6 @@ namespace Knjigovodstvo.Payroll
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuPostavke;
         private Button buttonKnjizi;
+
     }
 }

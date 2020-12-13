@@ -7,6 +7,7 @@
         Ura_odobrenje,
         Ura_trošak,
         Ira,
-        Place
+        Place,
+        Dodaci
     }
 }

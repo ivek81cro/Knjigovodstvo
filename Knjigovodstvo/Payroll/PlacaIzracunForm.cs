@@ -28,7 +28,6 @@ namespace Knjigovodstvo.Payroll
             comboBoxZaposlenik.SelectedIndex = index;
             InitPrivateMembers();
             FillComboBoxJoppd();
-            ShowDialog();
         }
 
         private void InitPrivateMembers()
@@ -181,10 +180,10 @@ namespace Knjigovodstvo.Payroll
 
         private void PopuniDodaci()
         {
-            DataTable dt = new PlacaDodatak().GetDodaciByOib(_zaposlenik.Oib);
+            DataTable dt = new Dodatak().GetDodaciByOib(_zaposlenik.Oib);
             List<DataRow> rows = dt.AsEnumerable().ToList();
             _placa.AddDodaci((from DataRow row in rows
-                              select new PlacaDodatak()
+                              select new Dodatak()
                               {
                                   Id = int.Parse(row["Id"].ToString()),
                                   Oib = row["Oib"].ToString(),
@@ -241,7 +240,7 @@ namespace Knjigovodstvo.Payroll
         {
             if (comboBoxZaposlenik.SelectedItem != null)
             {
-                DodaciUnosForm dodaci = new DodaciUnosForm(_zaposlenik, _placa);
+                DodatakUnosForm dodaci = new DodatakUnosForm(_zaposlenik, _placa);
                 _placa = dodaci.ShowDialogValue();
                 DodaciFormClosed();
             }
@@ -304,6 +303,6 @@ namespace Knjigovodstvo.Payroll
         private Placa _placa = new Placa();
         private readonly Zaposlenik _zaposlenik = new Zaposlenik();
         private decimal _prirez = 0;
-        private DbDataGet _dbGet = new DbDataGet();
+        private readonly DbDataGet _dbGet = new DbDataGet();
     }
 }

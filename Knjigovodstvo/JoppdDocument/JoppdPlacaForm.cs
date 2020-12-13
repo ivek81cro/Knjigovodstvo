@@ -360,7 +360,7 @@ namespace Knjigovodstvo.JoppdDocument
         private string _path = "";
         private int _broj_osoba = 0;
         private JoppdEntitet _joppdEntitet = new JoppdEntitet();
-        private readonly PlacaDodatak _placaDodatak = new PlacaDodatak();
+        private readonly Dodatak _placaDodatak = new Dodatak();
         private BindingList<JoppdEntitet> _list = new BindingList<JoppdEntitet>();
     }
 }

@@ -40,6 +40,6 @@ namespace Knjigovodstvo.FinancialReports
         }
 
         private KontniPlan _kontniPlan = new KontniPlan();
-        private IntValidator _intValidator = new IntValidator();
+        private readonly IntValidator _intValidator = new IntValidator();
     }
 }

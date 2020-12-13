@@ -4,6 +4,7 @@ using Knjigovodstvo.Interface;
 using Knjigovodstvo.Partners;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.Validators;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -34,12 +35,18 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             {
                 case "UraKnjiga":
                     tp.PrepareDataUra(_dt, _postavkeKnjizenja, _obj);
+                    FindPartnerontoNumber();
                     break;
                 case "Primka":
                     tp.PrepareDataPrimka(_dt, _postavkeKnjizenja, _obj);
+                    FindPartnerontoNumber();
                     break;
                 case "IraKnjiga":
                     tp.PrepareDataIra(_dt, _postavkeKnjizenja, _obj);
+                    FindPartnerontoNumber();
+                    break;
+                case "PlacaObracun":
+                    tp.PrepareDataPlaca(_dt, _postavkeKnjizenja, _obj);
                     break;
                 default:
                     break;
@@ -49,12 +56,15 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private void PrepareDataShared() 
         {
-            _dt.Rows[0]["Konto"] = _partner.GetKontoDByNaziv(_dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0]);
-
             LoadValuesDebitAndCredit();
             _dt.Columns.Remove("Mijenja predznak");
             dbDataGridView1.DataSource = _dt;
             dbDataGridView1.Columns[0].ReadOnly = true;
+        }
+
+        private void FindPartnerontoNumber()
+        {
+            _dt.Rows[0]["Konto"] = _partner.GetKontoDByNaziv(_dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0]);
         }
 
         private void LoadValuesDebitAndCredit()

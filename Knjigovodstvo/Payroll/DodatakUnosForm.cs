@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Payroll
 {
-    public partial class DodaciUnosForm : Form
+    public partial class DodatakUnosForm : Form
     {
-        public DodaciUnosForm(Zaposlenik zaposlenik = null, Placa placa = null)
+        public DodatakUnosForm(Zaposlenik zaposlenik = null, Placa placa = null)
         {
             InitializeComponent();
             if (zaposlenik != null)
@@ -32,7 +32,6 @@ namespace Knjigovodstvo.Payroll
         {
             dbDataGridView1.DataSource = _dbGet.GetTable(_dodaci, $"Oib='{_zaposlenik.Oib}';");
             dbDataGridView1.Columns["Id"].Visible = false;
-            dbDataGridView1.Columns["Id_placa"].Visible = false;
         }
 
         private void FillComboBoxZaposlenici()
@@ -61,7 +60,7 @@ namespace Knjigovodstvo.Payroll
             comboBoxOdabirDodatka.Text = "--Odaberi dodatak--";
         }
 
-        private int CheckDuplicate(PlacaDodatak dodatak)
+        private int CheckDuplicate(Dodatak dodatak)
         {
             DataTable table = new DbDataGet().GetTable(dodatak, $"Oib='{_zaposlenik.Oib}' AND Sifra={_sifra};");
             foreach(DataRow row in table.Rows)
@@ -165,10 +164,10 @@ namespace Knjigovodstvo.Payroll
             }
         }
 
-        private readonly PlacaDodatak _dodaci = new PlacaDodatak();
+        private readonly Dodatak _dodaci = new Dodatak();
         private readonly Zaposlenik _zaposlenik = new Zaposlenik();
-        private Placa _placa = new Placa();
+        private  readonly Placa _placa = new Placa();
         private string _sifra = "";
-        private DbDataGet _dbGet = new DbDataGet();
+        private readonly DbDataGet _dbGet = new DbDataGet();
     }
 }
