@@ -218,6 +218,20 @@ namespace Knjigovodstvo.MainForm
             }
         }
 
+        private void ShowDodatakObracunForm(object sender, EventArgs e)
+        {
+            string formName = ChildWindowName.DodatakObracun.ToString();
+            if (_isOpen.Check(MdiChildren, formName))
+            {
+                Form f = _isOpen.GetChild(MdiChildren, formName);
+                f.Focus();
+            }
+            else
+            {
+                _openForm.Open(new DodatakObracun(), this);
+            }
+        }
+
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.Cascade);

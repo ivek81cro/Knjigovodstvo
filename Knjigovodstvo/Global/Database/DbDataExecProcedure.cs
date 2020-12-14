@@ -7,7 +7,7 @@ namespace Knjigovodstvo.Database
 {
     enum ProcedureNames
     {
-        Dohvati_Distinct_Datum,
+        Placa_Distinct_Datum,
         /// <summary> params: @TABLENAME</summary>
         Drop_Table,
         PlacaPregled,
@@ -18,7 +18,8 @@ namespace Knjigovodstvo.Database
         Get_Table_Names,
         Izdvoji_Troskove,
         Izdvoji_Odobrenja,
-        IzvodKnjiga_GetLastId
+        IzvodKnjiga_GetLastId,
+        Dodatak_Distinct_Datum
     }
 
     class DbDataExecProcedure
@@ -64,7 +65,8 @@ namespace Knjigovodstvo.Database
         {
             return name switch
             {
-                ProcedureNames.Dohvati_Distinct_Datum => "Dohvati_Distinct_Datum",
+                ProcedureNames.Placa_Distinct_Datum => "Placa_Distinct_Datum",
+                ProcedureNames.Dodatak_Distinct_Datum => "Dodatak_Distinct_Datum",
                 ProcedureNames.Drop_Table => "Drop_Table " + param,
                 ProcedureNames.PlacaPregled => "PlacaPregled",
                 ProcedureNames.Prebaci_postBroj => "Prebaci_postBroj",

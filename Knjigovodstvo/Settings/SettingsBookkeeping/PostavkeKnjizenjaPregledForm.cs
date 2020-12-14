@@ -37,6 +37,9 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
                 case BookNames.Place:
                     PopulateComboBoxStupac(new Placa());
                     break;
+                case BookNames.Dodaci:
+                    PopulateComboBoxStupac(new Dodatak());
+                    break;
                 default:
                     break;
             }

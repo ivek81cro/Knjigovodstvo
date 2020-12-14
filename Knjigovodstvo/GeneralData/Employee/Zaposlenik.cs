@@ -1,8 +1,11 @@
-﻿using Knjigovodstvo.Code.Validators;
+﻿using Knjigovodstvo.City;
+using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Interface;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace Knjigovodstvo.Employee
 {
@@ -63,6 +66,43 @@ namespace Knjigovodstvo.Employee
             DataTable zaposlenik = new DbDataGet().GetTable(this, condition);
 
             SetPrivateMembers(zaposlenik);
+        }
+
+        public List<Zaposlenik> GetListZaposlenik()
+        {
+            DataTable dt = new DbDataGet().GetTable(this);
+            List<DataRow> rows = dt.AsEnumerable().ToList();
+            List<Zaposlenik> zaposlenikList = new List<Zaposlenik>();
+            zaposlenikList = (from DataRow dr in rows
+                        select new Zaposlenik()
+                        {
+                            Id = int.Parse(dr["Id"].ToString()),
+                            Oib = dr["Oib"].ToString(),
+                            Ime = dr["Ime"].ToString(),
+                            Prezime = dr["Prezime"].ToString(),
+                            Datum_Rodenja = dr["Datum_Rodenja"].ToString(),
+                            Adresa = new Adresa()
+                            {
+                                Ulica = dr["Ulica"].ToString(),
+                                Broj = dr["Broj"].ToString(),
+                                Grad = new Grad()
+                                {
+                                    Mjesto = dr["Mjesto"].ToString(),
+                                    Drzava = dr["Drzava"].ToString()
+                                }
+                            },
+                            Kontakt = new Kontakt()
+                            {
+                                Telefon = dr["Telefon"].ToString()
+                            },
+                            Stručna_Sprema = dr["Stručna_Sprema"].ToString(),
+                            Olaksica = decimal.Parse(dr["Olaksica"].ToString()),
+                            Datum_Dolaska = dr["Datum_Dolaska"].ToString(),
+                            Datum_Odlaska = dr["Datum_Odlaska"].ToString()
+
+                        }).ToList();
+
+            return zaposlenikList;
         }
 
         private void SetPrivateMembers(DataTable zaposlenik)

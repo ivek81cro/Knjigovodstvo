@@ -114,7 +114,7 @@ namespace Knjigovodstvo.Payroll
         {
             DataTable dt = new DbDataExecProcedure
                 ().GetTable(
-                ProcedureNames.Dohvati_Distinct_Datum);
+                ProcedureNames.Placa_Distinct_Datum);
             dt.Columns.Add(
                 "Mjesec",
                 typeof(string),

@@ -46,8 +46,15 @@ namespace Knjigovodstvo.Payroll
             this.menuPostavke = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.buttonKnjizi = new System.Windows.Forms.Button();
+            this.buttonSpremi = new System.Windows.Forms.Button();
+            this.comboBoxOdabirDodatka = new System.Windows.Forms.ComboBox();
+            this.buttonNoviDodatak = new System.Windows.Forms.Button();
+            this.checkBoxSvi = new System.Windows.Forms.CheckBox();
+            this.textBoxIznos = new System.Windows.Forms.TextBox();
+            this.groupBoxNoviDodatak = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.groupBoxNoviDodatak.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelRazdoblje
@@ -101,21 +108,20 @@ namespace Knjigovodstvo.Payroll
             this.buttonObracunajDodatke.TabIndex = 3;
             this.buttonObracunajDodatke.Text = "Obračunaj Dodatke";
             this.buttonObracunajDodatke.UseVisualStyleBackColor = true;
+            this.buttonObracunajDodatke.Click += new System.EventHandler(this.ButtonObracunajDodatke_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(9, 187);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1017, 361);
+            this.dataGridView1.Size = new System.Drawing.Size(691, 361);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.Text = "dataGridView1";
             // 
@@ -188,7 +194,7 @@ namespace Knjigovodstvo.Payroll
             // buttonKnjizi
             // 
             this.buttonKnjizi.Enabled = false;
-            this.buttonKnjizi.Location = new System.Drawing.Point(13, 70);
+            this.buttonKnjizi.Location = new System.Drawing.Point(13, 72);
             this.buttonKnjizi.Name = "buttonKnjizi";
             this.buttonKnjizi.Size = new System.Drawing.Size(124, 23);
             this.buttonKnjizi.TabIndex = 14;
@@ -196,11 +202,75 @@ namespace Knjigovodstvo.Payroll
             this.buttonKnjizi.UseVisualStyleBackColor = true;
             this.buttonKnjizi.Click += new System.EventHandler(this.ButtonKnjizi_Click);
             // 
+            // buttonSpremi
+            // 
+            this.buttonSpremi.Location = new System.Drawing.Point(545, 34);
+            this.buttonSpremi.Name = "buttonSpremi";
+            this.buttonSpremi.Size = new System.Drawing.Size(75, 23);
+            this.buttonSpremi.TabIndex = 15;
+            this.buttonSpremi.Text = "Spremi";
+            this.buttonSpremi.UseVisualStyleBackColor = true;
+            this.buttonSpremi.Click += new System.EventHandler(this.ButtonSpremi_Click);
+            // 
+            // comboBoxOdabirDodatka
+            // 
+            this.comboBoxOdabirDodatka.FormattingEnabled = true;
+            this.comboBoxOdabirDodatka.Location = new System.Drawing.Point(9, 54);
+            this.comboBoxOdabirDodatka.Name = "comboBoxOdabirDodatka";
+            this.comboBoxOdabirDodatka.Size = new System.Drawing.Size(272, 23);
+            this.comboBoxOdabirDodatka.TabIndex = 16;
+            // 
+            // buttonNoviDodatak
+            // 
+            this.buttonNoviDodatak.Location = new System.Drawing.Point(164, 25);
+            this.buttonNoviDodatak.Name = "buttonNoviDodatak";
+            this.buttonNoviDodatak.Size = new System.Drawing.Size(117, 23);
+            this.buttonNoviDodatak.TabIndex = 17;
+            this.buttonNoviDodatak.Text = "Novi Dodatak";
+            this.buttonNoviDodatak.UseVisualStyleBackColor = true;
+            this.buttonNoviDodatak.Click += new System.EventHandler(this.ButtonNoviDodatak_Click);
+            // 
+            // checkBoxSvi
+            // 
+            this.checkBoxSvi.AutoSize = true;
+            this.checkBoxSvi.Location = new System.Drawing.Point(9, 29);
+            this.checkBoxSvi.Name = "checkBoxSvi";
+            this.checkBoxSvi.Size = new System.Drawing.Size(104, 19);
+            this.checkBoxSvi.TabIndex = 18;
+            this.checkBoxSvi.Text = "Svi Zaposlenici";
+            this.checkBoxSvi.UseVisualStyleBackColor = true;
+            // 
+            // textBoxIznos
+            // 
+            this.textBoxIznos.Location = new System.Drawing.Point(181, 83);
+            this.textBoxIznos.Name = "textBoxIznos";
+            this.textBoxIznos.PlaceholderText = "Iznos";
+            this.textBoxIznos.Size = new System.Drawing.Size(100, 23);
+            this.textBoxIznos.TabIndex = 19;
+            this.textBoxIznos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            // 
+            // groupBoxNoviDodatak
+            // 
+            this.groupBoxNoviDodatak.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBoxNoviDodatak.Controls.Add(this.textBoxIznos);
+            this.groupBoxNoviDodatak.Controls.Add(this.comboBoxOdabirDodatka);
+            this.groupBoxNoviDodatak.Controls.Add(this.checkBoxSvi);
+            this.groupBoxNoviDodatak.Controls.Add(this.buttonNoviDodatak);
+            this.groupBoxNoviDodatak.Location = new System.Drawing.Point(706, 187);
+            this.groupBoxNoviDodatak.Name = "groupBoxNoviDodatak";
+            this.groupBoxNoviDodatak.Size = new System.Drawing.Size(287, 217);
+            this.groupBoxNoviDodatak.TabIndex = 20;
+            this.groupBoxNoviDodatak.TabStop = false;
+            this.groupBoxNoviDodatak.Text = "Novi Dodatak";
+            // 
             // DodatakObracun
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 560);
+            this.Controls.Add(this.groupBoxNoviDodatak);
+            this.Controls.Add(this.buttonSpremi);
             this.Controls.Add(this.buttonKnjizi);
             this.Controls.Add(this.labelFilterMjesec);
             this.Controls.Add(this.comboBoxFilterPoMjesecu);
@@ -221,6 +291,8 @@ namespace Knjigovodstvo.Payroll
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBoxNoviDodatak.ResumeLayout(false);
+            this.groupBoxNoviDodatak.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,6 +315,11 @@ namespace Knjigovodstvo.Payroll
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuPostavke;
         private Button buttonKnjizi;
-
+        private Button buttonSpremi;
+        private ComboBox comboBoxOdabirDodatka;
+        private Button buttonNoviDodatak;
+        private CheckBox checkBoxSvi;
+        private TextBox textBoxIznos;
+        private GroupBox groupBoxNoviDodatak;
     }
 }

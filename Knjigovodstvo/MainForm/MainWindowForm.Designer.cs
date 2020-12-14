@@ -69,6 +69,7 @@ namespace Knjigovodstvo.MainForm
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.menuDodatak = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -199,6 +200,7 @@ namespace Knjigovodstvo.MainForm
             this.menuPlaca.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuPregledPlace,
             this.menuObracunPlace,
+            this.menuDodatak,
             this.toolStripSeparator1,
             this.toolStripMenuItemJoppd});
             this.menuPlaca.Name = "menuPlaca";
@@ -208,26 +210,33 @@ namespace Knjigovodstvo.MainForm
             // menuPregledPlace
             // 
             this.menuPregledPlace.Name = "menuPregledPlace";
-            this.menuPregledPlace.Size = new System.Drawing.Size(151, 22);
+            this.menuPregledPlace.Size = new System.Drawing.Size(173, 22);
             this.menuPregledPlace.Text = "Pregled";
             this.menuPregledPlace.Click += new System.EventHandler(this.ShowNewFormPregledPlaca);
             // 
             // menuObracunPlace
             // 
             this.menuObracunPlace.Name = "menuObracunPlace";
-            this.menuObracunPlace.Size = new System.Drawing.Size(151, 22);
+            this.menuObracunPlace.Size = new System.Drawing.Size(173, 22);
             this.menuObracunPlace.Text = "Obračun Plaće";
             this.menuObracunPlace.Click += new System.EventHandler(this.ShowNewFormObracunPlaca);
+            // 
+            // menuDodatak
+            // 
+            this.menuDodatak.Name = "menuDodatak";
+            this.menuDodatak.Size = new System.Drawing.Size(173, 22);
+            this.menuDodatak.Text = "Obračun Dodataka";
+            this.menuDodatak.Click += new System.EventHandler(this.ShowDodatakObracunForm);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(148, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(170, 6);
             // 
             // toolStripMenuItemJoppd
             // 
             this.toolStripMenuItemJoppd.Name = "toolStripMenuItemJoppd";
-            this.toolStripMenuItemJoppd.Size = new System.Drawing.Size(151, 22);
+            this.toolStripMenuItemJoppd.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItemJoppd.Text = "Joppd obrazac";
             this.toolStripMenuItemJoppd.Click += new System.EventHandler(this.ShowNewFormPlacaJoppdForm);
             // 
@@ -424,6 +433,7 @@ namespace Knjigovodstvo.MainForm
         private System.Windows.Forms.ToolStripMenuItem menuFinancijsko;
         private System.Windows.Forms.ToolStripMenuItem menuKontniPlan;
         private System.Windows.Forms.ToolStripMenuItem menuTemeljnice;
+        private System.Windows.Forms.ToolStripMenuItem menuDodatak;
     }
 }
 

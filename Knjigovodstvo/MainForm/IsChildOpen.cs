@@ -17,7 +17,8 @@ namespace Knjigovodstvo.MainForm
         IraKnjigaForm,
         IzvodiPregledForm,
         KontniPlanPregledForm,
-        TemeljnicePregledForm
+        TemeljnicePregledForm,
+        DodatakObracun
     }
     public class IsChildOpen
     {
