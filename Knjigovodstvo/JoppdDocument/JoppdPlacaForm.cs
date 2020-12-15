@@ -175,15 +175,16 @@ namespace Knjigovodstvo.JoppdDocument
                 };
                 //If only bonuses checked, skip adding payroll to list
                 int dodatak_start_number = 1;
-                if (checkBoxSamoDodaci.Checked == false)
+                if (!checkBoxSamoDodaci.Checked)
                 {
                     _joppdB.Entitet.Add(_joppdEntitet);
                     redni_broj++;
                 }
+
+                var current_element = _joppdEntitet;
                 //If bonuses are checked insert new row for each separate bonus entity has
-                if (checkBoxBezDodataka.Checked == false)
+                if (!checkBoxBezDodataka.Checked)
                 {
-                    var current_element = _joppdEntitet;
                     current_element.PopuniDodatke();
                     current_element.PoduzetnikPrilagodi();
                     //Check if there is more tham one untaxable item and save them in separate row or reciever is enterpreneur
@@ -206,7 +207,8 @@ namespace Knjigovodstvo.JoppdDocument
                                 Datum_Do = Convert.ToDateTime(dr["Datum_Do"].ToString()).ToString("yyyy-MM-dd"),
                                 Oznaka_Neoporezivog = item.Sifra,
                                 Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
-                                Iznos_Neoporezivog = item.Iznos
+                                Iznos_Neoporezivog = item.Iznos,
+                                Iznos_Isplate = item.Iznos
                             };
                             //If specific bonus is selected
                             if (!comboBoxDodaci.Text.StartsWith('-'))
@@ -224,6 +226,10 @@ namespace Knjigovodstvo.JoppdDocument
                             }
                         }
                     }
+                }
+                else
+                {
+                    current_element.PoduzetnikPrilagodi();
                 }
             }
         }

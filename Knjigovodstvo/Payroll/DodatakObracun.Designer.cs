@@ -52,6 +52,7 @@ namespace Knjigovodstvo.Payroll
             this.checkBoxSvi = new System.Windows.Forms.CheckBox();
             this.textBoxIznos = new System.Windows.Forms.TextBox();
             this.groupBoxNoviDodatak = new System.Windows.Forms.GroupBox();
+            this.buttonBrisiRed = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBoxNoviDodatak.SuspendLayout();
@@ -264,11 +265,22 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxNoviDodatak.TabStop = false;
             this.groupBoxNoviDodatak.Text = "Novi Dodatak";
             // 
+            // buttonBrisiRed
+            // 
+            this.buttonBrisiRed.Location = new System.Drawing.Point(707, 524);
+            this.buttonBrisiRed.Name = "buttonBrisiRed";
+            this.buttonBrisiRed.Size = new System.Drawing.Size(75, 23);
+            this.buttonBrisiRed.TabIndex = 21;
+            this.buttonBrisiRed.Text = "Briši red";
+            this.buttonBrisiRed.UseVisualStyleBackColor = true;
+            this.buttonBrisiRed.Click += new System.EventHandler(this.ButtonBrisiRed_Click);
+            // 
             // DodatakObracun
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 560);
+            this.Controls.Add(this.buttonBrisiRed);
             this.Controls.Add(this.groupBoxNoviDodatak);
             this.Controls.Add(this.buttonSpremi);
             this.Controls.Add(this.buttonKnjizi);
@@ -321,5 +333,6 @@ namespace Knjigovodstvo.Payroll
         private CheckBox checkBoxSvi;
         private TextBox textBoxIznos;
         private GroupBox groupBoxNoviDodatak;
+        private Button buttonBrisiRed;
     }
 }

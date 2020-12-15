@@ -17,7 +17,8 @@ namespace Knjigovodstvo.JoppdDocument
         }
         public void PopuniDodatke()
         {
-            DataTable _dt = new DbDataGet().GetTable(new Dodatak(), $"Oib='{Oib}'");
+            DataTable _dt = new DbDataGet().GetTable(new DodatakArhiva(), 
+                $"Oib='{Oib}' AND Datum_Od='{Datum_Od}' AND Datum_Do='{Datum_Do}'");
             List<DataRow> rows = _dt.AsEnumerable().ToList();
             _dodaci = (from DataRow dr in rows
                               select new Dodatak()
@@ -31,6 +32,7 @@ namespace Knjigovodstvo.JoppdDocument
             if (_dodaci.Count > 0)
             {
                 Iznos_Neoporezivog = _dodaci.ElementAt(0).Iznos;
+                Iznos_Isplate += Iznos_Neoporezivog;
                 Oznaka_Neoporezivog = _dodaci.ElementAt(0).Sifra;
             }
         }
@@ -43,6 +45,7 @@ namespace Knjigovodstvo.JoppdDocument
                 Iznos_Neoporezivog = 0;
                 Oznaka_Neoporezivog = "0";
                 Primitak_Nesamostalni = 0;
+                Sati = (int)(Convert.ToDateTime(Datum_Do) - Convert.ToDateTime(Datum_Od)).TotalDays + 1;
             }
         }
 

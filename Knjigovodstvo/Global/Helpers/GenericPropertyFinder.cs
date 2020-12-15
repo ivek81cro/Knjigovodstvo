@@ -40,7 +40,6 @@ namespace Knjigovodstvo.Helpers
                     _propName.Add(property.Name.ToString());
                     _propValue.Add(property.GetValue(propValue).ToString());
                     _propType.Add(property.PropertyType.Name.ToString());
-                    _items.Remove("Id");
                 }
                 else if(property.DeclaringType.Name == _tableName[level]
                     && property.PropertyType != typeof(string)

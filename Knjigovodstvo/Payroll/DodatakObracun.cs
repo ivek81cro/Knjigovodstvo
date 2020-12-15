@@ -108,7 +108,8 @@ namespace Knjigovodstvo.Payroll
                 condition = null;
 
             dataGridView1.DataSource = _dbDataGet.GetTable(new DodatakArhiva(), condition);
-            for (int i = 3; i < dataGridView1.Columns.Count; i++)
+            dataGridView1.Columns["Id"].Visible = false;
+            for (int i = 4; i < dataGridView1.Columns.Count; i++)
             {
                 dataGridView1.Columns[i].DefaultCellStyle.Format = "0.00";
             }
@@ -155,6 +156,7 @@ namespace Knjigovodstvo.Payroll
             comboBoxFilterPoMjesecu.SelectedItem = null;
             comboBoxFilterPoMjesecu.Text = "--Odaberi mjesec--";
             LoadDatagrid();
+            FillComboBoxMjesec();
         }
 
         private void ButtonOpenPostavkeForm(object sender, EventArgs e)
@@ -235,6 +237,7 @@ namespace Knjigovodstvo.Payroll
             foreach (var dodatakA in _dodatakArhiva) 
             {
                 dodatakA.SaveToDatabase();
+                LoadDatagrid();
             }
         }
 
@@ -286,6 +289,23 @@ namespace Knjigovodstvo.Payroll
                         });
             }
             dataGridView1.DataSource = _dodaci;
+        }
+
+        private void ButtonBrisiRed_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count != 0)
+            {
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    int id = int.Parse(row.Cells["Id"].Value.ToString());
+                    new DbDataDelete().DeleteItem(new DodatakArhiva() { Id = id });
+                }
+                LoadDatagrid();
+            }
+            else
+            {
+                MessageBox.Show("Niste odabrali red.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private BindingList<DodatakArhiva> _dodatakArhiva = new BindingList<DodatakArhiva>();
