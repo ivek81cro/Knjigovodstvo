@@ -43,7 +43,8 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             // dbDataGridView1
             // 
             this.dbDataGridView1.AllowUserToAddRows = false;
-            this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dbDataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dbDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -74,6 +75,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             // 
             // labelDuguje
             // 
+            this.labelDuguje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelDuguje.AutoSize = true;
             this.labelDuguje.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelDuguje.ForeColor = System.Drawing.Color.Green;
@@ -85,6 +87,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             // 
             // labelPotrazuje
             // 
+            this.labelPotrazuje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPotrazuje.AutoSize = true;
             this.labelPotrazuje.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelPotrazuje.ForeColor = System.Drawing.Color.Green;
@@ -96,6 +99,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             // 
             // buttonDodajRed
             // 
+            this.buttonDodajRed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonDodajRed.Location = new System.Drawing.Point(13, 584);
             this.buttonDodajRed.Name = "buttonDodajRed";
             this.buttonDodajRed.Size = new System.Drawing.Size(75, 23);

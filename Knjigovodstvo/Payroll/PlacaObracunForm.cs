@@ -215,7 +215,6 @@ namespace Knjigovodstvo.Payroll
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            //TODO: resolve, unify
             PlacaArhiva po = new PlacaArhiva();
             foreach(DataGridViewRow row in dataGridView1.Rows)
             {

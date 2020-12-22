@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.dbDataGridView1 = new Knjigovodstvo.DBDataGridView();
             this.buttonKnjizi = new System.Windows.Forms.Button();
@@ -42,12 +44,28 @@
             // 
             this.dbDataGridView1.AllowUserToAddRows = false;
             this.dbDataGridView1.AllowUserToDeleteRows = false;
-            this.dbDataGridView1.AllowUserToResizeColumns = true;
-            this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dbDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dbDataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dbDataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dbDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dbDataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dbDataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dbDataGridView1.Name = "dbDataGridView1";
             this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -60,7 +78,8 @@
             // 
             // buttonKnjizi
             // 
-            this.buttonKnjizi.Location = new System.Drawing.Point(13, 324);
+            this.buttonKnjizi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonKnjizi.Location = new System.Drawing.Point(12, 324);
             this.buttonKnjizi.Name = "buttonKnjizi";
             this.buttonKnjizi.Size = new System.Drawing.Size(75, 23);
             this.buttonKnjizi.TabIndex = 11;
@@ -70,9 +89,10 @@
             // 
             // buttonBrisiRed
             // 
+            this.buttonBrisiRed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonBrisiRed.BackColor = System.Drawing.SystemColors.ControlLight;
             this.buttonBrisiRed.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonBrisiRed.Location = new System.Drawing.Point(13, 278);
+            this.buttonBrisiRed.Location = new System.Drawing.Point(12, 277);
             this.buttonBrisiRed.Name = "buttonBrisiRed";
             this.buttonBrisiRed.Size = new System.Drawing.Size(75, 23);
             this.buttonBrisiRed.TabIndex = 12;
@@ -82,9 +102,10 @@
             // 
             // buttonDodajRed
             // 
+            this.buttonDodajRed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonDodajRed.BackColor = System.Drawing.SystemColors.ControlLight;
             this.buttonDodajRed.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonDodajRed.Location = new System.Drawing.Point(94, 278);
+            this.buttonDodajRed.Location = new System.Drawing.Point(93, 277);
             this.buttonDodajRed.Name = "buttonDodajRed";
             this.buttonDodajRed.Size = new System.Drawing.Size(75, 23);
             this.buttonDodajRed.TabIndex = 13;
@@ -94,6 +115,7 @@
             // 
             // labelDugovna
             // 
+            this.labelDugovna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelDugovna.AutoSize = true;
             this.labelDugovna.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelDugovna.Location = new System.Drawing.Point(484, 286);
@@ -104,6 +126,7 @@
             // 
             // labelPotrazna
             // 
+            this.labelPotrazna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPotrazna.AutoSize = true;
             this.labelPotrazna.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelPotrazna.Location = new System.Drawing.Point(720, 286);
