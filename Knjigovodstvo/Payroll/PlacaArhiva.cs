@@ -1,4 +1,5 @@
 ﻿using Knjigovodstvo.Database;
+using System.Data;
 
 namespace Knjigovodstvo.Payroll
 {
@@ -6,8 +7,11 @@ namespace Knjigovodstvo.Payroll
     {
         public bool Exists()
         {
-            int count = new DbDataGet().GetTable(this, 
-                $"Oib={Oib} AND Datum_Od='{Datum_Od}' AND Datum_Do='{Datum_Do}'").Rows.Count;
+            DataTable dt = new DbDataGet().GetTable(this, 
+                $"Oib={Oib} AND Datum_Od='{Datum_Od}' AND Datum_Do='{Datum_Do}'");
+            int count = dt.Rows.Count;
+            if (count != 0)
+                Id = int.Parse(dt.Rows[0]["Id"].ToString());
 
             return count != 0;
         }

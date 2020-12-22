@@ -4,7 +4,6 @@ using Knjigovodstvo.Interface;
 using Knjigovodstvo.Partners;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.Validators;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -45,8 +44,11 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     tp.PrepareDataIra(_dt, _postavkeKnjizenja, _obj);
                     FindPartnerontoNumber();
                     break;
-                case "PlacaObracun":
+                case "PlacaArhiva":
                     tp.PrepareDataPlaca(_dt, _postavkeKnjizenja, _obj);
+                    break;
+                case "DodatakArhiva":
+                    tp.PrepareDataDodatak(_dt, _postavkeKnjizenja, _obj);
                     break;
                 default:
                     break;

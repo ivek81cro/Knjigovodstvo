@@ -31,10 +31,15 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             comboBoxVrstaTemeljnice.Items.Add(BookNames.Slobodna);
         }
 
-        private void ComboBoxVrstaTemeljnice_SelectionChangeCommitted(object sender, System.EventArgs e)
+        private void ComboBoxVrstaTemeljnice_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            _dt = new DbDataGet().GetTable(new TemeljnicaStavka(), 
-                $"Dokument = '{comboBoxVrstaTemeljnice.SelectedItem}' AND Broj_temeljnice = 0");
+            string selected = comboBoxVrstaTemeljnice.SelectedItem.ToString();
+            string condition = $"Dokument = '{selected}' AND Broj_temeljnice = 0";
+            if (selected == "Place")
+            {
+                condition = $"(Dokument = '{selected}' OR Dokument='Dodaci') AND Broj_temeljnice = 0";
+            }
+            _dt = new DbDataGet().GetTable(new TemeljnicaStavka(), condition);
             LoadDataView();
             CheckEndBalance();
         }

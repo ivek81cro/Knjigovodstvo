@@ -79,6 +79,7 @@ namespace Knjigovodstvo.Payroll
         private void ComboBoxFilter_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadDatagrid();
+            buttonKnjizi.Enabled = true;
         }
 
         private void LoadDatagrid()
@@ -190,20 +191,7 @@ namespace Knjigovodstvo.Payroll
             DodatakArhiva da = new DodatakArhiva();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                //po.Bruto += decimal.Parse(row.Cells["Bruto"].Value.ToString());
-                //po.Mio_1 += decimal.Parse(row.Cells["Mio_1"].Value.ToString());
-                //po.Mio_2 += decimal.Parse(row.Cells["Mio_2"].Value.ToString());
-                //po.Dohodak += decimal.Parse(row.Cells["Dohodak"].Value.ToString());
-                //po.Osobni_Odbitak += decimal.Parse(row.Cells["Osobni_Odbitak"].Value.ToString());
-                //po.Porezna_Osnovica += decimal.Parse(row.Cells["Porezna_Osnovica"].Value.ToString());
-                //po.Porez_24_per += decimal.Parse(row.Cells["Porez_24_per"].Value.ToString());
-                //po.Porez_36_per += decimal.Parse(row.Cells["Porez_36_per"].Value.ToString());
-                //po.Porez_Ukupno += decimal.Parse(row.Cells["Porez_Ukupno"].Value.ToString());
-                //po.Prirez += decimal.Parse(row.Cells["Prirez"].Value.ToString());
-                //po.Ukupno_Porez_i_Prirez += decimal.Parse(row.Cells["Ukupno_Porez_i_Prirez"].Value.ToString());
-                //po.Neto += decimal.Parse(row.Cells["Neto"].Value.ToString());
-                //po.Doprinos_Zdravstvo += decimal.Parse(row.Cells["Doprinos_Zdravstvo"].Value.ToString());
-                //po.Dodaci_Ukupno += decimal.Parse(row.Cells["Dodaci_Ukupno"].Value.ToString());
+                da.Iznos += decimal.Parse(row.Cells["Iznos"].Value.ToString());                
             }
             TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(da, _postavkeKnjizenja);
             form.ShowDialog();

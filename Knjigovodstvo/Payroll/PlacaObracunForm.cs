@@ -213,11 +213,6 @@ namespace Knjigovodstvo.Payroll
             SaveObracun();
         }
 
-        private void ButtonObracunajDodatke_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
             //TODO: resolve, unify

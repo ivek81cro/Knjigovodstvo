@@ -69,6 +69,25 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             }
         }
 
+        internal void PrepareDataDodatak(DataTable dt, List<PostavkeKnjizenja> postavkeKnjizenja, IDbObject obj)
+        {
+            DodatakArhiva knjiga = (DodatakArhiva)obj;
+
+            foreach (var postavka in postavkeKnjizenja)
+            {
+                dt.Rows.Add(
+                    knjiga.Id,
+                    postavka.Naziv_stupca,
+                    new KontniPlan().GetDescriptiopnByKontoNumber(postavka.Konto),
+                    postavka.Konto,
+                    DateTime.Today.ToString("dd.MM.yyyy"),
+                    postavka.Strana == "Dugovna",
+                    postavka.Strana == "Potražna",
+                    postavka.Mijenja_predznak == true
+                    );
+            }
+        }
+
         public void PrepareDataPlaca(DataTable dt, List<PostavkeKnjizenja> postavkeKnjizenja, IDbObject obj)
         {
             PlacaArhiva knjiga = (PlacaArhiva)obj;
@@ -80,7 +99,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     postavka.Naziv_stupca,
                     new KontniPlan().GetDescriptiopnByKontoNumber(postavka.Konto),
                     postavka.Konto,
-                    DateTime.Today,
+                    DateTime.Today.ToString("dd.MM.yyyy"),
                     postavka.Strana == "Dugovna",
                     postavka.Strana == "Potražna",
                     postavka.Mijenja_predznak == true

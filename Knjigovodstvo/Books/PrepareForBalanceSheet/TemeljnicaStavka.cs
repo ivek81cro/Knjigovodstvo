@@ -19,7 +19,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         public bool CheckIfExistsInDatabase() 
         {
-            DataTable dt = new DbDataGet().GetTable(this, $"Broj={Broj} AND Konto='{Konto}'");
+            DataTable dt = new DbDataGet().GetTable(this, $"Dokument='{Dokument}' AND Broj={Broj} AND Konto='{Konto}'");
             if (dt.Rows.Count > 0)
             {
                 Id= int.Parse(dt.Rows[0]["Id"].ToString());
