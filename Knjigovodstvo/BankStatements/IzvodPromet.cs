@@ -1,5 +1,4 @@
 ﻿using Knjigovodstvo.Interface;
-using System.Data;
 
 namespace Knjigovodstvo.BankStatements
 {

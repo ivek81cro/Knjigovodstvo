@@ -6,7 +6,7 @@ namespace Knjigovodstvo.BankStatements
 {
     public partial class IzvodiPojedinacniForm : Form
     {
-        public IzvodiPojedinacniForm(IzvodKnjiga izvodKnjiga)
+        public IzvodiPojedinacniForm(Izvod izvodKnjiga)
         {
             _izvodKnjiga = izvodKnjiga;
             InitializeComponent();
@@ -63,6 +63,6 @@ namespace Knjigovodstvo.BankStatements
             this.Close();
         }
         
-        private readonly IzvodKnjiga _izvodKnjiga;
+        private readonly Izvod _izvodKnjiga;
     }
 }

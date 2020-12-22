@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Database;
+﻿using Knjigovodstvo.Books.PrepareForBalanceSheet;
+using Knjigovodstvo.Database;
 using Knjigovodstvo.Helpers;
 using System;
 using System.ComponentModel;
@@ -21,7 +22,7 @@ namespace Knjigovodstvo.BankStatements
 
         private void LoadExistingIzvodi()
         {
-            DataTable dt = new DbDataGet().GetTable(_izvodKnjiga);
+            DataTable dt = new DbDataGet().GetTable(_izvod);
             dataGridViewIzvodi.DataSource = new DataView(dt).ToTable(false, "Redni_broj", "Datum_izvoda");
             dataGridViewIzvodi.Sort(this.dataGridViewIzvodi.Columns["Redni_broj"], ListSortDirection.Descending);
             for (int i = 0; i< dataGridViewIzvodi.Columns.Count; i++)
@@ -37,8 +38,8 @@ namespace Knjigovodstvo.BankStatements
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var encoding = Encoding.GetEncoding("windows-1250");
             StreamReader reader = new StreamReader(_path, encoding);
-            XmlSerializer x = new XmlSerializer(_izvodi.GetType());
-            _izvodi = (IzvodiXml)x.Deserialize(reader);
+            XmlSerializer x = new XmlSerializer(_izvodiXml.GetType());
+            _izvodiXml = (IzvodiXml)x.Deserialize(reader);
             reader.Close();
 
             CreateIzvodKnjigaElement();
@@ -46,16 +47,16 @@ namespace Knjigovodstvo.BankStatements
 
         private void CreateIzvodKnjigaElement()
         {
-            _izvodKnjiga = new IzvodKnjiga
+            _izvod = new Izvod
             {
                 Datum_izvoda = DateTime
-                .ParseExact(_izvodi.Izvod.DatumIzvoda, ("yyyyMMdd"), CultureInfo.InvariantCulture)
+                .ParseExact(_izvodiXml.Izvod.DatumIzvoda, ("yyyyMMdd"), CultureInfo.InvariantCulture)
                 .ToString("yyyy-MM-dd"),
-                Redni_broj = int.Parse(_izvodi.Izvod.RedniBroj),
-                Suma_potrazna = decimal.Parse(_izvodi.Izvod.Sekcije.Sekcija.PStrana.UkupnaSuma),
-                Suma_dugovna = decimal.Parse(_izvodi.Izvod.Sekcije.Sekcija.DStrana.UkupnaSuma),
-                Stanje_prethodnog_izvoda = decimal.Parse(_izvodi.Izvod.Sekcije.Sekcija.PrethodnoStanje),
-                Novo_stanje = decimal.Parse(_izvodi.Izvod.Sekcije.Sekcija.NovoStanje)
+                Redni_broj = int.Parse(_izvodiXml.Izvod.RedniBroj),
+                Suma_potrazna = decimal.Parse(_izvodiXml.Izvod.Sekcije.Sekcija.PStrana.UkupnaSuma),
+                Suma_dugovna = decimal.Parse(_izvodiXml.Izvod.Sekcije.Sekcija.DStrana.UkupnaSuma),
+                Stanje_prethodnog_izvoda = decimal.Parse(_izvodiXml.Izvod.Sekcije.Sekcija.PrethodnoStanje),
+                Novo_stanje = decimal.Parse(_izvodiXml.Izvod.Sekcije.Sekcija.NovoStanje)
             };
 
             CreatePrometElements();
@@ -65,9 +66,9 @@ namespace Knjigovodstvo.BankStatements
 
         private void CreatePrometElements()
         {
-            foreach(var prometStavka in _izvodi.Izvod.Sekcije.Sekcija.Prometi.Promet)
+            foreach(var prometStavka in _izvodiXml.Izvod.Sekcije.Sekcija.Prometi.Promet)
             {
-                _izvodKnjiga.Promet.Add(
+                _izvod.Promet.Add(
                     new IzvodPromet() 
                     {
                         Iznos = decimal.Parse(prometStavka.IznosPrometa.Iznos),
@@ -80,7 +81,7 @@ namespace Knjigovodstvo.BankStatements
 
         private void OpenIzvodPojedinacnoForm()
         {
-            IzvodiPojedinacniForm form = new IzvodiPojedinacniForm(_izvodKnjiga);
+            IzvodiPojedinacniForm form = new IzvodiPojedinacniForm(_izvod);
             form.FormClosing += new FormClosingEventHandler(Izvod_FormClosing);
             form.ShowDialog();
         }
@@ -96,9 +97,9 @@ namespace Knjigovodstvo.BankStatements
             {
                 DataGridViewRow row = this.dataGridViewIzvodi.SelectedRows[0];
                 int redniBroj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
-                _izvodKnjiga.GetIzvodByRedniBroj(redniBroj);
+                _izvod.GetIzvodByRedniBroj(redniBroj);
 
-                dataGridViewStavke.DataSource = _izvodKnjiga.GetPrometData();
+                dataGridViewStavke.DataSource = _izvod.GetPrometData();
 
                 dataGridViewStavke.Columns[0].Width = (int)(dataGridViewStavke.Width * 0.3);
                 dataGridViewStavke.Columns[1].Width = (int)(dataGridViewStavke.Width * 0.3);
@@ -135,12 +136,18 @@ namespace Knjigovodstvo.BankStatements
 
         private void ButtonDeleteIzvod_Click(object sender, EventArgs e)
         {
-            new DbDataDelete().DeleteItem(_izvodKnjiga);
+            new DbDataDelete().DeleteItem(_izvod);
             LoadExistingIzvodi();
         }
 
-        private IzvodiXml _izvodi = new IzvodiXml();
-        private IzvodKnjiga _izvodKnjiga = new IzvodKnjiga();
+        private void ButtonKnjizi_Click(object sender, EventArgs e)
+        {
+            TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_izvod, null);
+            form.ShowDialog();
+        }
+
+        private IzvodiXml _izvodiXml = new IzvodiXml();
+        private Izvod _izvod = new Izvod();
         private string _path = "";
     }
 }

@@ -1,9 +1,11 @@
-﻿using Knjigovodstvo.FinancialReports;
+﻿using Knjigovodstvo.BankStatements;
+using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Interface;
 using Knjigovodstvo.Partners;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.Validators;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -34,21 +36,24 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             {
                 case "UraKnjiga":
                     tp.PrepareDataUra(_dt, _postavkeKnjizenja, _obj);
-                    FindPartnerontoNumber();
+                    FindPartnerKontoNumber();
                     break;
                 case "Primka":
                     tp.PrepareDataPrimka(_dt, _postavkeKnjizenja, _obj);
-                    FindPartnerontoNumber();
+                    FindPartnerKontoNumber();
                     break;
                 case "IraKnjiga":
                     tp.PrepareDataIra(_dt, _postavkeKnjizenja, _obj);
-                    FindPartnerontoNumber();
+                    FindPartnerKontoNumber();
                     break;
                 case "PlacaArhiva":
                     tp.PrepareDataPlaca(_dt, _postavkeKnjizenja, _obj);
                     break;
                 case "DodatakArhiva":
                     tp.PrepareDataDodatak(_dt, _postavkeKnjizenja, _obj);
+                    break;
+                case "Izvod":
+                    tp.PrepareDataIzvod(_dt, _obj);
                     break;
                 default:
                     break;
@@ -58,13 +63,28 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private void PrepareDataShared() 
         {
-            LoadValuesDebitAndCredit();
+            if (_obj.GetType().Name == "Izvod")
+                LoadValuesDebitAndCreditIzvod();
+            else
+                LoadValuesDebitAndCredit();
+
             _dt.Columns.Remove("Mijenja predznak");
             dbDataGridView1.DataSource = _dt;
             dbDataGridView1.Columns[0].ReadOnly = true;
         }
 
-        private void FindPartnerontoNumber()
+        private void LoadValuesDebitAndCreditIzvod()
+        {
+            var prometi = ((Izvod)_obj).Promet;
+            for (int i = 0; i< prometi.Count; i++) 
+            {
+                _dt.Rows[i]["Dugovna"] = _dt.Rows[i]["Dugovna"].ToString() == "True" ? prometi[i].Iznos : 0;
+                _dt.Rows[i]["Potražna"] = _dt.Rows[i]["Potražna"].ToString() == "True" ? prometi[i].Iznos : 0;
+            }
+            //TODO: Povezivanje konta sa nazivom partnera na izvodu
+        }
+
+        private void FindPartnerKontoNumber()
         {
             _dt.Rows[0]["Konto"] = _partner.GetKontoDByNaziv(_dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0]);
         }

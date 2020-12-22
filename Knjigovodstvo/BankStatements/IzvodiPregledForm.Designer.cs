@@ -34,6 +34,7 @@ namespace Knjigovodstvo.BankStatements
             this.dataGridViewIzvodi = new System.Windows.Forms.DataGridView();
             this.buttonOpenIzvod = new System.Windows.Forms.Button();
             this.buttonDeleteIzvod = new System.Windows.Forms.Button();
+            this.buttonKnjizi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStavke)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIzvodi)).BeginInit();
             this.SuspendLayout();
@@ -101,11 +102,22 @@ namespace Knjigovodstvo.BankStatements
             this.buttonDeleteIzvod.UseVisualStyleBackColor = true;
             this.buttonDeleteIzvod.Click += new System.EventHandler(this.ButtonDeleteIzvod_Click);
             // 
+            // buttonKnjizi
+            // 
+            this.buttonKnjizi.Location = new System.Drawing.Point(12, 110);
+            this.buttonKnjizi.Name = "buttonKnjizi";
+            this.buttonKnjizi.Size = new System.Drawing.Size(75, 23);
+            this.buttonKnjizi.TabIndex = 15;
+            this.buttonKnjizi.Text = "Knjiži";
+            this.buttonKnjizi.UseVisualStyleBackColor = true;
+            this.buttonKnjizi.Click += new System.EventHandler(this.ButtonKnjizi_Click);
+            // 
             // IzvodiPregledForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 633);
+            this.Controls.Add(this.buttonKnjizi);
             this.Controls.Add(this.buttonDeleteIzvod);
             this.Controls.Add(this.buttonOpenIzvod);
             this.Controls.Add(this.dataGridViewIzvodi);
@@ -126,5 +138,6 @@ namespace Knjigovodstvo.BankStatements
         private System.Windows.Forms.DataGridView dataGridViewIzvodi;
         private System.Windows.Forms.Button buttonOpenIzvod;
         private System.Windows.Forms.Button buttonDeleteIzvod;
+        private System.Windows.Forms.Button buttonKnjizi;
     }
 }

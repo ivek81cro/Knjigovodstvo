@@ -8,6 +8,7 @@
         Ura_trošak,
         Ira,
         Place,
-        Dodaci
+        Dodaci,
+        Izvodi
     }
 }

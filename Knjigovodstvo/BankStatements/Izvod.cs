@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Knjigovodstvo.BankStatements
 {
-    public class IzvodKnjiga :IDbObject
+    public class Izvod :IDbObject
     {
         public FormError ValidateData()
         {

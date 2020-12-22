@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.FinancialReports;
+﻿using Knjigovodstvo.BankStatements;
+using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Interface;
 using Knjigovodstvo.IRA;
 using Knjigovodstvo.Payroll;
@@ -65,6 +66,24 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     postavka.Strana == "Dugovna",
                     postavka.Strana == "Potražna",
                     postavka.Mijenja_predznak == true
+                    );
+            }
+        }
+
+        internal void PrepareDataIzvod(DataTable dt, IDbObject obj)
+        {
+            Izvod izvod = (Izvod)obj;
+            foreach(var stavka in izvod.Promet)
+            {
+                dt.Rows.Add(
+                    izvod.Redni_broj,
+                    stavka.Naziv,
+                    stavka.Opis,
+                    "",
+                    izvod.Datum_izvoda,
+                    stavka.Oznaka == "D",
+                    stavka.Oznaka == "P",
+                    false
                     );
             }
         }
