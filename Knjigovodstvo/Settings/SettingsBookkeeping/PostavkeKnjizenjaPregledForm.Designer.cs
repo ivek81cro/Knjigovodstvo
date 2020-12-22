@@ -175,6 +175,7 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             this.Controls.Add(this.comboBoxStupac);
             this.Controls.Add(this.dbDataGridView1);
             this.Name = "PostavkeKnjizenjaPregledForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Postavke knjiženja";
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).EndInit();
             this.ResumeLayout(false);

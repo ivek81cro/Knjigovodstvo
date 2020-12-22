@@ -49,11 +49,11 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
         private void LoadDatagrid()
         {
             dbDataGridView1.DataSource = new DataView(
-                new DbDataGet().GetTable(_postavkeKnjizenja, $"Knjiga='{_postavkeKnjizenja.Knjiga}'"))
-                .ToTable(false, "Naziv_stupca", "Konto", "Strana", "Mijenja_predznak");
+                new DbDataGet().GetTable(_postavkeKnjizenja, $"Knjiga='{_postavkeKnjizenja.Knjiga}'"));
+            dbDataGridView1.Columns[0].Visible = false;
 
-            dbDataGridView1.Columns[0].Width = (int)(dbDataGridView1.Width * 0.3);
-            dbDataGridView1.Columns[1].Width = (int)(dbDataGridView1.Width * 0.3);
+            dbDataGridView1.Columns[1].Width = (int)(dbDataGridView1.Width * 0.15);
+            dbDataGridView1.Columns[2].Width = (int)(dbDataGridView1.Width * 0.3);
         }
 
         private void PopulateComboBoxStupac(IDbObject knjigaVrsta)
@@ -74,6 +74,7 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
         private void DbDataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             var row = dbDataGridView1.SelectedRows[0];
+            _postavkeKnjizenja.Id = int.Parse(row.Cells["Id"].Value.ToString());
             textBoxKonto.Text = _postavkeKnjizenja.Konto =  row.Cells["Konto"].Value.ToString();
             comboBoxStupac.Text = _postavkeKnjizenja.Naziv_stupca =  row.Cells["Naziv_stupca"].Value.ToString();
             comboBoxStrana.Text = _postavkeKnjizenja.Strana =  row.Cells["Strana"].Value.ToString();
@@ -115,7 +116,6 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
 
         private void ButtonIzmjeni_Click(object sender, EventArgs e)
         {
-            _postavkeKnjizenja.GetIdByKontoNazivStupca();
             SetPostavkeKnjizenjaMember(_postavkeKnjizenja.Konto);
             new DbDataUpdate().UpdateData(_postavkeKnjizenja);
 
