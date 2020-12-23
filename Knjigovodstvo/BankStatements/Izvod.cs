@@ -18,7 +18,7 @@ namespace Knjigovodstvo.BankStatements
         {
             Id = int.Parse(
                 new DbDataExecProcedure()
-                .GetTable(ProcedureNames.IzvodKnjiga_GetLastId)
+                .GetTable(ProcedureNames.Izvod_GetLastId)
                 .Rows[0]
                 .ItemArray[0].ToString());
         }
@@ -46,10 +46,12 @@ namespace Knjigovodstvo.BankStatements
                            {
                                Id = int.Parse(dr["Id"].ToString()),
                                Id_izvod = int.Parse(dr["Id_izvod"].ToString()),
-                               Iznos = decimal.Parse(dr["Iznos"].ToString()),
+                               Dugovna = decimal.Parse(dr["Dugovna"].ToString()),
+                               Potrazna = decimal.Parse(dr["Potrazna"].ToString()),
                                Oznaka = dr["Oznaka"].ToString(),
                                Naziv = dr["Naziv"].ToString(),
-                               Opis = dr["Opis"].ToString()
+                               Opis = dr["Opis"].ToString(),
+                               Konto = dr["Konto"].ToString()
                            }).ToList();
 
             return izvodPromet;
@@ -63,6 +65,7 @@ namespace Knjigovodstvo.BankStatements
                 {
                     { "Naziv", typeof(string) },
                     { "Opis", typeof(string) },
+                    { "Konto", typeof(string) },
                     { "Duguje", typeof(decimal) },
                     {"Potražuje", typeof(decimal) }
                 }
@@ -73,8 +76,9 @@ namespace Knjigovodstvo.BankStatements
                 DataRow row = dt.NewRow();
                 row["Naziv"] = promet.Naziv;
                 row["Opis"] = promet.Opis;
-                row["Duguje"] = promet.Oznaka == "D" ? promet.Iznos : 0;
-                row["Potražuje"] = promet.Oznaka == "P" ? promet.Iznos : 0;
+                row["Konto"] = promet.Konto;
+                row["Duguje"] = promet.Oznaka == "D" ? promet.Dugovna : 0;
+                row["Potražuje"] = promet.Oznaka == "P" ? promet.Potrazna : 0;
                 dt.Rows.Add(row);
             }
 

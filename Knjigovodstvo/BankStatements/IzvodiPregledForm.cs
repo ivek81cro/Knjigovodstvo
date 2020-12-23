@@ -69,9 +69,10 @@ namespace Knjigovodstvo.BankStatements
             foreach(var prometStavka in _izvodiXml.Izvod.Sekcije.Sekcija.Prometi.Promet)
             {
                 _izvod.Promet.Add(
-                    new IzvodPromet() 
+                    new IzvodPromet()
                     {
-                        Iznos = decimal.Parse(prometStavka.IznosPrometa.Iznos),
+                        Dugovna = prometStavka.IznosPrometa.Oznaka == "D" ? decimal.Parse(prometStavka.IznosPrometa.Iznos) : 0,
+                        Potrazna = prometStavka.IznosPrometa.Oznaka == "P" ? decimal.Parse(prometStavka.IznosPrometa.Iznos) : 0,
                         Oznaka = prometStavka.IznosPrometa.Oznaka,
                         Naziv = prometStavka.Naziv,
                         Opis = prometStavka.OpisPlacanja
@@ -125,8 +126,8 @@ namespace Knjigovodstvo.BankStatements
             {
                 _path = openFileDialog1.FileName;
             }
-
-            DeserializeIzvodXml();
+            if (_path != "")
+                DeserializeIzvodXml();
         }
 
         private void ButtonOpenIzvod_Click(object sender, EventArgs e)

@@ -78,8 +78,8 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             var prometi = ((Izvod)_obj).Promet;
             for (int i = 0; i< prometi.Count; i++) 
             {
-                _dt.Rows[i]["Dugovna"] = _dt.Rows[i]["Dugovna"].ToString() == "True" ? prometi[i].Iznos : 0;
-                _dt.Rows[i]["Potražna"] = _dt.Rows[i]["Potražna"].ToString() == "True" ? prometi[i].Iznos : 0;
+                _dt.Rows[i]["Dugovna"] = _dt.Rows[i]["Dugovna"].ToString() == "True" ? prometi[i].Dugovna : 0;
+                _dt.Rows[i]["Potražna"] = _dt.Rows[i]["Potražna"].ToString() == "True" ? prometi[i].Potrazna : 0;
             }
             //TODO: Povezivanje konta sa nazivom partnera na izvodu
         }

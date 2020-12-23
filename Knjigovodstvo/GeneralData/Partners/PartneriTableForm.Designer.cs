@@ -36,6 +36,7 @@ namespace Knjigovodstvo.Partners
             this.btnNewPartner = new System.Windows.Forms.Button();
             this.btnEditPartner = new System.Windows.Forms.Button();
             this.btnDeletePartner = new System.Windows.Forms.Button();
+            this.btnOdaberi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,7 +65,7 @@ namespace Knjigovodstvo.Partners
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(9, 84);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -103,11 +104,23 @@ namespace Knjigovodstvo.Partners
             this.btnDeletePartner.UseVisualStyleBackColor = true;
             this.btnDeletePartner.Click += new System.EventHandler(this.BtnDeletePartner_Click);
             // 
+            // btnOdaberi
+            // 
+            this.btnOdaberi.Location = new System.Drawing.Point(251, 50);
+            this.btnOdaberi.Name = "btnOdaberi";
+            this.btnOdaberi.Size = new System.Drawing.Size(75, 23);
+            this.btnOdaberi.TabIndex = 7;
+            this.btnOdaberi.Text = "Odaberi";
+            this.btnOdaberi.UseVisualStyleBackColor = true;
+            this.btnOdaberi.Visible = false;
+            this.btnOdaberi.Click += new System.EventHandler(this.BtnOdaberi_Click);
+            // 
             // PartneriTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1198, 543);
+            this.Controls.Add(this.btnOdaberi);
             this.Controls.Add(this.btnDeletePartner);
             this.Controls.Add(this.btnEditPartner);
             this.Controls.Add(this.btnNewPartner);
@@ -129,6 +142,7 @@ namespace Knjigovodstvo.Partners
         private System.Windows.Forms.Button btnNewPartner;
         private System.Windows.Forms.Button btnEditPartner;
         private System.Windows.Forms.Button btnDeletePartner;
+        private Button btnOdaberi;
     }
 }
 

@@ -19,6 +19,13 @@ namespace Knjigovodstvo.Partners
                 .ToTable(false, "Id", "Oib", "Naziv", "Ulica", "Broj", "Posta", "Mjesto", "Telefon", "Fax", "Email", "Iban", "Mbo");
         }
 
+        internal void OdabirPartnera()
+        {
+            btnEditPartner.Visible = false;
+            btnDeletePartner.Visible = false;
+            btnOdaberi.Visible = true;
+        }
+
         private void TextBoxFilterPartner_TextChanged(object sender, EventArgs e)
         {
             (dataGridView1.DataSource as DataTable).DefaultView.RowFilter =
@@ -60,6 +67,18 @@ namespace Knjigovodstvo.Partners
             }
         }
 
+        private void BtnOdaberi_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count != 0)
+            {
+                IdPartner = int.Parse(dataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
+                Close();
+            }
+            else
+                MessageBox.Show("Niste odabrali red.", "Informacija", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private readonly Partneri _partner = new Partneri();
+        public int IdPartner { get; private set; } = 0;
     }
 }

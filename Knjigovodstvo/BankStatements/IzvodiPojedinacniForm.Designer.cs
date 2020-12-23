@@ -34,6 +34,7 @@ namespace Knjigovodstvo.BankStatements
             this.labelStanjeZavrsno = new System.Windows.Forms.Label();
             this.dataGridView1 = new Knjigovodstvo.DBDataGridView();
             this.buttonSpremi = new System.Windows.Forms.Button();
+            this.buttonUpariKonto = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,10 +75,10 @@ namespace Knjigovodstvo.BankStatements
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 121);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1217, 519);
+            this.dataGridView1.Size = new System.Drawing.Size(646, 519);
             this.dataGridView1.TabIndex = 10;
             this.dataGridView1.Text = "dataGridView1";
             // 
@@ -91,17 +92,29 @@ namespace Knjigovodstvo.BankStatements
             this.buttonSpremi.UseVisualStyleBackColor = true;
             this.buttonSpremi.Click += new System.EventHandler(this.ButtonSpremi_Click);
             // 
+            // buttonUpariKonto
+            // 
+            this.buttonUpariKonto.Location = new System.Drawing.Point(573, 92);
+            this.buttonUpariKonto.Name = "buttonUpariKonto";
+            this.buttonUpariKonto.Size = new System.Drawing.Size(85, 23);
+            this.buttonUpariKonto.TabIndex = 12;
+            this.buttonUpariKonto.Text = "Upari Konto";
+            this.buttonUpariKonto.UseVisualStyleBackColor = true;
+            this.buttonUpariKonto.Click += new System.EventHandler(this.ButtonUpariKonto_Click);
+            // 
             // IzvodiPojedinacniForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1241, 652);
+            this.ClientSize = new System.Drawing.Size(670, 652);
+            this.Controls.Add(this.buttonUpariKonto);
             this.Controls.Add(this.buttonSpremi);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.labelStanjeZavrsno);
             this.Controls.Add(this.labelRedniBroj);
             this.Controls.Add(this.labelDatumIzvoda);
             this.Name = "IzvodiPojedinacniForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Izvod";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -116,5 +129,6 @@ namespace Knjigovodstvo.BankStatements
         private System.Windows.Forms.Label labelStanjeZavrsno;
         private DBDataGridView dataGridView1;
         private System.Windows.Forms.Button buttonSpremi;
+        private System.Windows.Forms.Button buttonUpariKonto;
     }
 }

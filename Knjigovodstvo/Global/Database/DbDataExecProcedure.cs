@@ -18,7 +18,7 @@ namespace Knjigovodstvo.Database
         Get_Table_Names,
         Izdvoji_Troskove,
         Izdvoji_Odobrenja,
-        IzvodKnjiga_GetLastId,
+        Izvod_GetLastId,
         Dodatak_Distinct_Datum
     }
 
@@ -75,7 +75,7 @@ namespace Knjigovodstvo.Database
                 ProcedureNames.Get_Table_Names => "Get_Table_Names",
                 ProcedureNames.Izdvoji_Troskove => "Izdvoji_Troskove",
                 ProcedureNames.Izdvoji_Odobrenja => "Izdvoji_Odobrenja",
-                ProcedureNames.IzvodKnjiga_GetLastId => "IzvodKnjiga_GetLastId",
+                ProcedureNames.Izvod_GetLastId => "Izvod_GetLastId",
                 _ => "",
             };
         }
