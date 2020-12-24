@@ -17,6 +17,9 @@ namespace Knjigovodstvo.URA
     {
         public UraKnjigaForm()
         {
+            _columns.Add(0, "Datum");
+            _columns.Add(1, "Naziv_i_sjediste_kupca");
+            _columns.Add(2, "Broj_racuna");
             InitializeComponent();
             _dt = new DbDataCustomQuery()
                 .ExecuteQuery("SELECT TOP 1 Redni_broj FROM UraKnjiga WHERE Redni_broj IS NOT NULL ORDER BY Redni_broj DESC;");
@@ -140,5 +143,6 @@ namespace Knjigovodstvo.URA
         private readonly DataTable _dt;
         private readonly UraKnjiga _uraKnjiga = new UraKnjiga();
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
+        private readonly Dictionary<int, string> _columns = new Dictionary<int, string>();
     }
 }
