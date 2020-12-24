@@ -1,7 +1,10 @@
 ﻿using Knjigovodstvo.Books.PrepareForBalanceSheet;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Helpers;
+using Knjigovodstvo.Settings;
+using Knjigovodstvo.Settings.SettingsBookkeeping;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
@@ -23,14 +26,17 @@ namespace Knjigovodstvo.BankStatements
         private void LoadExistingIzvodi()
         {
             DataTable dt = new DbDataGet().GetTable(_izvod);
-            dataGridViewIzvodi.DataSource = new DataView(dt).ToTable(false, "Redni_broj", "Datum_izvoda");
+            dataGridViewIzvodi.DataSource = new DataView(dt).ToTable(false, "Redni_broj", "Datum_izvoda", "Knjizen");
             dataGridViewIzvodi.Sort(this.dataGridViewIzvodi.Columns["Redni_broj"], ListSortDirection.Descending);
             for (int i = 0; i< dataGridViewIzvodi.Columns.Count; i++)
             {
                 dataGridViewIzvodi.Columns[i].HeaderText =
                     new TableHeaderFormat().FormatHeader(dataGridViewIzvodi.Columns[i].HeaderText);
             }
-
+            dataGridViewIzvodi.RowHeadersVisible = false;
+            dataGridViewIzvodi.Columns[0].Width = (int)(dataGridViewIzvodi.Width * 0.4);
+            dataGridViewIzvodi.Columns[1].Width = (int)(dataGridViewIzvodi.Width * 0.4);
+            dataGridViewIzvodi.Columns[2].Width = (int)(dataGridViewIzvodi.Width * 0.2);
         }
 
         private void DeserializeIzvodXml()
@@ -143,8 +149,14 @@ namespace Knjigovodstvo.BankStatements
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_izvod, null);
+            var postavke = new List<PostavkeKnjizenja>();
+            postavke.Add(new PostavkeKnjizenja() { Knjiga = BookNames.Izvodi.ToString() });
+            TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_izvod, postavke);
             form.ShowDialog();
+            //TODO implement check if saved to books before setting true
+            _izvod.Knjizen = true;
+            _izvod.UpdateData();
+            LoadExistingIzvodi();
         }
 
         private IzvodiXml _izvodiXml = new IzvodiXml();

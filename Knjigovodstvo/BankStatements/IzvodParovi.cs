@@ -14,7 +14,7 @@ namespace Knjigovodstvo.BankStatements
             throw new NotImplementedException();
         }
 
-        public void SaveToDatabase()
+        public void InsertData()
         {
             new DbDataInsert().InsertData(this);
         }

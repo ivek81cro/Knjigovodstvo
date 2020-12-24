@@ -154,19 +154,11 @@ namespace Knjigovodstvo.Database
                 else
                     query += _name[i] + "='" + _value[i] + "', ";
             }
-
             query = query.Substring(0, query.Length - 2);
+
             if (_whereColumn == null)
-                query += $" WHERE Id={_value[0]};";
-            else
             {
-                int i;
-                for (i = 0; i<_name.Count; ++i)
-                {
-                    if (_name[i].Contains(_whereColumn))
-                        break;
-                }
-                query += $" WHERE {_whereColumn}='{_value[i]}';";
+                query += $" WHERE Id={_value[0]};";
             }
 
             return query;

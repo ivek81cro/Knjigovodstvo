@@ -22,7 +22,14 @@ namespace Knjigovodstvo.Database
 
             string table = dbObject.GetType().ToString().Substring(dbObject.GetType().ToString().LastIndexOf('.') + 1);
             string query = new DbQueryBuilder(obj, table, condition).BuildQuery(QueryType.Update);
-            
+
+            if (condition != null)
+            {
+                if (query.EndsWith(';'))
+                    query = query[0..^1];
+                query += $" WHERE {condition};";
+            }
+
             try
             {
                 using SqlConnection conn = new SqlConnection(ConnHelper.ConnStr(connection_name));

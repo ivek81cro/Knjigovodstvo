@@ -3,6 +3,7 @@ using Knjigovodstvo.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 
 namespace Knjigovodstvo.BankStatements
@@ -11,7 +12,7 @@ namespace Knjigovodstvo.BankStatements
     {
         public FormError ValidateData()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         internal void GetCurrentId()
@@ -34,6 +35,7 @@ namespace Knjigovodstvo.BankStatements
             Stanje_prethodnog_izvoda = decimal.Parse(dt.Rows[0]["Stanje_prethodnog_izvoda"].ToString());
             Novo_stanje = decimal.Parse(dt.Rows[0]["Novo_stanje"].ToString());
             Promet = LoadPrometByIzvodId();
+            Knjizen = dt.Rows[0]["Knjizen"].ToString() == "True";
         }
 
         private List<IzvodPromet> LoadPrometByIzvodId()
@@ -55,6 +57,11 @@ namespace Knjigovodstvo.BankStatements
                            }).ToList();
 
             return izvodPromet;
+        }
+
+        internal bool InsertData()
+        {
+            return new DbDataInsert().InsertData(this);
         }
 
         public DataTable GetPrometData()
@@ -85,6 +92,15 @@ namespace Knjigovodstvo.BankStatements
             return dt;
         }
 
+        internal void UpdateData()
+        {
+            Datum_izvoda = DateTime
+                .ParseExact(Datum_izvoda.Split(' ')[0], ("dd.MM.yyyy"), CultureInfo.InvariantCulture)
+                .ToString("yyyy-MM-dd");
+
+            new DbDataUpdate().UpdateData(this);
+        }
+
         public int Id { get; set; } = 0;
         public int Redni_broj { get; set; } = 0;
         public string Datum_izvoda { get; set; } = "";
@@ -92,6 +108,7 @@ namespace Knjigovodstvo.BankStatements
         public decimal Suma_dugovna { get; set; }
         public decimal Stanje_prethodnog_izvoda { get; set; } = 0;
         public decimal Novo_stanje { get; set; } = 0;
+        public bool Knjizen { get; set; } = false;
 
         public List<IzvodPromet> Promet = new List<IzvodPromet>();
 

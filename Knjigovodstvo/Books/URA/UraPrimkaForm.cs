@@ -17,9 +17,6 @@ namespace Knjigovodstvo.URA
     {
         public UraPrimkaForm()
         {
-            _columns.Add(0, "Datum_knjizenja");
-            _columns.Add(1, "Naziv_dobavljaca");
-            _columns.Add(2, "Broj_racuna");
             InitializeComponent();
             DataTable dt = new DbDataCustomQuery()
                 .ExecuteQuery("SELECT TOP 1 Broj_u_knjizi_ura FROM Primka WHERE Redni_broj IS NOT NULL ORDER BY Broj_u_knjizi_ura DESC;");
@@ -135,6 +132,5 @@ namespace Knjigovodstvo.URA
         private string put = "";
         private List<Primka> _listaPrimki = new List<Primka>();
         private readonly int _lastRecord = 0;
-        private readonly Dictionary<int, string> _columns=new Dictionary<int, string>();
     }
 }

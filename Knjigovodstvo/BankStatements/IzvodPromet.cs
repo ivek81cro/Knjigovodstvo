@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Interface;
+﻿using Knjigovodstvo.Database;
+using Knjigovodstvo.Interface;
 
 namespace Knjigovodstvo.BankStatements
 {
@@ -7,6 +8,11 @@ namespace Knjigovodstvo.BankStatements
         public FormError ValidateData()
         {
             throw new System.NotImplementedException();
+        }
+
+        internal void InsertData()
+        {
+            new DbDataInsert().InsertData(this);
         }
 
         public int Id { get; set; } = 0;

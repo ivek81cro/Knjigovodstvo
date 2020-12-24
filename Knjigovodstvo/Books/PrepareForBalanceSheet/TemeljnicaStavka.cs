@@ -1,7 +1,9 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 
 namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 {
@@ -12,17 +14,36 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             throw new NotImplementedException();
         }
 
-        public void SaveToDatabase()
+        public void SaveToDatabase(List<TemeljnicaStavka> stavke)
         {
-            new DbDataInsert().InsertData(this);
+            foreach(var stavka in stavke)
+                new DbDataInsert().InsertData(stavka);
         }
 
-        public bool CheckIfExistsInDatabase() 
+        public bool CheckIfExistsInDatabase()
         {
-            DataTable dt = new DbDataGet().GetTable(this, $"Dokument='{Dokument}' AND Broj={Broj} AND Konto='{Konto}'");
+            DataTable dt = new DbDataGet().GetTable(this, $"Dokument='{Dokument}' AND Broj={Broj}");
+            _stavke = new List<TemeljnicaStavka>();
             if (dt.Rows.Count > 0)
             {
-                Id= int.Parse(dt.Rows[0]["Id"].ToString());
+                foreach(DataRow row in dt.Rows)
+                {
+                    _stavke.Add(new TemeljnicaStavka()
+                    {
+                        Id = int.Parse(row["Id"].ToString()),
+                        Opis = row["Opis"].ToString(),
+                        Dokument = row["Dokument"].ToString(),
+                        Broj = int.Parse(row["Broj"].ToString()),
+                        Konto = row["Konto"].ToString(),
+                        Datum = DateTime.ParseExact(row["Datum"].ToString().Split(' ')[0], "dd.MM.yyyy", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"),
+                        Valuta = row["Valuta"].ToString(),
+                        Duguje1 = decimal.Parse(row["Duguje1"].ToString()),
+                        Potrazuje1 = decimal.Parse(row["Potrazuje1"].ToString()),
+                        Duguje2 = decimal.Parse(row["Duguje2"].ToString()),
+                        Potrazuje2 = decimal.Parse(row["Potrazuje2"].ToString()),
+                        Broj_temeljnice = int.Parse(row["Broj_temeljnice"].ToString())
+                    });
+                }
                 return true;
             }
             return false;
@@ -30,8 +51,13 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         public void UpdateStavka()
         {
-            new DbDataUpdate().UpdateData(this);
+            foreach(var stavka in _stavke)
+            {
+                new DbDataUpdate().UpdateData(stavka);
+            }
         }
+
+        private List<TemeljnicaStavka> _stavke;
 
         public int Id { get; set; } = 0;
         public string Opis { get; set; } = "";

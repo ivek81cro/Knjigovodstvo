@@ -1,6 +1,4 @@
-﻿using Knjigovodstvo.Database;
-using Knjigovodstvo.Partners;
-using System;
+﻿using Knjigovodstvo.Partners;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,18 +11,18 @@ namespace Knjigovodstvo.BankStatements
     {
         public IzvodiPojedinacniForm(Izvod izvodKnjiga)
         {
-            _izvodKnjiga = izvodKnjiga;
+            _izvod = izvodKnjiga;
             InitializeComponent();
             FillData();
         }
 
         private void FillData()
         {
-            labelDatumIzvoda.Text = "Datum izvoda: " + _izvodKnjiga.Datum_izvoda;
-            labelRedniBroj.Text = "Redni broj: " + _izvodKnjiga.Redni_broj.ToString();
-            labelStanjeZavrsno.Text = "Stanje završno: " + _izvodKnjiga.Novo_stanje.ToString() + " HRK";
+            labelDatumIzvoda.Text = "Datum izvoda: " + _izvod.Datum_izvoda;
+            labelRedniBroj.Text = "Redni broj: " + _izvod.Redni_broj.ToString();
+            labelStanjeZavrsno.Text = "Stanje završno: " + _izvod.Novo_stanje.ToString() + " HRK";
 
-            var bindingList = new BindingList<IzvodPromet>(_izvodKnjiga.Promet);
+            var bindingList = new BindingList<IzvodPromet>(_izvod.Promet);
             var dSource = new BindingSource(bindingList, null);
             dataGridView1.DataSource = dSource;
 
@@ -58,21 +56,21 @@ namespace Knjigovodstvo.BankStatements
 
         private void ButtonSpremi_Click(object sender, System.EventArgs e)
         {
-            if (new DbDataInsert().InsertData(_izvodKnjiga))
+            if (_izvod.InsertData())
             {
-                _izvodKnjiga.GetCurrentId();
+                _izvod.GetCurrentId();
             }
 
-            if(_izvodKnjiga.Id != 0)
+            if(_izvod.Id != 0)
             {
-                foreach( var promet in _izvodKnjiga.Promet)
+                foreach( var promet in _izvod.Promet)
                 {
-                    promet.Id_izvod = _izvodKnjiga.Id;
-                    new DbDataInsert().InsertData(promet);
+                    promet.Id_izvod = _izvod.Id;
+                    promet.InsertData();
                 }
             }
 
-            this.Close();
+            Close();
         }
 
         private void ButtonUpariKonto_Click(object sender, System.EventArgs e)
@@ -91,7 +89,7 @@ namespace Knjigovodstvo.BankStatements
 
                 if (!p.ExistsInDb())
                 {
-                    p.SaveToDatabase();
+                    p.InsertData();
                     Partneri partner = new Partneri();
                     partner.OpciPodaci.Id = form.IdPartner;
                     partner.GetPartnerById();
@@ -105,6 +103,6 @@ namespace Knjigovodstvo.BankStatements
             }
         }
         
-        private readonly Izvod _izvodKnjiga;
+        private readonly Izvod _izvod;
     }
 }

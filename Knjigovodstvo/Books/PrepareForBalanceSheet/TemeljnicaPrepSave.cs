@@ -18,7 +18,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 {
                     _temeljnicaStavka.Add(new TemeljnicaStavka()
                     {
-                        Opis = row["Opis knjiženja"].ToString() + 
+                        Opis = row["Opis knjiženja"].ToString() +
                         " - " + row["Opis stavke"].ToString(),
                         Dokument = _postavkeKnjizenja.ElementAt(0).Knjiga,
                         Broj = int.Parse(row["Redni broj"].ToString()),
@@ -39,24 +39,20 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         public void SaveToDatabase()
         {
+            //TODO: If doing update, check is number of rows equal as original collection of _temeljnicaStavka items
+            TemeljnicaStavka stavka = _temeljnicaStavka.ElementAt(0);
             if (_temeljnicaStavka.Count > 0)
             {
-                foreach (var stavka in _temeljnicaStavka)
-                {
-                    if (!stavka.CheckIfExistsInDatabase() && !_updateConfirmed)
-                        stavka.SaveToDatabase();
-                    else if(_updateConfirmed)
-                        stavka.UpdateStavka();
+                    if (!stavka.CheckIfExistsInDatabase())
+                        stavka.SaveToDatabase(_temeljnicaStavka);
                     else 
                     {
                         if(MessageBox.Show("Podatak već postoji na temeljnici, radi li se o ispravci?"
                             , "Neispravan konto", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            _updateConfirmed = true;
                             stavka.UpdateStavka();
                         }
-                    }
-                }
+                    }                
             }
             else
             {
@@ -71,7 +67,6 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             return true;
         }
 
-        private bool _updateConfirmed = false;
         private readonly List<TemeljnicaStavka> _temeljnicaStavka = new List<TemeljnicaStavka>();
     }
 }

@@ -75,13 +75,15 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private void LoadValuesDebitAndCreditIzvod()
         {
+            _dt.Rows[0]["Potražna"] = ((Izvod)_obj).Suma_dugovna.ToString();
+            _dt.Rows[0]["Dugovna"] = ((Izvod)_obj).Suma_potrazna.ToString();
             var prometi = ((Izvod)_obj).Promet;
-            for (int i = 0; i< prometi.Count; i++) 
+            for (int i = 1; i <= prometi.Count; i++)
             {
-                _dt.Rows[i]["Dugovna"] = _dt.Rows[i]["Dugovna"].ToString() == "True" ? prometi[i].Dugovna : 0;
-                _dt.Rows[i]["Potražna"] = _dt.Rows[i]["Potražna"].ToString() == "True" ? prometi[i].Potrazna : 0;
+                _dt.Rows[i]["Dugovna"] = _dt.Rows[i]["Dugovna"].ToString() == "True" ? prometi[i - 1].Dugovna : 0;
+                _dt.Rows[i]["Potražna"] = _dt.Rows[i]["Potražna"].ToString() == "True" ? prometi[i - 1].Potrazna : 0;
             }
-            //TODO: Povezivanje konta sa nazivom partnera na izvodu
+            CheckEndBalance();
         }
 
         private void FindPartnerKontoNumber()

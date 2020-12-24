@@ -73,14 +73,24 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         internal void PrepareDataIzvod(DataTable dt, IDbObject obj)
         {
             Izvod izvod = (Izvod)obj;
+            dt.Rows.Add(
+                izvod.Redni_broj,
+                "Žiro račun",
+                "Izvod broj " + izvod.Redni_broj,
+                "1000",
+                izvod.Datum_izvoda.Split(' ')[0],
+                true,
+                true,
+                false
+                );
             foreach(var stavka in izvod.Promet)
             {
                 dt.Rows.Add(
                     izvod.Redni_broj,
                     stavka.Naziv,
                     stavka.Opis,
-                    "",
-                    izvod.Datum_izvoda,
+                    stavka.Konto,
+                    izvod.Datum_izvoda.Split(' ')[0],
                     stavka.Oznaka == "D",
                     stavka.Oznaka == "P",
                     false
