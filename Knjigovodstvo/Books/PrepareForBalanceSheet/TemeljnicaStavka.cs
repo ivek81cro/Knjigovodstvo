@@ -3,7 +3,6 @@ using Knjigovodstvo.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Globalization;
 
 namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 {
@@ -20,28 +19,28 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 new DbDataInsert().InsertData(stavka);
         }
 
-        public bool CheckIfExistsInDatabase()
+        public bool CheckIfExistsInDatabase(List<TemeljnicaStavka> _temeljnicaStavka)
         {
             DataTable dt = new DbDataGet().GetTable(this, $"Dokument='{Dokument}' AND Broj={Broj}");
             _stavke = new List<TemeljnicaStavka>();
             if (dt.Rows.Count > 0)
             {
-                foreach(DataRow row in dt.Rows)
+                for(int i =0; i<_temeljnicaStavka.Count; i++)
                 {
                     _stavke.Add(new TemeljnicaStavka()
                     {
-                        Id = int.Parse(row["Id"].ToString()),
-                        Opis = row["Opis"].ToString(),
-                        Dokument = row["Dokument"].ToString(),
-                        Broj = int.Parse(row["Broj"].ToString()),
-                        Konto = row["Konto"].ToString(),
-                        Datum = DateTime.ParseExact(row["Datum"].ToString().Split(' ')[0], "dd.MM.yyyy", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"),
-                        Valuta = row["Valuta"].ToString(),
-                        Duguje1 = decimal.Parse(row["Duguje1"].ToString()),
-                        Potrazuje1 = decimal.Parse(row["Potrazuje1"].ToString()),
-                        Duguje2 = decimal.Parse(row["Duguje2"].ToString()),
-                        Potrazuje2 = decimal.Parse(row["Potrazuje2"].ToString()),
-                        Broj_temeljnice = int.Parse(row["Broj_temeljnice"].ToString())
+                        Id = int.Parse(dt.Rows[i]["Id"].ToString()),
+                        Opis = _temeljnicaStavka[i].Opis,
+                        Dokument = _temeljnicaStavka[i].Dokument,
+                        Broj = _temeljnicaStavka[i].Broj,
+                        Konto = _temeljnicaStavka[i].Konto,
+                        Datum = _temeljnicaStavka[i].Datum,
+                        Valuta = _temeljnicaStavka[i].Valuta,
+                        Duguje1 = _temeljnicaStavka[i].Duguje1,
+                        Potrazuje1 = _temeljnicaStavka[i].Potrazuje1,
+                        Duguje2 = _temeljnicaStavka[i].Duguje2,
+                        Potrazuje2 = _temeljnicaStavka[i].Potrazuje2,
+                        Broj_temeljnice = _temeljnicaStavka[i].Broj_temeljnice
                     });
                 }
                 return true;

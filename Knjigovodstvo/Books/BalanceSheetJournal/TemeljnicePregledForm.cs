@@ -34,7 +34,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
         private void ComboBoxVrstaTemeljnice_SelectionChangeCommitted(object sender, EventArgs e)
         {
             string selected = comboBoxVrstaTemeljnice.SelectedItem.ToString();
-            string condition = $"Dokument = '{selected}' AND Broj_temeljnice = 0";
+            string condition = $"Dokument = '{selected}' AND Broj_temeljnice = 0 ORDER BY Broj ASC, Id ASC";
             if (selected == "Place")
             {
                 condition = $"(Dokument = '{selected}' OR Dokument='Dodaci') AND Broj_temeljnice = 0";

@@ -22,9 +22,10 @@ namespace Knjigovodstvo.BankStatements
             labelRedniBroj.Text = "Redni broj: " + _izvod.Redni_broj.ToString();
             labelStanjeZavrsno.Text = "Stanje završno: " + _izvod.Novo_stanje.ToString() + " HRK";
 
-            var bindingList = new BindingList<IzvodPromet>(_izvod.Promet);
-            var dSource = new BindingSource(bindingList, null);
-            dataGridView1.DataSource = dSource;
+            _bindingList = new BindingList<IzvodPromet>(_izvod.Promet);
+            _dSource = new BindingSource(_bindingList, null);
+
+            dataGridView1.DataSource = _dSource;
 
             dataGridView1.Columns["Id"].Visible = false;
             dataGridView1.Columns["Id_izvod"].Visible = false;
@@ -87,13 +88,13 @@ namespace Knjigovodstvo.BankStatements
                     Id_Partner = form.IdPartner
                 };
 
-                if (!p.ExistsInDb())
+                if (!p.ExistsInDb() && p.Id_Partner != 0)
                 {
                     p.InsertData();
                     Partneri partner = new Partneri();
                     partner.OpciPodaci.Id = form.IdPartner;
                     partner.GetPartnerById();
-                    row.Cells["Konto"].Value = row.Cells["Duguje"]
+                    row.Cells["Konto"].Value = row.Cells["Dugovna"]
                         .Value.ToString() == "0" ? partner.KontoK : partner.KontoD;
                 }
                 else
@@ -104,5 +105,7 @@ namespace Knjigovodstvo.BankStatements
         }
         
         private readonly Izvod _izvod;
+        BindingSource _dSource = new BindingSource();
+        BindingList<IzvodPromet> _bindingList;
     }
 }

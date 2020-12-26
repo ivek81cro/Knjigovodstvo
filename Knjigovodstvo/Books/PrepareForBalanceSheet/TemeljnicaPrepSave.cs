@@ -39,11 +39,10 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         public void SaveToDatabase()
         {
-            //TODO: If doing update, check is number of rows equal as original collection of _temeljnicaStavka items
             TemeljnicaStavka stavka = _temeljnicaStavka.ElementAt(0);
             if (_temeljnicaStavka.Count > 0)
             {
-                    if (!stavka.CheckIfExistsInDatabase())
+                    if (!stavka.CheckIfExistsInDatabase(_temeljnicaStavka))
                         stavka.SaveToDatabase(_temeljnicaStavka);
                     else 
                     {
