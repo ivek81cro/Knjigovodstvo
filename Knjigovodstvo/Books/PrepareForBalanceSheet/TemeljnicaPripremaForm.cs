@@ -5,10 +5,8 @@ using Knjigovodstvo.Interface;
 using Knjigovodstvo.Partners;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.Validators;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -22,6 +20,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             _obj = obj;
             string model = obj.GetType().Name;
             InitializeComponent();
+            _labelList = new List<Label>() { labelDugovna, labelPotrazna };
             _dt = new DataTable()
             {
                 Columns = { "Redni broj", "Opis stavke", "Opis knjiženja", "Konto", "Datum dokumenta", "Dugovna", "Potražna", "Mijenja predznak" }
@@ -83,7 +82,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 _dt.Rows[i]["Dugovna"] = _dt.Rows[i]["Dugovna"].ToString() == "True" ? prometi[i - 1].Dugovna : 0;
                 _dt.Rows[i]["Potražna"] = _dt.Rows[i]["Potražna"].ToString() == "True" ? prometi[i - 1].Potrazna : 0;
             }
-            CheckEndBalance();
+            _checkBalance.CheckEndBalance(_dt, _labelList);
         }
 
         private void FindPartnerKontoNumber()
@@ -103,32 +102,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             }
             foreach (DataRow row in _dt.Rows)
             {
-                string kljuc = row["Opis stavke"].ToString();
-                string value;
-                if (row["Dugovna"].ToString() == "True")
-                {
-                    if (iznosi.TryGetValue(kljuc, out value))
-                        row["Dugovna"] = 
-                            row["Mijenja predznak"].ToString() == "True"?decimal.Parse(value) * -1: decimal.Parse(value);
-                }
-                else
-                {
-                    row["Dugovna"] = "0,00";
-                }
-
-                if (row["Potražna"].ToString() == "True")
-                {
-                    if (iznosi.TryGetValue($"{kljuc}", out value))
-                        row["Potražna"] = 
-                            row["Mijenja predznak"].ToString() == "True" ? decimal.Parse(value) * -1 : decimal.Parse(value);
-                }
-                else
-                {
-                    row["Potražna"] = "0,00";
-                }
-
-                row["Opis stavke"] = new TableHeaderFormat().FormatHeader(row["Opis stavke"].ToString());
-                CheckEndBalance();
+                ExtractValues(iznosi, row);
             }
             //Remove rows with both sides 0,00
             for (int i = 0; i < _dt.Rows.Count; i++)
@@ -142,32 +116,37 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             }
         }
 
-        private void CheckEndBalance()
+        private void ExtractValues(Dictionary<string, string> iznosi, DataRow row)
         {
-            _dugovna = 0;
-            _potrazna = 0;
-            var validate = new DecimalValidate();
-            foreach (DataRow row in _dt.Rows)
+            string kljuc = row["Opis stavke"].ToString();
+            string value;
+            if (row["Dugovna"].ToString() == "True")
             {
-                if (validate.Check(row["Dugovna"].ToString()))
-                    _dugovna += decimal.Parse(row["Dugovna"].ToString());
-                if (validate.Check(row["Potražna"].ToString()))
-                    _potrazna += decimal.Parse(row["Potražna"].ToString());
-            }
-
-            labelDugovna.Text = "Dugovna: " + _dugovna.ToString();
-            labelPotrazna.Text = "Potražna: " + _potrazna.ToString();
-            if (_dugovna == _potrazna)
-            {
-                labelDugovna.ForeColor = Color.Green;
-                labelPotrazna.ForeColor = Color.Green;
+                if (iznosi.TryGetValue(kljuc, out value))
+                    row["Dugovna"] =
+                        row["Mijenja predznak"].ToString() == "True" ?
+                        decimal.Parse(value) * -1 : decimal.Parse(value);
             }
             else
             {
-                labelDugovna.ForeColor = Color.Red;
-                labelPotrazna.ForeColor = Color.Red;
+                row["Dugovna"] = "0,00";
             }
-        }
+
+            if (row["Potražna"].ToString() == "True")
+            {
+                if (iznosi.TryGetValue($"{kljuc}", out value))
+                    row["Potražna"] =
+                        row["Mijenja predznak"].ToString() == "True" ?
+                        decimal.Parse(value) * -1 : decimal.Parse(value);
+            }
+            else
+            {
+                row["Potražna"] = "0,00";
+            }
+
+            row["Opis stavke"] = new TableHeaderFormat().FormatHeader(row["Opis stavke"].ToString());
+            _checkBalance.CheckEndBalance(_dt, _labelList);
+        }        
 
         private void DbDataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -190,20 +169,20 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     || !validate.Check(row.Cells["Dugovna"].Value.ToString()))
                     MessageBox.Show("Vrijednosti u poljima iznosa nisu u odgovarajućem formatu(0,00)", "Upozorenja");
             }
-            CheckEndBalance();
+            _checkBalance.CheckEndBalance(_dt, _labelList);
         }
 
         private void ButtonBrisiRed_Click(object sender, System.EventArgs e)
         {
             if(dbDataGridView1.SelectedCells.Count > 0)
                 dbDataGridView1.Rows.RemoveAt(dbDataGridView1.SelectedCells[0].RowIndex);
-            CheckEndBalance();
+            _checkBalance.CheckEndBalance(_dt, _labelList);
         }
 
         private void ButtonDodajRed_Click(object sender, System.EventArgs e)
         {
             _dt.Rows.Add();
-            CheckEndBalance();
+            _checkBalance.CheckEndBalance(_dt, _labelList);
         }
 
         private void ButtonKnjizi_Click(object sender, System.EventArgs e)
@@ -218,7 +197,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         private readonly IDbObject _obj;
         private readonly List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly DataTable _dt;
-        private decimal _potrazna = 0;
-        private decimal _dugovna = 0;
+        private List<Label> _labelList;
+        private readonly CheckBalance _checkBalance = new CheckBalance();
     }       
 }

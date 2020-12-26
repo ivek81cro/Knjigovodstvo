@@ -129,6 +129,14 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
 
         #endregion
 
+        private void CustomiseDataGridView()
+        {
+            dbDataGridView1.DataSource = _dt;
+            dbDataGridView1.Columns.RemoveAt(0);
+            dbDataGridView1.Columns.RemoveAt(dbDataGridView1.Columns.Count - 1);
+            dbDataGridView1.Columns[0].ReadOnly = true;
+        }
+
         private DBDataGridView dbDataGridView1;
         private System.Windows.Forms.ComboBox comboBoxVrstaTemeljnice;
         private System.Windows.Forms.Label labelVrsta;

@@ -3,8 +3,8 @@ using Knjigovodstvo.Database;
 using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Settings.SettingsBookkeeping;
 using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -15,6 +15,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
         public TemeljnicePregledForm()
         {
             InitializeComponent();
+            _labelList = new List<Label>() { labelDuguje, labelPotrazuje };
             FillVrstaTemeljniceCombo();
         }
 
@@ -41,51 +42,16 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             }
             _dt = new DbDataGet().GetTable(new TemeljnicaStavka(), condition);
             LoadDataView();
-            CheckEndBalance();
+            _checkBalance.CheckEndBalance(_dt, _labelList);
         }
 
         private void LoadDataView()
         {
-            dbDataGridView1.DataSource = _dt;
-            dbDataGridView1.Columns.RemoveAt(0);
-            dbDataGridView1.Columns.RemoveAt(dbDataGridView1.Columns.Count - 1);
-            dbDataGridView1.Columns[0].ReadOnly = true;
+            CustomiseDataGridView();
 
             foreach (DataGridViewColumn col in dbDataGridView1.Columns)
             {
                 col.HeaderText = Regex.Replace(col.HeaderText, @"[\d-_]", " ");
-            }
-        }
-
-        private void CheckEndBalance()
-        {
-            decimal duguje = 0;
-            decimal potrazuje = 0;
-            foreach (DataRow row in _dt.Rows)
-            {
-                if (decimal.TryParse(row["Duguje2"].ToString(), out decimal temp))
-                {
-                    duguje += temp;
-                    temp = 0;
-                }
-                if (decimal.TryParse(row["Potrazuje2"].ToString(), out temp))
-                {
-                    potrazuje += temp;
-                    temp = 0;
-                }
-            }
-            labelPotrazuje.Text = "Potrazuje: " + potrazuje.ToString();
-            labelDuguje.Text = "Duguje: " + duguje.ToString();
-
-            if(potrazuje != duguje) 
-            {
-                labelPotrazuje.ForeColor = Color.Red;
-                labelDuguje.ForeColor = Color.Red;
-            }
-            else
-            {
-                labelPotrazuje.ForeColor = Color.Green;
-                labelDuguje.ForeColor = Color.Green;
             }
         }
 
@@ -111,9 +77,11 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
         private void ButtonDodajRed_Click(object sender, EventArgs e)
         {
             _dt.Rows.Add();
-            CheckEndBalance();
+            _checkBalance.CheckEndBalance(_dt, _labelList);
         }
 
         private DataTable _dt = new DataTable();
+        private List<Label> _labelList;
+        private readonly CheckBalance _checkBalance = new CheckBalance();
     }
 }

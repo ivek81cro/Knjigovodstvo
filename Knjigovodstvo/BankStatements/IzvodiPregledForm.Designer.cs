@@ -35,6 +35,8 @@ namespace Knjigovodstvo.BankStatements
             this.buttonOpenIzvod = new System.Windows.Forms.Button();
             this.buttonDeleteIzvod = new System.Windows.Forms.Button();
             this.buttonKnjizi = new System.Windows.Forms.Button();
+            this.labelPortazuje = new System.Windows.Forms.Label();
+            this.labelDuguje = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStavke)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIzvodi)).BeginInit();
             this.SuspendLayout();
@@ -112,11 +114,37 @@ namespace Knjigovodstvo.BankStatements
             this.buttonKnjizi.UseVisualStyleBackColor = true;
             this.buttonKnjizi.Click += new System.EventHandler(this.ButtonKnjizi_Click);
             // 
+            // labelPortazuje
+            // 
+            this.labelPortazuje.AutoSize = true;
+            this.labelPortazuje.BackColor = System.Drawing.SystemColors.Control;
+            this.labelPortazuje.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelPortazuje.ForeColor = System.Drawing.Color.ForestGreen;
+            this.labelPortazuje.Location = new System.Drawing.Point(629, 115);
+            this.labelPortazuje.Name = "labelPortazuje";
+            this.labelPortazuje.Size = new System.Drawing.Size(77, 21);
+            this.labelPortazuje.TabIndex = 17;
+            this.labelPortazuje.Text = "Potražuje:";
+            // 
+            // labelDuguje
+            // 
+            this.labelDuguje.AutoSize = true;
+            this.labelDuguje.BackColor = System.Drawing.SystemColors.Control;
+            this.labelDuguje.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelDuguje.ForeColor = System.Drawing.Color.ForestGreen;
+            this.labelDuguje.Location = new System.Drawing.Point(440, 115);
+            this.labelDuguje.Name = "labelDuguje";
+            this.labelDuguje.Size = new System.Drawing.Size(63, 21);
+            this.labelDuguje.TabIndex = 16;
+            this.labelDuguje.Text = "Duguje:";
+            // 
             // IzvodiPregledForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 633);
+            this.Controls.Add(this.labelPortazuje);
+            this.Controls.Add(this.labelDuguje);
             this.Controls.Add(this.buttonKnjizi);
             this.Controls.Add(this.buttonDeleteIzvod);
             this.Controls.Add(this.buttonOpenIzvod);
@@ -128,10 +156,24 @@ namespace Knjigovodstvo.BankStatements
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStavke)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIzvodi)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private void CustomiseColumnWidthIzvodi()
+        {
+            dataGridViewIzvodi.RowHeadersVisible = false;
+            dataGridViewIzvodi.Columns[0].Width = (int)(dataGridViewIzvodi.Width * 0.4);
+            dataGridViewIzvodi.Columns[1].Width = (int)(dataGridViewIzvodi.Width * 0.4);
+            dataGridViewIzvodi.Columns[2].Width = (int)(dataGridViewIzvodi.Width * 0.2);
+        }
+        private void CustomiseColumnWidthDetalji()
+        {
+            dataGridViewStavke.Columns[0].Width = (int)(dataGridViewStavke.Width * 0.3);
+            dataGridViewStavke.Columns[1].Width = (int)(dataGridViewStavke.Width * 0.3);
+        }
 
         private System.Windows.Forms.DataGridView dataGridViewStavke;
         private System.Windows.Forms.Button buttonUcitajIzvod;
@@ -139,5 +181,7 @@ namespace Knjigovodstvo.BankStatements
         private System.Windows.Forms.Button buttonOpenIzvod;
         private System.Windows.Forms.Button buttonDeleteIzvod;
         private System.Windows.Forms.Button buttonKnjizi;
+        private System.Windows.Forms.Label labelPortazuje;
+        private System.Windows.Forms.Label labelDuguje;
     }
 }

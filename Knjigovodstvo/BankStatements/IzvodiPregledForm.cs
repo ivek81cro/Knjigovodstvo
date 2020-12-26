@@ -28,15 +28,12 @@ namespace Knjigovodstvo.BankStatements
             DataTable dt = new DbDataGet().GetTable(_izvod);
             dataGridViewIzvodi.DataSource = new DataView(dt).ToTable(false, "Redni_broj", "Datum_izvoda", "Knjizen");
             dataGridViewIzvodi.Sort(this.dataGridViewIzvodi.Columns["Redni_broj"], ListSortDirection.Descending);
-            for (int i = 0; i< dataGridViewIzvodi.Columns.Count; i++)
+            for (int i = 0; i < dataGridViewIzvodi.Columns.Count; i++)
             {
                 dataGridViewIzvodi.Columns[i].HeaderText =
                     new TableHeaderFormat().FormatHeader(dataGridViewIzvodi.Columns[i].HeaderText);
             }
-            dataGridViewIzvodi.RowHeadersVisible = false;
-            dataGridViewIzvodi.Columns[0].Width = (int)(dataGridViewIzvodi.Width * 0.4);
-            dataGridViewIzvodi.Columns[1].Width = (int)(dataGridViewIzvodi.Width * 0.4);
-            dataGridViewIzvodi.Columns[2].Width = (int)(dataGridViewIzvodi.Width * 0.2);
+            CustomiseColumnWidthIzvodi();
         }
 
         private void DeserializeIzvodXml()
@@ -107,9 +104,7 @@ namespace Knjigovodstvo.BankStatements
                 _izvod.GetIzvodByRedniBroj(redniBroj);
 
                 dataGridViewStavke.DataSource = _izvod.GetPrometData();
-
-                dataGridViewStavke.Columns[0].Width = (int)(dataGridViewStavke.Width * 0.3);
-                dataGridViewStavke.Columns[1].Width = (int)(dataGridViewStavke.Width * 0.3);
+                CustomiseColumnWidthDetalji();
             }
         }
 
@@ -144,6 +139,8 @@ namespace Knjigovodstvo.BankStatements
         private void ButtonDeleteIzvod_Click(object sender, EventArgs e)
         {
             new DbDataDelete().DeleteItem(_izvod);
+            dataGridViewStavke.DataSource = null;
+            dataGridViewStavke.Rows.Clear();
             LoadExistingIzvodi();
         }
 
