@@ -57,6 +57,21 @@ namespace Knjigovodstvo.BankStatements
 
         private void ButtonSpremi_Click(object sender, System.EventArgs e)
         {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.Cells["Konto"].Value.ToString() == "")
+                {
+                    MessageBox.Show("Niste popunili sva polja 'Konto'","Upozorenje",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
+
+            if (_izvod.ExistsInDatabase())
+            {
+                MessageBox.Show("Izvod već postoji u bazi", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            
             if (_izvod.InsertData())
             {
                 _izvod.GetCurrentId();

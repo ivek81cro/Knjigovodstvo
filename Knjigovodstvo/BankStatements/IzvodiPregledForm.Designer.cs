@@ -37,8 +37,12 @@ namespace Knjigovodstvo.BankStatements
             this.buttonKnjizi = new System.Windows.Forms.Button();
             this.labelPortazuje = new System.Windows.Forms.Label();
             this.labelDuguje = new System.Windows.Forms.Label();
+            this.labelStanjePocetno = new System.Windows.Forms.Label();
+            this.labelStanjeZavrsno = new System.Windows.Forms.Label();
+            this.groupBoxStanje = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStavke)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIzvodi)).BeginInit();
+            this.groupBoxStanje.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridViewStavke
@@ -71,6 +75,8 @@ namespace Knjigovodstvo.BankStatements
             // 
             this.dataGridViewIzvodi.AllowUserToAddRows = false;
             this.dataGridViewIzvodi.AllowUserToDeleteRows = false;
+            this.dataGridViewIzvodi.AllowUserToResizeColumns = false;
+            this.dataGridViewIzvodi.AllowUserToResizeRows = false;
             this.dataGridViewIzvodi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridViewIzvodi.BackgroundColor = System.Drawing.SystemColors.Window;
@@ -117,10 +123,10 @@ namespace Knjigovodstvo.BankStatements
             // labelPortazuje
             // 
             this.labelPortazuje.AutoSize = true;
-            this.labelPortazuje.BackColor = System.Drawing.SystemColors.Control;
+            this.labelPortazuje.BackColor = System.Drawing.Color.AliceBlue;
             this.labelPortazuje.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelPortazuje.ForeColor = System.Drawing.Color.ForestGreen;
-            this.labelPortazuje.Location = new System.Drawing.Point(629, 115);
+            this.labelPortazuje.Location = new System.Drawing.Point(466, 67);
             this.labelPortazuje.Name = "labelPortazuje";
             this.labelPortazuje.Size = new System.Drawing.Size(77, 21);
             this.labelPortazuje.TabIndex = 17;
@@ -129,22 +135,58 @@ namespace Knjigovodstvo.BankStatements
             // labelDuguje
             // 
             this.labelDuguje.AutoSize = true;
-            this.labelDuguje.BackColor = System.Drawing.SystemColors.Control;
+            this.labelDuguje.BackColor = System.Drawing.Color.AliceBlue;
             this.labelDuguje.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelDuguje.ForeColor = System.Drawing.Color.ForestGreen;
-            this.labelDuguje.Location = new System.Drawing.Point(440, 115);
+            this.labelDuguje.Location = new System.Drawing.Point(277, 67);
             this.labelDuguje.Name = "labelDuguje";
             this.labelDuguje.Size = new System.Drawing.Size(63, 21);
             this.labelDuguje.TabIndex = 16;
             this.labelDuguje.Text = "Duguje:";
+            // 
+            // labelStanjePocetno
+            // 
+            this.labelStanjePocetno.AutoSize = true;
+            this.labelStanjePocetno.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelStanjePocetno.ForeColor = System.Drawing.Color.ForestGreen;
+            this.labelStanjePocetno.Location = new System.Drawing.Point(6, 37);
+            this.labelStanjePocetno.Name = "labelStanjePocetno";
+            this.labelStanjePocetno.Size = new System.Drawing.Size(113, 21);
+            this.labelStanjePocetno.TabIndex = 18;
+            this.labelStanjePocetno.Text = "Početno stanje:";
+            // 
+            // labelStanjeZavrsno
+            // 
+            this.labelStanjeZavrsno.AutoSize = true;
+            this.labelStanjeZavrsno.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelStanjeZavrsno.ForeColor = System.Drawing.Color.ForestGreen;
+            this.labelStanjeZavrsno.Location = new System.Drawing.Point(6, 67);
+            this.labelStanjeZavrsno.Name = "labelStanjeZavrsno";
+            this.labelStanjeZavrsno.Size = new System.Drawing.Size(114, 21);
+            this.labelStanjeZavrsno.TabIndex = 19;
+            this.labelStanjeZavrsno.Text = "Završno stanje:";
+            // 
+            // groupBoxStanje
+            // 
+            this.groupBoxStanje.BackColor = System.Drawing.Color.AliceBlue;
+            this.groupBoxStanje.Controls.Add(this.labelStanjePocetno);
+            this.groupBoxStanje.Controls.Add(this.labelPortazuje);
+            this.groupBoxStanje.Controls.Add(this.labelStanjeZavrsno);
+            this.groupBoxStanje.Controls.Add(this.labelDuguje);
+            this.groupBoxStanje.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.groupBoxStanje.Location = new System.Drawing.Point(181, 29);
+            this.groupBoxStanje.Name = "groupBoxStanje";
+            this.groupBoxStanje.Size = new System.Drawing.Size(690, 100);
+            this.groupBoxStanje.TabIndex = 20;
+            this.groupBoxStanje.TabStop = false;
+            this.groupBoxStanje.Text = "Stanje izvoda";
             // 
             // IzvodiPregledForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 633);
-            this.Controls.Add(this.labelPortazuje);
-            this.Controls.Add(this.labelDuguje);
+            this.Controls.Add(this.groupBoxStanje);
             this.Controls.Add(this.buttonKnjizi);
             this.Controls.Add(this.buttonDeleteIzvod);
             this.Controls.Add(this.buttonOpenIzvod);
@@ -155,8 +197,9 @@ namespace Knjigovodstvo.BankStatements
             this.Text = "IzvodiPregledForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStavke)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIzvodi)).EndInit();
+            this.groupBoxStanje.ResumeLayout(false);
+            this.groupBoxStanje.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -183,5 +226,8 @@ namespace Knjigovodstvo.BankStatements
         private System.Windows.Forms.Button buttonKnjizi;
         private System.Windows.Forms.Label labelPortazuje;
         private System.Windows.Forms.Label labelDuguje;
+        private System.Windows.Forms.Label labelStanjePocetno;
+        private System.Windows.Forms.Label labelStanjeZavrsno;
+        private System.Windows.Forms.GroupBox groupBoxStanje;
     }
 }

@@ -189,7 +189,10 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         {
             TemeljnicaPrepSave save = new TemeljnicaPrepSave();
             if (save.PrepareSave(_dt, _postavkeKnjizenja))
+            {
                 save.SaveToDatabase();
+                Knjizeno = true;
+            }
             Close();
         }
 
@@ -199,5 +202,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         private readonly DataTable _dt;
         private List<Label> _labelList;
         private readonly CheckBalance _checkBalance = new CheckBalance();
+
+        public bool Knjizeno { get; private set; } = false;
     }       
 }

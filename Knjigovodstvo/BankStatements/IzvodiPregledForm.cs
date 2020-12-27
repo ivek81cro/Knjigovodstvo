@@ -105,6 +105,10 @@ namespace Knjigovodstvo.BankStatements
 
                 dataGridViewStavke.DataSource = _izvod.GetPrometData();
                 CustomiseColumnWidthDetalji();
+                labelDuguje.Text = "Duguje: " + _izvod.Suma_dugovna.ToString();
+                labelPortazuje.Text = "Potražuje: " + _izvod.Suma_potrazna.ToString();
+                labelStanjePocetno.Text = "Početno stanje: " + _izvod.Stanje_prethodnog_izvoda.ToString();
+                labelStanjeZavrsno.Text = "Završno stanje: " + _izvod.Novo_stanje.ToString();
             }
         }
 
@@ -139,21 +143,31 @@ namespace Knjigovodstvo.BankStatements
         private void ButtonDeleteIzvod_Click(object sender, EventArgs e)
         {
             new DbDataDelete().DeleteItem(_izvod);
+            ClearDataGridView();
+            LoadExistingIzvodi();
+        }
+
+        private void ClearDataGridView()
+        {
             dataGridViewStavke.DataSource = null;
             dataGridViewStavke.Rows.Clear();
-            LoadExistingIzvodi();
         }
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
             var postavke = new List<PostavkeKnjizenja>();
             postavke.Add(new PostavkeKnjizenja() { Knjiga = BookNames.Izvodi.ToString() });
-            TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_izvod, postavke);
+            using TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_izvod, postavke);
             form.ShowDialog();
             //TODO implement check if saved to books before setting true
-            _izvod.Knjizen = true;
-            _izvod.UpdateData();
-            LoadExistingIzvodi();
+            if (form.Knjizeno)
+            {
+                _izvod.Knjizen = true;
+                _izvod.UpdateData();
+                LoadExistingIzvodi();
+                _izvod = new Izvod();
+                ClearDataGridView();
+            }
         }
 
         private IzvodiXml _izvodiXml = new IzvodiXml();

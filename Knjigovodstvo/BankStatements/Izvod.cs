@@ -101,6 +101,11 @@ namespace Knjigovodstvo.BankStatements
             new DbDataUpdate().UpdateData(this);
         }
 
+        public bool ExistsInDatabase()
+        {
+            return _dataGet.GetTable(this, $"Redni_broj={Redni_broj}").Rows.Count > 0;
+        }
+
         public int Id { get; set; } = 0;
         public int Redni_broj { get; set; } = 0;
         public string Datum_izvoda { get; set; } = "";
