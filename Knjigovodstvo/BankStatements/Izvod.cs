@@ -64,6 +64,11 @@ namespace Knjigovodstvo.BankStatements
             return new DbDataInsert().InsertData(this);
         }
 
+        internal bool DeleteIzvod()
+        {
+            return new DbDataDelete().DeleteItem(this);
+        }
+
         public DataTable GetPrometData()
         {
             DataTable dt = new DataTable()

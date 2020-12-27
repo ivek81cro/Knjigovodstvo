@@ -86,12 +86,7 @@ namespace Knjigovodstvo.BankStatements
         private void OpenIzvodPojedinacnoForm()
         {
             IzvodiPojedinacniForm form = new IzvodiPojedinacniForm(_izvod);
-            form.FormClosing += new FormClosingEventHandler(Izvod_FormClosing);
             form.ShowDialog();
-        }
-
-        private void Izvod_FormClosing(object sender, FormClosingEventArgs e)
-        {
             LoadExistingIzvodi();
         }
 
@@ -142,7 +137,11 @@ namespace Knjigovodstvo.BankStatements
 
         private void ButtonDeleteIzvod_Click(object sender, EventArgs e)
         {
-            new DbDataDelete().DeleteItem(_izvod);
+            if (_izvod.Knjizen && MessageBox.Show("Izvod je knjižen, želite li svejedno obrisati izvod?"
+                ,"Upozorenje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)==DialogResult.Yes)
+            {
+                _izvod.DeleteIzvod();
+            }
             ClearDataGridView();
             LoadExistingIzvodi();
         }
