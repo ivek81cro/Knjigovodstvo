@@ -26,10 +26,7 @@ namespace Knjigovodstvo.BankStatements
             _dSource = new BindingSource(_bindingList, null);
 
             dataGridView1.DataSource = _dSource;
-
-            dataGridView1.Columns["Id"].Visible = false;
-            dataGridView1.Columns["Id_izvod"].Visible = false;
-            dataGridView1.Columns["Oznaka"].Visible = false;
+            CustomiseColumns();
 
             FillKontoColumn();
         }
@@ -93,29 +90,27 @@ namespace Knjigovodstvo.BankStatements
         {
             DataGridViewRow row = dataGridView1.SelectedRows[0];
             string naziv = row.Cells["Naziv"].Value.ToString();
-            using (var form = new PartneriTableForm())
+            using var form = new PartneriTableForm();
+            form.OdabirPartnera();
+            form.ShowDialog();
+            IzvodParovi par = new IzvodParovi()
             {
-                form.OdabirPartnera();
-                form.ShowDialog();
-                IzvodParovi p = new IzvodParovi()
-                {
-                    Naziv_Izvod = naziv,
-                    Id_Partner = form.IdPartner
-                };
+                Naziv_Izvod = naziv,
+                Id_Partner = form.IdPartner
+            };
 
-                if (!p.ExistsInDb() && p.Id_Partner != 0)
-                {
-                    p.InsertData();
-                    Partneri partner = new Partneri();
-                    partner.OpciPodaci.Id = form.IdPartner;
-                    partner.GetPartnerById();
-                    row.Cells["Konto"].Value = row.Cells["Dugovna"]
-                        .Value.ToString() == "0" ? partner.KontoK : partner.KontoD;
-                }
-                else
-                {
-                    MessageBox.Show("Postoji već upareni konto.", "Informacija", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+            if (!par.ExistsInDb() && par.Id_Partner != 0)
+            {
+                par.InsertData();
+                Partneri partner = new Partneri();
+                partner.OpciPodaci.Id = par.Id_Partner;
+                partner.GetPartnerById();
+                row.Cells["Konto"].Value = row.Cells["Dugovna"]
+                    .Value.ToString() == "0" ? partner.KontoK : partner.KontoD;
+            }
+            else
+            {
+                MessageBox.Show("Postoji već upareni konto.", "Informacija", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         

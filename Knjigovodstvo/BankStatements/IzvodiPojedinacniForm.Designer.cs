@@ -124,6 +124,13 @@ namespace Knjigovodstvo.BankStatements
 
         #endregion
 
+        private void CustomiseColumns()
+        {
+            dataGridView1.Columns["Id"].Visible = false;
+            dataGridView1.Columns["Id_izvod"].Visible = false;
+            dataGridView1.Columns["Oznaka"].Visible = false;
+        }
+
         private System.Windows.Forms.Label labelDatumIzvoda;
         private System.Windows.Forms.Label labelRedniBroj;
         private System.Windows.Forms.Label labelStanjeZavrsno;

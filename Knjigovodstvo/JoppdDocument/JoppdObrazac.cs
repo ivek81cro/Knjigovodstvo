@@ -38,7 +38,7 @@ namespace Knjigovodstvo.JoppdDocument
                     P72 = (tOznakaInvaliditet)Enum.Parse(typeof(tOznakaInvaliditet), "Item" + e.Invaliditet),
                     P8 = (tOznakaMjesec)Enum.Parse(typeof(tOznakaMjesec), "Item" + e.Mjesec),
                     P9 = (tOznakaRadnoVrijeme)Enum.Parse(typeof(tOznakaRadnoVrijeme), "Item" + e.Vrijeme),
-                    P10 = e.IsPoslodavac()? int.Parse((Convert.ToDateTime(e.Datum_Do) - Convert.ToDateTime(e.Datum_Od)).Days.ToString()) + 1 : e.Sati,
+                    P10 = e.IsPoslodavac() ? int.Parse((Convert.ToDateTime(e.Datum_Do) - Convert.ToDateTime(e.Datum_Od)).Days.ToString()) + 1 : e.Sati,
                     P101 = Convert.ToDateTime(e.Datum_Od),
                     P102 = Convert.ToDateTime(e.Datum_Do),
                     P11 = e.Bruto,
@@ -61,7 +61,7 @@ namespace Knjigovodstvo.JoppdDocument
                     P151 = (tOznakaNeoporezivogPrimitka)Enum.Parse(typeof(tOznakaNeoporezivogPrimitka), e.Oznaka_Neoporezivog),
                     P152 = e.Iznos_Neoporezivog,
                     P161 = (tOznakaNacinaIsplate)Enum.Parse(typeof(tOznakaNacinaIsplate), e.Nacin_Isplate),
-                    P162 = e.Iznos_Isplate==0? e.Iznos_Neoporezivog: e.Iznos_Isplate+e.Iznos_Neoporezivog,
+                    P162 = e.Iznos_Isplate,
                     P17 = e.Primitak_Nesamostalni
                 });
             }
