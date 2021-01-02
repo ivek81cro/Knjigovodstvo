@@ -64,9 +64,8 @@ namespace Knjigovodstvo.URA
             }
         }
 
-        private void SetSelectedItem() 
+        private void SetSelectedItem(DataGridViewRow row) 
         {
-            var row = dataGridView1.SelectedRows[0];
             _uraKnjiga.Redni_broj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
             _uraKnjiga.GetDataFromDatabaseByRedniBroj();
         }
@@ -131,9 +130,16 @@ namespace Knjigovodstvo.URA
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            SetSelectedItem();
-            TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_uraKnjiga, _postavkeKnjizenja);
-            form.ShowDialog();
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                SetSelectedItem(row);
+                if (_uraKnjiga.Knjizen)
+                    continue;
+                TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_uraKnjiga, _postavkeKnjizenja);
+                form.ShowDialog();
+                if (!form.Knjizeno)
+                    break;
+            }
         }
 
         private BookNames _bookName;

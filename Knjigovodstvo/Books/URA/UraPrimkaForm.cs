@@ -132,6 +132,9 @@ namespace Knjigovodstvo.URA
                 form.ShowDialog();
                 if (!form.Knjizeno)
                     break;
+                else
+                    new DbDataCustomQuery()
+                        .ExecuteQuery($"UPDATE UraKnjiga SET Knjizen = 1 WHERE Redni_broj = {_primka.Broj_u_knjizi_ura}");
             }
         }
 
