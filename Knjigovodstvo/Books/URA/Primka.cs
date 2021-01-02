@@ -44,9 +44,9 @@ namespace Knjigovodstvo.URA
             return this;
         }
 
-        public void GetDataFromDatabaseByRedniBroj()
+        public void GetDataFromDatabaseByUraBroj()
         {
-            var row = new DbDataGet().GetTable(this, $"Redni_broj={Redni_broj}").Rows[0];
+            var row = new DbDataGet().GetTable(this, $"Broj_u_knjizi_ura={Broj_u_knjizi_ura}").Rows[0];
 
             Redni_broj = int.Parse(row["Redni_broj"].ToString());
             Datum_knjizenja = row["Datum_knjizenja"].ToString();

@@ -58,7 +58,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             foreach (var postavka in postavkeKnjizenja)
             {
                 dt.Rows.Add(
-                    knjiga.Redni_broj,
+                    knjiga.Broj_u_knjizi_ura,
                     postavka.Naziv_stupca,
                     knjiga.Naziv_dobavljaca + ":" + knjiga.Broj_racuna,
                     postavka.Konto,

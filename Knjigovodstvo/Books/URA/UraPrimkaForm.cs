@@ -17,8 +17,8 @@ namespace Knjigovodstvo.URA
     {
         public UraPrimkaForm()
         {
-            _columns.Add(0, "Datum");
-            _columns.Add(1, "Naziv_i_sjediste_kupca");
+            _columns.Add(0, "Datum_knjizenja");
+            _columns.Add(1, "Naziv_dobavljaca");
             _columns.Add(2, "Broj_racuna");
             InitializeComponent();
             DataTable dt = new DbDataCustomQuery()
@@ -35,7 +35,7 @@ namespace Knjigovodstvo.URA
 
         private void LoadDatagrid()
         {
-            dataGridView1.DataSource = new DbDataGet().GetTable(new Primka());
+            dataGridView1.DataSource = new DbDataGet().GetTable(_primka, $" Redni_broj <> 0 ORDER BY Redni_broj");
             FixColumnHeaders();
         }
 
@@ -65,11 +65,10 @@ namespace Knjigovodstvo.URA
             }
         }
 
-        private void SetSelectedItem()
+        private void SetSelectedItem(DataGridViewRow row)
         {
-            var row = dataGridView1.SelectedRows[0];
-            _primka.Redni_broj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
-            _primka.GetDataFromDatabaseByRedniBroj();
+            _primka.Broj_u_knjizi_ura = int.Parse(row.Cells["Broj_u_knjizi_ura"].Value.ToString());
+            _primka.GetDataFromDatabaseByUraBroj();
         }
         /// <summary>
         /// Read CSV file into List and fill DataGridView with data for review before saving to database
@@ -104,8 +103,10 @@ namespace Knjigovodstvo.URA
             DbDataInsert ins = new DbDataInsert();
             foreach (Primka primka in _listaPrimki)
             {
-                if (primka.Redni_broj > _lastRecord)
+                if (primka.Broj_u_knjizi_ura > _lastRecord)
                     ins.InsertData(primka);
+                else
+                    new DbDataUpdate().UpdateData(primka, $"Broj_u_knjizi_ura={primka.Broj_u_knjizi_ura}");
             }
             LoadDatagrid();
         }
@@ -124,9 +125,14 @@ namespace Knjigovodstvo.URA
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            SetSelectedItem();
-            TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_primka, _postavkeKnjizenja);
-            form.ShowDialog();
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                SetSelectedItem(row);
+                using TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_primka, _postavkeKnjizenja);
+                form.ShowDialog();
+                if (!form.Knjizeno)
+                    break;
+            }
         }
 
         private readonly Primka _primka = new Primka();

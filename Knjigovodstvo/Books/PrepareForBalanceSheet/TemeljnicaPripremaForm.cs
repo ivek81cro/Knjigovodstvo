@@ -192,8 +192,8 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             {
                 save.SaveToDatabase();
                 Knjizeno = true;
+                Close();
             }
-            Close();
         }
 
         private readonly Partneri _partner = new Partneri();

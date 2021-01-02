@@ -29,7 +29,7 @@ namespace Knjigovodstvo.BankStatements
                       {
                           Id = int.Parse(dr["Id"].ToString()),
                           Naziv_Izvod = dr["Naziv_Izvod"].ToString(),
-                          Id_Partner = int.Parse(dr["Id_Partner"].ToString())
+                          Id_Konto = int.Parse(dr["Id_Konto"].ToString())
                       }).ToList();
             return parovi;
         }
@@ -41,6 +41,6 @@ namespace Knjigovodstvo.BankStatements
 
         public int Id { get; set; } = 0;
         public string Naziv_Izvod { get; set; } = "";
-        public int Id_Partner { get; set; } = 0;
+        public int Id_Konto { get; set; } = 0;
     }
 }

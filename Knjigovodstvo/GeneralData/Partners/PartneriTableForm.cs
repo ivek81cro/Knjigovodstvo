@@ -24,6 +24,7 @@ namespace Knjigovodstvo.Partners
             btnEditPartner.Visible = false;
             btnDeletePartner.Visible = false;
             btnOdaberi.Visible = true;
+            ShowDialog();
         }
 
         private void TextBoxFilterPartner_TextChanged(object sender, EventArgs e)

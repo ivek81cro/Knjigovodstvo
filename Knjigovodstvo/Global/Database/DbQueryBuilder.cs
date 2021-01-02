@@ -144,8 +144,8 @@ namespace Knjigovodstvo.Database
         {
             string query = $"UPDATE {_table} ";
             query += "SET ";
-
-            for (int i = 1; i < _name.Count; ++i)
+            int i = _whereColumn == null ? 1 : 0;
+            for ( ; i < _name.Count; ++i)
             {
                 if (_type[i] == "Decimal")
                     query += _name[i] + "=" + _value[i].Replace(',', '.') + ", ";

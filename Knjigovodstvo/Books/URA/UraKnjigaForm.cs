@@ -18,7 +18,7 @@ namespace Knjigovodstvo.URA
         public UraKnjigaForm()
         {
             _columns.Add(0, "Datum");
-            _columns.Add(1, "Naziv_i_sjediste_kupca");
+            _columns.Add(1, "Naziv_dobavljaca");
             _columns.Add(2, "Broj_racuna");
             InitializeComponent();
             _dt = new DbDataCustomQuery()

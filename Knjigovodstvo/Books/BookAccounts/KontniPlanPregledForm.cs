@@ -53,6 +53,8 @@ namespace Knjigovodstvo.FinancialReports
             DataGridViewRow selectedRow = dbDataGridView1.SelectedRows[0];
             KontoBroj = selectedRow.Cells["Konto"].Value.ToString(); 
             Opis = selectedRow.Cells["Opis"].Value.ToString();
+            _kontniPlan.Konto = KontoBroj;
+            Id_Konto = _kontniPlan.GetIdByKontoNumber();
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)
@@ -62,6 +64,7 @@ namespace Knjigovodstvo.FinancialReports
         }
 
         private readonly KontniPlan _kontniPlan = new KontniPlan();
+        public int Id_Konto { get; private set; }
         public string KontoBroj { get; private set; }
         public string Opis { get; set; }
     }
