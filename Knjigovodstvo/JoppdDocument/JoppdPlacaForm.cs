@@ -116,7 +116,8 @@ namespace Knjigovodstvo.JoppdDocument
         /// </summary>
         private void FillDataForJoppdFile()
         {
-            string datumOd = dateTimePicker1.Value.Year.ToString() + '-' + (dateTimePicker1.Value.Month - 1).ToString();
+            string datumOd = dateTimePicker1.Value.AddMonths(-1).Year.ToString() + 
+                '-' + (dateTimePicker1.Value.AddMonths(-1).Month).ToString();
             datumOd = datumOd.Split('-')[1].Length < 2 ?datumOd.Split('-')[0] + "-0" + datumOd.Split('-')[1] : datumOd;
             _dt = new DbDataExecProcedure().GetTable(ProcedureNames.Joppd_podaci, $"@datumOd='{datumOd}', @dan='01'");
 

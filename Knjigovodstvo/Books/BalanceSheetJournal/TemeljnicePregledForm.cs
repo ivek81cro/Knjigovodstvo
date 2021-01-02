@@ -5,7 +5,6 @@ using Knjigovodstvo.Settings.SettingsBookkeeping;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Books.BalanceSheetJournal
@@ -48,11 +47,9 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
         private void LoadDataView()
         {
             CustomiseDataGridView();
-
-            foreach (DataGridViewColumn col in dbDataGridView1.Columns)
-            {
-                col.HeaderText = Regex.Replace(col.HeaderText, @"[\d-_]", " ");
-            }
+            _dt.Columns["Duguje"].ColumnName = "Dugovna";
+            _dt.Columns["Potrazuje"].ColumnName = "Potražna";
+            _dt.Columns.Remove("Id");
         }
 
         private void DbDataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

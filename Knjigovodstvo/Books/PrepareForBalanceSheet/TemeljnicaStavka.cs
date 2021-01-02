@@ -36,10 +36,8 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                         Konto = _temeljnicaStavka[i].Konto,
                         Datum = _temeljnicaStavka[i].Datum,
                         Valuta = _temeljnicaStavka[i].Valuta,
-                        Duguje1 = _temeljnicaStavka[i].Duguje1,
-                        Potrazuje1 = _temeljnicaStavka[i].Potrazuje1,
-                        Duguje2 = _temeljnicaStavka[i].Duguje2,
-                        Potrazuje2 = _temeljnicaStavka[i].Potrazuje2,
+                        Duguje = _temeljnicaStavka[i].Duguje,
+                        Potrazuje = _temeljnicaStavka[i].Potrazuje,
                         Broj_temeljnice = _temeljnicaStavka[i].Broj_temeljnice
                     });
                 }
@@ -65,10 +63,8 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         public string Konto { get; set; } = "";
         public string Datum { get; set; } = "";
         public string Valuta { get; set; } = "HRK";
-        public decimal Duguje1 { get; set; } = 0;
-        public decimal Potrazuje1 { get; set; } = 0;
-        public decimal Duguje2 { get; set; } = 0;
-        public decimal Potrazuje2 { get; set; } = 0;
+        public decimal Duguje { get; set; } = 0;
+        public decimal Potrazuje { get; set; } = 0;
         public int Broj_temeljnice { get; set; } = 0;
     }
 }
