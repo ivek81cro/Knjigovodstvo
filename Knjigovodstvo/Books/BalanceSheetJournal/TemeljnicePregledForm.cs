@@ -78,7 +78,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
         }
 
         private DataTable _dt = new DataTable();
-        private List<Label> _labelList;
+        private readonly List<Label> _labelList;
         private readonly CheckBalance _checkBalance = new CheckBalance();
     }
 }

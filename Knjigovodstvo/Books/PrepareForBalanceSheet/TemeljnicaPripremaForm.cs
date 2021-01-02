@@ -200,7 +200,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         private readonly IDbObject _obj;
         private readonly List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly DataTable _dt;
-        private List<Label> _labelList;
+        private readonly List<Label> _labelList;
         private readonly CheckBalance _checkBalance = new CheckBalance();
 
         public bool Knjizeno { get; private set; } = false;

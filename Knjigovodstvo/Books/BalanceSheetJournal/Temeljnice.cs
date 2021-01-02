@@ -11,8 +11,6 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             throw new System.NotImplementedException();
         }
 
-        private List<TemeljnicaStavka> _temeljnicaStavke = new List<TemeljnicaStavka>();
-
         public int Id { get; set; }
         public int Broj_temeljnice { get; set; }
         public string Vrsta_temeljnice { get; set; }
