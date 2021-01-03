@@ -62,7 +62,7 @@ namespace Knjigovodstvo.Global
             if (!csvData.Contains(_identifier))
                 return "";
 
-            return put;
+            return output;
         }
 
         private List<string> CreateCsvString(DataSet result, string put)

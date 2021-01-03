@@ -88,6 +88,18 @@ namespace Knjigovodstvo.URA
             dataGridView1.DataSource = data;
         }
 
+        private void SaveDataToDatabase()
+        {
+            DbDataInsert ins = new DbDataInsert();
+            foreach (Primka primka in _listaPrimki)
+            {
+                if (primka.Broj_u_knjizi_ura > _lastRecord)
+                    ins.InsertData(primka);
+                else
+                    new DbDataUpdate().UpdateData(primka, $"Broj_u_knjizi_ura={primka.Broj_u_knjizi_ura}");
+            }
+        }
+
         private void SetSelectedItem(DataGridViewRow row)
         {
             _primka.Broj_u_knjizi_ura = int.Parse(row.Cells["Broj_u_knjizi_ura"].Value.ToString());
@@ -109,16 +121,9 @@ namespace Knjigovodstvo.URA
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonSpremi_Click(object sender, EventArgs e)
+        private void ButtonSpremi_ClickAsync(object sender, EventArgs e)
         {
-            DbDataInsert ins = new DbDataInsert();
-            foreach (Primka primka in _listaPrimki)
-            {
-                if (primka.Broj_u_knjizi_ura > _lastRecord)
-                    ins.InsertData(primka);
-                else
-                    new DbDataUpdate().UpdateData(primka, $"Broj_u_knjizi_ura={primka.Broj_u_knjizi_ura}");
-            }
+            SaveDataToDatabase();
             LoadDatagrid();
         }
 
