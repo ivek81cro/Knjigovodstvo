@@ -1,7 +1,11 @@
 ﻿using ExcelDataReader;
+using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Global
@@ -13,7 +17,7 @@ namespace Knjigovodstvo.Global
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             _identifier = identifier;
         }
-        public bool Convert(ref string put)
+        public async Task<string> ConvertAsync(string put)
         {
             OpenFileDialog choofdlog = new OpenFileDialog
             {
@@ -29,11 +33,11 @@ namespace Knjigovodstvo.Global
             if (put == null || put == "")
             {
                 MessageBox.Show("Nije odabrana datoteka");
-                return false;
+                return "";
             }
 
-            if (put.Contains(".csv")) return false;
-
+            if (put.Contains(".csv")) return "";
+            Stopwatch timer = Stopwatch.StartNew();
             FileStream stream = File.Open(put, FileMode.Open, FileAccess.Read);
             IExcelDataReader excelReader;
             try
@@ -48,8 +52,31 @@ namespace Knjigovodstvo.Global
             DataSet result = excelReader.AsDataSet();
             excelReader.Close();
 
+            Debug.WriteLine("Elapsed time  excel reader:" + timer.ElapsedMilliseconds);
+
             result.Tables[0].TableName.ToString();
 
+            List<string> data = await Task.Run(() => CreateCsvString(result, put));
+            put = data[0];
+            string csvData = data[1];
+
+            Debug.WriteLine("Elapsed time creating string:" + timer.ElapsedMilliseconds);
+            string output = put; // define your own filepath & filename
+            StreamWriter csv = new StreamWriter(@output, false, Encoding.UTF8);
+            csv.Write(csvData);
+            csv.Close();
+
+            Debug.WriteLine("Elapsed time total:" + timer.ElapsedMilliseconds);
+            timer.Stop();
+
+            if (!csvData.Contains(_identifier))
+                return "";
+
+            return put;
+        }
+
+        private List<string> CreateCsvString(DataSet result, string put)
+        {
             string csvData = "";
             int row_no = 0;
             int ind = 0;
@@ -70,15 +97,8 @@ namespace Knjigovodstvo.Global
             {
                 put = put.Replace("xls", "csv");
             }
-            string output = put; // define your own filepath & filename
-            StreamWriter csv = new StreamWriter(@output, false, Encoding.UTF8);
-            csv.Write(csvData);
-            csv.Close();
 
-            if (!csvData.Contains(_identifier))
-                return false;
-
-            return true;
+            return new List<string>() { put, csvData };
         }
 
         private readonly string _identifier = "";

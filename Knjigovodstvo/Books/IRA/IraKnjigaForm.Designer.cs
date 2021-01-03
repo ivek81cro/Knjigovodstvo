@@ -65,7 +65,7 @@ namespace Knjigovodstvo.IRA
             this.buttonUcitaj.TabIndex = 11;
             this.buttonUcitaj.Text = "Učitaj";
             this.buttonUcitaj.UseVisualStyleBackColor = true;
-            this.buttonUcitaj.Click += new System.EventHandler(this.ButtonUcitaj_Click);
+            this.buttonUcitaj.Click += new System.EventHandler(this.ButtonUcitaj_ClickAsync);
             // 
             // buttonSpremi
             // 

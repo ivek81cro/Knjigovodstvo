@@ -10,6 +10,7 @@ using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Settings.SettingsBookkeeping;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.Books.PrepareForBalanceSheet;
+using System.Threading.Tasks;
 
 namespace Knjigovodstvo.URA
 {
@@ -65,6 +66,28 @@ namespace Knjigovodstvo.URA
             }
         }
 
+        /// <summary>
+        /// Opens exported .xlsx file and imports data
+        /// </summary>
+        private async Task OpenAndLoadXlsFileAsync()
+        {
+            ConvertXlsToCsv conv = new ConvertXlsToCsv("Primke");
+            _put = await conv.ConvertAsync(_put);
+            if (_put == "")
+            {
+                MessageBox.Show("Krivo odabrana datoteka", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            _listaPrimki = File.ReadAllLines(_put).Skip(3).Select(v => new Primka().FromCsv(v)).ToList();
+
+            var data = new BindingSource
+            {
+                DataSource = _listaPrimki
+            };
+            dataGridView1.DataSource = data;
+        }
+
         private void SetSelectedItem(DataGridViewRow row)
         {
             _primka.Broj_u_knjizi_ura = int.Parse(row.Cells["Broj_u_knjizi_ura"].Value.ToString());
@@ -75,24 +98,12 @@ namespace Knjigovodstvo.URA
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonLoadTable_Click(object sender, EventArgs e)
+        private async void ButtonLoadTable_Click(object sender, EventArgs e)
         {
-            ConvertXlsToCsv conv = new ConvertXlsToCsv("Primke");
-            if (!conv.Convert(ref put))
-            {
-                MessageBox.Show("Krivo odabrana datoteka", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            _listaPrimki = File.ReadAllLines(put).Skip(3).Select(v => new Primka().FromCsv(v)).ToList();
-
-            var data = new BindingSource
-            {
-                DataSource = _listaPrimki
-            };
-            dataGridView1.DataSource = data;
+            await OpenAndLoadXlsFileAsync();
             FixColumnHeaders();
         }
+
         /// <summary>
         /// Save data from DataGridView to database
         /// </summary>
@@ -141,7 +152,7 @@ namespace Knjigovodstvo.URA
         private readonly Primka _primka = new Primka();
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly BookNames _bookNames;
-        private string put = "";
+        private string _put = "";
         private List<Primka> _listaPrimki = new List<Primka>();
         private readonly int _lastRecord = 0;
         private readonly Dictionary<int, string> _columns = new Dictionary<int, string>();

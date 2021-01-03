@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.IRA
@@ -47,6 +48,26 @@ namespace Knjigovodstvo.IRA
             }
         }
 
+        private async Task OpenAndLoadXlsFileAsync()
+        {
+            ConvertXlsToCsv conv = new ConvertXlsToCsv("izlaznih");
+            _put = await conv.ConvertAsync(_put);
+            if (_put == "")
+            {
+                MessageBox.Show("Krivo odabrana datoteka", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            _listaStavki = File.ReadAllLines(_put).Skip(3).Select(v => new IraKnjiga().FromCsv(v)).ToList();
+
+            var data = new BindingSource
+            {
+                DataSource = _listaStavki
+            };
+            dataGridView1.DataSource = data;
+            FixColumnHeaders();
+        }
+
         private void LoadBookkeepingSettings()
         {
             List<DataRow> dr = new DbDataGet().GetTable(new PostavkeKnjizenja(), $"Knjiga='{_bookNames}'").AsEnumerable().ToList();
@@ -64,24 +85,11 @@ namespace Knjigovodstvo.IRA
 
         }
 
-        private void ButtonUcitaj_Click(object sender, EventArgs e)
+        private async void ButtonUcitaj_ClickAsync(object sender, EventArgs e)
         {
-            ConvertXlsToCsv conv = new ConvertXlsToCsv("izlaznih");
-            if (!conv.Convert(ref put)) 
-            {
-                MessageBox.Show("Krivo odabrana datoteka", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            _listaStavki = File.ReadAllLines(put).Skip(3).Select(v => new IraKnjiga().FromCsv(v)).ToList();
-
-            var data = new BindingSource
-            {
-                DataSource = _listaStavki
-            };
-            dataGridView1.DataSource = data;
-            FixColumnHeaders();
+            await OpenAndLoadXlsFileAsync();
         }
+
         private void ButtonSpremi_Click(object sender, EventArgs e)
         {
             DbDataInsert ins = new DbDataInsert();
@@ -121,7 +129,7 @@ namespace Knjigovodstvo.IRA
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly IraKnjiga _iraKnjiga = new IraKnjiga();
         private readonly BookNames _bookNames;
-        private string put = "";
+        private string _put = "";
         private List<IraKnjiga> _listaStavki = new List<IraKnjiga>();
         private readonly int _lastRecord = 0;
         private readonly Dictionary<int, string> _columns = new Dictionary<int, string>();

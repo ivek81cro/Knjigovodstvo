@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.URA
@@ -64,28 +65,34 @@ namespace Knjigovodstvo.URA
             }
         }
 
-        private void SetSelectedItem(DataGridViewRow row) 
-        {
-            _uraKnjiga.Redni_broj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
-            _uraKnjiga.GetDataFromDatabaseByRedniBroj();
-        }
-
-        private void ButtonUcitaj_Click(object sender, EventArgs e)
+        private async Task OpenAndLoadXlsFileAsync()
         {
             ConvertXlsToCsv conv = new ConvertXlsToCsv("ulaznih");
-            if (!conv.Convert(ref put))
+            _put = await conv.ConvertAsync(_put);
+            if (_put == "")
             {
                 MessageBox.Show("Krivo odabrana datoteka", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            _listaStavki = File.ReadAllLines(put).Skip(3).Select(v => new UraKnjiga().FromCsv(v)).ToList();
+            _listaStavki = File.ReadAllLines(_put).Skip(3).Select(v => new UraKnjiga().FromCsv(v)).ToList();
 
             var data = new BindingSource
             {
                 DataSource = _listaStavki
             };
             dataGridView1.DataSource = data;
+        }
+
+        private void SetSelectedItem(DataGridViewRow row) 
+        {
+            _uraKnjiga.Redni_broj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
+            _uraKnjiga.GetDataFromDatabaseByRedniBroj();
+        }
+
+        private async void ButtonUcitaj_ClickAsync(object sender, EventArgs e)
+        {
+            await OpenAndLoadXlsFileAsync();
             FixColumnHeaders();
         }
 
@@ -143,7 +150,7 @@ namespace Knjigovodstvo.URA
         }
 
         private BookNames _bookName;
-        private string put = "";
+        private string _put = "";
         private List<UraKnjiga> _listaStavki = new List<UraKnjiga>();
         private readonly int _lastRecord = 0;
         private readonly DataTable _dt;
