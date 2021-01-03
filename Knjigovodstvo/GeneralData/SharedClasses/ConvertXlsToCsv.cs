@@ -1,8 +1,6 @@
 ﻿using ExcelDataReader;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +35,6 @@ namespace Knjigovodstvo.Global
             }
 
             if (put.Contains(".csv")) return "";
-            Stopwatch timer = Stopwatch.StartNew();
             FileStream stream = File.Open(put, FileMode.Open, FileAccess.Read);
             IExcelDataReader excelReader;
             try
@@ -52,22 +49,15 @@ namespace Knjigovodstvo.Global
             DataSet result = excelReader.AsDataSet();
             excelReader.Close();
 
-            Debug.WriteLine("Elapsed time  excel reader:" + timer.ElapsedMilliseconds);
-
             result.Tables[0].TableName.ToString();
 
             List<string> data = await Task.Run(() => CreateCsvString(result, put));
-            put = data[0];
             string csvData = data[1];
 
-            Debug.WriteLine("Elapsed time creating string:" + timer.ElapsedMilliseconds);
-            string output = put; // define your own filepath & filename
+            string output = data[0]; //new file extension
             StreamWriter csv = new StreamWriter(@output, false, Encoding.UTF8);
             csv.Write(csvData);
             csv.Close();
-
-            Debug.WriteLine("Elapsed time total:" + timer.ElapsedMilliseconds);
-            timer.Stop();
 
             if (!csvData.Contains(_identifier))
                 return "";
