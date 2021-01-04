@@ -69,7 +69,7 @@ namespace Knjigovodstvo.URA
             this.buttonUcitaj.TabIndex = 0;
             this.buttonUcitaj.Text = "Učitaj";
             this.buttonUcitaj.UseVisualStyleBackColor = true;
-            this.buttonUcitaj.Click += new System.EventHandler(this.ButtonUcitaj_ClickAsync);
+            this.buttonUcitaj.Click += new System.EventHandler(this.ButtonUcitaj_Click);
             // 
             // buttonSpremi
             // 

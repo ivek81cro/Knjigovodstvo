@@ -15,7 +15,8 @@ namespace Knjigovodstvo.Global
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             _identifier = identifier;
         }
-        public async Task<string> ConvertAsync(string put)
+
+        public void OpenXlsFile(ref string put)
         {
             OpenFileDialog choofdlog = new OpenFileDialog
             {
@@ -28,13 +29,19 @@ namespace Knjigovodstvo.Global
             {
                 put = choofdlog.FileName.ToString();
             }
+
             if (put == null || put == "")
             {
                 MessageBox.Show("Nije odabrana datoteka");
-                return "";
+                return;
             }
 
-            if (put.Contains(".csv")) return "";
+            if (put.Contains(".csv")) 
+                 return;
+        }
+
+        public void Convert(ref string put)
+        {
             FileStream stream = File.Open(put, FileMode.Open, FileAccess.Read);
             IExcelDataReader excelReader;
             try
@@ -51,18 +58,16 @@ namespace Knjigovodstvo.Global
 
             result.Tables[0].TableName.ToString();
 
-            List<string> data = await Task.Run(() => CreateCsvString(result, put));
+            List<string> data = CreateCsvString(result, put);
             string csvData = data[1];
 
-            string output = data[0]; //new file extension
-            StreamWriter csv = new StreamWriter(@output, false, Encoding.UTF8);
+            put = data[0]; //new file extension
+            StreamWriter csv = new StreamWriter(@put, false, Encoding.UTF8);
             csv.Write(csvData);
             csv.Close();
 
             if (!csvData.Contains(_identifier))
-                return "";
-
-            return output;
+                return;
         }
 
         private List<string> CreateCsvString(DataSet result, string put)
@@ -89,6 +94,17 @@ namespace Knjigovodstvo.Global
             }
 
             return new List<string>() { put, csvData };
+        }
+
+        public void SaveToCsvAndLoad(ref string path)
+        {
+            Convert(ref path);
+
+            if (path == "")
+            {
+                MessageBox.Show("Krivo odabrana datoteka", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
         }
 
         private readonly string _identifier = "";

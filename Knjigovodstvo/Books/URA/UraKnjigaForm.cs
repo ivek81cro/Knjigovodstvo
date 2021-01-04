@@ -1,5 +1,6 @@
 ﻿using Knjigovodstvo.Books.PrepareForBalanceSheet;
 using Knjigovodstvo.Database;
+using Knjigovodstvo.GeneralData.WaitForm;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Settings;
@@ -9,7 +10,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.URA
@@ -65,17 +65,23 @@ namespace Knjigovodstvo.URA
             }
         }
 
-        private async Task OpenAndLoadXlsFileAsync()
+        private void OpenAndLoadXlsFile()
         {
+            string path = "";
             ConvertXlsToCsv conv = new ConvertXlsToCsv("ulaznih");
-            _put = await conv.ConvertAsync(_put);
-            if (_put == "")
+            conv.OpenXlsFile(ref path);
+
+            //internal method used to pass params to method used as argument in WaitDialog constr.
+            void act()
             {
-                MessageBox.Show("Krivo odabrana datoteka", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
+                conv.SaveToCsvAndLoad(ref path);
+                _listaStavki = File.ReadAllLines(path).Skip(3).Select(v => new UraKnjiga().FromCsv(v)).ToList();
             }
 
-            _listaStavki = File.ReadAllLines(_put).Skip(3).Select(v => new UraKnjiga().FromCsv(v)).ToList();
+            using (WaitDialog waitDialog = new WaitDialog(act))
+            {
+                waitDialog.ShowDialog(this);
+            }
 
             var data = new BindingSource
             {
@@ -90,9 +96,9 @@ namespace Knjigovodstvo.URA
             _uraKnjiga.GetDataFromDatabaseByRedniBroj();
         }
 
-        private async void ButtonUcitaj_ClickAsync(object sender, EventArgs e)
+        private void ButtonUcitaj_Click(object sender, EventArgs e)
         {
-            await OpenAndLoadXlsFileAsync();
+            OpenAndLoadXlsFile();
             FixColumnHeaders();
         }
 
@@ -150,7 +156,6 @@ namespace Knjigovodstvo.URA
         }
 
         private BookNames _bookName;
-        private string _put = "";
         private List<UraKnjiga> _listaStavki = new List<UraKnjiga>();
         private readonly int _lastRecord = 0;
         private readonly DataTable _dt;

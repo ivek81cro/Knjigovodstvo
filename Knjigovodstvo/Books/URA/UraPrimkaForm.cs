@@ -11,6 +11,7 @@ using Knjigovodstvo.Settings.SettingsBookkeeping;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.Books.PrepareForBalanceSheet;
 using System.Threading.Tasks;
+using Knjigovodstvo.GeneralData.WaitForm;
 
 namespace Knjigovodstvo.URA
 {
@@ -54,7 +55,6 @@ namespace Knjigovodstvo.URA
                                       Strana = dRow["Strana"].ToString(),
                                       Mijenja_predznak = dRow["Mijenja_predznak"].ToString() == "True"
                                   }).ToList();
-
         }
 
         private void FixColumnHeaders()
@@ -69,24 +69,31 @@ namespace Knjigovodstvo.URA
         /// <summary>
         /// Opens exported .xlsx file and imports data
         /// </summary>
-        private async Task OpenAndLoadXlsFileAsync()
+        private void OpenAndLoadXlsFile()
         {
+            string path = "";
             ConvertXlsToCsv conv = new ConvertXlsToCsv("Primke");
-            _put = await conv.ConvertAsync(_put);
-            if (_put == "")
+            conv.OpenXlsFile(ref path);
+            
+            //internal method used to pass params to method used as argument in WaitDialog constr.
+            void act()
             {
-                MessageBox.Show("Krivo odabrana datoteka", "Poruka", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
+                conv.SaveToCsvAndLoad(ref path);
+                _listaPrimki = File.ReadAllLines(path).Skip(3).Select(v => new Primka().FromCsv(v)).ToList();
             }
 
-            _listaPrimki = File.ReadAllLines(_put).Skip(3).Select(v => new Primka().FromCsv(v)).ToList();
+            using (WaitDialog waitDialog = new WaitDialog(act))
+            { 
+                waitDialog.ShowDialog(this); 
+            }
 
             var data = new BindingSource
             {
                 DataSource = _listaPrimki
             };
+
             dataGridView1.DataSource = data;
-        }
+        }        
 
         private void SaveDataToDatabase()
         {
@@ -110,9 +117,9 @@ namespace Knjigovodstvo.URA
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void ButtonLoadTable_Click(object sender, EventArgs e)
+        private void ButtonLoadTable_Click(object sender, EventArgs e)
         {
-            await OpenAndLoadXlsFileAsync();
+            OpenAndLoadXlsFile();
             FixColumnHeaders();
         }
 
@@ -157,7 +164,6 @@ namespace Knjigovodstvo.URA
         private readonly Primka _primka = new Primka();
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly BookNames _bookNames;
-        private string _put = "";
         private List<Primka> _listaPrimki = new List<Primka>();
         private readonly int _lastRecord = 0;
         private readonly Dictionary<int, string> _columns = new Dictionary<int, string>();
