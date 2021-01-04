@@ -75,6 +75,17 @@ namespace Knjigovodstvo.IRA
             FixColumnHeaders();
         }
 
+        private void SaveDataToDatabase()
+        {
+            DbDataInsert ins = new DbDataInsert();
+            foreach (IraKnjiga stavka in _listaStavki)
+            {
+                if (stavka.Redni_broj > _lastRecord)
+                    ins.InsertData(stavka);
+            }
+            LoadDatagrid();
+        }
+
         private void LoadBookkeepingSettings()
         {
             List<DataRow> dr = new DbDataGet().GetTable(new PostavkeKnjizenja(), $"Knjiga='{_bookNames}'").AsEnumerable().ToList();
@@ -92,6 +103,12 @@ namespace Knjigovodstvo.IRA
 
         }
 
+        private void SetSelectedItem(DataGridViewRow row)
+        {
+            _iraKnjiga.Redni_broj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
+            _iraKnjiga.GetDataFromDatabaseByRedniBroj();
+        }
+
         private void ButtonUcitaj_ClickAsync(object sender, EventArgs e)
         {
             OpenAndLoadXlsFile();
@@ -99,13 +116,10 @@ namespace Knjigovodstvo.IRA
 
         private void ButtonSpremi_Click(object sender, EventArgs e)
         {
-            DbDataInsert ins = new DbDataInsert();
-            foreach (IraKnjiga stavka in _listaStavki)
+            using (WaitDialog waitDialog = new WaitDialog(SaveDataToDatabase))
             {
-                if (stavka.Redni_broj > _lastRecord)
-                    ins.InsertData(stavka);
+                waitDialog.ShowDialog(this);
             }
-            LoadDatagrid();
         }
 
         private void ButtonPostavke_Click(object sender, EventArgs e)
@@ -122,16 +136,20 @@ namespace Knjigovodstvo.IRA
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            SetSelectedItem();
-            TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_iraKnjiga, _postavkeKnjizenja);
-            form.ShowDialog();
-        }
-        private void SetSelectedItem()
-        {
-            var row = dataGridView1.SelectedRows[0];
-            _iraKnjiga.Redni_broj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
-            _iraKnjiga.GetDataFromDatabaseByRedniBroj();
-        }
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            {
+                SetSelectedItem(row);
+                if (_iraKnjiga.Knjizen)
+                    continue;
+                TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_iraKnjiga, _postavkeKnjizenja);
+                form.ShowDialog(); 
+                if (!form.Knjizeno)
+                    break;
+                else
+                    new DbDataCustomQuery()
+                        .ExecuteQuery($"UPDATE IraKnjiga SET Knjizen = 1 WHERE Redni_broj = {_iraKnjiga.Redni_broj}");
+            }
+        }        
 
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly IraKnjiga _iraKnjiga = new IraKnjiga();

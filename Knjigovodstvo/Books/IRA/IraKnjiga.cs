@@ -86,6 +86,7 @@ namespace Knjigovodstvo.IRA
             Zaprimljen_u_HZZO = row["Zaprimljen_u_HZZO"].ToString();
             Dana_od_zaprimanja = int.Parse(row["Dana_od_zaprimanja"].ToString());
             Dana_neplacanja = int.Parse(row["Dana_neplacanja"].ToString());
+            Knjizen = int.Parse(row["Dana_neplacanja"].ToString()) == 1;
         }
 
         public int Redni_broj { get; set; } = 0;
@@ -119,5 +120,6 @@ namespace Knjigovodstvo.IRA
         public string Zaprimljen_u_HZZO { get; set; } = "";
         public int Dana_od_zaprimanja { get; set; } = 0;
         public int Dana_neplacanja { get; set; } = 0;
+        public bool Knjizen { get; set; } = false;
     }
 }

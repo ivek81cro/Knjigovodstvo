@@ -90,6 +90,16 @@ namespace Knjigovodstvo.URA
             dataGridView1.DataSource = data;
         }
 
+        private void SaveDataToDatabase()
+        {
+            DbDataInsert ins = new DbDataInsert();
+            foreach (UraKnjiga stavka in _listaStavki)
+            {
+                if (stavka.Redni_broj > _lastRecord)
+                    ins.InsertData(stavka);
+            }
+        }
+
         private void SetSelectedItem(DataGridViewRow row) 
         {
             _uraKnjiga.Redni_broj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
@@ -104,11 +114,9 @@ namespace Knjigovodstvo.URA
 
         private void ButtonSpremi_Click(object sender, EventArgs e)
         {
-            DbDataInsert ins = new DbDataInsert();
-            foreach (UraKnjiga stavka in _listaStavki)
+            using (WaitDialog waitDialog = new WaitDialog(SaveDataToDatabase))
             {
-                if (stavka.Redni_broj > _lastRecord)
-                    ins.InsertData(stavka);
+                waitDialog.ShowDialog(this);
             }
             LoadDatagrid();
         }
@@ -146,12 +154,15 @@ namespace Knjigovodstvo.URA
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
                 SetSelectedItem(row);
-                if (_uraKnjiga.Knjizen)
+                if (_uraKnjiga.Knjizen || _uraKnjiga.Broj_primke != 0)
                     continue;
                 TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_uraKnjiga, _postavkeKnjizenja);
                 form.ShowDialog();
                 if (!form.Knjizeno)
                     break;
+                else
+                    new DbDataCustomQuery()
+                        .ExecuteQuery($"UPDATE UraKnjiga SET Knjizen = 1 WHERE Redni_broj = {_uraKnjiga.Redni_broj}");
             }
         }
 

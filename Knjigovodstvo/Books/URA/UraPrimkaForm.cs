@@ -130,7 +130,10 @@ namespace Knjigovodstvo.URA
         /// <param name="e"></param>
         private void ButtonSpremi_ClickAsync(object sender, EventArgs e)
         {
-            SaveDataToDatabase();
+            using (WaitDialog waitDialog = new WaitDialog(SaveDataToDatabase))
+            {
+                waitDialog.ShowDialog(this);
+            }
             LoadDatagrid();
         }
 
