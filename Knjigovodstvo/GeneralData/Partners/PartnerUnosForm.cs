@@ -38,6 +38,23 @@ namespace Knjigovodstvo.Partners
             labelMessage.Text = new ProcessFormErrors().FormErrorMessage(errorType);
         }
 
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void BtnSelectCity_Click(object sender, EventArgs e)
+        {
+            GradoviTableForm form = new GradoviTableForm();
+            Grad grad = form.OdabirGrada();
+
+            if (grad != null && grad.ValidateData() == FormError.None)
+            {
+                textBoxCity.Text = grad.Mjesto;
+                textBoxPost.Text = grad.Posta;
+            }
+        }
+
         private void BtnSave_Click(object sender, EventArgs e)
         {
             labelMessage.Text = "";
@@ -77,22 +94,6 @@ namespace Knjigovodstvo.Partners
             }
         }
 
-        private void BtnClose_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void BtnSelectCity_Click(object sender, EventArgs e)
-        {
-            GradoviTableForm form = new GradoviTableForm();
-            Grad grad = form.OdabirGrada();
-
-            if (grad != null && grad.ValidateData() == FormError.None)
-            {
-                textBoxCity.Text = grad.Mjesto;
-                textBoxPost.Text = grad.Posta;
-            }
-        }
         private readonly Partneri _partner = new Partneri();
     }
 }

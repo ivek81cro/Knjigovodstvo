@@ -110,6 +110,7 @@ namespace Knjigovodstvo.BankStatements
         private void DataGridViewIzvodi_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             OpenIzvodDetails();
+            buttonKnjizi.Enabled = true;
         }
 
         private void ButtonUcitajIzvod_Click(object sender, EventArgs e)
@@ -128,6 +129,7 @@ namespace Knjigovodstvo.BankStatements
             }
             if (_path != "")
                 DeserializeIzvodXml();
+
         }
 
         private void ButtonOpenIzvod_Click(object sender, EventArgs e)
@@ -138,10 +140,13 @@ namespace Knjigovodstvo.BankStatements
         private void ButtonDeleteIzvod_Click(object sender, EventArgs e)
         {
             if (_izvod.Knjizen && MessageBox.Show("Izvod je knjižen, želite li svejedno obrisati izvod?"
-                ,"Upozorenje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)==DialogResult.Yes)
+                , "Upozorenje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 _izvod.DeleteIzvod();
             }
+            else
+                _izvod.DeleteIzvod();
+
             ClearDataGridView();
             LoadExistingIzvodi();
         }
@@ -166,6 +171,7 @@ namespace Knjigovodstvo.BankStatements
                 LoadExistingIzvodi();
                 _izvod = new Izvod();
                 ClearDataGridView();
+                buttonKnjizi.Enabled = false;
             }
         }
 

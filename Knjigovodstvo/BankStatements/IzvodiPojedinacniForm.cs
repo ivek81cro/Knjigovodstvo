@@ -97,19 +97,23 @@ namespace Knjigovodstvo.BankStatements
             string naziv = row.Cells["Naziv"].Value.ToString();
             using var form = new PartneriTableForm();
             form.OdabirPartnera();
+            
+            Partneri partner = new Partneri();
+            partner.OpciPodaci.Id = form.IdPartner; 
+            partner.GetPartnerById();
+            
+            KontniPlan kontniPlan = new KontniPlan();
+            kontniPlan.Konto = row.Cells["Dugovna"].Value.ToString() == "0" ? partner.KontoK : partner.KontoD;
             IzvodParovi par = new IzvodParovi()
             {
-                Naziv_Izvod = naziv
+                Naziv_Izvod = naziv,
+                Id_Konto = kontniPlan.GetIdByKontoNumber()
             };
 
             if (!par.ExistsInDb() && par.Id_Konto != 0)
             {
                 par.InsertData();
-                Partneri partner = new Partneri();
-                partner.OpciPodaci.Id = form.IdPartner;
-                partner.GetPartnerById();
-                row.Cells["Konto"].Value = row.Cells["Dugovna"]
-                    .Value.ToString() == "0" ? partner.KontoK : partner.KontoD;
+                FillKontoColumn();
             }
             else
             {

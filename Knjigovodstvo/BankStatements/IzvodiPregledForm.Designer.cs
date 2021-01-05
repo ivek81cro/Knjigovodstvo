@@ -112,6 +112,7 @@ namespace Knjigovodstvo.BankStatements
             // 
             // buttonKnjizi
             // 
+            this.buttonKnjizi.Enabled = false;
             this.buttonKnjizi.Location = new System.Drawing.Point(12, 110);
             this.buttonKnjizi.Name = "buttonKnjizi";
             this.buttonKnjizi.Size = new System.Drawing.Size(75, 23);
