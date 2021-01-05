@@ -215,6 +215,13 @@ namespace Knjigovodstvo.Payroll
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
+            if(dataGridView1.Rows.Count == 0 || comboBoxFilterPoMjesecu.Text.Contains("--"))
+            {
+                MessageBox.Show("Niste odabrali mjesec obračuna", "Obračun", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             PlacaArhiva po = new PlacaArhiva();
             foreach(DataGridViewRow row in dataGridView1.Rows)
             {
@@ -233,6 +240,7 @@ namespace Knjigovodstvo.Payroll
                 po.Doprinos_Zdravstvo += decimal.Parse(row.Cells["Doprinos_Zdravstvo"].Value.ToString());
                 po.Dodaci_Ukupno += decimal.Parse(row.Cells["Dodaci_Ukupno"].Value.ToString());
             }
+            po.Datum_Do = comboBoxFilterPoMjesecu.Text;//use this string for description date in next step
             TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(po, _postavkeKnjizenja);
             form.ShowDialog();
         }

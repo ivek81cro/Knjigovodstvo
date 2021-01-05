@@ -126,7 +126,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 dt.Rows.Add(
                     knjiga.Id,
                     postavka.Naziv_stupca,
-                    new KontniPlan().GetDescriptiopnByKontoNumber(postavka.Konto),
+                    new KontniPlan().GetDescriptiopnByKontoNumber(postavka.Konto) + "-Placa za " + knjiga.Datum_Do,
                     postavka.Konto,
                     DateTime.Today.ToString("dd.MM.yyyy"),
                     postavka.Strana == "Dugovna",
