@@ -25,8 +25,8 @@ namespace Knjigovodstvo.Payroll
                 Dohodak = decimal.Parse(data.Rows[0]["Dohodak"].ToString());
                 Osobni_Odbitak = decimal.Parse(data.Rows[0]["Osobni_Odbitak"].ToString());
                 Porezna_Osnovica = decimal.Parse(data.Rows[0]["Porezna_Osnovica"].ToString());
-                Porez_24_per = decimal.Parse(data.Rows[0]["Porez_24_per"].ToString());
-                Porez_36_per = decimal.Parse(data.Rows[0]["Porez_36_per"].ToString());
+                Porez_1 = decimal.Parse(data.Rows[0]["Porez_1"].ToString());
+                Porez_2 = decimal.Parse(data.Rows[0]["Porez_2"].ToString());
                 Porez_Ukupno = decimal.Parse(data.Rows[0]["Porez_Ukupno"].ToString());
                 Prirez = decimal.Parse(data.Rows[0]["Prirez"].ToString());
                 Ukupno_Porez_i_Prirez = decimal.Parse(data.Rows[0]["Ukupno_Porez_i_Prirez"].ToString());
@@ -70,8 +70,8 @@ namespace Knjigovodstvo.Payroll
         public decimal Dohodak { get; set; } = 0;
         public decimal Osobni_Odbitak { get; set; } = 0;
         public decimal Porezna_Osnovica { get; set; } = 0;
-        public decimal Porez_24_per { get; set; } = 0;
-        public decimal Porez_36_per { get; set; } = 0;
+        public decimal Porez_1 { get; set; } = 0;
+        public decimal Porez_2 { get; set; } = 0;
         public decimal Porez_Ukupno { get; set; } = 0;
         public decimal Prirez { get; set; } = 0;
         public decimal Ukupno_Porez_i_Prirez { get; set; } = 0;

@@ -47,8 +47,8 @@ namespace Knjigovodstvo.Payroll
                           Dohodak = decimal.Parse(data["Dohodak"].ToString()),
                           Osobni_Odbitak = decimal.Parse(data["Osobni_Odbitak"].ToString()),
                           Porezna_Osnovica = decimal.Parse(data["Porezna_Osnovica"].ToString()),
-                          Porez_24_per = decimal.Parse(data["Porez_24_per"].ToString()),
-                          Porez_36_per = decimal.Parse(data["Porez_36_per"].ToString()),
+                          Porez_1 = decimal.Parse(data["Porez_1"].ToString()),
+                          Porez_2 = decimal.Parse(data["Porez_2"].ToString()),
                           Porez_Ukupno = decimal.Parse(data["Porez_Ukupno"].ToString()),
                           Prirez = decimal.Parse(data["Prirez"].ToString()),
                           Ukupno_Porez_i_Prirez = decimal.Parse(data["Ukupno_Porez_i_Prirez"].ToString()),
@@ -199,8 +199,8 @@ namespace Knjigovodstvo.Payroll
                                  Dohodak = placa.Dohodak,
                                  Osobni_Odbitak = placa.Osobni_Odbitak,
                                  Porezna_Osnovica = placa.Porezna_Osnovica,
-                                 Porez_24_per = placa.Porez_24_per,
-                                 Porez_36_per = placa.Porez_36_per,
+                                 Porez_1 = placa.Porez_1,
+                                 Porez_2 = placa.Porez_2,
                                  Porez_Ukupno = placa.Porez_Ukupno,
                                  Prirez = placa.Prirez,
                                  Ukupno_Porez_i_Prirez = placa.Ukupno_Porez_i_Prirez,
@@ -224,8 +224,8 @@ namespace Knjigovodstvo.Payroll
                 po.Dohodak += decimal.Parse(row.Cells["Dohodak"].Value.ToString());
                 po.Osobni_Odbitak += decimal.Parse(row.Cells["Osobni_Odbitak"].Value.ToString());
                 po.Porezna_Osnovica += decimal.Parse(row.Cells["Porezna_Osnovica"].Value.ToString());
-                po.Porez_24_per += decimal.Parse(row.Cells["Porez_24_per"].Value.ToString());
-                po.Porez_36_per += decimal.Parse(row.Cells["Porez_36_per"].Value.ToString());
+                po.Porez_1 += decimal.Parse(row.Cells["Porez_1"].Value.ToString());
+                po.Porez_2 += decimal.Parse(row.Cells["Porez_2"].Value.ToString());
                 po.Porez_Ukupno += decimal.Parse(row.Cells["Porez_Ukupno"].Value.ToString());
                 po.Prirez += decimal.Parse(row.Cells["Prirez"].Value.ToString());
                 po.Ukupno_Porez_i_Prirez += decimal.Parse(row.Cells["Ukupno_Porez_i_Prirez"].Value.ToString());

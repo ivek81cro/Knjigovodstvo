@@ -31,15 +31,15 @@ namespace Knjigovodstvo.Payroll
 
             if (p.Porezna_Osnovica > 30000)
             {
-                iznos -= p.Porez_24_per = 30000.0m * stope.GetStopaByName(PlacaStope.Porez_Dohodak_1);
-                iznos -= p.Porez_36_per = (p.Porezna_Osnovica - 30000) * stope.GetStopaByName(PlacaStope.Porez_Dohodak_2);
+                iznos -= p.Porez_1 = 30000.0m * stope.GetStopaByName(PlacaStope.Porez_Dohodak_1);
+                iznos -= p.Porez_1 = (p.Porezna_Osnovica - 30000) * stope.GetStopaByName(PlacaStope.Porez_Dohodak_2);
             }
             else
             {
-                iznos -= p.Porez_24_per = p.Porezna_Osnovica * stope.GetStopaByName(PlacaStope.Porez_Dohodak_1);
-                p.Porez_36_per = 0;
+                iznos -= p.Porez_1 = p.Porezna_Osnovica * stope.GetStopaByName(PlacaStope.Porez_Dohodak_1);
+                p.Porez_2 = 0;
             }
-            iznos -= p.Prirez = (p.Porez_Ukupno = p.Porez_24_per + p.Porez_36_per) * prirez / 100;
+            iznos -= p.Prirez = (p.Porez_Ukupno = p.Porez_1 + p.Porez_2) * prirez / 100;
             p.Ukupno_Porez_i_Prirez = p.Porez_Ukupno + p.Prirez;
             p.Neto = iznos + p.Osobni_Odbitak;
 

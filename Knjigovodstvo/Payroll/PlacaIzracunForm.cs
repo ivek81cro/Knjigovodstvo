@@ -156,8 +156,8 @@ namespace Knjigovodstvo.Payroll
             textBoxDohodak.Text = Math.Round(placa.Dohodak, 2).ToString("0.00");
             textBoxOdbitak.Text = Math.Round(placa.Osobni_Odbitak, 2).ToString("0.00");
             textBoxPoreznaOsnovica.Text = Math.Round(placa.Porezna_Osnovica, 2).ToString("0.00");
-            textBoxPorez24.Text = Math.Round(placa.Porez_24_per, 2).ToString("0.00");
-            textBoxPorez36.Text = Math.Round(placa.Porez_36_per, 2).ToString("0.00");
+            textBoxPorez24.Text = Math.Round(placa.Porez_1, 2).ToString("0.00");
+            textBoxPorez36.Text = Math.Round(placa.Porez_2, 2).ToString("0.00");
             textBoxPorezUkupno.Text = Math.Round(placa.Porez_Ukupno, 2).ToString("0.00");
             textBoxPrirez.Text = Math.Round(placa.Prirez, 2).ToString("0.00");
             textBoxUkupnoPorezPrirez.Text = Math.Round(placa.Ukupno_Porez_i_Prirez, 2).ToString("0.00");
