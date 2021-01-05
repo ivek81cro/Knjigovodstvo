@@ -73,8 +73,11 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
        
         private void ButtonDodajRed_Click(object sender, EventArgs e)
         {
-            _dt.Rows.Add();
-            _checkBalance.CheckEndBalance(_dt, _labelList);
+            if (comboBoxVrstaTemeljnice.Text != "")
+            {
+                _dt.Rows.Add();
+                _checkBalance.CheckEndBalance(_dt, _labelList);
+            }
         }
 
         private DataTable _dt = new DataTable();
