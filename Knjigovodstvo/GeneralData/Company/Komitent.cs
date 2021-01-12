@@ -2,6 +2,7 @@
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Interface;
+using System.Data;
 
 namespace Knjigovodstvo
 {
@@ -39,6 +40,25 @@ namespace Knjigovodstvo
                 return true;
 
             return false;
+        }
+
+        public void GetData()
+        {
+            DataTable dt = new DbDataGet().GetTable(this);
+            OpciPodaci.Oib = dt.Rows[0]["Oib"].ToString();
+            OpciPodaci.Naziv = dt.Rows[0]["Naziv"].ToString();
+            OpciPodaci.Id = int.Parse(dt.Rows[0]["Id"].ToString());
+            OpciPodaci.Iban = dt.Rows[0]["Iban"].ToString();
+            OpciPodaci.Mbo = dt.Rows[0]["Mbo"].ToString();
+            Adresa.Grad.Mjesto = dt.Rows[0]["Mjesto"].ToString();
+            Adresa.Ulica = dt.Rows[0]["Ulica"].ToString();
+            Adresa.Broj = dt.Rows[0]["Broj"].ToString();
+            Kontakt.Email = dt.Rows[0]["Email"].ToString();
+            Kontakt.Telefon = dt.Rows[0]["Telefon"].ToString();
+            Kontakt.Fax = dt.Rows[0]["Fax"].ToString();
+            Vrsta_djelatnosti = dt.Rows[0]["Vrsta_djelatnosti"].ToString();
+            Sifra_djelatnosti = dt.Rows[0]["Sifra_djelatnosti"].ToString();
+            Naziv_djelatnosti = dt.Rows[0]["Naziv_djelatnosti"].ToString();
         }
 
         public OpciPodaci OpciPodaci { get; set; } = new OpciPodaci();

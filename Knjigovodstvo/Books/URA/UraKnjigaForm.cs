@@ -3,6 +3,7 @@ using Knjigovodstvo.Database;
 using Knjigovodstvo.GeneralData.WaitForm;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Helpers;
+using Knjigovodstvo.PoreznaUra;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.Settings.SettingsBookkeeping;
 using System;
@@ -35,7 +36,7 @@ namespace Knjigovodstvo.URA
 
         private void LoadDatagrid()
         {
-            dataGridView1.DataSource = new DbDataGet().GetTable(_uraKnjiga);
+            dbDdataGridView1.DataSource = new DbDataGet().GetTable(_uraKnjiga);
             FixColumnHeaders();
         }
 
@@ -58,10 +59,10 @@ namespace Knjigovodstvo.URA
 
         private void FixColumnHeaders()
         {
-            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+            for (int i = 0; i < dbDdataGridView1.Columns.Count; i++)
             {
-                dataGridView1.Columns[i].HeaderText =
-                    new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
+                dbDdataGridView1.Columns[i].HeaderText =
+                    new TableHeaderFormat().FormatHeader(dbDdataGridView1.Columns[i].HeaderText);
             }
         }
 
@@ -87,7 +88,7 @@ namespace Knjigovodstvo.URA
             {
                 DataSource = _listaStavki
             };
-            dataGridView1.DataSource = data;
+            dbDdataGridView1.DataSource = data;
         }
 
         private void SaveDataToDatabase()
@@ -123,7 +124,7 @@ namespace Knjigovodstvo.URA
 
         private void ButtonTroskovi_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = new DbDataExecProcedure().GetTable(ProcedureNames.Izdvoji_Troskove);
+            dbDdataGridView1.DataSource = new DbDataExecProcedure().GetTable(ProcedureNames.Izdvoji_Troskove);
             _bookName = BookNames.Ura_trošak;
             LoadBookkeepingsettings();
             FixColumnHeaders();
@@ -131,7 +132,7 @@ namespace Knjigovodstvo.URA
 
         private void ButtonOdobrenja_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = new DbDataExecProcedure().GetTable(ProcedureNames.Izdvoji_Odobrenja);
+            dbDdataGridView1.DataSource = new DbDataExecProcedure().GetTable(ProcedureNames.Izdvoji_Odobrenja);
             _bookName = BookNames.Ura_odobrenje;
             LoadBookkeepingsettings();
             FixColumnHeaders();
@@ -149,9 +150,15 @@ namespace Knjigovodstvo.URA
             LoadBookkeepingsettings();
         }
 
+        private void ButtonOpenPoreznaUraForm(object sender, EventArgs e)
+        {
+            PoreznaUraForm form = new PoreznaUraForm();
+            form.ShowDialog();
+        }
+
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            foreach (DataGridViewRow row in dbDdataGridView1.SelectedRows)
             {
                 SetSelectedItem(row);
                 if (_uraKnjiga.Knjizen || _uraKnjiga.Broj_primke != 0)

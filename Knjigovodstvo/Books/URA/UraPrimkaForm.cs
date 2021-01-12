@@ -10,7 +10,6 @@ using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Settings.SettingsBookkeeping;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.Books.PrepareForBalanceSheet;
-using System.Threading.Tasks;
 using Knjigovodstvo.GeneralData.WaitForm;
 
 namespace Knjigovodstvo.URA
