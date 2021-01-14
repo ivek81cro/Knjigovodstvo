@@ -33,7 +33,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             TemeljnicaDataPrepare tp = new TemeljnicaDataPrepare();
             switch (model)
             {
-                case "UraKnjiga":
+                case "KnjigaUra":
                     tp.PrepareDataUra(_dt, _postavkeKnjizenja, _obj);
                     FindPartnerKontoNumber();
                     break;
@@ -41,7 +41,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     tp.PrepareDataPrimka(_dt, _postavkeKnjizenja, _obj);
                     FindPartnerKontoNumber();
                     break;
-                case "IraKnjiga":
+                case "KnjigaIra":
                     tp.PrepareDataIra(_dt, _postavkeKnjizenja, _obj);
                     FindPartnerKontoNumber();
                     break;

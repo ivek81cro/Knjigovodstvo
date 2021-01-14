@@ -15,7 +15,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
     {
         public void PrepareDataIra(DataTable dt, List<PostavkeKnjizenja> postavkeKnjizenja, IDbObject obj)
         {
-            IraKnjiga knjiga = (IraKnjiga)obj;
+            KnjigaIra knjiga = (KnjigaIra)obj;
 
             foreach (var postavka in postavkeKnjizenja)
             {
@@ -34,7 +34,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         public void PrepareDataUra(DataTable dt, List<PostavkeKnjizenja> postavkeKnjizenja, IDbObject obj)
         {
-            UraKnjiga knjiga = (UraKnjiga)obj;
+            KnjigaUra knjiga = (KnjigaUra)obj;
 
             foreach (var postavka in postavkeKnjizenja)
             {
@@ -109,7 +109,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     postavka.Naziv_stupca,
                     new KontniPlan().GetDescriptiopnByKontoNumber(postavka.Konto),
                     postavka.Konto,
-                    DateTime.Today.ToString("dd.MM.yyyy"),
+                    DateTime.Today.ToString("dd.MM.yyyy."),
                     postavka.Strana == "Dugovna",
                     postavka.Strana == "Potražna",
                     postavka.Mijenja_predznak == true
@@ -128,7 +128,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     postavka.Naziv_stupca,
                     new KontniPlan().GetDescriptiopnByKontoNumber(postavka.Konto) + "-Placa za " + knjiga.Datum_Do,
                     postavka.Konto,
-                    DateTime.Today.ToString("dd.MM.yyyy"),
+                    DateTime.Today.ToString("dd.MM.yyyy."),
                     postavka.Strana == "Dugovna",
                     postavka.Strana == "Potražna",
                     postavka.Mijenja_predznak == true

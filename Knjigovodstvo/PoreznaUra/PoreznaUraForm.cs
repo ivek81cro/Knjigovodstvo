@@ -146,7 +146,7 @@ namespace Knjigovodstvo.PoreznaUra
         }
 
         private DbDataGet _dbDataGet = new DbDataGet();
-        private UraKnjiga _uraKnjiga = new UraKnjiga();
+        private KnjigaUra _uraKnjiga = new KnjigaUra();
         private DataTable _dt = new DataTable();
         private ObrazacUra _obrazacURA = new ObrazacUra();
         private string _path = "";

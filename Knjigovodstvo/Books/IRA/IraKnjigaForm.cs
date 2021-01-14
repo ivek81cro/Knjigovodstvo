@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.IRA
@@ -24,7 +23,7 @@ namespace Knjigovodstvo.IRA
             _columns.Add(2, "Broj_racuna");
             InitializeComponent();
             DataTable dt = new DbDataCustomQuery()
-                    .ExecuteQuery("SELECT TOP 1 Redni_broj FROM IraKnjiga WHERE Redni_broj IS NOT NULL ORDER BY Redni_broj DESC;");
+                    .ExecuteQuery("SELECT TOP 1 Redni_broj FROM KnjigaIra WHERE Redni_broj IS NOT NULL ORDER BY Redni_broj DESC;");
             if (dt.Rows.Count != 0)
                 _lastRecord = int.Parse(dt.Rows[0].ItemArray[0].ToString());
             else
@@ -36,7 +35,17 @@ namespace Knjigovodstvo.IRA
 
         private void LoadDatagrid()
         {
-            dataGridView1.DataSource = new DbDataGet().GetTable(new IraKnjiga());
+            if (InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    dataGridView1.DataSource = new DbDataGet().GetTable(new KnjigaIra());
+                }));
+            }
+            else
+            {
+                dataGridView1.DataSource = new DbDataGet().GetTable(new KnjigaIra());
+            }
             FixColumnHeaders();
         }
 
@@ -56,15 +65,18 @@ namespace Knjigovodstvo.IRA
             conv.OpenXlsFile(ref path);
 
             //internal method used to pass params to method used as argument in WaitDialog constr.
-            void act()
+            if (path != null)
             {
-                conv.SaveToCsvAndLoad(ref path);
-                _listaStavki = File.ReadAllLines(path).Skip(3).Select(v => new IraKnjiga().FromCsv(v)).ToList();
-            }
+                void act()
+                {
+                    conv.SaveToCsvAndLoad(ref path);
+                    _listaStavki = File.ReadAllLines(path).Skip(3).Select(v => new KnjigaIra().FromCsv(v)).ToList();                    
+                }
 
-            using (WaitDialog waitDialog = new WaitDialog(act))
-            {
-                waitDialog.ShowDialog(this);
+                using (WaitDialog waitDialog = new WaitDialog(act, SplashMessages.Učitavanje))
+                {
+                    waitDialog.ShowDialog(this);                    
+                }
             }
 
             var data = new BindingSource
@@ -78,7 +90,7 @@ namespace Knjigovodstvo.IRA
         private void SaveDataToDatabase()
         {
             DbDataInsert ins = new DbDataInsert();
-            foreach (IraKnjiga stavka in _listaStavki)
+            foreach (KnjigaIra stavka in _listaStavki)
             {
                 if (stavka.Redni_broj > _lastRecord)
                     ins.InsertData(stavka);
@@ -116,7 +128,7 @@ namespace Knjigovodstvo.IRA
 
         private void ButtonSpremi_Click(object sender, EventArgs e)
         {
-            using (WaitDialog waitDialog = new WaitDialog(SaveDataToDatabase))
+            using (WaitDialog waitDialog = new WaitDialog(SaveDataToDatabase, SplashMessages.Spremanje))
             {
                 waitDialog.ShowDialog(this);
             }
@@ -147,14 +159,14 @@ namespace Knjigovodstvo.IRA
                     break;
                 else
                     new DbDataCustomQuery()
-                        .ExecuteQuery($"UPDATE IraKnjiga SET Knjizen = 1 WHERE Redni_broj = {_iraKnjiga.Redni_broj}");
+                        .ExecuteQuery($"UPDATE KnjigaIra SET Knjizen = 1 WHERE Redni_broj = {_iraKnjiga.Redni_broj}");
             }
         }        
 
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
-        private readonly IraKnjiga _iraKnjiga = new IraKnjiga();
+        private readonly KnjigaIra _iraKnjiga = new KnjigaIra();
         private readonly BookNames _bookNames;
-        private List<IraKnjiga> _listaStavki = new List<IraKnjiga>();
+        private List<KnjigaIra> _listaStavki = new List<KnjigaIra>();
         private readonly int _lastRecord = 0;
         private readonly Dictionary<int, string> _columns = new Dictionary<int, string>();
     }

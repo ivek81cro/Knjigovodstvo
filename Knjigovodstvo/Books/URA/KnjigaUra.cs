@@ -1,13 +1,15 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 
 namespace Knjigovodstvo.URA
 {
-    public class UraKnjiga : IDbObject
+    public class KnjigaUra : IDbObject
     {
-        public UraKnjiga FromCsv(string line)
+        public KnjigaUra FromCsv(string line)
         {
             string[] val = line.Split(';');
 
@@ -62,11 +64,15 @@ namespace Knjigovodstvo.URA
 
         public void GetDataFromDatabaseByRedniBroj()
         {
-            var row = new DbDataGet().GetTable(this, $"Redni_broj={Redni_broj}").Rows[0];
+            var datatable = _dataGet.GetTable(this, $"Redni_broj={Redni_broj}");
+            FillData(datatable.Rows[0]);
+        }
 
+        public void FillData(DataRow row)
+        {
             Datum = row["Datum"].ToString();
             Broj_racuna = row["Broj_racuna"].ToString();
-            Storno = row["Storno"].ToString()=="1";
+            Storno = row["Storno"].ToString() == "1";
             Storno_broja = int.Parse(row["Storno_broja"].ToString());
             Datum_racuna = row["Datum_racuna"].ToString();
             Starost_racuna = int.Parse(row["Starost_racuna"].ToString());
@@ -108,13 +114,15 @@ namespace Knjigovodstvo.URA
             Ukupno_uplaceno = decimal.Parse(row["Ukupno_uplaceno"].ToString());
             Preostalo_za_uplatit = decimal.Parse(row["Preostalo_za_uplatit"].ToString());
             Dospijece_dana = int.Parse(row["Dospijece_dana"].ToString());
-            Knjizen = row["Knjizen"].ToString()=="1";
+            Knjizen = row["Knjizen"].ToString() == "1";
         }
 
         public FormError ValidateData()
         {
             throw new NotImplementedException();
         }
+
+        private DbDataGet _dataGet = new DbDataGet();
 
         public int Redni_broj { get; set; } = 0;
         public string Datum { get; set; } = "";

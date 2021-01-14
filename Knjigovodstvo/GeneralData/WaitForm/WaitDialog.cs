@@ -4,14 +4,21 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.GeneralData.WaitForm
 {
+    public enum SplashMessages
+    {
+        Učitavanje,
+        Spremanje
+    }
     public partial class WaitDialog : Form
     {
-        public WaitDialog(Action worker)
+        public WaitDialog(Action worker, SplashMessages message)
         {
             InitializeComponent();
             if (worker == null)
                 throw new ArgumentNullException();
             Worker = worker;
+
+            label1.Text = "Molim sačekati\n" + message.ToString() + " podataka";
         }
 
         protected override void OnLoad(EventArgs e)

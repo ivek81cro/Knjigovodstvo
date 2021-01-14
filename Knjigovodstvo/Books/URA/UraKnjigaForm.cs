@@ -24,7 +24,7 @@ namespace Knjigovodstvo.URA
             _columns.Add(2, "Broj_racuna");
             InitializeComponent();
             _dt = new DbDataCustomQuery()
-                .ExecuteQuery("SELECT TOP 1 Redni_broj FROM UraKnjiga WHERE Redni_broj IS NOT NULL ORDER BY Redni_broj DESC;");
+                .ExecuteQuery("SELECT TOP 1 Redni_broj FROM KnjigaUra WHERE Redni_broj IS NOT NULL ORDER BY Redni_broj DESC;");
             if (_dt.Rows.Count != 0)
                 _lastRecord = int.Parse(_dt.Rows[0].ItemArray[0].ToString());
             else
@@ -36,7 +36,17 @@ namespace Knjigovodstvo.URA
 
         private void LoadDatagrid()
         {
-            dbDdataGridView1.DataSource = new DbDataGet().GetTable(_uraKnjiga);
+            if (InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    dbDdataGridView1.DataSource = new DbDataGet().GetTable(_uraKnjiga);
+                }));
+            }
+            else
+            {
+                dbDdataGridView1.DataSource = new DbDataGet().GetTable(_uraKnjiga);
+            }
             FixColumnHeaders();
         }
 
@@ -76,10 +86,10 @@ namespace Knjigovodstvo.URA
             void act()
             {
                 conv.SaveToCsvAndLoad(ref path);
-                _listaStavki = File.ReadAllLines(path).Skip(3).Select(v => new UraKnjiga().FromCsv(v)).ToList();
+                _listaStavki = File.ReadAllLines(path).Skip(3).Select(v => new KnjigaUra().FromCsv(v)).ToList();
             }
 
-            using (WaitDialog waitDialog = new WaitDialog(act))
+            using (WaitDialog waitDialog = new WaitDialog(act, SplashMessages.Učitavanje))
             {
                 waitDialog.ShowDialog(this);
             }
@@ -94,7 +104,7 @@ namespace Knjigovodstvo.URA
         private void SaveDataToDatabase()
         {
             DbDataInsert ins = new DbDataInsert();
-            foreach (UraKnjiga stavka in _listaStavki)
+            foreach (KnjigaUra stavka in _listaStavki)
             {
                 if (stavka.Redni_broj > _lastRecord)
                     ins.InsertData(stavka);
@@ -115,7 +125,7 @@ namespace Knjigovodstvo.URA
 
         private void ButtonSpremi_Click(object sender, EventArgs e)
         {
-            using (WaitDialog waitDialog = new WaitDialog(SaveDataToDatabase))
+            using (WaitDialog waitDialog = new WaitDialog(SaveDataToDatabase, SplashMessages.Spremanje))
             {
                 waitDialog.ShowDialog(this);
             }
@@ -169,15 +179,15 @@ namespace Knjigovodstvo.URA
                     break;
                 else
                     new DbDataCustomQuery()
-                        .ExecuteQuery($"UPDATE UraKnjiga SET Knjizen = 1 WHERE Redni_broj = {_uraKnjiga.Redni_broj}");
+                        .ExecuteQuery($"UPDATE KnjigaUra SET Knjizen = 1 WHERE Redni_broj = {_uraKnjiga.Redni_broj}");
             }
         }
 
         private BookNames _bookName;
-        private List<UraKnjiga> _listaStavki = new List<UraKnjiga>();
+        private List<KnjigaUra> _listaStavki = new List<KnjigaUra>();
         private readonly int _lastRecord = 0;
         private readonly DataTable _dt;
-        private readonly UraKnjiga _uraKnjiga = new UraKnjiga();
+        private readonly KnjigaUra _uraKnjiga = new KnjigaUra();
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly Dictionary<int, string> _columns = new Dictionary<int, string>();
     }

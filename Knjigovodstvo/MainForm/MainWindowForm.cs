@@ -232,6 +232,20 @@ namespace Knjigovodstvo.MainForm
             }
         }
 
+        private void ShowNewPorezPdvForm(object sender, EventArgs e)
+        {
+            string formName = ChildWindowName.PorezPdvForm.ToString();
+            if (_isOpen.Check(MdiChildren, formName))
+            {
+                Form f = _isOpen.GetChild(MdiChildren, formName);
+                f.Focus();
+            }
+            else
+            {
+                _openForm.Open(new PorezPdvForm(), this);
+            }
+        }
+
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.Cascade);

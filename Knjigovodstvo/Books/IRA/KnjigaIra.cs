@@ -1,18 +1,19 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
 using System;
+using System.Data;
 using System.Globalization;
 
 namespace Knjigovodstvo.IRA
 {
-    class IraKnjiga : IDbObject
+    class KnjigaIra : IDbObject
     {
         public FormError ValidateData()
         {
             throw new NotImplementedException();
         }
 
-        public IraKnjiga FromCsv(string line)
+        public KnjigaIra FromCsv(string line)
         {
             string[] val = line.Split(';');
 
@@ -54,7 +55,11 @@ namespace Knjigovodstvo.IRA
         internal void GetDataFromDatabaseByRedniBroj()
         {
             var row = new DbDataGet().GetTable(this, $"Redni_broj={Redni_broj}").Rows[0];
+            FillData(row);
+        }
 
+        public void FillData(DataRow row)
+        {
             Redni_broj = int.Parse(row["Redni_broj"].ToString());
             Broj_racuna = row["Broj_racuna"].ToString();
             Storno = row["Storno"].ToString() == "1";
@@ -88,6 +93,8 @@ namespace Knjigovodstvo.IRA
             Dana_neplacanja = int.Parse(row["Dana_neplacanja"].ToString());
             Knjizen = int.Parse(row["Dana_neplacanja"].ToString()) == 1;
         }
+
+        private DbDataGet _dataGet = new DbDataGet();
 
         public int Redni_broj { get; set; } = 0;
         public string Broj_racuna { get; set; } = "";

@@ -25,7 +25,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                             Dokument = _postavkeKnjizenja.ElementAt(0).Knjiga,
                             Broj = int.Parse(row["Redni broj"].ToString()),
                             Konto = row["Konto"].ToString(),
-                            Datum = DateTime.ParseExact(row["Datum dokumenta"].ToString(), "dd.MM.yyyy", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"),
+                            Datum = DateTime.ParseExact(row["Datum dokumenta"].ToString(), "dd.MM.yyyy.", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"),
                             Duguje = decimal.Parse(row["Dugovna"].ToString()),
                             Potrazuje = decimal.Parse(row["Potražna"].ToString())
                         });

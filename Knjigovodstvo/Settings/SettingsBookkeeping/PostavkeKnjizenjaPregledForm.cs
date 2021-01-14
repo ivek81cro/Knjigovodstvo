@@ -23,16 +23,16 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
             switch (knjiga) 
             {
                 case BookNames.Ura_odobrenje:
-                    PopulateComboBoxStupac(new UraKnjiga());
+                    PopulateComboBoxStupac(new KnjigaUra());
                     break;
                 case BookNames.Ura_trošak:
-                    PopulateComboBoxStupac(new UraKnjiga());
+                    PopulateComboBoxStupac(new KnjigaUra());
                     break;
                 case BookNames.Ura_primka:
                     PopulateComboBoxStupac(new Primka());
                     break;
                 case BookNames.Ira:
-                    PopulateComboBoxStupac(new IraKnjiga());
+                    PopulateComboBoxStupac(new KnjigaIra());
                     break;
                 case BookNames.Place:
                     PopulateComboBoxStupac(new Placa());

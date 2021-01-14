@@ -81,7 +81,7 @@ namespace Knjigovodstvo.URA
                 _listaPrimki = File.ReadAllLines(path).Skip(3).Select(v => new Primka().FromCsv(v)).ToList();
             }
 
-            using (WaitDialog waitDialog = new WaitDialog(act))
+            using (WaitDialog waitDialog = new WaitDialog(act, SplashMessages.Učitavanje))
             { 
                 waitDialog.ShowDialog(this); 
             }
@@ -129,7 +129,7 @@ namespace Knjigovodstvo.URA
         /// <param name="e"></param>
         private void ButtonSpremi_ClickAsync(object sender, EventArgs e)
         {
-            using (WaitDialog waitDialog = new WaitDialog(SaveDataToDatabase))
+            using (WaitDialog waitDialog = new WaitDialog(SaveDataToDatabase, SplashMessages.Spremanje))
             {
                 waitDialog.ShowDialog(this);
             }
@@ -159,7 +159,7 @@ namespace Knjigovodstvo.URA
                     break;
                 else
                     new DbDataCustomQuery()
-                        .ExecuteQuery($"UPDATE UraKnjiga SET Knjizen = 1 WHERE Redni_broj = {_primka.Broj_u_knjizi_ura}");
+                        .ExecuteQuery($"UPDATE KnjigaUra SET Knjizen = 1 WHERE Redni_broj = {_primka.Broj_u_knjizi_ura}");
             }
         }
 
