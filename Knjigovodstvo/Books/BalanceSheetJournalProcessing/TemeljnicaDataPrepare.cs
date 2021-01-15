@@ -70,6 +70,25 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             }
         }
 
+        public void PrepareDataPrimkaRepro(DataTable dt, List<PostavkeKnjizenja> postavkeKnjizenja, IDbObject obj)
+        {
+            PrimkaRepro knjiga = (PrimkaRepro)obj;
+
+            foreach (var postavka in postavkeKnjizenja)
+            {
+                dt.Rows.Add(
+                    knjiga.Broj_u_knjizi_ura,
+                    postavka.Naziv_stupca,
+                    knjiga.Naziv_dobavljaca + ":" + knjiga.Broj_racuna,
+                    postavka.Konto,
+                    knjiga.Datum_knjizenja.Split(' ')[0],
+                    postavka.Strana == "Dugovna",
+                    postavka.Strana == "Potražna",
+                    postavka.Mijenja_predznak == true
+                    );
+            }
+        }
+
         internal void PrepareDataIzvod(DataTable dt, IDbObject obj)
         {
             Izvod izvod = (Izvod)obj;

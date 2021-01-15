@@ -28,6 +28,9 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
                 case BookNames.Ura_trošak:
                     PopulateComboBoxStupac(new KnjigaUra());
                     break;
+                case BookNames.Ura_repro:
+                    PopulateComboBoxStupac(new PrimkaRepro());
+                    break;
                 case BookNames.Ura_primka:
                     PopulateComboBoxStupac(new Primka());
                     break;

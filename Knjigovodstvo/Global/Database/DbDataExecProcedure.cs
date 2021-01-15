@@ -19,7 +19,8 @@ namespace Knjigovodstvo.Database
         Izdvoji_Troskove,
         Izdvoji_Odobrenja,
         Izvod_GetLastId,
-        Dodatak_Distinct_Datum
+        Dodatak_Distinct_Datum,
+        Izdvoji_Repromaterijal
     }
 
     class DbDataExecProcedure
@@ -76,6 +77,7 @@ namespace Knjigovodstvo.Database
                 ProcedureNames.Izdvoji_Troskove => "Izdvoji_Troskove",
                 ProcedureNames.Izdvoji_Odobrenja => "Izdvoji_Odobrenja",
                 ProcedureNames.Izvod_GetLastId => "Izvod_GetLastId",
+                ProcedureNames.Izdvoji_Repromaterijal => "Izdvoji_Repromaterijal",
                 _ => "",
             };
         }

@@ -136,7 +136,7 @@ namespace Knjigovodstvo.MainForm
         }
         private void ShowNewFormUraPrimkaForm(object sender, EventArgs e)
         {
-            string formName = ChildWindowName.UraPrimkaForm.ToString();
+            string formName = ChildWindowName.UraPrimkaReproForm.ToString();
             if (_isOpen.Check(MdiChildren, formName))
             {
                 Form f = _isOpen.GetChild(MdiChildren, formName);
@@ -145,6 +145,20 @@ namespace Knjigovodstvo.MainForm
             else
             {
                 _openForm.Open(new UraPrimkaForm(), this);
+            }
+        }
+
+        private void ShowNewFormPrimkaRepro(object sender, EventArgs e)
+        {
+            string formName = ChildWindowName.UraPrimkaReproForm.ToString();
+            if (_isOpen.Check(MdiChildren, formName))
+            {
+                Form f = _isOpen.GetChild(MdiChildren, formName);
+                f.Focus();
+            }
+            else
+            {
+                _openForm.Open(new UraPrimkaReproForm(), this);
             }
         }
 
