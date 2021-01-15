@@ -1,6 +1,4 @@
-﻿using Knjigovodstvo.Books.PrepareForBalanceSheet;
-using Knjigovodstvo.Interface;
-using System.Collections.Generic;
+﻿using Knjigovodstvo.Interface;
 
 namespace Knjigovodstvo.Books.BalanceSheetJournal
 {

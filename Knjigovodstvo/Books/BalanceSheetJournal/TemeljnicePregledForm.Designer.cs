@@ -37,12 +37,16 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             this.labelDuguje = new System.Windows.Forms.Label();
             this.labelPotrazuje = new System.Windows.Forms.Label();
             this.buttonDodajRed = new System.Windows.Forms.Button();
+            this.dateTimePickerDatumKnjizenja = new System.Windows.Forms.DateTimePicker();
+            this.labelDatumKnjizenja = new System.Windows.Forms.Label();
+            this.buttonKnjiziTemeljnicu = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dbDataGridView1
             // 
             this.dbDataGridView1.AllowUserToAddRows = false;
+            this.dbDataGridView1.AllowUserToDeleteRows = false;
             this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -50,7 +54,9 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             this.dbDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dbDataGridView1.Location = new System.Drawing.Point(13, 182);
             this.dbDataGridView1.Name = "dbDataGridView1";
+            this.dbDataGridView1.ReadOnly = true;
             this.dbDataGridView1.RowTemplate.Height = 25;
+            this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dbDataGridView1.Size = new System.Drawing.Size(1186, 395);
             this.dbDataGridView1.TabIndex = 0;
             this.dbDataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DbDataGridView1_CellDoubleClick);
@@ -108,11 +114,40 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             this.buttonDodajRed.UseVisualStyleBackColor = true;
             this.buttonDodajRed.Click += new System.EventHandler(this.ButtonDodajRed_Click);
             // 
+            // dateTimePickerDatumKnjizenja
+            // 
+            this.dateTimePickerDatumKnjizenja.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerDatumKnjizenja.Location = new System.Drawing.Point(169, 12);
+            this.dateTimePickerDatumKnjizenja.Name = "dateTimePickerDatumKnjizenja";
+            this.dateTimePickerDatumKnjizenja.Size = new System.Drawing.Size(100, 23);
+            this.dateTimePickerDatumKnjizenja.TabIndex = 6;
+            // 
+            // labelDatumKnjizenja
+            // 
+            this.labelDatumKnjizenja.AutoSize = true;
+            this.labelDatumKnjizenja.Location = new System.Drawing.Point(13, 18);
+            this.labelDatumKnjizenja.Name = "labelDatumKnjizenja";
+            this.labelDatumKnjizenja.Size = new System.Drawing.Size(150, 15);
+            this.labelDatumKnjizenja.TabIndex = 7;
+            this.labelDatumKnjizenja.Text = "Datum knjiženja temeljnice";
+            // 
+            // buttonKnjiziTemeljnicu
+            // 
+            this.buttonKnjiziTemeljnicu.Location = new System.Drawing.Point(13, 50);
+            this.buttonKnjiziTemeljnicu.Name = "buttonKnjiziTemeljnicu";
+            this.buttonKnjiziTemeljnicu.Size = new System.Drawing.Size(110, 23);
+            this.buttonKnjiziTemeljnicu.TabIndex = 8;
+            this.buttonKnjiziTemeljnicu.Text = "Knjiži temeljnicu";
+            this.buttonKnjiziTemeljnicu.UseVisualStyleBackColor = true;
+            // 
             // TemeljnicePregledForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1211, 631);
+            this.Controls.Add(this.buttonKnjiziTemeljnicu);
+            this.Controls.Add(this.labelDatumKnjizenja);
+            this.Controls.Add(this.dateTimePickerDatumKnjizenja);
             this.Controls.Add(this.buttonDodajRed);
             this.Controls.Add(this.labelPotrazuje);
             this.Controls.Add(this.labelDuguje);
@@ -143,5 +178,8 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
         private System.Windows.Forms.Label labelDuguje;
         private System.Windows.Forms.Label labelPotrazuje;
         private System.Windows.Forms.Button buttonDodajRed;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDatumKnjizenja;
+        private System.Windows.Forms.Label labelDatumKnjizenja;
+        private System.Windows.Forms.Button buttonKnjiziTemeljnicu;
     }
 }

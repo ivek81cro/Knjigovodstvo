@@ -91,6 +91,7 @@ namespace Knjigovodstvo
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
             //TODO: finish saving to books
+            //Zatvori konto 1600 i 2600 sa kontom za razliku poreza i pretporeza
         }
 
         private void ButtonIzracunaj_Click(object sender, EventArgs e)
