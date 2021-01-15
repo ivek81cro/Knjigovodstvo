@@ -36,7 +36,17 @@ namespace Knjigovodstvo.URA
 
         private void LoadDatagrid()
         {
-            dataGridView1.DataSource = new DbDataGet().GetTable(_primka, $" Redni_broj <> 0 ORDER BY Redni_broj");
+            if (InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    dataGridView1.DataSource = new DbDataGet().GetTable(_primka);
+                }));
+            }
+            else
+            {
+                dataGridView1.DataSource = new DbDataGet().GetTable(_primka);
+            }
             FixColumnHeaders();
         }
 

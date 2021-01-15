@@ -70,6 +70,8 @@
             this.labelPp5 = new System.Windows.Forms.Label();
             this.labelPpOs25 = new System.Windows.Forms.Label();
             this.buttonKnjizi = new System.Windows.Forms.Button();
+            this.labelZaUplatu = new System.Windows.Forms.Label();
+            this.labelIznZaUplatu = new System.Windows.Forms.Label();
             this.groupBoxRazdoblje.SuspendLayout();
             this.groupBoxIznosi.SuspendLayout();
             this.groupBoxPorez.SuspendLayout();
@@ -133,10 +135,12 @@
             this.buttonIzracunaj.TabIndex = 4;
             this.buttonIzracunaj.Text = "Izračunaj";
             this.buttonIzracunaj.UseVisualStyleBackColor = true;
-            this.buttonIzracunaj.Click += new System.EventHandler(this.buttonIzracunaj_Click);
+            this.buttonIzracunaj.Click += new System.EventHandler(this.ButtonIzracunaj_Click);
             // 
             // groupBoxIznosi
             // 
+            this.groupBoxIznosi.Controls.Add(this.labelIznZaUplatu);
+            this.groupBoxIznosi.Controls.Add(this.labelZaUplatu);
             this.groupBoxIznosi.Controls.Add(this.groupBoxPorez);
             this.groupBoxIznosi.Controls.Add(this.groupBoxPretporez);
             this.groupBoxIznosi.Location = new System.Drawing.Point(12, 126);
@@ -494,6 +498,26 @@
             this.buttonKnjizi.UseVisualStyleBackColor = true;
             this.buttonKnjizi.Click += new System.EventHandler(this.ButtonKnjizi_Click);
             // 
+            // labelZaUplatu
+            // 
+            this.labelZaUplatu.AutoSize = true;
+            this.labelZaUplatu.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelZaUplatu.Location = new System.Drawing.Point(12, 358);
+            this.labelZaUplatu.Name = "labelZaUplatu";
+            this.labelZaUplatu.Size = new System.Drawing.Size(129, 20);
+            this.labelZaUplatu.TabIndex = 8;
+            this.labelZaUplatu.Text = "Za uplatu / povrat";
+            // 
+            // labelIznZaUplatu
+            // 
+            this.labelIznZaUplatu.AutoSize = true;
+            this.labelIznZaUplatu.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelIznZaUplatu.Location = new System.Drawing.Point(161, 358);
+            this.labelIznZaUplatu.Name = "labelIznZaUplatu";
+            this.labelIznZaUplatu.Size = new System.Drawing.Size(36, 20);
+            this.labelIznZaUplatu.TabIndex = 9;
+            this.labelIznZaUplatu.Text = "0,00";
+            // 
             // PorezPdvForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -508,6 +532,7 @@
             this.groupBoxRazdoblje.ResumeLayout(false);
             this.groupBoxRazdoblje.PerformLayout();
             this.groupBoxIznosi.ResumeLayout(false);
+            this.groupBoxIznosi.PerformLayout();
             this.groupBoxPorez.ResumeLayout(false);
             this.groupBoxPorez.PerformLayout();
             this.groupBoxPretporez.ResumeLayout(false);
@@ -560,5 +585,7 @@
         private System.Windows.Forms.Label labelIzPp13;
         private System.Windows.Forms.Label labelIzPp5;
         private System.Windows.Forms.Button buttonKnjizi;
+        private System.Windows.Forms.Label labelIznZaUplatu;
+        private System.Windows.Forms.Label labelZaUplatu;
     }
 }
