@@ -9,6 +9,7 @@
         Ira,
         Place,
         Dodaci,
-        Izvodi
+        Izvodi,
+        Ura_repro
     }
 }

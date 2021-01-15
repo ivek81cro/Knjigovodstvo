@@ -56,6 +56,7 @@ namespace Knjigovodstvo.MainForm
             this.menuFinancijsko = new System.Windows.Forms.ToolStripMenuItem();
             this.menuKontniPlan = new System.Windows.Forms.ToolStripMenuItem();
             this.menuTemeljnice = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuIzracunPdv = new System.Windows.Forms.ToolStripMenuItem();
             this.prozoriMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cascadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tileVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +71,7 @@ namespace Knjigovodstvo.MainForm
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.menuIzracunPdv = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRepro = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -154,6 +155,7 @@ namespace Knjigovodstvo.MainForm
             // 
             this.menuUra.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuPrimke,
+            this.menuRepro,
             this.menuUraKnjiga});
             this.menuUra.Name = "menuUra";
             this.menuUra.Size = new System.Drawing.Size(97, 22);
@@ -162,14 +164,14 @@ namespace Knjigovodstvo.MainForm
             // menuPrimke
             // 
             this.menuPrimke.Name = "menuPrimke";
-            this.menuPrimke.Size = new System.Drawing.Size(142, 22);
+            this.menuPrimke.Size = new System.Drawing.Size(194, 22);
             this.menuPrimke.Text = "Primke";
             this.menuPrimke.Click += new System.EventHandler(this.ShowNewFormUraPrimkaForm);
             // 
             // menuUraKnjiga
             // 
             this.menuUraKnjiga.Name = "menuUraKnjiga";
-            this.menuUraKnjiga.Size = new System.Drawing.Size(142, 22);
+            this.menuUraKnjiga.Size = new System.Drawing.Size(194, 22);
             this.menuUraKnjiga.Text = "Ulazni računi";
             this.menuUraKnjiga.Click += new System.EventHandler(this.ShowNewFormUraKnjigaPregled);
             // 
@@ -271,6 +273,13 @@ namespace Knjigovodstvo.MainForm
             this.menuTemeljnice.Size = new System.Drawing.Size(137, 22);
             this.menuTemeljnice.Text = "Temeljnice";
             this.menuTemeljnice.Click += new System.EventHandler(this.ShowNewFormTemeljnice);
+            // 
+            // menuIzracunPdv
+            // 
+            this.menuIzracunPdv.Name = "menuIzracunPdv";
+            this.menuIzracunPdv.Size = new System.Drawing.Size(137, 22);
+            this.menuIzracunPdv.Text = "Izračun PDV";
+            this.menuIzracunPdv.Click += new System.EventHandler(this.ShowNewPorezPdvForm);
             // 
             // prozoriMenu
             // 
@@ -374,12 +383,12 @@ namespace Knjigovodstvo.MainForm
             this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
-            // menuIzracunPdv
+            // menuRepro
             // 
-            this.menuIzracunPdv.Name = "menuIzracunPdv";
-            this.menuIzracunPdv.Size = new System.Drawing.Size(137, 22);
-            this.menuIzracunPdv.Text = "Izračun PDV";
-            this.menuIzracunPdv.Click += new System.EventHandler(this.ShowNewPorezPdvForm);
+            this.menuRepro.Name = "menuRepro";
+            this.menuRepro.Size = new System.Drawing.Size(194, 22);
+            this.menuRepro.Text = "Primke repromaterijala";
+            this.menuRepro.Click += new System.EventHandler(this.ShowNewFormPrimkaRepro);
             // 
             // MainWindowForm
             // 
@@ -444,6 +453,7 @@ namespace Knjigovodstvo.MainForm
         private System.Windows.Forms.ToolStripMenuItem menuDodatak;
         private System.Windows.Forms.ToolStripMenuItem menuTemeljnice;
         private System.Windows.Forms.ToolStripMenuItem menuIzracunPdv;
+        private System.Windows.Forms.ToolStripMenuItem menuRepro;
     }
 }
 

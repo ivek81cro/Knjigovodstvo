@@ -41,6 +41,10 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     tp.PrepareDataPrimka(_dt, _postavkeKnjizenja, _obj);
                     FindPartnerKontoNumber();
                     break;
+                case "PrimkaRepro":
+                    tp.PrepareDataPrimkaRepro(_dt, _postavkeKnjizenja, _obj);
+                    FindPartnerKontoNumber();
+                    break;
                 case "KnjigaIra":
                     tp.PrepareDataIra(_dt, _postavkeKnjizenja, _obj);
                     FindPartnerKontoNumber();

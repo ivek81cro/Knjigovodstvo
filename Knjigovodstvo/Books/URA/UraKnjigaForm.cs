@@ -171,7 +171,7 @@ namespace Knjigovodstvo.URA
             foreach (DataGridViewRow row in dbDdataGridView1.SelectedRows)
             {
                 SetSelectedItem(row);//TODO: Knjizenje repromaterijala
-                if (_uraKnjiga.Knjizen)
+                if (_uraKnjiga.Knjizen || _uraKnjiga.Broj_primke != 0)
                     continue;
                 TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_uraKnjiga, _postavkeKnjizenja);
                 form.ShowDialog();

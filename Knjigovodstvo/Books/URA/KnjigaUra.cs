@@ -1,7 +1,6 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 

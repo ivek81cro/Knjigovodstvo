@@ -12,7 +12,7 @@ namespace Knjigovodstvo.MainForm
         PlacaPregledForm,
         PlacaObracunForm,
         JoppdPlacaForm,
-        UraPrimkaForm,
+        UraPrimkaReproForm,
         UraKnjigaForm,
         IraKnjigaForm,
         IzvodiPregledForm,

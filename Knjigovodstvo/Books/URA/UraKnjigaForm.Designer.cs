@@ -45,11 +45,19 @@ namespace Knjigovodstvo.URA
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dbDataGridView1
-            //             
+            // dbDdataGridView1
+            // 
+            this.dbDdataGridView1.AllowUserToAddRows = false;
+            this.dbDdataGridView1.AllowUserToDeleteRows = false;
+            this.dbDdataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dbDdataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dbDdataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dbDdataGridView1.Location = new System.Drawing.Point(12, 139);
-            this.dbDdataGridView1.Name = "dataGridView1";
+            this.dbDdataGridView1.Name = "dbDdataGridView1";
+            this.dbDdataGridView1.ReadOnly = true;
+            this.dbDdataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dbDdataGridView1.Size = new System.Drawing.Size(1241, 466);
             this.dbDdataGridView1.TabIndex = 10;
             this.dbDdataGridView1.Text = "dataGridView1";
