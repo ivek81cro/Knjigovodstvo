@@ -1,4 +1,6 @@
 ﻿
+using Knjigovodstvo.Global;
+
 namespace Knjigovodstvo.BankStatements
 {
     partial class IzvodiPojedinacniForm
@@ -34,11 +36,8 @@ namespace Knjigovodstvo.BankStatements
             this.labelStanjeZavrsno = new System.Windows.Forms.Label();
             this.dataGridView1 = new Knjigovodstvo.DBDataGridView();
             this.buttonSpremi = new System.Windows.Forms.Button();
-            this.buttonPartneri = new System.Windows.Forms.Button();
-            this.groupBoxUpariKonto = new System.Windows.Forms.GroupBox();
-            this.buttonKontniPlan = new System.Windows.Forms.Button();
+            this.accountPairing = new AccountPairing(dataGridView1);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBoxUpariKonto.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelDatumIzvoda
@@ -80,6 +79,7 @@ namespace Knjigovodstvo.BankStatements
             this.dataGridView1.Location = new System.Drawing.Point(12, 121);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(646, 519);
             this.dataGridView1.TabIndex = 10;
@@ -95,54 +95,28 @@ namespace Knjigovodstvo.BankStatements
             this.buttonSpremi.UseVisualStyleBackColor = true;
             this.buttonSpremi.Click += new System.EventHandler(this.ButtonSpremi_Click);
             // 
-            // buttonPartneri
+            // accountPairing
             // 
-            this.buttonPartneri.Location = new System.Drawing.Point(97, 26);
-            this.buttonPartneri.Name = "buttonPartneri";
-            this.buttonPartneri.Size = new System.Drawing.Size(85, 23);
-            this.buttonPartneri.TabIndex = 12;
-            this.buttonPartneri.Text = "Partneri";
-            this.buttonPartneri.UseVisualStyleBackColor = true;
-            this.buttonPartneri.Click += new System.EventHandler(this.ButtonPartneri_Click);
-            // 
-            // groupBoxUpariKonto
-            // 
-            this.groupBoxUpariKonto.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBoxUpariKonto.Controls.Add(this.buttonKontniPlan);
-            this.groupBoxUpariKonto.Controls.Add(this.buttonPartneri);
-            this.groupBoxUpariKonto.Location = new System.Drawing.Point(470, 40);
-            this.groupBoxUpariKonto.Name = "groupBoxUpariKonto";
-            this.groupBoxUpariKonto.Size = new System.Drawing.Size(188, 66);
-            this.groupBoxUpariKonto.TabIndex = 13;
-            this.groupBoxUpariKonto.TabStop = false;
-            this.groupBoxUpariKonto.Text = "Upari konto";
-            // 
-            // buttonKontniPlan
-            // 
-            this.buttonKontniPlan.Location = new System.Drawing.Point(6, 26);
-            this.buttonKontniPlan.Name = "buttonKontniPlan";
-            this.buttonKontniPlan.Size = new System.Drawing.Size(85, 23);
-            this.buttonKontniPlan.TabIndex = 13;
-            this.buttonKontniPlan.Text = "Kontni plan";
-            this.buttonKontniPlan.UseVisualStyleBackColor = true;
-            this.buttonKontniPlan.Click += new System.EventHandler(this.ButtonKontniPlan_Click);
+            this.accountPairing.Location = new System.Drawing.Point(452, 33);
+            this.accountPairing.Name = "accountPairing";
+            this.accountPairing.Size = new System.Drawing.Size(206, 82);
+            this.accountPairing.TabIndex = 12;
             // 
             // IzvodiPojedinacniForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(670, 652);
-            this.Controls.Add(this.groupBoxUpariKonto);
             this.Controls.Add(this.buttonSpremi);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.labelStanjeZavrsno);
             this.Controls.Add(this.labelRedniBroj);
             this.Controls.Add(this.labelDatumIzvoda);
+            this.Controls.Add(this.accountPairing);
             this.Name = "IzvodiPojedinacniForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Izvod";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.groupBoxUpariKonto.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,8 +136,6 @@ namespace Knjigovodstvo.BankStatements
         private System.Windows.Forms.Label labelStanjeZavrsno;
         private DBDataGridView dataGridView1;
         private System.Windows.Forms.Button buttonSpremi;
-        private System.Windows.Forms.Button buttonPartneri;
-        private System.Windows.Forms.GroupBox groupBoxUpariKonto;
-        private System.Windows.Forms.Button buttonKontniPlan;
+        private AccountPairing accountPairing;
     }
 }

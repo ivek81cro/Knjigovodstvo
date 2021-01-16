@@ -34,6 +34,7 @@ namespace Knjigovodstvo.FinancialReports
             this.textBoxFilterKonto = new System.Windows.Forms.TextBox();
             this.textBoxFilterOpis = new System.Windows.Forms.TextBox();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.buttonDodajPartnera = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,9 +59,9 @@ namespace Knjigovodstvo.FinancialReports
             // 
             this.buttonDodajKonto.Location = new System.Drawing.Point(13, 13);
             this.buttonDodajKonto.Name = "buttonDodajKonto";
-            this.buttonDodajKonto.Size = new System.Drawing.Size(75, 23);
+            this.buttonDodajKonto.Size = new System.Drawing.Size(96, 23);
             this.buttonDodajKonto.TabIndex = 11;
-            this.buttonDodajKonto.Text = "Dodaj";
+            this.buttonDodajKonto.Text = "Dodaj konto";
             this.buttonDodajKonto.UseVisualStyleBackColor = true;
             this.buttonDodajKonto.Click += new System.EventHandler(this.ButtonDodajKonto_Click);
             // 
@@ -88,7 +89,7 @@ namespace Knjigovodstvo.FinancialReports
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(95, 12);
+            this.buttonClose.Location = new System.Drawing.Point(115, 12);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 14;
@@ -96,11 +97,22 @@ namespace Knjigovodstvo.FinancialReports
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
+            // buttonDodajPartnera
+            // 
+            this.buttonDodajPartnera.Location = new System.Drawing.Point(12, 43);
+            this.buttonDodajPartnera.Name = "buttonDodajPartnera";
+            this.buttonDodajPartnera.Size = new System.Drawing.Size(97, 23);
+            this.buttonDodajPartnera.TabIndex = 15;
+            this.buttonDodajPartnera.Text = "Dodaj partnera";
+            this.buttonDodajPartnera.UseVisualStyleBackColor = true;
+            this.buttonDodajPartnera.Click += new System.EventHandler(this.ButtonDodajPartnera_Click);
+            // 
             // KontniPlanPregledForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1246, 632);
+            this.Controls.Add(this.buttonDodajPartnera);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.textBoxFilterOpis);
             this.Controls.Add(this.textBoxFilterKonto);
@@ -122,5 +134,6 @@ namespace Knjigovodstvo.FinancialReports
         private System.Windows.Forms.TextBox textBoxFilterKonto;
         private System.Windows.Forms.TextBox textBoxFilterOpis;
         private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.Button buttonDodajPartnera;
     }
 }

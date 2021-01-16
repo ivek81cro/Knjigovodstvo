@@ -64,14 +64,12 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private bool CheckKonto(DataRow row)
         {
-            return !(row["Konto"].ToString() == "" || row["Konto"].ToString().Length < 2);
-                
+            return !(row["Konto"].ToString() == "" || row["Konto"].ToString().Length < 2);                
         }
 
         private bool CheckEmpty(DataRow row)
         {
-            return !(row["Dugovna"].ToString() == "0,00" && row["Potražna"].ToString() == "0,00");
-                
+            return !(row["Dugovna"].ToString() == "0,00" && row["Potražna"].ToString() == "0,00");                
         }
 
 

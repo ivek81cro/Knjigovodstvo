@@ -1,4 +1,6 @@
-﻿namespace Knjigovodstvo.Books.PrepareForBalanceSheet
+﻿using Knjigovodstvo.Global;
+
+namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 {
     partial class TemeljnicaPripremaForm
     {

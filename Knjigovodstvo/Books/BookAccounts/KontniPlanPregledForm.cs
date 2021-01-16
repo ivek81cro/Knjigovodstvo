@@ -1,4 +1,5 @@
 ﻿using Knjigovodstvo.Database;
+using Knjigovodstvo.Partners;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -42,12 +43,6 @@ namespace Knjigovodstvo.FinancialReports
             FilterClass("Opis");
         }
 
-        private void ButtonDodajKonto_Click(object sender, EventArgs e)
-        {
-            KontniPlanNoviForm form = new KontniPlanNoviForm();
-            form.ShowDialog();
-        }
-
         private void DbDataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow selectedRow = dbDataGridView1.SelectedRows[0];
@@ -55,6 +50,20 @@ namespace Knjigovodstvo.FinancialReports
             Opis = selectedRow.Cells["Opis"].Value.ToString();
             _kontniPlan.Konto = KontoBroj;
             Id_Konto = _kontniPlan.GetIdByKontoNumber();
+        }
+
+        private void ButtonDodajKonto_Click(object sender, EventArgs e)
+        {
+            KontniPlanNoviForm form = new KontniPlanNoviForm();
+            form.ShowDialog();
+            FillDataGrid();
+        }
+
+        private void ButtonDodajPartnera_Click(object sender, EventArgs e)
+        {
+            PartnerUnosForm form = new PartnerUnosForm();
+            form.ShowDialog();
+            FillDataGrid();
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)

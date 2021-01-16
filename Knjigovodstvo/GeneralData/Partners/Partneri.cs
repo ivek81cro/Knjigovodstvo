@@ -138,7 +138,7 @@ namespace Knjigovodstvo.Partners
 
         public string GetKontoDByNaziv(string naziv)
         {
-            _dt = new DbDataGet().GetTable(this, $"Naziv='{naziv}'");
+            _dt = new DbDataGet().GetTable(this, $"Naziv LIKE '{naziv}%'");
             string kontoPartnera = "";
             if (_dt.Rows.Count > 0)
                 kontoPartnera = _dt.Rows[0]["KontoD"].ToString();

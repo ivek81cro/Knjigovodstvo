@@ -1,5 +1,4 @@
 ﻿using Knjigovodstvo.FinancialReports;
-using Knjigovodstvo.Partners;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +14,12 @@ namespace Knjigovodstvo.BankStatements
             _izvod = izvodKnjiga;
             InitializeComponent();
             FillData();
+            FormMethodPointer += new CallFillKontoColumn(FillKontoColumn);
+            accountPairing.userFunctionPointer = FormMethodPointer;
         }
+
+        public delegate void CallFillKontoColumn();
+        private event CallFillKontoColumn FormMethodPointer;
 
         private void FillData()
         {
@@ -52,11 +56,6 @@ namespace Knjigovodstvo.BankStatements
             }
         }
 
-        private static void MessageShow()
-        {
-            MessageBox.Show("Postoji već upareni konto.", "Informacija", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
         private void ButtonSpremi_Click(object sender, System.EventArgs e)
         {
             foreach (DataGridViewRow row in dataGridView1.Rows)
@@ -89,61 +88,6 @@ namespace Knjigovodstvo.BankStatements
             }
 
             Close();
-        }
-
-        private void ButtonPartneri_Click(object sender, System.EventArgs e)
-        {
-            DataGridViewRow row = dataGridView1.SelectedRows[0];
-            string naziv = row.Cells["Naziv"].Value.ToString();
-            using var form = new PartneriTableForm();
-            form.OdabirPartnera();
-            
-            Partneri partner = new Partneri();
-            partner.OpciPodaci.Id = form.IdPartner; 
-            partner.GetPartnerById();
-            
-            KontniPlan kontniPlan = new KontniPlan();
-            kontniPlan.Konto = row.Cells["Dugovna"].Value.ToString() == "0" ? partner.KontoK : partner.KontoD;
-            IzvodParovi par = new IzvodParovi()
-            {
-                Naziv_Izvod = naziv,
-                Id_Konto = kontniPlan.GetIdByKontoNumber()
-            };
-
-            if (!par.ExistsInDb() && par.Id_Konto != 0)
-            {
-                par.InsertData();
-                FillKontoColumn();
-            }
-            else
-            {
-                MessageShow();
-            }
-        }
-
-        private void ButtonKontniPlan_Click(object sender, System.EventArgs e)
-        {
-            DataGridViewRow row = dataGridView1.SelectedRows[0];
-            string naziv = row.Cells["Naziv"].Value.ToString();
-            using var form = new KontniPlanPregledForm();
-            form.ShowDialog();
-            IzvodParovi par = new IzvodParovi()
-            {
-                Naziv_Izvod = naziv,
-                Id_Konto = form.Id_Konto
-            };
-
-            if (!par.ExistsInDb() && par.Id_Konto != 0)
-            {
-                par.InsertData();
-                KontniPlan konto = new KontniPlan();
-                konto.Id = par.Id_Konto;
-                row.Cells["Konto"].Value = konto.GetKontoById();
-            }
-            else
-            {
-                MessageShow();
-            }
         }
         
         private readonly Izvod _izvod;

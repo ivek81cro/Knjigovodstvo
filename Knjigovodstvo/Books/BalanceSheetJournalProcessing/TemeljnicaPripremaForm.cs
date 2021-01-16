@@ -167,12 +167,21 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         private void DbDataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             DecimalValidate validate = new DecimalValidate();
-            foreach (DataGridViewRow row in dbDataGridView1.Rows)
+            KontniPlan konto = new KontniPlan();
+            DataGridViewRow row = dbDataGridView1.Rows[dbDataGridView1.CurrentCell.RowIndex];
+
+            if (!validate.Check(row.Cells["Potražna"].Value.ToString())
+                || !validate.Check(row.Cells["Dugovna"].Value.ToString()))
             {
-                if (!validate.Check(row.Cells["Potražna"].Value.ToString())
-                    || !validate.Check(row.Cells["Dugovna"].Value.ToString()))
-                    MessageBox.Show("Vrijednosti u poljima iznosa nisu u odgovarajućem formatu(0,00)", "Upozorenja");
+                MessageBox.Show("Vrijednosti u poljima iznosa nisu u odgovarajućem formatu(0,00)", "Upozorenja");
             }
+
+            if (row.Cells["Konto"].Value.ToString() != "" && !konto.ExistsKonto(row.Cells["Konto"].Value.ToString()))
+            {
+                MessageBox.Show("Nepostojeći konto, unesite novog partnera ili otvorite novi konto.", "Upozorenja");
+                row.Cells["Konto"].Value = "";
+            }
+            
             _checkBalance.CheckEndBalance(_dt, _labelList);
         }
 

@@ -14,7 +14,7 @@ namespace Knjigovodstvo
             BackgroundColor = System.Drawing.SystemColors.Window;
             AllowUserToAddRows = false;
             AllowUserToDeleteRows = false;
-            ReadOnly = true;
+            ReadOnly = false;
             SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
     }
