@@ -64,7 +64,12 @@ namespace Knjigovodstvo.URA
                                       Strana = dRow["Strana"].ToString(),
                                       Mijenja_predznak = dRow["Mijenja_predznak"].ToString() == "True"
                                   }).ToList();
-            
+
+            if (_postavkeKnjizenja.Count == 0)
+            {
+                MessageBox.Show("Ne postoje postavke knjiženja za dokumente, molim postavite ih.", "Upozorenja");
+            }
+
         }
 
         private void FixColumnHeaders()
@@ -170,7 +175,7 @@ namespace Knjigovodstvo.URA
         {
             foreach (DataGridViewRow row in dbDdataGridView1.SelectedRows)
             {
-                SetSelectedItem(row);//TODO: Knjizenje repromaterijala
+                SetSelectedItem(row);
                 if (_uraKnjiga.Knjizen || _uraKnjiga.Broj_primke != 0)
                     continue;
                 TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_uraKnjiga, _postavkeKnjizenja);

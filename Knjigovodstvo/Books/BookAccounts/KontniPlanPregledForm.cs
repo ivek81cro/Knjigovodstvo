@@ -45,11 +45,14 @@ namespace Knjigovodstvo.FinancialReports
 
         private void DbDataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow selectedRow = dbDataGridView1.SelectedRows[0];
-            KontoBroj = selectedRow.Cells["Konto"].Value.ToString(); 
-            Opis = selectedRow.Cells["Opis"].Value.ToString();
-            _kontniPlan.Konto = KontoBroj;
-            Id_Konto = _kontniPlan.GetIdByKontoNumber();
+            if (dbDataGridView1.SelectedRows.Count != 0)
+            {
+                DataGridViewRow selectedRow = dbDataGridView1.SelectedRows[0];
+                KontoBroj = selectedRow.Cells["Konto"].Value.ToString();
+                Opis = selectedRow.Cells["Opis"].Value.ToString();
+                _kontniPlan.Konto = KontoBroj;
+                Id_Konto = _kontniPlan.GetIdByKontoNumber();
+            }
         }
 
         private void ButtonDodajKonto_Click(object sender, EventArgs e)

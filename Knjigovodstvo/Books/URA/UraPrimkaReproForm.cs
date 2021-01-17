@@ -64,6 +64,11 @@ namespace Knjigovodstvo.URA
                                       Strana = dRow["Strana"].ToString(),
                                       Mijenja_predznak = dRow["Mijenja_predznak"].ToString() == "True"
                                   }).ToList();
+
+            if(_postavkeKnjizenja.Count == 0)
+            {
+                MessageBox.Show("Ne postoje postavke knjiženja za dokumente, molim postavite ih.", "Upozorenja");
+            }
         }
 
         private void FixColumnHeaders()

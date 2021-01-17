@@ -70,7 +70,7 @@ namespace Knjigovodstvo.PoreznaUra
                             Broj = _komitent.Adresa.Broj
                         },
                         PodrucjeDjelatnosti = "G",
-                        SifraDjelatnosti = _komitent.Sifra_djelatnosti
+                        SifraDjelatnosti = _komitent.Sifra_djelatnosti.Replace(".", "")
                     },
                     ObracunSastavio = new sIspunjavatelj()
                     {

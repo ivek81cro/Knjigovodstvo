@@ -31,9 +31,9 @@ namespace Knjigovodstvo.BankStatements
             _dSource = new BindingSource(_bindingList, null);
 
             dataGridView1.DataSource = _dSource;
-            CustomiseColumns();
 
             FillKontoColumn();
+            CustomiseColumns();
         }
 
         private void FillKontoColumn()

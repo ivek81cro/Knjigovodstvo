@@ -208,11 +208,11 @@ namespace Knjigovodstvo.Payroll
                     Sifra = dodatak.Sifra,
                     Iznos = dodatak.Iznos,
                     Datum_Od = DateTime.ParseExact(dateTimePickerDatumOd.Text, 
-                    ("dd.MM.yyyy"),
+                    ("dd.MM.yyyy."),
                     CultureInfo.InvariantCulture).
                     ToString("yyyy-MM-dd"),
                     Datum_Do = DateTime.ParseExact(dateTimePickerDatumDo.Text, 
-                    ("dd.MM.yyyy"), 
+                    ("dd.MM.yyyy."), 
                     CultureInfo.InvariantCulture)
                     .ToString("yyyy-MM-dd")
                 });

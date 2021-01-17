@@ -79,7 +79,7 @@ namespace Knjigovodstvo.BankStatements
             this.dataGridView1.Location = new System.Drawing.Point(12, 121);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.ReadOnly = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(646, 519);
             this.dataGridView1.TabIndex = 10;
@@ -129,6 +129,8 @@ namespace Knjigovodstvo.BankStatements
             dataGridView1.Columns["Id"].Visible = false;
             dataGridView1.Columns["Id_izvod"].Visible = false;
             dataGridView1.Columns["Oznaka"].Visible = false;
+            dataGridView1.Columns["Opis"].ReadOnly = true;
+            dataGridView1.Columns["Naziv"].ReadOnly = true;
         }
 
         private System.Windows.Forms.Label labelDatumIzvoda;

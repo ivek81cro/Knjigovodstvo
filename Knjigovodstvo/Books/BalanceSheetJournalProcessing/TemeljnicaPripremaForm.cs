@@ -91,7 +91,8 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private void FindPartnerKontoNumber()
         {
-            _dt.Rows[0]["Konto"] = _partner.GetKontoDByNaziv(_dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0]);
+            if(_postavkeKnjizenja.Count != 0)
+                _dt.Rows[0]["Konto"] = _partner.GetKontoDByNaziv(_dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0]);
         }
 
         private void LoadValuesDebitAndCredit()

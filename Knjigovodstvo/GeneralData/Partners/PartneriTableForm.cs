@@ -1,5 +1,6 @@
 ﻿using Knjigovodstvo.Database;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -17,6 +18,7 @@ namespace Knjigovodstvo.Partners
         {
             dataGridView1.DataSource = new DataView(new DbDataGet().GetTable(_partner))
                 .ToTable(false, "Id", "Oib", "Naziv", "Ulica", "Broj", "Posta", "Mjesto", "Telefon", "Fax", "Email", "Iban", "Mbo");
+            dataGridView1.Sort(this.dataGridView1.Columns["Naziv"], ListSortDirection.Ascending);
         }
 
         internal void OdabirPartnera()

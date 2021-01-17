@@ -95,18 +95,26 @@ namespace Knjigovodstvo.Partners
         {
             DbDataUpdate dbUpdate = new DbDataUpdate();
             SetKonto();
-            if (_kontniPlan.ExistsKonto(KontoD))
+            bool kontoK = _kontniPlan.ExistsKonto(KontoK);
+            bool kontoD = _kontniPlan.ExistsKonto(KontoD);
+
+            if (kontoD)
             {
                 _kontniPlan.Opis = OpciPodaci.Naziv;
                 _kontniPlan.Konto = KontoD;
                 dbUpdate.UpdateData(_kontniPlan);
             }
 
-            if (_kontniPlan.ExistsKonto(KontoK))
+            if (kontoK)
             {
                 _kontniPlan.Opis = OpciPodaci.Naziv;
                 _kontniPlan.Konto = KontoK;
                 dbUpdate.UpdateData(_kontniPlan);
+            }
+            
+            if(!kontoK || !kontoD)
+            {
+                InsertNewKonto();
             }
 
             if (dbUpdate.UpdateData(this))
@@ -117,23 +125,26 @@ namespace Knjigovodstvo.Partners
 
         public void GetPartnerById()
         {
-            string condition = $"Id={OpciPodaci.Id};";
-            DataTable dt = new DbDataGet().GetTable(this, condition);
+            if (OpciPodaci.Id != 0)
+            {
+                string condition = $"Id={OpciPodaci.Id};";
+                DataTable dt = new DbDataGet().GetTable(this, condition);
 
-            OpciPodaci.Id = int.Parse(dt.Rows[0]["Id"].ToString());
-            OpciPodaci.Oib = dt.Rows[0]["Oib"].ToString();
-            OpciPodaci.Naziv = dt.Rows[0]["Naziv"].ToString();
-            Adresa.Ulica = dt.Rows[0]["Ulica"].ToString();
-            Adresa.Broj = dt.Rows[0]["Broj"].ToString();
-            Adresa.Grad.Posta = dt.Rows[0]["Posta"].ToString();
-            Adresa.Grad.Mjesto = dt.Rows[0]["Mjesto"].ToString();
-            Kontakt.Telefon = dt.Rows[0]["Telefon"].ToString();
-            Kontakt.Fax = dt.Rows[0]["Fax"].ToString();
-            Kontakt.Email = dt.Rows[0]["Email"].ToString();
-            OpciPodaci.Iban = dt.Rows[0]["Iban"].ToString();
-            OpciPodaci.Mbo = dt.Rows[0]["Mbo"].ToString();
-            KontoK = dt.Rows[0]["KontoK"].ToString();
-            KontoD = dt.Rows[0]["KontoD"].ToString();
+                OpciPodaci.Id = int.Parse(dt.Rows[0]["Id"].ToString());
+                OpciPodaci.Oib = dt.Rows[0]["Oib"].ToString();
+                OpciPodaci.Naziv = dt.Rows[0]["Naziv"].ToString();
+                Adresa.Ulica = dt.Rows[0]["Ulica"].ToString();
+                Adresa.Broj = dt.Rows[0]["Broj"].ToString();
+                Adresa.Grad.Posta = dt.Rows[0]["Posta"].ToString();
+                Adresa.Grad.Mjesto = dt.Rows[0]["Mjesto"].ToString();
+                Kontakt.Telefon = dt.Rows[0]["Telefon"].ToString();
+                Kontakt.Fax = dt.Rows[0]["Fax"].ToString();
+                Kontakt.Email = dt.Rows[0]["Email"].ToString();
+                OpciPodaci.Iban = dt.Rows[0]["Iban"].ToString();
+                OpciPodaci.Mbo = dt.Rows[0]["Mbo"].ToString();
+                KontoK = dt.Rows[0]["KontoK"].ToString();
+                KontoD = dt.Rows[0]["KontoD"].ToString();
+            }
         }
 
         public string GetKontoDByNaziv(string naziv)

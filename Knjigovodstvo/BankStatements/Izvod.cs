@@ -100,7 +100,7 @@ namespace Knjigovodstvo.BankStatements
         internal void UpdateData()
         {
             Datum_izvoda = DateTime
-                .ParseExact(Datum_izvoda.Split(' ')[0], ("dd.MM.yyyy"), CultureInfo.InvariantCulture)
+                .ParseExact(Datum_izvoda.Split(' ')[0], ("dd.MM.yyyy."), CultureInfo.InvariantCulture)
                 .ToString("yyyy-MM-dd");
 
             new DbDataUpdate().UpdateData(this);

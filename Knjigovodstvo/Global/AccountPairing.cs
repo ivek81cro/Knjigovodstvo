@@ -31,6 +31,9 @@ namespace Knjigovodstvo.Global
             Partneri partner = new Partneri();
             partner.OpciPodaci.Id = form.IdPartner;
             partner.GetPartnerById();
+            
+            if (partner.OpciPodaci.Id == 0)
+                return;
 
             KontniPlan kontniPlan = new KontniPlan
             {
