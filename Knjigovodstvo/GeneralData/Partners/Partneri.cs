@@ -148,15 +148,14 @@ namespace Knjigovodstvo.Partners
             }
         }
 
+        private readonly KontniPlan _kontniPlan = new KontniPlan();
+        private readonly DbDataInsert _dataInsert = new DbDataInsert();
+
         public OpciPodaci OpciPodaci { get; set; } = new OpciPodaci();
         public Adresa Adresa { get; set; } = new Adresa();
         public Kontakt Kontakt { get; set; } = new Kontakt();
         public string KontoK { get; set; } = "";
         public string KontoD { get; set; } = "";
-
-        private readonly KontniPlan _kontniPlan = new KontniPlan();
-        private readonly DbDataInsert _dataInsert = new DbDataInsert();
-        private DataTable _dt = new DataTable();
     }
 
 }

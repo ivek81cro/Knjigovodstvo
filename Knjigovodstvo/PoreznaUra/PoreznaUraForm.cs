@@ -145,10 +145,10 @@ namespace Knjigovodstvo.PoreznaUra
             GenerateUraObrazac();
         }
 
-        private DbDataGet _dbDataGet = new DbDataGet();
-        private KnjigaUra _uraKnjiga = new KnjigaUra();
+        private readonly DbDataGet _dbDataGet = new DbDataGet();
+        private readonly KnjigaUra _uraKnjiga = new KnjigaUra();
         private DataTable _dt = new DataTable();
-        private ObrazacUra _obrazacURA = new ObrazacUra();
+        private readonly ObrazacUra _obrazacURA = new ObrazacUra();
         private string _path = "";
     }
 }

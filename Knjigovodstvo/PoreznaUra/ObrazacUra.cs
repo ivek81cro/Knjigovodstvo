@@ -92,7 +92,7 @@ namespace Knjigovodstvo.PoreznaUra
         }
 
         private sObrazacURA _sObrazacURA;
-        private Komitent _komitent = new Komitent();
+        private readonly Komitent _komitent = new Komitent();
         private UraObrazacGeneralData _gd;
     }
 }

@@ -19,7 +19,11 @@ namespace Knjigovodstvo.Database
             GenericPropertyFinder<IDbObject> property = new GenericPropertyFinder<IDbObject>();
 
             IEnumerable<List<string>> obj = property.PrintTModelPropertyAndValue(dbObject);
-            string table = dbObject.GetType().ToString().Substring(dbObject.GetType().ToString().LastIndexOf('.') + 1);
+            string table = dbObject.GetType()
+                .ToString()
+                .Substring(dbObject.GetType()
+                                   .ToString()
+                                   .LastIndexOf('.') + 1);
             string query = new DbQueryBuilder(obj, table).BuildQuery(QueryType.Insert);
 
             try

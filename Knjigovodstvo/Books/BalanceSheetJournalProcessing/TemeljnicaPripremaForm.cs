@@ -213,7 +213,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             }
         }
 
-        private KontniPlan _kontniPlan = new KontniPlan();
+        private readonly KontniPlan _kontniPlan = new KontniPlan();
         private readonly IDbObject _obj;
         private readonly List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly DataTable _dt;

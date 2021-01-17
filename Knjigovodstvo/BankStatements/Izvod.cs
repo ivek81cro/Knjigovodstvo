@@ -122,6 +122,6 @@ namespace Knjigovodstvo.BankStatements
 
         public List<IzvodPromet> Promet = new List<IzvodPromet>();
 
-        private DbDataGet _dataGet = new DbDataGet();
+        private readonly DbDataGet _dataGet = new DbDataGet();
     }
 }

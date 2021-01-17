@@ -159,8 +159,10 @@ namespace Knjigovodstvo.BankStatements
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            var postavke = new List<PostavkeKnjizenja>();
-            postavke.Add(new PostavkeKnjizenja() { Knjiga = BookNames.Izvodi.ToString() });
+            var postavke = new List<PostavkeKnjizenja>
+            {
+                new PostavkeKnjizenja() { Knjiga = BookNames.Izvodi.ToString() }
+            };
             using TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_izvod, postavke);
             form.ShowDialog();
             //TODO implement check if saved to books before setting true
