@@ -35,19 +35,19 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             {
                 case "KnjigaUra":
                     tp.PrepareDataUra(_dt, _postavkeKnjizenja, _obj);
-                    FindPartnerKontoNumber();
+                    FindKontoNumber();
                     break;
                 case "Primka":
                     tp.PrepareDataPrimka(_dt, _postavkeKnjizenja, _obj);
-                    FindPartnerKontoNumber();
+                    FindKontoNumber();
                     break;
                 case "PrimkaRepro":
                     tp.PrepareDataPrimkaRepro(_dt, _postavkeKnjizenja, _obj);
-                    FindPartnerKontoNumber();
+                    FindKontoNumber();
                     break;
                 case "KnjigaIra":
                     tp.PrepareDataIra(_dt, _postavkeKnjizenja, _obj);
-                    FindPartnerKontoNumber();
+                    FindKontoNumber();
                     break;
                 case "PlacaArhiva":
                     tp.PrepareDataPlaca(_dt, _postavkeKnjizenja, _obj);
@@ -89,10 +89,13 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             _checkBalance.CheckEndBalance(_dt, _labelList);
         }
 
-        private void FindPartnerKontoNumber()
+        private void FindKontoNumber()
         {
-            if(_postavkeKnjizenja.Count != 0)
-                _dt.Rows[0]["Konto"] = _partner.GetKontoDByNaziv(_dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0]);
+            if (_postavkeKnjizenja.Count != 0)
+            {
+                string naziv = _dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0];
+                _dt.Rows[0]["Konto"] = _kontniPlan.FindByDescription(naziv);
+            }
         }
 
         private void LoadValuesDebitAndCredit()
@@ -210,7 +213,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             }
         }
 
-        private readonly Partneri _partner = new Partneri();
+        private KontniPlan _kontniPlan = new KontniPlan();
         private readonly IDbObject _obj;
         private readonly List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly DataTable _dt;

@@ -3,6 +3,7 @@ using Knjigovodstvo.Database;
 using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Interface;
+using System;
 using System.Data;
 
 namespace Knjigovodstvo.Partners
@@ -76,14 +77,14 @@ namespace Knjigovodstvo.Partners
 
         private void InsertNewKonto()
         {
-            if(KontoK.Length == 8)
+            if(KontoK.Length == 8 && !_kontniPlan.ExistsKonto(KontoK))
             {
                 _kontniPlan.Konto = KontoK;
                 _kontniPlan.Opis = OpciPodaci.Naziv;
                 _dataInsert.InsertData(_kontniPlan);
             }
 
-            if (KontoD.Length == 8)
+            if (KontoD.Length == 8 && !_kontniPlan.ExistsKonto(KontoD))
             {
                 _kontniPlan.Konto = KontoD;
                 _kontniPlan.Opis = OpciPodaci.Naziv;
@@ -145,27 +146,6 @@ namespace Knjigovodstvo.Partners
                 KontoK = dt.Rows[0]["KontoK"].ToString();
                 KontoD = dt.Rows[0]["KontoD"].ToString();
             }
-        }
-
-        public string GetKontoDByNaziv(string naziv)
-        {
-            _dt = new DbDataGet().GetTable(this, $"Naziv LIKE '{naziv}%'");
-            string kontoPartnera = "";
-            if (_dt.Rows.Count > 0)
-                kontoPartnera = _dt.Rows[0]["KontoD"].ToString();
-
-            return kontoPartnera;
-        }
-
-
-        internal object GetKontoPByNaziv(string naziv)
-        {
-            _dt = new DbDataGet().GetTable(this, $"Naziv='{naziv}'");
-            string kontoPartnera = "";
-            if (_dt.Rows.Count > 0)
-                kontoPartnera = _dt.Rows[0]["KontoP"].ToString();
-
-            return kontoPartnera;
         }
 
         public OpciPodaci OpciPodaci { get; set; } = new OpciPodaci();

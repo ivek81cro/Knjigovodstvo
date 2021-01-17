@@ -1,7 +1,9 @@
-﻿using Knjigovodstvo.Database;
+﻿using Knjigovodstvo.BankStatements;
+using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
 using System;
 using System.Data;
+using System.Linq;
 
 namespace Knjigovodstvo.FinancialReports
 {
@@ -46,6 +48,28 @@ namespace Knjigovodstvo.FinancialReports
                 .GetTable(this, $"Id='{Id}'");
 
             return Konto = _dt.Rows[0]["Konto"].ToString();
+        }
+
+        internal string FindByDescription(string naziv)
+        {
+            _dt = new DbDataGet().GetTable(this, $"Opis LIKE '{naziv}%'");
+            if (_dt.Rows.Count > 0)
+            { 
+                return _dt.Rows[0]["Konto"].ToString(); 
+            }
+            else
+            {
+                IzvodParovi izvodParovi = new IzvodParovi();
+                var id = izvodParovi.GetIzvodParovi().Where(i => i.Naziv_Izvod == naziv);
+                if (id != null)
+                {
+                    Id = id.FirstOrDefault().Id_Konto;
+                    GetKontoById();
+                    return Konto;
+                }
+            }
+
+            return "";
         }
 
         private DataTable _dt = new DataTable();
