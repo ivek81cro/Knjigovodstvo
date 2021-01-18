@@ -6,7 +6,7 @@ using System.Globalization;
 
 namespace Knjigovodstvo.Books.Inventory
 {
-    class OsnovnoSredstvo : IDbObject
+    public class OsnovnoSredstvo : IDbObject
     {
         public FormError ValidateData()
         {
@@ -17,6 +17,12 @@ namespace Knjigovodstvo.Books.Inventory
         {
             CalculateCurrentValue();
             return new DbDataInsert().InsertData(this);
+        }
+
+        internal bool UpdateData()
+        {
+            Iznos_amortizacije = Nabavna_vrijednost * Stopa_otpisa / 100.0m;
+            return new DbDataUpdate().UpdateData(this);
         }
 
         private void CalculateCurrentValue()

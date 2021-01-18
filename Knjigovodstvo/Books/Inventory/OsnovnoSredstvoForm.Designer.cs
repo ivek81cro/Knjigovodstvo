@@ -34,6 +34,7 @@ namespace Knjigovodstvo.Books.Inventory
             this.menuPostavke = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonDodajNovo = new System.Windows.Forms.Button();
             this.buttonObracunAmortizacije = new System.Windows.Forms.Button();
+            this.buttonIzmjena = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -85,7 +86,7 @@ namespace Knjigovodstvo.Books.Inventory
             // 
             // buttonObracunAmortizacije
             // 
-            this.buttonObracunAmortizacije.Location = new System.Drawing.Point(104, 27);
+            this.buttonObracunAmortizacije.Location = new System.Drawing.Point(12, 56);
             this.buttonObracunAmortizacije.Name = "buttonObracunAmortizacije";
             this.buttonObracunAmortizacije.Size = new System.Drawing.Size(113, 23);
             this.buttonObracunAmortizacije.TabIndex = 3;
@@ -93,11 +94,22 @@ namespace Knjigovodstvo.Books.Inventory
             this.buttonObracunAmortizacije.UseVisualStyleBackColor = true;
             this.buttonObracunAmortizacije.Click += new System.EventHandler(this.ButtonObracunAmortizacije_Click);
             // 
+            // buttonIzmjena
+            // 
+            this.buttonIzmjena.Location = new System.Drawing.Point(104, 27);
+            this.buttonIzmjena.Name = "buttonIzmjena";
+            this.buttonIzmjena.Size = new System.Drawing.Size(75, 23);
+            this.buttonIzmjena.TabIndex = 4;
+            this.buttonIzmjena.Text = "Izmjena";
+            this.buttonIzmjena.UseVisualStyleBackColor = true;
+            this.buttonIzmjena.Click += new System.EventHandler(this.ButtonIzmjena_Click);
+            // 
             // OsnovnoSredstvoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1211, 554);
+            this.Controls.Add(this.buttonIzmjena);
             this.Controls.Add(this.buttonObracunAmortizacije);
             this.Controls.Add(this.buttonDodajNovo);
             this.Controls.Add(this.dbDataGridView1);
@@ -120,5 +132,6 @@ namespace Knjigovodstvo.Books.Inventory
         private System.Windows.Forms.ToolStripMenuItem menuPostavke;
         private System.Windows.Forms.Button buttonDodajNovo;
         private System.Windows.Forms.Button buttonObracunAmortizacije;
+        private System.Windows.Forms.Button buttonIzmjena;
     }
 }
