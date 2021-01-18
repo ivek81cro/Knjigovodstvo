@@ -61,7 +61,7 @@ namespace Knjigovodstvo.FinancialReports
             {
                 IzvodParovi izvodParovi = new IzvodParovi();
                 var id = izvodParovi.GetIzvodParovi().Where(i => i.Naziv_Izvod == naziv);
-                if (id != null)
+                if (id.Count() != 0)
                 {
                     Id = id.FirstOrDefault().Id_Konto;
                     GetKontoById();
