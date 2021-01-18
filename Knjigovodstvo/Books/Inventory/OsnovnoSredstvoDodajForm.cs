@@ -1,6 +1,5 @@
 ﻿using Knjigovodstvo.Validators;
 using System;
-using System.Globalization;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Books.Inventory
@@ -53,6 +52,10 @@ namespace Knjigovodstvo.Books.Inventory
                 if (!_osnovnoSredstvo.SaveData())
                 {
                     MessageBox.Show("Greška u spremanju podataka", "Upozorenje");
+                }
+                else
+                {
+                    Close();
                 }
             }
             else

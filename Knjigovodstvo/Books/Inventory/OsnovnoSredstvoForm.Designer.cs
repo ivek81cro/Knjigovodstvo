@@ -71,6 +71,7 @@ namespace Knjigovodstvo.Books.Inventory
             this.menuPostavke.Name = "menuPostavke";
             this.menuPostavke.Size = new System.Drawing.Size(115, 20);
             this.menuPostavke.Text = "Postavke knjiženja";
+            this.menuPostavke.Click += new System.EventHandler(this.ButtonPostavke_Click);
             // 
             // buttonDodajNovo
             // 

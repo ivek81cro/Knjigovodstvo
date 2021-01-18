@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Database;
+﻿using Knjigovodstvo.Books.Inventory;
+using Knjigovodstvo.Database;
 using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Interface;
@@ -42,6 +43,9 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
                     break;
                 case BookNames.Dodaci:
                     PopulateComboBoxStupac(new Dodatak());
+                    break;
+                case BookNames.Amortizacija:
+                    PopulateComboBoxStupac(new OsnovnoSredstvo());
                     break;
                 default:
                     break;

@@ -112,7 +112,6 @@ namespace Knjigovodstvo.IRA
                                       Strana = dRow["Strana"].ToString(),
                                       Mijenja_predznak = dRow["Mijenja_predznak"].ToString() == "True"
                                   }).ToList();
-
         }
 
         private void SetSelectedItem(DataGridViewRow row)

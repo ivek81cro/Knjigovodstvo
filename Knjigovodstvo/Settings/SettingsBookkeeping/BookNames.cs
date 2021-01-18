@@ -10,6 +10,7 @@
         Place,
         Dodaci,
         Izvodi,
-        Ura_repro
+        Ura_repro,
+        Amortizacija
     }
 }
