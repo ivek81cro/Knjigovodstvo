@@ -36,8 +36,16 @@ namespace Knjigovodstvo.Books.Inventory
         {
             DataTable dt = new DbDataGet().GetTable(this, $"Id={Id}");
             Naziv = dt.Rows[0]["Naziv"].ToString();
-            Datum_nabave = dt.Rows[0]["Datum_nabave"].ToString();
-            Datum_uporabe = dt.Rows[0]["Datum_uporabe"].ToString();
+            Datum_nabave = DateTime.ParseExact(
+                    dt.Rows[0]["Datum_nabave"].ToString(), 
+                    "dd.MM.yyyy. h:mm:ss", 
+                    CultureInfo.InvariantCulture)
+                .ToString("yyyy-MM-dd");
+            Datum_uporabe = DateTime.ParseExact(
+                    dt.Rows[0]["Datum_uporabe"].ToString(), 
+                    "dd.MM.yyyy. h:mm:ss", 
+                    CultureInfo.InvariantCulture)
+                .ToString("yyyy-MM-dd");
             Dobavljac = dt.Rows[0]["Dobavljac"].ToString();
             Dokument = dt.Rows[0]["Dokument"].ToString();
             Kolicina = decimal.Parse(dt.Rows[0]["Kolicina"].ToString());
@@ -47,6 +55,16 @@ namespace Knjigovodstvo.Books.Inventory
             Otpisano = decimal.Parse(dt.Rows[0]["Otpisano"].ToString());
             Sadasnja_vrijednost = decimal.Parse(dt.Rows[0]["Sadasnja_vrijednost"].ToString());
             Iznos_amortizacije = decimal.Parse(dt.Rows[0]["Iznos_amortizacije"].ToString());
+        }
+
+        internal void Recalculate()
+        {
+            Sadasnja_vrijednost -= Iznos_amortizacije;
+            Otpisano += Iznos_amortizacije;
+            if (Iznos_amortizacije > Sadasnja_vrijednost)
+                Iznos_amortizacije = Sadasnja_vrijednost;
+
+            new DbDataUpdate().UpdateData(this);
         }
 
         public int Id { get; set; } = 0;

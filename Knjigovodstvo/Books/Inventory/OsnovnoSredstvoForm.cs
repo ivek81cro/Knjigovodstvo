@@ -64,6 +64,7 @@ namespace Knjigovodstvo.Books.Inventory
 
         private void CreateListOfInventoryWithValue()
         {
+            _listaSredstava = new List<OsnovnoSredstvo>();
             foreach (DataGridViewRow row in dbDataGridView1.Rows)
             {
                 if (decimal.Parse(row.Cells["Sadasnja_vrijednost"].Value.ToString()) > 0)
@@ -97,7 +98,10 @@ namespace Knjigovodstvo.Books.Inventory
             {
                 TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(os, _postavkeKnjizenja);
                 form.ShowDialog();
+                if (form.Knjizeno)
+                    os.Recalculate();
             }
+            LoadDataGrid();
         }
 
         private DataTable _dt = new DataTable();
