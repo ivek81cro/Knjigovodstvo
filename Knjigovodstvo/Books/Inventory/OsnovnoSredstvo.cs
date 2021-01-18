@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Interface;
+﻿using Knjigovodstvo.Database;
+using Knjigovodstvo.Interface;
 using System;
 
 namespace Knjigovodstvo.Books.Inventory
@@ -8,6 +9,11 @@ namespace Knjigovodstvo.Books.Inventory
         public FormError ValidateData()
         {
             throw new NotImplementedException();
+        }
+
+        internal bool SaveData()
+        {
+            return new DbDataInsert().InsertData(this);
         }
 
         public int Id { get; set; } = 0;

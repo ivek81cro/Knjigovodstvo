@@ -42,6 +42,7 @@ namespace Knjigovodstvo.MainForm
             this.menuKnjige = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUra = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPrimke = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuRepro = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUraKnjiga = new System.Windows.Forms.ToolStripMenuItem();
             this.menuIra = new System.Windows.Forms.ToolStripMenuItem();
             this.menuIraKnjiga = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +72,7 @@ namespace Knjigovodstvo.MainForm
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.menuRepro = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOsnovnaSredstva = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -146,7 +147,8 @@ namespace Knjigovodstvo.MainForm
             // 
             this.menuKnjige.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuUra,
-            this.menuIra});
+            this.menuIra,
+            this.menuOsnovnaSredstva});
             this.menuKnjige.Name = "menuKnjige";
             this.menuKnjige.Size = new System.Drawing.Size(52, 20);
             this.menuKnjige.Text = "&Knjige";
@@ -158,7 +160,7 @@ namespace Knjigovodstvo.MainForm
             this.menuRepro,
             this.menuUraKnjiga});
             this.menuUra.Name = "menuUra";
-            this.menuUra.Size = new System.Drawing.Size(97, 22);
+            this.menuUra.Size = new System.Drawing.Size(167, 22);
             this.menuUra.Text = "URA";
             // 
             // menuPrimke
@@ -167,6 +169,13 @@ namespace Knjigovodstvo.MainForm
             this.menuPrimke.Size = new System.Drawing.Size(194, 22);
             this.menuPrimke.Text = "Primke";
             this.menuPrimke.Click += new System.EventHandler(this.ShowNewFormUraPrimkaForm);
+            // 
+            // menuRepro
+            // 
+            this.menuRepro.Name = "menuRepro";
+            this.menuRepro.Size = new System.Drawing.Size(194, 22);
+            this.menuRepro.Text = "Primke repromaterijala";
+            this.menuRepro.Click += new System.EventHandler(this.ShowNewFormPrimkaRepro);
             // 
             // menuUraKnjiga
             // 
@@ -180,7 +189,7 @@ namespace Knjigovodstvo.MainForm
             this.menuIra.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuIraKnjiga});
             this.menuIra.Name = "menuIra";
-            this.menuIra.Size = new System.Drawing.Size(97, 22);
+            this.menuIra.Size = new System.Drawing.Size(167, 22);
             this.menuIra.Text = "IRA";
             // 
             // menuIraKnjiga
@@ -383,12 +392,12 @@ namespace Knjigovodstvo.MainForm
             this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
-            // menuRepro
+            // menuOsnovnaSredstva
             // 
-            this.menuRepro.Name = "menuRepro";
-            this.menuRepro.Size = new System.Drawing.Size(194, 22);
-            this.menuRepro.Text = "Primke repromaterijala";
-            this.menuRepro.Click += new System.EventHandler(this.ShowNewFormPrimkaRepro);
+            this.menuOsnovnaSredstva.Name = "menuOsnovnaSredstva";
+            this.menuOsnovnaSredstva.Size = new System.Drawing.Size(167, 22);
+            this.menuOsnovnaSredstva.Text = "Osnovna sredstva";
+            this.menuOsnovnaSredstva.Click += new System.EventHandler(this.ShowFormOsnovnoSredstvo);
             // 
             // MainWindowForm
             // 
@@ -454,6 +463,7 @@ namespace Knjigovodstvo.MainForm
         private System.Windows.Forms.ToolStripMenuItem menuTemeljnice;
         private System.Windows.Forms.ToolStripMenuItem menuIzracunPdv;
         private System.Windows.Forms.ToolStripMenuItem menuRepro;
+        private System.Windows.Forms.ToolStripMenuItem menuOsnovnaSredstva;
     }
 }
 
