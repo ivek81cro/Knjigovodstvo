@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Knjigovodstvo.Database;
+using System;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Books.Inventory
