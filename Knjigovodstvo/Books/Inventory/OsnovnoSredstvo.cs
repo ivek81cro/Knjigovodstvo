@@ -6,7 +6,7 @@ using System.Globalization;
 
 namespace Knjigovodstvo.Books.Inventory
 {
-    class OsnovnoSredstvo : IDbObject
+    public class OsnovnoSredstvo : IDbObject
     {
         public FormError ValidateData()
         {

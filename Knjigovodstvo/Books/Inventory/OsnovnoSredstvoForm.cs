@@ -58,6 +58,7 @@ namespace Knjigovodstvo.Books.Inventory
 
         private void CustomColumnEditable()
         {
+            dbDataGridView1.ReadOnly = true;
             dbDataGridView1.Columns["Id"].Visible = false;
             dbDataGridView1.Columns["Iznos_amortizacije"].Visible = false;
         }
@@ -69,8 +70,10 @@ namespace Knjigovodstvo.Books.Inventory
             {
                 if (decimal.Parse(row.Cells["Sadasnja_vrijednost"].Value.ToString()) > 0)
                 {
-                    _osnovnoSredstvo = new OsnovnoSredstvo();
-                    _osnovnoSredstvo.Id = int.Parse(row.Cells["Id"].Value.ToString());
+                    _osnovnoSredstvo = new OsnovnoSredstvo
+                    {
+                        Id = int.Parse(row.Cells["Id"].Value.ToString())
+                    };
                     _osnovnoSredstvo.GetById();
                     _listaSredstava.Add(_osnovnoSredstvo);
                 }
@@ -101,6 +104,20 @@ namespace Knjigovodstvo.Books.Inventory
                 if (form.Knjizeno)
                     os.Recalculate();
             }
+            LoadDataGrid();
+        }
+
+        private void ButtonIzmjena_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow row = dbDataGridView1.SelectedRows[0];
+            _osnovnoSredstvo.Id = int.Parse(row.Cells["Id"].Value.ToString());
+            _osnovnoSredstvo.GetById();
+            using OsnovnoSredstvoIzmjenaForm form = new OsnovnoSredstvoIzmjenaForm
+            {
+                OsnovnoSredstvo = _osnovnoSredstvo
+            };
+            form.FillControls();
+            form.ShowDialog();
             LoadDataGrid();
         }
 
