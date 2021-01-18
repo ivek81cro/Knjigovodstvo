@@ -58,6 +58,9 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 case "Izvod":
                     tp.PrepareDataIzvod(_dt, _obj);
                     break;
+                case "OsnovnoSredstvo":
+                    tp.PrepareDataOsnovnoSredstvo(_dt, _postavkeKnjizenja, _obj);
+                    break;
                 default:
                     break;
             }

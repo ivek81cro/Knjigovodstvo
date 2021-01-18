@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Database;
+﻿using Knjigovodstvo.Books.PrepareForBalanceSheet;
+using Knjigovodstvo.Database;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.Settings.SettingsBookkeeping;
@@ -61,6 +62,20 @@ namespace Knjigovodstvo.Books.Inventory
             dbDataGridView1.Columns["Iznos_amortizacije"].Visible = false;
         }
 
+        private void CreateListOfInventoryWithValue()
+        {
+            foreach (DataGridViewRow row in dbDataGridView1.Rows)
+            {
+                if (decimal.Parse(row.Cells["Sadasnja_vrijednost"].Value.ToString()) > 0)
+                {
+                    _osnovnoSredstvo = new OsnovnoSredstvo();
+                    _osnovnoSredstvo.Id = int.Parse(row.Cells["Id"].Value.ToString());
+                    _osnovnoSredstvo.GetById();
+                    _listaSredstava.Add(_osnovnoSredstvo);
+                }
+            }
+        }
+
         private void ButtonPostavke_Click(object sender, EventArgs e)
         {
             PostavkeKnjizenjaPregledForm form = new PostavkeKnjizenjaPregledForm(_bookNames);
@@ -77,12 +92,18 @@ namespace Knjigovodstvo.Books.Inventory
 
         private void ButtonObracunAmortizacije_Click(object sender, EventArgs e)
         {
-
+            CreateListOfInventoryWithValue();
+            foreach (var os in _listaSredstava)
+            {
+                TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(os, _postavkeKnjizenja);
+                form.ShowDialog();
+            }
         }
 
         private DataTable _dt = new DataTable();
-        private readonly OsnovnoSredstvo _osnovnoSredstvo= new OsnovnoSredstvo();
+        private OsnovnoSredstvo _osnovnoSredstvo= new OsnovnoSredstvo();
         private readonly BookNames _bookNames;
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
+        List<OsnovnoSredstvo> _listaSredstava = new List<OsnovnoSredstvo>();
     }
 }

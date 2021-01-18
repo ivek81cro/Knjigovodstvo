@@ -1,4 +1,5 @@
 ﻿using Knjigovodstvo.BankStatements;
+using Knjigovodstvo.Books.Inventory;
 using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Interface;
 using Knjigovodstvo.IRA;
@@ -63,6 +64,24 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     knjiga.Naziv_dobavljaca + ":" + knjiga.Broj_racuna,
                     postavka.Konto,
                     knjiga.Datum_knjizenja.Split(' ')[0],
+                    postavka.Strana == "Dugovna",
+                    postavka.Strana == "Potražna",
+                    postavka.Mijenja_predznak == true
+                    );
+            }
+        }
+
+        internal void PrepareDataOsnovnoSredstvo(DataTable dt, List<PostavkeKnjizenja> postavkeKnjizenja, IDbObject obj)
+        {
+            OsnovnoSredstvo knjiga = (OsnovnoSredstvo)obj;
+            foreach (var postavka in postavkeKnjizenja)
+            {
+                dt.Rows.Add(
+                    knjiga.Id,
+                    postavka.Naziv_stupca,
+                    knjiga.Naziv,
+                    postavka.Konto,
+                    DateTime.Today.ToString("dd.MM.yyyy."),
                     postavka.Strana == "Dugovna",
                     postavka.Strana == "Potražna",
                     postavka.Mijenja_predznak == true

@@ -1,7 +1,5 @@
 ﻿using Knjigovodstvo.Interface;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Knjigovodstvo.Books.Inventory
 {

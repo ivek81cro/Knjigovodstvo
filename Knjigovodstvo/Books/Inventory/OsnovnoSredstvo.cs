@@ -1,6 +1,8 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
 using System;
+using System.Data;
+using System.Globalization;
 
 namespace Knjigovodstvo.Books.Inventory
 {
@@ -28,6 +30,23 @@ namespace Knjigovodstvo.Books.Inventory
                 Otpisano = Nabavna_vrijednost;
 
             Sadasnja_vrijednost = Nabavna_vrijednost - Otpisano;
+        }
+
+        internal void GetById()
+        {
+            DataTable dt = new DbDataGet().GetTable(this, $"Id={Id}");
+            Naziv = dt.Rows[0]["Naziv"].ToString();
+            Datum_nabave = dt.Rows[0]["Datum_nabave"].ToString();
+            Datum_uporabe = dt.Rows[0]["Datum_uporabe"].ToString();
+            Dobavljac = dt.Rows[0]["Dobavljac"].ToString();
+            Dokument = dt.Rows[0]["Dokument"].ToString();
+            Kolicina = decimal.Parse(dt.Rows[0]["Kolicina"].ToString());
+            Nabavna_vrijednost = decimal.Parse(dt.Rows[0]["Nabavna_vrijednost"].ToString());
+            Vijek_trajanja = decimal.Parse(dt.Rows[0]["Vijek_trajanja"].ToString());
+            Stopa_otpisa = decimal.Parse(dt.Rows[0]["Stopa_otpisa"].ToString());
+            Otpisano = decimal.Parse(dt.Rows[0]["Otpisano"].ToString());
+            Sadasnja_vrijednost = decimal.Parse(dt.Rows[0]["Sadasnja_vrijednost"].ToString());
+            Iznos_amortizacije = decimal.Parse(dt.Rows[0]["Iznos_amortizacije"].ToString());
         }
 
         public int Id { get; set; } = 0;
