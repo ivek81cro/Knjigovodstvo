@@ -1,7 +1,6 @@
 ﻿using Knjigovodstvo.City;
 using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Interface;
-using Knjigovodstvo.Payroll;
 using System;
 using System.Windows.Forms;
 
@@ -84,7 +83,6 @@ namespace Knjigovodstvo.Employee
             string odlazak = "Null";
             if (dateTimePickerDatumOdlaska.Visible == true)
                 odlazak = dateTimePickerDatumOdlaska.Value.ToString("yyyy-MM-dd");
-
 
             _zaposlenik.Oib = textBoxOib.Text;
             _zaposlenik.Ime = textBoxIme.Text;

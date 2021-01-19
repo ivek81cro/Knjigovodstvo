@@ -38,8 +38,8 @@ namespace Knjigovodstvo.Employee
 
         private void BtnEditZaposlenik_Click(object sender, EventArgs e)
         {
-            int id = int.Parse(dataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
-            _zaposlenik.GetZaposlenikById(id);
+            _zaposlenik.Id = int.Parse(dataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
+            _zaposlenik.GetZaposlenikById();
             ZaposlenikUnosForm pn = new ZaposlenikUnosForm();
             pn.FormClosing += new FormClosingEventHandler(this.ZaposlenikNew_FormClosing);
             pn.EditZaposlenik(_zaposlenik);
@@ -48,12 +48,13 @@ namespace Knjigovodstvo.Employee
         private void BtnDeleteZaposlenik_Click(object sender, EventArgs e)
         {
             _zaposlenik.Id = int.Parse(dataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
+            _zaposlenik.GetZaposlenikById();
             DialogResult result = MessageBox.Show("Da li ste sigurni da želite obrisati odabranog zaposlenika?",
                 "Brisanje reda", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
-                if (new DbDataDelete().DeleteItem(_zaposlenik))
+                if (_zaposlenik.DeleteZaposlenik())
                     MessageBox.Show("Podatak obrisan", "Brisanje podatka", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 LoadDatagrid();

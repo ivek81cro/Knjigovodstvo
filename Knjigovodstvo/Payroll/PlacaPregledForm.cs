@@ -27,9 +27,17 @@ namespace Knjigovodstvo.Payroll
 
         private void ButtonIzracun_Click(object sender, EventArgs e)
         {
-            string oib = dataGridView1.SelectedRows[0].Cells["Oib"].Value.ToString();
-            _placa.GetPlacaByOib(oib);
-            PlacaIzracunForm pn = new PlacaIzracunForm(_placa);
+            PlacaIzracunForm pn;
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                string oib = dataGridView1.SelectedRows[0].Cells["Oib"].Value.ToString();
+                _placa.GetPlacaByOib(oib);
+                pn = new PlacaIzracunForm(_placa);
+            }
+            else
+            {
+                pn = new PlacaIzracunForm();
+            }
             pn.ShowDialog();
             LoadDatagrid();
         }

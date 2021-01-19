@@ -3,6 +3,8 @@ using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Interface;
+using Knjigovodstvo.JoppdDocument;
+using Knjigovodstvo.Payroll;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -43,6 +45,31 @@ namespace Knjigovodstvo.Employee
             return false;
         }
 
+        public bool DeleteZaposlenik()
+        {
+            DbDataDelete del = new DbDataDelete();
+            
+            Placa p = new Placa();
+            p.GetPlacaByOib(Oib);
+            del.DeleteItem(p);
+            
+            ZaposlenikJoppd z = new ZaposlenikJoppd();
+            z = z.GetZaposlenikByOib(Oib);
+            del.DeleteItem(z);
+            
+            Dodatak d = new Dodatak();
+            foreach (DataRow row in d.GetDodaciByOib(Oib).Rows)
+            {
+                del.DeleteItem(
+                    new Dodatak() 
+                    { 
+                        Id = int.Parse(row.ItemArray[0].ToString())
+                    });
+            }
+            
+            return del.DeleteItem(this);
+        }
+
         internal void GetZaposlenikByOib(string oib)
         {
             string condition = $"Oib='{oib}';";
@@ -60,11 +87,9 @@ namespace Knjigovodstvo.Employee
             }
         }
 
-        public void GetZaposlenikById(int id)
+        public void GetZaposlenikById()
         {
-            string condition = $"Id={id};";
-            DataTable zaposlenik = new DbDataGet().GetTable(this, condition);
-
+            DataTable zaposlenik = new DbDataGet().GetTable(this, $"Id={Id}");
             SetPrivateMembers(zaposlenik);
         }
 
