@@ -116,10 +116,7 @@ namespace Knjigovodstvo.JoppdDocument
         /// </summary>
         private void FillDataForJoppdFile()
         {
-            string datumOd = dateTimePicker1.Value.AddMonths(-1).Year.ToString() + 
-                '-' + (dateTimePicker1.Value.AddMonths(-1).Month).ToString();
-            datumOd = datumOd.Split('-')[1].Length < 2 ?datumOd.Split('-')[0] + "-0" + datumOd.Split('-')[1] : datumOd;
-            _dt = new DbDataExecProcedure().GetTable(ProcedureNames.Joppd_podaci, $"@datumOd='{datumOd}', @dan='01'");
+            _dt = new DbDataExecProcedure().GetTable(ProcedureNames.Joppd_podaci);
 
             List<DataRow> rows = _dt.AsEnumerable().ToList();
 
@@ -158,8 +155,8 @@ namespace Knjigovodstvo.JoppdDocument
                     Mjesec = dr["Mjesec"].ToString(),
                     Vrijeme = dr["Vrijeme"].ToString(),
                     Sati = int.Parse(textBoxSatiRada.Text),
-                    Datum_Od = Convert.ToDateTime(dr["Datum_Od"].ToString()).ToString("yyyy-MM-dd"),
-                    Datum_Do = Convert.ToDateTime(dr["Datum_Do"].ToString()).ToString("yyyy-MM-dd"),
+                    Datum_Od = dateTimePickerRazdobljeOd.Value.ToString("yyyy-MM-dd"),
+                    Datum_Do = dateTimePickerRazdobljeDo.Value.ToString("yyyy-MM-dd"),
                     Bruto = decimal.Parse(dr["Bruto"].ToString()),
                     Mio_1 = decimal.Parse(dr["Mio_1"].ToString()),
                     Mio_2 = decimal.Parse(dr["Mio_2"].ToString()),
@@ -204,8 +201,8 @@ namespace Knjigovodstvo.JoppdDocument
                                 Opcina_Rada = dr["Opcina_Rada"].ToString(),
                                 Oib = dr["Oib"].ToString(),
                                 Ime_Prezime = dr["Ime_Prezime"].ToString(),
-                                Datum_Od = Convert.ToDateTime(dr["Datum_Od"].ToString()).ToString("yyyy-MM-dd"),
-                                Datum_Do = Convert.ToDateTime(dr["Datum_Do"].ToString()).ToString("yyyy-MM-dd"),
+                                Datum_Od = dateTimePickerRazdobljeOd.Value.ToString("yyyy-MM-dd"),
+                                Datum_Do = dateTimePickerRazdobljeDo.Value.ToString("yyyy-MM-dd"),
                                 Oznaka_Neoporezivog = item.Sifra,
                                 Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
                                 Iznos_Neoporezivog = item.Iznos,
@@ -321,15 +318,13 @@ namespace Knjigovodstvo.JoppdDocument
             if (checkBoxBezDodataka.Checked == true)
                 checkBoxSamoDodaci.Checked = false;
         }
-        /// <summary>
-        /// Prepare data for Joppd B part of document
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonPopuniObrazac_Click(object sender, EventArgs e)
+
+        private void textBoxGodinaObracuna_KeyPress(object sender, KeyPressEventArgs e)
         {
-            FillDataForJoppdFile();
-            buttonSnimiPodatke.Enabled = true;
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
         }
         /// <summary>
         /// Allow user to edit cells or delete rows before saving to XML file, unlocks edit mode of form's datagridvew
@@ -341,6 +336,16 @@ namespace Knjigovodstvo.JoppdDocument
             dataGridView1.ReadOnly = false;
             dataGridView1.AllowUserToDeleteRows = true;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
+        }
+        /// <summary>
+        /// Prepare data for Joppd B part of document
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonPopuniObrazac_Click(object sender, EventArgs e)
+        {
+            FillDataForJoppdFile();
+            buttonSnimiPodatke.Enabled = true;
         }
         /// <summary>
         /// Locks edit mode for form's datagridview and saves data to XML file, result is shown in datagridview

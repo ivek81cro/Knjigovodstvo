@@ -45,6 +45,8 @@ namespace Knjigovodstvo.JoppdDocument
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxIzvjesceSastavioIme = new System.Windows.Forms.TextBox();
             this.buttonSnimiPodatke = new System.Windows.Forms.Button();
+            this.dateTimePickerRazdobljeOd = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerRazdobljeDo = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -174,7 +176,7 @@ namespace Knjigovodstvo.JoppdDocument
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(571, 18);
+            this.label1.Location = new System.Drawing.Point(400, 81);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 15);
             this.label1.TabIndex = 11;
@@ -182,7 +184,7 @@ namespace Knjigovodstvo.JoppdDocument
             // 
             // textBoxIzvjesceSastavioIme
             // 
-            this.textBoxIzvjesceSastavioIme.Location = new System.Drawing.Point(669, 15);
+            this.textBoxIzvjesceSastavioIme.Location = new System.Drawing.Point(498, 78);
             this.textBoxIzvjesceSastavioIme.Name = "textBoxIzvjesceSastavioIme";
             this.textBoxIzvjesceSastavioIme.Size = new System.Drawing.Size(136, 23);
             this.textBoxIzvjesceSastavioIme.TabIndex = 12;
@@ -198,11 +200,29 @@ namespace Knjigovodstvo.JoppdDocument
             this.buttonSnimiPodatke.UseVisualStyleBackColor = true;
             this.buttonSnimiPodatke.Click += new System.EventHandler(this.ButtonSnimiPodatke_Click);
             // 
+            // dateTimePickerRazdobljeOd
+            // 
+            this.dateTimePickerRazdobljeOd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerRazdobljeOd.Location = new System.Drawing.Point(400, 49);
+            this.dateTimePickerRazdobljeOd.Name = "dateTimePickerRazdobljeOd";
+            this.dateTimePickerRazdobljeOd.Size = new System.Drawing.Size(77, 23);
+            this.dateTimePickerRazdobljeOd.TabIndex = 14;
+            // 
+            // dateTimePickerRazdobljeDo
+            // 
+            this.dateTimePickerRazdobljeDo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerRazdobljeDo.Location = new System.Drawing.Point(483, 49);
+            this.dateTimePickerRazdobljeDo.Name = "dateTimePickerRazdobljeDo";
+            this.dateTimePickerRazdobljeDo.Size = new System.Drawing.Size(77, 23);
+            this.dateTimePickerRazdobljeDo.TabIndex = 15;
+            // 
             // JoppdPlacaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 547);
+            this.Controls.Add(this.dateTimePickerRazdobljeDo);
+            this.Controls.Add(this.dateTimePickerRazdobljeOd);
             this.Controls.Add(this.buttonSnimiPodatke);
             this.Controls.Add(this.textBoxIzvjesceSastavioIme);
             this.Controls.Add(this.label1);
@@ -243,5 +263,7 @@ namespace Knjigovodstvo.JoppdDocument
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxIzvjesceSastavioIme;
         private Button buttonSnimiPodatke;
+        private DateTimePicker dateTimePickerRazdobljeOd;
+        private DateTimePicker dateTimePickerRazdobljeDo;
     }
 }

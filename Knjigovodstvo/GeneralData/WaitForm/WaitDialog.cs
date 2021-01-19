@@ -7,7 +7,8 @@ namespace Knjigovodstvo.GeneralData.WaitForm
     public enum SplashMessages
     {
         Učitavanje,
-        Spremanje
+        Spremanje,
+        Brisanje
     }
     public partial class WaitDialog : Form
     {

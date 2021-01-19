@@ -1,6 +1,7 @@
 ﻿using Knjigovodstvo.Books.PrepareForBalanceSheet;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.FinancialReports;
+using Knjigovodstvo.GeneralData.WaitForm;
 using Knjigovodstvo.Settings.SettingsBookkeeping;
 using System;
 using System.Collections.Generic;
@@ -34,22 +35,32 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
         private void ComboBoxVrstaTemeljnice_SelectionChangeCommitted(object sender, EventArgs e)
         {
             string selected = comboBoxVrstaTemeljnice.SelectedItem.ToString();
-            string condition = $"Dokument = '{selected}' AND Broj_temeljnice = 0 ORDER BY Broj ASC, Id ASC";
+            _condition = $"Dokument = '{selected}' AND Broj_temeljnice = 0 ORDER BY Broj ASC, Id ASC";
             if (selected == "Place")
             {
-                condition = $"(Dokument = '{selected}' OR Dokument='Dodaci') AND Broj_temeljnice = 0";
+                _condition = $"(Dokument = '{selected}' OR Dokument='Dodaci') AND Broj_temeljnice = 0";
             }
-            _dt = new DbDataGet().GetTable(new TemeljnicaStavka(), condition);
+            
             LoadDataView();
-            _checkBalance.CheckEndBalance(_dt, _labelList);
         }
 
         private void LoadDataView()
         {
+            _dt = new DbDataGet().GetTable(new TemeljnicaStavka(), _condition);
             CustomiseDataGridView();
             _dt.Columns["Duguje"].ColumnName = "Dugovna";
             _dt.Columns["Potrazuje"].ColumnName = "Potražna";
-            _dt.Columns.Remove("Id");
+            dbDataGridView1.Columns["Id"].Visible = false;
+
+            _checkBalance.CheckEndBalance(_dt, _labelList);
+        }
+
+        private void TemeljnicePregledForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                ButtonBrisiRed_Click(sender, e);
+            }
         }
 
         private void DbDataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -80,8 +91,34 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             }
         }
 
+        private void ButtonBrisiRed_Click(object sender, EventArgs e)
+        {
+            using (WaitDialog waitDialog = new WaitDialog(DeleteSelectedRows, SplashMessages.Brisanje))
+            {
+                waitDialog.ShowDialog(this);
+            }
+            LoadDataView();
+        }
+
+        private void DeleteSelectedRows()
+        {
+            if (dbDataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewSelectedRowCollection rows = dbDataGridView1.SelectedRows;
+                foreach(DataGridViewRow row in rows)
+                {
+                    if (row.Cells["Id"].Value == null)
+                        continue;
+                    _stavka.Id = int.Parse(row.Cells["Id"].Value.ToString());
+                    _stavka.DeleteStavka();
+                }
+            }
+        }
+
         private DataTable _dt = new DataTable();
         private readonly List<Label> _labelList;
         private readonly CheckBalance _checkBalance = new CheckBalance();
+        private string _condition = "";
+        private TemeljnicaStavka _stavka = new TemeljnicaStavka();
     }
 }

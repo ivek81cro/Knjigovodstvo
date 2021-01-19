@@ -40,6 +40,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             this.dateTimePickerDatumKnjizenja = new System.Windows.Forms.DateTimePicker();
             this.labelDatumKnjizenja = new System.Windows.Forms.Label();
             this.buttonKnjiziTemeljnicu = new System.Windows.Forms.Button();
+            this.buttonBrisiRed = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,12 +55,12 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             this.dbDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dbDataGridView1.Location = new System.Drawing.Point(13, 182);
             this.dbDataGridView1.Name = "dbDataGridView1";
-            this.dbDataGridView1.ReadOnly = true;
             this.dbDataGridView1.RowTemplate.Height = 25;
             this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dbDataGridView1.Size = new System.Drawing.Size(1186, 395);
             this.dbDataGridView1.TabIndex = 0;
             this.dbDataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DbDataGridView1_CellDoubleClick);
+            this.dbDataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TemeljnicePregledForm_KeyDown);
             // 
             // comboBoxVrstaTemeljnice
             // 
@@ -140,11 +141,23 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             this.buttonKnjiziTemeljnicu.Text = "Knjiži temeljnicu";
             this.buttonKnjiziTemeljnicu.UseVisualStyleBackColor = true;
             // 
+            // buttonBrisiRed
+            // 
+            this.buttonBrisiRed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonBrisiRed.Location = new System.Drawing.Point(97, 584);
+            this.buttonBrisiRed.Name = "buttonBrisiRed";
+            this.buttonBrisiRed.Size = new System.Drawing.Size(75, 23);
+            this.buttonBrisiRed.TabIndex = 9;
+            this.buttonBrisiRed.Text = "Briši red";
+            this.buttonBrisiRed.UseVisualStyleBackColor = true;
+            this.buttonBrisiRed.Click += new System.EventHandler(this.ButtonBrisiRed_Click);
+            // 
             // TemeljnicePregledForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1211, 631);
+            this.Controls.Add(this.buttonBrisiRed);
             this.Controls.Add(this.buttonKnjiziTemeljnicu);
             this.Controls.Add(this.labelDatumKnjizenja);
             this.Controls.Add(this.dateTimePickerDatumKnjizenja);
@@ -181,5 +194,6 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
         private System.Windows.Forms.DateTimePicker dateTimePickerDatumKnjizenja;
         private System.Windows.Forms.Label labelDatumKnjizenja;
         private System.Windows.Forms.Button buttonKnjiziTemeljnicu;
+        private System.Windows.Forms.Button buttonBrisiRed;
     }
 }

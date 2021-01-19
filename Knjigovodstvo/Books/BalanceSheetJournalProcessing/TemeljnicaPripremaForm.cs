@@ -2,7 +2,6 @@
 using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Interface;
-using Knjigovodstvo.Partners;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.Validators;
 using System.Collections.Generic;

@@ -72,7 +72,7 @@ namespace Knjigovodstvo.Database
                 ProcedureNames.PlacaPregled => "PlacaPregled",
                 ProcedureNames.Prebaci_postBroj => "Prebaci_postBroj",
                 ProcedureNames.Prebaci_prirez => "Prebaci_prirez",
-                ProcedureNames.Joppd_podaci => "Joppd_podaci " + param,
+                ProcedureNames.Joppd_podaci => "Joppd_podaci",
                 ProcedureNames.Get_Table_Names => "Get_Table_Names",
                 ProcedureNames.Izdvoji_Troskove => "Izdvoji_Troskove",
                 ProcedureNames.Izdvoji_Odobrenja => "Izdvoji_Odobrenja",
