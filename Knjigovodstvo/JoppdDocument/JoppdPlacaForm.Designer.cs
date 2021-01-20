@@ -47,22 +47,28 @@ namespace Knjigovodstvo.JoppdDocument
             this.buttonSnimiPodatke = new System.Windows.Forms.Button();
             this.dateTimePickerRazdobljeOd = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerRazdobljeDo = new System.Windows.Forms.DateTimePicker();
+            this.groupBoxRazdoblje = new System.Windows.Forms.GroupBox();
+            this.groupBoxOpcije = new System.Windows.Forms.GroupBox();
+            this.groupBoxOpci = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBoxRazdoblje.SuspendLayout();
+            this.groupBoxOpcije.SuspendLayout();
+            this.groupBoxOpci.SuspendLayout();
             this.SuspendLayout();
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(114, 12);
+            this.dateTimePicker1.Location = new System.Drawing.Point(119, 15);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(126, 23);
+            this.dateTimePicker1.Size = new System.Drawing.Size(84, 23);
             this.dateTimePicker1.TabIndex = 0;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.DateTimePicker1_ValueChanged);
             // 
             // labelDatumObrasca
             // 
             this.labelDatumObrasca.AutoSize = true;
-            this.labelDatumObrasca.Location = new System.Drawing.Point(11, 16);
+            this.labelDatumObrasca.Location = new System.Drawing.Point(6, 21);
             this.labelDatumObrasca.Name = "labelDatumObrasca";
             this.labelDatumObrasca.Size = new System.Drawing.Size(87, 15);
             this.labelDatumObrasca.TabIndex = 1;
@@ -71,15 +77,15 @@ namespace Knjigovodstvo.JoppdDocument
             // labelBrojObrasca
             // 
             this.labelBrojObrasca.AutoSize = true;
-            this.labelBrojObrasca.Location = new System.Drawing.Point(246, 16);
+            this.labelBrojObrasca.Location = new System.Drawing.Point(213, 19);
             this.labelBrojObrasca.Name = "labelBrojObrasca";
-            this.labelBrojObrasca.Size = new System.Drawing.Size(40, 15);
+            this.labelBrojObrasca.Size = new System.Drawing.Size(32, 15);
             this.labelBrojObrasca.TabIndex = 2;
-            this.labelBrojObrasca.Text = "yyddd";
+            this.labelBrojObrasca.Text = "-----";
             // 
             // buttonPripremiPodatke
             // 
-            this.buttonPripremiPodatke.Location = new System.Drawing.Point(11, 146);
+            this.buttonPripremiPodatke.Location = new System.Drawing.Point(19, 109);
             this.buttonPripremiPodatke.Name = "buttonPripremiPodatke";
             this.buttonPripremiPodatke.Size = new System.Drawing.Size(75, 23);
             this.buttonPripremiPodatke.TabIndex = 3;
@@ -90,7 +96,7 @@ namespace Knjigovodstvo.JoppdDocument
             // checkBoxSamoDodaci
             // 
             this.checkBoxSamoDodaci.AutoSize = true;
-            this.checkBoxSamoDodaci.Location = new System.Drawing.Point(15, 51);
+            this.checkBoxSamoDodaci.Location = new System.Drawing.Point(11, 58);
             this.checkBoxSamoDodaci.Name = "checkBoxSamoDodaci";
             this.checkBoxSamoDodaci.Size = new System.Drawing.Size(95, 19);
             this.checkBoxSamoDodaci.TabIndex = 4;
@@ -102,7 +108,7 @@ namespace Knjigovodstvo.JoppdDocument
             // 
             this.comboBoxDodaci.DropDownWidth = 800;
             this.comboBoxDodaci.FormattingEnabled = true;
-            this.comboBoxDodaci.Location = new System.Drawing.Point(114, 49);
+            this.comboBoxDodaci.Location = new System.Drawing.Point(112, 56);
             this.comboBoxDodaci.Name = "comboBoxDodaci";
             this.comboBoxDodaci.Size = new System.Drawing.Size(199, 23);
             this.comboBoxDodaci.TabIndex = 5;
@@ -111,7 +117,7 @@ namespace Knjigovodstvo.JoppdDocument
             // checkBoxBezDodataka
             // 
             this.checkBoxBezDodataka.AutoSize = true;
-            this.checkBoxBezDodataka.Location = new System.Drawing.Point(15, 86);
+            this.checkBoxBezDodataka.Location = new System.Drawing.Point(11, 22);
             this.checkBoxBezDodataka.Name = "checkBoxBezDodataka";
             this.checkBoxBezDodataka.Size = new System.Drawing.Size(96, 19);
             this.checkBoxBezDodataka.TabIndex = 6;
@@ -122,7 +128,7 @@ namespace Knjigovodstvo.JoppdDocument
             // checkBoxPojedinacno
             // 
             this.checkBoxPojedinacno.AutoSize = true;
-            this.checkBoxPojedinacno.Location = new System.Drawing.Point(15, 121);
+            this.checkBoxPojedinacno.Location = new System.Drawing.Point(11, 94);
             this.checkBoxPojedinacno.Name = "checkBoxPojedinacno";
             this.checkBoxPojedinacno.Size = new System.Drawing.Size(92, 19);
             this.checkBoxPojedinacno.TabIndex = 7;
@@ -132,7 +138,7 @@ namespace Knjigovodstvo.JoppdDocument
             // comboBoxZaposlenik
             // 
             this.comboBoxZaposlenik.FormattingEnabled = true;
-            this.comboBoxZaposlenik.Location = new System.Drawing.Point(114, 119);
+            this.comboBoxZaposlenik.Location = new System.Drawing.Point(112, 90);
             this.comboBoxZaposlenik.Name = "comboBoxZaposlenik";
             this.comboBoxZaposlenik.Size = new System.Drawing.Size(199, 23);
             this.comboBoxZaposlenik.TabIndex = 5;
@@ -141,7 +147,7 @@ namespace Knjigovodstvo.JoppdDocument
             // labelSatiRada
             // 
             this.labelSatiRada.AutoSize = true;
-            this.labelSatiRada.Location = new System.Drawing.Point(383, 18);
+            this.labelSatiRada.Location = new System.Drawing.Point(6, 53);
             this.labelSatiRada.Name = "labelSatiRada";
             this.labelSatiRada.Size = new System.Drawing.Size(109, 15);
             this.labelSatiRada.TabIndex = 8;
@@ -149,7 +155,7 @@ namespace Knjigovodstvo.JoppdDocument
             // 
             // textBoxSatiRada
             // 
-            this.textBoxSatiRada.Location = new System.Drawing.Point(498, 15);
+            this.textBoxSatiRada.Location = new System.Drawing.Point(119, 50);
             this.textBoxSatiRada.Name = "textBoxSatiRada";
             this.textBoxSatiRada.Size = new System.Drawing.Size(56, 23);
             this.textBoxSatiRada.TabIndex = 9;
@@ -165,18 +171,18 @@ namespace Knjigovodstvo.JoppdDocument
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(9, 201);
+            this.dataGridView1.Location = new System.Drawing.Point(9, 162);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(935, 330);
+            this.dataGridView1.Size = new System.Drawing.Size(935, 369);
             this.dataGridView1.TabIndex = 10;
             this.dataGridView1.Text = "dataGridView1";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(400, 81);
+            this.label1.Location = new System.Drawing.Point(6, 84);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 15);
             this.label1.TabIndex = 11;
@@ -184,7 +190,7 @@ namespace Knjigovodstvo.JoppdDocument
             // 
             // textBoxIzvjesceSastavioIme
             // 
-            this.textBoxIzvjesceSastavioIme.Location = new System.Drawing.Point(498, 78);
+            this.textBoxIzvjesceSastavioIme.Location = new System.Drawing.Point(119, 81);
             this.textBoxIzvjesceSastavioIme.Name = "textBoxIzvjesceSastavioIme";
             this.textBoxIzvjesceSastavioIme.Size = new System.Drawing.Size(136, 23);
             this.textBoxIzvjesceSastavioIme.TabIndex = 12;
@@ -192,7 +198,7 @@ namespace Knjigovodstvo.JoppdDocument
             // 
             // buttonSnimiPodatke
             // 
-            this.buttonSnimiPodatke.Location = new System.Drawing.Point(92, 146);
+            this.buttonSnimiPodatke.Location = new System.Drawing.Point(100, 109);
             this.buttonSnimiPodatke.Name = "buttonSnimiPodatke";
             this.buttonSnimiPodatke.Size = new System.Drawing.Size(75, 23);
             this.buttonSnimiPodatke.TabIndex = 13;
@@ -203,7 +209,7 @@ namespace Knjigovodstvo.JoppdDocument
             // dateTimePickerRazdobljeOd
             // 
             this.dateTimePickerRazdobljeOd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerRazdobljeOd.Location = new System.Drawing.Point(400, 49);
+            this.dateTimePickerRazdobljeOd.Location = new System.Drawing.Point(6, 27);
             this.dateTimePickerRazdobljeOd.Name = "dateTimePickerRazdobljeOd";
             this.dateTimePickerRazdobljeOd.Size = new System.Drawing.Size(77, 23);
             this.dateTimePickerRazdobljeOd.TabIndex = 14;
@@ -211,38 +217,72 @@ namespace Knjigovodstvo.JoppdDocument
             // dateTimePickerRazdobljeDo
             // 
             this.dateTimePickerRazdobljeDo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerRazdobljeDo.Location = new System.Drawing.Point(483, 49);
+            this.dateTimePickerRazdobljeDo.Location = new System.Drawing.Point(89, 27);
             this.dateTimePickerRazdobljeDo.Name = "dateTimePickerRazdobljeDo";
             this.dateTimePickerRazdobljeDo.Size = new System.Drawing.Size(77, 23);
             this.dateTimePickerRazdobljeDo.TabIndex = 15;
+            // 
+            // groupBoxRazdoblje
+            // 
+            this.groupBoxRazdoblje.Controls.Add(this.dateTimePickerRazdobljeOd);
+            this.groupBoxRazdoblje.Controls.Add(this.dateTimePickerRazdobljeDo);
+            this.groupBoxRazdoblje.Location = new System.Drawing.Point(11, 12);
+            this.groupBoxRazdoblje.Name = "groupBoxRazdoblje";
+            this.groupBoxRazdoblje.Size = new System.Drawing.Size(176, 71);
+            this.groupBoxRazdoblje.TabIndex = 16;
+            this.groupBoxRazdoblje.TabStop = false;
+            this.groupBoxRazdoblje.Text = "Razdoblje";
+            // 
+            // groupBoxOpcije
+            // 
+            this.groupBoxOpcije.Controls.Add(this.comboBoxZaposlenik);
+            this.groupBoxOpcije.Controls.Add(this.checkBoxSamoDodaci);
+            this.groupBoxOpcije.Controls.Add(this.comboBoxDodaci);
+            this.groupBoxOpcije.Controls.Add(this.checkBoxBezDodataka);
+            this.groupBoxOpcije.Controls.Add(this.checkBoxPojedinacno);
+            this.groupBoxOpcije.Location = new System.Drawing.Point(481, 12);
+            this.groupBoxOpcije.Name = "groupBoxOpcije";
+            this.groupBoxOpcije.Size = new System.Drawing.Size(322, 132);
+            this.groupBoxOpcije.TabIndex = 17;
+            this.groupBoxOpcije.TabStop = false;
+            this.groupBoxOpcije.Text = "Opcije";
+            // 
+            // groupBoxOpci
+            // 
+            this.groupBoxOpci.Controls.Add(this.labelDatumObrasca);
+            this.groupBoxOpci.Controls.Add(this.dateTimePicker1);
+            this.groupBoxOpci.Controls.Add(this.labelBrojObrasca);
+            this.groupBoxOpci.Controls.Add(this.labelSatiRada);
+            this.groupBoxOpci.Controls.Add(this.textBoxIzvjesceSastavioIme);
+            this.groupBoxOpci.Controls.Add(this.textBoxSatiRada);
+            this.groupBoxOpci.Controls.Add(this.label1);
+            this.groupBoxOpci.Location = new System.Drawing.Point(203, 12);
+            this.groupBoxOpci.Name = "groupBoxOpci";
+            this.groupBoxOpci.Size = new System.Drawing.Size(260, 132);
+            this.groupBoxOpci.TabIndex = 18;
+            this.groupBoxOpci.TabStop = false;
+            this.groupBoxOpci.Text = "Opći";
             // 
             // JoppdPlacaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 547);
-            this.Controls.Add(this.dateTimePickerRazdobljeDo);
-            this.Controls.Add(this.dateTimePickerRazdobljeOd);
+            this.Controls.Add(this.groupBoxOpci);
+            this.Controls.Add(this.groupBoxOpcije);
+            this.Controls.Add(this.groupBoxRazdoblje);
             this.Controls.Add(this.buttonSnimiPodatke);
-            this.Controls.Add(this.textBoxIzvjesceSastavioIme);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.textBoxSatiRada);
-            this.Controls.Add(this.labelSatiRada);
-            this.Controls.Add(this.comboBoxZaposlenik);
-            this.Controls.Add(this.checkBoxPojedinacno);
-            this.Controls.Add(this.checkBoxBezDodataka);
-            this.Controls.Add(this.comboBoxDodaci);
-            this.Controls.Add(this.checkBoxSamoDodaci);
             this.Controls.Add(this.buttonPripremiPodatke);
-            this.Controls.Add(this.labelBrojObrasca);
-            this.Controls.Add(this.labelDatumObrasca);
-            this.Controls.Add(this.dateTimePicker1);
             this.Name = "JoppdPlacaForm";
-            this.Text = "PlacaJoppdForm";
+            this.Text = "Joppd obrazac";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBoxRazdoblje.ResumeLayout(false);
+            this.groupBoxOpcije.ResumeLayout(false);
+            this.groupBoxOpcije.PerformLayout();
+            this.groupBoxOpci.ResumeLayout(false);
+            this.groupBoxOpci.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -265,5 +305,8 @@ namespace Knjigovodstvo.JoppdDocument
         private Button buttonSnimiPodatke;
         private DateTimePicker dateTimePickerRazdobljeOd;
         private DateTimePicker dateTimePickerRazdobljeDo;
+        private GroupBox groupBoxRazdoblje;
+        private GroupBox groupBoxOpcije;
+        private GroupBox groupBoxOpci;
     }
 }
