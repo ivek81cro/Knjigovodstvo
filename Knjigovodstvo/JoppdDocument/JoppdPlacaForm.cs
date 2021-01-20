@@ -80,7 +80,7 @@ namespace Knjigovodstvo.JoppdDocument
             }
             formNumber = formNumber.Substring(formNumber.Length - 2) + dayOfYear;
 
-            labelBrojObrasca.Text = "Oznaka obrasca: " + formNumber;
+            labelBrojObrasca.Text = formNumber;
 
             return formNumber;
         }

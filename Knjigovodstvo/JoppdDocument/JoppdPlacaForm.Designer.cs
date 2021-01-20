@@ -77,9 +77,10 @@ namespace Knjigovodstvo.JoppdDocument
             // labelBrojObrasca
             // 
             this.labelBrojObrasca.AutoSize = true;
-            this.labelBrojObrasca.Location = new System.Drawing.Point(213, 19);
+            this.labelBrojObrasca.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelBrojObrasca.Location = new System.Drawing.Point(209, 15);
             this.labelBrojObrasca.Name = "labelBrojObrasca";
-            this.labelBrojObrasca.Size = new System.Drawing.Size(32, 15);
+            this.labelBrojObrasca.Size = new System.Drawing.Size(39, 20);
             this.labelBrojObrasca.TabIndex = 2;
             this.labelBrojObrasca.Text = "-----";
             // 
