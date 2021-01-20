@@ -45,7 +45,7 @@ namespace Knjigovodstvo.City
             this.textBoxFilterGrad.Location = new System.Drawing.Point(128, 51);
             this.textBoxFilterGrad.Name = "textBoxFilterGrad";
             this.textBoxFilterGrad.Size = new System.Drawing.Size(147, 23);
-            this.textBoxFilterGrad.TabIndex = 3;
+            this.textBoxFilterGrad.TabIndex = 0;
             this.textBoxFilterGrad.TextChanged += new System.EventHandler(this.TextBoxFilterGrad_TextChanged);
             // 
             // namePartnerLabel
@@ -80,7 +80,7 @@ namespace Knjigovodstvo.City
             this.btnNewGrad.Location = new System.Drawing.Point(12, 12);
             this.btnNewGrad.Name = "btnNewGrad";
             this.btnNewGrad.Size = new System.Drawing.Size(75, 23);
-            this.btnNewGrad.TabIndex = 0;
+            this.btnNewGrad.TabIndex = 3;
             this.btnNewGrad.Text = "Novi";
             this.btnNewGrad.UseVisualStyleBackColor = true;
             this.btnNewGrad.Click += new System.EventHandler(this.ButtonNewGrad_Click);

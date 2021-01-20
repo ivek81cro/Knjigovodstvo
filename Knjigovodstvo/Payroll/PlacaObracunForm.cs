@@ -211,6 +211,7 @@ namespace Knjigovodstvo.Payroll
                                  Datum_Do = dateTimePickerDatumDo.Value.ToString("yyyy-MM-dd")
                              }).ToList();
             SaveObracun();
+            FillComboBoxMjesec();
         }
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)

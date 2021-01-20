@@ -82,7 +82,7 @@ namespace Knjigovodstvo.Employee
             string odlazak = "Null";
             if (dateTimePickerDatumOdlaska.Visible == true)
                 odlazak = dateTimePickerDatumOdlaska.Value.ToString("yyyy-MM-dd");
-
+            
             _zaposlenik.Oib = textBoxOib.Text;
             _zaposlenik.Ime = textBoxIme.Text;
             _zaposlenik.Prezime = textBoxPrezime.Text;

@@ -241,6 +241,7 @@
             this.textBoxOlaksica.Name = "textBoxOlaksica";
             this.textBoxOlaksica.Size = new System.Drawing.Size(59, 23);
             this.textBoxOlaksica.TabIndex = 10;
+            this.textBoxOlaksica.Text = "0";
             this.textBoxOlaksica.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // buttonSave
