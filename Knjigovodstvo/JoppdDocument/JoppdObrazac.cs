@@ -71,7 +71,7 @@ namespace Knjigovodstvo.JoppdDocument
             {
                 DatumIzvjesca = datum,
                 OznakaIzvjesca = joppdBroj,
-                VrstaIzvjesca = tVrstaIzvjesca.Item2,
+                VrstaIzvjesca = tVrstaIzvjesca.Item1,
                 IzvjesceSastavio = new sIzvjesceSastavio()
                 {
                     Ime = izvjesceSastavio.Split(' ')[0],
