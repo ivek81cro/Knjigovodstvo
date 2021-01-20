@@ -105,7 +105,6 @@ namespace Knjigovodstvo.Employee
                             Oib = dr["Oib"].ToString(),
                             Ime = dr["Ime"].ToString(),
                             Prezime = dr["Prezime"].ToString(),
-                            Datum_Rodenja = dr["Datum_Rodenja"].ToString(),
                             Adresa = new Adresa()
                             {
                                 Ulica = dr["Ulica"].ToString(),
@@ -136,7 +135,6 @@ namespace Knjigovodstvo.Employee
             Oib = zaposlenik.Rows[0]["Oib"].ToString();
             Ime = zaposlenik.Rows[0]["Ime"].ToString();
             Prezime = zaposlenik.Rows[0]["Prezime"].ToString();
-            Datum_Rodenja = zaposlenik.Rows[0]["Datum_Rodenja"].ToString();
             Adresa.Ulica = zaposlenik.Rows[0]["Ulica"].ToString();
             Adresa.Broj = zaposlenik.Rows[0]["Broj"].ToString();
             Adresa.Grad.Mjesto = zaposlenik.Rows[0]["Mjesto"].ToString();
@@ -154,7 +152,6 @@ namespace Knjigovodstvo.Employee
         public string Oib { get; set; } = "";
         public string Ime { get; set; } = "";
         public string Prezime { get; set; } = "";
-        public string Datum_Rodenja { get; set; } = "";
         public Adresa Adresa { get; set; } = new Adresa();
         public Kontakt Kontakt { get; set; } = new Kontakt();
         public string Stručna_Sprema { get; set; } = "";

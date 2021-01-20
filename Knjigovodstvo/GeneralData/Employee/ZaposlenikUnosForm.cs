@@ -26,7 +26,6 @@ namespace Knjigovodstvo.Employee
             textBoxOib.Text = _zaposlenik.Oib;
             textBoxIme.Text = _zaposlenik.Ime;
             textBoxPrezime.Text = _zaposlenik.Prezime;
-            dateTimePickerDatumRodenja.Text = _zaposlenik.Datum_Rodenja;
             textBoxUlica.Text = _zaposlenik.Adresa.Ulica;
             textBoxUlicaBroj.Text = _zaposlenik.Adresa.Ulica;
             textBoxGrad.Text = _zaposlenik.Adresa.Grad.Mjesto;
@@ -87,7 +86,6 @@ namespace Knjigovodstvo.Employee
             _zaposlenik.Oib = textBoxOib.Text;
             _zaposlenik.Ime = textBoxIme.Text;
             _zaposlenik.Prezime = textBoxPrezime.Text;
-            _zaposlenik.Datum_Rodenja = dateTimePickerDatumRodenja.Value.ToString("yyyy-MM-dd");
             _zaposlenik.Adresa.Ulica = textBoxUlica.Text;
             _zaposlenik.Adresa.Broj = textBoxUlicaBroj.Text;
             _zaposlenik.Adresa.Grad.Mjesto = textBoxGrad.Text;
