@@ -17,6 +17,7 @@ namespace Knjigovodstvo.Payroll
         public PlacaObracunForm()
         {
             InitializeComponent();
+
             DateTime date = DateTime.Now.AddMonths(-1);
             var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
             var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
@@ -25,6 +26,7 @@ namespace Knjigovodstvo.Payroll
             _bookName = BookNames.Place;
             _place = new Placa().GetListOfPlaca();
             _zaposlenici = new Zaposlenik().GetListZaposlenik();
+
             FillComboBoxMjesec();
             FillComboBoxZaposlenik();
             LoadBookkeepingsettings();

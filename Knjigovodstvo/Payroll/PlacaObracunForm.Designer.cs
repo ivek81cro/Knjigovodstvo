@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace Knjigovodstvo.Payroll
 {
@@ -111,6 +112,9 @@ namespace Knjigovodstvo.Payroll
             this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dbDataGridView1.Size = new System.Drawing.Size(1017, 361);
             this.dbDataGridView1.TabIndex = 4;
+            this.dbDataGridView1.RowHeadersVisible = false;
+            this.dbDataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Aquamarine;
+            this.dbDataGridView1.EnableHeadersVisualStyles = false;
             this.dbDataGridView1.Text = "dataGridView1";
             // 
             // comboBoxFilterDjelatnik
