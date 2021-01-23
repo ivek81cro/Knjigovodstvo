@@ -1,6 +1,8 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace Knjigovodstvo.Settings
 {
@@ -52,6 +54,21 @@ namespace Knjigovodstvo.Settings
             DataTable postavka = new DbDataGet().GetTable(this, condition);
 
             return decimal.Parse(postavka.Rows[0]["Vrijednost"].ToString());
+        }
+
+        internal List<PostavkePlace> GetpostavkePlaceList()
+        {
+            DataTable dt = new DbDataGet().GetTable(this);
+
+            List<PostavkePlace> placaPostavke = new List<PostavkePlace>();
+            placaPostavke = (from DataRow dr in dt.Rows
+                             select new PostavkePlace()
+                             {
+                                 Naziv = dr["Naziv"].ToString(),
+                                 Vrijednost = decimal.Parse(dr["Vrijednost"].ToString())
+                             }).ToList();
+
+            return placaPostavke;
         }
 
         public int Id { get; set; } = 0;

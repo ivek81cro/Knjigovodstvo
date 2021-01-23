@@ -1,6 +1,7 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
 using Knjigovodstvo.JoppdDocument;
+using Knjigovodstvo.Settings;
 using Knjigovodstvo.Validators;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Knjigovodstvo.Payroll
             InitializeComponent();
             FillComboBoxZaposlenik();
             FillComboBoxJoppd();
+            SetLabelsText();
         }
 
         public PlacaIzracunForm(Placa placa)
@@ -28,6 +30,17 @@ namespace Knjigovodstvo.Payroll
             comboBoxZaposlenik.SelectedIndex = index;
             InitPrivateMembers();
             FillComboBoxJoppd();
+            SetLabelsText();
+        }
+
+        private void SetLabelsText()
+        {
+            _postavkePlace = new PostavkePlace().GetpostavkePlaceList();
+
+            labelPorez1.Text += (_postavkePlace.Where(p => p.Naziv == "Porez_Dohodak_1")
+                .FirstOrDefault().Vrijednost * 100).ToString() + "%";
+            labelPorez2.Text += (_postavkePlace.Where(p => p.Naziv == "Porez_Dohodak_2")
+                 .FirstOrDefault().Vrijednost * 100).ToString() + "%";
         }
 
         private void InitPrivateMembers()
@@ -156,8 +169,8 @@ namespace Knjigovodstvo.Payroll
             textBoxDohodak.Text = Math.Round(placa.Dohodak, 2).ToString("0.00");
             textBoxOdbitak.Text = Math.Round(placa.Osobni_Odbitak, 2).ToString("0.00");
             textBoxPoreznaOsnovica.Text = Math.Round(placa.Porezna_Osnovica, 2).ToString("0.00");
-            textBoxPorez24.Text = Math.Round(placa.Porez_1, 2).ToString("0.00");
-            textBoxPorez36.Text = Math.Round(placa.Porez_2, 2).ToString("0.00");
+            textBoxPorez1.Text = Math.Round(placa.Porez_1, 2).ToString("0.00");
+            textBoxPorez2.Text = Math.Round(placa.Porez_2, 2).ToString("0.00");
             textBoxPorezUkupno.Text = Math.Round(placa.Porez_Ukupno, 2).ToString("0.00");
             textBoxPrirez.Text = Math.Round(placa.Prirez, 2).ToString("0.00");
             textBoxUkupnoPorezPrirez.Text = Math.Round(placa.Ukupno_Porez_i_Prirez, 2).ToString("0.00");
@@ -304,5 +317,6 @@ namespace Knjigovodstvo.Payroll
         private readonly Zaposlenik _zaposlenik = new Zaposlenik();
         private decimal _prirez = 0;
         private readonly DbDataGet _dbGet = new DbDataGet();
+        private List<PostavkePlace> _postavkePlace;
     }
 }

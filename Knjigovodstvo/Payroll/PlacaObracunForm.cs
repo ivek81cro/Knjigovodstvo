@@ -1,6 +1,7 @@
 ﻿using Knjigovodstvo.Books.PrepareForBalanceSheet;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
+using Knjigovodstvo.Global.Helpers;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.Settings.SettingsBookkeeping;
@@ -26,48 +27,38 @@ namespace Knjigovodstvo.Payroll
             _bookName = BookNames.Place;
             _place = new Placa().GetListOfPlaca();
             _zaposlenici = new Zaposlenik().GetListZaposlenik();
+            _dt = new DbDataGet().GetTable(new Placa());
 
             FillComboBoxMjesec();
-            FillComboBoxZaposlenik();
             LoadBookkeepingsettings();
             LoadDatagrid();
         }
 
         private void LoadDatagrid()
-        {
-            _dt = new DbDataGet().GetTable(new Placa());
+        {            
             _dt.Columns.Add("Odabir", typeof(bool)).SetOrdinal(0);
             _dt.Columns.Add("Ime i prezime", typeof(string)).SetOrdinal(1);
             Zaposlenik z = new Zaposlenik();
             foreach (DataRow row in _dt.Rows)
             {
-                 z =_zaposlenici.Find(z => z.Oib == row["Oib"].ToString());
+                z = _zaposlenici.Find(z => z.Oib == row["Oib"].ToString());
                 row["Ime i prezime"] = z.Ime + ' ' + z.Prezime;
             }
             dbDataGridView1.DataSource = _dt;
             dbDataGridView1.Columns["Id"].Visible = false;
             dbDataGridView1.Columns[0].Width = 50;
+            FormatDataTableColumnHeaders();
+        }
 
-            for(int i=1; i < dbDataGridView1.Columns.Count; i++)
+        private void FormatDataTableColumnHeaders()
+        {
+            for (int i = 1; i < dbDataGridView1.Columns.Count; i++)
             {
                 dbDataGridView1.Columns[i].ReadOnly = true;
-                dbDataGridView1.Columns[i].HeaderText = 
+                dbDataGridView1.Columns[i].HeaderText =
                     new TableHeaderFormat()
                     .FormatHeader(dbDataGridView1.Columns[i].HeaderText);
             }
-        }
-
-        private void FillComboBoxZaposlenik()
-        {
-            DataTable dt = new DbDataGet().GetTable(new Zaposlenik());
-            dt.Columns.Add(
-                "Ime i prezime",
-                typeof(string),
-                "oib + '   ' + Ime + ' ' + Prezime");
-            comboBoxFilterDjelatnik.DataSource = dt;
-            comboBoxFilterDjelatnik.DisplayMember = "Ime i prezime";
-            comboBoxFilterDjelatnik.SelectedItem = null;
-            comboBoxFilterDjelatnik.Text = "--Odaberi zaposlenika--";
         }
 
         private void FillComboBoxMjesec()
@@ -76,18 +67,13 @@ namespace Knjigovodstvo.Payroll
                 ().GetTable(
                 ProcedureNames.Placa_Distinct_Datum);
             dt.Columns.Add(
-                "Mjesec",
+                "Datum obračuna",
                 typeof(string),
-                "monthdate + '/' + yeardate");
-            comboBoxFilterPoMjesecu.DataSource = dt;
-            comboBoxFilterPoMjesecu.DisplayMember = "Mjesec";
-            comboBoxFilterPoMjesecu.SelectedItem = null;
-            comboBoxFilterPoMjesecu.Text = "--Odaberi mjesec--";
-        }
-
-        private void ComboBoxFilter_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            LoadDatagrid();
+                 "yeardate");
+            comboBox1.DataSource = dt;
+            comboBox1.DisplayMember = "Datum obračuna";
+            comboBox1.SelectedItem = null;
+            comboBox1.Text = "--Odaberi mjesec--";
         }
 
         private void PostavkeClosing_Event(object sender, FormClosingEventArgs e)
@@ -111,7 +97,7 @@ namespace Knjigovodstvo.Payroll
                                   }).ToList();
         }
 
-        private void SaveObracun()
+        private void SaveObracunToArhiva()
         {            
             DbDataInsert insert = new DbDataInsert();
             DbDataUpdate update = new DbDataUpdate();
@@ -128,7 +114,6 @@ namespace Knjigovodstvo.Payroll
             }
 
             MessageBox.Show("Obračun izvršen", "Obračun", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            LoadDatagrid();
         }
 
         private void ButtonOpenPostavkeForm(object sender, EventArgs e)
@@ -138,98 +123,126 @@ namespace Knjigovodstvo.Payroll
             form.ShowDialog();
         }
 
-        private void ButtonPonisti_Click(object sender, EventArgs e)
-        {
-            comboBoxFilterDjelatnik.SelectedItem = null;
-            comboBoxFilterDjelatnik.Text = "--Odaberi zaposlenika--";
-            comboBoxFilterPoMjesecu.SelectedItem = null;
-            comboBoxFilterPoMjesecu.Text = "--Odaberi mjesec--";
-            LoadDatagrid();
-        }
-
         private void ButtonObracunajPlacu_Click(object sender, EventArgs e)
         {
             _odabir.Clear();
-            foreach(DataGridViewRow row in dbDataGridView1.Rows)
+            foreach (DataGridViewRow row in dbDataGridView1.Rows)
             {
-                if (row.Cells["Odabir"].Value.ToString() == "True") 
+                if (row.Cells["Odabir"].Value.ToString() == "True")
                 {
                     _odabir.Add(row.Cells["Oib"].Value.ToString());
                 }
             }
-            _placaArhiva = (from Placa placa in _place where _odabir.Exists(s => s == placa.Oib)
-                             select new PlacaArhiva()
-                             {
-                                 Oib = placa.Oib,
-                                 Bruto = placa.Bruto,
-                                 Mio_1 = placa.Mio_1,
-                                 Mio_2 = placa.Mio_2,
-                                 Dohodak = placa.Dohodak,
-                                 Osobni_Odbitak = placa.Osobni_Odbitak,
-                                 Porezna_Osnovica = placa.Porezna_Osnovica,
-                                 Porez_1 = placa.Porez_1,
-                                 Porez_2 = placa.Porez_2,
-                                 Porez_Ukupno = placa.Porez_Ukupno,
-                                 Prirez = placa.Prirez,
-                                 Ukupno_Porez_i_Prirez = placa.Ukupno_Porez_i_Prirez,
-                                 Neto = placa.Neto,
-                                 Doprinos_Zdravstvo = placa.Doprinos_Zdravstvo,
-                                 Dodaci_Ukupno = 0,
-                                 Datum_Od = dateTimePickerDatumOd.Value.ToString("yyyy-MM-dd"),
-                                 Datum_Do = dateTimePickerDatumDo.Value.ToString("yyyy-MM-dd"),
-                                 Datum_obracuna = dateTimePickerDatumObracuna.Value.ToString("yyyy-MM-dd")
-                             }).ToList();
-
+            FillListPlacaArhiva();
             buttonSpremiArhiva.Enabled = true;
-            dbDataGridView1.DataSource = _placaArhiva;
+
+            _dt = new ListToDataTable().ConvertList(_placaArhiva);
+            _dt.Columns.Add("Ime i prezime", typeof(string)).SetOrdinal(0);
+            _dt.Columns["Oib"].SetOrdinal(1);
+            _dt.Columns["Datum_Od"].SetOrdinal(_dt.Columns.Count - 3);
+            _dt.Columns["Datum_Do"].SetOrdinal(_dt.Columns.Count - 2);
+            Zaposlenik z = new Zaposlenik();
+            foreach (DataRow row in _dt.Rows)
+            {
+                z = _zaposlenici.Find(z => z.Oib == row["Oib"].ToString());
+                row["Ime i prezime"] = z.Ime + ' ' + z.Prezime;
+            }
+            dbDataGridView1.DataSource = _dt;
             dbDataGridView1.Columns["Id"].Visible = false;
+
+            FormatDataTableColumnHeaders();
+        }
+
+        private void FillListPlacaArhiva()
+        {
+            _placaArhiva = (from Placa placa in _place
+                            where _odabir.Exists(s => s == placa.Oib)
+                            select new PlacaArhiva()
+                            {
+                                Oib = placa.Oib,
+                                Bruto = placa.Bruto,
+                                Mio_1 = placa.Mio_1,
+                                Mio_2 = placa.Mio_2,
+                                Dohodak = placa.Dohodak,
+                                Osobni_Odbitak = placa.Osobni_Odbitak,
+                                Porezna_Osnovica = placa.Porezna_Osnovica,
+                                Porez_1 = placa.Porez_1,
+                                Porez_2 = placa.Porez_2,
+                                Porez_Ukupno = placa.Porez_Ukupno,
+                                Prirez = placa.Prirez,
+                                Ukupno_Porez_i_Prirez = placa.Ukupno_Porez_i_Prirez,
+                                Neto = placa.Neto,
+                                Doprinos_Zdravstvo = placa.Doprinos_Zdravstvo,
+                                Dodaci_Ukupno = 0,
+                                Datum_Od = dateTimePickerDatumOd.Value.ToString("yyyy-MM-dd"),
+                                Datum_Do = dateTimePickerDatumDo.Value.ToString("yyyy-MM-dd"),
+                                Datum_obracuna = dateTimePickerDatumObracuna.Value.ToString("yyyy-MM-dd"),
+                                Knjizen = false
+                            }).ToList();
         }
 
         private void ButtonSpremiArhiva_Click(object sender, EventArgs e)
         {
-            SaveObracun();
+            SaveObracunToArhiva();
             FillComboBoxMjesec();
             buttonSpremiArhiva.Enabled = false;
+            buttonKnjizi.Enabled = true;
         }
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            if(dbDataGridView1.Rows.Count == 0 || comboBoxFilterPoMjesecu.Text.Contains("--"))
-            {
-                MessageBox.Show("Niste odabrali mjesec obračuna", "Obračun", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             PlacaArhiva po = new PlacaArhiva();
             foreach(DataGridViewRow row in dbDataGridView1.Rows)
             {
-                po.Bruto += decimal.Parse(row.Cells["Bruto"].Value.ToString());
-                po.Mio_1 += decimal.Parse(row.Cells["Mio_1"].Value.ToString());
-                po.Mio_2 += decimal.Parse(row.Cells["Mio_2"].Value.ToString());
-                po.Dohodak += decimal.Parse(row.Cells["Dohodak"].Value.ToString());
-                po.Osobni_Odbitak += decimal.Parse(row.Cells["Osobni_Odbitak"].Value.ToString());
-                po.Porezna_Osnovica += decimal.Parse(row.Cells["Porezna_Osnovica"].Value.ToString());
-                po.Porez_1 += decimal.Parse(row.Cells["Porez_1"].Value.ToString());
-                po.Porez_2 += decimal.Parse(row.Cells["Porez_2"].Value.ToString());
-                po.Porez_Ukupno += decimal.Parse(row.Cells["Porez_Ukupno"].Value.ToString());
-                po.Prirez += decimal.Parse(row.Cells["Prirez"].Value.ToString());
-                po.Ukupno_Porez_i_Prirez += decimal.Parse(row.Cells["Ukupno_Porez_i_Prirez"].Value.ToString());
-                po.Neto += decimal.Parse(row.Cells["Neto"].Value.ToString());
-                po.Doprinos_Zdravstvo += decimal.Parse(row.Cells["Doprinos_Zdravstvo"].Value.ToString());
-                po.Dodaci_Ukupno += decimal.Parse(row.Cells["Dodaci_Ukupno"].Value.ToString());
+                if(row.Cells["Odabir"].Value.ToString() == "True")
+                {
+                    string oib = row.Cells["Oib"].Value.ToString();
+                    po.Doprinos_Zdravstvo += _placaArhiva.Where(p => p.Oib == oib)
+                        .FirstOrDefault().Doprinos_Zdravstvo;
+                    po.Mio_1 += _placaArhiva.Where(p => p.Oib == oib)
+                        .FirstOrDefault().Mio_1;
+                    po.Mio_2 += _placaArhiva.Where(p => p.Oib == oib)
+                        .FirstOrDefault().Mio_2;
+                    po.Neto += _placaArhiva.Where(p => p.Oib == oib)
+                        .FirstOrDefault().Neto;
+                    po.Porezna_Osnovica += _placaArhiva.Where(p => p.Oib == oib)
+                        .FirstOrDefault().Porezna_Osnovica;
+                    po.Prirez += _placaArhiva.Where(p => p.Oib == oib)
+                        .FirstOrDefault().Prirez;
+                    po.Porez_Ukupno += _placaArhiva.Where(p => p.Oib == oib)
+                        .FirstOrDefault().Porez_Ukupno;
+                    po.Ukupno_Porez_i_Prirez += _placaArhiva.Where(p => p.Oib == oib)
+                        .FirstOrDefault().Ukupno_Porez_i_Prirez;
+                    po.Datum_obracuna = _placaArhiva.Where(p => p.Oib == oib)
+                        .FirstOrDefault().Datum_obracuna;
+                }
             }
-            po.Datum_Do = comboBoxFilterPoMjesecu.Text;//use this string for description date in next step
             TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(po, _postavkeKnjizenja);
             form.ShowDialog();
         }
 
+        private void ButtonDohvatArhiva_Click(object sender, EventArgs e)
+        {
+            _placaArhiva = new PlacaArhiva().GetListFromArhiva();
+            _dt = new DbDataGet().GetTable(_placaArhiva.ElementAt(0));
+            buttonBrisiOdabrane.Enabled = true;
+            buttonKnjizi.Enabled = true;
+            LoadDatagrid();
+        }
+
+        private void ButtonPocetniPrikaz_Click(object sender, EventArgs e)
+        {
+            _dt = new DbDataGet().GetTable(new Placa());
+            buttonBrisiOdabrane.Enabled = false;
+            LoadDatagrid();
+        }
+
         private List<PlacaArhiva> _placaArhiva = new List<PlacaArhiva>();
-        private List<Placa> _place;
-        private List<Zaposlenik> _zaposlenici;
+        private readonly List<Placa> _place;
+        private readonly List<Zaposlenik> _zaposlenici;
         private readonly BookNames _bookName;
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
         private DataTable _dt = new DataTable();
-        private List<string> _odabir = new List<string>();
+        private readonly List<string> _odabir = new List<string>();
     }
 }

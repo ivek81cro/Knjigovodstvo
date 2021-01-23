@@ -1,4 +1,5 @@
 ﻿using Knjigovodstvo.Database;
+using Knjigovodstvo.Employee;
 using Knjigovodstvo.Interface;
 using System.Collections.Generic;
 using System.Data;
@@ -89,7 +90,6 @@ namespace Knjigovodstvo.Payroll
         }
 
         private List<Dodatak> _dodaci = new List<Dodatak>();
-
         public int Id { get; set; } = 0;
         public string Oib { get; set; } = "";
         public decimal Bruto { get; set; } = 0;
