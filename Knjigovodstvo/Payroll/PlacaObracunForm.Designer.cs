@@ -49,12 +49,13 @@ namespace Knjigovodstvo.Payroll
             this.textBoxFilterIme = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBoxFilteri = new System.Windows.Forms.GroupBox();
+            this.buttonFiltrirajDatum = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxDatumObracunaFilter = new System.Windows.Forms.ComboBox();
             this.buttonDohvatArhiva = new System.Windows.Forms.Button();
             this.groupBoxArhiva = new System.Windows.Forms.GroupBox();
-            this.groupBoxObračun = new System.Windows.Forms.GroupBox();
             this.buttonPocetniPrikaz = new System.Windows.Forms.Button();
+            this.groupBoxObračun = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBoxRazdoblje.SuspendLayout();
@@ -214,14 +215,16 @@ namespace Knjigovodstvo.Payroll
             this.buttonBrisiOdabrane.TabIndex = 20;
             this.buttonBrisiOdabrane.Text = "Briši odabrane";
             this.buttonBrisiOdabrane.UseVisualStyleBackColor = true;
+            this.buttonBrisiOdabrane.Click += new System.EventHandler(this.ButtonBrisiOdabrane_Click);
             // 
             // textBoxFilterIme
             // 
             this.textBoxFilterIme.Location = new System.Drawing.Point(90, 21);
             this.textBoxFilterIme.Name = "textBoxFilterIme";
             this.textBoxFilterIme.PlaceholderText = "Ime ili prezime";
-            this.textBoxFilterIme.Size = new System.Drawing.Size(183, 23);
+            this.textBoxFilterIme.Size = new System.Drawing.Size(131, 23);
             this.textBoxFilterIme.TabIndex = 21;
+            this.textBoxFilterIme.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FilterByName);
             // 
             // label1
             // 
@@ -234,8 +237,9 @@ namespace Knjigovodstvo.Payroll
             // 
             // groupBoxFilteri
             // 
+            this.groupBoxFilteri.Controls.Add(this.buttonFiltrirajDatum);
             this.groupBoxFilteri.Controls.Add(this.label2);
-            this.groupBoxFilteri.Controls.Add(this.comboBox1);
+            this.groupBoxFilteri.Controls.Add(this.comboBoxDatumObracunaFilter);
             this.groupBoxFilteri.Controls.Add(this.label1);
             this.groupBoxFilteri.Controls.Add(this.textBoxFilterIme);
             this.groupBoxFilteri.Location = new System.Drawing.Point(13, 132);
@@ -245,22 +249,32 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxFilteri.TabStop = false;
             this.groupBoxFilteri.Text = "Filter";
             // 
+            // buttonFiltrirajDatum
+            // 
+            this.buttonFiltrirajDatum.Location = new System.Drawing.Point(430, 20);
+            this.buttonFiltrirajDatum.Name = "buttonFiltrirajDatum";
+            this.buttonFiltrirajDatum.Size = new System.Drawing.Size(75, 23);
+            this.buttonFiltrirajDatum.TabIndex = 25;
+            this.buttonFiltrirajDatum.Text = "Filtriraj";
+            this.buttonFiltrirajDatum.UseVisualStyleBackColor = true;
+            this.buttonFiltrirajDatum.Click += new System.EventHandler(this.ButtonFiltrirajDatum_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(279, 24);
+            this.label2.Location = new System.Drawing.Point(227, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 15);
             this.label2.TabIndex = 24;
             this.label2.Text = "Datum obračuna";
             // 
-            // comboBox1
+            // comboBoxDatumObracunaFilter
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(382, 21);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 23);
-            this.comboBox1.TabIndex = 23;
+            this.comboBoxDatumObracunaFilter.FormattingEnabled = true;
+            this.comboBoxDatumObracunaFilter.Location = new System.Drawing.Point(330, 21);
+            this.comboBoxDatumObracunaFilter.Name = "comboBoxDatumObracunaFilter";
+            this.comboBoxDatumObracunaFilter.Size = new System.Drawing.Size(94, 23);
+            this.comboBoxDatumObracunaFilter.TabIndex = 23;
             // 
             // buttonDohvatArhiva
             // 
@@ -285,6 +299,16 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxArhiva.TabStop = false;
             this.groupBoxArhiva.Text = "Arhiva";
             // 
+            // buttonPocetniPrikaz
+            // 
+            this.buttonPocetniPrikaz.Location = new System.Drawing.Point(7, 109);
+            this.buttonPocetniPrikaz.Name = "buttonPocetniPrikaz";
+            this.buttonPocetniPrikaz.Size = new System.Drawing.Size(120, 23);
+            this.buttonPocetniPrikaz.TabIndex = 25;
+            this.buttonPocetniPrikaz.Text = "Početni prikaz";
+            this.buttonPocetniPrikaz.UseVisualStyleBackColor = true;
+            this.buttonPocetniPrikaz.Click += new System.EventHandler(this.ButtonPocetniPrikaz_Click);
+            // 
             // groupBoxObračun
             // 
             this.groupBoxObračun.Controls.Add(this.dateTimePickerDatumObracuna);
@@ -297,16 +321,6 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxObračun.TabIndex = 26;
             this.groupBoxObračun.TabStop = false;
             this.groupBoxObračun.Text = "Obračun i knjiženje";
-            // 
-            // buttonPocetniPrikaz
-            // 
-            this.buttonPocetniPrikaz.Location = new System.Drawing.Point(7, 109);
-            this.buttonPocetniPrikaz.Name = "buttonPocetniPrikaz";
-            this.buttonPocetniPrikaz.Size = new System.Drawing.Size(120, 23);
-            this.buttonPocetniPrikaz.TabIndex = 25;
-            this.buttonPocetniPrikaz.Text = "Početni prikaz";
-            this.buttonPocetniPrikaz.UseVisualStyleBackColor = true;
-            this.buttonPocetniPrikaz.Click += new System.EventHandler(this.ButtonPocetniPrikaz_Click);
             // 
             // PlacaObracunForm
             // 
@@ -359,7 +373,8 @@ namespace Knjigovodstvo.Payroll
         private Button buttonDohvatArhiva;
         private GroupBox groupBoxArhiva;
         private GroupBox groupBoxObračun;
-        private ComboBox comboBox1;
+        private ComboBox comboBoxDatumObracunaFilter;
         private Button buttonPocetniPrikaz;
+        private Button buttonFiltrirajDatum;
     }
 }

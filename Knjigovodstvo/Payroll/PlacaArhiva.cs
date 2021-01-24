@@ -52,6 +52,11 @@ namespace Knjigovodstvo.Payroll
             return placaArhivaList;
         }
 
+        internal void DeleteRow()
+        {
+            new DbDataDelete().DeleteItem(this);
+        }
+
         private readonly DbDataGet _dataGet = new DbDataGet();
         private DataTable _dt = new DataTable();
 
