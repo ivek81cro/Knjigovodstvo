@@ -5,6 +5,7 @@ using Knjigovodstvo.GeneralData.WaitForm;
 using Knjigovodstvo.Settings.SettingsBookkeeping;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -30,6 +31,25 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
                 }
             }
             comboBoxVrstaTemeljnice.Items.Add(BookNames.Slobodna);
+        }
+
+        private void DataTableToList()
+        {
+            foreach(DataRow row in _dt.Rows)
+            {
+                _stavkaList.Add(new TemeljnicaStavka()
+                {
+                    Id = int.Parse(row["Id"].ToString()),
+                    Broj = int.Parse(row["Broj"].ToString()),
+                    Datum = row["Datum"].ToString(),
+                    Dokument = row["Dokument"].ToString(),
+                    Duguje = decimal.Parse(row["Duguje"].ToString()),
+                    Potrazuje = decimal.Parse(row["Potrazuje"].ToString()),
+                    Konto = row["Konto"].ToString(),
+                    Opis = row["Opis"].ToString(),
+                    Valuta = row["Valuta"].ToString()
+                });
+            }
         }
 
         private void ComboBoxVrstaTemeljnice_SelectionChangeCommitted(object sender, EventArgs e)
@@ -120,5 +140,6 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
         private readonly CheckBalance _checkBalance = new CheckBalance();
         private string _condition = "";
         private TemeljnicaStavka _stavka = new TemeljnicaStavka();
+        private BindingList<TemeljnicaStavka> _stavkaList = new BindingList<TemeljnicaStavka>();
     }
 }

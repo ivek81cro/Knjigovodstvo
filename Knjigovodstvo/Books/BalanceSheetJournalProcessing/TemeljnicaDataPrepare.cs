@@ -147,7 +147,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     postavka.Naziv_stupca,
                     new KontniPlan().GetDescriptiopnByKontoNumber(postavka.Konto),
                     postavka.Konto,
-                    DateTime.Today.ToString("dd.MM.yyyy."),
+                    knjiga.Datum_obracuna,
                     postavka.Strana == "Dugovna",
                     postavka.Strana == "Potražna",
                     postavka.Mijenja_predznak == true
@@ -166,7 +166,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     postavka.Naziv_stupca,
                     new KontniPlan().GetDescriptiopnByKontoNumber(postavka.Konto) + "-Placa za " + knjiga.Datum_Do,
                     postavka.Konto,
-                    DateTime.Today.ToString("dd.MM.yyyy."),
+                    knjiga.Datum_obracuna,
                     postavka.Strana == "Dugovna",
                     postavka.Strana == "Potražna",
                     postavka.Mijenja_predznak == true

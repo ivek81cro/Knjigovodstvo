@@ -53,6 +53,8 @@ namespace Knjigovodstvo.Payroll
             this.textBoxIznos = new System.Windows.Forms.TextBox();
             this.groupBoxNoviDodatak = new System.Windows.Forms.GroupBox();
             this.buttonBrisiRed = new System.Windows.Forms.Button();
+            this.labelDatumObracuna = new System.Windows.Forms.Label();
+            this.dateTimePickerDatumObracuna = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBoxNoviDodatak.SuspendLayout();
@@ -63,14 +65,14 @@ namespace Knjigovodstvo.Payroll
             this.labelRazdoblje.AutoSize = true;
             this.labelRazdoblje.Location = new System.Drawing.Point(13, 37);
             this.labelRazdoblje.Name = "labelRazdoblje";
-            this.labelRazdoblje.Size = new System.Drawing.Size(152, 15);
+            this.labelRazdoblje.Size = new System.Drawing.Size(119, 15);
             this.labelRazdoblje.TabIndex = 0;
-            this.labelRazdoblje.Text = "Razdoblje na koje se odnosi";
+            this.labelRazdoblje.Text = "Razdoblje za obračun";
             // 
             // dateTimePickerDatumOd
             // 
             this.dateTimePickerDatumOd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerDatumOd.Location = new System.Drawing.Point(194, 34);
+            this.dateTimePickerDatumOd.Location = new System.Drawing.Point(161, 31);
             this.dateTimePickerDatumOd.Name = "dateTimePickerDatumOd";
             this.dateTimePickerDatumOd.Size = new System.Drawing.Size(91, 23);
             this.dateTimePickerDatumOd.TabIndex = 1;
@@ -78,7 +80,7 @@ namespace Knjigovodstvo.Payroll
             // labelDatumOd
             // 
             this.labelDatumOd.AutoSize = true;
-            this.labelDatumOd.Location = new System.Drawing.Point(171, 38);
+            this.labelDatumOd.Location = new System.Drawing.Point(138, 35);
             this.labelDatumOd.Name = "labelDatumOd";
             this.labelDatumOd.Size = new System.Drawing.Size(23, 15);
             this.labelDatumOd.TabIndex = 2;
@@ -87,7 +89,7 @@ namespace Knjigovodstvo.Payroll
             // dateTimePickerDatumDo
             // 
             this.dateTimePickerDatumDo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerDatumDo.Location = new System.Drawing.Point(320, 34);
+            this.dateTimePickerDatumDo.Location = new System.Drawing.Point(284, 31);
             this.dateTimePickerDatumDo.Name = "dateTimePickerDatumDo";
             this.dateTimePickerDatumDo.Size = new System.Drawing.Size(91, 23);
             this.dateTimePickerDatumDo.TabIndex = 1;
@@ -95,7 +97,7 @@ namespace Knjigovodstvo.Payroll
             // labelDatumDo
             // 
             this.labelDatumDo.AutoSize = true;
-            this.labelDatumDo.Location = new System.Drawing.Point(296, 38);
+            this.labelDatumDo.Location = new System.Drawing.Point(260, 35);
             this.labelDatumDo.Name = "labelDatumDo";
             this.labelDatumDo.Size = new System.Drawing.Size(22, 15);
             this.labelDatumDo.TabIndex = 2;
@@ -103,7 +105,7 @@ namespace Knjigovodstvo.Payroll
             // 
             // buttonObracunajDodatke
             // 
-            this.buttonObracunajDodatke.Location = new System.Drawing.Point(13, 69);
+            this.buttonObracunajDodatke.Location = new System.Drawing.Point(13, 112);
             this.buttonObracunajDodatke.Name = "buttonObracunajDodatke";
             this.buttonObracunajDodatke.Size = new System.Drawing.Size(117, 23);
             this.buttonObracunajDodatke.TabIndex = 3;
@@ -196,7 +198,7 @@ namespace Knjigovodstvo.Payroll
             // buttonKnjizi
             // 
             this.buttonKnjizi.Enabled = false;
-            this.buttonKnjizi.Location = new System.Drawing.Point(217, 69);
+            this.buttonKnjizi.Location = new System.Drawing.Point(217, 112);
             this.buttonKnjizi.Name = "buttonKnjizi";
             this.buttonKnjizi.Size = new System.Drawing.Size(124, 23);
             this.buttonKnjizi.TabIndex = 14;
@@ -206,7 +208,7 @@ namespace Knjigovodstvo.Payroll
             // 
             // buttonSpremi
             // 
-            this.buttonSpremi.Location = new System.Drawing.Point(136, 69);
+            this.buttonSpremi.Location = new System.Drawing.Point(136, 112);
             this.buttonSpremi.Name = "buttonSpremi";
             this.buttonSpremi.Size = new System.Drawing.Size(75, 23);
             this.buttonSpremi.TabIndex = 15;
@@ -276,11 +278,30 @@ namespace Knjigovodstvo.Payroll
             this.buttonBrisiRed.UseVisualStyleBackColor = true;
             this.buttonBrisiRed.Click += new System.EventHandler(this.ButtonBrisiRed_Click);
             // 
+            // labelDatumObracuna
+            // 
+            this.labelDatumObracuna.AutoSize = true;
+            this.labelDatumObracuna.Location = new System.Drawing.Point(13, 73);
+            this.labelDatumObracuna.Name = "labelDatumObracuna";
+            this.labelDatumObracuna.Size = new System.Drawing.Size(96, 15);
+            this.labelDatumObracuna.TabIndex = 22;
+            this.labelDatumObracuna.Text = "Datum obračuna";
+            // 
+            // dateTimePickerDatumObracuna
+            // 
+            this.dateTimePickerDatumObracuna.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerDatumObracuna.Location = new System.Drawing.Point(161, 67);
+            this.dateTimePickerDatumObracuna.Name = "dateTimePickerDatumObracuna";
+            this.dateTimePickerDatumObracuna.Size = new System.Drawing.Size(91, 23);
+            this.dateTimePickerDatumObracuna.TabIndex = 23;
+            // 
             // DodatakObracun
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 560);
+            this.Controls.Add(this.dateTimePickerDatumObracuna);
+            this.Controls.Add(this.labelDatumObracuna);
             this.Controls.Add(this.buttonBrisiRed);
             this.Controls.Add(this.groupBoxNoviDodatak);
             this.Controls.Add(this.buttonSpremi);
@@ -335,5 +356,7 @@ namespace Knjigovodstvo.Payroll
         private TextBox textBoxIznos;
         private GroupBox groupBoxNoviDodatak;
         private Button buttonBrisiRed;
+        private Label labelDatumObracuna;
+        private DateTimePicker dateTimePickerDatumObracuna;
     }
 }

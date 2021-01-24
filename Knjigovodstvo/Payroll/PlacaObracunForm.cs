@@ -238,10 +238,9 @@ namespace Knjigovodstvo.Payroll
                         .FirstOrDefault().Porez_Ukupno;
                     po.Ukupno_Porez_i_Prirez += _placaArhivaLista.Where(p => p.Oib == oib)
                         .FirstOrDefault().Ukupno_Porez_i_Prirez;
-                    po.Datum_obracuna = _placaArhivaLista.Where(p => p.Oib == oib)
-                        .FirstOrDefault().Datum_obracuna;
                 }
             }
+            po.Datum_obracuna = dbDataGridView1.Rows[0].Cells["Datum_obracuna"].Value.ToString().Split(' ')[0];
             TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(po, _postavkeKnjizenja);
             form.ShowDialog();
         }

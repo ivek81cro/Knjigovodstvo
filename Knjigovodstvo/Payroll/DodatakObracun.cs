@@ -110,10 +110,6 @@ namespace Knjigovodstvo.Payroll
 
             dataGridView1.DataSource = _dbDataGet.GetTable(new DodatakArhiva(), condition);
             dataGridView1.Columns["Id"].Visible = false;
-            for (int i = 4; i < dataGridView1.Columns.Count; i++)
-            {
-                dataGridView1.Columns[i].DefaultCellStyle.Format = "0.00";
-            }
 
             for (int i = 0; i < dataGridView1.Columns.Count; i++)
             {
@@ -191,7 +187,8 @@ namespace Knjigovodstvo.Payroll
             DodatakArhiva da = new DodatakArhiva();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                da.Iznos += decimal.Parse(row.Cells["Iznos"].Value.ToString());                
+                da.Iznos += decimal.Parse(row.Cells["Iznos"].Value.ToString());
+                da.Datum_obracuna = row.Cells["Datum_obracuna"].Value.ToString().Split(' ')[0];
             }
             TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(da, _postavkeKnjizenja);
             form.ShowDialog();
@@ -202,18 +199,25 @@ namespace Knjigovodstvo.Payroll
             _dodatakArhiva = new BindingList<DodatakArhiva>();
             foreach(var dodatak in _dodaci)
             {
-                _dodatakArhiva.Add(new DodatakArhiva() 
+                _dodatakArhiva.Add(new DodatakArhiva()
                 {
                     Oib = dodatak.Oib,
                     Sifra = dodatak.Sifra,
                     Iznos = dodatak.Iznos,
-                    Datum_Od = DateTime.ParseExact(dateTimePickerDatumOd.Text, 
-                    ("dd.MM.yyyy."),
-                    CultureInfo.InvariantCulture).
-                    ToString("yyyy-MM-dd"),
-                    Datum_Do = DateTime.ParseExact(dateTimePickerDatumDo.Text, 
-                    ("dd.MM.yyyy."), 
-                    CultureInfo.InvariantCulture)
+                    Datum_Od = DateTime.ParseExact(
+                        dateTimePickerDatumOd.Text,
+                        ("dd.MM.yyyy."),
+                        CultureInfo.InvariantCulture)
+                    .ToString("yyyy-MM-dd"),
+                    Datum_Do = DateTime.ParseExact(
+                        dateTimePickerDatumDo.Text,
+                        ("dd.MM.yyyy."),
+                        CultureInfo.InvariantCulture)
+                    .ToString("yyyy-MM-dd"),
+                    Datum_obracuna = DateTime.ParseExact(
+                        dateTimePickerDatumObracuna.Text,
+                        ("dd.MM.yyyy."),
+                        CultureInfo.InvariantCulture)
                     .ToString("yyyy-MM-dd")
                 });
             }
