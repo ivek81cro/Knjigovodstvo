@@ -83,30 +83,30 @@ namespace Knjigovodstvo.Payroll
 
         private void FillListPlacaArhiva()
         {
-            _placaArhiva = (from Placa placa in _place
-                            where _odabir.Exists(s => s == placa.Oib)
-                            select new PlacaArhiva()
-                            {
-                                Oib = placa.Oib,
-                                Bruto = placa.Bruto,
-                                Mio_1 = placa.Mio_1,
-                                Mio_2 = placa.Mio_2,
-                                Dohodak = placa.Dohodak,
-                                Osobni_Odbitak = placa.Osobni_Odbitak,
-                                Porezna_Osnovica = placa.Porezna_Osnovica,
-                                Porez_1 = placa.Porez_1,
-                                Porez_2 = placa.Porez_2,
-                                Porez_Ukupno = placa.Porez_Ukupno,
-                                Prirez = placa.Prirez,
-                                Ukupno_Porez_i_Prirez = placa.Ukupno_Porez_i_Prirez,
-                                Neto = placa.Neto,
-                                Doprinos_Zdravstvo = placa.Doprinos_Zdravstvo,
-                                Dodaci_Ukupno = 0,
-                                Datum_Od = dateTimePickerDatumOd.Value.ToString("yyyy-MM-dd"),
-                                Datum_Do = dateTimePickerDatumDo.Value.ToString("yyyy-MM-dd"),
-                                Datum_obracuna = dateTimePickerDatumObracuna.Value.ToString("yyyy-MM-dd"),
-                                Knjizen = false
-                            }).ToList();
+            _placaArhivaLista = (from Placa placa in _place
+                                 where _odabir.Exists(s => s == placa.Oib)
+                                 select new PlacaArhiva()
+                                 {
+                                     Oib = placa.Oib,
+                                     Bruto = placa.Bruto,
+                                     Mio_1 = placa.Mio_1,
+                                     Mio_2 = placa.Mio_2,
+                                     Dohodak = placa.Dohodak,
+                                     Osobni_Odbitak = placa.Osobni_Odbitak,
+                                     Porezna_Osnovica = placa.Porezna_Osnovica,
+                                     Porez_1 = placa.Porez_1,
+                                     Porez_2 = placa.Porez_2,
+                                     Porez_Ukupno = placa.Porez_Ukupno,
+                                     Prirez = placa.Prirez,
+                                     Ukupno_Porez_i_Prirez = placa.Ukupno_Porez_i_Prirez,
+                                     Neto = placa.Neto,
+                                     Doprinos_Zdravstvo = placa.Doprinos_Zdravstvo,
+                                     Dodaci_Ukupno = 0,
+                                     Datum_Od = dateTimePickerDatumOd.Value.ToString("yyyy-MM-dd"),
+                                     Datum_Do = dateTimePickerDatumDo.Value.ToString("yyyy-MM-dd"),
+                                     Datum_obracuna = dateTimePickerDatumObracuna.Value.ToString("yyyy-MM-dd"),
+                                     Knjizen = false
+                                 }).ToList();
         }
 
         private void LoadBookkeepingsettings()
@@ -130,7 +130,7 @@ namespace Knjigovodstvo.Payroll
             DbDataInsert insert = new DbDataInsert();
             DbDataUpdate update = new DbDataUpdate();
 
-            foreach (PlacaArhiva placaArhiva in _placaArhiva)
+            foreach (PlacaArhiva placaArhiva in _placaArhivaLista)
             {
                 if (placaArhiva.Exists())
                 {
@@ -149,7 +149,7 @@ namespace Knjigovodstvo.Payroll
             string filter = comboBoxDatumObracunaFilter.Text;
             if (!filter.StartsWith("--"))
             {
-                List<PlacaArhiva> filtered = _placaArhiva.Where(x => x.Datum_obracuna.Split(' ')[0] == filter).ToList();
+                List<PlacaArhiva> filtered = _placaArhivaLista.Where(x => x.Datum_obracuna.Split(' ')[0] == filter).ToList();
                 _dt = new ListToDataTable().ConvertList(filtered);
                 LoadDatagrid();
             }
@@ -189,7 +189,7 @@ namespace Knjigovodstvo.Payroll
             FillListPlacaArhiva();
             buttonSpremiArhiva.Enabled = true;
 
-            _dt = new ListToDataTable().ConvertList(_placaArhiva);
+            _dt = new ListToDataTable().ConvertList(_placaArhivaLista);
             _dt.Columns.Add("Ime i prezime", typeof(string)).SetOrdinal(0);
             _dt.Columns["Oib"].SetOrdinal(1);
             _dt.Columns["Datum_Od"].SetOrdinal(_dt.Columns.Count - 3);
@@ -222,23 +222,23 @@ namespace Knjigovodstvo.Payroll
                 if(row.Cells["Odabir"].Value.ToString() == "True")
                 {
                     string oib = row.Cells["Oib"].Value.ToString();
-                    po.Doprinos_Zdravstvo += _placaArhiva.Where(p => p.Oib == oib)
+                    po.Doprinos_Zdravstvo += _placaArhivaLista.Where(p => p.Oib == oib)
                         .FirstOrDefault().Doprinos_Zdravstvo;
-                    po.Mio_1 += _placaArhiva.Where(p => p.Oib == oib)
+                    po.Mio_1 += _placaArhivaLista.Where(p => p.Oib == oib)
                         .FirstOrDefault().Mio_1;
-                    po.Mio_2 += _placaArhiva.Where(p => p.Oib == oib)
+                    po.Mio_2 += _placaArhivaLista.Where(p => p.Oib == oib)
                         .FirstOrDefault().Mio_2;
-                    po.Neto += _placaArhiva.Where(p => p.Oib == oib)
+                    po.Neto += _placaArhivaLista.Where(p => p.Oib == oib)
                         .FirstOrDefault().Neto;
-                    po.Porezna_Osnovica += _placaArhiva.Where(p => p.Oib == oib)
+                    po.Porezna_Osnovica += _placaArhivaLista.Where(p => p.Oib == oib)
                         .FirstOrDefault().Porezna_Osnovica;
-                    po.Prirez += _placaArhiva.Where(p => p.Oib == oib)
+                    po.Prirez += _placaArhivaLista.Where(p => p.Oib == oib)
                         .FirstOrDefault().Prirez;
-                    po.Porez_Ukupno += _placaArhiva.Where(p => p.Oib == oib)
+                    po.Porez_Ukupno += _placaArhivaLista.Where(p => p.Oib == oib)
                         .FirstOrDefault().Porez_Ukupno;
-                    po.Ukupno_Porez_i_Prirez += _placaArhiva.Where(p => p.Oib == oib)
+                    po.Ukupno_Porez_i_Prirez += _placaArhivaLista.Where(p => p.Oib == oib)
                         .FirstOrDefault().Ukupno_Porez_i_Prirez;
-                    po.Datum_obracuna = _placaArhiva.Where(p => p.Oib == oib)
+                    po.Datum_obracuna = _placaArhivaLista.Where(p => p.Oib == oib)
                         .FirstOrDefault().Datum_obracuna;
                 }
             }
@@ -248,8 +248,8 @@ namespace Knjigovodstvo.Payroll
 
         private void ButtonDohvatArhiva_Click(object sender, EventArgs e)
         {
-            _placaArhiva = new PlacaArhiva().GetListFromArhiva();
-            _dt = new DbDataGet().GetTable(_placaArhiva.ElementAt(0));
+            _placaArhivaLista = new PlacaArhiva().GetListFromArhiva();
+            _dt = new DbDataGet().GetTable(_placaArhiva);
             buttonBrisiOdabrane.Enabled = true;
             buttonKnjizi.Enabled = true;
             LoadDatagrid();
@@ -275,14 +275,15 @@ namespace Knjigovodstvo.Payroll
                 if (row.Cells["Odabir"].Value.ToString() == "True")
                 {
                     int id = int.Parse(row.Cells["Id"].Value.ToString());
-                    PlacaArhiva placaArhiva = new PlacaArhiva() { Id = id };
-                    placaArhiva.DeleteRow();
+                    _placaArhiva = new PlacaArhiva() { Id = id };
+                    _placaArhiva.DeleteRow();
                 }
             }
             ButtonDohvatArhiva_Click(null, null);
         }
 
-        private List<PlacaArhiva> _placaArhiva = new List<PlacaArhiva>();
+        private List<PlacaArhiva> _placaArhivaLista = new List<PlacaArhiva>();
+        private PlacaArhiva _placaArhiva = new PlacaArhiva();
         private readonly List<Placa> _place;
         private readonly List<Zaposlenik> _zaposlenici;
         private readonly BookNames _bookName;
