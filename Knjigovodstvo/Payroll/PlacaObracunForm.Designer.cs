@@ -56,12 +56,15 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxArhiva = new System.Windows.Forms.GroupBox();
             this.buttonPocetniPrikaz = new System.Windows.Forms.Button();
             this.groupBoxObračun = new System.Windows.Forms.GroupBox();
+            this.groupBoxOdaberiSve = new System.Windows.Forms.GroupBox();
+            this.checkBoxOdaberiSve = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBoxRazdoblje.SuspendLayout();
             this.groupBoxFilteri.SuspendLayout();
             this.groupBoxArhiva.SuspendLayout();
             this.groupBoxObračun.SuspendLayout();
+            this.groupBoxOdaberiSve.SuspendLayout();
             this.SuspendLayout();
             // 
             // dateTimePickerDatumOd
@@ -126,11 +129,11 @@ namespace Knjigovodstvo.Payroll
             this.dbDataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dbDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dbDataGridView1.EnableHeadersVisualStyles = false;
-            this.dbDataGridView1.Location = new System.Drawing.Point(9, 196);
+            this.dbDataGridView1.Location = new System.Drawing.Point(9, 203);
             this.dbDataGridView1.Name = "dbDataGridView1";
             this.dbDataGridView1.RowHeadersVisible = false;
             this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dbDataGridView1.Size = new System.Drawing.Size(1017, 352);
+            this.dbDataGridView1.Size = new System.Drawing.Size(1017, 345);
             this.dbDataGridView1.TabIndex = 4;
             this.dbDataGridView1.Text = "dataGridView1";
             // 
@@ -242,9 +245,9 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxFilteri.Controls.Add(this.comboBoxDatumObracunaFilter);
             this.groupBoxFilteri.Controls.Add(this.label1);
             this.groupBoxFilteri.Controls.Add(this.textBoxFilterIme);
-            this.groupBoxFilteri.Location = new System.Drawing.Point(13, 132);
+            this.groupBoxFilteri.Location = new System.Drawing.Point(165, 138);
             this.groupBoxFilteri.Name = "groupBoxFilteri";
-            this.groupBoxFilteri.Size = new System.Drawing.Size(519, 58);
+            this.groupBoxFilteri.Size = new System.Drawing.Size(509, 58);
             this.groupBoxFilteri.TabIndex = 23;
             this.groupBoxFilteri.TabStop = false;
             this.groupBoxFilteri.Text = "Filter";
@@ -292,9 +295,9 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxArhiva.Controls.Add(this.buttonDohvatArhiva);
             this.groupBoxArhiva.Controls.Add(this.buttonSpremiArhiva);
             this.groupBoxArhiva.Controls.Add(this.buttonBrisiOdabrane);
-            this.groupBoxArhiva.Location = new System.Drawing.Point(538, 32);
+            this.groupBoxArhiva.Location = new System.Drawing.Point(680, 32);
             this.groupBoxArhiva.Name = "groupBoxArhiva";
-            this.groupBoxArhiva.Size = new System.Drawing.Size(140, 158);
+            this.groupBoxArhiva.Size = new System.Drawing.Size(140, 165);
             this.groupBoxArhiva.TabIndex = 25;
             this.groupBoxArhiva.TabStop = false;
             this.groupBoxArhiva.Text = "Arhiva";
@@ -317,16 +320,38 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxObračun.Controls.Add(this.buttonKnjizi);
             this.groupBoxObračun.Location = new System.Drawing.Point(165, 32);
             this.groupBoxObračun.Name = "groupBoxObračun";
-            this.groupBoxObračun.Size = new System.Drawing.Size(367, 100);
+            this.groupBoxObračun.Size = new System.Drawing.Size(509, 100);
             this.groupBoxObračun.TabIndex = 26;
             this.groupBoxObračun.TabStop = false;
             this.groupBoxObračun.Text = "Obračun i knjiženje";
+            // 
+            // groupBoxOdaberiSve
+            // 
+            this.groupBoxOdaberiSve.Controls.Add(this.checkBoxOdaberiSve);
+            this.groupBoxOdaberiSve.Location = new System.Drawing.Point(13, 138);
+            this.groupBoxOdaberiSve.Name = "groupBoxOdaberiSve";
+            this.groupBoxOdaberiSve.Size = new System.Drawing.Size(146, 59);
+            this.groupBoxOdaberiSve.TabIndex = 27;
+            this.groupBoxOdaberiSve.TabStop = false;
+            this.groupBoxOdaberiSve.Text = "Odabir";
+            // 
+            // checkBoxOdaberiSve
+            // 
+            this.checkBoxOdaberiSve.AutoSize = true;
+            this.checkBoxOdaberiSve.Location = new System.Drawing.Point(9, 23);
+            this.checkBoxOdaberiSve.Name = "checkBoxOdaberiSve";
+            this.checkBoxOdaberiSve.Size = new System.Drawing.Size(88, 19);
+            this.checkBoxOdaberiSve.TabIndex = 0;
+            this.checkBoxOdaberiSve.Text = "Odaberi sve";
+            this.checkBoxOdaberiSve.UseVisualStyleBackColor = true;
+            this.checkBoxOdaberiSve.CheckStateChanged += new System.EventHandler(this.CheckBoxOdaberiSve_CheckStateChanged);
             // 
             // PlacaObracunForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 560);
+            this.Controls.Add(this.groupBoxOdaberiSve);
             this.Controls.Add(this.groupBoxObračun);
             this.Controls.Add(this.groupBoxArhiva);
             this.Controls.Add(this.groupBoxFilteri);
@@ -346,6 +371,8 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxArhiva.ResumeLayout(false);
             this.groupBoxObračun.ResumeLayout(false);
             this.groupBoxObračun.PerformLayout();
+            this.groupBoxOdaberiSve.ResumeLayout(false);
+            this.groupBoxOdaberiSve.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -376,5 +403,7 @@ namespace Knjigovodstvo.Payroll
         private ComboBox comboBoxDatumObracunaFilter;
         private Button buttonPocetniPrikaz;
         private Button buttonFiltrirajDatum;
+        private GroupBox groupBoxOdaberiSve;
+        private CheckBox checkBoxOdaberiSve;
     }
 }

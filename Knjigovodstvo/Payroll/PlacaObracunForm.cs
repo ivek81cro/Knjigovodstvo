@@ -8,7 +8,6 @@ using Knjigovodstvo.Settings.SettingsBookkeeping;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -167,6 +166,14 @@ namespace Knjigovodstvo.Payroll
             PostavkeKnjizenjaPregledForm form = new PostavkeKnjizenjaPregledForm(_bookName);
             form.FormClosing += new FormClosingEventHandler(PostavkeClosing_Event);
             form.ShowDialog();
+        }
+
+        private void CheckBoxOdaberiSve_CheckStateChanged(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dbDataGridView1.Rows)
+            {
+                row.Cells["Odabir"].Value = checkBoxOdaberiSve.Checked;
+            }
         }
 
         private void ButtonObracunajPlacu_Click(object sender, EventArgs e)
