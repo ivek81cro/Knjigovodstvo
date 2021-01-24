@@ -103,7 +103,7 @@ namespace Knjigovodstvo.Payroll
             // 
             // buttonObracunajDodatke
             // 
-            this.buttonObracunajDodatke.Location = new System.Drawing.Point(422, 34);
+            this.buttonObracunajDodatke.Location = new System.Drawing.Point(13, 69);
             this.buttonObracunajDodatke.Name = "buttonObracunajDodatke";
             this.buttonObracunajDodatke.Size = new System.Drawing.Size(117, 23);
             this.buttonObracunajDodatke.TabIndex = 3;
@@ -114,6 +114,7 @@ namespace Knjigovodstvo.Payroll
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
@@ -195,7 +196,7 @@ namespace Knjigovodstvo.Payroll
             // buttonKnjizi
             // 
             this.buttonKnjizi.Enabled = false;
-            this.buttonKnjizi.Location = new System.Drawing.Point(13, 72);
+            this.buttonKnjizi.Location = new System.Drawing.Point(217, 69);
             this.buttonKnjizi.Name = "buttonKnjizi";
             this.buttonKnjizi.Size = new System.Drawing.Size(124, 23);
             this.buttonKnjizi.TabIndex = 14;
@@ -205,7 +206,7 @@ namespace Knjigovodstvo.Payroll
             // 
             // buttonSpremi
             // 
-            this.buttonSpremi.Location = new System.Drawing.Point(545, 34);
+            this.buttonSpremi.Location = new System.Drawing.Point(136, 69);
             this.buttonSpremi.Name = "buttonSpremi";
             this.buttonSpremi.Size = new System.Drawing.Size(75, 23);
             this.buttonSpremi.TabIndex = 15;

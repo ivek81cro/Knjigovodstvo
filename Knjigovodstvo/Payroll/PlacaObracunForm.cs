@@ -141,7 +141,7 @@ namespace Knjigovodstvo.Payroll
                 insert.InsertData(placaArhiva);
             }
 
-            MessageBox.Show("Obračun izvršen", "Obračun", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Obračun izvršen i arhiviran", "Obračun", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void FilterByDate()

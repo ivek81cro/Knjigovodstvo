@@ -218,6 +218,7 @@ namespace Knjigovodstvo.Payroll
                 });
             }
             dataGridView1.DataSource = _dodatakArhiva;
+            dataGridView1.Columns["Id"].Visible = false;
         }
 
         private void ButtonSpremi_Click(object sender, EventArgs e)
