@@ -28,23 +28,26 @@ namespace Knjigovodstvo.Payroll
             return _dataGet.GetTable(this, condition);
         }
 
-        internal void ConvertDataRow(DataGridViewRow row)
+        internal PlacaArhiva ConvertDataRow(DataGridViewRow row)
         {
-                Oib = row.Cells["Oib"].Value.ToString();
-                Bruto = Convert.ToDecimal(row.Cells["Bruto"].Value.ToString());
-                Mio_1 = Convert.ToDecimal(row.Cells["Mio_1"].Value.ToString());
-                Mio_2 = Convert.ToDecimal(row.Cells["Mio_2"].Value.ToString());
-                Dohodak = Convert.ToDecimal(row.Cells["Dohodak"].Value.ToString());
-                Osobni_Odbitak = Convert.ToDecimal(row.Cells["Osobni_Odbitak"].Value.ToString());
-                Porezna_Osnovica = Convert.ToDecimal(row.Cells["Porezna_Osnovica"].Value.ToString());
-                Porez_1 = Convert.ToDecimal(row.Cells["Porez_1"].Value.ToString());
-                Porez_2 = Convert.ToDecimal(row.Cells["Porez_2"].Value.ToString());
-                Porez_Ukupno = Convert.ToDecimal(row.Cells["Porez_Ukupno"].Value.ToString());
-                Prirez = Convert.ToDecimal(row.Cells["Prirez"].Value.ToString());
-                Ukupno_Porez_i_Prirez = Convert.ToDecimal(row.Cells["Ukupno_Porez_i_Prirez"].Value.ToString());
-                Neto = Convert.ToDecimal(row.Cells["Neto"].Value.ToString());
-                Doprinos_Zdravstvo = Convert.ToDecimal(row.Cells["Doprinos_Zdravstvo"].Value.ToString());
-                Dodaci_Ukupno = Convert.ToDecimal(row.Cells["Dodaci_Ukupno"].Value.ToString());
+            return new PlacaArhiva() 
+            {
+                Oib = row.Cells["Oib"].Value.ToString(),
+                Bruto = Convert.ToDecimal(row.Cells["Bruto"].Value.ToString()),
+                Mio_1 = Convert.ToDecimal(row.Cells["Mio_1"].Value.ToString()),
+                Mio_2 = Convert.ToDecimal(row.Cells["Mio_2"].Value.ToString()),
+                Dohodak = Convert.ToDecimal(row.Cells["Dohodak"].Value.ToString()),
+                Osobni_Odbitak = Convert.ToDecimal(row.Cells["Osobni_Odbitak"].Value.ToString()),
+                Porezna_Osnovica = Convert.ToDecimal(row.Cells["Porezna_Osnovica"].Value.ToString()),
+                Porez_1 = Convert.ToDecimal(row.Cells["Porez_1"].Value.ToString()),
+                Porez_2 = Convert.ToDecimal(row.Cells["Porez_2"].Value.ToString()),
+                Porez_Ukupno = Convert.ToDecimal(row.Cells["Porez_Ukupno"].Value.ToString()),
+                Prirez = Convert.ToDecimal(row.Cells["Prirez"].Value.ToString()),
+                Ukupno_Porez_i_Prirez = Convert.ToDecimal(row.Cells["Ukupno_Porez_i_Prirez"].Value.ToString()),
+                Neto = Convert.ToDecimal(row.Cells["Neto"].Value.ToString()),
+                Doprinos_Zdravstvo = Convert.ToDecimal(row.Cells["Doprinos_Zdravstvo"].Value.ToString()),
+                Dodaci_Ukupno = Convert.ToDecimal(row.Cells["Dodaci_Ukupno"].Value.ToString())
+            };
         }
 
         private readonly DbDataGet _dataGet = new DbDataGet();

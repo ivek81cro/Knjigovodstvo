@@ -36,8 +36,8 @@ namespace Knjigovodstvo.Payroll
 
         private void LoadDatagrid()
         {            
+            _dt.Columns.Add("Ime_i_prezime", typeof(string)).SetOrdinal(0);
             _dt.Columns.Add("Odabir", typeof(bool)).SetOrdinal(0);
-            _dt.Columns.Add("Ime_i_prezime", typeof(string)).SetOrdinal(1);
 
             FillNameColumn();
 
@@ -81,12 +81,12 @@ namespace Knjigovodstvo.Payroll
             {
                 if (row.Cells["Odabir"].Value.ToString() == "True")
                 {
-                    _placaArhiva.ConvertDataRow(row);
-                    _placaArhiva.Datum_Od = dateTimePickerDatumOd.Value.ToString("yyyy-MM-dd");
-                    _placaArhiva.Datum_Do = dateTimePickerDatumDo.Value.ToString("yyyy-MM-dd");
-                    _placaArhiva.Datum_obracuna = dateTimePickerDatumObracuna.Value.ToString("yyyy-MM-dd");
+                    PlacaArhiva p =_placaArhiva.ConvertDataRow(row);
+                    p.Datum_Od = dateTimePickerDatumOd.Value.ToString("yyyy-MM-dd");
+                    p.Datum_Do = dateTimePickerDatumDo.Value.ToString("yyyy-MM-dd");
+                    p.Datum_obracuna = dateTimePickerDatumObracuna.Value.ToString("yyyy-MM-dd");
                     
-                    _placaArhivaLista.Add(_placaArhiva);
+                    _placaArhivaLista.Add(p);
                 }
             }
         }
@@ -164,17 +164,9 @@ namespace Knjigovodstvo.Payroll
             SaveObracunToArhiva();
 
             _dt = _placaArhiva.GetPlacaArhivaDataTable();
-            _dt.Columns.Add("Ime_i_prezime", typeof(string)).SetOrdinal(0);
-            _dt.Columns["Oib"].SetOrdinal(1);
-            _dt.Columns["Datum_Od"].SetOrdinal(_dt.Columns.Count - 3);
-            _dt.Columns["Datum_Do"].SetOrdinal(_dt.Columns.Count - 2);
-
-            FillNameColumn();
-
-            dbDataGridView1.DataSource = _dt;
-            dbDataGridView1.Columns["Id"].Visible = false;
-
-            FormatDataTableColumnHeaders();
+            _dt.Columns["Datum_Do"].SetOrdinal(0);
+            _dt.Columns["Datum_Od"].SetOrdinal(0);
+            LoadDatagrid();
         }
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
