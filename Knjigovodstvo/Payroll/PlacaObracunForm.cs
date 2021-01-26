@@ -45,6 +45,8 @@ namespace Knjigovodstvo.Payroll
             dbDataGridView1.Columns["Id"].Visible = false;
             dbDataGridView1.Columns[0].Width = 50;
 
+            checkBoxOdaberiSve.Checked = false;
+
             FormatDataTableColumnHeaders();
         }
 
@@ -164,8 +166,6 @@ namespace Knjigovodstvo.Payroll
             SaveObracunToArhiva();
 
             _dt = _placaArhiva.GetPlacaArhivaDataTable();
-            _dt.Columns["Datum_Do"].SetOrdinal(0);
-            _dt.Columns["Datum_Od"].SetOrdinal(0);
             LoadDatagrid();
         }
 
