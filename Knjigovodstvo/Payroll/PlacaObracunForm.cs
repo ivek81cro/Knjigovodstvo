@@ -1,7 +1,6 @@
 ﻿using Knjigovodstvo.Books.PrepareForBalanceSheet;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
-using Knjigovodstvo.Global.Helpers;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.Settings.SettingsBookkeeping;
@@ -18,35 +17,34 @@ namespace Knjigovodstvo.Payroll
         public PlacaObracunForm()
         {
             InitializeComponent();
+            InitializeControls();
+            FillComboBoxMjesec();
+            LoadBookkeepingsettings();
+            LoadDatagrid();
+        }
 
+        private void InitializeControls()
+        {
             DateTime date = DateTime.Now.AddMonths(-1);
             var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
             var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
             dateTimePickerDatumOd.Value = firstDayOfMonth;
             dateTimePickerDatumDo.Value = lastDayOfMonth;
-            _bookName = BookNames.Place;
-            _place = new Placa().GetListOfPlaca();
             _zaposlenici = new Zaposlenik().GetListZaposlenik();
-            _dt = new DbDataGet().GetTable(new Placa());
-
-            FillComboBoxMjesec();
-            LoadBookkeepingsettings();
-            LoadDatagrid();
+            _dt = _placa.GetPlacaDataTable();
         }
 
         private void LoadDatagrid()
         {            
             _dt.Columns.Add("Odabir", typeof(bool)).SetOrdinal(0);
             _dt.Columns.Add("Ime_i_prezime", typeof(string)).SetOrdinal(1);
-            Zaposlenik z = new Zaposlenik();
-            foreach (DataRow row in _dt.Rows)
-            {
-                z = _zaposlenici.Find(z => z.Oib == row["Oib"].ToString());
-                row["Ime_i_prezime"] = z.Ime + ' ' + z.Prezime;
-            }
+
+            FillNameColumn();
+
             dbDataGridView1.DataSource = _dt;
             dbDataGridView1.Columns["Id"].Visible = false;
             dbDataGridView1.Columns[0].Width = 50;
+
             FormatDataTableColumnHeaders();
         }
 
@@ -76,53 +74,37 @@ namespace Knjigovodstvo.Payroll
             comboBoxDatumObracunaFilter.Text = "--Odaberi mjesec--";
         }
 
-        private void PostavkeClosing_Event(object sender, FormClosingEventArgs e)
-        {
-            LoadBookkeepingsettings();
-        }
-
         private void FillListPlacaArhiva()
         {
-            _placaArhivaLista = (from Placa placa in _place
-                                 where _odabir.Exists(s => s == placa.Oib)
-                                 select new PlacaArhiva()
-                                 {
-                                     Oib = placa.Oib,
-                                     Bruto = placa.Bruto,
-                                     Mio_1 = placa.Mio_1,
-                                     Mio_2 = placa.Mio_2,
-                                     Dohodak = placa.Dohodak,
-                                     Osobni_Odbitak = placa.Osobni_Odbitak,
-                                     Porezna_Osnovica = placa.Porezna_Osnovica,
-                                     Porez_1 = placa.Porez_1,
-                                     Porez_2 = placa.Porez_2,
-                                     Porez_Ukupno = placa.Porez_Ukupno,
-                                     Prirez = placa.Prirez,
-                                     Ukupno_Porez_i_Prirez = placa.Ukupno_Porez_i_Prirez,
-                                     Neto = placa.Neto,
-                                     Doprinos_Zdravstvo = placa.Doprinos_Zdravstvo,
-                                     Dodaci_Ukupno = 0,
-                                     Datum_Od = dateTimePickerDatumOd.Value.ToString("yyyy-MM-dd"),
-                                     Datum_Do = dateTimePickerDatumDo.Value.ToString("yyyy-MM-dd"),
-                                     Datum_obracuna = dateTimePickerDatumObracuna.Value.ToString("yyyy-MM-dd"),
-                                     Knjizen = false
-                                 }).ToList();
+            _placaArhivaLista.Clear();
+            foreach(DataGridViewRow row in dbDataGridView1.Rows)
+            {
+                if (row.Cells["Odabir"].Value.ToString() == "True")
+                {
+                    _placaArhiva.ConvertDataRow(row);
+                    _placaArhiva.Datum_Od = dateTimePickerDatumOd.Value.ToString("yyyy-MM-dd");
+                    _placaArhiva.Datum_Do = dateTimePickerDatumDo.Value.ToString("yyyy-MM-dd");
+                    _placaArhiva.Datum_obracuna = dateTimePickerDatumObracuna.Value.ToString("yyyy-MM-dd");
+                    
+                    _placaArhivaLista.Add(_placaArhiva);
+                }
+            }
+        }
+
+        private void FillNameColumn()
+        {
+            Zaposlenik z = new Zaposlenik();
+            foreach (DataRow row in _dt.Rows)
+            {
+                z = _zaposlenici.Find(z => z.Oib == row["Oib"].ToString());
+                row["Ime_i_prezime"] = z.Ime + ' ' + z.Prezime;
+            }
         }
 
         private void LoadBookkeepingsettings()
         {
-            List<DataRow> dr = new DbDataGet().GetTable(new PostavkeKnjizenja(), $"Knjiga='{_bookName}'").AsEnumerable().ToList();
-            _postavkeKnjizenja = new List<PostavkeKnjizenja>();
-            _postavkeKnjizenja = (from DataRow dRow in dr
-                                  select new PostavkeKnjizenja()
-                                  {
-                                      Id = int.Parse(dRow["Id"].ToString()),
-                                      Knjiga = dRow["Knjiga"].ToString(),
-                                      Naziv_stupca = dRow["Naziv_stupca"].ToString(),
-                                      Konto = dRow["Konto"].ToString(),
-                                      Strana = dRow["Strana"].ToString(),
-                                      Mijenja_predznak = dRow["Mijenja_predznak"].ToString() == "True"
-                                  }).ToList();
+            _postavkeKnjizenja = new PostavkeKnjizenja()
+                .GetPostavkeKnjizenjaList(BookNames.Place);
         }
 
         private void SaveObracunToArhiva()
@@ -142,15 +124,15 @@ namespace Knjigovodstvo.Payroll
             }
 
             MessageBox.Show("Obračun izvršen i arhiviran", "Obračun", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            FillComboBoxMjesec();
         }
 
         private void FilterByDate()
         {
-            string filter = comboBoxDatumObracunaFilter.Text;
-            if (!filter.StartsWith("--"))
+            string datumObracuna = DateTime.Parse(comboBoxDatumObracunaFilter.Text).ToString("yyyy-MM-dd");
+            if (!datumObracuna.StartsWith("--"))
             {
-                List<PlacaArhiva> filtered = _placaArhivaLista.Where(x => x.Datum_obracuna.Split(' ')[0] == filter).ToList();
-                _dt = new ListToDataTable().ConvertList(filtered);
+                _dt = _placaArhiva.GetPlacaArhivaDataTable($"Datum_obracuna='{datumObracuna}'");
                 LoadDatagrid();
             }
         }
@@ -163,9 +145,9 @@ namespace Knjigovodstvo.Payroll
 
         private void ButtonOpenPostavkeForm(object sender, EventArgs e)
         {
-            PostavkeKnjizenjaPregledForm form = new PostavkeKnjizenjaPregledForm(_bookName);
-            form.FormClosing += new FormClosingEventHandler(PostavkeClosing_Event);
+            PostavkeKnjizenjaPregledForm form = new PostavkeKnjizenjaPregledForm(BookNames.Place);
             form.ShowDialog();
+            LoadBookkeepingsettings();
         }
 
         private void CheckBoxOdaberiSve_CheckStateChanged(object sender, EventArgs e)
@@ -178,40 +160,21 @@ namespace Knjigovodstvo.Payroll
 
         private void ButtonObracunajPlacu_Click(object sender, EventArgs e)
         {
-            _odabir.Clear();
-            foreach (DataGridViewRow row in dbDataGridView1.Rows)
-            {
-                if (row.Cells["Odabir"].Value.ToString() == "True")
-                {
-                    _odabir.Add(row.Cells["Oib"].Value.ToString());
-                }
-            }
             FillListPlacaArhiva();
-            buttonSpremiArhiva.Enabled = true;
+            SaveObracunToArhiva();
 
-            _dt = new ListToDataTable().ConvertList(_placaArhivaLista);
-            _dt.Columns.Add("Ime i prezime", typeof(string)).SetOrdinal(0);
+            _dt = _placaArhiva.GetPlacaArhivaDataTable();
+            _dt.Columns.Add("Ime_i_prezime", typeof(string)).SetOrdinal(0);
             _dt.Columns["Oib"].SetOrdinal(1);
             _dt.Columns["Datum_Od"].SetOrdinal(_dt.Columns.Count - 3);
             _dt.Columns["Datum_Do"].SetOrdinal(_dt.Columns.Count - 2);
-            Zaposlenik z = new Zaposlenik();
-            foreach (DataRow row in _dt.Rows)
-            {
-                z = _zaposlenici.Find(z => z.Oib == row["Oib"].ToString());
-                row["Ime i prezime"] = z.Ime + ' ' + z.Prezime;
-            }
+
+            FillNameColumn();
+
             dbDataGridView1.DataSource = _dt;
             dbDataGridView1.Columns["Id"].Visible = false;
 
             FormatDataTableColumnHeaders();
-        }
-
-        private void ButtonSpremiArhiva_Click(object sender, EventArgs e)
-        {
-            SaveObracunToArhiva();
-            FillComboBoxMjesec();
-            buttonSpremiArhiva.Enabled = false;
-            buttonKnjizi.Enabled = true;
         }
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
@@ -247,8 +210,7 @@ namespace Knjigovodstvo.Payroll
 
         private void ButtonDohvatArhiva_Click(object sender, EventArgs e)
         {
-            _placaArhivaLista = new PlacaArhiva().GetListFromArhiva();
-            _dt = new DbDataGet().GetTable(_placaArhiva);
+            _dt = _placaArhiva.GetPlacaArhivaDataTable();
             buttonBrisiOdabrane.Enabled = true;
             buttonKnjizi.Enabled = true;
             LoadDatagrid();
@@ -256,9 +218,8 @@ namespace Knjigovodstvo.Payroll
 
         private void ButtonPocetniPrikaz_Click(object sender, EventArgs e)
         {
-            _dt = new DbDataGet().GetTable(new Placa());
+            _dt = _placa.GetPlacaDataTable(); ;
             buttonBrisiOdabrane.Enabled = false;
-            buttonSpremiArhiva.Enabled = false;
             LoadDatagrid();
         }
 
@@ -281,13 +242,11 @@ namespace Knjigovodstvo.Payroll
             ButtonDohvatArhiva_Click(null, null);
         }
 
-        private List<PlacaArhiva> _placaArhivaLista = new List<PlacaArhiva>();
+        private readonly List<PlacaArhiva> _placaArhivaLista = new List<PlacaArhiva>();
         private PlacaArhiva _placaArhiva = new PlacaArhiva();
-        private readonly List<Placa> _place;
-        private readonly List<Zaposlenik> _zaposlenici;
-        private readonly BookNames _bookName;
+        private readonly Placa _placa = new Placa();
+        private List<Zaposlenik> _zaposlenici;
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
         private DataTable _dt = new DataTable();
-        private readonly List<string> _odabir = new List<string>();
     }
 }

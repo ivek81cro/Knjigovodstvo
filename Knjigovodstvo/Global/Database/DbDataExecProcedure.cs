@@ -23,7 +23,7 @@ namespace Knjigovodstvo.Database
         Izdvoji_Repromaterijal
     }
 
-    class DbDataExecProcedure
+    class DbDataExecProcedure : DbData
     {
         /// <summary>
         /// Gets table from database depending on recieved object.
@@ -81,7 +81,5 @@ namespace Knjigovodstvo.Database
                 _ => "",
             };
         }
-
-        private readonly string connection_name = "KnjigovodstvoDb";
     }
 }

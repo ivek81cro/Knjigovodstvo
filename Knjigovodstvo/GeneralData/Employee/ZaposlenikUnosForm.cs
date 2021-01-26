@@ -119,11 +119,13 @@ namespace Knjigovodstvo.Employee
 
         private void ButtonOdaberiGrad_Click(object sender, EventArgs e)
         {
-            GradoviTableForm form = new GradoviTableForm();
-            Grad grad = form.OdabirGrada();
-
-            if (grad != null && grad.ValidateData() == FormError.None)
-                textBoxGrad.Text = grad.Mjesto;
+            using (GradoviTableForm form = new GradoviTableForm())
+            {
+                form.Odabir = true;
+                form.ShowDialog();
+                if (form.Grad.Id != 0 && form.Grad.ValidateData() == FormError.None)
+                    textBoxGrad.Text = form.Grad.Mjesto;
+            }
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)

@@ -116,7 +116,7 @@
             this.btnSave.TabIndex = 7;
             this.btnSave.Text = "Spremi";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // btnOdaberi
             // 
@@ -126,7 +126,7 @@
             this.btnOdaberi.TabIndex = 8;
             this.btnOdaberi.Text = "Zatvori";
             this.btnOdaberi.UseVisualStyleBackColor = true;
-            this.btnOdaberi.Click += new System.EventHandler(this.BtnOdaberi_Click);
+            this.btnOdaberi.Click += new System.EventHandler(this.ButtonOdaberi_Click);
             // 
             // labelUpozorenja
             // 

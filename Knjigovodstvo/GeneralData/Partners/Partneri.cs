@@ -4,6 +4,7 @@ using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Interface;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Knjigovodstvo.Partners
@@ -29,6 +30,7 @@ namespace Knjigovodstvo.Partners
             return FormError.None;
         }
 
+
         public bool InsertNew()
         {
             if (new DbDataInsert().InsertData(this))
@@ -40,6 +42,11 @@ namespace Knjigovodstvo.Partners
                 return true;
             }
             return false;
+        }
+
+        internal DataTable GetPartnerDataTable()
+        {
+            return new DbDataGet().GetTable(this);
         }
 
         private int GetId()

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Database
 {
-    class DbDataUpdate
+    class DbDataUpdate : DbData
     {
         /// <summary>
         /// Updates row in table.
@@ -62,7 +62,5 @@ namespace Knjigovodstvo.Database
                 return false;
             }
         }
-
-        private readonly string connection_name = "KnjigovodstvoDb";
     }
 }

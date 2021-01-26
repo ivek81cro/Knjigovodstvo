@@ -47,7 +47,7 @@ namespace Knjigovodstvo.Payroll
         {
             string selected = comboBoxZaposlenik.GetItemText(this.comboBoxZaposlenik.SelectedItem);
             string oib = selected.Split(' ')[0];
-            _zaposlenik.GetZaposlenikByOib(oib);
+            _zaposlenik.GetZaposlenikDataTable(oib);
             _placa.GetPlacaByOib(_zaposlenik.Oib);
             _zaposlenikJoppd = _zaposlenikJoppd.GetZaposlenikByOib(oib);
             if (_zaposlenik.Oib != "0")

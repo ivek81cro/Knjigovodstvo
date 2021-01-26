@@ -250,7 +250,7 @@
             this.btnSave.TabIndex = 12;
             this.btnSave.Text = "Spremi";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // btnClose
             // 
@@ -260,7 +260,7 @@
             this.btnClose.TabIndex = 13;
             this.btnClose.Text = "Zatvori";
             this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
+            this.btnClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // btnSelectCity
             // 
@@ -270,7 +270,7 @@
             this.btnSelectCity.TabIndex = 4;
             this.btnSelectCity.Text = "Odaberi";
             this.btnSelectCity.UseVisualStyleBackColor = true;
-            this.btnSelectCity.Click += new System.EventHandler(this.BtnSelectCity_Click);
+            this.btnSelectCity.Click += new System.EventHandler(this.ButtonSelectCity_Click);
             // 
             // labelMessage
             // 

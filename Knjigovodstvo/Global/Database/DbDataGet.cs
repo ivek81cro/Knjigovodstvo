@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Database
 {
-    class DbDataGet
+    class DbDataGet : DbData
     {
         /// <summary>
         /// Gets table from database depending on recieved object.
@@ -58,7 +58,5 @@ namespace Knjigovodstvo.Database
             }
             return dt;
         }
-
-        private readonly string connection_name = "KnjigovodstvoDb";
     }
 }

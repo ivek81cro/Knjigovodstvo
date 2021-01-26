@@ -1,6 +1,5 @@
 ﻿using Knjigovodstvo.Database;
 using System;
-using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -16,48 +15,48 @@ namespace Knjigovodstvo.Partners
         }
         private void LoadDatagrid()
         {
-            dataGridView1.DataSource = new DataView(new DbDataGet().GetTable(_partner))
-                .ToTable(false, "Id", "Oib", "Naziv", "Ulica", "Broj", "Posta", "Mjesto", "Telefon", "Fax", "Email", "Iban", "Mbo");
-            dataGridView1.Sort(this.dataGridView1.Columns["Naziv"], ListSortDirection.Ascending);
+            _dt = _partner.GetPartnerDataTable();
+            dbDataGridView1.DataSource = _dt;
+            dbDataGridView1.Columns["Id"].Visible = false;
+            dbDataGridView1.Columns["Id1"].Visible = false;
+            dbDataGridView1.Columns["KontoK"].Visible = false;
+            dbDataGridView1.Columns["KontoD"].Visible = false;
         }
 
         internal void OdabirPartnera()
         {
-            btnEditPartner.Visible = false;
-            btnDeletePartner.Visible = false;
-            btnOdaberi.Visible = true;
+            buttonEditPartner.Visible = false;
+            buttonDeletePartner.Visible = false;
+            buttonOdaberi.Visible = true;
             ShowDialog();
         }
 
         private void TextBoxFilterPartner_TextChanged(object sender, EventArgs e)
         {
-            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter =
-                $"Naziv LIKE '{textBoxFilterPartner.Text}%' OR Naziv LIKE '% {textBoxFilterPartner.Text}%'";
+            (dbDataGridView1.DataSource as DataTable).DefaultView.RowFilter =
+                $"Naziv LIKE '{textBoxPartnerFilter.Text}%' OR Naziv LIKE '% {textBoxPartnerFilter.Text}%'";
         }
 
-        private void BtnNewPartner_Click(object sender, EventArgs e)
+        private void ButtonNewPartner_Click(object sender, EventArgs e)
         {
             PartnerUnosForm form = new PartnerUnosForm();
-            form.FormClosing += new FormClosingEventHandler(PartnersNew_FormClosing);
             form.ShowDialog();
-        }
-
-        private void BtnEditPartner_Click(object sender, EventArgs e)
-        {
-            _partner.OpciPodaci.Id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-            _partner.GetPartnerById();
-            PartnerUnosForm pn = new PartnerUnosForm(_partner);
-            pn.FormClosing += new FormClosingEventHandler(PartnersNew_FormClosing);
-            pn.ShowDialog();
-        }
-        private void PartnersNew_FormClosing(object sender, FormClosingEventArgs e)
-        {
             LoadDatagrid();
         }
 
-        private void BtnDeletePartner_Click(object sender, EventArgs e)
+        private void ButtonEditPartner_Click(object sender, EventArgs e)
         {
-            _partner.OpciPodaci.Id = int.Parse(dataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
+            _partner.OpciPodaci.Id = int.Parse(dbDataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+            _partner.GetPartnerById();
+            PartnerUnosForm pn = new PartnerUnosForm();
+            pn.InitPartner(_partner);
+            pn.ShowDialog();
+            LoadDatagrid();
+        }
+
+        private void ButtonDeletePartner_Click(object sender, EventArgs e)
+        {
+            _partner.OpciPodaci.Id = int.Parse(dbDataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
             DialogResult result = MessageBox.Show("Da li ste sigurni da želite obrisati odabranog partnera?", 
                 "Brisanje partnera", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -70,11 +69,11 @@ namespace Knjigovodstvo.Partners
             }
         }
 
-        private void BtnOdaberi_Click(object sender, EventArgs e)
+        private void ButtonOdaberi_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count != 0)
+            if (dbDataGridView1.SelectedRows.Count != 0)
             {
-                IdPartner = int.Parse(dataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
+                IdPartner = int.Parse(dbDataGridView1.SelectedRows[0].Cells["Id"].Value.ToString());
                 Close();
             }
             else
@@ -82,6 +81,7 @@ namespace Knjigovodstvo.Partners
         }
 
         private readonly Partneri _partner = new Partneri();
+        private DataTable _dt = new DataTable();
         public int IdPartner { get; private set; } = 0;
     }
 }

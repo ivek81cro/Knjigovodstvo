@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Database
 {
-    class DbDataCustomQuery
+    class DbDataCustomQuery : DbData
     {
         public DataTable ExecuteQuery(string query)
         {
@@ -28,7 +28,5 @@ namespace Knjigovodstvo.Database
 
             return dt;
         }
-
-        private readonly string connection_name = "KnjigovodstvoDb";
     }
 }

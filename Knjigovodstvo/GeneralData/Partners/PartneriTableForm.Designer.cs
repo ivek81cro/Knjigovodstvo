@@ -30,119 +30,119 @@ namespace Knjigovodstvo.Partners
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxFilterPartner = new System.Windows.Forms.TextBox();
-            this.namePartnerLabel = new System.Windows.Forms.Label();
-            this.dataGridView1 = new Knjigovodstvo.DBDataGridView();
-            this.btnNewPartner = new System.Windows.Forms.Button();
-            this.btnEditPartner = new System.Windows.Forms.Button();
-            this.btnDeletePartner = new System.Windows.Forms.Button();
-            this.btnOdaberi = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.textBoxPartnerFilter = new System.Windows.Forms.TextBox();
+            this.labelPartnerName = new System.Windows.Forms.Label();
+            this.dbDataGridView1 = new Knjigovodstvo.DBDataGridView();
+            this.buttonNewPartner = new System.Windows.Forms.Button();
+            this.buttonEditPartner = new System.Windows.Forms.Button();
+            this.buttonDeletePartner = new System.Windows.Forms.Button();
+            this.buttonOdaberi = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBoxFilterPartner
+            // textBoxPartnerFilter
             // 
-            this.textBoxFilterPartner.Location = new System.Drawing.Point(98, 51);
-            this.textBoxFilterPartner.Name = "textBoxFilterPartner";
-            this.textBoxFilterPartner.Size = new System.Drawing.Size(147, 23);
-            this.textBoxFilterPartner.TabIndex = 1;
-            this.textBoxFilterPartner.TextChanged += new System.EventHandler(this.TextBoxFilterPartner_TextChanged);
+            this.textBoxPartnerFilter.Location = new System.Drawing.Point(98, 51);
+            this.textBoxPartnerFilter.Name = "textBoxPartnerFilter";
+            this.textBoxPartnerFilter.Size = new System.Drawing.Size(147, 23);
+            this.textBoxPartnerFilter.TabIndex = 1;
+            this.textBoxPartnerFilter.TextChanged += new System.EventHandler(this.TextBoxFilterPartner_TextChanged);
             // 
-            // namePartnerLabel
+            // labelPartnerName
             // 
-            this.namePartnerLabel.AutoSize = true;
-            this.namePartnerLabel.Location = new System.Drawing.Point(9, 54);
-            this.namePartnerLabel.Name = "namePartnerLabel";
-            this.namePartnerLabel.Size = new System.Drawing.Size(83, 15);
-            this.namePartnerLabel.TabIndex = 2;
-            this.namePartnerLabel.Text = "Naziv Partnera";
+            this.labelPartnerName.AutoSize = true;
+            this.labelPartnerName.Location = new System.Drawing.Point(9, 54);
+            this.labelPartnerName.Name = "labelPartnerName";
+            this.labelPartnerName.Size = new System.Drawing.Size(83, 15);
+            this.labelPartnerName.TabIndex = 2;
+            this.labelPartnerName.Text = "Naziv Partnera";
             // 
-            // dataGridView1
+            // dbDataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dbDataGridView1.AllowUserToAddRows = false;
+            this.dbDataGridView1.AllowUserToDeleteRows = false;
+            this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(9, 84);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1177, 447);
-            this.dataGridView1.TabIndex = 4;
-            this.dataGridView1.Text = "dataGridView1";
+            this.dbDataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dbDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dbDataGridView1.Location = new System.Drawing.Point(9, 84);
+            this.dbDataGridView1.Name = "dbDataGridView1";
+            this.dbDataGridView1.ReadOnly = true;
+            this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dbDataGridView1.Size = new System.Drawing.Size(1177, 447);
+            this.dbDataGridView1.TabIndex = 4;
+            this.dbDataGridView1.Text = "dataGridView1";
             // 
-            // btnNewPartner
+            // buttonNewPartner
             // 
-            this.btnNewPartner.Location = new System.Drawing.Point(12, 12);
-            this.btnNewPartner.Name = "btnNewPartner";
-            this.btnNewPartner.Size = new System.Drawing.Size(75, 23);
-            this.btnNewPartner.TabIndex = 5;
-            this.btnNewPartner.Text = "Novi";
-            this.btnNewPartner.UseVisualStyleBackColor = true;
-            this.btnNewPartner.Click += new System.EventHandler(this.BtnNewPartner_Click);
+            this.buttonNewPartner.Location = new System.Drawing.Point(12, 12);
+            this.buttonNewPartner.Name = "buttonNewPartner";
+            this.buttonNewPartner.Size = new System.Drawing.Size(75, 23);
+            this.buttonNewPartner.TabIndex = 5;
+            this.buttonNewPartner.Text = "Novi";
+            this.buttonNewPartner.UseVisualStyleBackColor = true;
+            this.buttonNewPartner.Click += new System.EventHandler(this.ButtonNewPartner_Click);
             // 
-            // btnEditPartner
+            // buttonEditPartner
             // 
-            this.btnEditPartner.Location = new System.Drawing.Point(93, 12);
-            this.btnEditPartner.Name = "btnEditPartner";
-            this.btnEditPartner.Size = new System.Drawing.Size(75, 23);
-            this.btnEditPartner.TabIndex = 6;
-            this.btnEditPartner.Text = "Izmijeni";
-            this.btnEditPartner.UseVisualStyleBackColor = true;
-            this.btnEditPartner.Click += new System.EventHandler(this.BtnEditPartner_Click);
+            this.buttonEditPartner.Location = new System.Drawing.Point(93, 12);
+            this.buttonEditPartner.Name = "buttonEditPartner";
+            this.buttonEditPartner.Size = new System.Drawing.Size(75, 23);
+            this.buttonEditPartner.TabIndex = 6;
+            this.buttonEditPartner.Text = "Izmijeni";
+            this.buttonEditPartner.UseVisualStyleBackColor = true;
+            this.buttonEditPartner.Click += new System.EventHandler(this.ButtonEditPartner_Click);
             // 
-            // btnDeletePartner
+            // buttonDeletePartner
             // 
-            this.btnDeletePartner.Location = new System.Drawing.Point(174, 12);
-            this.btnDeletePartner.Name = "btnDeletePartner";
-            this.btnDeletePartner.Size = new System.Drawing.Size(75, 23);
-            this.btnDeletePartner.TabIndex = 6;
-            this.btnDeletePartner.Text = "Briši";
-            this.btnDeletePartner.UseVisualStyleBackColor = true;
-            this.btnDeletePartner.Click += new System.EventHandler(this.BtnDeletePartner_Click);
+            this.buttonDeletePartner.Location = new System.Drawing.Point(174, 12);
+            this.buttonDeletePartner.Name = "buttonDeletePartner";
+            this.buttonDeletePartner.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeletePartner.TabIndex = 6;
+            this.buttonDeletePartner.Text = "Briši";
+            this.buttonDeletePartner.UseVisualStyleBackColor = true;
+            this.buttonDeletePartner.Click += new System.EventHandler(this.ButtonDeletePartner_Click);
             // 
-            // btnOdaberi
+            // buttonOdaberi
             // 
-            this.btnOdaberi.Location = new System.Drawing.Point(251, 50);
-            this.btnOdaberi.Name = "btnOdaberi";
-            this.btnOdaberi.Size = new System.Drawing.Size(75, 23);
-            this.btnOdaberi.TabIndex = 7;
-            this.btnOdaberi.Text = "Odaberi";
-            this.btnOdaberi.UseVisualStyleBackColor = true;
-            this.btnOdaberi.Visible = false;
-            this.btnOdaberi.Click += new System.EventHandler(this.BtnOdaberi_Click);
+            this.buttonOdaberi.Location = new System.Drawing.Point(251, 50);
+            this.buttonOdaberi.Name = "buttonOdaberi";
+            this.buttonOdaberi.Size = new System.Drawing.Size(75, 23);
+            this.buttonOdaberi.TabIndex = 7;
+            this.buttonOdaberi.Text = "Odaberi";
+            this.buttonOdaberi.UseVisualStyleBackColor = true;
+            this.buttonOdaberi.Visible = false;
+            this.buttonOdaberi.Click += new System.EventHandler(this.ButtonOdaberi_Click);
             // 
             // PartneriTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1198, 543);
-            this.Controls.Add(this.btnOdaberi);
-            this.Controls.Add(this.btnDeletePartner);
-            this.Controls.Add(this.btnEditPartner);
-            this.Controls.Add(this.btnNewPartner);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.namePartnerLabel);
-            this.Controls.Add(this.textBoxFilterPartner);
+            this.Controls.Add(this.buttonOdaberi);
+            this.Controls.Add(this.buttonDeletePartner);
+            this.Controls.Add(this.buttonEditPartner);
+            this.Controls.Add(this.buttonNewPartner);
+            this.Controls.Add(this.dbDataGridView1);
+            this.Controls.Add(this.labelPartnerName);
+            this.Controls.Add(this.textBoxPartnerFilter);
             this.Name = "PartneriTableForm";
             this.Text = "Poslovni Partneri";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBoxFilterPartner;
-        private System.Windows.Forms.Label namePartnerLabel;
-        private DBDataGridView dataGridView1;
-        private System.Windows.Forms.Button btnNewPartner;
-        private System.Windows.Forms.Button btnEditPartner;
-        private System.Windows.Forms.Button btnDeletePartner;
-        private Button btnOdaberi;
+        private System.Windows.Forms.TextBox textBoxPartnerFilter;
+        private System.Windows.Forms.Label labelPartnerName;
+        private DBDataGridView dbDataGridView1;
+        private System.Windows.Forms.Button buttonNewPartner;
+        private System.Windows.Forms.Button buttonEditPartner;
+        private System.Windows.Forms.Button buttonDeletePartner;
+        private Button buttonOdaberi;
     }
 }
 

@@ -37,7 +37,7 @@ namespace Knjigovodstvo.City
 
         void FillComboCity()
         {
-            DataTable dt = new Grad().GetGradoviByZupanija(comboBoxZupanija.Text);
+            DataTable dt = _grad.GetGradoviByZupanija(comboBoxZupanija.Text);
 
             //Assign DataTable as DataSource.
             if (dt.Rows.Count > 0)
@@ -48,18 +48,6 @@ namespace Knjigovodstvo.City
             }
             int index = comboBoxGrad.FindStringExact(_grad.Mjesto);
             comboBoxGrad.SelectedIndex = index;
-            FillPrirezSifra();
-            FillComboPosta();
-        }
-
-        private void ComboBoxCounty_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            FillComboCity();
-        }
-
-        private void ComboBoxGrad_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            _grad.GetGradById(int.Parse(comboBoxGrad.SelectedValue.ToString()));
             FillPrirezSifra();
             FillComboPosta();
         }
@@ -83,23 +71,42 @@ namespace Knjigovodstvo.City
             }
         }
 
-        private void BtnOdaberi_Click(object sender, EventArgs e)
+        private void ComboBoxCounty_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            Close();
+            FillComboCity();
         }
 
-        /// <summary>
-        /// Custom ShowDialog
-        /// </summary>
-        /// <returns>City selected from dialog.</returns>
-        public Grad ShowDialogValue()
+        private void ComboBoxGrad_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            ShowDialog();
-
-            return _grad;
+            _grad.GetGradById(int.Parse(comboBoxGrad.SelectedValue.ToString()));
+            FillPrirezSifra();
+            FillComboPosta();
         }
 
-        private void BtnSave_Click(object sender, EventArgs e)
+        internal void EditGrad()
+        {
+            comboBoxGrad.Text = _grad.Mjesto;
+            comboBoxZupanija.Text = _grad.Zupanija;
+            comboBoxPosta.Text = _grad.Posta;
+            textBoxPrirez.Text = _grad.Prirez.ToString();
+            textBoxSifra.Text = _grad.Sifra;
+        }
+
+        private void SetMessageLabel(FormError errorType)
+        {
+            labelUpozorenja.Text = new ProcessFormErrors().FormErrorMessage(errorType);
+        }
+
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             _grad.Sifra = textBoxSifra.Text;
             _grad.Prirez = decimal.Parse(textBoxPrirez.Text);
@@ -128,30 +135,9 @@ namespace Knjigovodstvo.City
             }
         }
 
-        internal void EditGrad()
+        private void ButtonOdaberi_Click(object sender, EventArgs e)
         {
-            comboBoxGrad.Text = _grad.Mjesto;
-            comboBoxZupanija.Text = _grad.Zupanija;
-            comboBoxPosta.Text = _grad.Posta;
-            textBoxPrirez.Text = _grad.Prirez.ToString();
-            textBoxSifra.Text = _grad.Sifra;
-
-            ShowDialog();
-        }
-
-        private void SetMessageLabel(FormError errorType)
-        {
-            labelUpozorenja.Text = new ProcessFormErrors().FormErrorMessage(errorType);
-
-        }
-
-        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
+            Close();
         }
 
         private Grad _grad = new Grad();

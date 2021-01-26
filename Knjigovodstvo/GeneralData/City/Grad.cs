@@ -28,29 +28,6 @@ namespace Knjigovodstvo.City
             return FormError.None;
         }
 
-        /// <summary>
-        /// Gets list of cities from database.
-        /// </summary>
-        /// <returns>List of City</returns>
-        public List<Grad> GetAllGrad()
-        {            
-            DataTable dt = new DbDataGet().GetTable(new Grad());
-            List<DataRow> rows = dt.AsEnumerable().ToList();
-            List<Grad> cityList = new List<Grad>();
-            cityList = (from DataRow dr in rows
-                        select new Grad()
-                        {
-                            Id = int.Parse(dr["Id"].ToString()),
-                            Mjesto = dr["Naziv"].ToString(),
-                            Drzava = dr["Drzava"].ToString(),
-                            Zupanija = dr["Zupanija"].ToString(),
-                            Posta = dr["Posta"].ToString(),
-                            Sifra = dr["Sifra"].ToString()
-                        }).ToList();
-
-            return cityList;
-        }
-
         internal void GetGradById(int id)
         {
             string condition = $"Id={id};";
@@ -96,6 +73,16 @@ namespace Knjigovodstvo.City
                 return true;
 
             return false;
+        }
+
+        internal bool DeleteGrad()
+        {
+            return new DbDataDelete().DeleteItem(this);
+        }
+
+        internal DataTable GetGradDataTable()
+        {
+            return new DbDataGet().GetTable(this);
         }
 
         public int Id { get; set; } = 0;

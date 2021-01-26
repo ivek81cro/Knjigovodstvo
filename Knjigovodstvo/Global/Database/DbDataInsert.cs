@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Database
 {
-    class DbDataInsert
+    class DbDataInsert : DbData
     {
         /// <summary>
         /// Insert data in database. Name of table based on argument type.
@@ -58,7 +58,5 @@ namespace Knjigovodstvo.Database
                 return false;
             }
         }
-
-        private readonly string connection_name = "KnjigovodstvoDb";
     }
 }

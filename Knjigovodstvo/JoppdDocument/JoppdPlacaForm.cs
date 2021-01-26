@@ -296,7 +296,7 @@ namespace Knjigovodstvo.JoppdDocument
         {
             string selected = comboBoxZaposlenik.GetItemText(comboBoxZaposlenik.SelectedItem);
             string oib = selected.Split(' ')[0];
-            _zaposlenik.GetZaposlenikByOib(oib);
+            _zaposlenik.GetZaposlenikDataTable(oib);
         }
 
         private void ComboBoxDodaci_SelectionChangeCommitted(object sender, EventArgs e)

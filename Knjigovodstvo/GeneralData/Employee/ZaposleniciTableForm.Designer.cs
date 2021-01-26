@@ -31,105 +31,104 @@ namespace Knjigovodstvo.Employee
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxFilterZaposlenik = new System.Windows.Forms.TextBox();
-            this.namePartnerLabel = new System.Windows.Forms.Label();
-            this.dataGridView1 = new DBDataGridView();
-            this.btnNewZaposlenik = new System.Windows.Forms.Button();
-            this.btnEditZaposlenik = new System.Windows.Forms.Button();
-            this.btnDeleteZaposlenik = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.textBoxZaposlenikFilter = new System.Windows.Forms.TextBox();
+            this.labelPartnerName = new System.Windows.Forms.Label();
+            this.dbDataGridView1 = new Knjigovodstvo.DBDataGridView();
+            this.buttonNewZaposlenik = new System.Windows.Forms.Button();
+            this.buttonEditZaposlenik = new System.Windows.Forms.Button();
+            this.buttonDeleteZaposlenik = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBoxFilterZaposlenik
+            // textBoxZaposlenikFilter
             // 
-            this.textBoxFilterZaposlenik.Location = new System.Drawing.Point(128, 51);
-            this.textBoxFilterZaposlenik.Name = "textBoxFilterZaposlenik";
-            this.textBoxFilterZaposlenik.Size = new System.Drawing.Size(147, 23);
-            this.textBoxFilterZaposlenik.TabIndex = 1;
-            this.textBoxFilterZaposlenik.TextChanged += new System.EventHandler(this.TextBoxFilterZaposlenik_TextChanged);
+            this.textBoxZaposlenikFilter.Location = new System.Drawing.Point(128, 51);
+            this.textBoxZaposlenikFilter.Name = "textBoxZaposlenikFilter";
+            this.textBoxZaposlenikFilter.Size = new System.Drawing.Size(147, 23);
+            this.textBoxZaposlenikFilter.TabIndex = 1;
+            this.textBoxZaposlenikFilter.TextChanged += new System.EventHandler(this.TextBoxFilterZaposlenik_TextChanged);
             // 
-            // namePartnerLabel
+            // labelPartnerName
             // 
-            this.namePartnerLabel.AutoSize = true;
-            this.namePartnerLabel.Location = new System.Drawing.Point(9, 54);
-            this.namePartnerLabel.Name = "namePartnerLabel";
-            this.namePartnerLabel.Size = new System.Drawing.Size(113, 15);
-            this.namePartnerLabel.TabIndex = 2;
-            this.namePartnerLabel.Text = "Prezime zaposlenika";
+            this.labelPartnerName.AutoSize = true;
+            this.labelPartnerName.Location = new System.Drawing.Point(9, 54);
+            this.labelPartnerName.Name = "labelPartnerName";
+            this.labelPartnerName.Size = new System.Drawing.Size(113, 15);
+            this.labelPartnerName.TabIndex = 2;
+            this.labelPartnerName.Text = "Prezime zaposlenika";
             // 
-            // dataGridView1
+            // dbDataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dbDataGridView1.AllowUserToAddRows = false;
+            this.dbDataGridView1.AllowUserToDeleteRows = false;
+            this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(9, 84);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1177, 447);
-            this.dataGridView1.TabIndex = 4;
-            this.dataGridView1.Text = "dataGridView1";
+            this.dbDataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dbDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dbDataGridView1.Location = new System.Drawing.Point(9, 84);
+            this.dbDataGridView1.Name = "dbDataGridView1";
+            this.dbDataGridView1.ReadOnly = true;
+            this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dbDataGridView1.Size = new System.Drawing.Size(1177, 447);
+            this.dbDataGridView1.TabIndex = 4;
+            this.dbDataGridView1.Text = "dataGridView1";
             // 
-            // btnNewZaposlenik
+            // buttonNewZaposlenik
             // 
-            this.btnNewZaposlenik.Location = new System.Drawing.Point(12, 12);
-            this.btnNewZaposlenik.Name = "btnNewZaposlenik";
-            this.btnNewZaposlenik.Size = new System.Drawing.Size(75, 23);
-            this.btnNewZaposlenik.TabIndex = 5;
-            this.btnNewZaposlenik.Text = "Novi";
-            this.btnNewZaposlenik.UseVisualStyleBackColor = true;
-            this.btnNewZaposlenik.Click += new System.EventHandler(this.BtnNewZaposlenik_Click);
+            this.buttonNewZaposlenik.Location = new System.Drawing.Point(12, 12);
+            this.buttonNewZaposlenik.Name = "buttonNewZaposlenik";
+            this.buttonNewZaposlenik.Size = new System.Drawing.Size(75, 23);
+            this.buttonNewZaposlenik.TabIndex = 5;
+            this.buttonNewZaposlenik.Text = "Novi";
+            this.buttonNewZaposlenik.UseVisualStyleBackColor = true;
+            this.buttonNewZaposlenik.Click += new System.EventHandler(this.ButtonNewZaposlenik_Click);
             // 
-            // btnEditZaposlenik
+            // buttonEditZaposlenik
             // 
-            this.btnEditZaposlenik.Location = new System.Drawing.Point(93, 12);
-            this.btnEditZaposlenik.Name = "btnEditZaposlenik";
-            this.btnEditZaposlenik.Size = new System.Drawing.Size(75, 23);
-            this.btnEditZaposlenik.TabIndex = 6;
-            this.btnEditZaposlenik.Text = "Izmijeni";
-            this.btnEditZaposlenik.UseVisualStyleBackColor = true;
-            this.btnEditZaposlenik.Click += new System.EventHandler(this.BtnEditZaposlenik_Click);
+            this.buttonEditZaposlenik.Location = new System.Drawing.Point(93, 12);
+            this.buttonEditZaposlenik.Name = "buttonEditZaposlenik";
+            this.buttonEditZaposlenik.Size = new System.Drawing.Size(75, 23);
+            this.buttonEditZaposlenik.TabIndex = 6;
+            this.buttonEditZaposlenik.Text = "Izmijeni";
+            this.buttonEditZaposlenik.UseVisualStyleBackColor = true;
+            this.buttonEditZaposlenik.Click += new System.EventHandler(this.ButtonEditZaposlenik_Click);
             // 
-            // btnDeleteZaposlenik
+            // buttonDeleteZaposlenik
             // 
-            this.btnDeleteZaposlenik.Location = new System.Drawing.Point(174, 12);
-            this.btnDeleteZaposlenik.Name = "btnDeleteZaposlenik";
-            this.btnDeleteZaposlenik.Size = new System.Drawing.Size(75, 23);
-            this.btnDeleteZaposlenik.TabIndex = 6;
-            this.btnDeleteZaposlenik.Text = "Briši";
-            this.btnDeleteZaposlenik.UseVisualStyleBackColor = true;
-            this.btnDeleteZaposlenik.Click += new System.EventHandler(this.BtnDeleteZaposlenik_Click);
+            this.buttonDeleteZaposlenik.Location = new System.Drawing.Point(174, 12);
+            this.buttonDeleteZaposlenik.Name = "buttonDeleteZaposlenik";
+            this.buttonDeleteZaposlenik.Size = new System.Drawing.Size(75, 23);
+            this.buttonDeleteZaposlenik.TabIndex = 6;
+            this.buttonDeleteZaposlenik.Text = "Briši";
+            this.buttonDeleteZaposlenik.UseVisualStyleBackColor = true;
+            this.buttonDeleteZaposlenik.Click += new System.EventHandler(this.ButtonDeleteZaposlenik_Click);
             // 
             // ZaposleniciTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1198, 543);
-            this.Controls.Add(this.btnDeleteZaposlenik);
-            this.Controls.Add(this.btnEditZaposlenik);
-            this.Controls.Add(this.btnNewZaposlenik);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.namePartnerLabel);
-            this.Controls.Add(this.textBoxFilterZaposlenik);
+            this.Controls.Add(this.buttonDeleteZaposlenik);
+            this.Controls.Add(this.buttonEditZaposlenik);
+            this.Controls.Add(this.buttonNewZaposlenik);
+            this.Controls.Add(this.dbDataGridView1);
+            this.Controls.Add(this.labelPartnerName);
+            this.Controls.Add(this.textBoxZaposlenikFilter);
             this.Name = "ZaposleniciTableForm";
             this.Text = "Zaposlenici";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBoxFilterZaposlenik;
-        private System.Windows.Forms.Label namePartnerLabel;
-        private DBDataGridView dataGridView1;
-        private System.Windows.Forms.Button btnNewZaposlenik;
-        private System.Windows.Forms.Button btnEditZaposlenik;
-        private System.Windows.Forms.Button btnDeleteZaposlenik;
+        private System.Windows.Forms.TextBox textBoxZaposlenikFilter;
+        private System.Windows.Forms.Label labelPartnerName;
+        private DBDataGridView dbDataGridView1;
+        private System.Windows.Forms.Button buttonNewZaposlenik;
+        private System.Windows.Forms.Button buttonEditZaposlenik;
+        private System.Windows.Forms.Button buttonDeleteZaposlenik;
     }
 }

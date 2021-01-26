@@ -89,13 +89,15 @@ namespace Knjigovodstvo.Gui
 
         private void ButtonSelectCity_Click(object sender, EventArgs e)
         {
-            GradoviTableForm form = new GradoviTableForm();
-            Grad grad = form.OdabirGrada();
-
-            if (grad != null && grad.ValidateData() == FormError.None)
-            { 
-                textBoxCity.Text = grad.Mjesto;
-                textBoxPost.Text = grad.Posta;
+            using (GradoviTableForm form = new GradoviTableForm())
+            {
+                form.Odabir = true;
+                form.ShowDialog();
+                if (form.Grad.Id != 0 && form.Grad.ValidateData() == FormError.None)
+                {
+                    textBoxCity.Text = form.Grad.Mjesto;
+                    textBoxPost.Text = form.Grad.Posta;
+                }
             }
         }
 

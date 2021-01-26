@@ -45,6 +45,11 @@ namespace Knjigovodstvo.Employee
             return false;
         }
 
+        internal DataTable GetZaposlenikDataTable(string condition = null)
+        {
+            return new DbDataGet().GetTable(this, condition);
+        }
+
         public bool DeleteZaposlenik()
         {
             DbDataDelete del = new DbDataDelete();
@@ -70,14 +75,6 @@ namespace Knjigovodstvo.Employee
             return del.DeleteItem(this);
         }
 
-        internal void GetZaposlenikByOib(string oib)
-        {
-            string condition = $"Oib='{oib}';";
-            DataTable dt = new DbDataGet().GetTable(this, condition);
-
-            SetPrivateMembers(dt);
-        }
-
         private void SetPrirez()
         {
             if (Adresa.Grad.Mjesto != "")
@@ -89,7 +86,7 @@ namespace Knjigovodstvo.Employee
 
         public void GetZaposlenikById()
         {
-            DataTable zaposlenik = new DbDataGet().GetTable(this, $"Id={Id}");
+            DataRow zaposlenik = GetZaposlenikDataTable($"Id={Id}").Rows[0];
             SetPrivateMembers(zaposlenik);
         }
 
@@ -129,21 +126,21 @@ namespace Knjigovodstvo.Employee
             return zaposlenikList;
         }
 
-        private void SetPrivateMembers(DataTable zaposlenik)
+        private void SetPrivateMembers(DataRow row)
         {
-            Id = int.Parse(zaposlenik.Rows[0]["Id"].ToString());
-            Oib = zaposlenik.Rows[0]["Oib"].ToString();
-            Ime = zaposlenik.Rows[0]["Ime"].ToString();
-            Prezime = zaposlenik.Rows[0]["Prezime"].ToString();
-            Adresa.Ulica = zaposlenik.Rows[0]["Ulica"].ToString();
-            Adresa.Broj = zaposlenik.Rows[0]["Broj"].ToString();
-            Adresa.Grad.Mjesto = zaposlenik.Rows[0]["Mjesto"].ToString();
-            Adresa.Grad.Drzava = zaposlenik.Rows[0]["Drzava"].ToString();
-            Kontakt.Telefon = zaposlenik.Rows[0]["Telefon"].ToString();
-            Stručna_Sprema = zaposlenik.Rows[0]["Stručna_Sprema"].ToString();
-            Olaksica = decimal.Parse(zaposlenik.Rows[0]["Olaksica"].ToString());
-            Datum_Dolaska = zaposlenik.Rows[0]["Datum_Dolaska"].ToString();
-            Datum_Odlaska = zaposlenik.Rows[0]["Datum_Odlaska"].ToString();
+            Id = int.Parse(row["Id"].ToString());
+            Oib = row["Oib"].ToString();
+            Ime = row["Ime"].ToString();
+            Prezime = row["Prezime"].ToString();
+            Adresa.Ulica = row["Ulica"].ToString();
+            Adresa.Broj = row["Broj"].ToString();
+            Adresa.Grad.Mjesto = row["Mjesto"].ToString();
+            Adresa.Grad.Drzava = row["Drzava"].ToString();
+            Kontakt.Telefon = row["Telefon"].ToString();
+            Stručna_Sprema = row["Stručna_Sprema"].ToString();
+            Olaksica = decimal.Parse(row["Olaksica"].ToString());
+            Datum_Dolaska = row["Datum_Dolaska"].ToString();
+            Datum_Odlaska = row["Datum_Odlaska"].ToString();
 
             SetPrirez();
         }

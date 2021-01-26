@@ -13,11 +13,14 @@ namespace Knjigovodstvo.Partners
             InitializeComponent();
         }
 
-        public PartnerUnosForm(Partneri partner)
+        public void InitPartner(Partneri partner)
         {
-            InitializeComponent();
             _partner = partner;
+            FillControls();
+        }
 
+        private void FillControls()
+        {
             textBoxOib.Text = _partner.OpciPodaci.Oib;
             textBoxName.Text = _partner.OpciPodaci.Naziv;
             textBoxStreet.Text = _partner.Adresa.Ulica;
@@ -38,40 +41,29 @@ namespace Knjigovodstvo.Partners
             labelMessage.Text = new ProcessFormErrors().FormErrorMessage(errorType);
         }
 
-        private void BtnClose_Click(object sender, EventArgs e)
+        private void ButtonClose_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void BtnSelectCity_Click(object sender, EventArgs e)
+        private void ButtonSelectCity_Click(object sender, EventArgs e)
         {
-            GradoviTableForm form = new GradoviTableForm();
-            Grad grad = form.OdabirGrada();
-
-            if (grad != null && grad.ValidateData() == FormError.None)
+            using (GradoviTableForm form = new GradoviTableForm())
             {
-                textBoxCity.Text = grad.Mjesto;
-                textBoxPost.Text = grad.Posta;
+                form.Odabir = true;
+                form.ShowDialog();
+                if (form.Grad.Id != 0 && form.Grad.ValidateData() == FormError.None)
+                {
+                    textBoxCity.Text = form.Grad.Mjesto;
+                    textBoxPost.Text = form.Grad.Posta;
+                }
             }
         }
 
-        private void BtnSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             labelMessage.Text = "";
-
-            _partner.OpciPodaci.Oib = textBoxOib.Text;
-            _partner.OpciPodaci.Naziv = textBoxName.Text;
-            _partner.Adresa.Ulica = textBoxStreet.Text;
-            _partner.Adresa.Broj = textBoxUlicaBroj.Text;
-            _partner.Adresa.Grad.Posta = textBoxPost.Text;
-            _partner.Adresa.Grad.Mjesto = textBoxCity.Text;
-            _partner.Kontakt.Telefon = textBoxPhone.Text;
-            _partner.Kontakt.Fax = textBoxFax.Text;
-            _partner.Kontakt.Email = textBoxEmail.Text;
-            _partner.OpciPodaci.Iban = textBoxIban.Text;
-            _partner.OpciPodaci.Mbo = textBoxMbo.Text;
-            _partner.KontoK = checkBoxBuyer.Checked ? "12" : "";
-            _partner.KontoD = checkBoxSupplier.Checked ? "22" : "";
+            FillControls();
 
             FormError validateResult = _partner.ValidateData();
             if ( validateResult == FormError.None)
@@ -94,6 +86,6 @@ namespace Knjigovodstvo.Partners
             }
         }
 
-        private readonly Partneri _partner = new Partneri();
+        private Partneri _partner = new Partneri();
     }
 }

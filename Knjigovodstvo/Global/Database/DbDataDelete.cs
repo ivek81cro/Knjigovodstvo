@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Knjigovodstvo.Database
 {
-    class DbDataDelete
+    class DbDataDelete : DbData
     {
         /// <summary>Deletes row from table</summary>
         /// <param name="id">Id of row in table.</param>
@@ -53,7 +53,5 @@ namespace Knjigovodstvo.Database
                 return false;
             }
         }
-
-        private readonly string connection_name = "KnjigovodstvoDb";
     }
 }

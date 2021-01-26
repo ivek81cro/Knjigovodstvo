@@ -15,47 +15,12 @@ namespace Knjigovodstvo.Database
     {
         public DbQueryBuilder(IEnumerable<List<String>> obj, string table, string whereColumn=null)
         {
-            _obj = SortPropertiesCustom(obj);
+            _obj = obj;
             _name = _obj.First();
             _value = _obj.ElementAt(1);
             _type = _obj.ElementAt(2);
             _table = table;
             _whereColumn = whereColumn;
-        }
-
-        private IEnumerable<List<string>> SortPropertiesCustom(IEnumerable<List<string>> obj)
-        {
-            List<string> col_names = new List<string>()
-            {
-                "Id", "Oib", "Naziv", "Mbo", "Ime", "Prezime", "Mjesto", "Posta", "Ulica", "Broj", "Email", "Telefon","Fax"
-            };
-            List<string> new_name = new List<string>();
-            List<string> new_value = new List<string>();
-            List<string> new_type = new List<string>();
-            for (int i = 0; i < col_names.Count; i++)
-            {
-                for (int j = 0; j < obj.ElementAt(0).Count; j++)
-                {
-                    if (String.Compare(col_names[i], obj.ElementAt(0)[j]) == 0 && !new_name.Contains(obj.ElementAt(0)[j]))
-                    {
-                        new_name.Add(obj.ElementAt(0)[j]);
-                        new_value.Add(obj.ElementAt(1)[j]);
-                        new_type.Add(obj.ElementAt(2)[j]);
-                        break;
-                    }
-                }
-            }
-            for (int i = 0; i < obj.ElementAt(0).Count; i++)
-            {
-                if (!new_name.Contains(obj.ElementAt(0)[i]) )
-                {
-                    new_name.Add(obj.ElementAt(0)[i]);
-                    new_value.Add(obj.ElementAt(1)[i]);
-                    new_type.Add(obj.ElementAt(2)[i]);
-                }
-            }
-
-            return new List<List<string>> { new_name, new_value, new_type};
         }
 
         /// <summary>
@@ -104,7 +69,7 @@ namespace Knjigovodstvo.Database
                 else
                     query += _name[i] + ", ";
             }
-            query = query.Substring(0, query.Length - 2);
+            query = query[0..^2];
 
             query += " FROM " + _table + ";";
 
@@ -121,7 +86,7 @@ namespace Knjigovodstvo.Database
                 query += _name[i] + ", ";
             }
 
-            query = query.Substring(0, query.Length - 2);
+            query = query[0..^2];
             query += ") VALUES (";
             i = _name[0] == "Id" ? 1 : 0;
             for (; i < _value.Count; ++i)
@@ -134,7 +99,7 @@ namespace Knjigovodstvo.Database
                     query += "'" + _value[i] + "', ";
             }
 
-            query = query.Substring(0, query.Length - 2);
+            query = query[0..^2];
             query += ");";
 
             return query;
@@ -147,6 +112,8 @@ namespace Knjigovodstvo.Database
             int i = _whereColumn == null ? 1 : 0;
             for ( ; i < _name.Count; ++i)
             {
+                if (_name[i] == "Id")
+                    continue;
                 if (_type[i] == "Decimal")
                     query += _name[i] + "=" + _value[i].Replace(',', '.') + ", ";
                 else if (_value[i] == "Null")
@@ -154,11 +121,11 @@ namespace Knjigovodstvo.Database
                 else
                     query += _name[i] + "='" + _value[i] + "', ";
             }
-            query = query.Substring(0, query.Length - 2);
+            query = query[0..^2];
 
             if (_whereColumn == null)
             {
-                query += $" WHERE Id={_value[0]};";
+                query += $" WHERE Id={_value[_name.FindIndex(s => s == "Id")]};";
             }
 
             return query;

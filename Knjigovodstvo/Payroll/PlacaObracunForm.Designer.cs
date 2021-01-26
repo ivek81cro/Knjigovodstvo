@@ -44,7 +44,6 @@ namespace Knjigovodstvo.Payroll
             this.dateTimePickerDatumObracuna = new System.Windows.Forms.DateTimePicker();
             this.labelDatumObracuna = new System.Windows.Forms.Label();
             this.groupBoxRazdoblje = new System.Windows.Forms.GroupBox();
-            this.buttonSpremiArhiva = new System.Windows.Forms.Button();
             this.buttonBrisiOdabrane = new System.Windows.Forms.Button();
             this.textBoxFilterIme = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -198,23 +197,12 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxRazdoblje.TabStop = false;
             this.groupBoxRazdoblje.Text = "Razdoblje obračuna";
             // 
-            // buttonSpremiArhiva
-            // 
-            this.buttonSpremiArhiva.Enabled = false;
-            this.buttonSpremiArhiva.Location = new System.Drawing.Point(6, 21);
-            this.buttonSpremiArhiva.Name = "buttonSpremiArhiva";
-            this.buttonSpremiArhiva.Size = new System.Drawing.Size(121, 23);
-            this.buttonSpremiArhiva.TabIndex = 18;
-            this.buttonSpremiArhiva.Text = "Spremi u arhivu";
-            this.buttonSpremiArhiva.UseVisualStyleBackColor = true;
-            this.buttonSpremiArhiva.Click += new System.EventHandler(this.ButtonSpremiArhiva_Click);
-            // 
             // buttonBrisiOdabrane
             // 
             this.buttonBrisiOdabrane.Enabled = false;
-            this.buttonBrisiOdabrane.Location = new System.Drawing.Point(6, 79);
+            this.buttonBrisiOdabrane.Location = new System.Drawing.Point(6, 47);
             this.buttonBrisiOdabrane.Name = "buttonBrisiOdabrane";
-            this.buttonBrisiOdabrane.Size = new System.Drawing.Size(121, 23);
+            this.buttonBrisiOdabrane.Size = new System.Drawing.Size(120, 23);
             this.buttonBrisiOdabrane.TabIndex = 20;
             this.buttonBrisiOdabrane.Text = "Briši odabrane";
             this.buttonBrisiOdabrane.UseVisualStyleBackColor = true;
@@ -247,7 +235,7 @@ namespace Knjigovodstvo.Payroll
             this.groupBoxFilteri.Controls.Add(this.textBoxFilterIme);
             this.groupBoxFilteri.Location = new System.Drawing.Point(165, 138);
             this.groupBoxFilteri.Name = "groupBoxFilteri";
-            this.groupBoxFilteri.Size = new System.Drawing.Size(509, 58);
+            this.groupBoxFilteri.Size = new System.Drawing.Size(655, 58);
             this.groupBoxFilteri.TabIndex = 23;
             this.groupBoxFilteri.TabStop = false;
             this.groupBoxFilteri.Text = "Filter";
@@ -281,9 +269,9 @@ namespace Knjigovodstvo.Payroll
             // 
             // buttonDohvatArhiva
             // 
-            this.buttonDohvatArhiva.Location = new System.Drawing.Point(6, 50);
+            this.buttonDohvatArhiva.Location = new System.Drawing.Point(6, 22);
             this.buttonDohvatArhiva.Name = "buttonDohvatArhiva";
-            this.buttonDohvatArhiva.Size = new System.Drawing.Size(121, 23);
+            this.buttonDohvatArhiva.Size = new System.Drawing.Size(120, 23);
             this.buttonDohvatArhiva.TabIndex = 24;
             this.buttonDohvatArhiva.Text = "Dohvat iz arhive";
             this.buttonDohvatArhiva.UseVisualStyleBackColor = true;
@@ -293,18 +281,17 @@ namespace Knjigovodstvo.Payroll
             // 
             this.groupBoxArhiva.Controls.Add(this.buttonPocetniPrikaz);
             this.groupBoxArhiva.Controls.Add(this.buttonDohvatArhiva);
-            this.groupBoxArhiva.Controls.Add(this.buttonSpremiArhiva);
             this.groupBoxArhiva.Controls.Add(this.buttonBrisiOdabrane);
             this.groupBoxArhiva.Location = new System.Drawing.Point(680, 32);
             this.groupBoxArhiva.Name = "groupBoxArhiva";
-            this.groupBoxArhiva.Size = new System.Drawing.Size(140, 165);
+            this.groupBoxArhiva.Size = new System.Drawing.Size(140, 100);
             this.groupBoxArhiva.TabIndex = 25;
             this.groupBoxArhiva.TabStop = false;
             this.groupBoxArhiva.Text = "Arhiva";
             // 
             // buttonPocetniPrikaz
             // 
-            this.buttonPocetniPrikaz.Location = new System.Drawing.Point(7, 109);
+            this.buttonPocetniPrikaz.Location = new System.Drawing.Point(6, 71);
             this.buttonPocetniPrikaz.Name = "buttonPocetniPrikaz";
             this.buttonPocetniPrikaz.Size = new System.Drawing.Size(120, 23);
             this.buttonPocetniPrikaz.TabIndex = 25;
@@ -391,7 +378,6 @@ namespace Knjigovodstvo.Payroll
         private DateTimePicker dateTimePickerDatumObracuna;
         private Label labelDatumObracuna;
         private GroupBox groupBoxRazdoblje;
-        private Button buttonSpremiArhiva;
         private Button buttonBrisiOdabrane;
         private TextBox textBoxFilterIme;
         private Label label1;
