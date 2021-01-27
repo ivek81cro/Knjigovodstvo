@@ -71,6 +71,24 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             }
         }
 
+        internal void PrepareDataPdvStavke(DataTable dt, List<PostavkeKnjizenja> postavkeKnjizenja, IDbObject obj)
+        {
+            PdvStavke knjiga = (PdvStavke)obj;
+            foreach (var postavka in postavkeKnjizenja)
+            {
+                dt.Rows.Add(
+                    knjiga.Id,
+                    postavka.Naziv_stupca,
+                    "PDV za razdoblje: " + knjiga.Datum_od + " - " + knjiga.Datum_do,
+                    postavka.Konto,
+                    DateTime.Today.ToString("dd.MM.yyyy."),
+                    postavka.Strana == "Dugovna",
+                    postavka.Strana == "Potražna",
+                    postavka.Mijenja_predznak == true
+                    );
+            }
+        }
+
         internal void PrepareDataOsnovnoSredstvo(DataTable dt, List<PostavkeKnjizenja> postavkeKnjizenja, IDbObject obj)
         {
             OsnovnoSredstvo knjiga = (OsnovnoSredstvo)obj;

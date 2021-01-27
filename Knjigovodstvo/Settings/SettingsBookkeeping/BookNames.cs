@@ -11,6 +11,7 @@
         Dodaci,
         Izvodi,
         Ura_repro,
-        Amortizacija
+        Amortizacija,
+        Vat
     }
 }

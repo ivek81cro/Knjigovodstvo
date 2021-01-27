@@ -1,5 +1,8 @@
-﻿using Knjigovodstvo.Database;
+﻿using Knjigovodstvo.Books.PrepareForBalanceSheet;
+using Knjigovodstvo.Database;
 using Knjigovodstvo.IRA;
+using Knjigovodstvo.Settings;
+using Knjigovodstvo.Settings.SettingsBookkeeping;
 using Knjigovodstvo.URA;
 using System;
 using System.Collections.Generic;
@@ -14,6 +17,7 @@ namespace Knjigovodstvo
         public PorezPdvForm()
         {
             InitializeComponent();
+            _postavkeKnjizenja = new PostavkeKnjizenja().GetPostavkeKnjizenjaList(BookNames.Vat);
         }
 
         private void ImportDataFromDatabase()
@@ -88,10 +92,32 @@ namespace Knjigovodstvo
             labelIznZaUplatu.Text = _pdvStavke.Za_uplatu.ToString("n");
         }
 
+        private void LoadBookkeepingsettings()
+        {
+            _postavkeKnjizenja = new PostavkeKnjizenja()
+                .GetPostavkeKnjizenjaList(BookNames.Vat);
+        }
+
+        private void ButtonOpenPostavkeForm(object sender, EventArgs e)
+        {
+            PostavkeKnjizenjaPregledForm form = new PostavkeKnjizenjaPregledForm(BookNames.Vat);
+            form.ShowDialog();
+            LoadBookkeepingsettings();
+        }
+
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            //TODO: finish saving to books
-            //Zatvori konto 1600 i 2600 sa kontom za razliku poreza i pretporeza
+            _pdvStavke.Datum_od = dateTimePickerOd.Value.ToString("dd.MM.yyyy.");
+            _pdvStavke.Datum_do = dateTimePickerDo.Value.ToString("dd.MM.yyyy.");
+            if (_pdvStavke.SaveToDatabase())
+            {
+                TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_pdvStavke, _postavkeKnjizenja);
+                form.ShowDialog();
+            }
+            else
+            {
+
+            }
         }
 
         private void ButtonIzracunaj_Click(object sender, EventArgs e)
@@ -103,5 +129,6 @@ namespace Knjigovodstvo
         private List<KnjigaUra> _knjigaUra = new List<KnjigaUra>();
         private List<KnjigaIra> _knjigaIra = new List<KnjigaIra>();
         private PdvStavke _pdvStavke = new PdvStavke();
+        private List<PostavkeKnjizenja> _postavkeKnjizenja;
     }
 }

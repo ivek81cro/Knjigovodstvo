@@ -47,6 +47,9 @@ namespace Knjigovodstvo.Settings.SettingsBookkeeping
                 case BookNames.Amortizacija:
                     PopulateComboBoxStupac(new OsnovnoSredstvo());
                     break;
+                case BookNames.Vat:
+                    PopulateComboBoxStupac(new PdvStavke());
+                    break;
                 default:
                     break;
             }

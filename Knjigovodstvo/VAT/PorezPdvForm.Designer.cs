@@ -35,6 +35,8 @@
             this.dateTimePickerOd = new System.Windows.Forms.DateTimePicker();
             this.buttonIzracunaj = new System.Windows.Forms.Button();
             this.groupBoxIznosi = new System.Windows.Forms.GroupBox();
+            this.labelIznZaUplatu = new System.Windows.Forms.Label();
+            this.labelZaUplatu = new System.Windows.Forms.Label();
             this.groupBoxPorez = new System.Windows.Forms.GroupBox();
             this.labelIzPorUkupno = new System.Windows.Forms.Label();
             this.labelIzPor25 = new System.Windows.Forms.Label();
@@ -70,12 +72,13 @@
             this.labelPp5 = new System.Windows.Forms.Label();
             this.labelPpOs25 = new System.Windows.Forms.Label();
             this.buttonKnjizi = new System.Windows.Forms.Button();
-            this.labelZaUplatu = new System.Windows.Forms.Label();
-            this.labelIznZaUplatu = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuPostavkeKnjizenja = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxRazdoblje.SuspendLayout();
             this.groupBoxIznosi.SuspendLayout();
             this.groupBoxPorez.SuspendLayout();
             this.groupBoxPretporez.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxRazdoblje
@@ -84,7 +87,7 @@
             this.groupBoxRazdoblje.Controls.Add(this.labelRazdobljeOd);
             this.groupBoxRazdoblje.Controls.Add(this.dateTimePickerDo);
             this.groupBoxRazdoblje.Controls.Add(this.dateTimePickerOd);
-            this.groupBoxRazdoblje.Location = new System.Drawing.Point(12, 12);
+            this.groupBoxRazdoblje.Location = new System.Drawing.Point(12, 27);
             this.groupBoxRazdoblje.Name = "groupBoxRazdoblje";
             this.groupBoxRazdoblje.Size = new System.Drawing.Size(200, 93);
             this.groupBoxRazdoblje.TabIndex = 3;
@@ -129,7 +132,7 @@
             // 
             // buttonIzracunaj
             // 
-            this.buttonIzracunaj.Location = new System.Drawing.Point(218, 19);
+            this.buttonIzracunaj.Location = new System.Drawing.Point(218, 34);
             this.buttonIzracunaj.Name = "buttonIzracunaj";
             this.buttonIzracunaj.Size = new System.Drawing.Size(75, 23);
             this.buttonIzracunaj.TabIndex = 4;
@@ -143,12 +146,32 @@
             this.groupBoxIznosi.Controls.Add(this.labelZaUplatu);
             this.groupBoxIznosi.Controls.Add(this.groupBoxPorez);
             this.groupBoxIznosi.Controls.Add(this.groupBoxPretporez);
-            this.groupBoxIznosi.Location = new System.Drawing.Point(12, 126);
+            this.groupBoxIznosi.Location = new System.Drawing.Point(12, 141);
             this.groupBoxIznosi.Name = "groupBoxIznosi";
             this.groupBoxIznosi.Size = new System.Drawing.Size(523, 421);
             this.groupBoxIznosi.TabIndex = 5;
             this.groupBoxIznosi.TabStop = false;
             this.groupBoxIznosi.Text = "Iznosi";
+            // 
+            // labelIznZaUplatu
+            // 
+            this.labelIznZaUplatu.AutoSize = true;
+            this.labelIznZaUplatu.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelIznZaUplatu.Location = new System.Drawing.Point(161, 358);
+            this.labelIznZaUplatu.Name = "labelIznZaUplatu";
+            this.labelIznZaUplatu.Size = new System.Drawing.Size(36, 20);
+            this.labelIznZaUplatu.TabIndex = 9;
+            this.labelIznZaUplatu.Text = "0,00";
+            // 
+            // labelZaUplatu
+            // 
+            this.labelZaUplatu.AutoSize = true;
+            this.labelZaUplatu.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelZaUplatu.Location = new System.Drawing.Point(12, 358);
+            this.labelZaUplatu.Name = "labelZaUplatu";
+            this.labelZaUplatu.Size = new System.Drawing.Size(129, 20);
+            this.labelZaUplatu.TabIndex = 8;
+            this.labelZaUplatu.Text = "Za uplatu / povrat";
             // 
             // groupBoxPorez
             // 
@@ -490,7 +513,7 @@
             // 
             // buttonKnjizi
             // 
-            this.buttonKnjizi.Location = new System.Drawing.Point(218, 49);
+            this.buttonKnjizi.Location = new System.Drawing.Point(218, 64);
             this.buttonKnjizi.Name = "buttonKnjizi";
             this.buttonKnjizi.Size = new System.Drawing.Size(75, 23);
             this.buttonKnjizi.TabIndex = 6;
@@ -498,25 +521,23 @@
             this.buttonKnjizi.UseVisualStyleBackColor = true;
             this.buttonKnjizi.Click += new System.EventHandler(this.ButtonKnjizi_Click);
             // 
-            // labelZaUplatu
+            // menuStrip1
             // 
-            this.labelZaUplatu.AutoSize = true;
-            this.labelZaUplatu.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelZaUplatu.Location = new System.Drawing.Point(12, 358);
-            this.labelZaUplatu.Name = "labelZaUplatu";
-            this.labelZaUplatu.Size = new System.Drawing.Size(129, 20);
-            this.labelZaUplatu.TabIndex = 8;
-            this.labelZaUplatu.Text = "Za uplatu / povrat";
+            this.menuStrip1.AllowMerge = false;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuPostavkeKnjizenja});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(963, 24);
+            this.menuStrip1.TabIndex = 7;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // labelIznZaUplatu
+            // menuPostavkeKnjizenja
             // 
-            this.labelIznZaUplatu.AutoSize = true;
-            this.labelIznZaUplatu.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelIznZaUplatu.Location = new System.Drawing.Point(161, 358);
-            this.labelIznZaUplatu.Name = "labelIznZaUplatu";
-            this.labelIznZaUplatu.Size = new System.Drawing.Size(36, 20);
-            this.labelIznZaUplatu.TabIndex = 9;
-            this.labelIznZaUplatu.Text = "0,00";
+            this.menuPostavkeKnjizenja.Name = "menuPostavkeKnjizenja";
+            this.menuPostavkeKnjizenja.Size = new System.Drawing.Size(115, 20);
+            this.menuPostavkeKnjizenja.Text = "Postavke knjiženja";
+            this.menuPostavkeKnjizenja.Click += new System.EventHandler(ButtonOpenPostavkeForm);
             // 
             // PorezPdvForm
             // 
@@ -527,6 +548,8 @@
             this.Controls.Add(this.groupBoxIznosi);
             this.Controls.Add(this.buttonIzracunaj);
             this.Controls.Add(this.groupBoxRazdoblje);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "PorezPdvForm";
             this.Text = "Izračun PDV-a";
             this.groupBoxRazdoblje.ResumeLayout(false);
@@ -537,7 +560,10 @@
             this.groupBoxPorez.PerformLayout();
             this.groupBoxPretporez.ResumeLayout(false);
             this.groupBoxPretporez.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -587,5 +613,7 @@
         private System.Windows.Forms.Button buttonKnjizi;
         private System.Windows.Forms.Label labelIznZaUplatu;
         private System.Windows.Forms.Label labelZaUplatu;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuPostavkeKnjizenja;
     }
 }
