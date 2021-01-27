@@ -80,17 +80,19 @@ namespace Knjigovodstvo.Database
         {
             string query = "INSERT INTO " + _table + " ";
             query += "(";
-            int i = _name[0] == "Id" ? 1 : 0;
-            for (; i < _name.Count; ++i)
+            for (int i = 0; i < _name.Count; ++i)
             {
+                if (_name[i] == "Id")
+                    continue;
                 query += _name[i] + ", ";
             }
 
             query = query[0..^2];
             query += ") VALUES (";
-            i = _name[0] == "Id" ? 1 : 0;
-            for (; i < _value.Count; ++i)
+            for (int i = 0; i < _value.Count; ++i)
             {
+                if (_name[i] == "Id")
+                    continue;
                 if (_type[i] == "Decimal")
                     query += _value[i].Replace(',', '.') + ", ";
                 else if(_value[i] == "Null")

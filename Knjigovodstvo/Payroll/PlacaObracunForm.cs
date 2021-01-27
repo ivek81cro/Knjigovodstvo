@@ -176,6 +176,7 @@ namespace Knjigovodstvo.Payroll
             {
                 if(row.Cells["Odabir"].Value.ToString() == "True")
                 {
+                    //Sum all individual item for each selected payroll
                     string oib = row.Cells["Oib"].Value.ToString();
                     po.Doprinos_Zdravstvo += _placaArhivaLista.Where(p => p.Oib == oib)
                         .FirstOrDefault().Doprinos_Zdravstvo;

@@ -3,8 +3,6 @@ using Knjigovodstvo.Database;
 using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Interface;
-using System;
-using System.Collections.Generic;
 using System.Data;
 
 namespace Knjigovodstvo.Partners
@@ -44,9 +42,18 @@ namespace Knjigovodstvo.Partners
             return false;
         }
 
-        internal DataTable GetPartnerDataTable()
+        internal DataTable GetPartnerDataTable(string condition = null)
         {
-            return new DbDataGet().GetTable(this);
+            return new DbDataGet().GetTable(this, condition);
+        }
+
+        public bool ExistsInDb()
+        {
+            DataTable dt = GetPartnerDataTable($"Naziv='{OpciPodaci.Naziv}'");
+            if(dt.Rows.Count > 0)
+                OpciPodaci.Id = int.Parse(dt.Rows[0]["Id"].ToString());
+
+            return dt.Rows.Count > 0; 
         }
 
         private int GetId()

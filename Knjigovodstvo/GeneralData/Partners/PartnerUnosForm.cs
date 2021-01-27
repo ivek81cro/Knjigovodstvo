@@ -35,6 +35,23 @@ namespace Knjigovodstvo.Partners
             checkBoxBuyer.Checked = _partner.KontoK.StartsWith("12");
             checkBoxSupplier.Checked = _partner.KontoD.StartsWith("22");
         }
+        private void CreateNewPartner()
+        {
+            _partner = new Partneri();
+            _partner.OpciPodaci.Oib = textBoxOib.Text;
+            _partner.OpciPodaci.Naziv = textBoxName.Text;
+            _partner.OpciPodaci.Iban = textBoxIban.Text;
+            _partner.OpciPodaci.Mbo = textBoxMbo.Text;
+            _partner.Adresa.Ulica = textBoxStreet.Text;
+            _partner.Adresa.Broj = textBoxUlicaBroj.Text;
+            _partner.Adresa.Grad.Mjesto = textBoxCity.Text;
+            _partner.Adresa.Grad.Posta = textBoxPost.Text;
+            _partner.Kontakt.Telefon = textBoxPhone.Text;
+            _partner.Kontakt.Fax = textBoxFax.Text;
+            _partner.Kontakt.Email = textBoxEmail.Text;
+            _partner.KontoD = checkBoxSupplier.Checked ? "22" : "";
+            _partner.KontoK = checkBoxBuyer.Checked ? "12" : "";
+        }
 
         private void SetMessageLabel(FormError errorType)
         {
@@ -63,7 +80,8 @@ namespace Knjigovodstvo.Partners
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             labelMessage.Text = "";
-            FillControls();
+            CreateNewPartner();
+            _partner.ExistsInDb();
 
             FormError validateResult = _partner.ValidateData();
             if ( validateResult == FormError.None)
