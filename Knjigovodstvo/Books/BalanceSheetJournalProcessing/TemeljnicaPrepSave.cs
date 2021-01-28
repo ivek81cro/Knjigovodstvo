@@ -25,9 +25,15 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                             Dokument = _postavkeKnjizenja.ElementAt(0).Knjiga,
                             Broj = int.Parse(row["Redni broj"].ToString()),
                             Konto = row["Konto"].ToString(),
-                            Datum = DateTime.ParseExact(row["Datum dokumenta"].ToString(), "dd.MM.yyyy.", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd"),
-                            Duguje = decimal.Parse(row["Dugovna"].ToString()),
-                            Potrazuje = decimal.Parse(row["Potražna"].ToString())
+                            
+                            Datum = DateTime.ParseExact(
+                                row["Datum dokumenta"].ToString()
+                                ,"dd.MM.yyyy."
+                                ,CultureInfo.InvariantCulture)
+                            .ToString("yyyy-MM-dd"),
+
+                            Dugovna = decimal.Parse(row["Dugovna"].ToString()),
+                            Potražna = decimal.Parse(row["Potražna"].ToString())
                         });
                     }
                 }
@@ -42,7 +48,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         public void SaveToDatabase()
         {
-            TemeljnicaStavka stavka = _temeljnicaStavka.ElementAt(0);
+            TemeljnicaStavka stavka = new TemeljnicaStavka();
             if (_temeljnicaStavka.Count > 0)
             {
                     if (!stavka.CheckIfExistsInDatabase(_temeljnicaStavka))

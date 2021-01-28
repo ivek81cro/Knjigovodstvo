@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Books.PrepareForBalanceSheet;
+﻿using Knjigovodstvo.Books.BookJournal;
+using Knjigovodstvo.Books.PrepareForBalanceSheet;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.GeneralData.WaitForm;
@@ -7,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Books.BalanceSheetJournal
@@ -33,43 +36,22 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             comboBoxVrstaTemeljnice.Items.Add(BookNames.Slobodna);
         }
 
-        private void DataTableToList()
-        {
-            foreach(DataRow row in _dt.Rows)
-            {
-                _stavkaList.Add(new TemeljnicaStavka()
-                {
-                    Id = int.Parse(row["Id"].ToString()),
-                    Broj = int.Parse(row["Broj"].ToString()),
-                    Datum = row["Datum"].ToString(),
-                    Dokument = row["Dokument"].ToString(),
-                    Duguje = decimal.Parse(row["Duguje"].ToString()),
-                    Potrazuje = decimal.Parse(row["Potrazuje"].ToString()),
-                    Konto = row["Konto"].ToString(),
-                    Opis = row["Opis"].ToString(),
-                    Valuta = row["Valuta"].ToString()
-                });
-            }
-        }
-
         private void ComboBoxVrstaTemeljnice_SelectionChangeCommitted(object sender, EventArgs e)
         {
             string selected = comboBoxVrstaTemeljnice.SelectedItem.ToString();
-            _condition = $"Dokument = '{selected}' AND Broj_temeljnice = 0 ORDER BY Broj ASC, Id ASC";
+            string condition = $"Dokument = '{selected}' AND Broj_temeljnice = 0 ORDER BY Broj ASC, Id ASC";
             if (selected == "Place")
             {
-                _condition = $"(Dokument = '{selected}' OR Dokument='Dodaci') AND Broj_temeljnice = 0";
+                condition = $"(Dokument = '{selected}' OR Dokument='Dodaci') AND Broj_temeljnice = 0";
             }
             
-            LoadDataView();
+            LoadDataView(condition);
         }
 
-        private void LoadDataView()
+        private void LoadDataView(string condition = null)
         {
-            _dt = new DbDataGet().GetTable(new TemeljnicaStavka(), _condition);
+            _dt = new DbDataGet().GetTable(new TemeljnicaStavka(), condition);
             CustomiseDataGridView();
-            _dt.Columns["Duguje"].ColumnName = "Dugovna";
-            _dt.Columns["Potrazuje"].ColumnName = "Potražna";
             dbDataGridView1.Columns["Id"].Visible = false;
 
             _checkBalance.CheckEndBalance(_dt, _labelList);
@@ -135,11 +117,60 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             }
         }
 
+        private void ButtonKnjiziTemeljnicu_Click(object sender, EventArgs e)
+        {
+            if(dbDataGridView1.Rows.Count > 0)
+            {
+                DnevnikKnjizenja dk = new DnevnikKnjizenja(); ;
+                int latestNumber = dk.GetLatestBrojTemeljnice();
+
+                _temeljnica = new Temeljnica()
+                {
+                    Broj_temeljnice = latestNumber,
+                    
+                    Datum_knjizenja = DateTime.ParseExact(
+                        dateTimePickerDatumKnjizenja.Value.ToString().Split(' ')[0]
+                        ,"dd.MM.yyyy."
+                        , CultureInfo.InvariantCulture)
+                    .ToString("yyyy-MM-dd"),
+
+                    Vrsta_temeljnice = comboBoxVrstaTemeljnice.Text
+                };
+
+                foreach(DataGridViewRow row in dbDataGridView1.Rows)
+                {
+                    dk = new DnevnikKnjizenja().ConvertDataGridViewRow(row);
+                    dk.Broj_temeljnice = latestNumber;
+                    _dnevnikKnjizenja.Add(dk);
+                }
+
+                _temeljnica.Dugovna = _dnevnikKnjizenja.Sum(x => x.Dugovna);
+                _temeljnica.Potražna = _dnevnikKnjizenja.Sum(x => x.Potražna);
+                _temeljnica.InsertNew();
+                dk.SaveToDatabase(_dnevnikKnjizenja);
+            }
+            else
+            {
+                MessageBox.Show("Nije otvorena niti jedna temeljnica trenutno", "Informacija");
+            }
+        }
+
+        private void ButtonKnjizeneTemeljnice_Click(object sender, EventArgs e)
+        {
+            using (KnjizeneTemeljniceDialog dialog = new KnjizeneTemeljniceDialog())
+            {
+                dialog.ShowDialog();
+                _temeljnica = dialog.OpenTemeljnica(ref _dt, dbDataGridView1);
+                comboBoxVrstaTemeljnice.Text = _temeljnica.Vrsta_temeljnice;
+            }
+            _checkBalance.CheckEndBalance(_dt, _labelList);
+        }
+
+        private Temeljnica _temeljnica = new Temeljnica();
         private DataTable _dt = new DataTable();
         private readonly List<Label> _labelList;
         private readonly CheckBalance _checkBalance = new CheckBalance();
-        private string _condition = "";
         private TemeljnicaStavka _stavka = new TemeljnicaStavka();
-        private BindingList<TemeljnicaStavka> _stavkaList = new BindingList<TemeljnicaStavka>();
+        private List<DnevnikKnjizenja> _dnevnikKnjizenja = new List<DnevnikKnjizenja>();
     }
 }
