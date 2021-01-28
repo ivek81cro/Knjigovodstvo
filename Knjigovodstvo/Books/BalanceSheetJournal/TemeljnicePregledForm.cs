@@ -6,7 +6,6 @@ using Knjigovodstvo.GeneralData.WaitForm;
 using Knjigovodstvo.Settings.SettingsBookkeeping;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Linq;
@@ -116,38 +115,42 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
                 }
             }
         }
+        private void ProcesItemsToMainBook()
+        {
+            DnevnikKnjizenja dk = new DnevnikKnjizenja(); ;
+            int latestNumber = dk.GetLatestBrojTemeljnice();
+
+            _temeljnica = new Temeljnica()
+            {
+                Broj_temeljnice = latestNumber,
+
+                Datum_knjizenja = DateTime.ParseExact(
+                    dateTimePickerDatumKnjizenja.Value.ToString().Split(' ')[0]
+                    , "dd.MM.yyyy."
+                    , CultureInfo.InvariantCulture)
+                .ToString("yyyy-MM-dd"),
+
+                Vrsta_temeljnice = comboBoxVrstaTemeljnice.Text
+            };
+
+            foreach (DataGridViewRow row in dbDataGridView1.Rows)
+            {
+                dk = new DnevnikKnjizenja().ConvertDataGridViewRow(row);
+                dk.Broj_temeljnice = latestNumber;
+                _dnevnikKnjizenja.Add(dk);
+            }
+
+            _temeljnica.Dugovna = _dnevnikKnjizenja.Sum(x => x.Dugovna);
+            _temeljnica.Potražna = _dnevnikKnjizenja.Sum(x => x.Potražna);
+            _temeljnica.InsertNew();
+            dk.SaveToDatabase(_dnevnikKnjizenja);
+        }
 
         private void ButtonKnjiziTemeljnicu_Click(object sender, EventArgs e)
         {
             if(dbDataGridView1.Rows.Count > 0)
             {
-                DnevnikKnjizenja dk = new DnevnikKnjizenja(); ;
-                int latestNumber = dk.GetLatestBrojTemeljnice();
-
-                _temeljnica = new Temeljnica()
-                {
-                    Broj_temeljnice = latestNumber,
-                    
-                    Datum_knjizenja = DateTime.ParseExact(
-                        dateTimePickerDatumKnjizenja.Value.ToString().Split(' ')[0]
-                        ,"dd.MM.yyyy."
-                        , CultureInfo.InvariantCulture)
-                    .ToString("yyyy-MM-dd"),
-
-                    Vrsta_temeljnice = comboBoxVrstaTemeljnice.Text
-                };
-
-                foreach(DataGridViewRow row in dbDataGridView1.Rows)
-                {
-                    dk = new DnevnikKnjizenja().ConvertDataGridViewRow(row);
-                    dk.Broj_temeljnice = latestNumber;
-                    _dnevnikKnjizenja.Add(dk);
-                }
-
-                _temeljnica.Dugovna = _dnevnikKnjizenja.Sum(x => x.Dugovna);
-                _temeljnica.Potražna = _dnevnikKnjizenja.Sum(x => x.Potražna);
-                _temeljnica.InsertNew();
-                dk.SaveToDatabase(_dnevnikKnjizenja);
+                ProcesItemsToMainBook();
             }
             else
             {
