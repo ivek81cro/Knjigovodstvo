@@ -22,7 +22,7 @@ namespace Knjigovodstvo.Books.BookJournal
             int latest = 1;
             if (dt.Rows.Count > 0)
             {
-                latest = int.Parse(dt.Rows[0]["Broj_temeljnice"].ToString());
+                latest = int.Parse(dt.Rows[0]["Broj_temeljnice"].ToString()) + 1;
             }
             return latest;
         }

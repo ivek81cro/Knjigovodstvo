@@ -7,6 +7,7 @@ using Knjigovodstvo.Settings.SettingsBookkeeping;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -50,9 +51,19 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
         private void LoadDataView(string condition = null)
         {
             _dt = new DbDataGet().GetTable(new TemeljnicaStavka(), condition);
-            CustomiseDataGridView();
-            dbDataGridView1.Columns["Id"].Visible = false;
+            if (InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    dbDataGridView1.DataSource = _dt;
+                }));
+            }
+            else
+            {
+                dbDataGridView1.DataSource = _dt;
+            }
 
+            dbDataGridView1.Columns["Id"].Visible = false;
             _checkBalance.CheckEndBalance(_dt, _labelList);
         }
 
@@ -130,7 +141,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
                     , CultureInfo.InvariantCulture)
                 .ToString("yyyy-MM-dd"),
 
-                Vrsta_temeljnice = comboBoxVrstaTemeljnice.Text
+                Vrsta_temeljnice = _currentBookType
             };
 
             foreach (DataGridViewRow row in dbDataGridView1.Rows)
@@ -138,19 +149,26 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
                 dk = new DnevnikKnjizenja().ConvertDataGridViewRow(row);
                 dk.Broj_temeljnice = latestNumber;
                 _dnevnikKnjizenja.Add(dk);
-            }
+                _stavka.Id = int.Parse(row.Cells["Id"].Value.ToString());
+                _stavka.DeleteStavka();
+            }            
 
             _temeljnica.Dugovna = _dnevnikKnjizenja.Sum(x => x.Dugovna);
             _temeljnica.Potražna = _dnevnikKnjizenja.Sum(x => x.Potražna);
             _temeljnica.InsertNew();
-            dk.SaveToDatabase(_dnevnikKnjizenja);
-        }
+            
+            dk.SaveToDatabase(_dnevnikKnjizenja);  
+        }        
 
         private void ButtonKnjiziTemeljnicu_Click(object sender, EventArgs e)
         {
+            _currentBookType = comboBoxVrstaTemeljnice.Text;
             if(dbDataGridView1.Rows.Count > 0)
             {
-                ProcesItemsToMainBook();
+                using (WaitDialog waitDialog = new WaitDialog(ProcesItemsToMainBook, SplashMessages.Učitavanje))
+                {
+                    waitDialog.ShowDialog(this);
+                }
             }
             else
             {
@@ -169,6 +187,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             _checkBalance.CheckEndBalance(_dt, _labelList);
         }
 
+        private string _currentBookType;
         private Temeljnica _temeljnica = new Temeljnica();
         private DataTable _dt = new DataTable();
         private readonly List<Label> _labelList;
