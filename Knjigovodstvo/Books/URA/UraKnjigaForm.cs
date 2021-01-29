@@ -23,12 +23,6 @@ namespace Knjigovodstvo.URA
             _columns.Add(1, "Naziv_dobavljaca");
             _columns.Add(2, "Broj_racuna");
             InitializeComponent();
-            _dt = new DbDataCustomQuery()
-                .ExecuteQuery("SELECT TOP 1 Redni_broj FROM KnjigaUra WHERE Redni_broj IS NOT NULL ORDER BY Redni_broj DESC;");
-            if (_dt.Rows.Count != 0)
-                _lastRecord = int.Parse(_dt.Rows[0].ItemArray[0].ToString());
-            else
-                _lastRecord = 0;
             LoadDatagrid();
             _bookName = BookNames.Ura_trošak;
             LoadBookkeepingsettings();
@@ -118,6 +112,11 @@ namespace Knjigovodstvo.URA
             _uraKnjiga.GetDataFromDatabaseByRedniBroj();
         }
 
+        private void CheckBoxShowCtrlDialog_CheckStateChanged(object sender, EventArgs e)
+        {
+            _noControllDialog = checkBoxShowCtrlDialog.Checked;
+        }
+
         private void ButtonUcitaj_Click(object sender, EventArgs e)
         {
             OpenAndLoadXlsFile();
@@ -172,22 +171,27 @@ namespace Knjigovodstvo.URA
             foreach (DataGridViewRow row in dbDdataGridView1.SelectedRows)
             {
                 SetSelectedItem(row);
-                if (_uraKnjiga.Knjizen || _uraKnjiga.Broj_primke != 0)
-                    continue;
                 TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_uraKnjiga, _postavkeKnjizenja);
-                form.ShowDialog();
+                if (_noControllDialog)
+                {
+                    form.ProcessDirectly();
+                }
+                else
+                {
+                    form.ShowDialog();
+                }
+                string query = $"UPDATE KnjigaUra SET Knjizen = 1 WHERE Redni_broj = {_uraKnjiga.Redni_broj}";
                 if (!form.Knjizeno)
                     break;
                 else
                     new DbDataCustomQuery()
-                        .ExecuteQuery($"UPDATE KnjigaUra SET Knjizen = 1 WHERE Redni_broj = {_uraKnjiga.Redni_broj}");
+                        .ExecuteQuery(query);
             }
         }
 
+        private bool _noControllDialog;
         private BookNames _bookName;
         private List<KnjigaUra> _listaStavki = new List<KnjigaUra>();
-        private readonly int _lastRecord = 0;
-        private readonly DataTable _dt;
         private readonly KnjigaUra _uraKnjiga = new KnjigaUra();
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly Dictionary<int, string> _columns = new Dictionary<int, string>();

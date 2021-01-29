@@ -21,15 +21,9 @@ namespace Knjigovodstvo.IRA
             _columns.Add(0, "Datum");
             _columns.Add(1, "Naziv_i_sjediste_kupca");
             _columns.Add(2, "Broj_racuna");
-            InitializeComponent();
-            DataTable dt = new DbDataCustomQuery()
-                    .ExecuteQuery("SELECT TOP 1 Redni_broj FROM KnjigaIra WHERE Redni_broj IS NOT NULL ORDER BY Redni_broj DESC;");
-            if (dt.Rows.Count != 0)
-                _lastRecord = int.Parse(dt.Rows[0].ItemArray[0].ToString());
-            else
-                _lastRecord = 0;
-            LoadDatagrid();
             _bookNames = BookNames.Ira;
+            InitializeComponent();            
+            LoadDatagrid();
             LoadBookkeepingSettings();
         }
 
@@ -73,10 +67,8 @@ namespace Knjigovodstvo.IRA
                     _listaStavki = File.ReadAllLines(path).Skip(3).Select(v => new KnjigaIra().FromCsv(v)).ToList();                    
                 }
 
-                using (WaitDialog waitDialog = new WaitDialog(act, SplashMessages.Učitavanje))
-                {
-                    waitDialog.ShowDialog(this);                    
-                }
+                using WaitDialog waitDialog = new WaitDialog(act, SplashMessages.Učitavanje);
+                waitDialog.ShowDialog(this);
             }
 
             var data = new BindingSource
@@ -115,6 +107,11 @@ namespace Knjigovodstvo.IRA
             _iraKnjiga.GetDataFromDatabaseByRedniBroj();
         }
 
+        private void CheckBoxShowCtrlDialog_CheckStateChanged(object sender, EventArgs e)
+        {
+            _noControllDialog = checkBoxShowCtrlDialog.Checked;
+        }
+
         private void ButtonUcitaj_ClickAsync(object sender, EventArgs e)
         {
             OpenAndLoadXlsFile();
@@ -122,10 +119,8 @@ namespace Knjigovodstvo.IRA
 
         private void ButtonSpremi_Click(object sender, EventArgs e)
         {
-            using (WaitDialog waitDialog = new WaitDialog(SaveDataToDatabase, SplashMessages.Spremanje))
-            {
-                waitDialog.ShowDialog(this);
-            }
+            using WaitDialog waitDialog = new WaitDialog(SaveDataToDatabase, SplashMessages.Spremanje);
+            waitDialog.ShowDialog(this);
         }
 
         private void ButtonPostavke_Click(object sender, EventArgs e)
@@ -145,23 +140,28 @@ namespace Knjigovodstvo.IRA
             foreach (DataGridViewRow row in dbDataGridView1.SelectedRows)
             {
                 SetSelectedItem(row);
-                if (_iraKnjiga.Knjizen)
-                    continue;
                 TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_iraKnjiga, _postavkeKnjizenja);
-                form.ShowDialog(); 
+                if (_noControllDialog)
+                {
+                    form.ProcessDirectly();
+                }
+                else
+                {
+                    form.ShowDialog();
+                }
+                string query = $"UPDATE KnjigaIra SET Knjizen = 1 WHERE Redni_broj = {_iraKnjiga.Redni_broj}";
                 if (!form.Knjizeno)
                     break;
                 else
-                    new DbDataCustomQuery()
-                        .ExecuteQuery($"UPDATE KnjigaIra SET Knjizen = 1 WHERE Redni_broj = {_iraKnjiga.Redni_broj}");
+                    new DbDataCustomQuery().ExecuteQuery(query);
             }
-        }        
+        }
 
+        private bool _noControllDialog;
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly KnjigaIra _iraKnjiga = new KnjigaIra();
         private readonly BookNames _bookNames;
         private List<KnjigaIra> _listaStavki = new List<KnjigaIra>();
-        private readonly int _lastRecord = 0;
         private readonly Dictionary<int, string> _columns = new Dictionary<int, string>();
     }
 }

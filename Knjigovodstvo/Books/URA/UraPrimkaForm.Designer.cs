@@ -38,11 +38,12 @@ namespace Knjigovodstvo.URA
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuPostavke = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonKnjizi = new System.Windows.Forms.Button();
+            this.checkBoxShowCtrlDialog = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dbDataGridView1
             // 
             this.dbDataGridView1.AllowUserToAddRows = false;
             this.dbDataGridView1.AllowUserToDeleteRows = false;
@@ -52,7 +53,7 @@ namespace Knjigovodstvo.URA
             this.dbDataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dbDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dbDataGridView1.Location = new System.Drawing.Point(9, 139);
-            this.dbDataGridView1.Name = "dataGridView1";
+            this.dbDataGridView1.Name = "dbDataGridView1";
             this.dbDataGridView1.ReadOnly = true;
             this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dbDataGridView1.Size = new System.Drawing.Size(1101, 466);
@@ -116,11 +117,23 @@ namespace Knjigovodstvo.URA
             this.buttonKnjizi.UseVisualStyleBackColor = true;
             this.buttonKnjizi.Click += new System.EventHandler(this.ButtonKnjizi_Click);
             // 
+            // checkBoxShowCtrlDialog
+            // 
+            this.checkBoxShowCtrlDialog.AutoSize = true;
+            this.checkBoxShowCtrlDialog.Location = new System.Drawing.Point(253, 29);
+            this.checkBoxShowCtrlDialog.Name = "checkBoxShowCtrlDialog";
+            this.checkBoxShowCtrlDialog.Size = new System.Drawing.Size(242, 19);
+            this.checkBoxShowCtrlDialog.TabIndex = 13;
+            this.checkBoxShowCtrlDialog.Text = "Ne otvaraj međuprozor ako je sve u redu.";
+            this.checkBoxShowCtrlDialog.UseVisualStyleBackColor = true;
+            this.checkBoxShowCtrlDialog.CheckStateChanged += new System.EventHandler(this.CheckBoxShowCtrlDialog_CheckStateChanged);
+            // 
             // UraPrimkaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1122, 617);
+            this.Controls.Add(this.checkBoxShowCtrlDialog);
             this.Controls.Add(this.buttonKnjizi);
             this.Controls.Add(this.buttonSpremi);
             this.Controls.Add(this.buttonUcitajTablicu);
@@ -145,5 +158,6 @@ namespace Knjigovodstvo.URA
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuPostavke;
         private System.Windows.Forms.Button buttonKnjizi;
+        private System.Windows.Forms.CheckBox checkBoxShowCtrlDialog;
     }
 }

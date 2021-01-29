@@ -21,15 +21,8 @@ namespace Knjigovodstvo.URA
             _columns.Add(0, "Datum_knjizenja");
             _columns.Add(1, "Naziv_dobavljaca");
             _columns.Add(2, "Broj_racuna");
-            InitializeComponent();
-            DataTable dt = new DbDataCustomQuery()
-                .ExecuteQuery("SELECT TOP 1 Broj_u_knjizi_ura FROM PrimkaRepro WHERE Redni_broj IS NOT NULL ORDER BY Broj_u_knjizi_ura DESC;");
-            if (dt.Rows.Count != 0)
-                _lastRecord = int.Parse(dt.Rows[0].ItemArray[0].ToString());
-            else
-                _lastRecord = 0;
-
             _bookNames = BookNames.Ura_repro;
+            InitializeComponent();
             LoadDatagrid();
             LoadBookkeepingSettings();
         }
@@ -120,6 +113,12 @@ namespace Knjigovodstvo.URA
             _primkaRepro.Broj_u_knjizi_ura = int.Parse(row.Cells["Broj_u_knjizi_ura"].Value.ToString());
             _primkaRepro.GetDataFromDatabaseByUraBroj();
         }
+
+        private void CheckBoxShowCtrlDialog_CheckStateChanged(object sender, EventArgs e)
+        {
+            _noControllDialog = checkBoxShowCtrlDialog.Checked;
+        }
+
         /// <summary>
         /// Read CSV file into List and fill DataGridView with data for review before saving to database
         /// </summary>
@@ -163,20 +162,27 @@ namespace Knjigovodstvo.URA
             {
                 SetSelectedItem(row);
                 using TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_primkaRepro, _postavkeKnjizenja);
-                form.ShowDialog();
+                if (_noControllDialog)
+                {
+                    form.ProcessDirectly();
+                }
+                else
+                {
+                    form.ShowDialog();
+                }
+                string query = $"UPDATE KnjigaUra SET Knjizen = 1 WHERE Redni_broj = {_primkaRepro.Broj_u_knjizi_ura}";
                 if (!form.Knjizeno)
                     break;
                 else
-                    new DbDataCustomQuery()
-                        .ExecuteQuery($"UPDATE KnjigaUra SET Knjizen = 1 WHERE Redni_broj = {_primkaRepro.Broj_u_knjizi_ura}");
+                    new DbDataCustomQuery().ExecuteQuery(query);
             }
         }
 
+        private bool _noControllDialog;
         private readonly PrimkaRepro _primkaRepro = new PrimkaRepro();
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly BookNames _bookNames;
         private List<PrimkaRepro> _listaPrimki = new List<PrimkaRepro>();
-        private readonly int _lastRecord = 0;
         private readonly Dictionary<int, string> _columns = new Dictionary<int, string>();
     }
 }

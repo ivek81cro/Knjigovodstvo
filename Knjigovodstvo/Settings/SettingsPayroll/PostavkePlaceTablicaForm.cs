@@ -29,6 +29,6 @@ namespace Knjigovodstvo.Settings
             LoadDatagrid();
         }
 
-        private PostavkePlace _postavke = new PostavkePlace();
+        private readonly PostavkePlace _postavke = new PostavkePlace();
     }
 }

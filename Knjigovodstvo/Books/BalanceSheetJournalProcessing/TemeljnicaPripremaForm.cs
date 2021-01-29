@@ -194,6 +194,11 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             _checkBalance.CheckEndBalance(_dt, _labelList);
         }
 
+        public void ProcessDirectly()
+        {
+            ButtonKnjizi_Click(null, null);
+        }
+
         private void ButtonBrisiRed_Click(object sender, System.EventArgs e)
         {
             if(dbDataGridView1.SelectedCells.Count > 0)
@@ -214,7 +219,13 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             {
                 save.SaveToDatabase();
                 Knjizeno = true;
-                Close();
+                if (ActiveForm == this)
+                    Close();
+            }
+            else
+            {
+                if(ActiveForm != this)
+                    ShowDialog();
             }
         }
 
