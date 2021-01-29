@@ -140,6 +140,6 @@ namespace Knjigovodstvo.City
             Close();
         }
 
-        private Grad _grad = new Grad();
+        private readonly Grad _grad = new Grad();
     }
 }

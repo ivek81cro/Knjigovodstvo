@@ -109,11 +109,7 @@ namespace Knjigovodstvo.URA
         private void SaveDataToDatabase()
         {
             DbDataInsert ins = new DbDataInsert();
-            foreach (KnjigaUra stavka in _listaStavki)
-            {
-                if (stavka.Redni_broj > _lastRecord)
-                    ins.InsertData(stavka);
-            }
+            ins.InsertDataBulk(_uraKnjiga, dbDdataGridView1);
         }
 
         private void SetSelectedItem(DataGridViewRow row) 

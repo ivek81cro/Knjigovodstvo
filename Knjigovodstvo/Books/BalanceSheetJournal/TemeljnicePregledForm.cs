@@ -117,13 +117,16 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             if (dbDataGridView1.SelectedRows.Count > 0)
             {
                 DataGridViewSelectedRowCollection rows = dbDataGridView1.SelectedRows;
+                string condition = "OR ";
                 foreach(DataGridViewRow row in rows)
                 {
                     if (row.Cells["Id"].Value == null)
                         continue;
                     _stavka.Id = int.Parse(row.Cells["Id"].Value.ToString());
-                    _stavka.DeleteStavka();
+                    condition += $"Id={_stavka.Id} OR ";
                 }
+                condition = condition[0..^4] + ';';
+                _stavka.DeleteStavka(condition);
             }
         }
         private void ProcesItemsToMainBook()
@@ -144,31 +147,42 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
                 Vrsta_temeljnice = _currentBookType
             };
 
+            string condition = "OR ";
             foreach (DataGridViewRow row in dbDataGridView1.Rows)
             {
                 dk = new DnevnikKnjizenja().ConvertDataGridViewRow(row);
                 dk.Broj_temeljnice = latestNumber;
                 _dnevnikKnjizenja.Add(dk);
                 _stavka.Id = int.Parse(row.Cells["Id"].Value.ToString());
-                _stavka.DeleteStavka();
-            }            
+                condition += $"Id={_stavka.Id} OR ";
+            }
+            condition = condition[0..^4] + ';';
+            _stavka.DeleteStavka(condition);//TODO: Bulk delete condition
 
             _temeljnica.Dugovna = _dnevnikKnjizenja.Sum(x => x.Dugovna);
             _temeljnica.Potražna = _dnevnikKnjizenja.Sum(x => x.Potražna);
-            _temeljnica.InsertNew();
+            _temeljnica.InsertNew();            
             
-            dk.SaveToDatabase(_dnevnikKnjizenja);  
-        }        
-
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(delegate
+                {
+                    dbDataGridView1.DataSource = _dnevnikKnjizenja;
+                }));
+            }
+            else
+            {
+                dbDataGridView1.DataSource = _dnevnikKnjizenja;
+            }            
+            dk.InsertNewBulk(dbDataGridView1);
+        }
         private void ButtonKnjiziTemeljnicu_Click(object sender, EventArgs e)
         {
             _currentBookType = comboBoxVrstaTemeljnice.Text;
             if(dbDataGridView1.Rows.Count > 0)
             {
-                using (WaitDialog waitDialog = new WaitDialog(ProcesItemsToMainBook, SplashMessages.Učitavanje))
-                {
-                    waitDialog.ShowDialog(this);
-                }
+                using WaitDialog waitDialog = new WaitDialog(ProcesItemsToMainBook, SplashMessages.Učitavanje);
+                waitDialog.ShowDialog(this);
             }
             else
             {
@@ -192,7 +206,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
         private DataTable _dt = new DataTable();
         private readonly List<Label> _labelList;
         private readonly CheckBalance _checkBalance = new CheckBalance();
-        private TemeljnicaStavka _stavka = new TemeljnicaStavka();
-        private List<DnevnikKnjizenja> _dnevnikKnjizenja = new List<DnevnikKnjizenja>();
+        private readonly TemeljnicaStavka _stavka = new TemeljnicaStavka();
+        private readonly List<DnevnikKnjizenja> _dnevnikKnjizenja = new List<DnevnikKnjizenja>();
     }
 }

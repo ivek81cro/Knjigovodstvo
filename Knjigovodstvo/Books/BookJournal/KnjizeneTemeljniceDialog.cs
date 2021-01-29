@@ -41,8 +41,8 @@ namespace Knjigovodstvo.Books.BookJournal
             return _temeljnica;
         }
 
-        private DnevnikKnjizenja _dnevnikKnjizenja = new DnevnikKnjizenja();
-        private Temeljnica _temeljnica = new Temeljnica();
+        private readonly DnevnikKnjizenja _dnevnikKnjizenja = new DnevnikKnjizenja();
+        private readonly Temeljnica _temeljnica = new Temeljnica();
         public int BrojTemeljnice { get; private set; } = 0;
     }
 }

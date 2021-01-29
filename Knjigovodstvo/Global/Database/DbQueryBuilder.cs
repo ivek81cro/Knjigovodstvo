@@ -135,7 +135,7 @@ namespace Knjigovodstvo.Database
 
         private string Delete()
         {
-            return $"DELETE FROM {_table} WHERE Id={_value[0]};";
+            return $"DELETE FROM {_table} WHERE Id={_value[0]} ;";
         }
 
         private readonly IEnumerable<List<string>> _obj;

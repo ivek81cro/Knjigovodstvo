@@ -1,7 +1,4 @@
-﻿
-using System.Drawing;
-
-namespace Knjigovodstvo.Books.BalanceSheetJournal
+﻿namespace Knjigovodstvo.Books.BalanceSheetJournal
 {
     partial class TemeljnicePregledForm
     {

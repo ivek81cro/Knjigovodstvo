@@ -40,12 +40,12 @@ namespace Knjigovodstvo.URA
             {
                 this.Invoke(new MethodInvoker(delegate
                 {
-                    dataGridView1.DataSource = new DbDataGet().GetTable(_primka);
+                    dbDataGridView1.DataSource = new DbDataGet().GetTable(_primka);
                 }));
             }
             else
             {
-                dataGridView1.DataSource = new DbDataGet().GetTable(_primka);
+                dbDataGridView1.DataSource = new DbDataGet().GetTable(_primka);
             }
             FixColumnHeaders();
         }
@@ -68,10 +68,10 @@ namespace Knjigovodstvo.URA
 
         private void FixColumnHeaders()
         {
-            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+            for (int i = 0; i < dbDataGridView1.Columns.Count; i++)
             {
-                dataGridView1.Columns[i].HeaderText =
-                    new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
+                dbDataGridView1.Columns[i].HeaderText =
+                    new TableHeaderFormat().FormatHeader(dbDataGridView1.Columns[i].HeaderText);
             }
         }
 
@@ -101,19 +101,13 @@ namespace Knjigovodstvo.URA
                 DataSource = _listaPrimki
             };
 
-            dataGridView1.DataSource = data;
+            dbDataGridView1.DataSource = data;
         }        
 
         private void SaveDataToDatabase()
         {
             DbDataInsert ins = new DbDataInsert();
-            foreach (Primka primka in _listaPrimki)
-            {
-                if (primka.Broj_u_knjizi_ura > _lastRecord)
-                    ins.InsertData(primka);
-                else
-                    new DbDataUpdate().UpdateData(primka, $"Broj_u_knjizi_ura={primka.Broj_u_knjizi_ura}");
-            }
+            ins.InsertDataBulk(_primka, dbDataGridView1);
         }
 
         private void SetSelectedItem(DataGridViewRow row)
@@ -160,7 +154,7 @@ namespace Knjigovodstvo.URA
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            foreach (DataGridViewRow row in dbDataGridView1.SelectedRows)
             {
                 SetSelectedItem(row);
                 using TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_primka, _postavkeKnjizenja);

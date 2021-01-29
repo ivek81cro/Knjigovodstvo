@@ -66,6 +66,16 @@ namespace Knjigovodstvo.Books.BookJournal
             new DbDataInsert().InsertData(this);
         }
 
+        /// <summary>
+        /// Insert data from DataGridView in SQL
+        /// DO NOT USE WITH CLASSES THAT HAVE NESTED CLASSES
+        /// </summary>
+        /// <param name="dgv">DataGridView</param>
+        internal void InsertNewBulk(DBDataGridView dgv)
+        {
+            new DbDataInsert().InsertDataBulk(this, dgv);
+        }
+
         public int Id { get; set; } = 0;
         public string Opis { get; set; } = "";
         public string Dokument { get; set; } = "";

@@ -40,12 +40,12 @@ namespace Knjigovodstvo.URA
             {
                 this.Invoke(new MethodInvoker(delegate
                 {
-                    dataGridView1.DataSource = new DbDataGet().GetTable(_primka);
+                    dbDataGridView1.DataSource = new DbDataGet().GetTable(_primkaRepro);
                 }));
             }
             else
             {
-                dataGridView1.DataSource = new DbDataGet().GetTable(_primka);
+                dbDataGridView1.DataSource = new DbDataGet().GetTable(_primkaRepro);
             }
             FixColumnHeaders();
         }
@@ -73,10 +73,10 @@ namespace Knjigovodstvo.URA
 
         private void FixColumnHeaders()
         {
-            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+            for (int i = 0; i < dbDataGridView1.Columns.Count; i++)
             {
-                dataGridView1.Columns[i].HeaderText =
-                    new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
+                dbDataGridView1.Columns[i].HeaderText =
+                    new TableHeaderFormat().FormatHeader(dbDataGridView1.Columns[i].HeaderText);
             }
         }
 
@@ -106,25 +106,19 @@ namespace Knjigovodstvo.URA
                 DataSource = _listaPrimki
             };
 
-            dataGridView1.DataSource = data;
+            dbDataGridView1.DataSource = data;
         }
 
         private void SaveDataToDatabase()
         {
             DbDataInsert ins = new DbDataInsert();
-            foreach (PrimkaRepro primka in _listaPrimki)
-            {
-                if (primka.Broj_u_knjizi_ura > _lastRecord)
-                    ins.InsertData(primka);
-                else
-                    new DbDataUpdate().UpdateData(primka, $"Broj_u_knjizi_ura={primka.Broj_u_knjizi_ura}");
-            }
+            ins.InsertDataBulk(_primkaRepro, dbDataGridView1);
         }
 
         private void SetSelectedItem(DataGridViewRow row)
         {
-            _primka.Broj_u_knjizi_ura = int.Parse(row.Cells["Broj_u_knjizi_ura"].Value.ToString());
-            _primka.GetDataFromDatabaseByUraBroj();
+            _primkaRepro.Broj_u_knjizi_ura = int.Parse(row.Cells["Broj_u_knjizi_ura"].Value.ToString());
+            _primkaRepro.GetDataFromDatabaseByUraBroj();
         }
         /// <summary>
         /// Read CSV file into List and fill DataGridView with data for review before saving to database
@@ -165,20 +159,20 @@ namespace Knjigovodstvo.URA
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            foreach (DataGridViewRow row in dbDataGridView1.SelectedRows)
             {
                 SetSelectedItem(row);
-                using TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_primka, _postavkeKnjizenja);
+                using TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_primkaRepro, _postavkeKnjizenja);
                 form.ShowDialog();
                 if (!form.Knjizeno)
                     break;
                 else
                     new DbDataCustomQuery()
-                        .ExecuteQuery($"UPDATE KnjigaUra SET Knjizen = 1 WHERE Redni_broj = {_primka.Broj_u_knjizi_ura}");
+                        .ExecuteQuery($"UPDATE KnjigaUra SET Knjizen = 1 WHERE Redni_broj = {_primkaRepro.Broj_u_knjizi_ura}");
             }
         }
 
-        private readonly PrimkaRepro _primka = new PrimkaRepro();
+        private readonly PrimkaRepro _primkaRepro = new PrimkaRepro();
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly BookNames _bookNames;
         private List<PrimkaRepro> _listaPrimki = new List<PrimkaRepro>();

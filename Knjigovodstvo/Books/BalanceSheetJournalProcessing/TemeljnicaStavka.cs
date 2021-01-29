@@ -54,9 +54,9 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             }
         }
 
-        public void DeleteStavka()
+        public void DeleteStavka(string condition = null)
         {
-            new DbDataDelete().DeleteItem(this);
+            new DbDataDelete().DeleteItem(this, condition);
         }
 
         private List<TemeljnicaStavka> _stavke;

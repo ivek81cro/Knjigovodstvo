@@ -29,33 +29,33 @@ namespace Knjigovodstvo.IRA
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new Knjigovodstvo.DBDataGridView();
+            this.dbDataGridView1 = new Knjigovodstvo.DBDataGridView();
             this.buttonUcitaj = new System.Windows.Forms.Button();
             this.buttonSpremi = new System.Windows.Forms.Button();
-            this.knjigaFilter1 = new Knjigovodstvo.Global.KnjigaFilter(dataGridView1, _columns);
+            this.knjigaFilter1 = new Knjigovodstvo.Global.KnjigaFilter(dbDataGridView1, _columns);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuPostavke = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonKnjizi = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dbDataGridView1.AllowUserToAddRows = false;
+            this.dbDataGridView1.AllowUserToDeleteRows = false;
+            this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 139);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1241, 466);
-            this.dataGridView1.TabIndex = 10;
-            this.dataGridView1.Text = "dataGridView1";
+            this.dbDataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dbDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dbDataGridView1.Location = new System.Drawing.Point(12, 139);
+            this.dbDataGridView1.Name = "dataGridView1";
+            this.dbDataGridView1.ReadOnly = true;
+            this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dbDataGridView1.Size = new System.Drawing.Size(1241, 466);
+            this.dbDataGridView1.TabIndex = 10;
+            this.dbDataGridView1.Text = "dataGridView1";
             // 
             // buttonUcitaj
             // 
@@ -123,12 +123,12 @@ namespace Knjigovodstvo.IRA
             this.Controls.Add(this.buttonKnjizi);
             this.Controls.Add(this.buttonSpremi);
             this.Controls.Add(this.buttonUcitaj);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dbDataGridView1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "IraKnjigaForm";
             this.Text = "IraKnjigaForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -136,7 +136,7 @@ namespace Knjigovodstvo.IRA
 
         }
         # endregion
-        private DBDataGridView dataGridView1;
+        private DBDataGridView dbDataGridView1;
         private System.Windows.Forms.Button buttonUcitaj;
         private System.Windows.Forms.Button buttonSpremi;
         private Global.KnjigaFilter knjigaFilter1;

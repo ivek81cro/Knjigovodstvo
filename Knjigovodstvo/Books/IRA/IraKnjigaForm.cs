@@ -39,22 +39,22 @@ namespace Knjigovodstvo.IRA
             {
                 this.Invoke(new MethodInvoker(delegate
                 {
-                    dataGridView1.DataSource = new DbDataGet().GetTable(new KnjigaIra());
+                    dbDataGridView1.DataSource = new DbDataGet().GetTable(new KnjigaIra());
                 }));
             }
             else
             {
-                dataGridView1.DataSource = new DbDataGet().GetTable(new KnjigaIra());
+                dbDataGridView1.DataSource = new DbDataGet().GetTable(new KnjigaIra());
             }
             FixColumnHeaders();
         }
 
         private void FixColumnHeaders()
         {
-            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+            for (int i = 0; i < dbDataGridView1.Columns.Count; i++)
             {
-                dataGridView1.Columns[i].HeaderText =
-                    new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
+                dbDataGridView1.Columns[i].HeaderText =
+                    new TableHeaderFormat().FormatHeader(dbDataGridView1.Columns[i].HeaderText);
             }
         }
 
@@ -83,19 +83,14 @@ namespace Knjigovodstvo.IRA
             {
                 DataSource = _listaStavki
             };
-            dataGridView1.DataSource = data;
+            dbDataGridView1.DataSource = data;
             FixColumnHeaders();
         }
 
         private void SaveDataToDatabase()
         {
             DbDataInsert ins = new DbDataInsert();
-            foreach (KnjigaIra stavka in _listaStavki)
-            {
-                if (stavka.Redni_broj > _lastRecord)
-                    ins.InsertData(stavka);
-            }
-            LoadDatagrid();
+            ins.InsertDataBulk(_iraKnjiga, dbDataGridView1);
         }
 
         private void LoadBookkeepingSettings()
@@ -147,7 +142,7 @@ namespace Knjigovodstvo.IRA
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+            foreach (DataGridViewRow row in dbDataGridView1.SelectedRows)
             {
                 SetSelectedItem(row);
                 if (_iraKnjiga.Knjizen)

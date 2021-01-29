@@ -1,7 +1,9 @@
-﻿using Knjigovodstvo.Helpers;
+﻿using Knjigovodstvo.Global.Helpers;
+using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -19,12 +21,8 @@ namespace Knjigovodstvo.Database
             GenericPropertyFinder<IDbObject> property = new GenericPropertyFinder<IDbObject>();
 
             IEnumerable<List<string>> obj = property.PrintTModelPropertyAndValue(dbObject);
-            string table = dbObject.GetType()
-                .ToString()
-                .Substring(dbObject.GetType()
-                                   .ToString()
-                                   .LastIndexOf('.') + 1);
-            string query = new DbQueryBuilder(obj, table).BuildQuery(QueryType.Insert);
+            GetTableName(dbObject);
+            string query = new DbQueryBuilder(obj, _table).BuildQuery(QueryType.Insert);
 
             try
             {
@@ -58,5 +56,39 @@ namespace Knjigovodstvo.Database
                 return false;
             }
         }
+
+        private void GetTableName(IDbObject dbObject)
+        {
+            _table = dbObject.GetType()
+                            .ToString()[(dbObject.GetType()
+                                               .ToString()
+                                               .LastIndexOf('.') + 1)..];
+        }
+
+        internal void InsertDataBulk(IDbObject obj, DataGridView dgv)
+        {
+            DataTable dt = new DgvToDataTable().ToDataTable(dgv);
+            try
+            {
+                using SqlConnection conn = new SqlConnection(ConnHelper.ConnStr(connection_name));
+                GetTableName(obj);
+                using var bulkCopy = new SqlBulkCopy(conn.ConnectionString, SqlBulkCopyOptions.KeepIdentity);
+                // when DT columns match db.table names
+                foreach (DataColumn col in dt.Columns)
+                {
+                    bulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+                }
+
+                bulkCopy.BulkCopyTimeout = 600;
+                bulkCopy.DestinationTableName = _table;
+                bulkCopy.WriteToServer(dt);
+            }
+            catch
+            {
+                MessageBox.Show("Bulk greška");
+            }
+        }
+
+        private string _table;
     }
 }
