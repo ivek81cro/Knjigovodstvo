@@ -75,6 +75,11 @@ namespace Knjigovodstvo.FinancialReports
             Close();
         }
 
+        private void ButtonBrisiKonto_Click(object sender, EventArgs e)
+        {
+            _kontniPlan.DeleteKonto();
+        }
+
         private readonly KontniPlan _kontniPlan = new KontniPlan();
         public int Id_Konto { get; private set; }
         public string KontoBroj { get; private set; }

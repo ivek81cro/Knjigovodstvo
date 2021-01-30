@@ -33,7 +33,6 @@ namespace Knjigovodstvo.City
 
         private void ButtonEditGrad_Click(object sender, EventArgs e)
         {
-
             int id = int.Parse(dbDataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             Grad.GetGradById(id);
 

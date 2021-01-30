@@ -157,7 +157,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
                 condition += $"Id={_stavka.Id} OR ";
             }
             condition = condition[0..^4] + ';';
-            _stavka.DeleteStavka(condition);//TODO: Bulk delete condition
+            _stavka.DeleteStavka(condition);//Bulk delete condition
 
             _temeljnica.Dugovna = _dnevnikKnjizenja.Sum(x => x.Dugovna);
             _temeljnica.Potražna = _dnevnikKnjizenja.Sum(x => x.Potražna);

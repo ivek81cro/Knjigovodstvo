@@ -72,6 +72,11 @@ namespace Knjigovodstvo.FinancialReports
             return "";
         }
 
+        internal void DeleteKonto()
+        {
+            new DbDataDelete().DeleteItem(this);
+        }
+
         private DataTable _dt = new DataTable();
 
         public int Id { get; set; } = 0;

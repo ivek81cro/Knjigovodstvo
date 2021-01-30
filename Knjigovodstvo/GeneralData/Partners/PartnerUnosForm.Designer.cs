@@ -68,6 +68,7 @@
             // 
             // textBoxName
             // 
+            this.textBoxName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBoxName.Location = new System.Drawing.Point(69, 83);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(251, 23);
@@ -79,13 +80,6 @@
             this.textBoxStreet.Name = "textBoxStreet";
             this.textBoxStreet.Size = new System.Drawing.Size(251, 23);
             this.textBoxStreet.TabIndex = 2;
-            // 
-            // textBoxUlicaBroj
-            // 
-            this.textBoxUlicaBroj.Location = new System.Drawing.Point(69, 143);
-            this.textBoxUlicaBroj.Name = "textBoxUlicaBroj";
-            this.textBoxUlicaBroj.Size = new System.Drawing.Size(251, 23);
-            this.textBoxUlicaBroj.TabIndex = 3;
             // 
             // textBoxPost
             // 
@@ -152,11 +146,11 @@
             this.checkBoxBuyer.Text = "Kupac";
             this.checkBoxBuyer.UseVisualStyleBackColor = true;
             // 
-            // checkBoxSeller
+            // checkBoxSupplier
             // 
             this.checkBoxSupplier.AutoSize = true;
             this.checkBoxSupplier.Location = new System.Drawing.Point(69, 412);
-            this.checkBoxSupplier.Name = "checkBoxSeller";
+            this.checkBoxSupplier.Name = "checkBoxSupplier";
             this.checkBoxSupplier.Size = new System.Drawing.Size(78, 19);
             this.checkBoxSupplier.TabIndex = 11;
             this.checkBoxSupplier.Text = "Dobavljač";
@@ -168,6 +162,7 @@
             this.labelOib.Location = new System.Drawing.Point(12, 55);
             this.labelOib.Name = "labelOib";
             this.labelOib.Size = new System.Drawing.Size(26, 15);
+            this.labelOib.TabIndex = 23;
             this.labelOib.Text = "OIB";
             // 
             // labelName
@@ -176,6 +171,7 @@
             this.labelName.Location = new System.Drawing.Point(12, 86);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(36, 15);
+            this.labelName.TabIndex = 22;
             this.labelName.Text = "Naziv";
             // 
             // labelPost
@@ -184,6 +180,7 @@
             this.labelPost.Location = new System.Drawing.Point(12, 175);
             this.labelPost.Name = "labelPost";
             this.labelPost.Size = new System.Drawing.Size(36, 15);
+            this.labelPost.TabIndex = 21;
             this.labelPost.Text = "Pošta";
             // 
             // labelCtiy
@@ -192,6 +189,7 @@
             this.labelCtiy.Location = new System.Drawing.Point(12, 206);
             this.labelCtiy.Name = "labelCtiy";
             this.labelCtiy.Size = new System.Drawing.Size(32, 15);
+            this.labelCtiy.TabIndex = 20;
             this.labelCtiy.Text = "Grad";
             // 
             // labelPhone
@@ -200,6 +198,7 @@
             this.labelPhone.Location = new System.Drawing.Point(12, 237);
             this.labelPhone.Name = "labelPhone";
             this.labelPhone.Size = new System.Drawing.Size(45, 15);
+            this.labelPhone.TabIndex = 19;
             this.labelPhone.Text = "Telefon";
             // 
             // labelFax
@@ -208,6 +207,7 @@
             this.labelFax.Location = new System.Drawing.Point(12, 268);
             this.labelFax.Name = "labelFax";
             this.labelFax.Size = new System.Drawing.Size(25, 15);
+            this.labelFax.TabIndex = 18;
             this.labelFax.Text = "Fax";
             // 
             // labelEmail
@@ -216,6 +216,7 @@
             this.labelEmail.Location = new System.Drawing.Point(12, 299);
             this.labelEmail.Name = "labelEmail";
             this.labelEmail.Size = new System.Drawing.Size(36, 15);
+            this.labelEmail.TabIndex = 17;
             this.labelEmail.Text = "Email";
             // 
             // labelIban
@@ -224,6 +225,7 @@
             this.labelIban.Location = new System.Drawing.Point(12, 330);
             this.labelIban.Name = "labelIban";
             this.labelIban.Size = new System.Drawing.Size(34, 15);
+            this.labelIban.TabIndex = 16;
             this.labelIban.Text = "IBAN";
             // 
             // labelMbo
@@ -232,6 +234,7 @@
             this.labelMbo.Location = new System.Drawing.Point(12, 361);
             this.labelMbo.Name = "labelMbo";
             this.labelMbo.Size = new System.Drawing.Size(32, 15);
+            this.labelMbo.TabIndex = 15;
             this.labelMbo.Text = "Mbo";
             // 
             // labelStreet
@@ -240,6 +243,7 @@
             this.labelStreet.Location = new System.Drawing.Point(12, 117);
             this.labelStreet.Name = "labelStreet";
             this.labelStreet.Size = new System.Drawing.Size(33, 15);
+            this.labelStreet.TabIndex = 14;
             this.labelStreet.Text = "Ulica";
             // 
             // btnSave
@@ -277,8 +281,15 @@
             this.labelMessage.AutoSize = true;
             this.labelMessage.Location = new System.Drawing.Point(12, 13);
             this.labelMessage.Name = "labelMessage";
-            this.labelMessage.Size = new System.Drawing.Size(0, 15);            this.labelMessage.TabIndex = 13;
-            
+            this.labelMessage.Size = new System.Drawing.Size(0, 15);
+            this.labelMessage.TabIndex = 13;
+            // 
+            // textBoxUlicaBroj
+            // 
+            this.textBoxUlicaBroj.Location = new System.Drawing.Point(69, 143);
+            this.textBoxUlicaBroj.Name = "textBoxUlicaBroj";
+            this.textBoxUlicaBroj.Size = new System.Drawing.Size(251, 23);
+            this.textBoxUlicaBroj.TabIndex = 3;
             // 
             // labelUlicaBroj
             // 
@@ -286,6 +297,7 @@
             this.labelUlicaBroj.Location = new System.Drawing.Point(12, 146);
             this.labelUlicaBroj.Name = "labelUlicaBroj";
             this.labelUlicaBroj.Size = new System.Drawing.Size(28, 15);
+            this.labelUlicaBroj.TabIndex = 0;
             this.labelUlicaBroj.Text = "Broj";
             // 
             // PartnerUnosForm

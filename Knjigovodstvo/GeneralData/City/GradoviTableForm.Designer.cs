@@ -57,7 +57,7 @@ namespace Knjigovodstvo.City
             this.namePartnerLabel.TabIndex = 2;
             this.namePartnerLabel.Text = "Naziv Grada";
             // 
-            // dataGridView1
+            // dbDataGridView1
             // 
             this.dbDataGridView1.AllowUserToAddRows = false;
             this.dbDataGridView1.AllowUserToDeleteRows = false;
@@ -67,7 +67,7 @@ namespace Knjigovodstvo.City
             this.dbDataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dbDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dbDataGridView1.Location = new System.Drawing.Point(9, 84);
-            this.dbDataGridView1.Name = "dataGridView1";
+            this.dbDataGridView1.Name = "dbDataGridView1";
             this.dbDataGridView1.ReadOnly = true;
             this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dbDataGridView1.Size = new System.Drawing.Size(1177, 447);
@@ -78,7 +78,7 @@ namespace Knjigovodstvo.City
             // buttonNewGrad
             // 
             this.buttonNewGrad.Location = new System.Drawing.Point(12, 12);
-            this.buttonNewGrad.Name = "btnNewGrad";
+            this.buttonNewGrad.Name = "buttonNewGrad";
             this.buttonNewGrad.Size = new System.Drawing.Size(75, 23);
             this.buttonNewGrad.TabIndex = 3;
             this.buttonNewGrad.Text = "Novi";
@@ -88,7 +88,7 @@ namespace Knjigovodstvo.City
             // buttonEditGrad
             // 
             this.buttonEditGrad.Location = new System.Drawing.Point(93, 12);
-            this.buttonEditGrad.Name = "btnEditGrad";
+            this.buttonEditGrad.Name = "buttonEditGrad";
             this.buttonEditGrad.Size = new System.Drawing.Size(139, 23);
             this.buttonEditGrad.TabIndex = 1;
             this.buttonEditGrad.Text = "Izmijeni / Odaberi";
@@ -98,7 +98,7 @@ namespace Knjigovodstvo.City
             // buttonDeleteGrad
             // 
             this.buttonDeleteGrad.Location = new System.Drawing.Point(238, 12);
-            this.buttonDeleteGrad.Name = "btnDeleteGrad";
+            this.buttonDeleteGrad.Name = "buttonDeleteGrad";
             this.buttonDeleteGrad.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteGrad.TabIndex = 2;
             this.buttonDeleteGrad.Text = "Briši";
@@ -117,6 +117,7 @@ namespace Knjigovodstvo.City
             this.Controls.Add(this.namePartnerLabel);
             this.Controls.Add(this.textBoxFilterGrad);
             this.Name = "GradoviTableForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Gradovi";
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).EndInit();
             this.ResumeLayout(false);

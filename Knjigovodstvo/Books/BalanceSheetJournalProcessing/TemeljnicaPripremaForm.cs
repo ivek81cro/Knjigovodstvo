@@ -13,8 +13,11 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 {
     public partial class TemeljnicaPripremaForm : Form
     {
-        public TemeljnicaPripremaForm(IDbObject obj, List<PostavkeKnjizenja> postavkeKnjizenja)
+        public TemeljnicaPripremaForm(IDbObject obj, 
+            List<PostavkeKnjizenja> postavkeKnjizenja, 
+            Dictionary<string, string> partner_konto = null)
         {
+            _partnerKonto = partner_konto;
             _postavkeKnjizenja = postavkeKnjizenja;
             _obj = obj;
             string model = obj.GetType().Name;
@@ -96,10 +99,11 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private void FindKontoNumber()
         {
+            //TODO: Pairs books datatable to dictionary, this is not working as intended
             if (_postavkeKnjizenja.Count != 0)
             {
                 string naziv = _dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0];
-                _dt.Rows[0]["Konto"] = _kontniPlan.FindByDescription(naziv);
+                _dt.Rows[0]["Konto"] = _partnerKonto.Where(p => p.Key.Contains(naziv)).FirstOrDefault().Value;
             }
         }
 
@@ -231,6 +235,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private readonly KontniPlan _kontniPlan = new KontniPlan();
         private readonly IDbObject _obj;
+        private readonly Dictionary<string, string> _partnerKonto;
         private readonly List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly DataTable _dt;
         private readonly List<Label> _labelList;

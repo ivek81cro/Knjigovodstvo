@@ -35,6 +35,7 @@ namespace Knjigovodstvo.FinancialReports
             this.textBoxFilterOpis = new System.Windows.Forms.TextBox();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonDodajPartnera = new System.Windows.Forms.Button();
+            this.buttonBrisiKonto = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,11 +108,22 @@ namespace Knjigovodstvo.FinancialReports
             this.buttonDodajPartnera.UseVisualStyleBackColor = true;
             this.buttonDodajPartnera.Click += new System.EventHandler(this.ButtonDodajPartnera_Click);
             // 
+            // buttonBrisiKonto
+            // 
+            this.buttonBrisiKonto.Location = new System.Drawing.Point(13, 132);
+            this.buttonBrisiKonto.Name = "buttonBrisiKonto";
+            this.buttonBrisiKonto.Size = new System.Drawing.Size(75, 23);
+            this.buttonBrisiKonto.TabIndex = 16;
+            this.buttonBrisiKonto.Text = "Briši konto";
+            this.buttonBrisiKonto.UseVisualStyleBackColor = true;
+            this.buttonBrisiKonto.Click += new System.EventHandler(this.ButtonBrisiKonto_Click);
+            // 
             // KontniPlanPregledForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1246, 632);
+            this.Controls.Add(this.buttonBrisiKonto);
             this.Controls.Add(this.buttonDodajPartnera);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.textBoxFilterOpis);
@@ -135,5 +147,6 @@ namespace Knjigovodstvo.FinancialReports
         private System.Windows.Forms.TextBox textBoxFilterOpis;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonDodajPartnera;
+        private System.Windows.Forms.Button buttonBrisiKonto;
     }
 }

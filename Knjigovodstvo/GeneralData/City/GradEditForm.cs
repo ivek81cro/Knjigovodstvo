@@ -112,6 +112,8 @@ namespace Knjigovodstvo.City
             _grad.Prirez = decimal.Parse(textBoxPrirez.Text);
             _grad.Posta = comboBoxPosta.Text;
             _grad.Mjesto = comboBoxGrad.Text;
+            _grad.Zupanija = comboBoxZupanija.Text;
+            _grad.Drzava = "Hrvatska";
             FormError validateResult = _grad.ValidateData();
             if (checkBoxNoviGrad.Checked)
                 _grad.Id = 0;
@@ -119,7 +121,7 @@ namespace Knjigovodstvo.City
             {
                 if (_grad.Id == 0 && _grad.InsertNew())
                 {
-                    MessageBox.Show("Unos uspješan.", "Novi partner unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Unos uspješan.", "Novi grad unešen", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
                 }
 
