@@ -72,7 +72,7 @@ namespace Knjigovodstvo.Database
             {
                 using SqlConnection conn = new SqlConnection(ConnHelper.ConnStr(connection_name));
                 GetTableName(obj);
-                using var bulkCopy = new SqlBulkCopy(conn.ConnectionString, SqlBulkCopyOptions.KeepIdentity);
+                using var bulkCopy = new SqlBulkCopy(conn.ConnectionString);
                 // when DT columns match db.table names
                 foreach (DataColumn col in dt.Columns)
                 {

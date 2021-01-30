@@ -32,14 +32,14 @@ namespace Knjigovodstvo.URA
         {
             if (InvokeRequired)
             {
-                this.Invoke(new MethodInvoker(delegate
+                Invoke(new MethodInvoker(delegate
                 {
-                    dbDdataGridView1.DataSource = new DbDataGet().GetTable(_uraKnjiga);
+                    dbDdataGridView1.DataSource = _uraKnjiga.GetUraKnjigaDataTable();
                 }));
             }
             else
             {
-                dbDdataGridView1.DataSource = new DbDataGet().GetTable(_uraKnjiga);
+                dbDdataGridView1.DataSource = _uraKnjiga.GetUraKnjigaDataTable();
             }
             FixColumnHeaders();
         }
@@ -117,6 +117,28 @@ namespace Knjigovodstvo.URA
             _noControllDialog = checkBoxShowCtrlDialog.Checked;
         }
 
+        private void ProcessSelectedItems()
+        {
+            foreach (DataGridViewRow row in dbDdataGridView1.SelectedRows)
+            {
+                SetSelectedItem(row);
+                TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_uraKnjiga, _postavkeKnjizenja);
+                if (_noControllDialog)
+                {
+                    form.ProcessDirectly();
+                }
+                else
+                {
+                    form.ShowDialog();
+                }
+                string query = $"UPDATE KnjigaUra SET Knjizen = 1 WHERE Redni_broj = {_uraKnjiga.Redni_broj}";
+                if (!form.Knjizeno)
+                    break;
+                else
+                    new DbDataCustomQuery().ExecuteQuery(query);
+            }
+        }
+
         private void ButtonUcitaj_Click(object sender, EventArgs e)
         {
             OpenAndLoadXlsFile();
@@ -168,25 +190,8 @@ namespace Knjigovodstvo.URA
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dbDdataGridView1.SelectedRows)
-            {
-                SetSelectedItem(row);
-                TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_uraKnjiga, _postavkeKnjizenja);
-                if (_noControllDialog)
-                {
-                    form.ProcessDirectly();
-                }
-                else
-                {
-                    form.ShowDialog();
-                }
-                string query = $"UPDATE KnjigaUra SET Knjizen = 1 WHERE Redni_broj = {_uraKnjiga.Redni_broj}";
-                if (!form.Knjizeno)
-                    break;
-                else
-                    new DbDataCustomQuery()
-                        .ExecuteQuery(query);
-            }
+            using WaitDialog waitDialog = new WaitDialog(ProcessSelectedItems, SplashMessages.Spremanje);
+            waitDialog.ShowDialog(this);
         }
 
         private bool _noControllDialog;

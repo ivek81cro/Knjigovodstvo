@@ -1,9 +1,7 @@
 ﻿using Knjigovodstvo.Database;
-using Knjigovodstvo.Employee;
 using Knjigovodstvo.Interface;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 
 namespace Knjigovodstvo.Payroll
 {

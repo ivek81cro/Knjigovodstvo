@@ -119,6 +119,28 @@ namespace Knjigovodstvo.URA
             _noControllDialog = checkBoxShowCtrlDialog.Checked;
         }
 
+        private void ProcessSelectedItems()
+        {
+            foreach (DataGridViewRow row in dbDataGridView1.SelectedRows)
+            {
+                SetSelectedItem(row);
+                using TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_primkaRepro, _postavkeKnjizenja);
+                if (_noControllDialog)
+                {
+                    form.ProcessDirectly();
+                }
+                else
+                {
+                    form.ShowDialog();
+                }
+                string query = $"UPDATE KnjigaUra SET Knjizen = 1 WHERE Redni_broj = {_primkaRepro.Broj_u_knjizi_ura}";
+                if (!form.Knjizeno)
+                    break;
+                else
+                    new DbDataCustomQuery().ExecuteQuery(query);
+            }
+        }
+
         /// <summary>
         /// Read CSV file into List and fill DataGridView with data for review before saving to database
         /// </summary>
@@ -158,24 +180,8 @@ namespace Knjigovodstvo.URA
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dbDataGridView1.SelectedRows)
-            {
-                SetSelectedItem(row);
-                using TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_primkaRepro, _postavkeKnjizenja);
-                if (_noControllDialog)
-                {
-                    form.ProcessDirectly();
-                }
-                else
-                {
-                    form.ShowDialog();
-                }
-                string query = $"UPDATE KnjigaUra SET Knjizen = 1 WHERE Redni_broj = {_primkaRepro.Broj_u_knjizi_ura}";
-                if (!form.Knjizeno)
-                    break;
-                else
-                    new DbDataCustomQuery().ExecuteQuery(query);
-            }
+            using WaitDialog waitDialog = new WaitDialog(ProcessSelectedItems, SplashMessages.Spremanje);
+            waitDialog.ShowDialog(this);
         }
 
         private bool _noControllDialog;

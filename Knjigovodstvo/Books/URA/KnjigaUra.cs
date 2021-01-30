@@ -61,6 +61,11 @@ namespace Knjigovodstvo.URA
             return this;
         }
 
+        internal object GetUraKnjigaDataTable()
+        {
+            return _dataGet.GetTable(this);
+        }
+
         public void GetDataFromDatabaseByRedniBroj()
         {
             var datatable = _dataGet.GetTable(this, $"Redni_broj={Redni_broj}");

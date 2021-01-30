@@ -202,8 +202,9 @@ namespace Knjigovodstvo.Payroll
         }
 
         private void ButtonDohvatArhiva_Click(object sender, EventArgs e)
-        {
+        {            
             _dt = _placaArhiva.GetPlacaArhivaDataTable();
+            _placaArhivaLista = _placaArhiva.DataTableToList(_dt);
             buttonBrisiOdabrane.Enabled = true;
             buttonKnjizi.Enabled = true;
             LoadDatagrid();
@@ -211,7 +212,7 @@ namespace Knjigovodstvo.Payroll
 
         private void ButtonPocetniPrikaz_Click(object sender, EventArgs e)
         {
-            _dt = _placa.GetPlacaDataTable(); ;
+            _dt = _placa.GetPlacaDataTable();
             buttonBrisiOdabrane.Enabled = false;
             LoadDatagrid();
         }
@@ -235,7 +236,7 @@ namespace Knjigovodstvo.Payroll
             ButtonDohvatArhiva_Click(null, null);
         }
 
-        private readonly List<PlacaArhiva> _placaArhivaLista = new List<PlacaArhiva>();
+        private List<PlacaArhiva> _placaArhivaLista = new List<PlacaArhiva>();
         private PlacaArhiva _placaArhiva = new PlacaArhiva();
         private readonly Placa _placa = new Placa();
         private List<Zaposlenik> _zaposlenici;
