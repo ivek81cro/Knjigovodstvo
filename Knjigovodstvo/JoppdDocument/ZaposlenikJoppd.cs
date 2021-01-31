@@ -12,26 +12,62 @@ namespace Knjigovodstvo.JoppdDocument
             throw new NotImplementedException();
         }
 
-        public ZaposlenikJoppd GetZaposlenikByOib(string oib)
+        /// <summary>
+        /// Returns all data for employees form as DataTable
+        /// </summary>
+        /// <returns>DataTable</returns>
+        public DataTable GetZaposlenikJoppdDataTable()
         {
-            string condition = $"Oib='{oib}'";
-            DataTable zaposlenik = new DbDataGet().GetTable(new ZaposlenikJoppd(), condition);
-            if (zaposlenik.Rows.Count > 0)
-            {
-                Id = int.Parse(zaposlenik.Rows[0]["Id"].ToString());
-                Oib = zaposlenik.Rows[0]["Oib"].ToString();
-                Nacin_Isplate = zaposlenik.Rows[0]["Nacin_Isplate"].ToString();
-                Stjecatelj = zaposlenik.Rows[0]["Stjecatelj"].ToString();
-                Primitak = zaposlenik.Rows[0]["Primitak"].ToString();
-                Beneficirani = zaposlenik.Rows[0]["Beneficirani"].ToString();
-                Invaliditet = zaposlenik.Rows[0]["Invaliditet"].ToString();
-                Mjesec = zaposlenik.Rows[0]["Mjesec"].ToString();
-                Vrijeme = zaposlenik.Rows[0]["Vrijeme"].ToString();
+            return new DbDataGet().GetTable(this);
+        }
 
-                return this;
-            }
+        /// <summary>
+        /// Returns all data for employees form as DataTable by condition
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns>DataTable</returns>
+        public DataTable GetZaposlenikJoppdDataTable(string condition)
+        {
+            return new DbDataGet().GetTable(this, condition);
+        }
+
+        /// <summary>
+        /// Returns data for employees form as DataTable for specific employee
+        /// </summary>
+        /// <returns></returns>
+        public ZaposlenikJoppd GetZaposlenikByOib()
+        {
+            DataRow row = GetZaposlenikJoppdDataTable($"Oib='{Oib}'").Rows[0];
+            SetPrivateMembers(row);
 
             return new ZaposlenikJoppd();
+        }
+
+        /// <summary>
+        /// Returns data for employees form as DataTable for specific employee
+        /// </summary>
+        /// <param name="oib"></param>
+        /// <returns></returns>
+        public ZaposlenikJoppd GetZaposlenikByOib(string oib)
+        {
+            DataRow row = GetZaposlenikJoppdDataTable($"Oib='{oib}'").Rows[0];
+            SetPrivateMembers(row);
+
+            return new ZaposlenikJoppd();
+        }
+
+        private void SetPrivateMembers(DataRow row)
+        {
+            Id = int.Parse(row["Id"].ToString());
+            Oib = row["Oib"].ToString();
+            Nacin_Isplate = row["Nacin_Isplate"].ToString();
+            Stjecatelj = row["Stjecatelj"].ToString();
+            Primitak = row["Primitak"].ToString();
+            Beneficirani = row["Beneficirani"].ToString();
+            Invaliditet = row["Invaliditet"].ToString();
+            Mjesec = row["Mjesec"].ToString();
+            Vrijeme = row["Vrijeme"].ToString();
+
         }
 
         public int Id { get; set; } = 0;

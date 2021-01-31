@@ -12,10 +12,13 @@ namespace Knjigovodstvo.BankStatements
     {
         public FormError ValidateData()
         {
-            throw new NotImplementedException();
+            return FormError.None;
         }
 
-        internal void GetCurrentId()
+        /// <summary>
+        /// Sets Id property of current bank statement after insert into database
+        /// </summary>
+        public void GetCurrentId()
         {
             Id = int.Parse(
                 new DbDataExecProcedure()
@@ -24,9 +27,14 @@ namespace Knjigovodstvo.BankStatements
                 .ItemArray[0].ToString());
         }
 
+        /// <summary>
+        /// Sets properties of bank statement by it's number from argument
+        /// </summary>
+        /// <param name="redniBroj"></param>
         public void GetIzvodByRedniBroj(int redniBroj)
         {
             DataTable dt = _dataGet.GetTable(this, $"Redni_broj={redniBroj}");
+
             Id = int.Parse(dt.Rows[0]["Id"].ToString());
             Redni_broj = int.Parse(dt.Rows[0]["Redni_broj"].ToString());
             Datum_izvoda = dt.Rows[0]["Datum_izvoda"].ToString();
@@ -37,7 +45,11 @@ namespace Knjigovodstvo.BankStatements
             Promet = LoadPrometByIzvodId();
             Knjizen = dt.Rows[0]["Knjizen"].ToString() == "True";
         }
-
+        
+        /// <summary>
+        /// Returns all items from individual bank statement as List<>
+        /// </summary>
+        /// <returns>List<IzvodPromet></returns>
         private List<IzvodPromet> LoadPrometByIzvodId()
         {
             DataTable dt = _dataGet.GetTable(new IzvodPromet(), $"Id_izvod={Id}");
@@ -59,16 +71,28 @@ namespace Knjigovodstvo.BankStatements
             return izvodPromet;
         }
 
-        internal bool InsertData()
+        /// <summary>
+        /// Insert new bank statement into database
+        /// </summary>
+        /// <returns>bool</returns>
+        public bool InsertData()
         {
             return new DbDataInsert().InsertData(this);
         }
 
-        internal bool DeleteIzvod()
+        /// <summary>
+        /// Deletes bank statement in database
+        /// </summary>
+        /// <returns>bool</returns>
+        public bool DeleteIzvod()
         {
             return new DbDataDelete().DeleteItem(this);
         }
 
+        /// <summary>
+        /// Returns all items from bank statement as DataTable
+        /// </summary>
+        /// <returns>DataTable</returns>
         public DataTable GetPrometData()
         {
             DataTable dt = new DataTable()
@@ -97,6 +121,9 @@ namespace Knjigovodstvo.BankStatements
             return dt;
         }
 
+        /// <summary>
+        /// Update bank statement
+        /// </summary>
         internal void UpdateData()
         {
             Datum_izvoda = DateTime
@@ -106,10 +133,17 @@ namespace Knjigovodstvo.BankStatements
             new DbDataUpdate().UpdateData(this);
         }
 
+        /// <summary>
+        /// Checks if bank statemena exists in database
+        /// </summary>
+        /// <returns>bool</returns>
         public bool ExistsInDatabase()
         {
             return _dataGet.GetTable(this, $"Redni_broj={Redni_broj}").Rows.Count > 0;
         }
+
+        private readonly DbDataGet _dataGet = new DbDataGet();
+        public List<IzvodPromet> Promet = new List<IzvodPromet>();
 
         public int Id { get; set; } = 0;
         public int Redni_broj { get; set; } = 0;
@@ -119,9 +153,5 @@ namespace Knjigovodstvo.BankStatements
         public decimal Stanje_prethodnog_izvoda { get; set; } = 0;
         public decimal Novo_stanje { get; set; } = 0;
         public bool Knjizen { get; set; } = false;
-
-        public List<IzvodPromet> Promet = new List<IzvodPromet>();
-
-        private readonly DbDataGet _dataGet = new DbDataGet();
     }
 }

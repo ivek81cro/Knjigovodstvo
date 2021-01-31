@@ -4,7 +4,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace Knjigovodstvo.Payroll
+namespace Knjigovodstvo.Wages
 {
     public partial class PlacaPregledForm : Form
     {
@@ -17,9 +17,8 @@ namespace Knjigovodstvo.Payroll
         private void LoadDatagrid()
         {
             dataGridView1.DataSource = new DbDataExecProcedure().GetTable(ProcedureNames.PlacaPregled);
-            for(int i = 3; i< dataGridView1.Columns.Count; i++)
+            for(int i = 0; i< dataGridView1.Columns.Count; i++)
             {
-                dataGridView1.Columns[i].DefaultCellStyle.Format = "0.00";
                 dataGridView1.Columns[i].HeaderText =
                     new TableHeaderFormat().FormatHeader(dataGridView1.Columns[i].HeaderText);
             }

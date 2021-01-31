@@ -9,7 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Knjigovodstvo.Payroll
+namespace Knjigovodstvo.Wages
 {
     public partial class PlacaIzracunForm : Form
     {
@@ -47,9 +47,10 @@ namespace Knjigovodstvo.Payroll
         {
             string selected = comboBoxZaposlenik.GetItemText(this.comboBoxZaposlenik.SelectedItem);
             string oib = selected.Split(' ')[0];
-            _zaposlenik.GetZaposlenikDataTable(oib);
+            _zaposlenik.GetZaposlenikByOib(oib);
             _placa.GetPlacaByOib(_zaposlenik.Oib);
-            _zaposlenikJoppd = _zaposlenikJoppd.GetZaposlenikByOib(oib);
+            _zaposlenikJoppd.Oib = _zaposlenik.Oib;
+            _zaposlenikJoppd.GetZaposlenikByOib();
             if (_zaposlenik.Oib != "0")
             {
                 _prirez = _zaposlenik.Adresa.Grad.Prirez;

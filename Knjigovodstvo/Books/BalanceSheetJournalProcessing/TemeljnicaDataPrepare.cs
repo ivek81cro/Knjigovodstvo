@@ -3,7 +3,7 @@ using Knjigovodstvo.Books.Inventory;
 using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Interface;
 using Knjigovodstvo.IRA;
-using Knjigovodstvo.Payroll;
+using Knjigovodstvo.Wages;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.URA;
 using System;

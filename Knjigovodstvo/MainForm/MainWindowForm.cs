@@ -8,7 +8,7 @@ using Knjigovodstvo.Gui;
 using Knjigovodstvo.IRA;
 using Knjigovodstvo.JoppdDocument;
 using Knjigovodstvo.Partners;
-using Knjigovodstvo.Payroll;
+using Knjigovodstvo.Wages;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.URA;
 using System;

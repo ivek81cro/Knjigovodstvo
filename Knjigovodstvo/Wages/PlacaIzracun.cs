@@ -1,6 +1,6 @@
 ﻿using Knjigovodstvo.Settings;
 
-namespace Knjigovodstvo.Payroll
+namespace Knjigovodstvo.Wages
 {
     class PlacaIzracun
     {

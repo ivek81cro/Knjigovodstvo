@@ -3,7 +3,7 @@ using Knjigovodstvo.Interface;
 using System;
 using System.Data;
 
-namespace Knjigovodstvo.Payroll
+namespace Knjigovodstvo.Wages
 {
     public class Dodatak : IDbObject
     {

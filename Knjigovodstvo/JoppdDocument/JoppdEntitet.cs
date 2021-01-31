@@ -1,6 +1,6 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
-using Knjigovodstvo.Payroll;
+using Knjigovodstvo.Wages;
 using System;
 using System.Collections.Generic;
 using System.Data;

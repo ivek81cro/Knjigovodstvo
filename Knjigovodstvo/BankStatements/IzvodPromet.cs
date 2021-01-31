@@ -7,7 +7,7 @@ namespace Knjigovodstvo.BankStatements
     {
         public FormError ValidateData()
         {
-            throw new System.NotImplementedException();
+            return FormError.None;
         }
 
         internal void InsertData()

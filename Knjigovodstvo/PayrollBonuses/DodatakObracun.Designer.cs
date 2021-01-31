@@ -1,7 +1,7 @@
 ﻿
 using System.Windows.Forms;
 
-namespace Knjigovodstvo.Payroll
+namespace Knjigovodstvo.Wages
 {
     partial class DodatakObracun
     {

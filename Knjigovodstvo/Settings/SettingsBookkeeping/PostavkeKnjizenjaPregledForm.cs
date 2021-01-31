@@ -4,7 +4,7 @@ using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Interface;
 using Knjigovodstvo.IRA;
-using Knjigovodstvo.Payroll;
+using Knjigovodstvo.Wages;
 using Knjigovodstvo.URA;
 using Knjigovodstvo.Validators;
 using System;

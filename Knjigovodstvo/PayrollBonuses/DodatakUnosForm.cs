@@ -6,7 +6,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 
-namespace Knjigovodstvo.Payroll
+namespace Knjigovodstvo.Wages
 {
     public partial class DodatakUnosForm : Form
     {

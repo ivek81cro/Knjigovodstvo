@@ -5,7 +5,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Linq;
 
-namespace Knjigovodstvo.Payroll
+namespace Knjigovodstvo.Wages
 {
     public class PlacaArhiva : Placa
     {

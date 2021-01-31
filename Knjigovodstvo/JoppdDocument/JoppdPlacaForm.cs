@@ -2,7 +2,7 @@
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Employee;
 using Knjigovodstvo.Global;
-using Knjigovodstvo.Payroll;
+using Knjigovodstvo.Wages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -140,7 +140,7 @@ namespace Knjigovodstvo.JoppdDocument
             int redni_broj = 1;
             foreach (DataRow dr in rows)
             {
-                //Add row for payroll
+                //Add row for wage
                 _joppdEntitet = new JoppdEntitet()
                 {
                     Redni_Broj = redni_broj,
@@ -171,7 +171,7 @@ namespace Knjigovodstvo.JoppdDocument
                     Zdravstvo = decimal.Parse(dr["Doprinos_Zdravstvo"].ToString()),
                     IzdatakUplaceni_Mio = decimal.Parse(dr["Mio_1"].ToString()) + decimal.Parse(dr["Mio_2"].ToString())
                 };
-                //If only bonuses checked, skip adding payroll to list
+                //If only bonuses checked, skip adding wage to list
                 int dodatak_start_number = 1;
                 if (!checkBoxSamoDodaci.Checked)
                 {

@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace Knjigovodstvo.Payroll
+namespace Knjigovodstvo.Wages
 {
     partial class PlacaIzracunForm
     {

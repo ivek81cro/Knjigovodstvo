@@ -13,7 +13,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Knjigovodstvo.Payroll
+namespace Knjigovodstvo.Wages
 {
     public partial class DodatakObracun : Form
     {
