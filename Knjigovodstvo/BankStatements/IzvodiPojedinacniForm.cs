@@ -1,4 +1,5 @@
 ﻿using Knjigovodstvo.FinancialReports;
+using Knjigovodstvo.Global.BaseClass;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,19 +39,18 @@ namespace Knjigovodstvo.BankStatements
 
         private void FillKontoColumn()
         {
-            List<IzvodParovi> parovi = new IzvodParovi().GetIzvodParovi();
+            List<Parovi> parovi = new IzvodParovi().GetParoviList();
             KontniPlan konto = new KontniPlan();
             foreach(DataGridViewRow row in dataGridView1.Rows)
             {
                 if (row.Cells["Konto"].Value.ToString() == "" &&
-                    parovi.Exists(p => p.Naziv_Izvod == row.Cells["Naziv"].Value.ToString()))
+                    parovi.Exists(p => p.Naziv == row.Cells["Naziv"].Value.ToString()))
                 {
                     int idPartner = parovi
-                        .Where(p => p.Naziv_Izvod == row.Cells["Naziv"]
+                        .Where(p => p.Naziv == row.Cells["Naziv"]
                         .Value.ToString())
                         .FirstOrDefault().Id_Konto;
-                    konto.Id = idPartner;
-                    konto.GetKontoById();
+                    konto.GetKontoById(idPartner);
                     row.Cells["Konto"].Value = konto.Konto;
                 }
             }

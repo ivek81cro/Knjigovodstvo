@@ -42,11 +42,11 @@ namespace Knjigovodstvo.Global
 
             IzvodParovi par = new IzvodParovi()
             {
-                Naziv_Izvod = naziv,
+                Naziv = naziv,
                 Id_Konto = kontniPlan.GetIdByKontoNumber()
             };
 
-            if (!par.ExistsInDb() && par.Id_Konto != 0)
+            if (!par.ExistsInDbByNaziv() && par.Id_Konto != 0)
             {
                 par.InsertData();
                 userFunctionPointer.DynamicInvoke();
@@ -65,19 +65,17 @@ namespace Knjigovodstvo.Global
             form.ShowDialog();
             IzvodParovi par = new IzvodParovi()
             {
-                Naziv_Izvod = naziv,
+                Naziv = naziv,
                 Id_Konto = form.Id_Konto
             };
 
-            if (!par.ExistsInDb() && par.Id_Konto != 0)
+            if (!par.ExistsInDbByNaziv() && par.Id_Konto != 0)
             {
                 par.InsertData();
-                KontniPlan konto = new KontniPlan
-                {
-                    Id = par.Id_Konto
-                };
+                KontniPlan konto = new KontniPlan();
+                konto.GetKontoById(par.Id_Konto);
 
-                row.Cells["Konto"].Value = konto.GetKontoById();
+                row.Cells["Konto"].Value = konto.Konto;
 
                 userFunctionPointer.DynamicInvoke();
             }

@@ -1,46 +1,12 @@
-﻿using Knjigovodstvo.Database;
-using Knjigovodstvo.Interface;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using Knjigovodstvo.Global.BaseClass;
 
 namespace Knjigovodstvo.BankStatements
 {
-    class IzvodParovi:IDbObject
+    class IzvodParovi : Parovi
     {
-        public FormError ValidateData()
+        public IzvodParovi():base()
         {
-            throw new NotImplementedException();
+            _derivedName = "IzvodParovi";
         }
-
-        public void InsertData()
-        {
-            new DbDataInsert().InsertData(this);
-        }
-
-        public List<IzvodParovi> GetIzvodParovi()
-        {
-            DataTable dt = new DbDataGet().GetTable(this);
-            List<DataRow> rows = dt.AsEnumerable().ToList();
-            List<IzvodParovi> parovi = new List<IzvodParovi>();
-            parovi = (from DataRow dr in rows
-                      select new IzvodParovi() 
-                      {
-                          Id = int.Parse(dr["Id"].ToString()),
-                          Naziv_Izvod = dr["Naziv_Izvod"].ToString(),
-                          Id_Konto = int.Parse(dr["Id_Konto"].ToString())
-                      }).ToList();
-            return parovi;
-        }
-
-        internal bool ExistsInDb()
-        {
-            return new DbDataGet().GetTable(this, $"Naziv_Izvod='{Naziv_Izvod}'").Rows.Count > 0;
-        }
-
-        public int Id { get; set; } = 0;
-        public string Naziv_Izvod { get; set; } = "";
-        public int Id_Konto { get; set; } = 0;
     }
 }

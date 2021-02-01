@@ -12,6 +12,9 @@ using Knjigovodstvo.Settings;
 using Knjigovodstvo.Books.PrepareForBalanceSheet;
 using Knjigovodstvo.GeneralData.WaitForm;
 using Knjigovodstvo.Partners;
+using Knjigovodstvo.Books.URA;
+using Knjigovodstvo.Global.BaseClass;
+using Knjigovodstvo.Global.Interface;
 
 namespace Knjigovodstvo.URA
 {
@@ -117,14 +120,15 @@ namespace Knjigovodstvo.URA
 
         private void ProcessSelectedItems()
         {
-            Dictionary<string, string> partner_konto = GetPartnerKontoList();
+            List<Parovi> parovi = GetPartnerKontoList();
             foreach (DataGridViewRow row in dbDataGridView1.SelectedRows)
             {
                 SetSelectedItem(row);
-                using TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_primka, _postavkeKnjizenja, partner_konto);
+                using TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_primka, _postavkeKnjizenja, parovi);
                 if (_noControllDialog)
                 {
                     form.ProcessDirectly();
+                    parovi = form._parovi;
                 }
                 else
                 {
@@ -138,21 +142,10 @@ namespace Knjigovodstvo.URA
             }
         }
 
-        private Dictionary<string, string> GetPartnerKontoList()
+        private List<Parovi> GetPartnerKontoList()
         {
-            //TODO: get from Book pairs database table
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            Partneri p = new Partneri();
-            DataTable dt = p.GetPartnerDataTable();
-            for (int i = 0; i < dt.Rows.Count; ++i)
-            {
-                dict.Add(
-                    dt.Rows[i]["Naziv"].ToString(),
-                    dt.Rows[i]["KontoD"].ToString()
-                    );
-            }
-
-            return dict;
+            List<Parovi> parovi = new KnjigaUraParovi().GetParoviList();
+            return parovi;
         }
 
         /// <summary>

@@ -37,6 +37,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             this.buttonDodajRed = new System.Windows.Forms.Button();
             this.labelDugovna = new System.Windows.Forms.Label();
             this.labelPotrazna = new System.Windows.Forms.Label();
+            this.buttonUpariKonto = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,12 +63,14 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             // buttonKnjizi
             // 
             this.buttonKnjizi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonKnjizi.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonKnjizi.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonKnjizi.Location = new System.Drawing.Point(12, 324);
             this.buttonKnjizi.Name = "buttonKnjizi";
             this.buttonKnjizi.Size = new System.Drawing.Size(75, 23);
             this.buttonKnjizi.TabIndex = 11;
             this.buttonKnjizi.Text = "Knjiži";
-            this.buttonKnjizi.UseVisualStyleBackColor = true;
+            this.buttonKnjizi.UseVisualStyleBackColor = false;
             this.buttonKnjizi.Click += new System.EventHandler(this.ButtonKnjizi_Click);
             // 
             // buttonBrisiRed
@@ -118,12 +121,25 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             this.labelPotrazna.TabIndex = 1;
             this.labelPotrazna.Text = "Potražna: ";
             // 
+            // buttonUpariKonto
+            // 
+            this.buttonUpariKonto.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.buttonUpariKonto.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonUpariKonto.Location = new System.Drawing.Point(174, 277);
+            this.buttonUpariKonto.Name = "buttonUpariKonto";
+            this.buttonUpariKonto.Size = new System.Drawing.Size(84, 23);
+            this.buttonUpariKonto.TabIndex = 14;
+            this.buttonUpariKonto.Text = "Upari konto";
+            this.buttonUpariKonto.UseVisualStyleBackColor = false;
+            this.buttonUpariKonto.Click += new System.EventHandler(this.ButtonUpariKonto_Click);
+            // 
             // TemeljnicaPripremaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1015, 359);
+            this.Controls.Add(this.buttonUpariKonto);
             this.Controls.Add(this.labelDugovna);
             this.Controls.Add(this.labelPotrazna);
             this.Controls.Add(this.buttonDodajRed);
@@ -149,5 +165,6 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         private System.Windows.Forms.Button buttonDodajRed;
         private System.Windows.Forms.Label labelPotrazna;
         private System.Windows.Forms.Label labelDugovna;
+        private System.Windows.Forms.Button buttonUpariKonto;
     }
 }

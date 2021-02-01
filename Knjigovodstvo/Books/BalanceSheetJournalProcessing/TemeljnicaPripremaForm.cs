@@ -1,5 +1,7 @@
 ﻿using Knjigovodstvo.BankStatements;
+using Knjigovodstvo.Books.URA;
 using Knjigovodstvo.FinancialReports;
+using Knjigovodstvo.Global.BaseClass;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Interface;
 using Knjigovodstvo.Settings;
@@ -15,9 +17,9 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
     {
         public TemeljnicaPripremaForm(IDbObject obj, 
             List<PostavkeKnjizenja> postavkeKnjizenja, 
-            Dictionary<string, string> partner_konto = null)
+            List<Parovi> parovi = null)
         {
-            _partnerKonto = partner_konto;
+            _parovi = parovi;
             _postavkeKnjizenja = postavkeKnjizenja;
             _obj = obj;
             string model = obj.GetType().Name;
@@ -99,11 +101,19 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private void FindKontoNumber()
         {
-            //TODO: Pairs books datatable to dictionary, this is not working as intended
             if (_postavkeKnjizenja.Count != 0)
             {
                 string naziv = _dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0];
-                _dt.Rows[0]["Konto"] = _partnerKonto.Where(p => p.Key.Contains(naziv)).FirstOrDefault().Value;
+                string konto = "";
+                if (_parovi.Count != 0) 
+                {
+                    var result = _parovi.Where(p => p.Naziv == naziv).FirstOrDefault();
+                    if(result != null)
+                    {
+                        konto = new KontniPlan().GetKontoById(result.Id_Konto);
+                    }
+                }
+                _dt.Rows[0]["Konto"] = konto;
             }
         }
 
@@ -233,9 +243,28 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             }
         }
 
-        private readonly KontniPlan _kontniPlan = new KontniPlan();
+        private void ButtonUpariKonto_Click(object sender, System.EventArgs e)
+        {
+            using var form = new KontniPlanPregledForm();
+            form.ShowDialog();
+            _dt.Rows[dbDataGridView1.SelectedCells[0]
+                .RowIndex]["Konto"] = form.KontoBroj;
+            KnjigaUraParovi par = new KnjigaUraParovi()
+            {
+                Id_Konto = form.Id_Konto,
+                Naziv = _dt.Rows[dbDataGridView1
+                                        .SelectedCells[0]
+                                        .RowIndex]["Opis knjiženja"]
+                                        .ToString()
+                                        .Split(':')[0]
+            };
+            par.InsertData();
+            if (_parovi.Count > 0)
+                _parovi = _parovi.ElementAt(0).GetParoviList();
+        }
+
         private readonly IDbObject _obj;
-        private readonly Dictionary<string, string> _partnerKonto;
+        public List<Parovi> _parovi { get; private set; }
         private readonly List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly DataTable _dt;
         private readonly List<Label> _labelList;

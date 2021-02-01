@@ -1,7 +1,6 @@
 ﻿using Knjigovodstvo.BankStatements;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
-using System;
 using System.Data;
 using System.Linq;
 
@@ -11,12 +10,27 @@ namespace Knjigovodstvo.FinancialReports
     {
         public FormError ValidateData()
         {
-            throw new NotImplementedException();
+            return FormError.None;
+        }
+
+        public DataTable GetObjectDataTable()
+        {
+            return _dataGet.GetTable(this);
+        }
+
+        public DataTable GetObjectDataTable(string condition)
+        {
+            return _dataGet.GetTable(this, condition);
+        }
+
+        public void DeleteKonto()
+        {
+            new DbDataDelete().DeleteItem(this);
         }
 
         public bool ExistsKonto(string konto)
         {
-            _dt = new DbDataGet().GetTable(this, $"Konto='{konto}'");
+            _dt = GetObjectDataTable($"Konto='{konto}'");
             if(_dt.Rows.Count > 0)
             {
                 Id = int.Parse(_dt.Rows[0]["Id"].ToString());
@@ -27,57 +41,46 @@ namespace Knjigovodstvo.FinancialReports
 
         public int GetIdByKontoNumber()
         {
-            _dt = new DbDataGet()
-                .GetTable(this, $"Konto='{Konto}'");
-            Opis = _dt.Rows[0]["Opis"].ToString();
-
+            _dt = GetObjectDataTable($"Konto='{Konto}'");
+            if (_dt.Rows.Count > 0)
+            {
+                LoadPrivateMembers(_dt.Rows[0]);
+            }
+            
             return Id = int.Parse(_dt.Rows[0]["Id"].ToString());
         }
 
         public string GetDescriptiopnByKontoNumber(string konto)
         {
-            _dt = new DbDataGet()
-                .GetTable(this, $"Konto='{konto}'");
-
+            _dt = GetObjectDataTable($"Konto='{konto}'");
+            if (_dt.Rows.Count > 0)
+            {
+                LoadPrivateMembers(_dt.Rows[0]);
+            }
+            
             return Opis = _dt.Rows[0]["Opis"].ToString();
         }
 
-        public string GetKontoById()
+        public string GetKontoById(int id)
         {
-            _dt = new DbDataGet()
-                .GetTable(this, $"Id='{Id}'");
+            _dt = GetObjectDataTable($"Id='{id}'");
+            if (_dt.Rows.Count > 0)
+            {
+                LoadPrivateMembers(_dt.Rows[0]);
+            }
 
             return Konto = _dt.Rows[0]["Konto"].ToString();
         }
 
-        internal string FindByDescription(string naziv)
+        private void LoadPrivateMembers(DataRow row)
         {
-            _dt = new DbDataGet().GetTable(this, $"Opis LIKE '{naziv}%'");
-            if (_dt.Rows.Count > 0)
-            { 
-                return _dt.Rows[0]["Konto"].ToString(); 
-            }
-            else
-            {
-                IzvodParovi izvodParovi = new IzvodParovi();
-                var id = izvodParovi.GetIzvodParovi().Where(i => i.Naziv_Izvod == naziv);
-                if (id.Count() != 0)
-                {
-                    Id = id.FirstOrDefault().Id_Konto;
-                    GetKontoById();
-                    return Konto;
-                }
-            }
-
-            return "";
-        }
-
-        internal void DeleteKonto()
-        {
-            new DbDataDelete().DeleteItem(this);
+            Id = int.Parse(row["Id"].ToString());
+            Konto = row["Konto"].ToString();
+            Opis = row["Opis"].ToString();
         }
 
         private DataTable _dt = new DataTable();
+        private DbDataGet _dataGet = new DbDataGet();
 
         public int Id { get; set; } = 0;
         public string Konto { get; set; } = "";
