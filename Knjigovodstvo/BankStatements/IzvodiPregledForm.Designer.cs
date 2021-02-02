@@ -31,7 +31,7 @@ namespace Knjigovodstvo.BankStatements
         /// </summary>
         private void InitializeComponent()
         {
-            this.dbDataGridViewStavke = new DBDataGridView();
+            this.dbDataGridViewStavke = new Knjigovodstvo.DBDataGridView();
             this.buttonUcitajIzvod = new System.Windows.Forms.Button();
             this.dataGridViewIzvodi = new System.Windows.Forms.DataGridView();
             this.buttonOpenIzvod = new System.Windows.Forms.Button();
@@ -48,7 +48,7 @@ namespace Knjigovodstvo.BankStatements
             this.groupBoxStanje.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridViewStavke
+            // dbDataGridViewStavke
             // 
             this.dbDataGridViewStavke.AllowUserToAddRows = false;
             this.dbDataGridViewStavke.AllowUserToDeleteRows = false;
@@ -57,7 +57,7 @@ namespace Knjigovodstvo.BankStatements
             this.dbDataGridViewStavke.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dbDataGridViewStavke.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dbDataGridViewStavke.Location = new System.Drawing.Point(12, 152);
-            this.dbDataGridViewStavke.Name = "dataGridViewStavke";
+            this.dbDataGridViewStavke.Name = "dbDataGridViewStavke";
             this.dbDataGridViewStavke.ReadOnly = true;
             this.dbDataGridViewStavke.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dbDataGridViewStavke.Size = new System.Drawing.Size(859, 469);
@@ -188,9 +188,9 @@ namespace Knjigovodstvo.BankStatements
             // 
             // kontoDescription
             // 
-            this.kontoDescription.Location = new System.Drawing.Point(95, 123);
+            this.kontoDescription.Location = new System.Drawing.Point(181, 123);
             this.kontoDescription.Name = "kontoDescription";
-            this.kontoDescription.Size = new System.Drawing.Size(537, 23);
+            this.kontoDescription.Size = new System.Drawing.Size(690, 23);
             this.kontoDescription.TabIndex = 13;
             // 
             // IzvodiPregledForm
