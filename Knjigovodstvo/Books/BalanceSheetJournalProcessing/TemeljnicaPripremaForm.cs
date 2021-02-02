@@ -19,7 +19,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             List<PostavkeKnjizenja> postavkeKnjizenja, 
             List<Parovi> parovi = null)
         {
-            _parovi = parovi;
+            Parovi = parovi;
             _postavkeKnjizenja = postavkeKnjizenja;
             _obj = obj;
             string model = obj.GetType().Name;
@@ -105,9 +105,9 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             {
                 string naziv = _dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0];
                 string konto = "";
-                if (_parovi.Count != 0) 
+                if (Parovi.Count != 0) 
                 {
-                    var result = _parovi.Where(p => p.Naziv == naziv).FirstOrDefault();
+                    var result = Parovi.Where(p => p.Naziv == naziv).FirstOrDefault();
                     if(result != null)
                     {
                         konto = new KontniPlan().GetKontoById(result.Id_Konto);
@@ -268,12 +268,12 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                                         .Split(':')[0]
             };
             par.InsertData();
-            if (_parovi.Count > 0)
-                _parovi = _parovi.ElementAt(0).GetParoviList();
+            if (Parovi.Count > 0)
+                Parovi = Parovi.ElementAt(0).GetParoviList();
         }
 
         private readonly IDbObject _obj;
-        public  List<Parovi> _parovi { get; private set; }
+        public  List<Parovi> Parovi { get; private set; }
         private readonly List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly DataTable _dt;
         private readonly List<Label> _labelList;

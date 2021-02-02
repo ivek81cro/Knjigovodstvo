@@ -84,7 +84,7 @@ namespace Knjigovodstvo.FinancialReports
         }
 
         private DataTable _dt = new DataTable();
-        private DbDataGet _dataGet = new DbDataGet();
+        private readonly DbDataGet _dataGet = new DbDataGet();
 
         public int Id { get; set; } = 0;
         public string Konto { get; set; } = "";

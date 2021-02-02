@@ -16,7 +16,7 @@ namespace Knjigovodstvo.Global
 
         private void LoadListKontniPlan()
         {
-            DataTable table = new KontniPlan().GetObjectDataTable($"Konto LIKE '1%' OR Konto LIKE '2%' OR Konto LIKE '4%'");
+            DataTable table = new KontniPlan().GetObjectDataTable();
             if (table.Rows.Count > 0)
             {
                 foreach (DataRow row in table.Rows)
@@ -38,6 +38,6 @@ namespace Knjigovodstvo.Global
             labelKontoDescription.Text = "Opis konta: " + opis;
         }
 
-        private List<KontniPlan> _kontniPlan = new List<KontniPlan>();
+        private readonly List<KontniPlan> _kontniPlan = new List<KontniPlan>();
     }
 }

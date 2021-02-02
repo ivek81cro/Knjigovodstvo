@@ -128,7 +128,7 @@ namespace Knjigovodstvo.URA
                 if (_noControllDialog)
                 {
                     form.ProcessDirectly();
-                    parovi = form._parovi;
+                    parovi = form.Parovi;
                 }
                 else
                 {
