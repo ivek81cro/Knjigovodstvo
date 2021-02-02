@@ -34,10 +34,11 @@ namespace Knjigovodstvo.BankStatements
             this.labelDatumIzvoda = new System.Windows.Forms.Label();
             this.labelRedniBroj = new System.Windows.Forms.Label();
             this.labelStanjeZavrsno = new System.Windows.Forms.Label();
-            this.dataGridView1 = new Knjigovodstvo.DBDataGridView();
+            this.dbDataGridView1 = new Knjigovodstvo.DBDataGridView();
             this.buttonSpremi = new System.Windows.Forms.Button();
-            this.accountPairing = new AccountPairing(dataGridView1);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.kontoDescription = new Knjigovodstvo.Global.KontoDescription();
+            this.accountPairing = new AccountPairing(dbDataGridView1);
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelDatumIzvoda
@@ -67,23 +68,23 @@ namespace Knjigovodstvo.BankStatements
             this.labelStanjeZavrsno.TabIndex = 2;
             this.labelStanjeZavrsno.Text = "label1";
             // 
-            // dataGridView1
+            // dbDataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dbDataGridView1.AllowUserToAddRows = false;
+            this.dbDataGridView1.AllowUserToDeleteRows = false;
+            this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 121);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = false;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(646, 519);
-            this.dataGridView1.TabIndex = 10;
-            this.dataGridView1.Text = "dataGridView1";
+            this.dbDataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dbDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dbDataGridView1.Location = new System.Drawing.Point(12, 121);
+            this.dbDataGridView1.MultiSelect = false;
+            this.dbDataGridView1.Name = "dbDataGridView1";
+            this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dbDataGridView1.Size = new System.Drawing.Size(646, 519);
+            this.dbDataGridView1.TabIndex = 10;
+            this.dbDataGridView1.Text = "dataGridView1";
+            this.dbDataGridView1.SelectionChanged += new System.EventHandler(this.DataGridView1_SelectionChanged);
             // 
             // buttonSpremi
             // 
@@ -102,21 +103,29 @@ namespace Knjigovodstvo.BankStatements
             this.accountPairing.Size = new System.Drawing.Size(206, 82);
             this.accountPairing.TabIndex = 12;
             // 
+            // kontoDescription
+            // 
+            this.kontoDescription.Location = new System.Drawing.Point(94, 92);
+            this.kontoDescription.Name = "kontoDescription";
+            this.kontoDescription.Size = new System.Drawing.Size(365, 23);
+            this.kontoDescription.TabIndex = 13;
+            // 
             // IzvodiPojedinacniForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(670, 652);
             this.Controls.Add(this.buttonSpremi);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dbDataGridView1);
             this.Controls.Add(this.labelStanjeZavrsno);
             this.Controls.Add(this.labelRedniBroj);
             this.Controls.Add(this.labelDatumIzvoda);
             this.Controls.Add(this.accountPairing);
+            this.Controls.Add(this.kontoDescription);
             this.Name = "IzvodiPojedinacniForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Izvod";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,18 +135,19 @@ namespace Knjigovodstvo.BankStatements
 
         private void CustomiseColumns()
         {
-            dataGridView1.Columns["Id"].Visible = false;
-            dataGridView1.Columns["Id_izvod"].Visible = false;
-            dataGridView1.Columns["Oznaka"].Visible = false;
-            dataGridView1.Columns["Opis"].ReadOnly = true;
-            dataGridView1.Columns["Naziv"].ReadOnly = true;
+            dbDataGridView1.Columns["Id"].Visible = false;
+            dbDataGridView1.Columns["Id_izvod"].Visible = false;
+            dbDataGridView1.Columns["Oznaka"].Visible = false;
+            dbDataGridView1.Columns["Opis"].ReadOnly = true;
+            dbDataGridView1.Columns["Naziv"].ReadOnly = true;
         }
 
         private System.Windows.Forms.Label labelDatumIzvoda;
         private System.Windows.Forms.Label labelRedniBroj;
         private System.Windows.Forms.Label labelStanjeZavrsno;
-        private DBDataGridView dataGridView1;
+        private DBDataGridView dbDataGridView1;
         private System.Windows.Forms.Button buttonSpremi;
         private AccountPairing accountPairing;
+        private KontoDescription kontoDescription;
     }
 }

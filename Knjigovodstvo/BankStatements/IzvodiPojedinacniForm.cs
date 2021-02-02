@@ -1,4 +1,5 @@
 ﻿using Knjigovodstvo.FinancialReports;
+using Knjigovodstvo.Global;
 using Knjigovodstvo.Global.BaseClass;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +32,7 @@ namespace Knjigovodstvo.BankStatements
             _bindingList = new BindingList<IzvodPromet>(_izvod.Promet);
             _dSource = new BindingSource(_bindingList, null);
 
-            dataGridView1.DataSource = _dSource;
+            dbDataGridView1.DataSource = _dSource;
 
             FillKontoColumn();
             CustomiseColumns();
@@ -41,7 +42,7 @@ namespace Knjigovodstvo.BankStatements
         {
             List<Parovi> parovi = new IzvodParovi().GetParoviList();
             KontniPlan konto = new KontniPlan();
-            foreach(DataGridViewRow row in dataGridView1.Rows)
+            foreach(DataGridViewRow row in dbDataGridView1.Rows)
             {
                 if (row.Cells["Konto"].Value.ToString() == "" &&
                     parovi.Exists(p => p.Naziv == row.Cells["Naziv"].Value.ToString()))
@@ -56,9 +57,14 @@ namespace Knjigovodstvo.BankStatements
             }
         }
 
+        private void DataGridView1_SelectionChanged(object sender, System.EventArgs e)
+        {
+            kontoDescription.SetLabelKontoDescription(dbDataGridView1);
+        }
+
         private void ButtonSpremi_Click(object sender, System.EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            foreach (DataGridViewRow row in dbDataGridView1.Rows)
             {
                 if (row.Cells["Konto"].Value.ToString() == "")
                 {
@@ -91,7 +97,7 @@ namespace Knjigovodstvo.BankStatements
         }
         
         private readonly Izvod _izvod;
-        BindingSource _dSource = new BindingSource();
-        BindingList<IzvodPromet> _bindingList;
+        private BindingSource _dSource = new BindingSource();
+        private BindingList<IzvodPromet> _bindingList;
     }
 }

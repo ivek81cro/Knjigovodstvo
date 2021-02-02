@@ -1,8 +1,6 @@
-﻿using Knjigovodstvo.BankStatements;
-using Knjigovodstvo.Database;
+﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
 using System.Data;
-using System.Linq;
 
 namespace Knjigovodstvo.FinancialReports
 {
@@ -50,8 +48,14 @@ namespace Knjigovodstvo.FinancialReports
             return Id = int.Parse(_dt.Rows[0]["Id"].ToString());
         }
 
-        public string GetDescriptiopnByKontoNumber(string konto)
+        public string GetDescriptionByKontoNumber(string konto)
         {
+            if (konto == "")
+            {
+                Opis = "";
+                return "";
+            }
+
             _dt = GetObjectDataTable($"Konto='{konto}'");
             if (_dt.Rows.Count > 0)
             {

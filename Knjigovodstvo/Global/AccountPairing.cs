@@ -1,5 +1,6 @@
 ﻿using Knjigovodstvo.BankStatements;
 using Knjigovodstvo.FinancialReports;
+using Knjigovodstvo.Global.BaseClass;
 using Knjigovodstvo.Partners;
 using System;
 using System.Windows.Forms;
@@ -40,7 +41,7 @@ namespace Knjigovodstvo.Global
                 Konto = row.Cells["Dugovna"].Value.ToString() == "0" ? partner.KontoK : partner.KontoD
             };
 
-            IzvodParovi par = new IzvodParovi()
+            Parovi par = new IzvodParovi()
             {
                 Naziv = naziv,
                 Id_Konto = kontniPlan.GetIdByKontoNumber()
@@ -63,7 +64,7 @@ namespace Knjigovodstvo.Global
             string naziv = row.Cells["Naziv"].Value.ToString();
             using var form = new KontniPlanPregledForm();
             form.ShowDialog();
-            IzvodParovi par = new IzvodParovi()
+            Parovi par = new IzvodParovi()
             {
                 Naziv = naziv,
                 Id_Konto = form.Id_Konto

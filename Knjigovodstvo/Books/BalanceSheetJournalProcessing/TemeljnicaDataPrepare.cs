@@ -163,7 +163,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 dt.Rows.Add(
                     knjiga.Id,
                     postavka.Naziv_stupca,
-                    new KontniPlan().GetDescriptiopnByKontoNumber(postavka.Konto),
+                    new KontniPlan().GetDescriptionByKontoNumber(postavka.Konto),
                     postavka.Konto,
                     knjiga.Datum_obracuna,
                     postavka.Strana == "Dugovna",
@@ -182,7 +182,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 dt.Rows.Add(
                     knjiga.Id,
                     postavka.Naziv_stupca,
-                    new KontniPlan().GetDescriptiopnByKontoNumber(postavka.Konto) + "-Placa za " + knjiga.Datum_Do,
+                    new KontniPlan().GetDescriptionByKontoNumber(postavka.Konto) + "-Placa za " + knjiga.Datum_Do,
                     postavka.Konto,
                     knjiga.Datum_obracuna,
                     postavka.Strana == "Dugovna",

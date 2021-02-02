@@ -264,7 +264,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         }
 
         private readonly IDbObject _obj;
-        public List<Parovi> _parovi { get; private set; }
+        public  List<Parovi> _parovi { get; private set; }
         private readonly List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly DataTable _dt;
         private readonly List<Label> _labelList;
