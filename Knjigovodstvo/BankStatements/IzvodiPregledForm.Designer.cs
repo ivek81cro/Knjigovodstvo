@@ -1,4 +1,6 @@
 ﻿
+using Knjigovodstvo.Global;
+
 namespace Knjigovodstvo.BankStatements
 {
     partial class IzvodiPregledForm
@@ -29,7 +31,7 @@ namespace Knjigovodstvo.BankStatements
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridViewStavke = new System.Windows.Forms.DataGridView();
+            this.dbDataGridViewStavke = new DBDataGridView();
             this.buttonUcitajIzvod = new System.Windows.Forms.Button();
             this.dataGridViewIzvodi = new System.Windows.Forms.DataGridView();
             this.buttonOpenIzvod = new System.Windows.Forms.Button();
@@ -40,26 +42,28 @@ namespace Knjigovodstvo.BankStatements
             this.labelStanjePocetno = new System.Windows.Forms.Label();
             this.labelStanjeZavrsno = new System.Windows.Forms.Label();
             this.groupBoxStanje = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStavke)).BeginInit();
+            this.kontoDescription = new Knjigovodstvo.Global.KontoDescription();
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataGridViewStavke)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIzvodi)).BeginInit();
             this.groupBoxStanje.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridViewStavke
             // 
-            this.dataGridViewStavke.AllowUserToAddRows = false;
-            this.dataGridViewStavke.AllowUserToDeleteRows = false;
-            this.dataGridViewStavke.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dbDataGridViewStavke.AllowUserToAddRows = false;
+            this.dbDataGridViewStavke.AllowUserToDeleteRows = false;
+            this.dbDataGridViewStavke.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.dataGridViewStavke.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridViewStavke.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewStavke.Location = new System.Drawing.Point(12, 139);
-            this.dataGridViewStavke.Name = "dataGridViewStavke";
-            this.dataGridViewStavke.ReadOnly = true;
-            this.dataGridViewStavke.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewStavke.Size = new System.Drawing.Size(859, 482);
-            this.dataGridViewStavke.TabIndex = 10;
-            this.dataGridViewStavke.Text = "dataGridViewStavke";
+            this.dbDataGridViewStavke.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dbDataGridViewStavke.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dbDataGridViewStavke.Location = new System.Drawing.Point(12, 152);
+            this.dbDataGridViewStavke.Name = "dataGridViewStavke";
+            this.dbDataGridViewStavke.ReadOnly = true;
+            this.dbDataGridViewStavke.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dbDataGridViewStavke.Size = new System.Drawing.Size(859, 469);
+            this.dbDataGridViewStavke.TabIndex = 10;
+            this.dbDataGridViewStavke.Text = "dataGridViewStavke";
+            this.dbDataGridViewStavke.SelectionChanged += new System.EventHandler(this.DataGridViewStavke_SelectionChanged);
             // 
             // buttonUcitajIzvod
             // 
@@ -81,11 +85,11 @@ namespace Knjigovodstvo.BankStatements
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridViewIzvodi.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridViewIzvodi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewIzvodi.Location = new System.Drawing.Point(877, 139);
+            this.dataGridViewIzvodi.Location = new System.Drawing.Point(877, 152);
             this.dataGridViewIzvodi.Name = "dataGridViewIzvodi";
             this.dataGridViewIzvodi.ReadOnly = true;
             this.dataGridViewIzvodi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewIzvodi.Size = new System.Drawing.Size(255, 482);
+            this.dataGridViewIzvodi.Size = new System.Drawing.Size(255, 469);
             this.dataGridViewIzvodi.TabIndex = 12;
             this.dataGridViewIzvodi.Text = "dataGridView2";
             this.dataGridViewIzvodi.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewIzvodi_CellMouseDoubleClick);
@@ -113,7 +117,7 @@ namespace Knjigovodstvo.BankStatements
             // buttonKnjizi
             // 
             this.buttonKnjizi.Enabled = false;
-            this.buttonKnjizi.Location = new System.Drawing.Point(12, 110);
+            this.buttonKnjizi.Location = new System.Drawing.Point(12, 123);
             this.buttonKnjizi.Name = "buttonKnjizi";
             this.buttonKnjizi.Size = new System.Drawing.Size(75, 23);
             this.buttonKnjizi.TabIndex = 15;
@@ -175,12 +179,19 @@ namespace Knjigovodstvo.BankStatements
             this.groupBoxStanje.Controls.Add(this.labelStanjeZavrsno);
             this.groupBoxStanje.Controls.Add(this.labelDuguje);
             this.groupBoxStanje.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBoxStanje.Location = new System.Drawing.Point(181, 29);
+            this.groupBoxStanje.Location = new System.Drawing.Point(181, 13);
             this.groupBoxStanje.Name = "groupBoxStanje";
             this.groupBoxStanje.Size = new System.Drawing.Size(690, 100);
             this.groupBoxStanje.TabIndex = 20;
             this.groupBoxStanje.TabStop = false;
             this.groupBoxStanje.Text = "Stanje izvoda";
+            // 
+            // kontoDescription
+            // 
+            this.kontoDescription.Location = new System.Drawing.Point(95, 123);
+            this.kontoDescription.Name = "kontoDescription";
+            this.kontoDescription.Size = new System.Drawing.Size(537, 23);
+            this.kontoDescription.TabIndex = 13;
             // 
             // IzvodiPregledForm
             // 
@@ -193,10 +204,11 @@ namespace Knjigovodstvo.BankStatements
             this.Controls.Add(this.buttonOpenIzvod);
             this.Controls.Add(this.dataGridViewIzvodi);
             this.Controls.Add(this.buttonUcitajIzvod);
-            this.Controls.Add(this.dataGridViewStavke);
+            this.Controls.Add(this.dbDataGridViewStavke);
+            this.Controls.Add(this.kontoDescription);
             this.Name = "IzvodiPregledForm";
             this.Text = "IzvodiPregledForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStavke)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataGridViewStavke)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewIzvodi)).EndInit();
             this.groupBoxStanje.ResumeLayout(false);
             this.groupBoxStanje.PerformLayout();
@@ -215,11 +227,11 @@ namespace Knjigovodstvo.BankStatements
         }
         private void CustomiseColumnWidthDetalji()
         {
-            dataGridViewStavke.Columns[0].Width = (int)(dataGridViewStavke.Width * 0.3);
-            dataGridViewStavke.Columns[1].Width = (int)(dataGridViewStavke.Width * 0.3);
+            dbDataGridViewStavke.Columns[0].Width = (int)(dbDataGridViewStavke.Width * 0.3);
+            dbDataGridViewStavke.Columns[1].Width = (int)(dbDataGridViewStavke.Width * 0.3);
         }
 
-        private System.Windows.Forms.DataGridView dataGridViewStavke;
+        private DBDataGridView dbDataGridViewStavke;
         private System.Windows.Forms.Button buttonUcitajIzvod;
         private System.Windows.Forms.DataGridView dataGridViewIzvodi;
         private System.Windows.Forms.Button buttonOpenIzvod;
@@ -230,5 +242,6 @@ namespace Knjigovodstvo.BankStatements
         private System.Windows.Forms.Label labelStanjePocetno;
         private System.Windows.Forms.Label labelStanjeZavrsno;
         private System.Windows.Forms.GroupBox groupBoxStanje;
+        private KontoDescription kontoDescription;
     }
 }

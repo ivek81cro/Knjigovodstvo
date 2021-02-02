@@ -98,7 +98,7 @@ namespace Knjigovodstvo.BankStatements
                 int redniBroj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
                 _izvod.GetIzvodByRedniBroj(redniBroj);
 
-                dataGridViewStavke.DataSource = _izvod.GetPrometData();
+                dbDataGridViewStavke.DataSource = _izvod.GetPrometData();
                 CustomiseColumnWidthDetalji();
                 labelDuguje.Text = "Duguje: " + _izvod.Suma_dugovna.ToString();
                 labelPortazuje.Text = "Potražuje: " + _izvod.Suma_potrazna.ToString();
@@ -153,8 +153,14 @@ namespace Knjigovodstvo.BankStatements
 
         private void ClearDataGridView()
         {
-            dataGridViewStavke.DataSource = null;
-            dataGridViewStavke.Rows.Clear();
+            dbDataGridViewStavke.DataSource = null;
+            dbDataGridViewStavke.Rows.Clear();
+        }
+
+        private void DataGridViewStavke_SelectionChanged(object sender, EventArgs e)
+        {
+            if(dbDataGridViewStavke.SelectedRows.Count > 0)
+                kontoDescription.SetLabelKontoDescription(dbDataGridViewStavke.SelectedRows[0]);
         }
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)

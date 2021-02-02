@@ -38,6 +38,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             this.labelDugovna = new System.Windows.Forms.Label();
             this.labelPotrazna = new System.Windows.Forms.Label();
             this.buttonUpariKonto = new System.Windows.Forms.Button();
+            this.kontoDescription = new Knjigovodstvo.Global.KontoDescription();
             ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,22 +51,23 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dbDataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dbDataGridView1.ColumnHeadersHeight = 50;
-            this.dbDataGridView1.Location = new System.Drawing.Point(12, 12);
+            this.dbDataGridView1.Location = new System.Drawing.Point(12, 32);
             this.dbDataGridView1.Name = "dbDataGridView1";
             this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dbDataGridView1.Size = new System.Drawing.Size(991, 259);
+            this.dbDataGridView1.Size = new System.Drawing.Size(991, 293);
             this.dbDataGridView1.TabIndex = 0;
             this.dbDataGridView1.TabStop = false;
             this.dbDataGridView1.Text = "dataGridView1";
             this.dbDataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DbDataGridView1_CellDoubleClick);
             this.dbDataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DbDataGridView1_CellValueChanged);
+            this.dbDataGridView1.SelectionChanged += new System.EventHandler(this.DbDataGridView1_SelectionChanged);
             // 
             // buttonKnjizi
             // 
             this.buttonKnjizi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonKnjizi.BackColor = System.Drawing.SystemColors.ControlLight;
             this.buttonKnjizi.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonKnjizi.Location = new System.Drawing.Point(12, 324);
+            this.buttonKnjizi.Location = new System.Drawing.Point(12, 378);
             this.buttonKnjizi.Name = "buttonKnjizi";
             this.buttonKnjizi.Size = new System.Drawing.Size(75, 23);
             this.buttonKnjizi.TabIndex = 11;
@@ -78,7 +80,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             this.buttonBrisiRed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonBrisiRed.BackColor = System.Drawing.SystemColors.ControlLight;
             this.buttonBrisiRed.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonBrisiRed.Location = new System.Drawing.Point(12, 277);
+            this.buttonBrisiRed.Location = new System.Drawing.Point(12, 331);
             this.buttonBrisiRed.Name = "buttonBrisiRed";
             this.buttonBrisiRed.Size = new System.Drawing.Size(75, 23);
             this.buttonBrisiRed.TabIndex = 12;
@@ -91,7 +93,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             this.buttonDodajRed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonDodajRed.BackColor = System.Drawing.SystemColors.ControlLight;
             this.buttonDodajRed.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonDodajRed.Location = new System.Drawing.Point(93, 277);
+            this.buttonDodajRed.Location = new System.Drawing.Point(93, 331);
             this.buttonDodajRed.Name = "buttonDodajRed";
             this.buttonDodajRed.Size = new System.Drawing.Size(75, 23);
             this.buttonDodajRed.TabIndex = 13;
@@ -104,7 +106,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             this.labelDugovna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelDugovna.AutoSize = true;
             this.labelDugovna.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelDugovna.Location = new System.Drawing.Point(484, 286);
+            this.labelDugovna.Location = new System.Drawing.Point(484, 340);
             this.labelDugovna.Name = "labelDugovna";
             this.labelDugovna.Size = new System.Drawing.Size(80, 21);
             this.labelDugovna.TabIndex = 0;
@@ -115,7 +117,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             this.labelPotrazna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPotrazna.AutoSize = true;
             this.labelPotrazna.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelPotrazna.Location = new System.Drawing.Point(720, 286);
+            this.labelPotrazna.Location = new System.Drawing.Point(720, 340);
             this.labelPotrazna.Name = "labelPotrazna";
             this.labelPotrazna.Size = new System.Drawing.Size(77, 21);
             this.labelPotrazna.TabIndex = 1;
@@ -123,9 +125,10 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             // 
             // buttonUpariKonto
             // 
+            this.buttonUpariKonto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonUpariKonto.BackColor = System.Drawing.SystemColors.ControlLight;
             this.buttonUpariKonto.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonUpariKonto.Location = new System.Drawing.Point(174, 277);
+            this.buttonUpariKonto.Location = new System.Drawing.Point(174, 331);
             this.buttonUpariKonto.Name = "buttonUpariKonto";
             this.buttonUpariKonto.Size = new System.Drawing.Size(84, 23);
             this.buttonUpariKonto.TabIndex = 14;
@@ -133,12 +136,20 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             this.buttonUpariKonto.UseVisualStyleBackColor = false;
             this.buttonUpariKonto.Click += new System.EventHandler(this.ButtonUpariKonto_Click);
             // 
+            // kontoDescription1
+            // 
+            this.kontoDescription.Location = new System.Drawing.Point(12, 0);
+            this.kontoDescription.Name = "kontoDescription1";
+            this.kontoDescription.Size = new System.Drawing.Size(510, 26);
+            this.kontoDescription.TabIndex = 15;
+            // 
             // TemeljnicaPripremaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1015, 359);
+            this.ClientSize = new System.Drawing.Size(1015, 413);
+            this.Controls.Add(this.kontoDescription);
             this.Controls.Add(this.buttonUpariKonto);
             this.Controls.Add(this.labelDugovna);
             this.Controls.Add(this.labelPotrazna);
@@ -166,5 +177,6 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         private System.Windows.Forms.Label labelPotrazna;
         private System.Windows.Forms.Label labelDugovna;
         private System.Windows.Forms.Button buttonUpariKonto;
+        private KontoDescription kontoDescription;
     }
 }

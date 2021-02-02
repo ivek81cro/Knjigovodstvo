@@ -59,7 +59,8 @@ namespace Knjigovodstvo.BankStatements
 
         private void DataGridView1_SelectionChanged(object sender, System.EventArgs e)
         {
-            kontoDescription.SetLabelKontoDescription(dbDataGridView1);
+            if (dbDataGridView1.SelectedRows.Count > 0)
+                kontoDescription.SetLabelKontoDescription(dbDataGridView1.SelectedRows[0]);
         }
 
         private void ButtonSpremi_Click(object sender, System.EventArgs e)

@@ -213,6 +213,15 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             ButtonKnjizi_Click(null, null);
         }
 
+        private void DbDataGridView1_SelectionChanged(object sender, System.EventArgs e)
+        {
+            if (dbDataGridView1.SelectedCells.Count > 0)
+            {
+                int selectedIndex = dbDataGridView1.SelectedCells[0].RowIndex;
+                kontoDescription.SetLabelKontoDescription(dbDataGridView1.Rows[selectedIndex]);
+            }
+        }
+
         private void ButtonBrisiRed_Click(object sender, System.EventArgs e)
         {
             if(dbDataGridView1.SelectedCells.Count > 0)

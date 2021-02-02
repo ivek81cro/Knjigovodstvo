@@ -16,7 +16,7 @@ namespace Knjigovodstvo.Global
 
         private void LoadListKontniPlan()
         {
-            DataTable table = new KontniPlan().GetObjectDataTable($"Konto LIKE '1200%' OR Konto LIKE '2200%'");
+            DataTable table = new KontniPlan().GetObjectDataTable($"Konto LIKE '1%' OR Konto LIKE '2%' OR Konto LIKE '4%'");
             if (table.Rows.Count > 0)
             {
                 foreach (DataRow row in table.Rows)
@@ -30,16 +30,12 @@ namespace Knjigovodstvo.Global
             }
         }
 
-        public void SetLabelKontoDescription(DBDataGridView dbDataGridView1)
+        public void SetLabelKontoDescription(DataGridViewRow row)
         {
-            if (dbDataGridView1.SelectedRows.Count > 0 && _kontniPlan.Count > 0)
-            {
-                DataGridViewRow row = dbDataGridView1.SelectedRows[0];
-                string konto = row.Cells["Konto"].Value.ToString();
-                var text = _kontniPlan.Find(k => k.Konto == konto);
-                string opis = text == null ? "" : text.Opis;
-                labelKontoDescription.Text = opis;
-            }
+            string konto = row.Cells["Konto"].Value.ToString();
+            var text = _kontniPlan.Find(k => k.Konto == konto);
+            string opis = text == null ? "" : text.Opis;
+            labelKontoDescription.Text = "Opis konta: " + opis;
         }
 
         private List<KontniPlan> _kontniPlan = new List<KontniPlan>();
