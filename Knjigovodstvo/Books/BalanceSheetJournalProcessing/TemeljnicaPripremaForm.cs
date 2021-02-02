@@ -268,7 +268,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                                         .Split(':')[0]
             };
             par.InsertData();
-            if (Parovi.Count > 0)
+            if (Parovi.Count > 0 && Parovi != null)
                 Parovi = Parovi.ElementAt(0).GetParoviList();
         }
 
