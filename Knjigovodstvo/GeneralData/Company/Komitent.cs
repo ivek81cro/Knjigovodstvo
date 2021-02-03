@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Code.Validators;
+﻿using Knjigovodstvo.City;
+using Knjigovodstvo.Code.Validators;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.Global;
 using Knjigovodstvo.Interface;
@@ -50,7 +51,7 @@ namespace Knjigovodstvo
             OpciPodaci.Id = int.Parse(dt.Rows[0]["Id"].ToString());
             OpciPodaci.Iban = dt.Rows[0]["Iban"].ToString();
             OpciPodaci.Mbo = dt.Rows[0]["Mbo"].ToString();
-            Adresa.Grad.Mjesto = dt.Rows[0]["Mjesto"].ToString();
+            Adresa.Grad = _grad.GetGradByMjesto(dt.Rows[0]["Mjesto"].ToString());
             Adresa.Ulica = dt.Rows[0]["Ulica"].ToString();
             Adresa.Broj = dt.Rows[0]["Broj"].ToString();
             Kontakt.Email = dt.Rows[0]["Email"].ToString();
@@ -60,6 +61,8 @@ namespace Knjigovodstvo
             Sifra_djelatnosti = dt.Rows[0]["Sifra_djelatnosti"].ToString();
             Naziv_djelatnosti = dt.Rows[0]["Naziv_djelatnosti"].ToString();
         }
+
+        private readonly Grad _grad = new Grad();
 
         public OpciPodaci OpciPodaci { get; set; } = new OpciPodaci();
         public Adresa Adresa { get; set; } = new Adresa();

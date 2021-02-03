@@ -39,6 +39,7 @@ namespace Knjigovodstvo.JoppdDocument
                     P8 = (tOznakaMjesec)Enum.Parse(typeof(tOznakaMjesec), "Item" + e.Mjesec),
                     P9 = (tOznakaRadnoVrijeme)Enum.Parse(typeof(tOznakaRadnoVrijeme), "Item" + e.Vrijeme),
                     P10 = e.IsPoslodavac() ? int.Parse((Convert.ToDateTime(e.Datum_Do) - Convert.ToDateTime(e.Datum_Od)).Days.ToString()) + 1 : e.Sati,
+                    P100 = e.IsPoslodavac() ? 0 : e.Sati_praznika,
                     P101 = Convert.ToDateTime(e.Datum_Od),
                     P102 = Convert.ToDateTime(e.Datum_Do),
                     P11 = e.Bruto,
@@ -167,9 +168,9 @@ namespace Knjigovodstvo.JoppdDocument
 
             sJOPPDmetapodaci meta = new sJOPPDmetapodaci()
             {
-                Datum = new sDatumTemeljni() { Value = datum.AddHours(12) },
+                Datum = new sDatumTemeljni() { Value = datum },
                 Naslov = new sNaslovTemeljni() { Value = "Izvješće o primicima, porezu na dohodak i prirezu te doprinosima za obvezna osiguranja" },
-                Autor = new sAutorTemeljni() { Value = "Ivan Batinić" },
+                Autor = new sAutorTemeljni() { Value = izvjesceSastavio },
                 Format = new sFormatTemeljni() { Value = tFormat.textxml },
                 Jezik = new sJezikTemeljni() { Value = tJezik.hrHR },
                 Identifikator = new sIdentifikatorTemeljni() { Value = Guid.NewGuid().ToString() },

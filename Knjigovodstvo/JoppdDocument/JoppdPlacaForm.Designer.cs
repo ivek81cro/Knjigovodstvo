@@ -37,11 +37,9 @@ namespace Knjigovodstvo.JoppdDocument
             this.checkBoxSamoDodaci = new System.Windows.Forms.CheckBox();
             this.comboBoxDodaci = new System.Windows.Forms.ComboBox();
             this.checkBoxBezDodataka = new System.Windows.Forms.CheckBox();
-            this.checkBoxPojedinacno = new System.Windows.Forms.CheckBox();
-            this.comboBoxZaposlenik = new System.Windows.Forms.ComboBox();
             this.labelSatiRada = new System.Windows.Forms.Label();
             this.textBoxSatiRada = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new Knjigovodstvo.DBDataGridView();
+            this.dbDataGridView1 = new Knjigovodstvo.DBDataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxIzvjesceSastavioIme = new System.Windows.Forms.TextBox();
             this.buttonSnimiPodatke = new System.Windows.Forms.Button();
@@ -50,7 +48,9 @@ namespace Knjigovodstvo.JoppdDocument
             this.groupBoxRazdoblje = new System.Windows.Forms.GroupBox();
             this.groupBoxOpcije = new System.Windows.Forms.GroupBox();
             this.groupBoxOpci = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxSatiPraznika = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).BeginInit();
             this.groupBoxRazdoblje.SuspendLayout();
             this.groupBoxOpcije.SuspendLayout();
             this.groupBoxOpci.SuspendLayout();
@@ -126,64 +126,45 @@ namespace Knjigovodstvo.JoppdDocument
             this.checkBoxBezDodataka.UseVisualStyleBackColor = true;
             this.checkBoxBezDodataka.CheckStateChanged += new System.EventHandler(this.CheckBoxBezDodataka_CheckStateChanged);
             // 
-            // checkBoxPojedinacno
-            // 
-            this.checkBoxPojedinacno.AutoSize = true;
-            this.checkBoxPojedinacno.Location = new System.Drawing.Point(11, 94);
-            this.checkBoxPojedinacno.Name = "checkBoxPojedinacno";
-            this.checkBoxPojedinacno.Size = new System.Drawing.Size(92, 19);
-            this.checkBoxPojedinacno.TabIndex = 7;
-            this.checkBoxPojedinacno.Text = "Pojedinačno";
-            this.checkBoxPojedinacno.UseVisualStyleBackColor = true;
-            // 
-            // comboBoxZaposlenik
-            // 
-            this.comboBoxZaposlenik.FormattingEnabled = true;
-            this.comboBoxZaposlenik.Location = new System.Drawing.Point(112, 90);
-            this.comboBoxZaposlenik.Name = "comboBoxZaposlenik";
-            this.comboBoxZaposlenik.Size = new System.Drawing.Size(199, 23);
-            this.comboBoxZaposlenik.TabIndex = 5;
-            this.comboBoxZaposlenik.SelectionChangeCommitted += new System.EventHandler(this.ComboBoxZaposlenik_SelectionChangeCommitted);
-            // 
             // labelSatiRada
             // 
             this.labelSatiRada.AutoSize = true;
-            this.labelSatiRada.Location = new System.Drawing.Point(6, 53);
+            this.labelSatiRada.Location = new System.Drawing.Point(6, 47);
             this.labelSatiRada.Name = "labelSatiRada";
-            this.labelSatiRada.Size = new System.Drawing.Size(109, 15);
+            this.labelSatiRada.Size = new System.Drawing.Size(65, 15);
             this.labelSatiRada.TabIndex = 8;
-            this.labelSatiRada.Text = "Sati rada u mjesecu";
+            this.labelSatiRada.Text = "Radnih sati";
             // 
             // textBoxSatiRada
             // 
-            this.textBoxSatiRada.Location = new System.Drawing.Point(119, 50);
+            this.textBoxSatiRada.Location = new System.Drawing.Point(119, 44);
             this.textBoxSatiRada.Name = "textBoxSatiRada";
             this.textBoxSatiRada.Size = new System.Drawing.Size(56, 23);
             this.textBoxSatiRada.TabIndex = 9;
             this.textBoxSatiRada.Text = "168";
             this.textBoxSatiRada.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxSatiRada_KeyPress);
             // 
-            // dataGridView1
+            // dbDataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dbDataGridView1.AllowUserToAddRows = false;
+            this.dbDataGridView1.AllowUserToDeleteRows = false;
+            this.dbDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(9, 162);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(935, 369);
-            this.dataGridView1.TabIndex = 10;
-            this.dataGridView1.Text = "dataGridView1";
+            this.dbDataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dbDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dbDataGridView1.Location = new System.Drawing.Point(9, 162);
+            this.dbDataGridView1.Name = "dbDataGridView1";
+            this.dbDataGridView1.ReadOnly = true;
+            this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dbDataGridView1.Size = new System.Drawing.Size(935, 369);
+            this.dbDataGridView1.TabIndex = 10;
+            this.dbDataGridView1.Text = "dataGridView1";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 84);
+            this.label1.Location = new System.Drawing.Point(6, 106);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 15);
             this.label1.TabIndex = 11;
@@ -191,7 +172,7 @@ namespace Knjigovodstvo.JoppdDocument
             // 
             // textBoxIzvjesceSastavioIme
             // 
-            this.textBoxIzvjesceSastavioIme.Location = new System.Drawing.Point(119, 81);
+            this.textBoxIzvjesceSastavioIme.Location = new System.Drawing.Point(119, 103);
             this.textBoxIzvjesceSastavioIme.Name = "textBoxIzvjesceSastavioIme";
             this.textBoxIzvjesceSastavioIme.Size = new System.Drawing.Size(136, 23);
             this.textBoxIzvjesceSastavioIme.TabIndex = 12;
@@ -236,11 +217,9 @@ namespace Knjigovodstvo.JoppdDocument
             // 
             // groupBoxOpcije
             // 
-            this.groupBoxOpcije.Controls.Add(this.comboBoxZaposlenik);
             this.groupBoxOpcije.Controls.Add(this.checkBoxSamoDodaci);
             this.groupBoxOpcije.Controls.Add(this.comboBoxDodaci);
             this.groupBoxOpcije.Controls.Add(this.checkBoxBezDodataka);
-            this.groupBoxOpcije.Controls.Add(this.checkBoxPojedinacno);
             this.groupBoxOpcije.Location = new System.Drawing.Point(481, 12);
             this.groupBoxOpcije.Name = "groupBoxOpcije";
             this.groupBoxOpcije.Size = new System.Drawing.Size(322, 132);
@@ -250,6 +229,8 @@ namespace Knjigovodstvo.JoppdDocument
             // 
             // groupBoxOpci
             // 
+            this.groupBoxOpci.Controls.Add(this.label2);
+            this.groupBoxOpci.Controls.Add(this.textBoxSatiPraznika);
             this.groupBoxOpci.Controls.Add(this.labelDatumObrasca);
             this.groupBoxOpci.Controls.Add(this.dateTimePicker1);
             this.groupBoxOpci.Controls.Add(this.labelBrojObrasca);
@@ -264,6 +245,23 @@ namespace Knjigovodstvo.JoppdDocument
             this.groupBoxOpci.TabStop = false;
             this.groupBoxOpci.Text = "Opći";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 77);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(73, 15);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Sati praznika";
+            // 
+            // textBoxSatiPraznika
+            // 
+            this.textBoxSatiPraznika.Location = new System.Drawing.Point(119, 74);
+            this.textBoxSatiPraznika.Name = "textBoxSatiPraznika";
+            this.textBoxSatiPraznika.Size = new System.Drawing.Size(56, 23);
+            this.textBoxSatiPraznika.TabIndex = 14;
+            this.textBoxSatiPraznika.Text = "0";
+            // 
             // JoppdPlacaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -273,11 +271,11 @@ namespace Knjigovodstvo.JoppdDocument
             this.Controls.Add(this.groupBoxOpcije);
             this.Controls.Add(this.groupBoxRazdoblje);
             this.Controls.Add(this.buttonSnimiPodatke);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dbDataGridView1);
             this.Controls.Add(this.buttonPripremiPodatke);
             this.Name = "JoppdPlacaForm";
             this.Text = "Joppd obrazac";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbDataGridView1)).EndInit();
             this.groupBoxRazdoblje.ResumeLayout(false);
             this.groupBoxOpcije.ResumeLayout(false);
             this.groupBoxOpcije.PerformLayout();
@@ -296,11 +294,9 @@ namespace Knjigovodstvo.JoppdDocument
         private System.Windows.Forms.CheckBox checkBoxSamoDodaci;
         private System.Windows.Forms.ComboBox comboBoxDodaci;
         private System.Windows.Forms.CheckBox checkBoxBezDodataka;
-        private System.Windows.Forms.CheckBox checkBoxPojedinacno;
-        private System.Windows.Forms.ComboBox comboBoxZaposlenik;
         private System.Windows.Forms.Label labelSatiRada;
         private System.Windows.Forms.TextBox textBoxSatiRada;
-        private DBDataGridView dataGridView1;
+        private DBDataGridView dbDataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxIzvjesceSastavioIme;
         private Button buttonSnimiPodatke;
@@ -309,5 +305,7 @@ namespace Knjigovodstvo.JoppdDocument
         private GroupBox groupBoxRazdoblje;
         private GroupBox groupBoxOpcije;
         private GroupBox groupBoxOpci;
+        private Label label2;
+        private TextBox textBoxSatiPraznika;
     }
 }

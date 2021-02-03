@@ -1,11 +1,7 @@
-﻿using Knjigovodstvo.City;
-using Knjigovodstvo.Database;
-using Knjigovodstvo.Employee;
-using Knjigovodstvo.Global;
+﻿using Knjigovodstvo.Database;
+using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Wages;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -19,48 +15,32 @@ namespace Knjigovodstvo.JoppdDocument
         public JoppdPlacaForm()
         {
             InitializeComponent();
-            dateTimePicker1.Value = DateTime.Today;
+            InitializeDate();
             SetJoppdFormNumber();
-            FillComboBoxZaposlenik();
             FillComboBoxDodaci();
             GetKomitentData();
             buttonSnimiPodatke.Enabled = false;
         }
 
+        private void InitializeDate()
+        {
+            DateTime date = DateTime.Now.AddMonths(-1);
+            var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+            var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+            dateTimePickerRazdobljeOd.Value = firstDayOfMonth;
+            dateTimePickerRazdobljeDo.Value = lastDayOfMonth;
+        }
+
         private void GetKomitentData()
         {
-            _dt = new DbDataGet().GetTable(_komitent);
-            List<DataRow> row = _dt.AsEnumerable().ToList();
-            _komitent = (from DataRow dr in row
-                         select new Komitent()
-                         {
-                             OpciPodaci = new OpciPodaci()
-                             {
-                                 Id = int.Parse(dr["Id"].ToString()),
-                                 Oib = dr["Oib"].ToString(),
-                                 Naziv = dr["Naziv"].ToString(),
-                             },
-                             Kontakt = new Kontakt()
-                             {
-                                 Email = dr["Email"].ToString()
-                             },
-                             Adresa = new Adresa()
-                             {
-                                 Ulica = dr["Ulica"].ToString(),
-                                 Broj = dr["Broj"].ToString(),
-                                 Grad = new Grad()
-                                 {
-                                     Mjesto = dr["Mjesto"].ToString(),
-                                     Posta = dr["Posta"].ToString()
-                                 }
-                             }
-                         }).ToList().FirstOrDefault();
+            _komitent.GetData();
         }
 
         private void DateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             SetJoppdFormNumber();
         }
+
         /// <summary>
         /// Set correct form number
         /// </summary>
@@ -78,24 +58,11 @@ namespace Knjigovodstvo.JoppdDocument
                     dayOfYear = "0" + dayOfYear;
                 }
             }
-            formNumber = formNumber.Substring(formNumber.Length - 2) + dayOfYear;
+            formNumber = formNumber[^2..] + dayOfYear;
 
             labelBrojObrasca.Text = formNumber;
 
             return formNumber;
-        }
-
-        private void FillComboBoxZaposlenik()
-        {
-            _dt = new DbDataGet().GetTable(_zaposlenik);
-            _dt.Columns.Add(
-                "Ime i prezime",
-                typeof(string),
-                "oib + '   ' + Ime + ' ' + Prezime");
-            comboBoxZaposlenik.DataSource = _dt;
-            comboBoxZaposlenik.DisplayMember = "Ime i prezime";
-            comboBoxZaposlenik.SelectedItem = null;
-            comboBoxZaposlenik.Text = "--Odaberi zaposlenika--";
         }
 
         private void FillComboBoxDodaci()
@@ -109,68 +76,62 @@ namespace Knjigovodstvo.JoppdDocument
             comboBoxDodaci.DisplayMember = "Sifra i naziv";
             comboBoxDodaci.SelectedItem = null;
             comboBoxDodaci.Text = "--Odaberi Dodatak--";
-
         }
+
         /// <summary>
         /// Fetch data for JoppdB from database
         /// </summary>
-        private void FillDataForJoppdFile()
+        private void LoadDataGrid()
         {
-            _dt = new DbDataExecProcedure().GetTable(ProcedureNames.Joppd_podaci);
+            _dt = new DbDataCustomQuery().ExecuteQuery($"SELECT * FROM JoppdObrazac");//View in DB
+            _dt.Columns.Add("Sati_neradnih", typeof(string)).SetOrdinal(10);
+            _dt.Columns.Add("Sati_radnih", typeof(string)).SetOrdinal(10);
+            _dt.Columns.Add("Razdoblje_do", typeof(string)).SetOrdinal(10);
+            _dt.Columns.Add("Razdoblje_od", typeof(string)).SetOrdinal(10);
+            _dt.Columns.Add("Opcina_Rada", typeof(string)).SetOrdinal(1);
+            _dt.Columns.Add("Odabir", typeof(bool)).SetOrdinal(0);
 
-            List<DataRow> rows = _dt.AsEnumerable().ToList();
+            dbDataGridView1.DataSource = _dt;
+            foreach(DataGridViewRow row in dbDataGridView1.Rows)
+            {
+                row.Cells["Opcina_Rada"].Value = _komitent.Adresa.Grad.Sifra;
+                row.Cells["Sati_radnih"].Value = textBoxSatiRada.Text;
+                row.Cells["Sati_neradnih"].Value = textBoxSatiPraznika.Text;
+                row.Cells["Razdoblje_od"].Value = dateTimePickerRazdobljeOd.Value.ToString("yyyy-MM-dd");
+                row.Cells["Razdoblje_do"].Value = dateTimePickerRazdobljeDo.Value.ToString("yyyy-MM-dd");
+            }
 
-            PopuniPodatkeStranaB(rows);
+            foreach(DataGridViewColumn col in dbDataGridView1.Columns)
+            {
+                col.HeaderText = new TableHeaderFormat().FormatHeader(
+                    col.HeaderText);
+            }
 
-            PrikazPodataka();
+            dbDataGridView1.Columns[0].Width = 50;
+            dbDataGridView1.ReadOnly = false;
         }
+
         /// <summary>
         /// Process data from database about employees needed for JoppdB data
         /// </summary>
         /// <param name="rows"></param>
-        private void PopuniPodatkeStranaB(List<DataRow> rows)
+        private void PopuniPodatkeStranaB()
         {
-            //If only one specific employee is selected
-            if (checkBoxPojedinacno.Checked && !comboBoxZaposlenik.Text.StartsWith('-'))
-            {
-                var newList = rows.Where(s => s.ItemArray[2].ToString() == _zaposlenik.Oib);
-                rows = newList.ToList();
-            }
             _joppdB.Entitet.Clear();
+
             int redni_broj = 1;
-            foreach (DataRow dr in rows)
+            foreach (DataGridViewRow row in dbDataGridView1.Rows)
             {
                 //Add row for wage
-                _joppdEntitet = new JoppdEntitet()
+                if (row.Cells["Odabir"].Value.ToString() == "True")
                 {
-                    Redni_Broj = redni_broj,
-                    Opcina_Prebivalista = dr["Opcina_Prebivalista"].ToString(),
-                    Opcina_Rada = dr["Opcina_Rada"].ToString(),
-                    Oib = dr["Oib"].ToString(),
-                    Ime_Prezime = dr["Ime_Prezime"].ToString(),
-                    Stjecatelj = dr["Stjecatelj"].ToString(),
-                    Primitak = dr["Primitak"].ToString(),
-                    Beneficirani = dr["Beneficirani"].ToString(),
-                    Invaliditet = dr["Invaliditet"].ToString(),
-                    Mjesec = dr["Mjesec"].ToString(),
-                    Vrijeme = dr["Vrijeme"].ToString(),
-                    Sati = int.Parse(textBoxSatiRada.Text),
-                    Datum_Od = dateTimePickerRazdobljeOd.Value.ToString("yyyy-MM-dd"),
-                    Datum_Do = dateTimePickerRazdobljeDo.Value.ToString("yyyy-MM-dd"),
-                    Bruto = decimal.Parse(dr["Bruto"].ToString()),
-                    Mio_1 = decimal.Parse(dr["Mio_1"].ToString()),
-                    Mio_2 = decimal.Parse(dr["Mio_2"].ToString()),
-                    Dohodak = decimal.Parse(dr["Dohodak"].ToString()),
-                    Osobni_Odbitak = decimal.Parse(dr["Osobni_Odbitak"].ToString()),
-                    Porezna_Osnovica = decimal.Parse(dr["Porezna_Osnovica"].ToString()),
-                    Porez_Ukupno = decimal.Parse(dr["Porez_Ukupno"].ToString()),
-                    Prirez = decimal.Parse(dr["Prirez"].ToString()),
-                    Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
-                    Iznos_Isplate = decimal.Parse(dr["Neto"].ToString()),
-                    Primitak_Nesamostalni = decimal.Parse(dr["Bruto"].ToString()),
-                    Zdravstvo = decimal.Parse(dr["Doprinos_Zdravstvo"].ToString()),
-                    IzdatakUplaceni_Mio = decimal.Parse(dr["Mio_1"].ToString()) + decimal.Parse(dr["Mio_2"].ToString())
-                };
+                    _joppdEntitet = new JoppdEntitet().CreateNewJoppdEntitet(row, redni_broj);
+                }
+                else
+                {
+                    continue;
+                }
+
                 //If only bonuses checked, skip adding wage to list
                 int dodatak_start_number = 1;
                 if (!checkBoxSamoDodaci.Checked)
@@ -197,14 +158,14 @@ namespace Knjigovodstvo.JoppdDocument
                             _joppdEntitet = new JoppdEntitet()
                             {
                                 Redni_Broj = redni_broj,
-                                Opcina_Prebivalista = dr["Opcina_Prebivalista"].ToString(),
-                                Opcina_Rada = dr["Opcina_Rada"].ToString(),
-                                Oib = dr["Oib"].ToString(),
-                                Ime_Prezime = dr["Ime_Prezime"].ToString(),
+                                Opcina_Prebivalista = row.Cells["Opcina_Prebivalista"].Value.ToString(),
+                                Opcina_Rada = row.Cells["Opcina_Rada"].Value.ToString(),
+                                Oib = row.Cells["Oib"].Value.ToString(),
+                                Ime_Prezime = row.Cells["Ime_i_prezime"].Value.ToString(),
                                 Datum_Od = dateTimePickerRazdobljeOd.Value.ToString("yyyy-MM-dd"),
                                 Datum_Do = dateTimePickerRazdobljeDo.Value.ToString("yyyy-MM-dd"),
                                 Oznaka_Neoporezivog = item.Sifra,
-                                Nacin_Isplate = dr["Nacin_Isplate"].ToString(),
+                                Nacin_Isplate = row.Cells["Nacin_Isplate"].Value.ToString(),
                                 Iznos_Neoporezivog = item.Iznos,
                                 Iznos_Isplate = item.Iznos
                             };
@@ -231,6 +192,7 @@ namespace Knjigovodstvo.JoppdDocument
                 }
             }
         }
+
         /// <summary>
         /// Creates XML file for sending to Porezna Uprava
         /// </summary>
@@ -252,6 +214,7 @@ namespace Knjigovodstvo.JoppdDocument
             {
                 _path = saveFileDialog1.FileName;
             }
+
             //Save joppd.xml file
             if (_path != "")
             {
@@ -269,6 +232,7 @@ namespace Knjigovodstvo.JoppdDocument
                 return false;
             }
         }
+
         /// <summary>
         /// Shows XML file data, JoppdB part in datagridview
         /// </summary>
@@ -281,7 +245,7 @@ namespace Knjigovodstvo.JoppdDocument
             //Read xml file into datagridview
             DataSet dataSet = new DataSet();
             dataSet.ReadXml(_path);
-            dataGridView1.DataSource = dataSet.Tables[dataSet.Tables.Count - 1];
+            dbDataGridView1.DataSource = dataSet.Tables[dataSet.Tables.Count - 1];
         }
 
         private void TextBoxSatiRada_KeyPress(object sender, KeyPressEventArgs e)
@@ -290,13 +254,6 @@ namespace Knjigovodstvo.JoppdDocument
             {
                 e.Handled = true;
             }
-        }
-
-        private void ComboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            string selected = comboBoxZaposlenik.GetItemText(comboBoxZaposlenik.SelectedItem);
-            string oib = selected.Split(' ')[0];
-            _zaposlenik.GetZaposlenikDataTable(oib);
         }
 
         private void ComboBoxDodaci_SelectionChangeCommitted(object sender, EventArgs e)
@@ -319,24 +276,14 @@ namespace Knjigovodstvo.JoppdDocument
                 checkBoxSamoDodaci.Checked = false;
         }
 
-        private void textBoxGodinaObracuna_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBoxGodinaObracuna_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
             }
         }
-        /// <summary>
-        /// Allow user to edit cells or delete rows before saving to XML file, unlocks edit mode of form's datagridvew
-        /// </summary>
-        private void PrikazPodataka()
-        {
-            _list = new BindingList<JoppdEntitet>(_joppdB.Entitet);
-            dataGridView1.DataSource = _list;
-            dataGridView1.ReadOnly = false;
-            dataGridView1.AllowUserToDeleteRows = true;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
-        }
+
         /// <summary>
         /// Prepare data for Joppd B part of document
         /// </summary>
@@ -344,9 +291,10 @@ namespace Knjigovodstvo.JoppdDocument
         /// <param name="e"></param>
         private void ButtonPopuniObrazac_Click(object sender, EventArgs e)
         {
-            FillDataForJoppdFile();
+            LoadDataGrid();
             buttonSnimiPodatke.Enabled = true;
         }
+
         /// <summary>
         /// Locks edit mode for form's datagridview and saves data to XML file, result is shown in datagridview
         /// </summary>
@@ -354,25 +302,23 @@ namespace Knjigovodstvo.JoppdDocument
         /// <param name="e"></param>
         private void ButtonSnimiPodatke_Click(object sender, EventArgs e)
         {
-            dataGridView1.ReadOnly = true;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            _joppdB.Entitet = _list.ToList();
+            PopuniPodatkeStranaB();
+
             _broj_osoba = _joppdB.Entitet.Select(o => o.Oib).Distinct().ToList().Count();
             if (CreateJoppdXmlFile())
                 ReadJoppdXmlToDataGrid();
+
+            buttonSnimiPodatke.Enabled = false;
         }
 
-        private readonly Zaposlenik _zaposlenik = new Zaposlenik();
         private DataTable _dt = new DataTable();
         private readonly JoppdSifre _joppdSifre = new JoppdSifre();
         private readonly JoppdB _joppdB = new JoppdB();
-        private Komitent _komitent = new Komitent();
+        private readonly Komitent _komitent = new Komitent();
         private sObrazacJOPPD _sObrazacJoppd = new sObrazacJOPPD();
         private string _path = "";
         private int _broj_osoba = 0;
         private JoppdEntitet _joppdEntitet = new JoppdEntitet();
         private readonly Dodatak _placaDodatak = new Dodatak();
-        private BindingList<JoppdEntitet> _list = new BindingList<JoppdEntitet>();
     }
 }

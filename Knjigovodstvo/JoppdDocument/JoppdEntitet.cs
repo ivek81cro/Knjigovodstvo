@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 
 namespace Knjigovodstvo.JoppdDocument
@@ -15,6 +16,43 @@ namespace Knjigovodstvo.JoppdDocument
         public JoppdEntitet()
         {
         }
+
+        public JoppdEntitet CreateNewJoppdEntitet(DataGridViewRow row, int redni_broj)
+        {
+            return new JoppdEntitet()
+            {
+                Redni_Broj = redni_broj,
+                Opcina_Prebivalista = row.Cells["Opcina_Prebivalista"].Value.ToString(),
+                Opcina_Rada = row.Cells["Opcina_Rada"].Value.ToString(),
+                Oib = row.Cells["Oib"].Value.ToString(),
+                Ime_Prezime = row.Cells["Ime_i_prezime"].Value.ToString(),
+                Stjecatelj = row.Cells["Stjecatelj"].Value.ToString(),
+                Primitak = row.Cells["Primitak"].Value.ToString(),
+                Beneficirani = row.Cells["Beneficirani"].Value.ToString(),
+                Invaliditet = row.Cells["Invaliditet"].Value.ToString(),
+                Mjesec = row.Cells["Mjesec"].Value.ToString(),
+                Vrijeme = row.Cells["Vrijeme"].Value.ToString(),
+                Sati = int.Parse(row.Cells["Sati_radnih"].Value.ToString()),
+                Sati_praznika = int.Parse(row.Cells["Sati_neradnih"].Value.ToString()),
+                Datum_Od = row.Cells["Razdoblje_od"].Value.ToString(),
+                Datum_Do = row.Cells["Razdoblje_do"].Value.ToString(),
+                Bruto = decimal.Parse(row.Cells["Bruto"].Value.ToString()),
+                Osnovica = decimal.Parse(row.Cells["Bruto"].Value.ToString()),
+                Mio_1 = decimal.Parse(row.Cells["Mio_1"].Value.ToString()),
+                Mio_2 = decimal.Parse(row.Cells["Mio_2"].Value.ToString()),
+                Zdravstvo = decimal.Parse(row.Cells["Doprinos_zdravstvo"].Value.ToString()),
+                IzdatakUplaceni_Mio = decimal.Parse(row.Cells["Mio_1"].Value.ToString()) +
+                                        decimal.Parse(row.Cells["Mio_2"].Value.ToString()),
+                Dohodak = decimal.Parse(row.Cells["Dohodak"].Value.ToString()),
+                Osobni_Odbitak = decimal.Parse(row.Cells["OSobni_Odbitak"].Value.ToString()),
+                Porezna_Osnovica = decimal.Parse(row.Cells["Porezna_Osnovica"].Value.ToString()),
+                Porez_Ukupno = decimal.Parse(row.Cells["Porez_Ukupno"].Value.ToString()),
+                Prirez = decimal.Parse(row.Cells["Prirez"].Value.ToString()),
+                Primitak_Nesamostalni = decimal.Parse(row.Cells["Bruto"].Value.ToString()),
+                Iznos_Isplate = decimal.Parse(row.Cells["Neto"].Value.ToString())
+            };
+        }
+
         public void PopuniDodatke()
         {
             DataTable _dt = new DbDataGet().GetTable(new DodatakArhiva(), 
@@ -106,6 +144,8 @@ namespace Knjigovodstvo.JoppdDocument
         public string Vrijeme { get; set; } = "0";
         [XmlElement("P10")]
         public int Sati { get; set; } = 0;
+        [XmlElement("P100")]
+        public int Sati_praznika { get; set; }
         [XmlElement("P101")]
         public string Datum_Od { get; set; } = "0";
         [XmlElement("P102")]

@@ -2,7 +2,7 @@
 
 namespace Knjigovodstvo.JoppdDocument
 {
-    class JoppdB
+    public class JoppdB
     {
         public List<JoppdEntitet> Entitet { get; set; } = new List<JoppdEntitet>();
     }
