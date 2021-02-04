@@ -49,7 +49,8 @@ namespace Knjigovodstvo.JoppdDocument
                 Porez_Ukupno = decimal.Parse(row.Cells["Porez_Ukupno"].Value.ToString()),
                 Prirez = decimal.Parse(row.Cells["Prirez"].Value.ToString()),
                 Primitak_Nesamostalni = decimal.Parse(row.Cells["Bruto"].Value.ToString()),
-                Iznos_Isplate = decimal.Parse(row.Cells["Neto"].Value.ToString())
+                Iznos_Isplate = decimal.Parse(row.Cells["Neto"].Value.ToString()),
+                Nacin_Isplate = row.Cells["Nacin_Isplate"].Value.ToString()
             };
         }
 
@@ -80,6 +81,7 @@ namespace Knjigovodstvo.JoppdDocument
         {
             if(Stjecatelj == "0032")
             {
+                Iznos_Isplate -= Iznos_Neoporezivog;
                 Iznos_Neoporezivog = 0;
                 Oznaka_Neoporezivog = "0";
                 Primitak_Nesamostalni = 0;

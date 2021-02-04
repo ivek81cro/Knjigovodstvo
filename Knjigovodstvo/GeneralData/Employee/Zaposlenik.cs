@@ -87,7 +87,7 @@ namespace Knjigovodstvo.Employee
         /// </summary>
         public void GetZaposlenikByOib()
         {
-            DataRow row = GetZaposlenikDataTable($"Oib={Oib}").Rows[0];
+            DataRow row = GetZaposlenikDataTable($"Oib='{Oib}'").Rows[0];
             SetPrivateMembers(row);
         }
 
@@ -97,7 +97,7 @@ namespace Knjigovodstvo.Employee
         /// <param name="oib"></param>
         public void GetZaposlenikByOib(string oib)
         {
-            DataRow row = GetZaposlenikDataTable($"Oib={oib}").Rows[0];
+            DataRow row = GetZaposlenikDataTable($"Oib='{oib}'").Rows[0];
             SetPrivateMembers(row);
         }
 

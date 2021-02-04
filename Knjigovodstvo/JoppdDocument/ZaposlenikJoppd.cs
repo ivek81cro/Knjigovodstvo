@@ -53,7 +53,7 @@ namespace Knjigovodstvo.JoppdDocument
             DataRow row = GetZaposlenikJoppdDataTable($"Oib='{oib}'").Rows[0];
             SetPrivateMembers(row);
 
-            return new ZaposlenikJoppd();
+            return this;
         }
 
         private void SetPrivateMembers(DataRow row)

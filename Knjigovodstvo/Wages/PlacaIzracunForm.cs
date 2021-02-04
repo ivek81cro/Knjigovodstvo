@@ -26,10 +26,10 @@ namespace Knjigovodstvo.Wages
             _placa = placa;
             InitializeComponent();
             FillComboBoxZaposlenik();
+            FillComboBoxJoppd();
             int index = comboBoxZaposlenik.FindString(_placa.Oib);
             comboBoxZaposlenik.SelectedIndex = index;
             InitPrivateMembers();
-            FillComboBoxJoppd();
             SetLabelsText();
         }
 
@@ -59,7 +59,7 @@ namespace Knjigovodstvo.Wages
 
             if (_zaposlenikJoppd.GetZaposlenikByOib(_zaposlenik.Oib).Oib != "")
             {
-                PopuniJoppd(_zaposlenikJoppd);
+                PopuniJoppd();
                 PopuniDodaci();
             }
         }
@@ -147,6 +147,7 @@ namespace Knjigovodstvo.Wages
         private void ComboBoxZaposlenik_SelectionChangeCommitted(object sender, EventArgs e)
         {
             InitPrivateMembers();
+            PopuniJoppd();
         }
 
         private void SetZaposlenikJoppd()
@@ -181,15 +182,15 @@ namespace Knjigovodstvo.Wages
             labelPrirez.Text = "Prirez " + _prirez.ToString() + "%";
         }
 
-        private void PopuniJoppd(ZaposlenikJoppd zaposlenikJoppd)
+        private void PopuniJoppd()
         {
-            comboBoxNacinIsplate.SelectedValue = zaposlenikJoppd.Nacin_Isplate;
-            comboBoxStjecatelj.SelectedValue = zaposlenikJoppd.Stjecatelj;
-            comboBoxPrimitak.SelectedValue = zaposlenikJoppd.Primitak;
-            comboBoxDodatniMio.SelectedValue = zaposlenikJoppd.Beneficirani;
-            comboBoxInvaliditet.SelectedValue = zaposlenikJoppd.Invaliditet;
-            comboBoxMjesecPrviZadnji.SelectedValue = zaposlenikJoppd.Mjesec;
-            comboBoxRadnoVrijeme.SelectedValue = zaposlenikJoppd.Vrijeme;
+            comboBoxNacinIsplate.SelectedValue = _zaposlenikJoppd.Nacin_Isplate;
+            comboBoxStjecatelj.SelectedValue = _zaposlenikJoppd.Stjecatelj;
+            comboBoxPrimitak.SelectedValue = _zaposlenikJoppd.Primitak;
+            comboBoxDodatniMio.SelectedValue = _zaposlenikJoppd.Beneficirani;
+            comboBoxInvaliditet.SelectedValue = _zaposlenikJoppd.Invaliditet;
+            comboBoxMjesecPrviZadnji.SelectedValue = _zaposlenikJoppd.Mjesec;
+            comboBoxRadnoVrijeme.SelectedValue = _zaposlenikJoppd.Vrijeme;
         }
 
         private void PopuniDodaci()
@@ -216,7 +217,7 @@ namespace Knjigovodstvo.Wages
         {
             PopuniDodaci();
             PopuniKontrole(_placa);
-            PopuniJoppd(_zaposlenikJoppd);
+            PopuniJoppd();
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
