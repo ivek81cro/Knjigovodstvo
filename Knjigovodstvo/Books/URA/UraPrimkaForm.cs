@@ -11,10 +11,6 @@ using Knjigovodstvo.Settings.SettingsBookkeeping;
 using Knjigovodstvo.Settings;
 using Knjigovodstvo.Books.PrepareForBalanceSheet;
 using Knjigovodstvo.GeneralData.WaitForm;
-using Knjigovodstvo.Partners;
-using Knjigovodstvo.Books.URA;
-using Knjigovodstvo.Global.BaseClass;
-using Knjigovodstvo.Global.Interface;
 
 namespace Knjigovodstvo.URA
 {
@@ -120,7 +116,7 @@ namespace Knjigovodstvo.URA
 
         private void ProcessSelectedItems()
         {
-            List<Parovi> parovi = GetPartnerKontoList();
+            List<KontoParovi> parovi = GetPartnerKontoList();
             foreach (DataGridViewRow row in dbDataGridView1.SelectedRows)
             {
                 SetSelectedItem(row);
@@ -142,9 +138,9 @@ namespace Knjigovodstvo.URA
             }
         }
 
-        private List<Parovi> GetPartnerKontoList()
+        private List<KontoParovi> GetPartnerKontoList()
         {
-            List<Parovi> parovi = new KnjigaUraParovi().GetParoviList();
+            List<KontoParovi> parovi = new KontoParovi(_bookNames).GetParoviList();
             return parovi;
         }
 

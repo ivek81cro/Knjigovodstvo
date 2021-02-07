@@ -1,7 +1,5 @@
 ﻿using Knjigovodstvo.BankStatements;
-using Knjigovodstvo.Books.URA;
 using Knjigovodstvo.FinancialReports;
-using Knjigovodstvo.Global.BaseClass;
 using Knjigovodstvo.Helpers;
 using Knjigovodstvo.Interface;
 using Knjigovodstvo.Settings;
@@ -17,7 +15,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
     {
         public TemeljnicaPripremaForm(IDbObject obj, 
             List<PostavkeKnjizenja> postavkeKnjizenja, 
-            List<Parovi> parovi = null)
+            List<KontoParovi> parovi = null)
         {
             Parovi = parovi;
             _postavkeKnjizenja = postavkeKnjizenja;
@@ -105,7 +103,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             {
                 string naziv = _dt.Rows[0]["Opis knjiženja"].ToString().Split(':')[0];
                 string konto = "";
-                if (Parovi.Count != 0) 
+                if (Parovi != null && Parovi.Count != 0) 
                 {
                     var result = Parovi.Where(p => p.Naziv == naziv).FirstOrDefault();
                     if(result != null)
@@ -254,31 +252,32 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
 
         private void ButtonUpariKonto_Click(object sender, System.EventArgs e)
         {
-            using var form = new KontniPlanPregledForm();
-            form.ShowDialog();
-            _dt.Rows[dbDataGridView1.SelectedCells[0]
-                .RowIndex]["Konto"] = form.KontoBroj;
-            KnjigaUraParovi par = new KnjigaUraParovi()
-            {
-                Id_Konto = form.Id_Konto,
-                Naziv = _dt.Rows[dbDataGridView1
+            //TODO: za izvode se razlikuje opis
+            using var form = new PostavkeParoviKonta(_postavkeKnjizenja.ElementAt(0).Knjiga);
+            form.Parovi.Naziv = _dt.Rows[dbDataGridView1
                                         .SelectedCells[0]
                                         .RowIndex]["Opis knjiženja"]
                                         .ToString()
-                                        .Split(':')[0]
-            };
-            par.InsertData();
-            if (Parovi.Count > 0 && Parovi != null)
-                Parovi = Parovi.ElementAt(0).GetParoviList();
+                                        .Split(':')[0];
+            form.Parovi.Opis = _dt.Rows[dbDataGridView1
+                                        .SelectedCells[0]
+                                        .RowIndex]["Opis knjiženja"]
+                                        .ToString()
+                                        .Split(':')[1];
+            form.SetControls();
+            form.ShowDialog();
+
+            Parovi = Parovi.ElementAt(0).GetParoviList();
+            FindKontoNumber();
         }
 
         private readonly IDbObject _obj;
-        public  List<Parovi> Parovi { get; private set; }
         private readonly List<PostavkeKnjizenja> _postavkeKnjizenja;
         private readonly DataTable _dt;
         private readonly List<Label> _labelList;
         private readonly CheckBalance _checkBalance = new CheckBalance();
 
+        public  List<KontoParovi> Parovi { get; private set; }
         public bool Knjizeno { get; private set; } = false;
     }       
 }

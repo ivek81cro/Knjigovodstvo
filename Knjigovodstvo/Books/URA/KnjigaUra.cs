@@ -21,7 +21,7 @@ namespace Knjigovodstvo.URA
             Starost_racuna = int.Parse(val[7]);
             Dospijece = DateTime.ParseExact(val[8], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             Planirana_uplata = val[9] == "" ? 0 : decimal.Parse(val[9]);
-            Datum_uplate = val[10] == "" ? "Null" : DateTime.ParseExact(val[10], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+            Datum_uplate = val[10] == "" ? null : DateTime.ParseExact(val[10], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             Za_uplatu = decimal.Parse(val[11]);
             Naziv_dobavljaca = val[12];
             Broj_primke = int.Parse(val[13]);
@@ -52,8 +52,8 @@ namespace Knjigovodstvo.URA
             Broj_odobrenja = val[38];
             Odobrenja_bez_PDVa = val[39];
             Odobreni_PDV = decimal.Parse(val[40]);
-            Datum_podnosenja = val[41] == "" ? "Null" : DateTime.ParseExact(val[41], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
-            Datum_izvrsenja = val[42] == "" ? "Null" : DateTime.ParseExact(val[42], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+            Datum_podnosenja = val[41] == "" ? null : DateTime.ParseExact(val[41], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+            Datum_izvrsenja = val[42] == "" ? null : DateTime.ParseExact(val[42], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             Ukupno_uplaceno = decimal.Parse(val[43]);
             Preostalo_za_uplatit = decimal.Parse(val[44]);
             Dospijece_dana = int.Parse(val[45]);

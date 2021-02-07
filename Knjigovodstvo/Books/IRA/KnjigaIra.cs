@@ -23,8 +23,9 @@ namespace Knjigovodstvo.IRA
             Iz_racuna = int.Parse(val[4]);
             Datum = DateTime.ParseExact(val[5], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             Dospijece = DateTime.ParseExact(val[6], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
-            Datum_zadnje_uplate = val[7] == "" ? "Null" : DateTime.ParseExact(val[7], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+            Datum_zadnje_uplate = val[7] == "" ? null : DateTime.ParseExact(val[7], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             Naziv_i_sjediste_kupca = val[8];
+            CheckNaziv();
             OIB = val[9];
             Iznos_s_PDVom = decimal.Parse(val[10]);
             Oslobodjeno_PDVa_EU = decimal.Parse(val[11]);
@@ -45,20 +46,38 @@ namespace Knjigovodstvo.IRA
             Ukupno_uplaceno = decimal.Parse(val[26]);
             Preostalo_za_uplatit = decimal.Parse(val[27]);
             Napomena_o_racunu = val[28];
-            Zaprimljen_u_HZZO = val[29] == "" ? "Null" : DateTime.ParseExact(val[29], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
+            Zaprimljen_u_HZZO = val[29] == "" ? null : DateTime.ParseExact(val[29], ("dd.MM.yyyy"), CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             Dana_od_zaprimanja = int.Parse(val[30]);
             Dana_neplacanja = int.Parse(val[31]);
 
             return this;
         }
 
-        internal void GetDataFromDatabaseByRedniBroj()
+        private void CheckNaziv()
         {
-            var row = new DbDataGet().GetTable(this, $"Redni_broj={Redni_broj}").Rows[0];
-            FillData(row);
+            if (Naziv_i_sjediste_kupca.Contains("PROMET "))
+            {
+                Naziv_i_sjediste_kupca = Naziv_i_sjediste_kupca.Replace("PROMET ", "PROMET: ");
+            }
         }
 
-        public void FillData(DataRow row)
+        public DataTable GetKnjigaIraDataTable()
+        {
+            return _dataGet.GetTable(this);
+        }
+
+        public DataTable GetKnjigaIraDataTable(string condition)
+        {
+            return _dataGet.GetTable(this, condition);
+        }
+
+        internal void GetDataFromDatabaseByRedniBroj()
+        {
+            var row = GetKnjigaIraDataTable($"Redni_broj={Redni_broj}").Rows[0];
+            SetPrivateMembers(row);
+        }
+
+        public void SetPrivateMembers(DataRow row)
         {
             Redni_broj = int.Parse(row["Redni_broj"].ToString());
             Broj_racuna = row["Broj_racuna"].ToString();

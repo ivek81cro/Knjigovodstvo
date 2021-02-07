@@ -83,9 +83,9 @@ namespace Knjigovodstvo.Database
                 bulkCopy.DestinationTableName = _table;
                 bulkCopy.WriteToServer(dt);
             }
-            catch
+            catch(Exception e)
             {
-                MessageBox.Show("Bulk greška");
+                MessageBox.Show("Bulk greška: " + e.Message);
             }
         }
 

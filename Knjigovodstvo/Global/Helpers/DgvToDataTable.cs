@@ -10,7 +10,7 @@ namespace Knjigovodstvo.Global.Helpers
             var dt = new DataTable();
             foreach (DataGridViewColumn col in dataGridView.Columns)
             {
-                dt.Columns.Add(col.Name);
+                dt.Columns.Add(col.Name, col.ValueType);
             }
             var cell = new object[dataGridView.Columns.Count];
             foreach (DataGridViewRow dataGridViewRow in dataGridView.Rows)

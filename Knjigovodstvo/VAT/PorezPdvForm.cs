@@ -39,7 +39,7 @@ namespace Knjigovodstvo
             foreach (DataRow row in dt.Rows)
             {
                 KnjigaIra ira = new KnjigaIra();
-                ira.FillData(row);
+                ira.SetPrivateMembers(row);
                 _knjigaIra.Add(ira);
             }
 

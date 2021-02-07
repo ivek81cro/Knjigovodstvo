@@ -61,7 +61,7 @@ namespace Knjigovodstvo.FinancialReports
             this.buttonDodajKonto.Location = new System.Drawing.Point(13, 13);
             this.buttonDodajKonto.Name = "buttonDodajKonto";
             this.buttonDodajKonto.Size = new System.Drawing.Size(96, 23);
-            this.buttonDodajKonto.TabIndex = 11;
+            this.buttonDodajKonto.TabIndex = 1;
             this.buttonDodajKonto.Text = "Dodaj konto";
             this.buttonDodajKonto.UseVisualStyleBackColor = true;
             this.buttonDodajKonto.Click += new System.EventHandler(this.ButtonDodajKonto_Click);
@@ -74,7 +74,7 @@ namespace Knjigovodstvo.FinancialReports
             this.textBoxFilterKonto.Name = "textBoxFilterKonto";
             this.textBoxFilterKonto.PlaceholderText = "Filter konta";
             this.textBoxFilterKonto.Size = new System.Drawing.Size(134, 23);
-            this.textBoxFilterKonto.TabIndex = 12;
+            this.textBoxFilterKonto.TabIndex = 4;
             this.textBoxFilterKonto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxFilterKonto_KeyUp);
             // 
             // textBoxFilterOpis
@@ -85,7 +85,7 @@ namespace Knjigovodstvo.FinancialReports
             this.textBoxFilterOpis.Name = "textBoxFilterOpis";
             this.textBoxFilterOpis.PlaceholderText = "Filter prema riječima u opisu";
             this.textBoxFilterOpis.Size = new System.Drawing.Size(300, 23);
-            this.textBoxFilterOpis.TabIndex = 13;
+            this.textBoxFilterOpis.TabIndex = 0;
             this.textBoxFilterOpis.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxFilterOpis_KeyUp);
             // 
             // buttonClose
@@ -103,7 +103,7 @@ namespace Knjigovodstvo.FinancialReports
             this.buttonDodajPartnera.Location = new System.Drawing.Point(12, 43);
             this.buttonDodajPartnera.Name = "buttonDodajPartnera";
             this.buttonDodajPartnera.Size = new System.Drawing.Size(97, 23);
-            this.buttonDodajPartnera.TabIndex = 15;
+            this.buttonDodajPartnera.TabIndex = 2;
             this.buttonDodajPartnera.Text = "Dodaj partnera";
             this.buttonDodajPartnera.UseVisualStyleBackColor = true;
             this.buttonDodajPartnera.Click += new System.EventHandler(this.ButtonDodajPartnera_Click);
@@ -113,7 +113,7 @@ namespace Knjigovodstvo.FinancialReports
             this.buttonBrisiKonto.Location = new System.Drawing.Point(13, 132);
             this.buttonBrisiKonto.Name = "buttonBrisiKonto";
             this.buttonBrisiKonto.Size = new System.Drawing.Size(75, 23);
-            this.buttonBrisiKonto.TabIndex = 16;
+            this.buttonBrisiKonto.TabIndex = 3;
             this.buttonBrisiKonto.Text = "Briši konto";
             this.buttonBrisiKonto.UseVisualStyleBackColor = true;
             this.buttonBrisiKonto.Click += new System.EventHandler(this.ButtonBrisiKonto_Click);

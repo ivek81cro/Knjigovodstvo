@@ -73,7 +73,7 @@ namespace Knjigovodstvo.FinancialReports
                 LoadPrivateMembers(_dt.Rows[0]);
             }
 
-            return Konto = _dt.Rows[0]["Konto"].ToString();
+            return Konto;
         }
 
         private void LoadPrivateMembers(DataRow row)

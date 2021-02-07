@@ -80,7 +80,8 @@ namespace Knjigovodstvo.URA
             string path = "";
             ConvertXlsToCsv conv = new ConvertXlsToCsv("ulaznih");
             conv.OpenXlsFile(ref path);
-
+            if (path == "")
+                return;
             //internal method used to pass params to method used as argument in WaitDialog constr.
             void act()
             {
@@ -119,10 +120,11 @@ namespace Knjigovodstvo.URA
 
         private void ProcessSelectedItems()
         {
+            List<KontoParovi> parovi = GetPartnerKontoList();
             foreach (DataGridViewRow row in dbDdataGridView1.SelectedRows)
             {
                 SetSelectedItem(row);
-                TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_uraKnjiga, _postavkeKnjizenja);
+                TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_uraKnjiga, _postavkeKnjizenja, parovi);
                 if (_noControllDialog)
                 {
                     form.ProcessDirectly();
@@ -137,6 +139,12 @@ namespace Knjigovodstvo.URA
                 else
                     new DbDataCustomQuery().ExecuteQuery(query);
             }
+        }
+
+        private List<KontoParovi> GetPartnerKontoList()
+        {
+            List<KontoParovi> parovi = new KontoParovi(_bookName).GetParoviList();
+            return parovi;
         }
 
         private void ButtonUcitaj_Click(object sender, EventArgs e)

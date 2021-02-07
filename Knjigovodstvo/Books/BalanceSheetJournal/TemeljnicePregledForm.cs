@@ -3,11 +3,10 @@ using Knjigovodstvo.Books.PrepareForBalanceSheet;
 using Knjigovodstvo.Database;
 using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.GeneralData.WaitForm;
-using Knjigovodstvo.Settings.SettingsBookkeeping;
+using Knjigovodstvo.Settings;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -148,6 +147,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             };
 
             string condition = "OR ";
+            _dnevnikKnjizenja = new List<DnevnikKnjizenja>();
             foreach (DataGridViewRow row in dbDataGridView1.Rows)
             {
                 dk = new DnevnikKnjizenja().ConvertDataGridViewRow(row);
@@ -207,6 +207,6 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
         private readonly List<Label> _labelList;
         private readonly CheckBalance _checkBalance = new CheckBalance();
         private readonly TemeljnicaStavka _stavka = new TemeljnicaStavka();
-        private readonly List<DnevnikKnjizenja> _dnevnikKnjizenja = new List<DnevnikKnjizenja>();
+        private List<DnevnikKnjizenja> _dnevnikKnjizenja = new List<DnevnikKnjizenja>();
     }
 }

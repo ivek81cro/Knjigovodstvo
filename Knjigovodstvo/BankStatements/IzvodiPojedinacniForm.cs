@@ -1,6 +1,5 @@
 ﻿using Knjigovodstvo.FinancialReports;
-using Knjigovodstvo.Global;
-using Knjigovodstvo.Global.BaseClass;
+using Knjigovodstvo.Settings;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,7 +39,7 @@ namespace Knjigovodstvo.BankStatements
 
         private void FillKontoColumn()
         {
-            List<Parovi> parovi = new IzvodParovi().GetParoviList();
+            List<KontoParovi> parovi = new KontoParovi(BookNames.Izvodi).GetParoviList();
             KontniPlan konto = new KontniPlan();
             foreach(DataGridViewRow row in dbDataGridView1.Rows)
             {

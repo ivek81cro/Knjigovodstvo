@@ -40,6 +40,11 @@ namespace Knjigovodstvo.FinancialReports
 
         private void TextBoxFilterOpis_KeyUp(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Escape)
+            {
+                ButtonClose_Click(null, null);
+            }
+
             FilterClass("Opis");
         }
 

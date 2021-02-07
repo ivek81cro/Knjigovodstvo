@@ -23,7 +23,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                 dt.Rows.Add(
                     knjiga.Redni_broj,
                     postavka.Naziv_stupca,
-                    knjiga.Naziv_i_sjediste_kupca.Split(" - ")[0] + ": " + knjiga.Broj_racuna,
+                    knjiga.Naziv_i_sjediste_kupca + ": Račun broj - " + knjiga.Broj_racuna,
                     postavka.Konto,
                     knjiga.Datum.Split(' ')[0],
                     postavka.Strana == "Dugovna",

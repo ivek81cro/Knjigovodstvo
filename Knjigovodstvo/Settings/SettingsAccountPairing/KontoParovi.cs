@@ -1,18 +1,25 @@
-﻿using Knjigovodstvo.BankStatements;
-using Knjigovodstvo.Books.URA;
-using Knjigovodstvo.Database;
+﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-namespace Knjigovodstvo.Global.BaseClass
+namespace Knjigovodstvo.Settings
 {
-    public class Parovi : IDbObject
+    public class KontoParovi : IDbObject
     {
-        public FormError ValidateData()
+        public KontoParovi(BookNames bookName)
         {
-            return FormError.None;
+            Knjiga = bookName.ToString();
+        }
+
+        private KontoParovi()
+        {
+        }
+
+        public DataTable GetKontoParoviDataTable(string condition)
+        {
+            return new DbDataGet().GetTable(this, condition);
         }
 
         public bool InsertData()
@@ -26,43 +33,33 @@ namespace Knjigovodstvo.Global.BaseClass
         /// <returns></returns>
         public bool ExistsInDbByNaziv()
         {
-            return new DbDataGet().GetTable(this, $"Naziv='{Naziv}'").Rows.Count > 0;
+            return new DbDataGet().GetTable(this, $"Knjiga={Knjiga} AND Naziv='{Naziv}'").Rows.Count > 0;
         }
 
         /// <summary>
         /// Returns list of saved pairs by user
         /// </summary>
         /// <returns></returns>
-        public List<Parovi> GetParoviList()
+        public List<KontoParovi> GetParoviList()
         {
-            DataTable dt;
-            string derivedName = _derivedName;
-            if (_derivedName == "KnjigaUraParovi")
-            {
-                dt = new DbDataGet().GetTable(new KnjigaUraParovi());             
-            }
-            else
-            {
-                dt = new DbDataGet().GetTable(new IzvodParovi());
-            }
-
+            DataTable dt = GetKontoParoviDataTable($"Knjiga='{Knjiga}'");
             List<DataRow> rows = dt.AsEnumerable().ToList();
-            List<Parovi> parovi = new List<Parovi>();
+            List<KontoParovi> parovi = new List<KontoParovi>();
             parovi = (from DataRow dr in rows
-                      select new Parovi()
+                      select new KontoParovi()
                       {
                           Id = int.Parse(dr["Id"].ToString()),
                           Naziv = dr["Naziv"].ToString(),
                           Id_Konto = int.Parse(dr["Id_Konto"].ToString()),
-                          _derivedName = derivedName
+                          Knjiga = this.Knjiga
                       }).ToList();
             return parovi;
         }
 
-        protected string _derivedName;
-
         public int Id { get; set; } = 0;
         public string Naziv { get; set; } = "";
+        public string Opis { get; set; } = "";
         public int Id_Konto { get; set; } = 0;
+        public string Knjiga { get; set; } = "";
     }
 }

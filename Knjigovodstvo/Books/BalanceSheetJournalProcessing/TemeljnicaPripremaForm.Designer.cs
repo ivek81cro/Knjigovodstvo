@@ -70,7 +70,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             this.buttonKnjizi.Location = new System.Drawing.Point(12, 378);
             this.buttonKnjizi.Name = "buttonKnjizi";
             this.buttonKnjizi.Size = new System.Drawing.Size(75, 23);
-            this.buttonKnjizi.TabIndex = 11;
+            this.buttonKnjizi.TabIndex = 1;
             this.buttonKnjizi.Text = "Knjiži";
             this.buttonKnjizi.UseVisualStyleBackColor = false;
             this.buttonKnjizi.Click += new System.EventHandler(this.ButtonKnjizi_Click);
@@ -83,7 +83,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             this.buttonBrisiRed.Location = new System.Drawing.Point(12, 331);
             this.buttonBrisiRed.Name = "buttonBrisiRed";
             this.buttonBrisiRed.Size = new System.Drawing.Size(75, 23);
-            this.buttonBrisiRed.TabIndex = 12;
+            this.buttonBrisiRed.TabIndex = 3;
             this.buttonBrisiRed.Text = "Briši red";
             this.buttonBrisiRed.UseVisualStyleBackColor = false;
             this.buttonBrisiRed.Click += new System.EventHandler(this.ButtonBrisiRed_Click);
@@ -96,7 +96,7 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             this.buttonDodajRed.Location = new System.Drawing.Point(93, 331);
             this.buttonDodajRed.Name = "buttonDodajRed";
             this.buttonDodajRed.Size = new System.Drawing.Size(75, 23);
-            this.buttonDodajRed.TabIndex = 13;
+            this.buttonDodajRed.TabIndex = 2;
             this.buttonDodajRed.Text = "Dodaj red";
             this.buttonDodajRed.UseVisualStyleBackColor = false;
             this.buttonDodajRed.Click += new System.EventHandler(this.ButtonDodajRed_Click);
@@ -131,15 +131,15 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             this.buttonUpariKonto.Location = new System.Drawing.Point(174, 331);
             this.buttonUpariKonto.Name = "buttonUpariKonto";
             this.buttonUpariKonto.Size = new System.Drawing.Size(84, 23);
-            this.buttonUpariKonto.TabIndex = 14;
+            this.buttonUpariKonto.TabIndex = 0;
             this.buttonUpariKonto.Text = "Upari konto";
             this.buttonUpariKonto.UseVisualStyleBackColor = false;
             this.buttonUpariKonto.Click += new System.EventHandler(this.ButtonUpariKonto_Click);
             // 
-            // kontoDescription1
+            // kontoDescription
             // 
             this.kontoDescription.Location = new System.Drawing.Point(12, 0);
-            this.kontoDescription.Name = "kontoDescription1";
+            this.kontoDescription.Name = "kontoDescription";
             this.kontoDescription.Size = new System.Drawing.Size(510, 26);
             this.kontoDescription.TabIndex = 15;
             // 

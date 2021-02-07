@@ -162,6 +162,11 @@ namespace Knjigovodstvo.BankStatements
             if(dbDataGridViewStavke.SelectedRows.Count > 0)
                 kontoDescription.SetLabelKontoDescription(dbDataGridViewStavke.SelectedRows[0]);
         }
+        private List<KontoParovi> GetPartnerKontoList()
+        {
+            List<KontoParovi> parovi = new KontoParovi(BookNames.Izvodi).GetParoviList();
+            return parovi;
+        }
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
@@ -169,7 +174,8 @@ namespace Knjigovodstvo.BankStatements
             {
                 new PostavkeKnjizenja() { Knjiga = BookNames.Izvodi.ToString() }
             };
-            using TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_izvod, postavke);
+            List<KontoParovi> parovi = GetPartnerKontoList();
+            using TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_izvod, postavke, parovi);
             form.ShowDialog();
             //TODO implement check if saved to books before setting true
             if (form.Knjizeno)

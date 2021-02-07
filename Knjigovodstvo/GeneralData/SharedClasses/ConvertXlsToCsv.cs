@@ -41,6 +41,9 @@ namespace Knjigovodstvo.Global
 
         public void Convert(ref string put)
         {
+            if (put == "")
+                return;
+
             FileStream stream = File.Open(put, FileMode.Open, FileAccess.Read);
             IExcelDataReader excelReader;
             try

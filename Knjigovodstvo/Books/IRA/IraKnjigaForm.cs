@@ -33,12 +33,12 @@ namespace Knjigovodstvo.IRA
             {
                 this.Invoke(new MethodInvoker(delegate
                 {
-                    dbDataGridView1.DataSource = new DbDataGet().GetTable(new KnjigaIra());
+                    dbDataGridView1.DataSource = _knjigaIra.GetKnjigaIraDataTable();
                 }));
             }
             else
             {
-                dbDataGridView1.DataSource = new DbDataGet().GetTable(new KnjigaIra());
+                dbDataGridView1.DataSource = _knjigaIra.GetKnjigaIraDataTable();
             }
             FixColumnHeaders();
         }
@@ -71,18 +71,15 @@ namespace Knjigovodstvo.IRA
                 waitDialog.ShowDialog(this);
             }
 
-            var data = new BindingSource
-            {
-                DataSource = _listaStavki
-            };
-            dbDataGridView1.DataSource = data;
+            dbDataGridView1.DataSource = _listaStavki;
+
             FixColumnHeaders();
         }
 
         private void SaveDataToDatabase()
         {
             DbDataInsert ins = new DbDataInsert();
-            ins.InsertDataBulk(_iraKnjiga, dbDataGridView1);
+            ins.InsertDataBulk(_knjigaIra, dbDataGridView1);
         }
 
         private void LoadBookkeepingSettings()
@@ -103,13 +100,36 @@ namespace Knjigovodstvo.IRA
 
         private void SetSelectedItem(DataGridViewRow row)
         {
-            _iraKnjiga.Redni_broj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
-            _iraKnjiga.GetDataFromDatabaseByRedniBroj();
+            _knjigaIra.Redni_broj = int.Parse(row.Cells["Redni_broj"].Value.ToString());
+            _knjigaIra.GetDataFromDatabaseByRedniBroj();
         }
 
         private void CheckBoxShowCtrlDialog_CheckStateChanged(object sender, EventArgs e)
         {
             _noControllDialog = checkBoxShowCtrlDialog.Checked;
+        }
+
+        private void ProcessSelectedItems()
+        {
+            foreach (DataGridViewRow row in dbDataGridView1.SelectedRows)
+            {
+                List<KontoParovi> parovi = GetPartnerKontoList();
+                SetSelectedItem(row);
+                TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_knjigaIra, _postavkeKnjizenja, parovi);
+                if (_noControllDialog)
+                {
+                    form.ProcessDirectly();
+                }
+                else
+                {
+                    form.ShowDialog();
+                }
+                string query = $"UPDATE KnjigaIra SET Knjizen = 1 WHERE Redni_broj = {_knjigaIra.Redni_broj}";
+                if (!form.Knjizeno)
+                    break;
+                else
+                    new DbDataCustomQuery().ExecuteQuery(query);
+            }
         }
 
         private void ButtonUcitaj_ClickAsync(object sender, EventArgs e)
@@ -135,31 +155,21 @@ namespace Knjigovodstvo.IRA
             LoadBookkeepingSettings();
         }
 
+        private List<KontoParovi> GetPartnerKontoList()
+        {
+            List<KontoParovi> parovi = new KontoParovi(_bookNames).GetParoviList();
+            return parovi;
+        }
+
         private void ButtonKnjizi_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dbDataGridView1.SelectedRows)
-            {
-                SetSelectedItem(row);
-                TemeljnicaPripremaForm form = new TemeljnicaPripremaForm(_iraKnjiga, _postavkeKnjizenja);
-                if (_noControllDialog)
-                {
-                    form.ProcessDirectly();
-                }
-                else
-                {
-                    form.ShowDialog();
-                }
-                string query = $"UPDATE KnjigaIra SET Knjizen = 1 WHERE Redni_broj = {_iraKnjiga.Redni_broj}";
-                if (!form.Knjizeno)
-                    break;
-                else
-                    new DbDataCustomQuery().ExecuteQuery(query);
-            }
+            using WaitDialog waitDialog = new WaitDialog(ProcessSelectedItems, SplashMessages.Spremanje);
+            waitDialog.ShowDialog(this);
         }
 
         private bool _noControllDialog;
         private List<PostavkeKnjizenja> _postavkeKnjizenja;
-        private readonly KnjigaIra _iraKnjiga = new KnjigaIra();
+        private readonly KnjigaIra _knjigaIra = new KnjigaIra();
         private readonly BookNames _bookNames;
         private List<KnjigaIra> _listaStavki = new List<KnjigaIra>();
         private readonly Dictionary<int, string> _columns = new Dictionary<int, string>();

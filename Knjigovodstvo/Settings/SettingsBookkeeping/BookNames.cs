@@ -1,4 +1,4 @@
-﻿namespace Knjigovodstvo.Settings.SettingsBookkeeping
+﻿namespace Knjigovodstvo.Settings
 {
     public enum BookNames
     {
