@@ -1,7 +1,6 @@
 ﻿using Knjigovodstvo.FinancialReports;
 using Knjigovodstvo.Settings;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,8 +14,6 @@ namespace Knjigovodstvo.BankStatements
             _izvod = izvodKnjiga;
             InitializeComponent();
             FillData();
-            FormMethodPointer += new CallFillKontoColumn(FillKontoColumn);
-            accountPairing.userFunctionPointer = FormMethodPointer;
         }
 
         public delegate void CallFillKontoColumn();
@@ -28,29 +25,40 @@ namespace Knjigovodstvo.BankStatements
             labelRedniBroj.Text = "Redni broj: " + _izvod.Redni_broj.ToString();
             labelStanjeZavrsno.Text = "Stanje završno: " + _izvod.Novo_stanje.ToString() + " HRK";
 
-            _bindingList = new BindingList<IzvodPromet>(_izvod.Promet);
-            _dSource = new BindingSource(_bindingList, null);
+            _dSource = _izvod.GetPrometData();
 
             dbDataGridView1.DataSource = _dSource;
 
-            FillKontoColumn();
-            CustomiseColumns();
+            FindKontoNumber();
         }
 
-        private void FillKontoColumn()
+        private void FindKontoNumber()
         {
             List<KontoParovi> parovi = new KontoParovi(BookNames.Izvodi).GetParoviList();
-            KontniPlan konto = new KontniPlan();
             foreach(DataGridViewRow row in dbDataGridView1.Rows)
             {
-                if (row.Cells["Konto"].Value.ToString() == "" &&
-                    parovi.Exists(p => p.Naziv == row.Cells["Naziv"].Value.ToString()))
+                if (row.Cells["Konto"].Value.ToString() != "")
+                    continue;
+                if (parovi.Exists(p => p.Naziv == row.Cells["Naziv"].Value.ToString()))
                 {
-                    int idPartner = parovi
-                        .Where(p => p.Naziv == row.Cells["Naziv"]
-                        .Value.ToString())
-                        .FirstOrDefault().Id_Konto;
-                    konto.GetKontoById(idPartner);
+                    var paroviFiltered = parovi
+                        .Where(p => p.Naziv == row.Cells["Naziv"].Value.ToString())
+                        .ToList();
+                    KontniPlan konto = new KontniPlan();
+                    if(paroviFiltered.Count > 0)
+                    {
+                        List<string> opisi = new List<string>();
+                        foreach (var par in paroviFiltered)
+                        {
+                            if (row.Cells["Opis"].Value.ToString().Contains(par.Opis))
+                            {
+                                paroviFiltered.Insert(0, par);
+                                int kontoId = paroviFiltered.FirstOrDefault().Id_Konto;
+                                konto.GetKontoById(kontoId);
+                                break;
+                            }                            
+                        }
+                    }
                     row.Cells["Konto"].Value = konto.Konto;
                 }
             }
@@ -95,9 +103,27 @@ namespace Knjigovodstvo.BankStatements
 
             Close();
         }
-        
+
+        private void ButtonUpariKonto_Click(object sender, System.EventArgs e)
+        {
+            using PostavkeParoviKonta form = new PostavkeParoviKonta(BookNames.Izvodi.ToString());
+            string[] opisKnjizenja = {_dSource.Rows[dbDataGridView1
+                                        .SelectedCells[0]
+                                        .RowIndex]["Naziv"]
+                                        .ToString(),
+                                       _dSource.Rows[dbDataGridView1
+                                        .SelectedCells[0]
+                                        .RowIndex]["Opis"]
+                                        .ToString() };
+            form.Parovi.Naziv = opisKnjizenja[0];
+            form.Parovi.Opis = opisKnjizenja[1];
+            form.SetControls();
+            form.ShowDialog();
+
+            FindKontoNumber();
+        }
+
         private readonly Izvod _izvod;
-        private BindingSource _dSource = new BindingSource();
-        private BindingList<IzvodPromet> _bindingList;
+        private DataTable _dSource = new DataTable();
     }
 }

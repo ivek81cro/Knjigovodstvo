@@ -51,7 +51,8 @@ namespace Knjigovodstvo.Settings
                           Id = int.Parse(dr["Id"].ToString()),
                           Naziv = dr["Naziv"].ToString(),
                           Id_Konto = int.Parse(dr["Id_Konto"].ToString()),
-                          Knjiga = this.Knjiga
+                          Knjiga = this.Knjiga,
+                          Opis = dr["Opis"].ToString()
                       }).ToList();
             return parovi;
         }

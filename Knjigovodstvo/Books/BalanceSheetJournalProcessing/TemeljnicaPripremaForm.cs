@@ -53,12 +53,15 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     break;
                 case "PlacaArhiva":
                     tp.PrepareDataPlaca(_dt, _postavkeKnjizenja, _obj);
+                    FindKontoNumber();
                     break;
                 case "DodatakArhiva":
                     tp.PrepareDataDodatak(_dt, _postavkeKnjizenja, _obj);
+                    FindKontoNumber();
                     break;
                 case "Izvod":
                     tp.PrepareDataIzvod(_dt, _obj);
+                    FindKontoNumber();
                     break;
                 case "OsnovnoSredstvo":
                     tp.PrepareDataOsnovnoSredstvo(_dt, _postavkeKnjizenja, _obj);
@@ -254,16 +257,14 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
         {
             //TODO: za izvode se razlikuje opis
             using var form = new PostavkeParoviKonta(_postavkeKnjizenja.ElementAt(0).Knjiga);
-            form.Parovi.Naziv = _dt.Rows[dbDataGridView1
+            string[] opisKnjizenja = _dt.Rows[dbDataGridView1
                                         .SelectedCells[0]
                                         .RowIndex]["Opis knjiženja"]
                                         .ToString()
-                                        .Split(':')[0];
-            form.Parovi.Opis = _dt.Rows[dbDataGridView1
-                                        .SelectedCells[0]
-                                        .RowIndex]["Opis knjiženja"]
-                                        .ToString()
-                                        .Split(':')[1];
+                                        .Split(':');
+            form.Parovi.Naziv = opisKnjizenja[0];
+            if(opisKnjizenja.Count() > 1)
+                form.Parovi.Opis = opisKnjizenja[1];
             form.SetControls();
             form.ShowDialog();
 

@@ -113,6 +113,23 @@ namespace Knjigovodstvo.BankStatements
             buttonKnjizi.Enabled = true;
         }
 
+        private void ClearDataGridView()
+        {
+            dbDataGridViewStavke.DataSource = null;
+            dbDataGridViewStavke.Rows.Clear();
+        }
+
+        private void DataGridViewStavke_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dbDataGridViewStavke.SelectedRows.Count > 0)
+                kontoDescription.SetLabelKontoDescription(dbDataGridViewStavke.SelectedRows[0]);
+        }
+        private List<KontoParovi> GetPartnerKontoList()
+        {
+            List<KontoParovi> parovi = new KontoParovi(BookNames.Izvodi).GetParoviList();
+            return parovi;
+        }
+
         private void ButtonUcitajIzvod_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog
@@ -149,23 +166,6 @@ namespace Knjigovodstvo.BankStatements
 
             ClearDataGridView();
             LoadExistingIzvodi();
-        }
-
-        private void ClearDataGridView()
-        {
-            dbDataGridViewStavke.DataSource = null;
-            dbDataGridViewStavke.Rows.Clear();
-        }
-
-        private void DataGridViewStavke_SelectionChanged(object sender, EventArgs e)
-        {
-            if(dbDataGridViewStavke.SelectedRows.Count > 0)
-                kontoDescription.SetLabelKontoDescription(dbDataGridViewStavke.SelectedRows[0]);
-        }
-        private List<KontoParovi> GetPartnerKontoList()
-        {
-            List<KontoParovi> parovi = new KontoParovi(BookNames.Izvodi).GetParoviList();
-            return parovi;
         }
 
         private void ButtonKnjizi_Click(object sender, EventArgs e)
