@@ -61,7 +61,6 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
                     break;
                 case "Izvod":
                     tp.PrepareDataIzvod(_dt, _obj);
-                    FindKontoNumber();
                     break;
                 case "OsnovnoSredstvo":
                     tp.PrepareDataOsnovnoSredstvo(_dt, _postavkeKnjizenja, _obj);

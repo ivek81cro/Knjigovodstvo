@@ -66,6 +66,7 @@
             this.dbDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dbDataGridView1.Size = new System.Drawing.Size(819, 334);
             this.dbDataGridView1.TabIndex = 1;
+            this.dbDataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DbDataGridView1_CellMouseClick);
             // 
             // textBoxKonto
             // 
@@ -123,6 +124,7 @@
             this.buttonBrisi.TabIndex = 4;
             this.buttonBrisi.Text = "Briši";
             this.buttonBrisi.UseVisualStyleBackColor = true;
+            this.buttonBrisi.Click += new System.EventHandler(this.ButtonBrisi_Click);
             // 
             // buttonPostaviKonto
             // 

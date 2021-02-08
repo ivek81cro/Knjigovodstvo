@@ -131,8 +131,8 @@ namespace Knjigovodstvo.Books.PrepareForBalanceSheet
             Izvod izvod = (Izvod)obj;
             dt.Rows.Add(
                 izvod.Redni_broj,
-                "Žiro račun",
-                "Izvod broj " + izvod.Redni_broj,
+                "Izvod",
+                "Žiro račun: Izvod broj " + izvod.Redni_broj,
                 "1000",
                 izvod.Datum_izvoda.Split(' ')[0],
                 true,

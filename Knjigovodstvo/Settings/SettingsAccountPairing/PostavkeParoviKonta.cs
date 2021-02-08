@@ -1,6 +1,7 @@
 ﻿using Knjigovodstvo.FinancialReports;
 using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Knjigovodstvo.Settings 
@@ -36,6 +37,13 @@ namespace Knjigovodstvo.Settings
             dbDataGridView1.Columns["Knjiga"].Visible = false;
         }
 
+        private void DbDataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewRow row = dbDataGridView1.SelectedRows[0];
+            int id = int.Parse(row.Cells["Id"].Value.ToString());
+            Parovi = Parovi.GetParoviList().Where(p => p.Id == id).FirstOrDefault();
+        }
+
         private void ButtonPostaviKonto_Click(object sender, EventArgs e)
         {
             KontniPlanPregledForm f = new KontniPlanPregledForm();
@@ -60,6 +68,15 @@ namespace Knjigovodstvo.Settings
             }
 
             Close();
+        }
+
+        private void ButtonBrisi_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Da li ste sigurni da želite brisati odabrani red?", "Upozorenje"
+                , MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                Parovi.DeleteData();
+            }
         }
 
         private BookNames _book;

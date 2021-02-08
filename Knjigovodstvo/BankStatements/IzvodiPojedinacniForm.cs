@@ -94,10 +94,10 @@ namespace Knjigovodstvo.BankStatements
 
             if(_izvod.Id != 0)
             {
-                foreach( var promet in _izvod.Promet)
+                foreach(DataGridViewRow row  in dbDataGridView1.Rows)
                 {
-                    promet.Id_izvod = _izvod.Id;
-                    promet.InsertData();
+                    IzvodPromet p = new IzvodPromet() { Id_izvod = _izvod.Id };
+                    p.InsertData(row);
                 }
             }
 

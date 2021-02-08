@@ -1,5 +1,6 @@
 ﻿using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -25,6 +26,11 @@ namespace Knjigovodstvo.Settings
         public bool InsertData()
         {
             return new DbDataInsert().InsertData(this);
+        }
+
+        internal void DeleteData()
+        {
+            new DbDataDelete().DeleteItem(this);
         }
 
         /// <summary>
