@@ -160,8 +160,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             _stavka.DeleteStavka(condition);//Bulk delete condition
 
             _temeljnica.Dugovna = _dnevnikKnjizenja.Sum(x => x.Dugovna);
-            _temeljnica.Potražna = _dnevnikKnjizenja.Sum(x => x.Potražna);
-            _temeljnica.InsertNew();            
+            _temeljnica.Potražna = _dnevnikKnjizenja.Sum(x => x.Potrazna);   
             
             if (InvokeRequired)
             {
@@ -175,6 +174,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
                 dbDataGridView1.DataSource = _dnevnikKnjizenja;
             }            
             dk.InsertNewBulk(dbDataGridView1);
+            _temeljnica.InsertNew();
         }
         private void ButtonKnjiziTemeljnicu_Click(object sender, EventArgs e)
         {
