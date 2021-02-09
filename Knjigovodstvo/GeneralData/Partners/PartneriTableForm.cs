@@ -46,9 +46,9 @@ namespace Knjigovodstvo.Partners
 
         private void ButtonEditPartner_Click(object sender, EventArgs e)
         {
+            _partner.OpciPodaci.Id = int.Parse(dbDataGridView1.SelectedRows[0].Cells[0].Value.ToString());
             if (_partner.OpciPodaci.Id != 0)
             {
-                _partner.OpciPodaci.Id = int.Parse(dbDataGridView1.SelectedRows[0].Cells[0].Value.ToString());
                 _partner.GetPartnerById();
                 PartnerUnosForm pn = new PartnerUnosForm();
                 pn.InitPartner(_partner);

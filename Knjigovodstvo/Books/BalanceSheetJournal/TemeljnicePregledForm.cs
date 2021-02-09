@@ -150,7 +150,7 @@ namespace Knjigovodstvo.Books.BalanceSheetJournal
             _dnevnikKnjizenja = new List<DnevnikKnjizenja>();
             foreach (DataGridViewRow row in dbDataGridView1.Rows)
             {
-                dk = new DnevnikKnjizenja().ConvertDataGridViewRow(row);
+                dk = new DnevnikKnjizenja().ConvertDataGridViewRow(row, _temeljnica);
                 dk.Broj_temeljnice = latestNumber;
                 _dnevnikKnjizenja.Add(dk);
                 _stavka.Id = int.Parse(row.Cells["Id"].Value.ToString());

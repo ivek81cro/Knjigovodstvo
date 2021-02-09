@@ -76,7 +76,10 @@ namespace Knjigovodstvo.URA
             string path = "";
             ConvertXlsToCsv conv = new ConvertXlsToCsv("Primke");
             conv.OpenXlsFile(ref path);
-            
+
+            if (path == "")
+                return;
+
             //internal method used to pass params to method used as argument in WaitDialog constr.
             void act()
             {

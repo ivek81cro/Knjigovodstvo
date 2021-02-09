@@ -1,4 +1,5 @@
-﻿using Knjigovodstvo.Database;
+﻿using Knjigovodstvo.Books.BalanceSheetJournal;
+using Knjigovodstvo.Database;
 using Knjigovodstvo.Interface;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Knjigovodstvo.Books.BookJournal
             return latest;
         }
 
-        internal DnevnikKnjizenja ConvertDataGridViewRow(DataGridViewRow row)
+        internal DnevnikKnjizenja ConvertDataGridViewRow(DataGridViewRow row, Temeljnica temeljnica)
         {
             return new DnevnikKnjizenja()
             {
@@ -45,6 +46,8 @@ namespace Knjigovodstvo.Books.BookJournal
                 Valuta = row.Cells["Valuta"].Value.ToString(),
                 Dugovna = decimal.Parse(row.Cells["Dugovna"].Value.ToString()),
                 Potražna = decimal.Parse(row.Cells["Potražna"].Value.ToString()),
+                Datum_knjizenja = temeljnica.Datum_knjizenja,
+                Vrsta_temeljnice = temeljnica.Vrsta_temeljnice
             };
         }
 
@@ -86,5 +89,7 @@ namespace Knjigovodstvo.Books.BookJournal
         public decimal Dugovna { get; set; } = 0;
         public decimal Potražna { get; set; } = 0;
         public int Broj_temeljnice { get; set; } = 0;
+        public string Datum_knjizenja { get; set; } = "";
+        public string Vrsta_temeljnice { get; set; } = "";
     }
 }
