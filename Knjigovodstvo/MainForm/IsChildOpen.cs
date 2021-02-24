@@ -20,7 +20,8 @@ namespace Knjigovodstvo.MainForm
         TemeljnicePregledForm,
         DodatakObracun,
         PorezPdvForm,
-        OsnovnoSredstvoForm
+        OsnovnoSredstvoForm,
+        DnevnikKnjizenjaForm
     }
     public class IsChildOpen
     {

@@ -13,6 +13,7 @@ using Knjigovodstvo.Settings;
 using Knjigovodstvo.URA;
 using System;
 using System.Windows.Forms;
+using Knjigovodstvo.Books.BookJournal;
 
 namespace Knjigovodstvo.MainForm
 {
@@ -272,6 +273,19 @@ namespace Knjigovodstvo.MainForm
             else
             {
                 _openForm.Open(new OsnovnoSredstvoForm(), this);
+            }
+        }
+        private void OpenDnevnikKnjizenjaForm(object sender, EventArgs e)
+        {
+            string formName = ChildWindowName.DnevnikKnjizenjaForm.ToString();
+            if (_isOpen.Check(MdiChildren, formName))
+            {
+                Form f = _isOpen.GetChild(MdiChildren, formName);
+                f.Focus();
+            }
+            else
+            {
+                _openForm.Open(new DnevnkiKnjizenjaForm(), this);
             }
         }
 

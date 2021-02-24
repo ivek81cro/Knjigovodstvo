@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Knjigovodstvo.Books.BookJournal
 {
@@ -32,6 +33,7 @@ namespace Knjigovodstvo.Books.BookJournal
         {
             return new DnevnikKnjizenja()
             {
+                Id = int.Parse(row.Cells["Id"].Value.ToString()),
                 Opis = row.Cells["Opis"].Value.ToString(),
                 Dokument = row.Cells["Dokument"].Value.ToString(),
                 Broj = int.Parse(row.Cells["Broj"].Value.ToString()),
@@ -45,23 +47,31 @@ namespace Knjigovodstvo.Books.BookJournal
                 
                 Valuta = row.Cells["Valuta"].Value.ToString(),
                 Dugovna = decimal.Parse(row.Cells["Dugovna"].Value.ToString()),
-                Potrazna = decimal.Parse(row.Cells["Potražna"].Value.ToString()),
-                Datum_knjizenja = temeljnica.Datum_knjizenja,
-                Vrsta_temeljnice = temeljnica.Vrsta_temeljnice
+                Potražna = decimal.Parse(row.Cells["Potražna"].Value.ToString()),
+                Datum_knjiženja = temeljnica.Datum_knjizenja,
+                Vrsta_temeljnice = temeljnica.Vrsta_temeljnice,
+                Broj_temeljnice = temeljnica.Broj_temeljnice
             };
+        }
+
+        public void UpdateDnevnikKnjizeja()
+        {
+            new DbDataUpdate().UpdateData(this);
         }
 
         internal DataTable GetDnevnikByTemeljnica(int brojTemeljnice)
         {
-            return new DbDataGet().GetTable(this, $"Broj_temeljnice = {brojTemeljnice}");
+            return GetDnevnikKnjizenjaDataTable($"Broj_temeljnice = {brojTemeljnice}");
         }
 
-        internal void SaveToDatabase(List<DnevnikKnjizenja> dk)
+        public DataTable GetDnevnikKnjizenjaDataTable()
         {
-            foreach(var item in dk)
-            {
-                item.InsertNew();
-            }
+            return new DbDataGet().GetTable(this);
+        }
+
+        public DataTable GetDnevnikKnjizenjaDataTable(string condition)
+        {
+            return new DbDataGet().GetTable(this, condition);
         }
 
         private void InsertNew()
@@ -87,9 +97,9 @@ namespace Knjigovodstvo.Books.BookJournal
         public string Datum { get; set; } = "";
         public string Valuta { get; set; } = "HRK";
         public decimal Dugovna { get; set; } = 0;
-        public decimal Potrazna { get; set; } = 0;
+        public decimal Potražna { get; set; } = 0;
         public int Broj_temeljnice { get; set; } = 0;
-        public string Datum_knjizenja { get; set; } = "";
+        public string Datum_knjiženja { get; set; } = "";
         public string Vrsta_temeljnice { get; set; } = "";
     }
 }

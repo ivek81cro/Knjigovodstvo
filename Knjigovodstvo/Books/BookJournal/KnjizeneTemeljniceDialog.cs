@@ -36,6 +36,7 @@ namespace Knjigovodstvo.Books.BookJournal
         internal Temeljnica OpenTemeljnica(ref DataTable dt, DBDataGridView dbDataGridView1)
         {
             dt = _dnevnikKnjizenja.GetDnevnikByTemeljnica(BrojTemeljnice);
+            _temeljnica.GetTemeljnicaByNumber(BrojTemeljnice);
             dbDataGridView1.DataSource = dt;
             dbDataGridView1.Columns["Id"].Visible = false;
             return _temeljnica;
